@@ -1,21 +1,29 @@
 public static class DefaulData
 {
     //Others
-    public static int maximInventorySlots = 30;
+    public static int stoneHealth = 10;
+
+    // Stones data
+    public static float castPosition = .1f;
+
+    // Trees data
     public static int treeHealth = 10;
+    public static float stickGravity = .5f;
+    public static int stickSpawnRate = 25;
 
     // Player stats
     public static float maxPlayerHealth = 100f;
     public static float maxPlayerStamina = 100f;
     public static float playerWalkSpeed = 3f;
     public static float playerRunSpeed = 4f;
+    public static int maximInventorySlots = 30;
 
     // Items
     public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);
     public static Item stick    = new Item("Stick", "Good for crafting and fire", 0, 50, ItemSprites.Instance.stick);
     public static Item stone    = new Item("Stone", "Good for crafting and firepit", 0, 25, ItemSprites.Instance.stone);
 
-    // Equip item
+    // Usable item
     public static Item stoneAxe = new Axe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.stonePickaxe);
     public static Item pickaxe  = new Pickaxe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.pickaxe);
 

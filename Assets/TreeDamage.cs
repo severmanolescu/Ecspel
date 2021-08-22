@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TreeDamage : MonoBehaviour
 {
     [SerializeField] private GameObject stickPrefab;
-    [SerializeField] private GameObject prefabSpawnLocation;
+    [SerializeField] private GameObject prefabSpawnLocation1;
+    [SerializeField] private GameObject prefabSpawnLocation2;
 
     private Animator animator;
     private ParticleStart particleStart;
@@ -20,9 +20,24 @@ public class TreeDamage : MonoBehaviour
         health = DefaulData.treeHealth;
     }
 
+    IEnumerator Wait(Rigidbody2D rigidbody)
+    {
+        rigidbody.gravityScale = DefaulData.stickGravity;
+
+        yield return new WaitForSeconds(.75f);
+
+        rigidbody.gravityScale = 0f;
+        rigidbody.velocity = Vector2.zero;
+    }
+
     public void TakeDamage(int damage, int spawn)
     {
         health -= damage;
+
+        if(particleStart != null)
+        {
+            particleStart.StartParticles();
+        }
 
         if (health <= 0)
         {
@@ -34,16 +49,22 @@ public class TreeDamage : MonoBehaviour
         }
         else
         {
-            float random = Random.Range(0, 100);
-
-            if(random >= 0)
+            if (Random.Range(0, 100) < DefaulData.stickSpawnRate)
             {
-                GameObject stick = Instantiate(stickPrefab, prefabSpawnLocation.transform.position, prefabSpawnLocation.transform.rotation);
+                GameObject stick;
 
-                int range = Random.Range(1, 3);
+                if (Random.Range(0, 3) < 1)
+                {
+                    stick = Instantiate(stickPrefab, prefabSpawnLocation1.transform.position, prefabSpawnLocation1.transform.rotation);
+                }
+                else
+                {
+                    stick = Instantiate(stickPrefab, prefabSpawnLocation2.transform.position, prefabSpawnLocation2.transform.rotation);
+                }
 
-                stick.GetComponent<Animator>().SetInteger("Spawn", range);
                 stick.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.stick, 1));
+
+                StartCoroutine(Wait(stick.GetComponent<Rigidbody2D>()));
             }
         }
     }

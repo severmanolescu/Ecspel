@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 499838160107977485}
   - component: {fileID: 7006121300339203858}
   - component: {fileID: 1788533449791264374}
-  - component: {fileID: 5415526936363496546}
   - component: {fileID: 6585227261542633436}
   m_Layer: 0
   m_Name: StickP
@@ -226,25 +225,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0590373, y: 0.86019784}
   m_EdgeRadius: 0
---- !u!95 &5415526936363496546
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6404206451452306307}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a2fb91e8890b36c40b3f5d927526bf15, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &6585227261542633436
 Rigidbody2D:
   serializedVersion: 4

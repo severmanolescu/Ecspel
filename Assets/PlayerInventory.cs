@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] private QuickSlotsChanger quickSlots;
+
     private List<ItemSlot> itemsSlot;
 
     private List<Item> items = new List<Item>();
@@ -53,6 +55,8 @@ public class PlayerInventory : MonoBehaviour
 
         if (item.GetAmount() <= 0)
         {
+            quickSlots.Reinitialize();
+
             return true;
         }
 
@@ -73,6 +77,8 @@ public class PlayerInventory : MonoBehaviour
                 {
                     auxItem.SetItem(item);
 
+                    quickSlots.Reinitialize();
+
                     return true;
                 }
 
@@ -81,6 +87,8 @@ public class PlayerInventory : MonoBehaviour
 
         if (item.GetAmount() <= 0)
         {
+            quickSlots.Reinitialize();
+
             return true;
         }
 
@@ -110,6 +118,7 @@ public class PlayerInventory : MonoBehaviour
                     {
                         auxItem.SetItem(item);
 
+                        quickSlots.Reinitialize();
                         return true;
                     }
                 }

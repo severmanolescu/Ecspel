@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerItemUse : MonoBehaviour
@@ -43,11 +41,11 @@ public class PlayerItemUse : MonoBehaviour
         {
             if (auxObject.gameObject != this.gameObject)
             {
-                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+                StoneDamage stoneDamage = auxObject.GetComponent<StoneDamage>();
 
-                if (treeDamage != null)
+                if (stoneDamage != null)
                 {
-                    treeDamage.TakeDamage(2, spawn);
+                    stoneDamage.TakeDamage(2);
                 }
             }
         }
@@ -77,25 +75,25 @@ public class PlayerItemUse : MonoBehaviour
 
         if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
-            castPosition.y -= .1f;
+            castPosition.y -= DefaulData.castPosition;
 
             spawn = 4;
         }
         else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
         {
-            castPosition.y += .1f;
+            castPosition.y += DefaulData.castPosition;
 
             spawn = 3;
         }
         else if (inputs.x <= -1 && inputs.y == 0)
         {
-            castPosition.x -= .1f;
+            castPosition.x -= DefaulData.castPosition;
 
             spawn = 1;
         }
         else if (inputs.x >= 1 && inputs.y == 0)
         {
-            castPosition.x += .1f;
+            castPosition.x += DefaulData.castPosition;
 
             spawn = 2;
         }
