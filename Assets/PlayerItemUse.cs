@@ -1,0 +1,152 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerItemUse : MonoBehaviour
+{
+    [SerializeField] private QuickSlotsChanger selectedSlot;
+
+    private PlayerMovement playerMovement;
+
+    private Animator animator;
+
+    private Vector2 inputs;
+
+    private Vector2 detectionZone = new Vector2(.5f, .5f);
+
+    private void Start()
+    {
+        animator = gameObject.GetComponent<Animator>();
+
+        playerMovement = gameObject.GetComponent<PlayerMovement>();
+    }
+
+    private void AxeUse(Collider2D[] objects, int spawn)
+    {
+        foreach (Collider2D auxObject in objects)
+        {
+            if (auxObject.gameObject != this.gameObject)
+            {
+                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+
+                if (treeDamage != null)
+                {
+                    treeDamage.TakeDamage(2, spawn);
+                }
+            }
+        }
+    }
+
+    private void PickaxeUse(Collider2D[] objects, int spawn)
+    {
+        foreach (Collider2D auxObject in objects)
+        {
+            if (auxObject.gameObject != this.gameObject)
+            {
+                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+
+                if (treeDamage != null)
+                {
+                    treeDamage.TakeDamage(2, spawn);
+                }
+            }
+        }
+    }
+
+    private void SwordUse(Collider2D[] objects, int spawn)
+    {
+        foreach (Collider2D auxObject in objects)
+        {
+            if (auxObject.gameObject != this.gameObject)
+            {
+                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+
+                if (treeDamage != null)
+                {
+                    treeDamage.TakeDamage(2, spawn);
+                }
+            }
+        }
+    }
+
+    private void SetCircleCast(ushort itemUse)
+    {
+        Vector3 castPosition = gameObject.transform.position;
+
+        int spawn = 1;
+
+        if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        {
+            castPosition.y -= .1f;
+
+            spawn = 4;
+        }
+        else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
+        {
+            castPosition.y += .1f;
+
+            spawn = 3;
+        }
+        else if (inputs.x <= -1 && inputs.y == 0)
+        {
+            castPosition.x -= .1f;
+
+            spawn = 1;
+        }
+        else if (inputs.x >= 1 && inputs.y == 0)
+        {
+            castPosition.x += .1f;
+
+            spawn = 2;
+        }
+
+        Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
+
+        switch(itemUse)
+        {
+            case 1: AxeUse(objects, spawn); return;
+            case 2: PickaxeUse(objects, spawn); return;
+            case 3: SwordUse(objects, spawn); return;
+            default: return;
+        }
+    }
+
+    private void SelectedItemAction(Item item)
+    {
+        if (playerMovement.GetCanMove())
+        {
+            if (item is Axe)
+            {
+                animator.SetBool("Axe", true);
+
+                SetCircleCast(1);
+            }
+            else if (item is Pickaxe)
+            {
+                animator.SetBool("Pickaxe", true);
+
+                SetCircleCast(2);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F) && playerMovement.GetSpeed() == 0)
+        {
+            Item item = selectedSlot.GetItem();
+
+            SelectedItemAction(item);
+        }
+    }
+
+    public void SetInputs(Vector2 inputs)
+    {
+        this.inputs = inputs;
+    }
+}
+
+// itemUse:
+//  1 - Axe
+//  2 - Pickaxe
+//  3 - Sword

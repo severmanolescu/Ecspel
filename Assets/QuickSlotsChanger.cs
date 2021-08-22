@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class QuickSlotsChanger : MonoBehaviour
+{
+    private QuickSlot[] quickSlots;
+
+    private int selectedItemIndex;
+
+    public int GetSelectedItemIndex()
+    {
+        return selectedItemIndex;
+    }
+
+    public Item GetItem()
+    {
+        return quickSlots[selectedItemIndex - 1].GetItem();
+    }
+
+    private void Start()
+    {
+        quickSlots = gameObject.GetComponentsInChildren<QuickSlot>();
+
+        ChangeSelectedItem(1);
+    }
+
+    public void Reinitialize()
+    {
+        foreach(QuickSlot slot in quickSlots)
+        {
+            slot.Reinitialize();
+        }
+    }
+
+    private void ChangeSelectedItem(int selected)
+    {
+        foreach(QuickSlot slot in quickSlots)
+        {
+            slot.DeselectItem();
+        }
+
+        quickSlots[selected - 1].SelectedItem();
+
+        selectedItemIndex = selected;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChangeSelectedItem(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangeSelectedItem(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangeSelectedItem(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ChangeSelectedItem(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            ChangeSelectedItem(5);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            ChangeSelectedItem(6);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            ChangeSelectedItem(7);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            ChangeSelectedItem(8);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            ChangeSelectedItem(9);
+        }
+    }
+}
