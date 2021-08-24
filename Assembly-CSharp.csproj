@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2021.1.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Item.cs" />
     <Compile Include="Assets\ItemWorldSpawn.cs" />
     <Compile Include="Assets\QuickSlot.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Assets\ItemDrag.cs" />
     <Compile Include="Assets\ItemSprites.cs" />
     <Compile Include="Assets\EquipItem.cs" />
+    <Compile Include="Assets\StoneDamage.cs" />
     <Compile Include="Assets\CanvasTabsOpen.cs" />
     <Compile Include="Assets\PlayerItemUse.cs" />
     <Compile Include="Assets\DefaulData.cs" />
@@ -73,7 +77,6 @@
     <Compile Include="Assets\TreeDamage.cs" />
     <Compile Include="Assets\EquipedITem.cs" />
     <Compile Include="Assets\ItemDetails.cs" />
-    <Compile Include="Assets\StoneDamage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

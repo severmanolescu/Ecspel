@@ -37,6 +37,8 @@ public class TreeDamage : MonoBehaviour
         if(particleStart != null)
         {
             particleStart.StartParticles();
+
+            animator.SetTrigger("Damage");
         }
 
         if (health <= 0)
@@ -44,7 +46,15 @@ public class TreeDamage : MonoBehaviour
             if (particleStart != null)
             {
                 particleStart.SetSpawn(spawn);
-                animator.SetBool("Fall", true);
+                
+                switch(spawn)
+                {
+                    case 1:   animator.SetTrigger("Left"); break;
+                    case 2:   animator.SetTrigger("Right"); break;
+                    case 3:   animator.SetTrigger("Up"); break;
+                    default:  animator.SetTrigger("Right"); break;
+                }
+
             }
         }
         else

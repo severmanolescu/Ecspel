@@ -16,7 +16,7 @@ public static class DefaulData
     public static float maxPlayerStamina = 100f;
     public static float playerWalkSpeed = 3f;
     public static float playerRunSpeed = 4f;
-    public static int maximInventorySlots = 30;
+    public static int   maximInventorySlots = 30;
 
     // Items
     public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);

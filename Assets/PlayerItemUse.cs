@@ -75,7 +75,7 @@ public class PlayerItemUse : MonoBehaviour
 
         if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
-            castPosition.y -= DefaulData.castPosition;
+            castPosition.y -= DefaulData.castPosition * 3;
 
             spawn = 4;
         }
