@@ -4818,6 +4818,7 @@ GameObject:
   - component: {fileID: 4181686834936703762}
   - component: {fileID: 4181686834936703763}
   - component: {fileID: 4181686834936703760}
+  - component: {fileID: 2737209550893363476}
   m_Layer: 0
   m_Name: Stone (1)P
   m_TagString: Untagged
@@ -4931,3 +4932,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stonePrefab: {fileID: 5330104649764483067, guid: 2ddf1a4c6fe261b4d8a2dae337dbad62, type: 3}
+--- !u!50 &2737209550893363476
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181686834936703761}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
