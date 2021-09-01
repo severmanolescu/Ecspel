@@ -418,12 +418,12 @@ namespace UnityEditor.Tilemaps
 
         private void UndoRedoPerformed()
         {
-            if (unlocked)
-            {
-                m_PaletteNeedsSave = true;
-                RefreshAllTiles();
-                Repaint();
-            }
+            if (!unlocked)
+                return;
+
+            m_PaletteNeedsSave = true;
+            RefreshAllTiles();
+            Repaint();
         }
 
         private void HandlePanAndZoom()
@@ -600,7 +600,13 @@ namespace UnityEditor.Tilemaps
                     RenderGrid();
                 previewUtility.Render();
                 if (m_Owner.drawGizmos)
+                {
+                    // Set CameraType to SceneView to force Gizmos to be drawn
+                    var storedType = previewUtility.camera.cameraType;
+                    previewUtility.camera.cameraType = CameraType.SceneView;
                     Handles.Internal_DoDrawGizmos(previewUtility.camera);
+                    previewUtility.camera.cameraType = storedType;
+                }
             }
 
             RenderDragAndDropPreview();

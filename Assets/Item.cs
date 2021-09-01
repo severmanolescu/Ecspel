@@ -4,11 +4,11 @@ using System;
 [Serializable]
 public class Item
 {
-    protected string name;
+    public string name;
 
     protected string details;
 
-    public int amount;
+    protected int amount;
 
     protected int maxAmount;
 

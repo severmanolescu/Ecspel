@@ -41,11 +41,7 @@ public class ItemConstruct : MonoBehaviour
         {
             if (canPlace)
             {
-                collider.isTrigger = false;
-
-                canDrag = false;
-
-                spriteRenderer.color = Color.clear;
+                StopDrag();
             }
         }
     }
@@ -66,8 +62,12 @@ public class ItemConstruct : MonoBehaviour
         collider.isTrigger = true;
     }
 
-    public bool StopDrag()
+    public void StopDrag()
     {
-        return true;
+        collider.isTrigger = false;
+
+        canDrag = false;
+
+        spriteRenderer.color = Color.white;
     }
 }

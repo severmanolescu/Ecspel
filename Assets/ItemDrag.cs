@@ -65,6 +65,12 @@ public class ItemDrag : MonoBehaviour
             {
                 auxCheckEquiped.DeleteItem();
             }
+            else
+            {
+                ItemSlot itemSlot = previousSlot.GetComponent<ItemSlot>();
+
+                itemSlot.DeleteItem();
+            }
         }
 
         item = null;

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasTabsOpen : MonoBehaviour
@@ -9,11 +10,20 @@ public class CanvasTabsOpen : MonoBehaviour
     [Header("Player Quickslots")]
     [SerializeField] private GameObject quickSlot;
 
+    [Header("Chest Slots")]
+    [SerializeField] private GameObject chestSlots;
+
+    private ChestStorage chestStorage;
+    private List<Item> chestItems = new List<Item>();
+    private bool chestSet = false;
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1.5f);
 
         PlayerInventory.SetActive(false);
+
+        chestSlots.SetActive(false);
     }
 
     private void Start()
@@ -30,6 +40,35 @@ public class CanvasTabsOpen : MonoBehaviour
             if(PlayerInventory.activeSelf == false)
             {
                 quickSlot.GetComponent<QuickSlotsChanger>().Reinitialize();
+
+                quickSlot.gameObject.SetActive(true);
+            }
+            else
+            {
+                quickSlot.gameObject.SetActive(false);
+            }
+
+            if(chestSet)
+            {
+                if(chestSlots.activeSelf)
+                {
+                    chestStorage.SetItems(chestSlots.GetComponent<ChestStorageCanvas>().ReturnItemsList());
+
+                    chestSlots.SetActive(false);
+                }
+                else
+                {
+                    chestSlots.SetActive(true);
+
+                    chestItems = chestStorage.GetComponent<ChestStorage>().GetItems();
+
+                    if (chestItems != null)
+                        chestSlots.GetComponent<ChestStorageCanvas>().SetItems(chestItems);
+                }
+            }
+            else
+            {
+                chestSlots.SetActive(false);
             }
         }
 
@@ -41,5 +80,21 @@ public class CanvasTabsOpen : MonoBehaviour
                 quickSlot.SetActive(true);
             }
         }
+    }
+
+    public void SetChestItems(List<Item> items, ChestStorage chestStorage)
+    {
+        this.chestItems = items;
+
+        chestSet = true;
+
+        this.chestStorage = chestStorage;
+    }
+
+    public void DeleteChestItems()
+    {
+        this.chestItems = null;
+
+        chestSet = false;
     }
 }

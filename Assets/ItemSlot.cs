@@ -50,6 +50,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private void HideItem()
     {
         itemSprite.gameObject.SetActive(false);
+        itemSprite.sprite = null;
+
+        amount.SetText("0");
         amount.gameObject.SetActive(false);
     }
 
