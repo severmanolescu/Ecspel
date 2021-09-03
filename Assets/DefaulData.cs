@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class DefaulData
 {
     //Others
@@ -42,5 +44,10 @@ public static class DefaulData
 
         item1 = item2;
         item2 = auxSwap;
+    }
+
+    public static Vector3 GetRandomMove()
+    {
+        return new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 }
