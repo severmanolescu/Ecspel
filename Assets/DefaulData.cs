@@ -20,6 +20,13 @@ public static class DefaulData
     public static float playerRunSpeed = 4f;
     public static int   maximInventorySlots = 30;
 
+    // Timer
+    public static int dayStart = 5;
+    public static int dayEnd   = 18;
+    public static float maxDayIntensity = 1f;
+    public static float maxNightIntensity = .2f;
+    public static int dayNightCycleTime = 5; 
+
     // Items
     public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);
     public static Item stick    = new Item("Stick", "Good for crafting and fire", 0, 50, ItemSprites.Instance.stick);

@@ -81,5 +81,9 @@ public class QuickSlotsChanger : MonoBehaviour
         {
             ChangeSelectedItem(9);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            ChangeSelectedItem(10);
+        }
     }
 }
