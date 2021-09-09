@@ -17,9 +17,24 @@ public class DayTimerHandler : MonoBehaviour
 
     private Light2D globalLight;
 
+    private int dayStart;
+    private int dayEnd;
+    private float maxDayIntensity;
+    private float maxNightIntensity;
+    private int dayNightCycleTime;
+
     private void Awake()
     {
-        globalLight = gameObject.GetComponent<Light2D>();
+        globalLight = gameObject.GetComponent<Light2D>(); 
+    }
+
+    private void Start()
+    {
+        dayStart = DefaulData.dayStart;
+        dayEnd = DefaulData.dayEnd;
+        maxDayIntensity = DefaulData.maxDayIntensity;
+        maxNightIntensity = DefaulData.maxNightIntensity;
+        dayNightCycleTime = DefaulData.dayNightCycleTime;
     }
 
     private void Update()
@@ -38,21 +53,21 @@ public class DayTimerHandler : MonoBehaviour
             }
         }
 
-        if(hours > DefaulData.dayStart + DefaulData.dayNightCycleTime && hours <= DefaulData.dayEnd)
+        if(hours > dayStart + dayNightCycleTime && hours <= dayEnd)
         {
-            intensity = DefaulData.maxDayIntensity;
+            intensity = maxDayIntensity;
         }
-        else if((hours > DefaulData.dayEnd + DefaulData.dayNightCycleTime && hours < 24) || (hours >= 0 && hours < DefaulData.dayStart))
+        else if((hours > dayEnd + dayNightCycleTime && hours < 24) || (hours >= 0 && hours < dayStart))
         {
-            intensity = DefaulData.maxNightIntensity;
+            intensity = maxNightIntensity;
         }
-        else if(hours >= DefaulData.dayStart && hours <= DefaulData.dayStart + DefaulData.dayNightCycleTime)
+        else if(hours >= dayStart && hours <= dayStart + dayNightCycleTime)
         {
-            intensity = Mathf.SmoothStep(DefaulData.maxNightIntensity, DefaulData.maxDayIntensity, ((hours - DefaulData.dayStart) + minutes / 60f) / 5f);
+            intensity = Mathf.SmoothStep(maxNightIntensity, maxDayIntensity, ((hours - dayStart) + minutes / 60f) / 5f);
         }
-        else if(hours >= DefaulData.dayEnd && hours <= DefaulData.dayEnd + DefaulData.dayNightCycleTime)
+        else if(hours >= dayEnd && hours <= dayEnd + dayNightCycleTime)
         {
-            intensity = Mathf.SmoothStep(DefaulData.maxDayIntensity, DefaulData.maxNightIntensity, ((hours - DefaulData.dayEnd) + minutes / 60f) / 5f);
+            intensity = Mathf.SmoothStep(maxDayIntensity, maxNightIntensity, ((hours - dayEnd) + minutes / 60f) / 5f);
         }
 
         globalLight.intensity = intensity;

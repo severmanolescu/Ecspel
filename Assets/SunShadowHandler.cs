@@ -11,6 +11,9 @@ public class SunShadowHandler : MonoBehaviour
     private float rotation;
 
     private bool active = true;
+    private int dayStart;
+    private int dayEnd;
+    private int dayNightCycleTime;
 
     private void Awake()
     {
@@ -26,12 +29,19 @@ public class SunShadowHandler : MonoBehaviour
         dayTimerHandler = gameObject.GetComponent<DayTimerHandler>();
     }
 
+    private void Start()
+    {
+        dayStart = DefaulData.dayStart;
+        dayEnd = DefaulData.dayEnd;
+        dayNightCycleTime = DefaulData.dayNightCycleTime;
+    }
+
     private void Update()
     {
         dayTimerHandler.GetTimer(out float minutes, out int hours);
         dayTimerHandler.GetIntensity(out float intensity);
 
-        if (hours >= DefaulData.dayStart && hours <= DefaulData.dayEnd + DefaulData.dayNightCycleTime)
+        if (hours >= dayStart && hours <= dayEnd + dayNightCycleTime)
         {
             rotation = Mathf.SmoothStep(-90, 90, (hours + minutes / 60f) / 25f);
 
@@ -64,6 +74,18 @@ public class SunShadowHandler : MonoBehaviour
         foreach(Transform shadow in sunShadows)
         {
             shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
+        }
+    }
+    
+    public void ReinitializeShadows()
+    {
+        GameObject[] shadows = GameObject.FindGameObjectsWithTag("SunShadow");
+
+        foreach (GameObject shadow in shadows)
+        {
+            sunShadows.Add(shadow.transform);
+
+            shadow.GetComponent<SpriteRenderer>().sortingOrder = -1;
         }
     }
 }
