@@ -4,6 +4,7 @@ public static class DefaulData
 {
     //Others
     public static int stoneHealth = 10;
+    public static float maxLightSourceDistance = 10f;
 
     // Stones data
     public static float castPosition = .1f;
@@ -19,6 +20,13 @@ public static class DefaulData
     public static float playerWalkSpeed = 3f;
     public static float playerRunSpeed = 4f;
     public static int   maximInventorySlots = 30;
+
+    // Timer
+    public static int dayStart = 5;
+    public static int dayEnd   = 18;
+    public static float maxDayIntensity = 1f;
+    public static float maxNightIntensity = .2f;
+    public static int dayNightCycleTime = 5; 
 
     // Items
     public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);
