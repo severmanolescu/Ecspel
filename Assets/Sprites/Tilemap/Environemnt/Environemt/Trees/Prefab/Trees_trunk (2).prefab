@@ -4849,6 +4849,7 @@ GameObject:
   - component: {fileID: 368230978711120581}
   - component: {fileID: 368230978711120580}
   - component: {fileID: -5499770212661696792}
+  - component: {fileID: 4142153846037188079}
   m_Layer: 0
   m_Name: Trees_trunk (2)
   m_TagString: Untagged
@@ -4988,6 +4989,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &4142153846037188079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368230978711120583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.203125, y: -0.1875, z: 0}
+  - {x: -0.19516039, y: -0.096164584, z: 0}
+  - {x: -0.17798662, y: -0.08991945, z: 0}
+  - {x: -0.16861868, y: -0.000926733, z: 0}
+  - {x: -0.14832258, y: -0.000926733, z: 0}
+  - {x: -0.12506151, y: 0.18437743, z: 0}
+  - {x: 0.13426852, y: 0.16300726, z: 0}
+  - {x: 0.1875124, y: -0.079478264, z: 0}
+  - {x: 0.20296478, y: -0.096164465, z: 0}
+  - {x: 0.203125, y: -0.1875, z: 0}
+  m_ShapePathHash: 1474798941
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -20594
 --- !u!1 &368230978712179841
 GameObject:
   m_ObjectHideFlags: 0
@@ -9964,7 +9997,11 @@ MonoBehaviour:
   - {fileID: 368230979321250691}
   - {fileID: 368230978782799282}
   m_Bounds:
+<<<<<<< HEAD
     m_Center: {x: -0.06350553, y: 0.010365367, z: 0}
+=======
+    m_Center: {x: -0.06350529, y: 0.010365367, z: 0}
+>>>>>>> 35cef38ce95c7ff2e8207d66da3273cde0e58dda
     m_Extent: {x: 1.001257, y: 1.2293689, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1

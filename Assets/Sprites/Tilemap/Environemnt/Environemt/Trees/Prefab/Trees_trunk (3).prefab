@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6630223467646122534}
   - component: {fileID: 6630223467646122535}
   - component: {fileID: 2367078468776945810}
+  - component: {fileID: 7671704304512334495}
   m_Layer: 0
   m_Name: Trees_trunk (3)
   m_TagString: Untagged
@@ -235,6 +236,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &7671704304512334495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630223467646122532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.203125, y: -0.1875, z: 0}
+  - {x: -0.13623929, y: 0.17326903, z: 0}
+  - {x: 0.12912393, y: 0.17326903, z: 0}
+  - {x: 0.203125, y: -0.1875, z: 0}
+  m_ShapePathHash: -1037043179
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -22200
 --- !u!1 &6630223467766891230
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,8 +402,13 @@ MonoBehaviour:
   - {fileID: 6630223468777175857}
   - {fileID: 6630223467977824811}
   m_Bounds:
+<<<<<<< HEAD
     m_Center: {x: -0.06350505, y: 0.010365367, z: 0}
     m_Extent: {x: 1.0012567, y: 1.229369, z: 0}
+=======
+    m_Center: {x: -0.06350529, y: 0.010365248, z: 0}
+    m_Extent: {x: 1.0012567, y: 1.2293689, z: 0}
+>>>>>>> 35cef38ce95c7ff2e8207d66da3273cde0e58dda
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

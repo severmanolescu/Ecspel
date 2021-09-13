@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 958918606}
   - component: {fileID: 958918607}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Shadow
+=======
+  m_Name: SunShadow
+>>>>>>> 35cef38ce95c7ff2e8207d66da3273cde0e58dda
   m_TagString: SunShadow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +316,7 @@ GameObject:
   - component: {fileID: 3843995095039717893}
   - component: {fileID: 1614613598907110473}
   - component: {fileID: -4793922667800406104}
+  - component: {fileID: 2021576976}
   m_Layer: 0
   m_Name: Trees_trunk (1)
   m_TagString: Untagged
@@ -451,6 +456,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &2021576976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843995095039717894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.20276701, y: -0.18707621, z: 0}
+  - {x: -0.20393443, y: -0.09295744, z: 0}
+  - {x: -0.17322439, y: -0.08737379, z: 0}
+  - {x: -0.17322439, y: 0.0019643903, z: 0}
+  - {x: -0.14251435, y: 0.0047562122, z: 0}
+  - {x: -0.111804366, y: 0.036862135, z: 0}
+  - {x: -0.12914181, y: 0.20843863, z: 0}
+  - {x: 0.13891317, y: 0.21262637, z: 0}
+  - {x: 0.14504246, y: 0.028486311, z: 0}
+  - {x: 0.15062611, y: -0.05666417, z: 0}
+  - {x: 0.17994018, y: -0.08877003, z: 0}
+  - {x: 0.20646249, y: -0.08877009, z: 0}
+  - {x: 0.20395748, y: -0.18951315, z: 0}
+  m_ShapePathHash: -1231508283
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -4366
 --- !u!1 &3843995095055797303
 GameObject:
   m_ObjectHideFlags: 0
@@ -10203,7 +10243,11 @@ MonoBehaviour:
   - {fileID: 1614613598305423486}
   - {fileID: 1614613598117681530}
   m_Bounds:
+<<<<<<< HEAD
     m_Center: {x: -0.05542445, y: 0.0144069195, z: 0}
+=======
+    m_Center: {x: -0.05542445, y: 0.014407039, z: 0}
+>>>>>>> 35cef38ce95c7ff2e8207d66da3273cde0e58dda
     m_Extent: {x: 1.0012567, y: 1.2293687, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1

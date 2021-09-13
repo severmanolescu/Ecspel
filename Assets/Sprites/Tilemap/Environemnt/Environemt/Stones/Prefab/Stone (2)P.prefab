@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2464016037713589145}
   - component: {fileID: 2464016037713589144}
   - component: {fileID: 6000087150052363996}
+  - component: {fileID: 7124726702511674351}
   m_Layer: 0
   m_Name: Stone (2)P
   m_TagString: Untagged
@@ -148,6 +149,39 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &7124726702511674351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464016037713589147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.14488506, y: -0.23469114, z: 0}
+  - {x: -0.23172331, y: -0.16482592, z: 0}
+  - {x: -0.23003769, y: -0.01698637, z: 0}
+  - {x: -0.116521835, y: -0.011201143, z: 0}
+  - {x: -0.060112476, y: 0.1429264, z: 0}
+  - {x: 0.16128397, y: 0.13932782, z: 0}
+  - {x: 0.24971485, y: -0.04438603, z: 0}
+  - {x: 0.28867102, y: -0.21145952, z: 0}
+  - {x: 0.21320677, y: -0.2803235, z: 0}
+  - {x: -0.006763935, y: -0.28387666, z: 0}
+  - {x: -0.048918724, y: -0.23849988, z: 0}
+  m_ShapePathHash: -223286809
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -24368
 --- !u!1 &2464016038963042788
 GameObject:
   m_ObjectHideFlags: 0
