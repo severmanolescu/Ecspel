@@ -7,12 +7,15 @@ public class ItemDrag : MonoBehaviour
 
     private GameObject previousSlot;
 
-    private Image itemImage;
+    public Image itemImage;
+
+    private void Awake()
+    {
+        itemImage = gameObject.GetComponentInChildren<Image>();
+    }
 
     private void Start()
     {
-        itemImage = gameObject.GetComponentInChildren<Image>();
-
         itemImage.gameObject.SetActive(false);
     }
 
