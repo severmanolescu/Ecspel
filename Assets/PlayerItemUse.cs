@@ -12,7 +12,7 @@ public class PlayerItemUse : MonoBehaviour
 
     private Vector2 detectionZone = new Vector2(.5f, .5f);
 
-    private void Start()
+    private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
 

@@ -8,11 +8,14 @@ public class StoneDamage : MonoBehaviour
 
     private int health;
 
+    private void Awake()
+    {
+        particle = GetComponentInChildren<ParticleSystem>();
+    }
+
     private void Start()
     {
         health = DefaulData.stoneHealth;
-
-        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     public void TakeDamage(int damage)

@@ -18,10 +18,13 @@ public class PlayerInventory : MonoBehaviour
         AddItem(DefaulData.GetItemWithAmount(DefaulData.pickaxe, 1));
     }
 
-    private void Start()
+    private void Awake()
     {
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
+    }
 
+    private void Start()
+    {
         StartCoroutine(Wait());
     }
 

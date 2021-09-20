@@ -7,7 +7,7 @@ public class QuickSlot : MonoBehaviour
 
     private Image[] itemSprites;
 
-    private void Start()
+    private void Awake()
     {
         itemSprites = gameObject.GetComponentsInChildren<Image>();
         

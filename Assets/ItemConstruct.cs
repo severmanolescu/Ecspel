@@ -10,7 +10,7 @@ public class ItemConstruct : MonoBehaviour
     private bool canDrag  = true;
     private bool canPlace = true;
 
-    private void Start()
+    private void Awake()
     {
         collider = gameObject.GetComponent<BoxCollider2D>();
 

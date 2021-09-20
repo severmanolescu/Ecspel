@@ -17,6 +17,8 @@ public class CanvasTabsOpen : MonoBehaviour
     private List<Item> chestItems = new List<Item>();
     private bool chestSet = false;
 
+    private PlayerMovement playerMovement;
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1.5f);
@@ -24,6 +26,11 @@ public class CanvasTabsOpen : MonoBehaviour
         PlayerInventory.SetActive(false);
 
         chestSlots.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        playerMovement = gameObject.GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -42,10 +49,14 @@ public class CanvasTabsOpen : MonoBehaviour
                 quickSlot.GetComponent<QuickSlotsChanger>().Reinitialize();
 
                 quickSlot.gameObject.SetActive(true);
+
+                playerMovement.SetPlayerMovementTrue();
             }
             else
             {
                 quickSlot.gameObject.SetActive(false);
+
+                playerMovement.SetPlayerMovementFalse();
             }
 
             if(chestSet)
@@ -55,10 +66,14 @@ public class CanvasTabsOpen : MonoBehaviour
                     chestStorage.SetItems(chestSlots.GetComponent<ChestStorageCanvas>().ReturnItemsList());
 
                     chestSlots.SetActive(false);
+
+                    playerMovement.SetPlayerMovementFalse();
                 }
                 else
                 {
                     chestSlots.SetActive(true);
+
+                    playerMovement.SetPlayerMovementTrue();
 
                     chestItems = chestStorage.GetComponent<ChestStorage>().GetItems();
 
@@ -78,6 +93,8 @@ public class CanvasTabsOpen : MonoBehaviour
             {
                 PlayerInventory.SetActive(false);
                 quickSlot.SetActive(true);
+
+                playerMovement.SetPlayerMovementFalse();
             }
         }
     }

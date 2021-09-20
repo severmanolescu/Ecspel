@@ -20,7 +20,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         return item;
     }
 
-    private void Start()
+    private void Awake()
     {
         Image[] auxiliarImage = gameObject.GetComponentsInChildren<Image>();
 

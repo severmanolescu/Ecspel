@@ -13,13 +13,16 @@ public class ChestStorage : MonoBehaviour
 
     private TextMeshProUGUI text;
 
-    private void Start()
+    private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
         text.gameObject.SetActive(false);
 
         canvasTabs = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
+    }
 
+    private void Start()
+    { 
         items.Add(DefaulData.GetItemWithAmount(DefaulData.log, 10));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.pickaxe, 1));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.stone, 10));

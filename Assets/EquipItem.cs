@@ -7,7 +7,7 @@ public class EquipItem : MonoBehaviour
     private EquipedITem Pickaxe;
     private EquipedITem Bow;
 
-    private void Start()
+    private void Awake()
     {
         EquipedITem[] auxiliarEquipedItems = gameObject.GetComponentsInChildren<EquipedITem>();
 

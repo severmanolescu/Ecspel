@@ -6,7 +6,7 @@ public class ChestStorageCanvas : MonoBehaviour
 {
     private ItemSlot[] chestItems;
 
-    private void Start()
+    private void Awake()
     {
         chestItems = gameObject.GetComponentsInChildren<ItemSlot>();
     }

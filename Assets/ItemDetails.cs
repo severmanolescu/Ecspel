@@ -9,7 +9,7 @@ public class ItemDetails : MonoBehaviour
     private TextMeshProUGUI itemNameObject;
     private TextMeshProUGUI itemDetailsObject;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
 

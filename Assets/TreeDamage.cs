@@ -12,11 +12,14 @@ public class TreeDamage : MonoBehaviour
 
     private int health;
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         particleStart = GetComponentInChildren<ParticleStart>();
+    }
 
+    private void Start()
+    {
         health = DefaulData.treeHealth;
     }
 

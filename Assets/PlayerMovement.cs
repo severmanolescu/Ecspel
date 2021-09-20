@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed;
 
-    private void Start()
+    private void Awake()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
 
@@ -98,5 +98,9 @@ public class PlayerMovement : MonoBehaviour
     public void SetPlayerMovementFalse()
     {
         canMove = false;
+
+        animator.SetFloat("Horizontal", 0);
+        animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Speed", 0);
     }
 }

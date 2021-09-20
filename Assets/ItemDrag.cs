@@ -9,7 +9,7 @@ public class ItemDrag : MonoBehaviour
 
     private Image itemImage;
 
-    private void Start()
+    private void Awake()
     {
         itemImage = gameObject.GetComponentInChildren<Image>();
 

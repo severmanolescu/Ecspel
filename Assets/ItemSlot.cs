@@ -15,7 +15,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public Item item = null;
 
-    private void Start()
+    private void Awake()
     {
         Image[] itemsSprite = gameObject.GetComponentsInChildren<Image>();
 

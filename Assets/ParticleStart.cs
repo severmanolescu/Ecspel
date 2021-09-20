@@ -9,7 +9,7 @@ public class ParticleStart : MonoBehaviour
 
     private int spawn;
 
-    private void Start()
+    private void Awake()
     {
         particles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
