@@ -5,26 +5,19 @@ public class QuickSlot : MonoBehaviour
 {
     [SerializeField] private ItemSlot equiped;
 
-    public Image slotImage;
-    public Image itemImage;
-
-    private void Awake()
-    {
-        Image[] itemSprites = gameObject.GetComponentsInChildren<Image>();
-
-        slotImage = itemSprites[0];
-        itemImage = itemSprites[1];
-    }
+    private Image[] itemSprites;
 
     private void Start()
     {
+        itemSprites = gameObject.GetComponentsInChildren<Image>();
+        
         if (equiped.GetItem() != null)
         {
-            itemImage.sprite = equiped.GetItem().GetSprite();
+            itemSprites[1].sprite = equiped.GetItem().GetSprite();
         }
         else
         {
-            itemImage.gameObject.SetActive(false);
+            itemSprites[1].gameObject.SetActive(false);
         }
 
         DeselectItem();
@@ -39,48 +32,48 @@ public class QuickSlot : MonoBehaviour
     {
         if (equiped.GetItem() != null)
         {
-            itemImage.sprite = equiped.GetItem().GetSprite();
-            itemImage.gameObject.SetActive(true);
+            itemSprites[1].sprite = equiped.GetItem().GetSprite();
+            itemSprites[1].gameObject.SetActive(true);
         }
         else
         {
-            itemImage.gameObject.SetActive(false);
+            itemSprites[1].gameObject.SetActive(false);
         }
     }
 
     public void SelectedItem()
     {
-        if (itemImage != null)
+        if (itemSprites != null)
         {
-            Color color = slotImage.color;
+            Color color = itemSprites[0].color;
 
             color.a = 1f;
 
-            slotImage.color = color;
+            itemSprites[0].color = color;
 
-            color = itemImage.color;
+            color = itemSprites[1].color;
 
             color.a = 1f;
 
-            itemImage.color = color;
+            itemSprites[1].color = color;
         }
     }
 
     public void DeselectItem()
     {
-        if (itemImage != null)
+        if (itemSprites != null)
         {
-            Color color = slotImage.color;
+            Color color = itemSprites[0].color;
 
             color.a = 0.5f;
 
-            slotImage.color = color;
+            itemSprites[0].color = color;
 
-            color = itemImage.color;
+            color = itemSprites[1].color;
 
             color.a = 0.5f;
 
-            itemImage.color = color;
+            itemSprites[1].color = color;
         }
     }
 }

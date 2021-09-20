@@ -23,9 +23,13 @@ public class DayTimerHandler : MonoBehaviour
     private float maxNightIntensity;
     private int dayNightCycleTime;
 
+    private SourceLightShadow sourceLight;
+
     private void Awake()
     {
-        globalLight = gameObject.GetComponent<Light2D>(); 
+        globalLight = gameObject.GetComponent<Light2D>();
+
+        sourceLight = gameObject.GetComponent<SourceLightShadow>();
     }
 
     private void Start()
@@ -56,18 +60,26 @@ public class DayTimerHandler : MonoBehaviour
         if(hours > dayStart + dayNightCycleTime && hours <= dayEnd)
         {
             intensity = maxDayIntensity;
+
+            sourceLight.ChangeLightsIntensity(0);
         }
         else if((hours > dayEnd + dayNightCycleTime && hours < 24) || (hours >= 0 && hours < dayStart))
         {
             intensity = maxNightIntensity;
+
+            sourceLight.ChangeLightsIntensity(DefaulData.maxDayIntensity);
         }
         else if(hours >= dayStart && hours <= dayStart + dayNightCycleTime)
         {
             intensity = Mathf.SmoothStep(maxNightIntensity, maxDayIntensity, ((hours - dayStart) + minutes / 60f) / 5f);
+
+            sourceLight.ChangeLightsIntensity(DefaulData.maxDayIntensity - intensity);
         }
         else if(hours >= dayEnd && hours <= dayEnd + dayNightCycleTime)
         {
             intensity = Mathf.SmoothStep(maxDayIntensity, maxNightIntensity, ((hours - dayEnd) + minutes / 60f) / 5f);
+
+            sourceLight.ChangeLightsIntensity(Mathf.Abs(DefaulData.maxDayIntensity - intensity));
         }
 
         globalLight.intensity = intensity;

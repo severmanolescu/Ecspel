@@ -10,7 +10,6 @@ public class SunShadowHandler : MonoBehaviour
 
     private float rotation;
 
-    private bool active = true;
     private int dayStart;
     private int dayEnd;
     private int dayNightCycleTime;
@@ -86,6 +85,21 @@ public class SunShadowHandler : MonoBehaviour
             sunShadows.Add(shadow.transform);
 
             shadow.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
+    }
+
+    public void AddShadow(Transform shadow)
+    {
+        if (!sunShadows.Contains(shadow))
+        {
+            sunShadows.Add(shadow);
+        }
+    }
+    public void RemoveShadow(Transform shadow)
+    {
+        if(sunShadows != null)
+        {
+            sunShadows.Remove(shadow);
         }
     }
 }

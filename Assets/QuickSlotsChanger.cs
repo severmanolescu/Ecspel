@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class QuickSlotsChanger : MonoBehaviour
@@ -16,10 +17,13 @@ public class QuickSlotsChanger : MonoBehaviour
         return quickSlots[selectedItemIndex - 1].GetItem();
     }
 
-    private void Start()
+    private void Awake()
     {
         quickSlots = gameObject.GetComponentsInChildren<QuickSlot>();
+    }
 
+    private void Start()
+    {
         ChangeSelectedItem(1);
     }
 

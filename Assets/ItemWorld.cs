@@ -11,6 +11,9 @@ public class ItemWorld : MonoBehaviour
 
     private int randomNumber;
 
+    private SunShadowHandler sunTimer;
+    private Transform shadow;
+
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
         Transform transform = Instantiate(ItemSprites.Instance.ItemWorld, position, Quaternion.identity);
@@ -26,6 +29,23 @@ public class ItemWorld : MonoBehaviour
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        Transform[] transforms = gameObject.GetComponentsInChildren<Transform>();
+
+        if (transforms[1] != null && transforms[1].CompareTag("SunShadow"))
+        {
+            shadow = transforms[1];
+        }
+    }
+
+    private void Start()
+    {
+        sunTimer = GameObject.Find("DayTimer").GetComponent<SunShadowHandler>();
+
+        if (shadow != null)
+        {
+            sunTimer.AddShadow(shadow);
+        }
     }
 
     public void SetItem(Item items)
@@ -66,6 +86,11 @@ public class ItemWorld : MonoBehaviour
 
     public void DestroySelf()
     {
+        if (shadow != null)
+        {
+            sunTimer.AddShadow(shadow);
+        }
+
         Destroy(gameObject);
     }
 
