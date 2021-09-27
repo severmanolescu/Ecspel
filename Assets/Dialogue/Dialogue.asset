@@ -19,11 +19,15 @@ MonoBehaviour:
     nextDialogue: {fileID: 0}
   - whoReply: 0
     dialogue: Eu ma numesc
-    nextDialogue: {fileID: 11400000, guid: 6ccf99320a8f8ef45a8f61cc827491f2, type: 2}
+    nextDialogue: {fileID: 0}
   - whoReply: 0
     dialogue: <b><color=red>Sever
     nextDialogue: {fileID: 0}
   - whoReply: 0
     dialogue: Dar tu?
     nextDialogue: {fileID: 0}
-  dialogueAnswers: []
+  dialogueAnswers:
+  - answer: Raspunsul 1
+    nextDialogue: {fileID: 11400000, guid: 6ccf99320a8f8ef45a8f61cc827491f2, type: 2}
+  - answer: Raspunsul2
+    nextDialogue: {fileID: 11400000}

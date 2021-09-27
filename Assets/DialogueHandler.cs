@@ -9,7 +9,7 @@ public class DialogueHandler : MonoBehaviour
 
     private void Awake()
     {
-        dialogueText = gameObject.GetComponent<TextMeshProUGUI>();
+        dialogueText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()

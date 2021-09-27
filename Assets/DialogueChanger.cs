@@ -7,32 +7,36 @@ public class DialogueChanger : MonoBehaviour
     private DialogueScriptableObject dialogueScriptable = null;
 
     private DialogueHandler dialogueHandler;
+    private AnswersHandler answersHandler;
 
     private List<DialogueClass> dialogueRespons = null;
-    private List<DialogueanswersClass> dialogueAnswers = null;
 
     private bool firstDialogue = false;
+
+    private bool stop = true;
 
     private int dialogueIndex = 0;
 
     private void Awake()
     {
          dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
+         answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
     }
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        dialogueHandler.gameObject.SetActive(false);
+        answersHandler.gameObject.SetActive(false);
+
+        answersHandler.SetDialogueChanger(this);
     }
 
     private void Update()
     {
-        if (dialogueScriptable != null && dialogueIndex <= dialogueRespons.Count)
+        if (!stop && dialogueScriptable != null && dialogueIndex <= dialogueRespons.Count)
         {
             if(firstDialogue == true)
             {
-                gameObject.SetActive(true);
-
                 dialogueHandler.SetDialogue(dialogueRespons[0].GetDialogue());
 
                 dialogueIndex = 1;
@@ -46,12 +50,24 @@ public class DialogueChanger : MonoBehaviour
                 {
                     SetDialogue(dialogueRespons[dialogueIndex - 1].GetNextDialogue());
 
+                    stop = true;
+
                     return;
                 }
 
                 if(dialogueIndex == dialogueRespons.Count)
                 {
-                    gameObject.SetActive(false);
+                    dialogueHandler.gameObject.SetActive(false);
+
+                    if(dialogueScriptable.GetDialogueAnswers() != null)
+                    {
+                        answersHandler.SetAnswers(dialogueScriptable.GetDialogueAnswers());
+
+                        answersHandler.gameObject.SetActive(true);
+                        dialogueHandler.gameObject.SetActive(false);
+
+                        stop = true;
+                    }
 
                     return;
                 }
@@ -74,11 +90,14 @@ public class DialogueChanger : MonoBehaviour
             this.dialogueScriptable = dialogueScriptable;
 
             dialogueRespons = dialogueScriptable.GetDialogueRespons();
-            dialogueAnswers = dialogueScriptable.GetDialogueAnswers();
+
+            dialogueHandler.gameObject.SetActive(true);
+
+            answersHandler.DeleteAll();
+            answersHandler.gameObject.SetActive(false);
 
             firstDialogue = true;
+            stop = false;
         }
-
-        
     }
 }
