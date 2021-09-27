@@ -8,7 +8,7 @@ public class TimeDegradation : MonoBehaviour
 
     private float alpha;
 
-    private float degradation = .2f;
+    private float degradation = .4f;
 
     private Color color;
 

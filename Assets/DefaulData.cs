@@ -5,6 +5,7 @@ public static class DefaulData
     //Others
     public static int stoneHealth = 10;
     public static float maxLightSourceDistance = 10f;
+    public static float dialogueSpeed = .07f;
 
     // Stones data
     public static float castPosition = .1f;

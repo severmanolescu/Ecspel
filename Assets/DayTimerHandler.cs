@@ -78,8 +78,8 @@ public class DayTimerHandler : MonoBehaviour
         else if(hours >= dayEnd && hours <= dayEnd + dayNightCycleTime)
         {
             intensity = Mathf.SmoothStep(maxDayIntensity, maxNightIntensity, ((hours - dayEnd) + minutes / 60f) / 5f);
-
-            sourceLight.ChangeLightsIntensity(Mathf.Abs(DefaulData.maxDayIntensity - intensity));
+          
+            sourceLight.ChangeLightsIntensity(DefaulData.maxNightIntensity + intensity);
         }
 
         globalLight.intensity = intensity;
