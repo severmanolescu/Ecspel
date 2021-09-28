@@ -53,9 +53,9 @@
     <UnityVersion>2021.1.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Dialogue\DialogueAnswersClass.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueAnswersClass.cs" />
     <Compile Include="Assets\Item.cs" />
-    <Compile Include="Assets\Dialogue\DialogueClass.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueClass.cs" />
     <Compile Include="Assets\SlimeAI.cs" />
     <Compile Include="Assets\ItemWorldSpawn.cs" />
     <Compile Include="Assets\QuickSlot.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="Assets\ItemWorld.cs" />
     <Compile Include="Assets\QuickSlotsChanger.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
-    <Compile Include="Assets\Dialogue\DialogueScriptableObject.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueScriptableObject.cs" />
     <Compile Include="Assets\ItemDrag.cs" />
     <Compile Include="Assets\ItemSprites.cs" />
     <Compile Include="Assets\DayTimerHandler.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Assets\SourceLightShadow.cs" />
     <Compile Include="Assets\StoneDamage.cs" />
     <Compile Include="Assets\AIPathFinding.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\AnswersHandler.cs" />
     <Compile Include="Assets\CanvasTabsOpen.cs" />
     <Compile Include="Assets\PlayerItemUse.cs" />
     <Compile Include="Assets\ItemConstruct.cs" />
@@ -83,16 +84,16 @@
     <Compile Include="Assets\ItemDropWrong.cs" />
     <Compile Include="Assets\SunShadowHandler.cs" />
     <Compile Include="Assets\ParticleStart.cs" />
-    <Compile Include="Assets\DialogueChanger.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueChanger.cs" />
     <Compile Include="Assets\Sprites\Tilemap\Environemnt\Grass\TransparencySortGraphicsHelper.cs" />
     <Compile Include="Assets\TreeDamage.cs" />
     <Compile Include="Assets\LightSourceShadowManager.cs" />
-    <Compile Include="Assets\DialogueTest.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueTest.cs" />
     <Compile Include="Assets\EquipedITem.cs" />
     <Compile Include="Assets\ChestStorageCanvas.cs" />
     <Compile Include="Assets\ItemDetails.cs" />
-    <Compile Include="Assets\DialogueHandler.cs" />
-    <Compile Include="Assets\AnswersHandler.cs" />
+    <Compile Include="Assets\Dialogue\Scripts\DialogueHandler.cs" />
+    <Compile Include="Assets\DialogueDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

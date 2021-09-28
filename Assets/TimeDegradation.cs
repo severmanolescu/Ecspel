@@ -8,8 +8,6 @@ public class TimeDegradation : MonoBehaviour
 
     private float alpha;
 
-    private float degradation = .4f;
-
     private Color color;
 
     private void Awake()
@@ -26,7 +24,7 @@ public class TimeDegradation : MonoBehaviour
 
     private void Update()
     {
-        alpha -= degradation * Time.deltaTime;
+        alpha -= DefaulData.degradation * Time.deltaTime;
 
         color.a = alpha;
 
