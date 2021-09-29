@@ -9,10 +9,11 @@ public class ItemWorld : MonoBehaviour
 
     private TextMeshProUGUI amount;
 
-    private int randomNumber;
-
     private SunShadowHandler sunTimer;
+
     private Transform shadow;
+
+    public Item Item { get { return item; } }
 
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
@@ -52,13 +53,13 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = items;
 
-        spriteRenderer.sprite = items.GetSprite();
+        spriteRenderer.sprite = items.Sprite;
 
         if (amount != null)
         {
-            if (item.GetAmount() > 1)
+            if (item.Amount > 1)
             {
-                amount.SetText(item.GetAmount().ToString());
+                amount.SetText(item.Amount.ToString());
             }
             else
             {
@@ -69,19 +70,14 @@ public class ItemWorld : MonoBehaviour
 
     public void ReinitializeItem()
     {
-        if (item.GetAmount() > 1)
+        if (item.Amount > 1)
         {
-            amount.SetText(item.GetAmount().ToString());
+            amount.SetText(item.Amount.ToString());
         }
         else
         {
             amount.SetText("");
         }
-    }
-
-    public Item GetItem()
-    {
-        return item;
     }
 
     public void DestroySelf()
@@ -92,10 +88,5 @@ public class ItemWorld : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    public int GetRandom()
-    {
-        return randomNumber;
     }
 }

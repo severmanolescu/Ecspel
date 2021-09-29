@@ -13,7 +13,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private Image itemSprite;
     private TextMeshProUGUI amount;
 
-    public Item item = null;
+    private Item item = null;
+
+    public Item Item { get { return item; } }
 
     private void Awake()
     {
@@ -33,11 +35,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         itemSprite.gameObject.SetActive(true);
 
-        itemSprite.sprite = item.GetSprite();
+        itemSprite.sprite = item.Sprite;
 
-        if(item.GetAmount() > 1)
+        if(item.Amount > 1)
         {
-            amount.text = item.GetAmount().ToString();
+            amount.text = item.Amount.ToString();
 
             amount.gameObject.SetActive(true);
         }
@@ -74,18 +76,13 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
             ShowItem();
         }
-    }
-
-    public Item GetItem()
-    {
-        return item;
     }    
 
     public void ReinitializeItem()
     {
-        if(item.GetAmount() > 1)
+        if(item.Amount > 1)
         {
-            amount.text = item.GetAmount().ToString();
+            amount.text = item.Amount.ToString();
 
             amount.gameObject.SetActive(true);
         }
@@ -104,21 +101,21 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private bool VerifyItem()
     {
-        if (item != null && itemDrag.GetItem() != null)
+        if (item != null && itemDrag.Item != null)
         {
-            if (item is Weapon && itemDrag.GetItem() is Weapon)
+            if (item is Weapon && itemDrag.Item is Weapon)
             {
                 return true;
             }
-            if (item is Axe && itemDrag.GetItem() is Axe)
+            if (item is Axe && itemDrag.Item is Axe)
             {
                 return true;
             }
-            if (item is Pickaxe && itemDrag.GetItem() is Pickaxe)
+            if (item is Pickaxe && itemDrag.Item is Pickaxe)
             {
                 return true;
             }
-            if (item is Range && itemDrag.GetItem() is Range)
+            if (item is Range && itemDrag.Item is Range)
             {
                 return true;
             }
@@ -131,9 +128,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         Item auxSwapItems = item;
 
-        SetItem(itemDrag.GetItem());
+        SetItem(itemDrag.Item);
 
-        itemDrag.GetPreviousItem().GetComponent<EquipedITem>().SetItem(auxSwapItems);
+        itemDrag.PreviousItem.GetComponent<EquipedITem>().SetItem(auxSwapItems);
 
         itemDrag.HideData();
     }
@@ -142,9 +139,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         Item auxSwapItems = item;
 
-        SetItem(itemDrag.GetItem());
+        SetItem(itemDrag.Item);
 
-        itemDrag.GetPreviousItem().GetComponent<ItemSlot>().SetItem(auxSwapItems);
+        itemDrag.PreviousItem.GetComponent<ItemSlot>().SetItem(auxSwapItems);
 
         itemDrag.HideData();
 
@@ -152,7 +149,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private void ChangeEquipedItem()
     {
-        if(itemDrag.GetPreviousItem().GetComponent<ItemSlot>() != null)
+        if(itemDrag.PreviousItem.GetComponent<ItemSlot>() != null)
         {
             ChangeSlotToSlot();
         }
@@ -196,9 +193,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         if(item == null)
         {
-            if(itemDrag.GetItem() != null)
+            if(itemDrag.Item!= null)
             {
-                SetItem(itemDrag.GetItem());
+                SetItem(itemDrag.Item);
 
                 itemDrag.DeleteData();
 
@@ -211,15 +208,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
         else
         {
-            if(item.GetName() == itemDrag.GetItem().GetName())
+            if(item.Name == itemDrag.Item.Name)
             {
-                if(item.GetAmount() <= item.GetMaximAmount())
+                if(item.Amount <= item.MaxAmount)
                 {
-                    int auxiliar = item.GetMaximAmount() - item.GetAmount();
+                    int auxiliar = item.MaxAmount - item.Amount;
 
-                    if(itemDrag.GetItem().GetAmount() <= auxiliar)
+                    if(itemDrag.Item.Amount <= auxiliar)
                     {
-                        item.ChangeAmount(item.GetAmount() + itemDrag.GetItem().GetAmount());
+                        item.Amount = item.Amount + itemDrag.Item.Amount;
 
                         itemDrag.DeleteData();
 
@@ -229,9 +226,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     }
                     else
                     {
-                        item.ChangeAmount(item.GetMaximAmount());
+                        item.Amount = item.MaxAmount;
 
-                        itemDrag.GetItem().ChangeAmount(itemDrag.GetItem().GetAmount() - auxiliar);
+                        itemDrag.Item.Amount = itemDrag.Item.Amount - auxiliar;
 
                         ReinitializeItem();
 

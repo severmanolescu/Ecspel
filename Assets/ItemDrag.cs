@@ -9,6 +9,9 @@ public class ItemDrag : MonoBehaviour
 
     private Image itemImage;
 
+    public Item Item { get { return item; } }
+    public GameObject PreviousItem { get { return previousSlot; } }
+
     private void Awake()
     {
         itemImage = gameObject.GetComponentInChildren<Image>();
@@ -25,7 +28,7 @@ public class ItemDrag : MonoBehaviour
                 this.item = item;
                 this.previousSlot = previousSlot;
 
-                itemImage.sprite = item.GetSprite();
+                itemImage.sprite = item.Sprite;
 
                 itemImage.gameObject.SetActive(true);
 
@@ -77,16 +80,6 @@ public class ItemDrag : MonoBehaviour
         previousSlot = null;
 
         itemImage.gameObject.SetActive(false);
-    }
-
-    public Item GetItem()
-    {
-        return item;
-    }
-
-    public GameObject GetPreviousItem()
-    {
-        return previousSlot;
     }
 
     public void Update()

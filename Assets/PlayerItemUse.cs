@@ -8,9 +8,11 @@ public class PlayerItemUse : MonoBehaviour
 
     private Animator animator;
 
-    private Vector2 inputs;
+    private Vector2 inputs = Vector2.zero;
 
     private Vector2 detectionZone = new Vector2(.5f, .5f);
+
+    public Vector2 Inputs { set { inputs = value; } }
 
     private void Awake()
     {
@@ -111,7 +113,7 @@ public class PlayerItemUse : MonoBehaviour
 
     private void SelectedItemAction(Item item)
     {
-        if (playerMovement.GetCanMove())
+        if (playerMovement.CanMove)
         {
             if (item is Axe)
             {
@@ -130,17 +132,12 @@ public class PlayerItemUse : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && playerMovement.GetSpeed() == 0)
+        if(Input.GetKeyDown(KeyCode.F) && playerMovement.Speed == 0)
         {
-            Item item = selectedSlot.GetItem();
+            Item item = selectedSlot.Item;
 
             SelectedItemAction(item);
         }
-    }
-
-    public void SetInputs(Vector2 inputs)
-    {
-        this.inputs = inputs;
     }
 }
 

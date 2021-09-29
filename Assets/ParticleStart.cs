@@ -9,6 +9,8 @@ public class ParticleStart : MonoBehaviour
 
     private int spawn;
 
+    public int Spawn { set { spawn = value; } }
+
     private void Awake()
     {
         particles = gameObject.GetComponentsInChildren<ParticleSystem>();
@@ -78,11 +80,5 @@ public class ParticleStart : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    public void SetSpawn(int spawn)
-    {
-        this.spawn = spawn;
-    }
-    
+    }    
 }

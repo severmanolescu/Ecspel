@@ -32,23 +32,23 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (ItemSlot auxItem in itemsSlot)
         {
-            if (auxItem.GetItem() != null && auxItem.GetItem().GetName() == item.GetName() && item.GetAmount() > 0)
+            if (auxItem.Item != null && auxItem.Item.Name == item.Name && item.Amount > 0)
             {
-                if (auxItem.GetItem().GetAmount() < item.GetMaximAmount())
+                if (auxItem.Item.Amount < item.MaxAmount)
                 {
-                    int auxiliarIteme = item.GetMaximAmount() - auxItem.GetItem().GetAmount();
+                    int auxiliarIteme = item.MaxAmount - auxItem.Item.Amount;
 
-                    if (item.GetAmount() <= auxiliarIteme)
+                    if (item.Amount <= auxiliarIteme)
                     {
-                        auxItem.GetItem().ChangeAmount(auxItem.GetItem().GetAmount() + item.GetAmount());
+                        auxItem.Item.Amount = auxItem.Item.Amount + item.Amount;
 
-                        item.ChangeAmount(0);
+                        item.Amount = 0;
                     }
                     else
                     {
-                        auxItem.GetItem().ChangeAmount(auxItem.GetItem().GetAmount() + auxiliarIteme);
+                        auxItem.Item.Amount = auxItem.Item.Amount + auxiliarIteme;
 
-                        item.ChangeAmount(item.GetAmount() - auxiliarIteme);
+                        item.Amount = item.Amount - auxiliarIteme;
                     }
 
                     auxItem.ReinitializeItem();
@@ -56,7 +56,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        if (item.GetAmount() <= 0)
+        if (item.Amount <= 0)
         {
             quickSlots.Reinitialize();
 
@@ -65,15 +65,15 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (ItemSlot auxItem in itemsSlot)
         {
-            if (auxItem.GetItem() == null && item.GetAmount() > 0)
+            if (auxItem.Item == null && item.Amount > 0)
             {
-                if (item.GetAmount() > item.GetMaximAmount())
+                if (item.Amount > item.MaxAmount)
                 {
-                    int auxiliar = item.GetAmount() - item.GetMaximAmount();
+                    int auxiliar = item.Amount - item.MaxAmount;
 
                     auxItem.SetItem(item.Copy());
 
-                    item.ChangeAmount(auxiliar);
+                    item.Amount = auxiliar;
                 }
 
                 else
@@ -88,7 +88,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
 
-        if (item.GetAmount() <= 0)
+        if (item.Amount <= 0)
         {
             quickSlots.Reinitialize();
 
@@ -100,7 +100,7 @@ public class PlayerInventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if(item.GetMaximAmount() > 1)
+        if(item.MaxAmount > 1)
         {
             if (items.Count < DefaulData.maximInventorySlots)
             {
@@ -117,7 +117,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 foreach (ItemSlot auxItem in itemsSlot)
                 {
-                    if (auxItem.GetItem() == null)
+                    if (auxItem.Item == null)
                     {
                         auxItem.SetItem(item);
 

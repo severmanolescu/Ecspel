@@ -7,13 +7,15 @@ public class QuickSlot : MonoBehaviour
 
     private Image[] itemSprites;
 
+    public Item Item { get { return equiped.Item; } }
+
     private void Awake()
     {
         itemSprites = gameObject.GetComponentsInChildren<Image>();
         
-        if (equiped.GetItem() != null)
+        if (equiped.Item != null)
         {
-            itemSprites[1].sprite = equiped.GetItem().GetSprite();
+            itemSprites[1].sprite = equiped.Item.Sprite;
         }
         else
         {
@@ -23,16 +25,11 @@ public class QuickSlot : MonoBehaviour
         DeselectItem();
     }
 
-    public Item GetItem()
-    {
-        return equiped.GetItem();
-    }
-
     public void Reinitialize()
     {
-        if (equiped.GetItem() != null)
+        if (equiped.Item != null)
         {
-            itemSprites[1].sprite = equiped.GetItem().GetSprite();
+            itemSprites[1].sprite = equiped.Item.Sprite;
             itemSprites[1].gameObject.SetActive(true);
         }
         else

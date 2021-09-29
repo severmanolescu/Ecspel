@@ -48,7 +48,7 @@ public class TreeDamage : MonoBehaviour
         {
             if (particleStart != null)
             {
-                particleStart.SetSpawn(spawn);
+                particleStart.Spawn = spawn;
                 
                 switch(spawn)
                 {

@@ -13,6 +13,8 @@ public class ChestStorage : MonoBehaviour
 
     private TextMeshProUGUI text;
 
+    public List<Item> Items { get { return items; } }
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -27,11 +29,6 @@ public class ChestStorage : MonoBehaviour
         items.Add(DefaulData.GetItemWithAmount(DefaulData.pickaxe, 1));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.stone, 10));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
-    }
-
-    public List<Item> GetItems()
-    {
-        return items;
     }
 
     public void SetItems(List<Item> items)

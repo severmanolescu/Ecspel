@@ -16,6 +16,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed;
 
+    public float Speed { get { return speed; } }
+    public bool CanMove { get { return canMove; } }
+
+    public void SetPlayerMovementTrue()
+    {
+        canMove = true;
+    }
+
     private void Awake()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
@@ -54,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("HorizontalFacing", inputs.x);
                 animator.SetFloat("VerticalFacing", inputs.y);
 
-                playerItem.SetInputs(inputs);
+                playerItem.Inputs = inputs;
             }
         }
     }
@@ -69,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.CompareTag("ItemWorld"))
         {
-            if(playerInventory.AddItem(collision.gameObject.GetComponent<ItemWorld>().GetItem()) == true)
+            if(playerInventory.AddItem(collision.gameObject.GetComponent<ItemWorld>().Item) == true)
             {
                 collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
             }
@@ -78,21 +86,6 @@ public class PlayerMovement : MonoBehaviour
                 collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
             }
         }
-    }
-
-    public float GetSpeed()
-    {
-        return speed;
-    }
-
-    public bool GetCanMove()
-    {
-        return canMove;
-    }
-
-    public void SetPlayerMovementTrue()
-    {
-        canMove = true;
     }
 
     public void SetPlayerMovementFalse()

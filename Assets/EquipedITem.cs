@@ -15,10 +15,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private Image image;
 
-    public Item GetItem()
-    {
-        return item;
-    }
+    public Item Item { get { return item;  } }
 
     private void Awake()
     {
@@ -39,7 +36,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 if(previousSlot != null)
                     previousSlot.DeleteItem();
 
-                image.sprite = item.GetSprite();
+                image.sprite = item.Sprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -52,7 +49,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 if (previousSlot != null)
                     previousSlot.SetItem(auxItemChange);
 
-                image.sprite = item.GetSprite();
+                image.sprite = item.Sprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -67,7 +64,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             {
                 this.item = item;
 
-                image.sprite = item.GetSprite();
+                image.sprite = item.Sprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -77,7 +74,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
                 this.item = item;
 
-                image.sprite = item.GetSprite();
+                image.sprite = item.Sprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -153,9 +150,9 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (item == null)
         {
-            if (itemDrag.GetItem() != null && VerifyItemToSlot(itemDrag.GetItem()) == true)
+            if (itemDrag.Item != null && VerifyItemToSlot(itemDrag.Item) == true)
             {
-                SetItem(itemDrag.GetItem());
+                SetItem(itemDrag.Item);
 
                 itemDrag.DeleteData();
 
@@ -168,21 +165,21 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         }
         else
         {
-            if (item != null && VerifyItemToSlot(itemDrag.GetItem()))
+            if (item != null && VerifyItemToSlot(itemDrag.Item))
             {
                 Item auxChangeItems = this.item;
 
-                ItemSlot previousItem = itemDrag.GetPreviousItem().GetComponent<ItemSlot>();
+                ItemSlot previousItem = itemDrag.PreviousItem.GetComponent<ItemSlot>();
 
                 if(previousItem != null)
                 {
-                    SetItem(itemDrag.GetItem());
+                    SetItem(itemDrag.Item);
 
                     previousItem.SetItem(auxChangeItems);
                 }
                 else
                 {
-                    item = itemDrag.GetItem();
+                    item = itemDrag.Item;
                 }
 
                 itemDrag.HideData();

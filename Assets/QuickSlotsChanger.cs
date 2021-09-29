@@ -7,15 +7,8 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private int selectedItemIndex;
 
-    public int GetSelectedItemIndex()
-    {
-        return selectedItemIndex;
-    }
-
-    public Item GetItem()
-    {
-        return quickSlots[selectedItemIndex - 1].GetItem();
-    }
+    public int SelectedItemIndex { get{ return selectedItemIndex; } }
+    public Item Item{ get{ return quickSlots[selectedItemIndex - 1].Item; } }
 
     private void Awake()
     {

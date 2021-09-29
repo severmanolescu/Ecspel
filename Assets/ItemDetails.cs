@@ -26,9 +26,9 @@ public class ItemDetails : MonoBehaviour
     {
         if (item != null)
         {
-            itemSpriteObject.sprite = item.GetSprite();
-            itemNameObject.text = item.GetName();
-            itemDetailsObject.text = item.GetDetails();
+            itemSpriteObject.sprite = item.Sprite;
+            itemNameObject.text = item.Name;
+            itemDetailsObject.text = item.Details;
 
             gameObject.SetActive(true);
         }

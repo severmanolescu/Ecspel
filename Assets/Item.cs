@@ -4,7 +4,7 @@ using System;
 [Serializable]
 public class Item
 {
-    public string name;
+    private string name;
 
     protected string details;
 
@@ -24,35 +24,11 @@ public class Item
         this.itemSprite = itemSprite;
     }
 
-    public string GetName()
-    {
-        return name;
-    }
-
-    public string GetDetails()
-    {
-        return details;
-    }
-
-    public int GetAmount()
-    {
-        return amount;
-    }
-
-    public Sprite GetSprite()
-    {
-        return itemSprite;
-    }
-
-    public int GetMaximAmount()
-    {
-        return maxAmount;
-    }
-
-    public void ChangeAmount(int amount)
-    {
-        this.amount = amount;
-    }
+    public string Name { get { return name; } }
+    public string Details { get { return details; } }
+    public int Amount { get { return amount; } set { amount = value; } }
+    public Sprite Sprite { get { return itemSprite; } }
+    public int MaxAmount { get { return maxAmount; } }
 
     public Item Copy()
     {
@@ -70,10 +46,7 @@ public class Weapon: Item
         this.attackPower = attackPower;
     }
 
-    public float GetAttackPower()
-    {
-        return attackPower;
-    }
+    public float AttackPower { get { return attackPower; } }
 }
 
 public class Range: Weapon
@@ -86,10 +59,7 @@ public class Range: Weapon
         this.range = range;
     }
 
-    public float GetRange()
-    {
-        return range;
-    }
+    public float GetRange { get { return range; } }
 }
 
 public class Axe : Item

@@ -53,8 +53,6 @@ public class SlimeAI : MonoBehaviour
     {
         aIPath.MoveToLocation(roaming, speed);
 
-
-
         if(Vector3.Distance(transform.position, roaming) <= tolerance)
         {
             roaming = GetRoamingPosition();

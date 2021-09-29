@@ -35,7 +35,7 @@ public class ChestStorageCanvas : MonoBehaviour
 
         foreach(ItemSlot item in chestItems)
         {
-            items.Add(item.GetItem());
+            items.Add(item.Item);
         }
 
         foreach (ItemSlot item in chestItems)

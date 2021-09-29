@@ -30,7 +30,7 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private void Awake()
     {
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -75,7 +75,7 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     playerMovement.SetPlayerMovementTrue();
 
-                    chestItems = chestStorage.GetComponent<ChestStorage>().GetItems();
+                    chestItems = chestStorage.GetComponent<ChestStorage>().Items;
 
                     if (chestItems != null)
                         chestSlots.GetComponent<ChestStorageCanvas>().SetItems(chestItems);

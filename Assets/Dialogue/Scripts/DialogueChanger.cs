@@ -9,7 +9,7 @@ public class DialogueChanger : MonoBehaviour
     private DialogueHandler dialogueHandler;
     private AnswersHandler answersHandler;
 
-    public DialogueDisplay NPCDialogue;
+    private DialogueDisplay NPCDialogue;
 
     private List<DialogueClass> dialogueRespons = null;
 
@@ -80,9 +80,9 @@ public class DialogueChanger : MonoBehaviour
                 {
                     dialogueHandler.gameObject.SetActive(false);
 
-                    if(dialogueScriptable.GetDialogueAnswers() != null)
+                    if(dialogueScriptable.DialogueAnswers.Count >= 1)
                     {
-                        answersHandler.SetAnswers(dialogueScriptable.GetDialogueAnswers());
+                        answersHandler.SetAnswers(dialogueScriptable.DialogueAnswers);
 
                         answersHandler.gameObject.SetActive(true);
                         dialogueHandler.gameObject.SetActive(false);
@@ -90,6 +90,17 @@ public class DialogueChanger : MonoBehaviour
                         NPCDialogue.DeleteDialogue();
 
                         stop = true;
+
+                        return;
+                    }
+                    if(dialogueScriptable.NextDialogue != null)
+                    {
+                        NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
+                    }
+
+                    if(dialogueScriptable.Quests != null)
+                    {
+                        
                     }
 
                     return;
@@ -108,7 +119,7 @@ public class DialogueChanger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                SetDialogue(NPCDialogue.GetDialogue());
+                SetDialogue(NPCDialogue.Dialogue);
             }
         }
     }
@@ -119,7 +130,7 @@ public class DialogueChanger : MonoBehaviour
         {
             this.dialogueScriptable = dialogueScriptable;
 
-            dialogueRespons = dialogueScriptable.GetDialogueRespons();
+            dialogueRespons = dialogueScriptable.DialogueRespons;
 
             dialogueHandler.gameObject.SetActive(true);
 

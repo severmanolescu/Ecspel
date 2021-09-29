@@ -43,7 +43,7 @@ public static class DefaulData
     {
         Item auxItem = item.Copy();
 
-        auxItem.ChangeAmount(amount);
+        auxItem.Amount = amount;
 
         return auxItem;
     }
