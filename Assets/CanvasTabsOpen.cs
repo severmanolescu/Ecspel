@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class CanvasTabsOpen : MonoBehaviour
 {
-    [Header("Player Inventory")]
-    [SerializeField] private GameObject PlayerInventory;
+    private GameObject playerInventory;
+    private GameObject quickSlot;
+    private GameObject chestSlots;
 
-    [Header("Player Quickslots")]
-    [SerializeField] private GameObject quickSlot;
-
-    [Header("Chest Slots")]
-    [SerializeField] private GameObject chestSlots;
+    private QuestShow questShow;
 
     private ChestStorage chestStorage;
     private List<Item> chestItems = new List<Item>();
@@ -23,14 +20,21 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        PlayerInventory.SetActive(false);
+        playerInventory.SetActive(false);
 
         chestSlots.SetActive(false);
+
+        questShow.gameObject.SetActive(false);
     }
 
     private void Awake()
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        playerInventory = gameObject.transform.Find("Field/Inventory/PlayerInventory").gameObject;
+        quickSlot = gameObject.transform.Find("Field/QuickSlots").gameObject;
+        chestSlots = gameObject.transform.Find("Field/Inventory/PlayerInventory/ChestInventory").gameObject;
+        questShow = gameObject.transform.Find("Field/QuestTab").gameObject.GetComponent<QuestShow>();
     }
 
     private void Start()
@@ -42,60 +46,53 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PlayerInventory.SetActive(!PlayerInventory.activeSelf);
-
-            if(PlayerInventory.activeSelf == false)
+            if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
             {
-                quickSlot.GetComponent<QuickSlotsChanger>().Reinitialize();
+                questShow.HideQuest();
 
-                quickSlot.gameObject.SetActive(true);
+                playerInventory.SetActive(true);
+                quickSlot.SetActive(false);
+
+                playerMovement.SetPlayerMovementFalse();
+            }
+            else if (playerInventory.activeSelf)
+            {
+                questShow.HideQuest();
+
+                playerInventory.SetActive(false);
+                quickSlot.SetActive(true);
 
                 playerMovement.SetPlayerMovementTrue();
             }
-            else
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
             {
-                quickSlot.gameObject.SetActive(false);
+                questShow.gameObject.SetActive(true);
+                playerInventory.SetActive(false);
+                quickSlot.SetActive(false);
 
                 playerMovement.SetPlayerMovementFalse();
             }
-
-            if(chestSet)
+            else if (questShow.gameObject.activeSelf)
             {
-                if(chestSlots.activeSelf)
-                {
-                    chestStorage.SetItems(chestSlots.GetComponent<ChestStorageCanvas>().ReturnItemsList());
+                questShow.HideQuest();
 
-                    chestSlots.SetActive(false);
-
-                    playerMovement.SetPlayerMovementFalse();
-                }
-                else
-                {
-                    chestSlots.SetActive(true);
-
-                    playerMovement.SetPlayerMovementTrue();
-
-                    chestItems = chestStorage.GetComponent<ChestStorage>().Items;
-
-                    if (chestItems != null)
-                        chestSlots.GetComponent<ChestStorageCanvas>().SetItems(chestItems);
-                }
-            }
-            else
-            {
-                chestSlots.SetActive(false);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (PlayerInventory.activeSelf)
-            {
-                PlayerInventory.SetActive(false);
+                playerInventory.SetActive(false);
                 quickSlot.SetActive(true);
 
-                playerMovement.SetPlayerMovementFalse();
+                playerMovement.SetPlayerMovementTrue();
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            questShow.HideQuest();
+
+            playerInventory.SetActive(false);
+            quickSlot.SetActive(true);
+
+            playerMovement.SetPlayerMovementTrue();
         }
     }
 

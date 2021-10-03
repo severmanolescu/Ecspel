@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DialogueChanger : MonoBehaviour
 {
+    [SerializeField] private QuestTabHandler questTab;
+
     private DialogueScriptableObject dialogueScriptable = null;
 
     private DialogueHandler dialogueHandler;
@@ -100,7 +102,10 @@ public class DialogueChanger : MonoBehaviour
 
                     if(dialogueScriptable.Quests != null)
                     {
-                        
+                        foreach(Quest quest in dialogueScriptable.Quests)
+                        {
+                            questTab.AddQuest(quest);
+                        }
                     }
 
                     return;

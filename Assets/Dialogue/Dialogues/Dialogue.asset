@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue
   m_EditorClassIdentifier: 
   name: 
-  quest: 0
+  haveQuest: 0
   dialogueRespons:
   - whoReply: 0
     dialogue: Buna
@@ -36,3 +36,5 @@ MonoBehaviour:
   - answer: Raspunsul2
     nextDialogue: {fileID: 11400000, guid: 6ccf99320a8f8ef45a8f61cc827491f2, type: 2}
   nextDialogue: {fileID: 11400000, guid: 6ccf99320a8f8ef45a8f61cc827491f2, type: 2}
+  quests:
+  - {fileID: 11400000, guid: c48640d3220f38d43bda486f948d2a74, type: 2}
