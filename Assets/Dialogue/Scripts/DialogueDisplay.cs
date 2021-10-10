@@ -13,6 +13,10 @@ public class DialogueDisplay : MonoBehaviour
     private DialogueHandler dialogueHandler;
     private AnswersHandler answersHandler;
 
+    private List<Quest> quests = new List<Quest>();
+
+    public List<Quest> Quest { get { return quests; } }
+
     public DialogueScriptableObject Dialogue { get { return dialogueScriptable; } set { dialogueScriptable = value; ChangeQuestMarkState(); } }
 
     private void Awake()
@@ -22,27 +26,20 @@ public class DialogueDisplay : MonoBehaviour
         questMark = gameObject.transform.Find("QuestMark").gameObject;
     }
 
-    private void ChangeQuestMarkState()
-    {
-        if (dialogueScriptable != null)
-        {
-            if(dialogueScriptable.HaveQuest == true)
-            {
-                questMark.SetActive(true);
-            }
-            else
-            {
-                questMark.SetActive(false);
-            }
-        }
-    }
-
     public void Start()
     {
         dialogueHandler.gameObject.SetActive(false);
         answersHandler.gameObject.SetActive(false);
 
         ChangeQuestMarkState();
+
+        if (dialogueScriptable != null)
+        {
+            foreach (Quest quest in dialogueScriptable.Quest)
+            {
+                quest.WhoToGive = this.gameObject;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -69,6 +66,25 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
+    private void ChangeQuestMarkState()
+    {
+        if (dialogueScriptable != null)
+        {
+            if (dialogueScriptable.HaveQuest == true)
+            {
+                questMark.SetActive(true);
+            }
+            else
+            {
+                questMark.SetActive(false);
+            }
+        }
+        else
+        {
+            questMark.SetActive(false);
+        }
+    }
+
     public void SetDialogue(string dialogue)
     {
         dialogueHandler.gameObject.SetActive(true);
@@ -83,4 +99,19 @@ public class DialogueDisplay : MonoBehaviour
         dialogueHandler.gameObject.SetActive(false);
     }
 
+    public void AddQuest(Quest quest)
+    {
+        if(quest != null)
+        {
+            quests.Add(quest);
+        }
+    }
+
+    public void DeleteQuest(Quest quest)
+    {
+        if(quests != null && quest != null)
+        {
+            quests.Remove(quest);
+        }
+    }
 }

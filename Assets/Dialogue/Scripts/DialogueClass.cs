@@ -11,18 +11,7 @@ public class DialogueClass
 
     [SerializeField] private DialogueScriptableObject nextDialogue;
 
-    public bool GetWhoReply()
-    {
-        return whoReply;
-    }
-
-    public string GetDialogue()
-    {
-        return dialogue;
-    }
-
-    public DialogueScriptableObject GetNextDialogue()
-    {
-        return nextDialogue;
-    }
+    public bool WhoReply { get { return whoReply; } }
+    public string Dialogue { get { return dialogue; } }
+    public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
 }

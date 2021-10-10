@@ -14,18 +14,18 @@ public class DialogueScriptableObject : ScriptableObject
     [SerializeField] private List<DialogueClass> dialogueRespons;
 
     [Header("Player answers for dialogue:")]
-    [SerializeField] private List<DialogueanswersClass> dialogueAnswers;
+    [SerializeField] private List<DialogueAnswersClass> dialogueAnswers;
 
     [Header("Next dialogue to play:")]
     [SerializeField] private DialogueScriptableObject nextDialogue;
 
-    [Header("Dialogue quest:")]
+    [Header("Dialogue quests:")]
     [SerializeField] private List<Quest> quests;
 
     public string Name { get { return name; } }
     public bool HaveQuest { get { return haveQuest; } }
     public List<DialogueClass> DialogueRespons { get { return dialogueRespons; } }
-    public List<DialogueanswersClass> DialogueAnswers { get { return dialogueAnswers; } }
+    public List<DialogueAnswersClass> DialogueAnswers { get { return dialogueAnswers; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
-    public List<Quest> Quests { get { return quests; } }
+    public List<Quest> Quest { get { return quests; } }
 }

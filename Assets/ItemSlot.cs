@@ -99,6 +99,22 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         HideItem();
     }
 
+    public void DecreseAmount(int amount)
+    {
+        item.Amount -= amount;
+
+        if (item.Amount <= 0)
+        {
+            item = null;
+
+            HideItem();
+        }
+        else
+        {
+            ReinitializeItem();
+        }
+    }
+
     private bool VerifyItem()
     {
         if (item != null && itemDrag.Item != null)

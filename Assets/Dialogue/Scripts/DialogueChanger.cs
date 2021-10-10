@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DialogueChanger : MonoBehaviour
 {
-    [SerializeField] private QuestTabHandler questTab;
-
     private DialogueScriptableObject dialogueScriptable = null;
 
     private DialogueHandler dialogueHandler;
@@ -15,6 +13,8 @@ public class DialogueChanger : MonoBehaviour
 
     private List<DialogueClass> dialogueRespons = null;
 
+    private QuestTabHandler questTab;
+
     private bool firstDialogue = false;
 
     private bool stop = true;
@@ -23,8 +23,9 @@ public class DialogueChanger : MonoBehaviour
 
     private void Awake()
     {
-         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
-         answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
+        dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
+        answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
+        questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
     }
 
     private void Start()
@@ -37,29 +38,75 @@ public class DialogueChanger : MonoBehaviour
 
     private void SetDialogue(DialogueClass dialogue)
     {
-        if(dialogue.GetWhoReply() == false)
+        if(dialogue.WhoReply == false)
         { 
             dialogueHandler.gameObject.SetActive(true);
 
-            dialogueHandler.SetDialogue(dialogue.GetDialogue());
+            dialogueHandler.SetDialogue(dialogue.Dialogue);
 
             NPCDialogue.DeleteDialogue();
         }
         else
         {
-            NPCDialogue.SetDialogue(dialogue.GetDialogue());
+            NPCDialogue.SetDialogue(dialogue.Dialogue);
 
             dialogueHandler.gameObject.SetActive(false);
         }
+    }
+
+    private void SetQuest()
+    {
+        answersHandler.SetAnswers(NPCDialogue.Quest);
+
+        answersHandler.gameObject.SetActive(true);
+        dialogueHandler.gameObject.SetActive(false);
+
+        NPCDialogue.DeleteDialogue();
+    }
+
+    private void DialogueEnd()
+    {
+        dialogueHandler.gameObject.SetActive(false);
+
+        if (dialogueScriptable.DialogueAnswers.Count >= 1)
+        {
+            answersHandler.SetAnswers(dialogueScriptable.DialogueAnswers);
+
+            answersHandler.gameObject.SetActive(true);
+            dialogueHandler.gameObject.SetActive(false);
+
+            NPCDialogue.DeleteDialogue();
+        }
+
+        if(NPCDialogue.Quest.Count > 0)
+        {
+            SetQuest();
+        }
+        else if (dialogueScriptable.NextDialogue != null)
+        {
+            NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
+        }
+
+        if(dialogueScriptable.Quest.Count > 0)
+        {
+            questTab.AddQuest(dialogueScriptable.Quest);
+        } 
+
+        stop = true;
     }
 
     private void Update()
     {
         if (!stop && dialogueScriptable != null && dialogueIndex <= dialogueRespons.Count)
         {
-            if(firstDialogue == true)
+            if (dialogueRespons.Count == 0)
             {
-                dialogueHandler.SetDialogue(dialogueRespons[0].GetDialogue());
+                DialogueEnd();
+            }
+
+            if (firstDialogue == true)
+            {
+                dialogueHandler.SetDialogue(dialogueRespons[0].Dialogue);
                 SetDialogue(dialogueRespons[0]);
 
                 dialogueIndex = 1;
@@ -69,7 +116,7 @@ public class DialogueChanger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if(dialogueRespons[dialogueIndex - 1].GetNextDialogue() != null)
+                if(dialogueRespons[dialogueIndex - 1].NextDialogue != null)
                 {
                     SetDialogue(dialogueRespons[dialogueIndex - 1]);
 
@@ -80,33 +127,7 @@ public class DialogueChanger : MonoBehaviour
 
                 if(dialogueIndex == dialogueRespons.Count)
                 {
-                    dialogueHandler.gameObject.SetActive(false);
-
-                    if(dialogueScriptable.DialogueAnswers.Count >= 1)
-                    {
-                        answersHandler.SetAnswers(dialogueScriptable.DialogueAnswers);
-
-                        answersHandler.gameObject.SetActive(true);
-                        dialogueHandler.gameObject.SetActive(false);
-
-                        NPCDialogue.DeleteDialogue();
-
-                        stop = true;
-
-                        return;
-                    }
-                    if(dialogueScriptable.NextDialogue != null)
-                    {
-                        NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
-                    }
-
-                    if(dialogueScriptable.Quests != null)
-                    {
-                        foreach(Quest quest in dialogueScriptable.Quests)
-                        {
-                            questTab.AddQuest(quest);
-                        }
-                    }
+                    DialogueEnd();
 
                     return;
                 }
@@ -131,7 +152,7 @@ public class DialogueChanger : MonoBehaviour
 
     public void SetDialogue(DialogueScriptableObject dialogueScriptable)
     {
-        if(dialogueScriptable != null)
+        if (dialogueScriptable != null)
         {
             this.dialogueScriptable = dialogueScriptable;
 
@@ -146,6 +167,12 @@ public class DialogueChanger : MonoBehaviour
 
             firstDialogue = true;
             stop = false;
+        }
+        else if (NPCDialogue.Quest != null)
+        {
+            answersHandler.DeleteAll();
+
+            SetQuest(); 
         }
     }
 

@@ -15,7 +15,9 @@ public class PlayerInventory : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.pickaxe, 1));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
     }
 
     private void Awake()
@@ -133,6 +135,34 @@ public class PlayerInventory : MonoBehaviour
                 return false;
             }
         }
+    }
+
+    public bool SearchInventory(Item item, int amount)
+    {
+        foreach(ItemSlot itemSlot in itemsSlot)
+        {
+            if(itemSlot.Item != null && itemSlot.Item.Name == item.name && itemSlot.Item.Amount >= amount)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void DeteleItems(List<QuestItems> items)
+    {
+        foreach (QuestItems questItem in items)
+        {
+            foreach (ItemSlot itemSlot in itemsSlot)
+            {
+                if (itemSlot.Item != null && itemSlot.Item.Name == questItem.Item.Name && itemSlot.Item.Amount >= questItem.Amount)
+                {
+                    itemSlot.DecreseAmount(questItem.Amount);
+                }
+            }
+        }
+
+        quickSlots.Reinitialize();
     }
 
 }

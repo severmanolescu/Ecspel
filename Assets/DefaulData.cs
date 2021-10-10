@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public static class DefaulData
@@ -31,13 +32,13 @@ public static class DefaulData
     public static int dayNightCycleTime = 5; 
 
     // Items
-    public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);
-    public static Item stick    = new Item("Stick", "Good for crafting and fire", 0, 50, ItemSprites.Instance.stick);
-    public static Item stone    = new Item("Stone", "Good for crafting and firepit", 0, 25, ItemSprites.Instance.stone);
+    public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));
+    public static Item stick    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stick.asset", typeof(Item));
+    public static Item stone    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stone.asset", typeof(Item));
 
     // Usable item
-    public static Item stoneAxe = new Axe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.stonePickaxe);
-    public static Item pickaxe  = new Pickaxe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.pickaxe);
+    public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
+    public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
 
     public static Item GetItemWithAmount(Item item, int amount)
     {

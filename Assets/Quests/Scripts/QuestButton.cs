@@ -1,37 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class QuestButton : MonoBehaviour
 {
-    public Quest quest;
+    private Quest quest;
+
+    private TextMeshProUGUI buttonText;
 
     private Button button;
-    private TextMeshProUGUI text;
 
-    public QuestShow questShow;
+    private QuestTabDataSet questTabData;
 
     public Quest Quest { get { return quest; } }
 
     private void Awake()
     {
         button = gameObject.GetComponent<Button>();
-        text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        buttonText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void SetQuest(Quest quest, QuestShow questShow)
+    public void SetData(Quest quest, QuestTabDataSet questTabData)
     {
-        if (quest != null)
-        {
-            this.quest = quest;
+        this.quest = quest;
+        this.questTabData = questTabData;
 
-            this.questShow = questShow;
+        buttonText.text = quest.Title;
 
-            button.onClick.AddListener(delegate { questShow.SetQuest(quest); });
-
-            text.text = quest.Title;
-        }
+        button.onClick.AddListener(delegate { questTabData.SetData(quest); });
     }
 }

@@ -1,46 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 
 public class AnswersHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject answerPrefab; 
-
-    private List<DialogueanswersClass> dialogueAnswers;
+    private GameObject answerPrefab; 
 
     private List<GameObject> answers = new List<GameObject>();
 
     private DialogueChanger dialogueChanger;
 
+    private PlayerInventory playerInventory;
+
+    private QuestTabHandler questTab;
+
+    private void Awake()
+    {
+        answerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Dialogue/Prefabs/AnswerPrefab.prefab", typeof(GameObject));
+
+        playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>();
+
+        questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
+    }
+
     public void SetDialogueChanger(DialogueChanger dialogueChanger)
     {
         this.dialogueChanger = dialogueChanger;
-    }
-
-    private void PlaceAnswers()
-    {
-        foreach(DialogueanswersClass answer in dialogueAnswers)
-        {
-            GameObject ansferInstance = Instantiate(answerPrefab);
-
-            ansferInstance.transform.SetParent(gameObject.transform);
-            ansferInstance.transform.localScale = answerPrefab.transform.localScale;
-
-            ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = answer.GetAnswer();
-
-            if(answer.GetNextDialogue() == null)
-            {
-                ansferInstance.GetComponent<Button>().onClick.AddListener(DeleteAll);
-            }
-            else
-            {
-                ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(answer.GetNextDialogue()); });
-            }
-
-            answers.Add(ansferInstance);
-        }
     }
 
     public void DeleteAll()
@@ -53,15 +40,76 @@ public class AnswersHandler : MonoBehaviour
         answers.Clear();
     }
 
-    public void SetAnswers(List<DialogueanswersClass> dialogueAnswers)
+    private void PlaceAnswers(List<DialogueAnswersClass> dialogueAnswers)
+    {
+        foreach (DialogueAnswersClass answer in dialogueAnswers)
+        {
+            GameObject ansferInstance = Instantiate(answerPrefab);
+
+            ansferInstance.transform.SetParent(gameObject.transform);
+            ansferInstance.transform.localScale = answerPrefab.transform.localScale;
+
+            ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = answer.Answer;
+
+            if (answer.NextDialogue == null)
+            {
+                ansferInstance.GetComponent<Button>().onClick.AddListener(DeleteAll);
+            }
+            else
+            {
+                ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(answer.NextDialogue); });
+            }
+
+            answers.Add(ansferInstance);
+        }
+    }
+
+    public void SetAnswers(List<DialogueAnswersClass> dialogueAnswers)
     {
         if (dialogueAnswers != null)
         {
             DeleteAll();
 
-            this.dialogueAnswers = dialogueAnswers;
+            PlaceAnswers(dialogueAnswers);
+        }
+    }
 
-            PlaceAnswers();
+    private void PlaceAnswers(Quest quest, bool found)
+    {
+        GameObject ansferInstance = Instantiate(answerPrefab);
+
+        ansferInstance.transform.SetParent(gameObject.transform);
+        ansferInstance.transform.localScale = answerPrefab.transform.localScale;
+
+        ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = quest.Title;
+
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(quest.ItemsNeeds); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { quest.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(quest.NextDialogue); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTab.DeleteQuest(quest); });
+
+        ansferInstance.GetComponent<Button>().interactable = found;
+
+        answers.Add(ansferInstance);
+    }
+
+    public void SetAnswers(List<Quest> quests)
+    {
+        bool allFoundInInventory = false;
+
+        foreach (Quest quest in quests)
+        {
+            foreach(QuestItems questItems in quest.ItemsNeeds)
+            {
+                if (playerInventory.SearchInventory(questItems.Item, questItems.Amount))
+                {
+                    allFoundInInventory = true;
+                }
+            }
+
+            PlaceAnswers(quest, allFoundInInventory);
+
+            allFoundInInventory = false;
         }
     }
 }

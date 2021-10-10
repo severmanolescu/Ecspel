@@ -9,10 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d7578642232224489c310a3c0a7e86, type: 3}
+  m_Script: {fileID: 11500000, guid: bf1468a1702c9094c8b22aeb9f206408, type: 3}
   m_Name: Quest
   m_EditorClassIdentifier: 
-  title: Da-mi si mie boss
-  npcName: Sever
-  details: Da-i si lui Sever niste mancare mancatias
-  questRequirements: []
+  title: Quest
+  details: OAre ce trebe sa fac, aflam!
+  whoToGive: {fileID: 0}
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
+    weapon: {fileID: 0}
+    range: {fileID: 0}
+    axe: {fileID: 0}
+    pickaxe: {fileID: 0}
+    amount: 5
+  itemsReceive:
+  - item: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
+    weapon: {fileID: 0}
+    range: {fileID: 0}
+    axe: {fileID: 0}
+    pickaxe: {fileID: 0}
+    amount: 20
+  nextDialogue: {fileID: 0}

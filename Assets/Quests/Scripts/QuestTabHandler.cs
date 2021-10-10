@@ -1,62 +1,93 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class QuestTabHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject questPrefab;
+    private GameObject answarePrefab;
 
-    private List<Quest> quests = new List<Quest>();
-
-    private GameObject questSpawn;
-
+    private Transform spawnLocation;
+    
     private List<QuestButton> questButtons = new List<QuestButton>();
-
-    private QuestShow questShow;
 
     private void Awake()
     {
-        questSpawn = transform.Find("ScrollView/Viewport/Content").gameObject;
-
-        questShow = gameObject.GetComponent<QuestShow>();
+        spawnLocation = transform.Find("ScrollView/Viewport/Content");
+        answarePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Quests/Prefabs/QuestPrefab.prefab", typeof(GameObject));
     }
 
-    private void AddQuestToTab(Quest quest)
+    private void InstantiateButton(Quest quest)
     {
-        GameObject button = Instantiate(questPrefab);
-        button.transform.SetParent(questSpawn.transform);
-        button.transform.localScale = questPrefab.transform.localScale;
+        GameObject @object = Instantiate(answarePrefab);
 
-        QuestButton questButton = button.GetComponent<QuestButton>();
+        @object.transform.SetParent(spawnLocation.transform);
+        @object.transform.localScale = answarePrefab.transform.localScale;
 
-        questButton.SetQuest(quest, questShow);
+        @object.GetComponent<QuestButton>().SetData(quest, gameObject.GetComponent<QuestTabDataSet>());
 
-        questButtons.Add(questButton);
+        questButtons.Add(@object.GetComponent<QuestButton>());
     }
 
-    private void DeleteQuestFromTab(Quest quest)
+    public void SetQuestWorld(Quest quest)
     {
-
-    }
-
-    public void DeleteQuest(Quest quest)
-    {
-        if(quest != null && quests.Contains(quest))
+        if(quest.ItemsNeeds.Count > 0)
         {
-            quests.Remove(quest);
-
-            DeleteQuestFromTab(quest);
+            quest.WhoToGive.GetComponent<DialogueDisplay>().AddQuest(quest);
         }
+    }
+
+    private bool VerifyQuest(Quest quest)
+    {
+        foreach(QuestButton questButton in questButtons)
+        {
+            if(questButton.Quest == quest)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void AddQuest(Quest quest)
     {
-        if(quest != null && !quests.Contains(quest))
+        if(quest != null && VerifyQuest(quest))
         {
-            quests.Add(quest);
+            InstantiateButton(quest);
 
-            AddQuestToTab(quest);
+            SetQuestWorld(quest);
         }
     }
 
+    public void AddQuest(List<Quest> questList)
+    {
+        if (questList != null)
+        {
+            foreach (Quest quest in questList)
+            {
+                if (VerifyQuest(quest))
+                {
+                    InstantiateButton(quest);
+
+                    SetQuestWorld(quest);
+                }
+            }
+        }
+    }
+
+    public void DeleteQuest(Quest quest)
+    {
+       foreach(QuestButton questButton in questButtons)
+        {
+            if(questButton.Quest == quest)
+            {
+                questButtons.Remove(questButton);
+
+                Destroy(questButton.gameObject);
+
+                return;
+            }
+        }
+    }
 }
