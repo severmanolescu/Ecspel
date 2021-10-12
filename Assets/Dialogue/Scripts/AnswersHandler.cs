@@ -16,6 +16,8 @@ public class AnswersHandler : MonoBehaviour
 
     private QuestTabHandler questTab;
 
+    private QuestTrack questTrack;
+
     private void Awake()
     {
         answerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Dialogue/Prefabs/AnswerPrefab.prefab", typeof(GameObject));
@@ -23,6 +25,8 @@ public class AnswersHandler : MonoBehaviour
         playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>();
 
         questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
+
+        questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
     }
 
     public void SetDialogueChanger(DialogueChanger dialogueChanger)
@@ -44,9 +48,8 @@ public class AnswersHandler : MonoBehaviour
     {
         foreach (DialogueAnswersClass answer in dialogueAnswers)
         {
-            GameObject ansferInstance = Instantiate(answerPrefab);
+            GameObject ansferInstance = Instantiate(answerPrefab, gameObject.transform);
 
-            ansferInstance.transform.SetParent(gameObject.transform);
             ansferInstance.transform.localScale = answerPrefab.transform.localScale;
 
             ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = answer.Answer;
@@ -76,9 +79,8 @@ public class AnswersHandler : MonoBehaviour
 
     private void PlaceAnswers(Quest quest, bool found)
     {
-        GameObject ansferInstance = Instantiate(answerPrefab);
+        GameObject ansferInstance = Instantiate(answerPrefab, gameObject.transform);
 
-        ansferInstance.transform.SetParent(gameObject.transform);
         ansferInstance.transform.localScale = answerPrefab.transform.localScale;
 
         ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = quest.Title;
@@ -87,6 +89,7 @@ public class AnswersHandler : MonoBehaviour
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { quest.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(quest.NextDialogue); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTab.DeleteQuest(quest); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTrack.StopTrackQuest(); });
 
         ansferInstance.GetComponent<Button>().interactable = found;
 

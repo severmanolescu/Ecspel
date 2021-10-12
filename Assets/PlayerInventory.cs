@@ -10,14 +10,20 @@ public class PlayerInventory : MonoBehaviour
 
     private List<Item> items = new List<Item>();
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
+        }
+    }
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1);
 
         AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
+        
     }
 
     private void Awake()

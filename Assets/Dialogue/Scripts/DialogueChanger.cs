@@ -86,6 +86,10 @@ public class DialogueChanger : MonoBehaviour
         {
             NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
         }
+        else if(dialogueScriptable.NextDialogue == null)
+        {
+            NPCDialogue.Dialogue = null;
+        }
 
         if(dialogueScriptable.Quest.Count > 0)
         {

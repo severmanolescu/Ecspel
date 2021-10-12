@@ -11,22 +11,24 @@ public class QuestTabHandler : MonoBehaviour
     
     private List<QuestButton> questButtons = new List<QuestButton>();
 
+    private QuestLocationFollow questLocation;
+
     private void Awake()
     {
         spawnLocation = transform.Find("ScrollView/Viewport/Content");
+        questLocation = GameObject.Find("Player").GetComponent<QuestLocationFollow>();
         answarePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Quests/Prefabs/QuestPrefab.prefab", typeof(GameObject));
     }
 
     private void InstantiateButton(Quest quest)
     {
-        GameObject @object = Instantiate(answarePrefab);
+        GameObject @object = Instantiate(answarePrefab, spawnLocation.transform);
 
-        @object.transform.SetParent(spawnLocation.transform);
         @object.transform.localScale = answarePrefab.transform.localScale;
 
-        @object.GetComponent<QuestButton>().SetData(quest, gameObject.GetComponent<QuestTabDataSet>());
-
         questButtons.Add(@object.GetComponent<QuestButton>());
+
+        @object.GetComponent<QuestButton>().SetData(quest, gameObject.GetComponent<QuestTabDataSet>());
     }
 
     public void SetQuestWorld(Quest quest)
@@ -34,6 +36,10 @@ public class QuestTabHandler : MonoBehaviour
         if(quest.ItemsNeeds.Count > 0)
         {
             quest.WhoToGive.GetComponent<DialogueDisplay>().AddQuest(quest);
+        }
+        else if(quest.Positions.Count > 0)
+        {
+            questLocation.SetPositions(quest);
         }
     }
 

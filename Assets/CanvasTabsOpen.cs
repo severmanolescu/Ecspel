@@ -8,7 +8,7 @@ public class CanvasTabsOpen : MonoBehaviour
     private QuickSlotsChanger quickSlot;
     private GameObject chestSlots;
 
-    private GameObject questShow;
+    private QuestTabDataSet questShow;
 
     private ChestStorage chestStorage;
     private List<Item> chestItems = new List<Item>();
@@ -26,6 +26,7 @@ public class CanvasTabsOpen : MonoBehaviour
 
         chestSlots.SetActive(false);
 
+        questShow.DeleteData();
         questShow.gameObject.SetActive(false);
     }
 
@@ -36,7 +37,7 @@ public class CanvasTabsOpen : MonoBehaviour
         playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
         chestSlots = transform.Find("Field/Inventory/PlayerInventory/ChestInventory").gameObject;
-        questShow = transform.Find("Field/QuestTab").gameObject;
+        questShow = transform.Find("Field/QuestTab").gameObject.GetComponent<QuestTabDataSet>();
     }
 
     private void Start()
@@ -52,7 +53,8 @@ public class CanvasTabsOpen : MonoBehaviour
             {
                 if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
-                    questShow.SetActive(false);
+                    questShow.DeleteData();
+                    questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(true);
                     quickSlot.gameObject.SetActive(false);
@@ -61,7 +63,7 @@ public class CanvasTabsOpen : MonoBehaviour
                 }
                 else if (playerInventory.activeSelf)
                 {
-                    questShow.SetActive(false);
+                    questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
                     quickSlot.gameObject.SetActive(true);
@@ -74,7 +76,8 @@ public class CanvasTabsOpen : MonoBehaviour
             {
                 if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
                 {
-                    questShow.SetActive(true);
+                    questShow.gameObject.SetActive(true);
+
                     playerInventory.SetActive(false);
                     quickSlot.gameObject.SetActive(false);
 
@@ -82,7 +85,8 @@ public class CanvasTabsOpen : MonoBehaviour
                 }
                 else if (questShow.gameObject.activeSelf)
                 {
-                    questShow.SetActive(false);
+                    questShow.DeleteData();
+                    questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
                     quickSlot.gameObject.SetActive(true);
@@ -93,7 +97,8 @@ public class CanvasTabsOpen : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                questShow.SetActive(false);
+                questShow.DeleteData();
+                questShow.gameObject.SetActive(false);
 
                 playerInventory.SetActive(false);
                 quickSlot.gameObject.SetActive(true);

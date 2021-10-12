@@ -38,6 +38,11 @@ public class DialogueDisplay : MonoBehaviour
             foreach (Quest quest in dialogueScriptable.Quest)
             {
                 quest.WhoToGive = this.gameObject;
+                if(quest.NextQuest != null)
+                {
+                    quest.NextQuest.WhoToGive = this.gameObject;
+                }
+
             }
         }
     }

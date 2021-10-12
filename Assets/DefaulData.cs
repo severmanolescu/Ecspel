@@ -9,6 +9,10 @@ public static class DefaulData
     public static float dialogueSpeed = .07f;
     public static float degradation = .4f;
 
+    //Quest track
+    public static float maxQuestDistante = 1.5f;
+    public static float borderSizeQuestTrack = 10f;
+
     // Stones data
     public static float castPosition = .1f;
 
@@ -61,4 +65,19 @@ public static class DefaulData
     {
         return new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
+
+    public static float GetAngleFromVectorFloat(Vector3 direction)
+    {
+        direction = direction.normalized;
+
+        float n = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (n < 0)
+        {
+            n += 360;
+        }
+
+        return n;
+    }
+
 }
