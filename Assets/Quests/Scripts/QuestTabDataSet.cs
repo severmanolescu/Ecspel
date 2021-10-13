@@ -4,7 +4,7 @@ using TMPro;
 
 public class QuestTabDataSet : MonoBehaviour
 {
-    private QuestLocationFollow questLocation;
+    private QuestFollowHandler questFollow;
 
     private QuestTrack questTrack;
 
@@ -24,7 +24,7 @@ public class QuestTabDataSet : MonoBehaviour
         track = gameObject.GetComponentInChildren<Button>();
 
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
-        questLocation = GameObject.Find("Player").GetComponent<QuestLocationFollow>();
+        questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
 
         track.gameObject.SetActive(false);
     }
@@ -37,11 +37,12 @@ public class QuestTabDataSet : MonoBehaviour
         track.gameObject.SetActive(true);
         if (quest.ItemsNeeds.Count > 0)
         {
+            track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
             track.onClick.AddListener(delegate { questTrack.TrackQuest(quest.WhoToGive.transform.position); });
         }
         else if(quest.Positions.Count > 0)
         {
-            track.onClick.AddListener(delegate { questLocation.ChangeTrack(true); });
+            track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
         }
 
     }

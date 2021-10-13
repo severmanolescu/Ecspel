@@ -7,7 +7,6 @@ public class QuestTrack : MonoBehaviour
 {
     private Vector3 targetPosition = Vector3.zero;
 
-    private Camera mainCamera;
     private Sprite arrowSprite;
     private Sprite crossSprite;
 
@@ -16,8 +15,6 @@ public class QuestTrack : MonoBehaviour
 
     private void Awake()
     {
-        mainCamera = GameObject.Find("Player/UICamera").GetComponent<Camera>();
-
         arrowSprite = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Quests/Sprites/QuestArrow.png", typeof(Sprite));
         crossSprite = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Quests/Sprites/QuestCross.png", typeof(Sprite));
 
@@ -61,7 +58,7 @@ public class QuestTrack : MonoBehaviour
                     cappedTargetScreenPosition.y = Screen.height - DefaulData.borderSizeQuestTrack;
                 }
 
-                Vector3 pointerWorldPosition = mainCamera.ScreenToWorldPoint(cappedTargetScreenPosition);
+                Vector3 pointerWorldPosition = cappedTargetScreenPosition;
 
                 pointerRectTransform.position = pointerWorldPosition;
                 pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);
@@ -72,7 +69,7 @@ public class QuestTrack : MonoBehaviour
             {
                 pointerImage.sprite = crossSprite;
 
-                Vector3 pointerWorldPosition = mainCamera.ScreenToWorldPoint(targetPositionScreenPoint);
+                Vector3 pointerWorldPosition = targetPositionScreenPoint;
 
                 pointerRectTransform.position = pointerWorldPosition;
                 pointerRectTransform.localPosition = new Vector3(pointerRectTransform.localPosition.x, pointerRectTransform.localPosition.y, 0f);

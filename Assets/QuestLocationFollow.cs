@@ -9,14 +9,21 @@ public class QuestLocationFollow : MonoBehaviour
     private QuestTrack questTrack;
     private QuestTabHandler questTab;
 
+    private Transform playerLocation;
+
     private int atIndex = 0;
 
     private bool track = false;
+
+    public Quest Quest { get { return quest; } set { SetPositions(value); } }
+    public bool Track { set { ChangeTrack(value); } }
 
     private void Awake()
     {
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
         questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
+
+        playerLocation = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     private void Update()
@@ -30,7 +37,7 @@ public class QuestLocationFollow : MonoBehaviour
                     questTrack.TrackQuest(quest.Positions[atIndex]);
                 }
 
-                if(Vector3.Distance(transform.localPosition, quest.Positions[atIndex]) < DefaulData.maxQuestDistante)
+                if(Vector3.Distance(playerLocation.localPosition, quest.Positions[atIndex]) < DefaulData.maxQuestDistante)
                 {
                     atIndex++;
                 }
@@ -56,7 +63,7 @@ public class QuestLocationFollow : MonoBehaviour
         }
     }
 
-    public void SetPositions(Quest quest)
+    private void SetPositions(Quest quest)
     {
         this.quest = quest;
 
@@ -65,7 +72,7 @@ public class QuestLocationFollow : MonoBehaviour
         track = false;
     }
 
-    public void ChangeTrack(bool track)
+    private void ChangeTrack(bool track)
     {
         this.track = track;
     }

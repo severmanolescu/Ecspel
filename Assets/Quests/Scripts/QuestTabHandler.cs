@@ -11,12 +11,12 @@ public class QuestTabHandler : MonoBehaviour
     
     private List<QuestButton> questButtons = new List<QuestButton>();
 
-    private QuestLocationFollow questLocation;
+    private QuestFollowHandler questFollow;
 
     private void Awake()
     {
         spawnLocation = transform.Find("ScrollView/Viewport/Content");
-        questLocation = GameObject.Find("Player").GetComponent<QuestLocationFollow>();
+        questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
         answarePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Quests/Prefabs/QuestPrefab.prefab", typeof(GameObject));
     }
 
@@ -39,7 +39,7 @@ public class QuestTabHandler : MonoBehaviour
         }
         else if(quest.Positions.Count > 0)
         {
-            questLocation.SetPositions(quest);
+            questFollow.SetQuestFollow(quest);
         }
     }
 

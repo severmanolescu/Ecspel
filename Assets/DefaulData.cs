@@ -11,7 +11,7 @@ public static class DefaulData
 
     //Quest track
     public static float maxQuestDistante = 1.5f;
-    public static float borderSizeQuestTrack = 10f;
+    public static float borderSizeQuestTrack = 3f;
 
     // Stones data
     public static float castPosition = .1f;
