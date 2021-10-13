@@ -12,7 +12,9 @@ public class QuickSlot : MonoBehaviour
     private void Awake()
     {
         itemSprites = gameObject.GetComponentsInChildren<Image>();
-        
+
+        equiped = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
+
         if (equiped.Item != null)
         {
             itemSprites[1].sprite = equiped.Item.Sprite;
@@ -21,7 +23,7 @@ public class QuickSlot : MonoBehaviour
         {
             itemSprites[1].gameObject.SetActive(false);
         }
-
+        
         DeselectItem();
     }
 

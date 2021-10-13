@@ -7,8 +7,8 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private int selectedItemIndex;
 
-    public int SelectedItemIndex { get{ return selectedItemIndex; } }
-    public Item Item{ get{ return quickSlots[selectedItemIndex - 1].Item; } }
+    public int SelectedItemIndex { get { return selectedItemIndex; } }
+    public Item Item { get { return quickSlots[selectedItemIndex - 1].Item; } }
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class QuickSlotsChanger : MonoBehaviour
 
     public void Reinitialize()
     {
-        foreach(QuickSlot slot in quickSlots)
+        foreach (QuickSlot slot in quickSlots)
         {
             slot.Reinitialize();
         }
@@ -30,7 +30,7 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private void ChangeSelectedItem(int selected)
     {
-        foreach(QuickSlot slot in quickSlots)
+        foreach (QuickSlot slot in quickSlots)
         {
             slot.DeselectItem();
         }
@@ -42,7 +42,7 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeSelectedItem(1);
         }

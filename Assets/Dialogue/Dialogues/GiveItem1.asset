@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1468a1702c9094c8b22aeb9f206408, type: 3}
+  m_Name: GiveItem1
+  m_EditorClassIdentifier: 
+  title: Vrea din nou lemne
+  details: Ultima data cand ii dai lemne
+  whoToGive: {fileID: 0}
+  itemsNeeds: []
+  positions:
+  - {x: 5, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  itemsReceive:
+  - item: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
+    weapon: {fileID: 0}
+    range: {fileID: 0}
+    axe: {fileID: 0}
+    pickaxe: {fileID: 0}
+    amount: 10
+  nextDialogue: {fileID: 0}
+  nextQuest: {fileID: 0}

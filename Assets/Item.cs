@@ -1,18 +1,19 @@
 using UnityEngine;
 using System;
 
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Item", order = 1)]
 [Serializable]
-public class Item
+public class Item : ScriptableObject
 {
-    private string name;
+    public new string name;
 
-    protected string details;
+    public string details;
 
-    protected int amount;
+    public int amount;
 
-    protected int maxAmount;
+    public int maxAmount;
 
-    protected Sprite itemSprite;
+    public Sprite itemSprite;
 
     public Item(string name, string details,  int amount, int maxAmount, Sprite itemSprite)
     {
@@ -36,9 +37,10 @@ public class Item
     }
 }
 
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Weapon", order = 1)]
 public class Weapon: Item
 {
-    protected float attackPower;
+    public float attackPower;
 
     public Weapon(string name, string details, int amount, int maxAmount, Sprite itemSprite, float attackPower)
         : base(name, details, amount, maxAmount, itemSprite)
@@ -49,9 +51,10 @@ public class Weapon: Item
     public float AttackPower { get { return attackPower; } }
 }
 
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Range Weapon", order = 1)]
 public class Range: Weapon
 {
-    protected float range;
+    public float range;
 
     public Range(string name, string details, int amount, int maxAmount, Sprite itemSprite, float attackPower, float range)
         : base(name, details, amount, maxAmount, itemSprite, attackPower)
@@ -62,6 +65,7 @@ public class Range: Weapon
     public float GetRange { get { return range; } }
 }
 
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Axe", order = 1)]
 public class Axe : Item
 {
     public Axe(string name, string details, int amount, int maxAmount, Sprite itemSprite) : base(name, details, amount, maxAmount, itemSprite)
@@ -70,6 +74,7 @@ public class Axe : Item
     }
 }
 
+[CreateAssetMenu(fileName = "Item", menuName = "Item/New Pickaxe", order = 1)]
 public class Pickaxe : Item
 {
     public Pickaxe(string name, string details, int amount, int maxAmount, Sprite itemSprite) : base(name, details, amount, maxAmount, itemSprite)

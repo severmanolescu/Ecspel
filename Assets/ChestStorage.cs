@@ -26,7 +26,7 @@ public class ChestStorage : MonoBehaviour
     private void Start()
     { 
         items.Add(DefaulData.GetItemWithAmount(DefaulData.log, 10));
-        items.Add(DefaulData.GetItemWithAmount(DefaulData.pickaxe, 1));
+        items.Add(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 1));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.stone, 10));
         items.Add(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
     }

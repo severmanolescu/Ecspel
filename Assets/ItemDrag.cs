@@ -90,5 +90,3 @@ public class ItemDrag : MonoBehaviour
         }
     }
 }
-
-//transform.position = Input.mousePosition;

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public static class DefaulData
@@ -7,6 +8,10 @@ public static class DefaulData
     public static float maxLightSourceDistance = 10f;
     public static float dialogueSpeed = .07f;
     public static float degradation = .4f;
+
+    //Quest track
+    public static float maxQuestDistante = 1.5f;
+    public static float borderSizeQuestTrack = 3f;
 
     // Stones data
     public static float castPosition = .1f;
@@ -31,13 +36,13 @@ public static class DefaulData
     public static int dayNightCycleTime = 5; 
 
     // Items
-    public static Item log      = new Item("Log","Lemne domnle!" , 0, 25, ItemSprites.Instance.log);
-    public static Item stick    = new Item("Stick", "Good for crafting and fire", 0, 50, ItemSprites.Instance.stick);
-    public static Item stone    = new Item("Stone", "Good for crafting and firepit", 0, 25, ItemSprites.Instance.stone);
+    public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));
+    public static Item stick    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stick.asset", typeof(Item));
+    public static Item stone    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stone.asset", typeof(Item));
 
     // Usable item
-    public static Item stoneAxe = new Axe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.stonePickaxe);
-    public static Item pickaxe  = new Pickaxe("Stone Pickaxe", "Your first axe!", 0, 1, ItemSprites.Instance.pickaxe);
+    public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
+    public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
 
     public static Item GetItemWithAmount(Item item, int amount)
     {
@@ -60,4 +65,19 @@ public static class DefaulData
     {
         return new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
+
+    public static float GetAngleFromVectorFloat(Vector3 direction)
+    {
+        direction = direction.normalized;
+
+        float n = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (n < 0)
+        {
+            n += 360;
+        }
+
+        return n;
+    }
+
 }

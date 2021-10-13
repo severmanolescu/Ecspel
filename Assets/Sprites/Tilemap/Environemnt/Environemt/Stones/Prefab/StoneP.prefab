@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403008161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0062, y: -0.0334, z: 0}
+  m_LocalPosition: {x: -0.0062, y: 0.284, z: 0}
   m_LocalScale: {x: 1.3126816, y: 1.610985, z: 1}
   m_Children: []
   m_Father: {fileID: 8615908400995782996}
@@ -93,10 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8615908400995782996}
   - component: {fileID: 8615908400995783003}
-  - component: {fileID: 8615908400995782997}
   - component: {fileID: 8615908400995782998}
   - component: {fileID: -4611001514549313568}
   - component: {fileID: 3694062493300916033}
+  - component: {fileID: 4556917035082363547}
   m_Layer: 0
   m_Name: StoneP
   m_TagString: Untagged
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d685bc0c5d493144b9d940f4a067d709, type: 3}
+  m_Sprite: {fileID: 5966473068272983084, guid: 1da3ad657ed42bf42b79c7cb956329c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,32 +172,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8615908400995782997
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8615908400995783002}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.033745527, y: -0.058492362}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.8}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.52553606, y: 0.50303876}
-  m_EdgeRadius: 0
 --- !u!114 &8615908400995782998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,26 +225,71 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
-  - {x: -0.04966092, y: -0.24000251, z: 0}
-  - {x: -0.19355607, y: -0.24290478, z: 0}
-  - {x: -0.19355607, y: -0.20428467, z: 0}
-  - {x: -0.26803756, y: -0.1587683, z: 0}
-  - {x: -0.26527905, y: -0.0098052025, z: 0}
-  - {x: -0.19037926, y: 0.055835247, z: 0}
-  - {x: -0.14632702, y: 0.07079637, z: 0}
-  - {x: -0.14217114, y: 0.11817312, z: 0}
-  - {x: -0.1055994, y: 0.12648487, z: 0}
-  - {x: -0.062074423, y: 0.18483108, z: 0}
-  - {x: 0.09103942, y: 0.18758965, z: 0}
-  - {x: 0.16091877, y: 0.10743439, z: 0}
-  - {x: 0.16781521, y: -0.034632206, z: 0}
-  - {x: 0.21333385, y: -0.06359732, z: 0}
-  - {x: 0.21333385, y: -0.21118116, z: 0}
-  - {x: 0.13471442, y: -0.28566277, z: 0}
-  - {x: -0.016544938, y: -0.28965688, z: 0}
-  m_ShapePathHash: 81729527
+  - {x: -0.3436923, y: 0.17503864, z: -0.1}
+  - {x: -0.3427472, y: 0.29536682, z: 0}
+  - {x: -0.318717, y: 0.29422253, z: 0}
+  - {x: -0.21916294, y: 0.39663804, z: 0}
+  - {x: -0.21859074, y: 0.42295718, z: 0}
+  - {x: -0.16938591, y: 0.42066848, z: 0}
+  - {x: -0.0938611, y: 0.49790895, z: 0}
+  - {x: -0.0901289, y: 0.521603, z: 0}
+  - {x: 0.05273485, y: 0.52046347, z: 0}
+  - {x: 0.0550313, y: 0.4979663, z: 0}
+  - {x: 0.30755043, y: 0.29595113, z: 0}
+  - {x: 0.3266101, y: 0.29488295, z: 0.1}
+  - {x: 0.32901907, y: 0.12754989, z: 0}
+  - {x: 0.3077917, y: 0.12829787, z: 0}
+  - {x: 0.1533103, y: 0.0018519163, z: 0}
+  - {x: 0.1533103, y: -0.025039315, z: 0}
+  - {x: 0.0068387985, y: -0.02332288, z: 0}
+  - {x: 0.0056943893, y: -0.0010088682, z: 0}
+  - {x: -0.06982899, y: 0.025882363, z: 0}
+  - {x: -0.14020348, y: 0.026454508, z: 0}
+  - {x: -0.1430645, y: 0.050485015, z: 0}
+  - {x: -0.22030544, y: 0.05105716, z: 0}
+  - {x: -0.21858883, y: 0.07337111, z: 0}
+  - {x: -0.3221488, y: 0.17635882, z: 0}
+  m_ShapePathHash: -2086445193
   m_Mesh: {fileID: 0}
-  m_InstanceId: -31006
+  m_InstanceId: 82242
+--- !u!68 &4556917035082363547
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615908400995783002}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.249}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.3375, y: 0}
+  - {x: -0.3338709, y: 0.041372478}
+  - {x: -0.31423664, y: 0.046869695}
+  - {x: -0.085945606, y: 0.24906826}
+  - {x: -0.0828886, y: 0.26968145}
+  - {x: 0.055566788, y: 0.26682603}
+  - {x: 0.057469845, y: 0.24540097}
+  - {x: 0.31076193, y: 0.045428574}
+  - {x: 0.33076525, y: 0.040904224}
+  - {x: 0.3350544, y: -0.11581856}
+  - {x: 0.3081236, y: -0.12151098}
+  - {x: 0.16095066, y: -0.24699807}
+  - {x: 0.15593481, y: -0.27540466}
+  - {x: 0.023059845, y: -0.27155295}
+  - {x: 0.014805794, y: -0.2513858}
+  - {x: -0.312922, y: -0.07395518}
+  - {x: -0.3349204, y: -0.06955898}
+  - {x: -0.33652648, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &8615908401749490758
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8615908401749490758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.038, z: 0}
+  m_LocalPosition: {x: -0, y: 0.292, z: 0}
   m_LocalScale: {x: 0.17, y: 0.18, z: 1}
   m_Children: []
   m_Father: {fileID: 8615908400995782996}

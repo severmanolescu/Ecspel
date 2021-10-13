@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class CanvasTabsOpen : MonoBehaviour
 {
-    [Header("Player Inventory")]
-    [SerializeField] private GameObject PlayerInventory;
+    private GameObject playerInventory;
+    private QuickSlotsChanger quickSlot;
+    private GameObject chestSlots;
 
-    [Header("Player Quickslots")]
-    [SerializeField] private GameObject quickSlot;
-
-    [Header("Chest Slots")]
-    [SerializeField] private GameObject chestSlots;
+    private QuestTabDataSet questShow;
 
     private ChestStorage chestStorage;
     private List<Item> chestItems = new List<Item>();
@@ -19,18 +16,28 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
+    private bool canOpenTabs = true;
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1.5f);
 
-        PlayerInventory.SetActive(false);
+        playerInventory.SetActive(false);
 
         chestSlots.SetActive(false);
+
+        questShow.DeleteData();
+        questShow.gameObject.SetActive(false);
     }
 
     private void Awake()
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
+        quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
+        chestSlots = transform.Find("Field/Inventory/PlayerInventory/ChestInventory").gameObject;
+        questShow = transform.Find("Field/QuestTab").gameObject.GetComponent<QuestTabDataSet>();
     }
 
     private void Start()
@@ -40,61 +47,64 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (canOpenTabs == true)
         {
-            PlayerInventory.SetActive(!PlayerInventory.activeSelf);
-
-            if(PlayerInventory.activeSelf == false)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                quickSlot.GetComponent<QuickSlotsChanger>().Reinitialize();
-
-                quickSlot.gameObject.SetActive(true);
-
-                playerMovement.SetPlayerMovementTrue();
-            }
-            else
-            {
-                quickSlot.gameObject.SetActive(false);
-
-                playerMovement.SetPlayerMovementFalse();
-            }
-
-            if(chestSet)
-            {
-                if(chestSlots.activeSelf)
+                if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
-                    chestStorage.SetItems(chestSlots.GetComponent<ChestStorageCanvas>().ReturnItemsList());
+                    questShow.DeleteData();
+                    questShow.gameObject.SetActive(false);
 
-                    chestSlots.SetActive(false);
+                    playerInventory.SetActive(true);
+                    quickSlot.gameObject.SetActive(false);
 
                     playerMovement.SetPlayerMovementFalse();
                 }
-                else
+                else if (playerInventory.activeSelf)
                 {
-                    chestSlots.SetActive(true);
+                    questShow.gameObject.SetActive(false);
+
+                    playerInventory.SetActive(false);
+                    quickSlot.gameObject.SetActive(true);
+                    quickSlot.Reinitialize();
 
                     playerMovement.SetPlayerMovementTrue();
-
-                    chestItems = chestStorage.GetComponent<ChestStorage>().Items;
-
-                    if (chestItems != null)
-                        chestSlots.GetComponent<ChestStorageCanvas>().SetItems(chestItems);
                 }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.Tab))
             {
-                chestSlots.SetActive(false);
+                if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
+                {
+                    questShow.gameObject.SetActive(true);
+
+                    playerInventory.SetActive(false);
+                    quickSlot.gameObject.SetActive(false);
+
+                    playerMovement.SetPlayerMovementFalse();
+                }
+                else if (questShow.gameObject.activeSelf)
+                {
+                    questShow.DeleteData();
+                    questShow.gameObject.SetActive(false);
+
+                    playerInventory.SetActive(false);
+                    quickSlot.gameObject.SetActive(true);
+                    quickSlot.Reinitialize();
+
+                    playerMovement.SetPlayerMovementTrue();
+                }
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (PlayerInventory.activeSelf)
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                PlayerInventory.SetActive(false);
-                quickSlot.SetActive(true);
+                questShow.DeleteData();
+                questShow.gameObject.SetActive(false);
 
-                playerMovement.SetPlayerMovementFalse();
+                playerInventory.SetActive(false);
+                quickSlot.gameObject.SetActive(true);
+                quickSlot.Reinitialize();
+
+                playerMovement.SetPlayerMovementTrue();
             }
         }
     }
@@ -113,5 +123,10 @@ public class CanvasTabsOpen : MonoBehaviour
         this.chestItems = null;
 
         chestSet = false;
+    }
+
+    public void SetCanOpenTabs(bool canOpenTabs)
+    {
+        this.canOpenTabs = canOpenTabs;
     }
 }
