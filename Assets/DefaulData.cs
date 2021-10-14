@@ -33,7 +33,22 @@ public static class DefaulData
     public static int dayEnd   = 18;
     public static float maxDayIntensity = 1f;
     public static float maxNightIntensity = .2f;
-    public static int dayNightCycleTime = 5; 
+    public static int dayNightCycleTime = 5;
+
+    // Enemy stats
+    // Slime:
+    
+    public static float distanceToFind = 5f;
+    public static float maxDinstanceToCatch = 10f;
+    public static int slimeAttackRate = 1;
+
+    // Little Slime
+    public static float slimeLittleAttackPower = 5f;
+    public static float slimeLittleAttackDistance = .6f;
+
+    // Big Slime
+    public static float slimeBigAttackPower = 5f;
+    public static float slimeBigAttackDistance = .6f;    
 
     // Items
     public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));

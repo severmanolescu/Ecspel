@@ -56,7 +56,7 @@ public class ItemDrag : MonoBehaviour
     {
         ItemSlot auxCheckSlot = previousSlot.GetComponent<ItemSlot>();
 
-        if(auxCheckSlot != null)
+        if (auxCheckSlot != null)
         {
             auxCheckSlot.DeleteItem();
         }
@@ -70,9 +70,8 @@ public class ItemDrag : MonoBehaviour
             }
             else
             {
-                ItemSlot itemSlot = previousSlot.GetComponent<ItemSlot>();
 
-                itemSlot.DeleteItem();
+                auxCheckSlot.DeleteItem();
             }
         }
 

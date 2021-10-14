@@ -154,7 +154,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             {
                 SetItem(itemDrag.Item);
 
-                itemDrag.DeleteData();
+                //itemDrag.DeleteData();
 
                 return;
             }

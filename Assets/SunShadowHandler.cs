@@ -22,7 +22,7 @@ public class SunShadowHandler : MonoBehaviour
         {
             sunShadows.Add(shadow.transform);
 
-            shadow.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            shadow.GetComponent<SpriteRenderer>().sortingOrder = -2;
         }
 
         dayTimerHandler = gameObject.GetComponent<DayTimerHandler>();

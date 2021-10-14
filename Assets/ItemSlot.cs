@@ -200,61 +200,68 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(VerifyItem())
+        if(itemDrag.PreviousItem != this.gameObject)
         {
-            ChangeEquipedItem();
-
-            return;
-        }
-
-        if(item == null)
-        {
-            if(itemDrag.Item!= null)
+            if (VerifyItem())
             {
-                SetItem(itemDrag.Item);
-
-                itemDrag.DeleteData();
+                ChangeEquipedItem();
 
                 return;
             }
+
+            if (item == null)
+            {
+                if (itemDrag.Item != null)
+                {
+                    SetItem(itemDrag.Item);
+
+                    itemDrag.DeleteData();
+
+                    return;
+                }
+                else
+                {
+                    itemDrag.HideData();
+                }
+            }
             else
             {
+                if (item.Name == itemDrag.Item.Name)
+                {
+                    if (item.Amount <= item.MaxAmount)
+                    {
+                        int auxiliar = item.MaxAmount - item.Amount;
+
+                        if (itemDrag.Item.Amount <= auxiliar)
+                        {
+                            item.Amount = item.Amount + itemDrag.Item.Amount;
+
+                            itemDrag.DeleteData();
+
+                            ReinitializeItem();
+
+                            return;
+                        }
+                        else
+                        {
+                            item.Amount = item.MaxAmount;
+
+                            itemDrag.Item.Amount = itemDrag.Item.Amount - auxiliar;
+
+                            ReinitializeItem();
+
+                            itemDrag.HideData();
+
+                            return;
+                        }
+                    }                    
+                }
+
                 itemDrag.HideData();
             }
         }
         else
         {
-            if(item.Name == itemDrag.Item.Name)
-            {
-                if(item.Amount <= item.MaxAmount)
-                {
-                    int auxiliar = item.MaxAmount - item.Amount;
-
-                    if(itemDrag.Item.Amount <= auxiliar)
-                    {
-                        item.Amount = item.Amount + itemDrag.Item.Amount;
-
-                        itemDrag.DeleteData();
-
-                        ReinitializeItem();
-
-                        return;
-                    }
-                    else
-                    {
-                        item.Amount = item.MaxAmount;
-
-                        itemDrag.Item.Amount = itemDrag.Item.Amount - auxiliar;
-
-                        ReinitializeItem();
-
-                        itemDrag.HideData();
-
-                        return;
-                    }
-                }
-            }
-
             itemDrag.HideData();
         }
     }

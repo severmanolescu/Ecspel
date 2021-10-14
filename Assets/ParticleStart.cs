@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEditor;
 
 public class ParticleStart : MonoBehaviour
 {
-    [SerializeField] private GameObject log;
+    private GameObject log;
     [SerializeField] private GameObject logSpawn;
 
     private ParticleSystem[] particles;
@@ -15,7 +16,9 @@ public class ParticleStart : MonoBehaviour
     {
         particles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
-        foreach(ParticleSystem particle in particles)
+        log = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Tilemap/Environemnt/Environemt/Trees/Prefab/Log.prefab", typeof(GameObject));
+
+        foreach (ParticleSystem particle in particles)
         {
             particle.Stop();
         }

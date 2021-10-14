@@ -7,7 +7,6 @@ public class SlimeAI : MonoBehaviour
     enum State
     {
         Walking,
-        Standing,
         GoToPlayer,
         Attack,
     }
@@ -16,25 +15,25 @@ public class SlimeAI : MonoBehaviour
 
     private float tolerance = .01f;
 
+    private float nextAttackTime;
+
     private Vector2 roaming;
 
-    private new Rigidbody2D rigidbody;
     private State state;
 
     private Vector3 initialLocation;
-    private float maxDistante = 10f;
-
-    private Animator animator;
 
     private AIPathFinding aIPath;
 
+    private Transform playerLocation;
+
     private void Awake()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        aIPath = GetComponent<AIPathFinding>();
 
-        animator = gameObject.GetComponent<Animator>();
+        playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
-        aIPath = gameObject.GetComponent<AIPathFinding>();
+        state = State.Walking;
     }
 
     private void Start()
@@ -42,6 +41,8 @@ public class SlimeAI : MonoBehaviour
         initialLocation = gameObject.transform.position;
 
         roaming = GetRoamingPosition();
+
+        nextAttackTime = DefaulData.slimeAttackRate;
     }
 
     private Vector3 GetRoamingPosition()
@@ -51,11 +52,65 @@ public class SlimeAI : MonoBehaviour
 
     private void Update()
     {
-        aIPath.MoveToLocation(roaming, speed);
-
-        if(Vector3.Distance(transform.position, roaming) <= tolerance)
+        switch(state)
         {
-            roaming = GetRoamingPosition();
+            case State.Walking:
+                {
+                    aIPath.MoveToLocation(roaming, speed);
+
+                    if (Vector3.Distance(transform.position, roaming) <= tolerance)
+                    {
+                        roaming = GetRoamingPosition(); 
+                    }
+
+                    FindPlayer();
+
+                    break;
+                }
+
+            case State.GoToPlayer:
+                {
+                    aIPath.MoveToLocation(playerLocation.position, speed);
+
+                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+
+                    if (distance <= DefaulData.slimeLittleAttackDistance)
+                    {
+                        state = State.Attack;
+                    }
+                    else if(distance >= DefaulData.maxDinstanceToCatch)
+                    {
+                        state = State.Walking;
+                    }
+
+                    break;
+                }
+            case State.Attack:
+                {
+                    if (Time.time > nextAttackTime)
+                    {
+                        playerLocation.GetComponent<PlayerStats>().Health -= DefaulData.slimeLittleAttackPower;
+
+                        nextAttackTime = Time.time + DefaulData.slimeAttackRate;
+                    }
+
+                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+
+                    if (distance > DefaulData.slimeLittleAttackDistance)
+                    {
+                        state = State.GoToPlayer;
+                    }
+
+                    break;
+                }
+        }
+    }
+
+    private void FindPlayer()
+    {
+        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.distanceToFind)
+        {
+            state = State.GoToPlayer;
         }
     }
 }
