@@ -14,8 +14,12 @@ public class QuestItems
 
     [SerializeField] private int amount;
 
+    [SerializeField] private int minDrop;
+    [SerializeField] private int maxDrop;
+
     public Item Item { get { return ValidItem(); } }
     public int Amount { get { return amount; } }
+    public int Drop { get { return (int)UnityEngine.Random.Range(minDrop, maxDrop); } }
 
     private Item ValidItem()
     {

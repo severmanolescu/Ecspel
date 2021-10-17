@@ -37,7 +37,6 @@ public static class DefaulData
 
     // Enemy stats
     // Slime:
-    
     public static float distanceToFind = 5f;
     public static float maxDinstanceToCatch = 10f;
     public static int slimeAttackRate = 1;
@@ -58,6 +57,9 @@ public static class DefaulData
     // Usable item
     public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
     public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
+
+    //Enemy drops
+    public static Item slime = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/EnemyDrop/Slime.asset", typeof(Item));
 
     public static Item GetItemWithAmount(Item item, int amount)
     {

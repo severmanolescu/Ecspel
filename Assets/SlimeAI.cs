@@ -27,11 +27,15 @@ public class SlimeAI : MonoBehaviour
 
     private Transform playerLocation;
 
+    private Animator animator;
+
     private void Awake()
     {
         aIPath = GetComponent<AIPathFinding>();
 
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
+
+        animator = GetComponent<Animator>();
 
         state = State.Walking;
     }
@@ -89,7 +93,9 @@ public class SlimeAI : MonoBehaviour
                 {
                     if (Time.time > nextAttackTime)
                     {
-                        playerLocation.GetComponent<PlayerStats>().Health -= DefaulData.slimeLittleAttackPower;
+                        animator.SetTrigger("Attack");
+
+                        
 
                         nextAttackTime = Time.time + DefaulData.slimeAttackRate;
                     }
@@ -106,11 +112,30 @@ public class SlimeAI : MonoBehaviour
         }
     }
 
+    public void AttackPlayer()
+    {
+        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.slimeLittleAttackDistance)
+        {
+            playerLocation.GetComponent<PlayerStats>().Health -= DefaulData.slimeLittleAttackPower;
+        }
+    }
+
     private void FindPlayer()
     {
         if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.distanceToFind)
         {
             state = State.GoToPlayer;
         }
+    }
+
+    public void DestroyEnemyAnimation()
+    {
+        GetComponent<EnemyDropLoot>().DropItem();
+
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
+
+        Destroy(GetComponent<BoxCollider2D>());
+        gameObject.AddComponent<TimeDegradation>();
+        Destroy(this);
     }
 }

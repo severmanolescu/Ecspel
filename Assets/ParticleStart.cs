@@ -16,7 +16,7 @@ public class ParticleStart : MonoBehaviour
     {
         particles = gameObject.GetComponentsInChildren<ParticleSystem>();
 
-        log = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Tilemap/Environemnt/Environemt/Trees/Prefab/Log.prefab", typeof(GameObject));
+        log = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Tilemap/Environemnt/Trees/Prefab/Log.prefab", typeof(GameObject));
 
         foreach (ParticleSystem particle in particles)
         {

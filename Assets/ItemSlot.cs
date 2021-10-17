@@ -234,7 +234,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
                         if (itemDrag.Item.Amount <= auxiliar)
                         {
-                            item.Amount = item.Amount + itemDrag.Item.Amount;
+                            item.Amount += itemDrag.Item.Amount;
 
                             itemDrag.DeleteData();
 
@@ -246,7 +246,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                         {
                             item.Amount = item.MaxAmount;
 
-                            itemDrag.Item.Amount = itemDrag.Item.Amount - auxiliar;
+                            itemDrag.Item.Amount -= auxiliar;
 
                             ReinitializeItem();
 
