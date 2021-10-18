@@ -86,6 +86,7 @@ public class AnswersHandler : MonoBehaviour
         ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = quest.Title;
 
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(quest.ItemsNeeds); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.AddItem(quest.ItemsReceive); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { quest.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(quest.NextDialogue); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTab.DeleteQuest(quest); });

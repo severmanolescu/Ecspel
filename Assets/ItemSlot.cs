@@ -185,7 +185,14 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemDrag.SetData(item, this.gameObject);
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            itemDrag.SetData(item, this.gameObject);
+        }
+        else
+        {
+        }
+
     }
 
     public void OnDrag(PointerEventData eventData)

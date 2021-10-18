@@ -8,8 +8,6 @@ public class PlayerInventory : MonoBehaviour
 
     private List<ItemSlot> itemsSlot;
 
-    private List<Item> items = new List<Item>();
-
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.O))
@@ -83,7 +81,11 @@ public class PlayerInventory : MonoBehaviour
                 {
                     int auxiliar = item.Amount - item.MaxAmount;
 
-                    auxItem.SetItem(item.Copy());
+                    Item auxChangeItem = Instantiate(item);
+
+                    auxChangeItem.Amount = item.maxAmount;
+
+                    auxItem.SetItem(auxChangeItem);
 
                     item.Amount = auxiliar;
                 }
@@ -96,7 +98,6 @@ public class PlayerInventory : MonoBehaviour
 
                     return true;
                 }
-
             }
         }
 
@@ -106,7 +107,7 @@ public class PlayerInventory : MonoBehaviour
 
             return true;
         }
-
+        
         return false;
     }
 
@@ -114,18 +115,38 @@ public class PlayerInventory : MonoBehaviour
     {
         if(item.MaxAmount > 1)
         {
-            if (items.Count < DefaulData.maximInventorySlots)
+             return AddItemStackable(item);
+        }
+        else
+        {
+            foreach (ItemSlot auxItem in itemsSlot)
+            {
+                if (auxItem.Item == null)
+                {
+                    auxItem.SetItem(item);
+
+                    quickSlots.Reinitialize();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public bool AddItem(List<QuestItems> questItems)
+    {
+        foreach (QuestItems quest in questItems)
+        {
+            Item item = quest.Item;
+
+            item.Amount = quest.Amount;
+
+            if (item.MaxAmount > 1)
             {
                 return AddItemStackable(item);
             }
             else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            if(items.Count < DefaulData.maximInventorySlots)
             {
                 foreach (ItemSlot auxItem in itemsSlot)
                 {
@@ -137,24 +158,25 @@ public class PlayerInventory : MonoBehaviour
                         return true;
                     }
                 }
-
-                return false;
-            }
-            else
-            {
-                return false;
             }
         }
+
+        return false;
     }
 
     public bool SearchInventory(Item item, int amount)
     {
         foreach(ItemSlot itemSlot in itemsSlot)
         {
-            if(itemSlot.Item != null && itemSlot.Item.Name == item.name && itemSlot.Item.Amount >= amount)
+            if(itemSlot.Item != null && itemSlot.Item.Name == item.name)
+            {
+                amount -= itemSlot.Item.Amount;
+            }
+
+            if (amount <= 0)
             {
                 return true;
-            }
+            }    
         }
         return false;
     }
@@ -163,16 +185,28 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (QuestItems questItem in items)
         {
+            int amount = questItem.Amount;
+
             foreach (ItemSlot itemSlot in itemsSlot)
             {
-                if (itemSlot.Item != null && itemSlot.Item.Name == questItem.Item.Name && itemSlot.Item.Amount >= questItem.Amount)
+                if (itemSlot.Item != null && itemSlot.Item.Name == questItem.Item.Name)
                 {
-                    itemSlot.DecreseAmount(questItem.Amount);
+                    if (itemSlot.Item.Amount >= amount)
+                    {
+                        itemSlot.DecreseAmount(amount);
+                        break;
+                    }
+                    else
+                    {
+                        amount -= itemSlot.Item.Amount;
+
+                        itemSlot.DeleteItem();
+                        continue;
+                    }
                 }
             }
         }
 
         quickSlots.Reinitialize();
     }
-
 }

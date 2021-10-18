@@ -6,13 +6,8 @@ public class CanvasTabsOpen : MonoBehaviour
 {
     private GameObject playerInventory;
     private QuickSlotsChanger quickSlot;
-    private GameObject chestSlots;
 
     private QuestTabDataSet questShow;
-
-    private ChestStorage chestStorage;
-    private List<Item> chestItems = new List<Item>();
-    private bool chestSet = false;
 
     private PlayerMovement playerMovement;
 
@@ -24,8 +19,6 @@ public class CanvasTabsOpen : MonoBehaviour
 
         playerInventory.SetActive(false);
 
-        chestSlots.SetActive(false);
-
         questShow.DeleteData();
         questShow.gameObject.SetActive(false);
     }
@@ -36,7 +29,6 @@ public class CanvasTabsOpen : MonoBehaviour
 
         playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
-        chestSlots = transform.Find("Field/Inventory/PlayerInventory/ChestInventory").gameObject;
         questShow = transform.Find("Field/QuestTab").gameObject.GetComponent<QuestTabDataSet>();
     }
 
@@ -107,22 +99,6 @@ public class CanvasTabsOpen : MonoBehaviour
                 playerMovement.SetPlayerMovementTrue();
             }
         }
-    }
-
-    public void SetChestItems(List<Item> items, ChestStorage chestStorage)
-    {
-        this.chestItems = items;
-
-        chestSet = true;
-
-        this.chestStorage = chestStorage;
-    }
-
-    public void DeleteChestItems()
-    {
-        this.chestItems = null;
-
-        chestSet = false;
     }
 
     public void SetCanOpenTabs(bool canOpenTabs)

@@ -15,10 +15,16 @@ MonoBehaviour:
   title: Vrea din nou lemne
   details: Ultima data cand ii dai lemne
   whoToGive: {fileID: 0}
-  itemsNeeds: []
-  positions:
-  - {x: 5, y: 0, z: 0}
-  - {x: 10, y: 0, z: 0}
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
+    weapon: {fileID: 0}
+    range: {fileID: 0}
+    axe: {fileID: 0}
+    pickaxe: {fileID: 0}
+    amount: 60
+    minDrop: 0
+    maxDrop: 0
+  positions: []
   itemsReceive:
   - item: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
     weapon: {fileID: 0}
@@ -26,5 +32,7 @@ MonoBehaviour:
     axe: {fileID: 0}
     pickaxe: {fileID: 0}
     amount: 10
+    minDrop: 0
+    maxDrop: 0
   nextDialogue: {fileID: 0}
   nextQuest: {fileID: 0}

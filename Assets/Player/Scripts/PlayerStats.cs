@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     private float health;
     private float stamina;
 
-    public float Health { get { return health; } set { health = value; Debug.Log(health); } }
+    public float Health { get { return health; } set { health = value; } }
     public float Stamina { get { return stamina; } set { stamina = value; } }
 
     private void Start()

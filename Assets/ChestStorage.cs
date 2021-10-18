@@ -41,8 +41,6 @@ public class ChestStorage : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             text.gameObject.SetActive(true);
-
-            canvasTabs.SetChestItems(items, this);
         }
     }
 
@@ -51,8 +49,6 @@ public class ChestStorage : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             text.gameObject.SetActive(false);
-
-            canvasTabs.DeleteChestItems();
         }
     }
 }

@@ -36,7 +36,7 @@ public static class DefaulData
     public static int dayNightCycleTime = 5;
 
     // Enemy stats
-    // Slime:
+    // Slime
     public static float distanceToFind = 5f;
     public static float maxDinstanceToCatch = 10f;
     public static int slimeAttackRate = 1;
@@ -60,6 +60,10 @@ public static class DefaulData
 
     //Enemy drops
     public static Item slime = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/EnemyDrop/Slime.asset", typeof(Item));
+
+    //Berries
+    public static Item yellowRaspberry = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Berries/YellowRaspberry.asset", typeof(Item));
+
 
     public static Item GetItemWithAmount(Item item, int amount)
     {
