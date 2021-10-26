@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public static class DefaulData
     public static float maxLightSourceDistance = 10f;
     public static float dialogueSpeed = .07f;
     public static float degradation = .4f;
+    public const int sortingOrderDefault = 5000;
 
     //Quest track
     public static float maxQuestDistante = 1.5f;
@@ -31,8 +33,6 @@ public static class DefaulData
     // Timer
     public static int dayStart = 5;
     public static int dayEnd   = 18;
-    public static float maxDayIntensity = 1f;
-    public static float maxNightIntensity = .2f;
     public static int dayNightCycleTime = 5;
 
     // Enemy stats
@@ -101,4 +101,49 @@ public static class DefaulData
         return n;
     }
 
+    public static TextMesh CreateWorldText(string text, Transform parent = null, Vector3 localPosition = default(Vector3), int fontSize = 40, Color? color = null, TextAnchor textAnchor = TextAnchor.UpperLeft, TextAlignment textAlignment = TextAlignment.Left, int sortingOrder = sortingOrderDefault)
+    {
+        if (color == null) color = Color.white;
+        return CreateWorldText(parent, text, localPosition, fontSize, (Color)color, textAnchor, textAlignment, sortingOrder);
+    }
+
+    public static TextMesh CreateWorldText(Transform parent, string text, Vector3 localPosition, int fontSize, Color color, TextAnchor textAnchor, TextAlignment textAlignment, int sortingOrder)
+    {
+        GameObject gameObject = new GameObject("World_Text", typeof(TextMesh));
+        Transform transform = gameObject.transform;
+        transform.SetParent(parent, false);
+        transform.localPosition = localPosition;
+        TextMesh textMesh = gameObject.GetComponent<TextMesh>();
+        textMesh.anchor = textAnchor;
+        textMesh.alignment = textAlignment;
+        textMesh.text = text;
+        textMesh.fontSize = fontSize;
+        textMesh.color = color;
+        textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
+        return textMesh;
+    }
+
+    public static Color GetColorFromString(string color)
+    {
+        float red = Hex_to_Dec01(color.Substring(0, 2));
+        float green = Hex_to_Dec01(color.Substring(2, 2));
+        float blue = Hex_to_Dec01(color.Substring(4, 2));
+        float alpha = 1f;
+        if (color.Length >= 8)
+        {
+            // Color string contains alpha
+            alpha = Hex_to_Dec01(color.Substring(6, 2));
+        }
+        return new Color(red, green, blue, alpha);
+    }
+
+    public static float Hex_to_Dec01(string hex)
+    {
+        return Hex_to_Dec(hex) / 255f;
+    }
+
+    public static int Hex_to_Dec(string hex)
+    {
+        return Convert.ToInt32(hex, 16);
+    }
 }

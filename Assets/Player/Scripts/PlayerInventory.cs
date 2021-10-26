@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 1));
         
     }
 

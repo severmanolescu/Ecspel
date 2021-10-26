@@ -54,8 +54,7 @@ public class TreeDamage : MonoBehaviour
                 {
                     case 1:   animator.SetTrigger("Left"); break;
                     case 2:   animator.SetTrigger("Right"); break;
-                    case 3:   animator.SetTrigger("Up"); break;
-                    default:  animator.SetTrigger("Right"); break;
+                    default:  animator.SetTrigger("Right"); particleStart.Spawn = 2; break;
                 }
 
             }

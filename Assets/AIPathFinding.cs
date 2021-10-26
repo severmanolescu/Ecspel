@@ -8,7 +8,7 @@ public class AIPathFinding : MonoBehaviour
 
     private Vector3 changeScale;
 
-    private bool canMove;
+    private bool canMove = true;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class AIPathFinding : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, position, speed * Time.deltaTime);
 
-            if(position.x > transform.position.x)
+            if (position.x > transform.position.x)
             {
                 changeScale.x = -initialScaleX;
 

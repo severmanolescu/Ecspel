@@ -5,22 +5,22 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637698197412888441
-    m_Hash: 4011587370
+      ticks: 637704835048586682
+    m_Hash: 3306695315
   m_LockFileStatus:
     m_FilePath: D:/Proiect/Unity/Ecspel/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637698197413218735
-    m_Hash: 712669856
+      ticks: 637704835363929250
+    m_Hash: 4187414384
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: D:/Proiect/Unity/Ecspel/Packages
-m_EditorVersion: 2021.1.25f1 (b6f2b893ea32)
+m_EditorVersion: 2021.1.26f1 (6f076387c01d)
 m_ResolvedPackages:
 - packageId: com.unity.2d.animation@6.0.7
   testable: 0
@@ -726,12 +726,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 2.2.0
     nextVersion: 
-- packageId: com.unity.collab-proxy@1.11.2
+- packageId: com.unity.collab-proxy@1.13.5
   testable: 0
   isDirectDependency: 1
-  version: 1.11.2
+  version: 1.13.5
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.collab-proxy@1.11.2
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.collab-proxy@1.13.5
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -787,8 +787,6 @@ m_ResolvedPackages:
     - 2.1.0-preview.5
     - 2.1.0-preview.6
     compatible:
-    - 1.11.2
-    - 1.12.5
     - 1.13.5
     - 2.0.0-preview.6
     - 2.0.0-preview.8
@@ -800,9 +798,19 @@ m_ResolvedPackages:
     - 2.1.0-preview.3
     - 2.1.0-preview.5
     - 2.1.0-preview.6
-    verified: 1.11.2
-  dependencies: []
-  resolvedDependencies: []
+    verified: 1.13.5
+  dependencies:
+  - name: com.unity.nuget.newtonsoft-json
+    version: 2.0.0
+  - name: com.unity.services.core
+    version: 1.0.1
+  resolvedDependencies:
+  - name: com.unity.nuget.newtonsoft-json
+    version: 2.0.0
+  - name: com.unity.services.core
+    version: 1.0.1
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
   keywords:
   - backup
   - cloud
@@ -829,16 +837,16 @@ m_ResolvedPackages:
   entitlements:
     isAllowed: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637679178630000000
+  datePublishedTicks: 637685076530000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: 3bc7fe2ab9acbe4538785fec6100ac17fe9e8da5
+    revision: 4001806dc89b25276d1382d5abffd71731b030e5
     path: 
   unityLifecycle:
-    version: 1.11.2
+    version: 1.13.5
     nextVersion: 
 - packageId: com.unity.ide.rider@3.0.7
   testable: 0
@@ -1679,11 +1687,13 @@ m_ResolvedPackages:
     - 1.7.1
     - 1.7.2
     - 1.7.3
+    - 1.7.5
     compatible:
     - 1.6.1
     - 1.7.1
     - 1.7.2
     - 1.7.3
+    - 1.7.5
     verified: 1.6.1
   dependencies:
   - name: com.unity.ugui
@@ -4031,6 +4041,123 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 11.0.0
     nextVersion: 
+- packageId: com.unity.nuget.newtonsoft-json@2.0.0
+  testable: 0
+  isDirectDependency: 0
+  version: 2.0.0
+  source: 1
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0
+  assetPath: Packages/com.unity.nuget.newtonsoft-json
+  name: com.unity.nuget.newtonsoft-json
+  displayName: Newtonsoft Json
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: library
+  description: 'Newtonsoft Json for use in Unity projects and Unity packages. Currently
+    synced to version 12.0.2.
+
+
+    This package is used for advanced json serialization
+    and deserialization. Most Unity users will be better suited using the existing
+    json tools built into Unity.
+
+    To avoid assembly clashes, please use this
+    package if you intend to use Newtonsoft Json.'
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 2.0.0
+    compatible:
+    - 2.0.0
+    verified: 2.0.0
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hasRegistry: 1
+  hideInEditor: 1
+  entitlements:
+    isAllowed: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.nuget.newtonsoft-json.git
+    revision: d2fd6ed876261bbd82f59199ad711e7667bf633a
+    path: 
+  unityLifecycle:
+    version: 2.0.0
+    nextVersion: 
+- packageId: com.unity.services.core@1.0.1
+  testable: 0
+  isDirectDependency: 0
+  version: 1.0.1
+  source: 1
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.services.core@1.0.1
+  assetPath: Packages/com.unity.services.core
+  name: com.unity.services.core
+  displayName: Services Core
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: 'This package defines common components used by multiple Game Service
+    packages.
+
+    These are standardized and aim to unify the overall experience
+    of working with Game Services packages.'
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.1
+    compatible:
+    - 1.0.1
+    verified: 1.0.1
+  dependencies:
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hasRegistry: 1
+  hideInEditor: 1
+  entitlements:
+    isAllowed: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
+    revision: 4cd880d4fd5c60597629249bf4f324e4c8d7aa2e
+    path: 
+  unityLifecycle:
+    version: 1.0.1
+    nextVersion: 1.1.0-pre.8
 - packageId: com.unity.2d.common@5.0.0
   testable: 0
   isDirectDependency: 0

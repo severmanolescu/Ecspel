@@ -8,15 +8,11 @@ public class EnemyHealth : MonoBehaviour
 
     private Animator animator;
 
-    private EnemyDropLoot enemyDropLoot;
-
     private float health;
 
     private void Awake()
     {
         health = maxHealth;
-
-        enemyDropLoot = GetComponent<EnemyDropLoot>();
 
         animator = GetComponent<Animator>();
     }
