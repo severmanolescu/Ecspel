@@ -33,11 +33,13 @@ public class QuestTabHandler : MonoBehaviour
 
     public void SetQuestWorld(Quest quest)
     {
-        if(quest.ItemsNeeds.Count > 0)
+        if(quest is GiveItem)
         {
-            quest.WhoToGive.GetComponent<DialogueDisplay>().AddQuest(quest);
+            GiveItem giveItem = (GiveItem)quest;
+
+            giveItem.WhoToGive.GetComponent<DialogueDisplay>().AddQuest(quest);
         }
-        else if(quest.Positions.Count > 0)
+        else if(quest is GoToLocation)
         {
             questFollow.SetQuestFollow(quest);
         }

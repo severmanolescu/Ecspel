@@ -57,6 +57,7 @@ public class TreeDamage : MonoBehaviour
                     default:  animator.SetTrigger("Right"); particleStart.Spawn = 2; break;
                 }
 
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().Trees++;
             }
         }
         else

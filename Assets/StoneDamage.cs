@@ -36,6 +36,8 @@ public class StoneDamage : MonoBehaviour
 
                 Destroy(this.gameObject);
             }
+
+            GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
         }
     }
 }
