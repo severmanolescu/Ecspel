@@ -31,6 +31,8 @@ public class TreeDamage : MonoBehaviour
 
         rigidbody.gravityScale = 0f;
         rigidbody.velocity = Vector2.zero;
+
+        rigidbody.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void TakeDamage(int damage, int spawn)
@@ -76,6 +78,7 @@ public class TreeDamage : MonoBehaviour
                 }
 
                 stick.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.stick, 1));
+                stick.GetComponent<BoxCollider2D>().enabled = false;
 
                 StartCoroutine(Wait(stick.GetComponent<Rigidbody2D>()));
             }

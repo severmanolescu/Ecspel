@@ -57,7 +57,10 @@
     <Compile Include="Assets\Items\Script\Item.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueClass.cs" />
     <Compile Include="Assets\Berries\Scripts\BerrierBush.cs" />
+    <Compile Include="Assets\Items\Script\Axe.cs" />
+    <Compile Include="Assets\Items\Script\Weapon.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeAI.cs" />
+    <Compile Include="Assets\Items\Script\Pickaxe.cs" />
     <Compile Include="Assets\Items\Script\ItemWorldSpawn.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\TimeDegradation.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="Assets\PlayerAchievements.cs" />
     <Compile Include="Assets\Items\Script\ItemDrag.cs" />
     <Compile Include="Assets\Items\Script\ItemSprites.cs" />
+    <Compile Include="Assets\Quests\Scripts\TypeOfQuest.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestTabDataSet.cs" />
     <Compile Include="Assets\Berries\Scripts\BerriesDropWaitToStopAnimation.cs" />
     <Compile Include="Assets\DayTimerHandler.cs" />
@@ -88,15 +92,18 @@
     <Compile Include="Assets\StoneDamage.cs" />
     <Compile Include="Assets\Enemy\Scripts\AIPathFinding.cs" />
     <Compile Include="Assets\Dialogue\Scripts\AnswersHandler.cs" />
+    <Compile Include="Assets\Quests\Scripts\GoToLocation.cs" />
     <Compile Include="Assets\CanvasTabsOpen.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerItemUse.cs" />
     <Compile Include="Assets\Enemy\Testenemy\PathfindingDebugStepVisual.cs" />
+    <Compile Include="Assets\Items\Script\Range.cs" />
     <Compile Include="Assets\Items\Script\ItemConstruct.cs" />
     <Compile Include="Assets\Enemy\Testenemy\Grid.cs" />
     <Compile Include="Assets\DefaulData.cs" />
     <Compile Include="Assets\Enemy\Testenemy\PathNode.cs" />
     <Compile Include="Assets\Quests\Scripts\Quest.cs" />
     <Compile Include="Assets\Items\Script\ItemDropWrong.cs" />
+    <Compile Include="Assets\Quests\Scripts\CutTrees.cs" />
     <Compile Include="Assets\SunShadowHandler.cs" />
     <Compile Include="Assets\ParticleStart.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueChanger.cs" />
@@ -114,16 +121,15 @@
     <Compile Include="Assets\Items\Script\ItemDetails.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestItems.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueHandler.cs" />
+    <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Enemy\Testenemy\CharacterPathfindingMovementHandler.cs" />
-    <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
-    <Compile Include="Assets\Quests\Scripts\TypeOfQuest.cs" />
-    <Compile Include="Assets\Quests\Scripts\CutTrees.cs" />
-    <Compile Include="Assets\Quests\Scripts\GoToLocation.cs" />
-    <Compile Include="Assets\Items\Script\Range.cs" />
-    <Compile Include="Assets\Items\Script\Weapon.cs" />
-    <Compile Include="Assets\Items\Script\Pickaxe.cs" />
-    <Compile Include="Assets\Items\Script\Axe.cs" />
+    <Compile Include="Assets\QuestCutTreesHandler.cs" />
+    <Compile Include="Assets\QuestCutTrees.cs" />
+    <Compile Include="Assets\WaitToFinishAnimation.cs" />
+    <Compile Include="Assets\Quests\Scripts\DestroyStone.cs" />
+    <Compile Include="Assets\QuestDestroyStoneHandle.cs" />
+    <Compile Include="Assets\Quests\Scripts\QuestDestroyStone.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

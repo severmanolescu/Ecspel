@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestLocationFollow : MonoBehaviour
 {
-    private Quest quest;
+    public Quest quest;
 
     private QuestTrack questTrack;
     private QuestTabHandler questTab;

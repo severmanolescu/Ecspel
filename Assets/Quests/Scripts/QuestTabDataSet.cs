@@ -46,6 +46,14 @@ public class QuestTabDataSet : MonoBehaviour
         {
             track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
         }
+        else if(quest is CutTrees)
+        {
+            track.gameObject.SetActive(false);
+        }
+        else if (quest is DestroyStone)
+        {
+            track.gameObject.SetActive(false);
+        }
 
     }
 

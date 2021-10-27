@@ -43,6 +43,14 @@ public class QuestTabHandler : MonoBehaviour
         {
             questFollow.SetQuestFollow(quest);
         }
+        else if(quest is CutTrees)
+        {
+            GetComponent<QuestCutTreesHandler>().SetCutTreesQuest(quest);
+        }
+        else if (quest is DestroyStone)
+        {
+            GetComponent<QuestDestroyStoneHandle>().SetDestroyStonequest(quest);
+        }
     }
 
     private bool VerifyQuest(Quest quest)
