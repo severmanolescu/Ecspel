@@ -21,6 +21,8 @@ public class DayTimerHandler : MonoBehaviour
 
     private SourceLightShadow sourceLight;
 
+    public int Days { get { return days; } }
+
     private void Awake()
     {
         globalLight = gameObject.GetComponent<Light2D>();
@@ -41,10 +43,14 @@ public class DayTimerHandler : MonoBehaviour
             {
                 hours = 0;
                 days++;
+
+                GetComponent<CropGrowHandler>().DayChange(days);
             }
         }
 
-        globalLight.color = gradient.Evaluate((hours + minutes / 60) / 24);
+        intensity = (hours + minutes / 60) / 24;
+
+        globalLight.color = gradient.Evaluate(intensity);
     }
 
     public void SetTimer(int seconds, float minutes, int hours, int days)

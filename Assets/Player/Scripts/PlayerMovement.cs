@@ -14,15 +14,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canMove = true;
 
+    private bool tabOpen = false;
+
     private float speed;
 
     public float Speed { get { return speed; } }
     public bool CanMove { get { return canMove; } }
-
-    public void SetPlayerMovementTrue()
-    {
-        canMove = true;
-    }
+    public bool TabOpen { get { return tabOpen; } set { tabOpen = value; } }
 
     private void Awake()
     {
@@ -86,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
                 collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
             }
         }
+    }
+
+    public void SetPlayerMovementTrue()
+    {
+        canMove = true;
     }
 
     public void SetPlayerMovementFalse()

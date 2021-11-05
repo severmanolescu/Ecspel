@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: GrapesSeed
+  m_EditorClassIdentifier: 
+  name: Grapes Seeds
+  details: Grapes Seeds
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: -3309453895758867990, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 6
+  levels:
+  - {fileID: -1439584136451277544, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 1626522942629454886, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -7539393175627563276, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -810820319444354179, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -4937228829635442148, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -1449128383499467295, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -6893517904170921001, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  destroy: {fileID: -990721511798661886, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: 2e878710bec818c438f673306c7792ea, type: 2}
+  minDrop: 2
+  maxDrop: 3
+  centerX: 1
+  centerY: 1
+  refil: 1
+  refilDecreseSpriteIndexStart: 2

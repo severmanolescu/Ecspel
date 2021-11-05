@@ -50,7 +50,7 @@ public class SunShadowHandler : MonoBehaviour
                 {
                     shadow.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotation);
 
-                    shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, intensity / 3f);
+                    shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, intensity);
 
                     shadow.gameObject.SetActive(true);
                 }

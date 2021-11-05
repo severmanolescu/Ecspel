@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5255762919377533062}
   - component: {fileID: 5255762919377533056}
   - component: {fileID: 5255762919377533057}
+  - component: {fileID: 7710158174618261719}
   m_Layer: 0
   m_Name: LittleBusheYellowShrub
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5255762919377533061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.9603739, y: 5.9633017, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5963898, y: 2.59639, z: 1}
   m_Children:
   - {fileID: 2744776601902793809}
   m_Father: {fileID: 0}
@@ -115,9 +116,35 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029400826, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.65221024
+  m_Radius: 0.408431
+--- !u!61 &7710158174618261719
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255762919377533061}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.09167106}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.44, y: 0.38}
+    newSize: {x: 0.54, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.44, y: 0.19665788}
+  m_EdgeRadius: 0
 --- !u!1 &7524910561642539219
 GameObject:
   m_ObjectHideFlags: 0

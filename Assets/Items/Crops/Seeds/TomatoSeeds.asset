@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: TomatoSeeds
+  m_EditorClassIdentifier: 
+  name: Tomato Seeds
+  details: Tomato Seeds
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: -215958242341156383, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 3
+  levels:
+  - {fileID: -1798770582133672151, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 1891719608972110627, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -5561610127479562760, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -4143670234373046720, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -2419261919087593864, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -3439257915936802255, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  destroy: {fileID: -5242555845900806480, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: 9ac8caa43cf199f44ae12b79c1dddc7c, type: 2}
+  minDrop: 2
+  maxDrop: 3
+  centerX: 1
+  centerY: 1
+  refil: 1
+  refilDecreseSpriteIndexStart: 2

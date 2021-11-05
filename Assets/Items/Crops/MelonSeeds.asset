@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: MelonSeeds
+  m_EditorClassIdentifier: 
+  name: Melon Seeds
+  details: Melon Seeds
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: -3559217653539498635, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 4
+  levels:
+  - {fileID: 7196204118683552569, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -4765420755938042611, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 9065264473920484245, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 7597997462438837095, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -8425725622617219983, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -6286295482687621359, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: 6b4c9fbac6dcfce469bc397793055176, type: 2}
+  minDrop: 1
+  maxDrop: 1
+  centerX: 1
+  centerY: 1
+  refil: 0
+  refilDecreseSpriteIndexStart: 0

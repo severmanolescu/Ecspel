@@ -3,7 +3,7 @@ using TMPro;
 
 public class ItemWorld : MonoBehaviour
 {
-    private Item item;
+    public Item item;
 
     private SpriteRenderer spriteRenderer;
 
@@ -12,6 +12,12 @@ public class ItemWorld : MonoBehaviour
     private SunShadowHandler sunTimer;
 
     private Transform shadow;
+
+    private float moveSpeed = 2f;
+    private float maxDistante = 0.1f;
+
+    Vector3 newPosition;
+    bool move = false;
 
     public Item Item { get { return item; } }
 
@@ -27,7 +33,7 @@ public class ItemWorld : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
@@ -53,6 +59,8 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = items;
 
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
         spriteRenderer.sprite = items.Sprite;
 
         if (amount != null)
@@ -64,6 +72,28 @@ public class ItemWorld : MonoBehaviour
             else
             {
                 amount.SetText("");
+            }
+        }
+    }
+
+    public void MoveToPoint()
+    {
+        this.newPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0);
+
+        move = true;
+    }
+
+    private void Update()
+    {
+        if(move == true)
+        {
+            if (Vector3.Distance(transform.position, newPosition) >= maxDistante)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                move = false;
             }
         }
     }

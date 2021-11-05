@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 430849976363439123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.3385036, y: 0.9961122, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.0365634, y: 2.0019238, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf5d91c7d249104b82079a9df31d964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
 --- !u!114 &430849976363439128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,10 +208,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drops:
   - item: {fileID: 11400000, guid: 49cb99a8b1b652e4f9a2e49d88042ff6, type: 2}
-    weapon: {fileID: 0}
-    range: {fileID: 0}
-    axe: {fileID: 0}
-    pickaxe: {fileID: 0}
     amount: 0
     minDrop: 1
     maxDrop: 3

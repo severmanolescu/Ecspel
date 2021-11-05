@@ -22,6 +22,7 @@ public class PlayerInventory : MonoBehaviour
 
         AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
         AddItem(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 1));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.hoe, 1));
         
     }
 

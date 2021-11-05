@@ -16,7 +16,7 @@ public static class DefaulData
     public static float borderSizeQuestTrack = 3f;
 
     // Stones data
-    public static float castPosition = .1f;
+    public static float castPosition = 1f;
 
     // Trees data
     public static int treeHealth = 10;
@@ -26,8 +26,8 @@ public static class DefaulData
     // Player stats
     public static float maxPlayerHealth = 100f;
     public static float maxPlayerStamina = 100f;
-    public static float playerWalkSpeed = 3f;
-    public static float playerRunSpeed = 4f;
+    public static float playerWalkSpeed = 5f;
+    public static float playerRunSpeed = 7f;
     public static int   maximInventorySlots = 30;
 
     // Timer
@@ -43,11 +43,11 @@ public static class DefaulData
 
     // Little Slime
     public static float slimeLittleAttackPower = 5f;
-    public static float slimeLittleAttackDistance = .6f;
+    public static float slimeLittleAttackDistance = 1f;
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
-    public static float slimeBigAttackDistance = .6f;    
+    public static float slimeBigAttackDistance = 1f;    
 
     // Items
     public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));
@@ -57,12 +57,16 @@ public static class DefaulData
     // Usable item
     public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
     public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
+    public static Item hoe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Hoe.asset", typeof(Item));
 
     //Enemy drops
     public static Item slime = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/EnemyDrop/Slime.asset", typeof(Item));
 
     //Berries
     public static Item yellowRaspberry = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Berries/YellowRaspberry.asset", typeof(Item));
+
+    //Crops
+    public static Item PotatoSeeds = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Crops/PotatoSeeds.asset", typeof(Item));
 
 
     public static Item GetItemWithAmount(Item item, int amount)

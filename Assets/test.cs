@@ -4,40 +4,17 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
-    private CharacterPathfindingMovementHandler character;
+    public List<Item> items;
 
-    private Transform transformPlayer;
-
-    private Pathfinding pathfinding;
-
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        pathfinding = new Pathfinding(20, 10);
+        foreach(Item item in items)
+        {
+            Item copy = item.Copy();
 
-        transformPlayer = GameObject.Find("Player").GetComponent<Transform>();
+            copy.Amount = 2;
 
-        character = GetComponent<CharacterPathfindingMovementHandler>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-            pathfinding.GetGrid().GetXY(transformPlayer.position, out int x, out int y);
-
-            List<PathNode> path = pathfinding.FindPath(0, 0, x, y);
-
-            if (path != null)
-            {
-                for (int i = 0; i < path.Count - 1; i++)
-                {
-                    Debug.Log(new Vector3(path[i].x, path[i].y) + " " + new Vector3(path[i + 1].x, path[i + 1].y));
-
-                    GetComponent<AIPathFinding>().MoveToLocation(new Vector3(path[i].x, path[i].y), 3);
-                }
-            }
-        //}
+            GetComponent<PlayerInventory>().AddItem(copy);
+        }
     }
 }

@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class QuickSlot : MonoBehaviour
 {
-    [SerializeField] private ItemSlot equiped;
+    private ItemSlot equiped;
+
+    private TextMeshProUGUI amount;
 
     private Image[] itemSprites;
 
@@ -15,6 +18,8 @@ public class QuickSlot : MonoBehaviour
 
         equiped = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
 
+        amount = GetComponentInChildren<TextMeshProUGUI>();
+
         if (equiped.Item != null)
         {
             itemSprites[1].sprite = equiped.Item.Sprite;
@@ -22,6 +27,8 @@ public class QuickSlot : MonoBehaviour
         else
         {
             itemSprites[1].gameObject.SetActive(false);
+
+            amount.gameObject.SetActive(false);
         }
         
         DeselectItem();
@@ -33,10 +40,34 @@ public class QuickSlot : MonoBehaviour
         {
             itemSprites[1].sprite = equiped.Item.Sprite;
             itemSprites[1].gameObject.SetActive(true);
+
+            if(equiped.Item.Amount <= 0)
+            {
+                equiped.DeleteItem();
+
+                itemSprites[1].gameObject.SetActive(false);
+
+                amount.gameObject.SetActive(false);
+            }
+            else if (equiped.Item.Amount > 1)
+            {
+                amount.text = equiped.Item.Amount.ToString();
+
+                amount.gameObject.SetActive(true);
+
+                equiped.ReinitializeItem();
+            }
+            else
+            {
+                equiped.ReinitializeItem();
+
+                amount.gameObject.SetActive(false);
+            }
         }
         else
         {
             itemSprites[1].gameObject.SetActive(false);
+            amount.gameObject.SetActive(false);
         }
     }
 

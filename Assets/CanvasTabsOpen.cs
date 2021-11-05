@@ -51,7 +51,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerInventory.SetActive(true);
                     quickSlot.gameObject.SetActive(false);
 
-                    playerMovement.SetPlayerMovementFalse();
+                    playerMovement.TabOpen = true;
+
                 }
                 else if (playerInventory.activeSelf)
                 {
@@ -61,7 +62,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    playerMovement.SetPlayerMovementTrue();
+                    playerMovement.TabOpen = false;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Tab))
@@ -73,7 +74,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerInventory.SetActive(false);
                     quickSlot.gameObject.SetActive(false);
 
-                    playerMovement.SetPlayerMovementFalse();
+                    playerMovement.TabOpen = true;
                 }
                 else if (questShow.gameObject.activeSelf)
                 {
@@ -84,7 +85,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    playerMovement.SetPlayerMovementTrue();
+                    playerMovement.TabOpen = false;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
@@ -96,7 +97,7 @@ public class CanvasTabsOpen : MonoBehaviour
                 quickSlot.gameObject.SetActive(true);
                 quickSlot.Reinitialize();
 
-                playerMovement.SetPlayerMovementTrue();
+                playerMovement.TabOpen = false;
             }
         }
     }

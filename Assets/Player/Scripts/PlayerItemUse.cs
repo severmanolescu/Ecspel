@@ -4,13 +4,15 @@ public class PlayerItemUse : MonoBehaviour
 {
     [SerializeField] private QuickSlotsChanger selectedSlot;
 
+    private Item item;
+
     private PlayerMovement playerMovement;
 
     private Animator animator;
 
     private Vector2 inputs = Vector2.zero;
 
-    private Vector2 detectionZone = new Vector2(.5f, .5f);
+    private Vector2 detectionZone = new Vector2(1f, 1f);
 
     public Vector2 Inputs { set { inputs = value; } }
 
@@ -27,11 +29,21 @@ public class PlayerItemUse : MonoBehaviour
         {
             if (auxObject.gameObject != this.gameObject)
             {
-                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+                DamageTree treeDamage = auxObject.GetComponent<DamageTree>();
 
                 if (treeDamage != null)
                 {
-                    treeDamage.TakeDamage(2, spawn);
+                    Axe axe = (Axe)item;
+
+                    treeDamage.TakeDamage(axe.Damage, spawn, axe.level);
+
+                    return;
+                }
+                else if (auxObject.CompareTag("Crop"))
+                {
+                    auxObject.GetComponent<CropGrow>().Destroy();
+
+                    return;
                 }
             }
         }
@@ -45,9 +57,19 @@ public class PlayerItemUse : MonoBehaviour
             {
                 StoneDamage stoneDamage = auxObject.GetComponent<StoneDamage>();
 
+                Pickaxe pickaxe= (Pickaxe)item;
+
                 if (stoneDamage != null)
                 {
-                    stoneDamage.TakeDamage(2);
+                    stoneDamage.TakeDamage(pickaxe.damage, pickaxe.level);
+
+                    return;
+                }
+                else if (auxObject.CompareTag("Crop"))
+                {
+                    auxObject.GetComponent<CropGrow>().Destroy();
+
+                    return;
                 }
             }
         }
@@ -77,15 +99,15 @@ public class PlayerItemUse : MonoBehaviour
 
         if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
-            castPosition.y -= DefaulData.castPosition * 3;
+            castPosition.y -= DefaulData.castPosition;
 
-            spawn = 4;
+            spawn = 2;
         }
         else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
         {
             castPosition.y += DefaulData.castPosition;
 
-            spawn = 3;
+            spawn = 2;
         }
         else if (inputs.x <= -1 && inputs.y == 0)
         {
@@ -111,8 +133,30 @@ public class PlayerItemUse : MonoBehaviour
         }
     }
 
+    private int GetSpawnLocation()
+    {
+        if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        {
+            return 4;
+        }
+        else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
+        {
+            return 3;
+        }
+        else if (inputs.x <= -1 && inputs.y == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
     private void SelectedItemAction(Item item)
     {
+        this.item = item;
+
         if (playerMovement.CanMove)
         {
             if (item is Axe)
@@ -127,17 +171,30 @@ public class PlayerItemUse : MonoBehaviour
 
                 SetCircleCast(2);
             }
+            else if(item is Hoe)
+            {
+                animator.SetBool("Hoe", true);
+
+                GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation());
+            }
         }
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && playerMovement.Speed == 0)
+        if(playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
         {
-            Item item = selectedSlot.Item;
+            if (Input.GetMouseButtonDown(0))
+            {
+                Item item = selectedSlot.Item;
 
-            SelectedItemAction(item);
-        }
+                SelectedItemAction(item);
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                GameObject.Find("Global/BuildSystem").GetComponent<HarvestCropHandler>().Harvest(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
+        }        
     }
 }
 

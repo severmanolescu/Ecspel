@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8691269334346287652}
   - component: {fileID: 8691269334346287650}
   - component: {fileID: 8691269334346287651}
+  - component: {fileID: 4762323366119083711}
   m_Layer: 0
   m_Name: LittleBusheYellowRaspberry
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 8691269334346287655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.3448334, y: 4.2493806, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8994122, y: 1.899412, z: 1}
   m_Children:
   - {fileID: 1066802411861371564}
   m_Father: {fileID: 0}
@@ -198,6 +199,32 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029400826, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.65221024
+  m_Radius: 0.408431
+--- !u!61 &4762323366119083711
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691269334346287655}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.10943823}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.44, y: 0.38}
+    newSize: {x: 0.54, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.44, y: 0.16112353}
+  m_EdgeRadius: 0

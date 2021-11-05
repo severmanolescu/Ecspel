@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2258467750595262210}
   - component: {fileID: 2258467750595262212}
   - component: {fileID: 2258467750595262213}
+  - component: {fileID: 7295020358917838177}
   m_Layer: 0
   m_Name: LittleBusheYellowBlueberrie
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2258467750595262209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.629, y: 5.103, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.899412, y: 1.899412, z: 1}
   m_Children:
   - {fileID: 6627714124452224402}
   m_Father: {fileID: 0}
@@ -117,7 +118,33 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.029400826, y: 0}
   serializedVersion: 2
-  m_Radius: 0.65221024
+  m_Radius: 0.408431
+--- !u!61 &7295020358917838177
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2258467750595262209}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.105661266}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.44, y: 0.38}
+    newSize: {x: 0.54, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.44, y: 0.16867746}
+  m_EdgeRadius: 0
 --- !u!1 &8316313119945062844
 GameObject:
   m_ObjectHideFlags: 0

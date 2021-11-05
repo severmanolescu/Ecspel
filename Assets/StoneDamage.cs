@@ -6,38 +6,39 @@ public class StoneDamage : MonoBehaviour
 
     private ParticleSystem particle;
 
-    private int health;
+    [SerializeField] private float health;
+    [SerializeField] private int stoneLevel;
 
     private void Awake()
     {
         particle = GetComponentInChildren<ParticleSystem>();
     }
 
-    private void Start()
+    public void TakeDamage(float damage, int level)
     {
-        health = DefaulData.stoneHealth;
-    }
+        if (level >= stoneLevel)
+        { 
+            health -= damage;
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
+            particle.Play();
 
-        particle.Play();
-
-        if(health <= 0)
-        {
-            GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
-
-            ItemWorld itemWorld = stone.GetComponent<ItemWorld>();
-
-            if(itemWorld != null)
+            if (health <= 0)
             {
-                itemWorld.SetItem(DefaulData.GetItemWithAmount(DefaulData.stone, 2));
+                GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
 
-                Destroy(this.gameObject);
+                ItemWorld itemWorld = stone.GetComponent<ItemWorld>();
+
+                if (itemWorld != null)
+                {
+                    itemWorld.SetItem(DefaulData.GetItemWithAmount(DefaulData.stone, 2));
+
+                    itemWorld.MoveToPoint();
+
+                    Destroy(this.gameObject);
+                }
+
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
             }
-
-            GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
         }
     }
 }
