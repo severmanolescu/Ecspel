@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1dcd248671184479fc0d36d9d476a6, type: 3}
+  m_Name: Tree2Sapling
+  m_EditorClassIdentifier: 
+  name: Tree sapling
+  details: Tree sapling
+  amount: 0
+  maxAmount: 20
+  itemSprite: {fileID: -8248838775534701058, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 2
+  dayToGrow: 5
+  seed: {fileID: 8367003098876595645, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sapling: {fileID: -8248838775534701058, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  levels:
+  - {fileID: -4099243639674717333, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -114558855922539592, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 1607911409318614997, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  almostMature: {fileID: 0}
+  mature: {fileID: 4861898502372893238, guid: da44dc58c38b78c47bfd84ec8ab58465, type: 3}

@@ -163,17 +163,18 @@ public class PlayerItemUse : MonoBehaviour
             {
                 animator.SetBool("Axe", true);
 
-                SetCircleCast(1);
+                GameObject.Find("Global/BuildSystem").GetComponent<AxeHandler>().UseAxe(transform.position, GetSpawnLocation(), item);
             }
             else if (item is Pickaxe)
             {
                 animator.SetBool("Pickaxe", true);
 
-                SetCircleCast(2);
+                GameObject.Find("Global/BuildSystem").GetComponent<PickaxeHandler>().UsePickaxe(transform.position, GetSpawnLocation(), item);
             }
             else if(item is Hoe)
             {
                 animator.SetBool("Hoe", true);
+
 
                 GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation());
             }
@@ -190,13 +191,39 @@ public class PlayerItemUse : MonoBehaviour
 
                 SelectedItemAction(item);
             }
-            if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 GameObject.Find("Global/BuildSystem").GetComponent<HarvestCropHandler>().Harvest(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
-        }        
+            
+        }
+        if (selectedSlot.Item is Hoe)
+        {
+            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().HoeHeadlight(playerMovement.transform.position, GetSpawnLocation());
+
+            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StopPlace();
+        }
+        else if (selectedSlot.Item is Placeable && playerMovement.TabOpen == false)
+        {
+            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StartPlace(selectedSlot.Item);
+            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().StopHeadlight();
+        }
+        else
+        {
+            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StopPlace();
+            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().StopHeadlight();
+        }
     }
 }
+
+//if (Item is Placeable)
+//{
+//    buildSystem.StartPlace(Item);
+//}
+//else
+//{
+//    buildSystem.StopPlace();
+//}
 
 // itemUse:
 //  1 - Axe

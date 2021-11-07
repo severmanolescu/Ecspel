@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,12 +53,9 @@
     <UnityVersion>2021.1.28f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Dialogue\Scripts\DialogueAnswersClass.cs" />
     <Compile Include="Assets\Items\Script\Item.cs" />
-    <Compile Include="Assets\HarvestCropHandler.cs" />
+    <Compile Include="Assets\Build system\HarvestCropHandler.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueClass.cs" />
     <Compile Include="Assets\Berries\Scripts\BerrierBush.cs" />
     <Compile Include="Assets\Items\Script\Axe.cs" />
@@ -68,7 +65,7 @@
     <Compile Include="Assets\Items\Script\ItemWorldSpawn.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\CameraHandler.cs" />
-    <Compile Include="Assets\PositionInGrid.cs" />
+    <Compile Include="Assets\Build system\PositionInGrid.cs" />
     <Compile Include="Assets\TimeDegradation.cs" />
     <Compile Include="Assets\Quests\Scripts\DestroyStone.cs" />
     <Compile Include="Assets\LightHandler.cs" />
@@ -77,7 +74,7 @@
     <Compile Include="Assets\DestroyTree.cs" />
     <Compile Include="Assets\Items\Script\ItemSlot.cs" />
     <Compile Include="Assets\Items\Script\Hoe.cs" />
-    <Compile Include="Assets\QuestCutTrees.cs" />
+    <Compile Include="Assets\Quests\Scripts\QuestCutTrees.cs" />
     <Compile Include="Assets\Enemy\Scripts\EnemyDropLoot.cs" />
     <Compile Include="Assets\Items\Script\ItemWorld.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestButton.cs" />
@@ -85,24 +82,24 @@
     <Compile Include="Assets\QuickSlotsChanger.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Enemy\Scripts\EnemyHealth.cs" />
-    <Compile Include="Assets\QuestCutTreesHandler.cs" />
+    <Compile Include="Assets\Quests\Scripts\QuestCutTreesHandler.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueScriptableObject.cs" />
     <Compile Include="Assets\Items\Script\Placeable.cs" />
     <Compile Include="Assets\Enemy\Scripts\PotionAI.cs" />
-    <Compile Include="Assets\PlayerAchievements.cs" />
+    <Compile Include="Assets\Player\Scripts\PlayerAchievements.cs" />
     <Compile Include="Assets\Items\Script\ItemDrag.cs" />
     <Compile Include="Assets\Items\Script\ItemSprites.cs" />
-    <Compile Include="Assets\HoeSystemHandler.cs" />
+    <Compile Include="Assets\Build system\HoeSystemHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\TypeOfQuest.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestTabDataSet.cs" />
     <Compile Include="Assets\Berries\Scripts\BerriesDropWaitToStopAnimation.cs" />
     <Compile Include="Assets\DayTimerHandler.cs" />
     <Compile Include="Assets\DamageTree.cs" />
     <Compile Include="Assets\Items\Script\Sapling.cs" />
-    <Compile Include="Assets\FootPrintHandler.cs" />
+    <Compile Include="Assets\Player\Scripts\FootPrintHandler.cs" />
     <Compile Include="Assets\Items\Script\EquipItem.cs" />
-    <Compile Include="Assets\Grid.cs" />
-    <Compile Include="Assets\GridNode.cs" />
+    <Compile Include="Assets\Build system\Grid.cs" />
+    <Compile Include="Assets\Build system\GridNode.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestFollowHandler.cs" />
     <Compile Include="Assets\ChestStorage.cs" />
     <Compile Include="Assets\SourceLightShadow.cs" />
@@ -113,15 +110,15 @@
     <Compile Include="Assets\Quests\Scripts\GoToLocation.cs" />
     <Compile Include="Assets\CanvasTabsOpen.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerItemUse.cs" />
-    <Compile Include="Assets\BuildSystemHandler.cs" />
+    <Compile Include="Assets\Build system\BuildSystemHandler.cs" />
     <Compile Include="Assets\Items\Script\Range.cs" />
     <Compile Include="Assets\Items\Script\ItemConstruct.cs" />
-    <Compile Include="Assets\QuestDestroyStoneHandle.cs" />
+    <Compile Include="Assets\Quests\Scripts\QuestDestroyStoneHandle.cs" />
     <Compile Include="Assets\DefaulData.cs" />
     <Compile Include="Assets\Quests\Scripts\Quest.cs" />
     <Compile Include="Assets\Items\Script\ItemDropWrong.cs" />
     <Compile Include="Assets\Items\Script\Crop.cs" />
-    <Compile Include="Assets\CropGrowHandler.cs" />
+    <Compile Include="Assets\Build system\CropGrowHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\CutTrees.cs" />
     <Compile Include="Assets\SunShadowHandler.cs" />
     <Compile Include="Assets\ParticleStart.cs" />
@@ -142,7 +139,10 @@
     <Compile Include="Assets\Dialogue\Scripts\DialogueHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
-    <Compile Include="Assets\CropGrow.cs" />
+    <Compile Include="Assets\Build system\CropGrow.cs" />
+    <Compile Include="Assets\Build system\PickaxeHandler.cs" />
+    <Compile Include="Assets\Build system\AxeHandler.cs" />
+    <Compile Include="Assets\SaplingGrowHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -105,14 +105,5 @@ public class QuickSlotsChanger : MonoBehaviour
                 ChangeSelectedItem(selectedItemIndex);
             }
         }
-
-        if (Item is Placeable)
-        {
-            buildSystem.StartPlace(Item);
-        }
-        else
-        {
-            buildSystem.StopPlace();
-        }
     }
 }

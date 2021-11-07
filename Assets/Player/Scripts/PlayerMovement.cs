@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canMove)
+        if (canMove == true && tabOpen == false)
         {
             inputs.x = Input.GetAxisRaw("Horizontal");
             inputs.y = Input.GetAxisRaw("Vertical");
@@ -62,6 +62,15 @@ public class PlayerMovement : MonoBehaviour
 
                 playerItem.Inputs = inputs;
             }
+        }
+        else
+        {
+            speed = 0;
+            inputs = Vector2.zero;
+
+            animator.SetFloat("Horizontal", 0f);
+            animator.SetFloat("Vertical", 0f);
+            animator.SetFloat("Speed", 0f);
         }
     }
 

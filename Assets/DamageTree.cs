@@ -16,6 +16,12 @@ public class DamageTree : MonoBehaviour
 
     private bool destroyed = false;
 
+    private int startScaleX;
+    private int startScaleY;
+
+    private int scaleX;
+    private int scaleY;
+
     private void Awake()
     {
         destroyTree = GetComponentInChildren<DestroyTree>();
@@ -26,6 +32,31 @@ public class DamageTree : MonoBehaviour
     private void Start()
     {
         prefabLog = destroyTree.ItemWorld;
+    }
+
+    public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
+    {
+        this.startScaleX = startScaleX;
+        this.startScaleY = startScaleY;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+    }
+
+    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
+    {
+        for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
+        {
+            for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
+            {
+                if (grid.gridArray[i, j] != null)
+                {
+                    grid.gridArray[i, j].canPlace = true;
+                    grid.gridArray[i, j].canPlant = false;
+                    grid.gridArray[i, j].isWalkable = true;
+                    grid.gridArray[i, j].objectInSpace = null;
+                }
+            }
+        }
     }
 
     public void TakeDamage(float damage, int spawn, int itemLevel)
@@ -54,7 +85,7 @@ public class DamageTree : MonoBehaviour
                 switch (spawn)
                 {
                     case 1: animator.SetTrigger("Left"); break;
-                    case 2: animator.SetTrigger("Right"); break;
+                    default: animator.SetTrigger("Right"); break;
                 }
 
                 Vector3 newScale = transform.Find("Shadow").localScale;
@@ -76,8 +107,16 @@ public class DamageTree : MonoBehaviour
                 game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 2));
                 game.MoveToPoint();
 
-                Destroy(this.gameObject);
+                Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
 
+                GridNode gridNode = grid.GetGridObject(transform.position);
+
+                if (gridNode != null)
+                {
+                    ChangeGridData(gridNode, grid);
+                }
+
+                Destroy(this.gameObject);
             }
         }
     }

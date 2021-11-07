@@ -5,6 +5,11 @@ public class DestroyTree : MonoBehaviour
 {
     [SerializeField] private Item sapling;
 
+    [SerializeField] private int minSaplingDrop;
+    [SerializeField] private int maxSaplingDrop;
+
+    [SerializeField] private int logAmountDrop;
+
     private GameObject itemWorld;
 
     private int spawn;
@@ -31,20 +36,20 @@ public class DestroyTree : MonoBehaviour
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 2));
+                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, logAmountDrop));
                     game.MoveToPoint();
 
                     game = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(2, 3)));
+                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
                     game.MoveToPoint();
 
                     break;
                 }
 
-            case 2:
+            default:
                 {
                     ItemWorld game = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
@@ -54,14 +59,14 @@ public class DestroyTree : MonoBehaviour
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 2));
+                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, logAmountDrop));
                     game.MoveToPoint();
 
                     game = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(2, 3)));
+                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
                     game.MoveToPoint();
 
                     break;
