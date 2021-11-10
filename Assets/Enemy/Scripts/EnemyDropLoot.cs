@@ -28,6 +28,8 @@ public class EnemyDropLoot : MonoBehaviour
 
             itemWorld.transform.position = transform.position;
 
+            itemWorld.MoveToPoint();
+
             return;
         }
     }

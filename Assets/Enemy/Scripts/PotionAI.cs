@@ -99,7 +99,7 @@ public class PotionAI : MonoBehaviour
                 {
                     if (Time.time > nextAttackTime)
                     {
-                        animator.SetTrigger("Attack");
+                        animator.SetTrigger("Prepare");
 
                         nextAttackTime = Time.time + DefaulData.slimeAttackRate;
                     }
@@ -122,9 +122,9 @@ public class PotionAI : MonoBehaviour
     {
         rotation++;
 
-        if(rotation >= 5)
+        if(rotation >= 2)
         {
-            Debug.Log("attack");
+            animator.SetTrigger("Attack");
         }
     }
 
@@ -151,12 +151,12 @@ public class PotionAI : MonoBehaviour
 
     public void DestroyEnemyAnimation()
     {
-        GetComponent<EnemyDropLoot>().DropItem();
-
         GetComponent<SpriteRenderer>().sortingOrder = -1;
 
         Destroy(GetComponent<BoxCollider2D>());
+
         gameObject.AddComponent<TimeDegradation>();
+
         Destroy(this);
     }
 }

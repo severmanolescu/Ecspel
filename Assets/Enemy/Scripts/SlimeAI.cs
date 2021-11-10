@@ -95,8 +95,6 @@ public class SlimeAI : MonoBehaviour
                     {
                         animator.SetTrigger("Attack");
 
-                        
-
                         nextAttackTime = Time.time + DefaulData.slimeAttackRate;
                     }
 

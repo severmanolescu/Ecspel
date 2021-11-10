@@ -10,15 +10,15 @@ public class AxeHandler : MonoBehaviour
 
     private void DamageTree(GameObject node, int spawn, Item item)
     {
-        if(node != null)
+        Axe axe = (Axe)item;
+
+        if (node != null)
         {
             DamageTree damageTree = node.GetComponent<DamageTree>();
 
             if (damageTree != null)
             {
-                Axe axe = (Axe)item;
-
-                damageTree.TakeDamage(axe.damage, spawn, axe.level);
+                damageTree.TakeDamage(axe.Damage, spawn, axe.Level);
             }
 
             SaplingGrowHandler saplingGrow = node.GetComponent<SaplingGrowHandler>();
@@ -28,6 +28,8 @@ public class AxeHandler : MonoBehaviour
                 saplingGrow.DestroyObject();
             }
         }
+
+        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= axe.Stamina;
     }
 
     public void UseAxe(Vector3 position, int spawn, Item item)

@@ -5,15 +5,15 @@ using System;
 [Serializable]
 public class Item : ScriptableObject
 {
-    public new string name;
+    [SerializeField] private new string name;
 
-    public string details;
+    [SerializeField] private string details;
 
-    public int amount;
+    [SerializeField] private int amount;
 
-    public int maxAmount;
+    [SerializeField] private int maxAmount;
 
-    public Sprite itemSprite;
+    [SerializeField] private Sprite itemSprite;
 
     public Item(string name, string details,  int amount, int maxAmount, Sprite itemSprite)
     {

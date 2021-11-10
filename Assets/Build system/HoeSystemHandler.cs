@@ -325,7 +325,7 @@ public class HoeSystemHandler : MonoBehaviour
         }
     }
 
-    public void PlaceSoil(Vector3 playerPosition, int spawn)
+    public void PlaceSoil(Vector3 playerPosition, int spawn, Hoe hoe)
     {
         GridNode gridNode = grid.GetGridObject(playerPosition);
 
@@ -339,6 +339,8 @@ public class HoeSystemHandler : MonoBehaviour
                 case 4: if (gridNode.y - 1 >= 0) Spawn(grid.gridArray[gridNode.x, gridNode.y - 1]); break;
             }
         }
+
+        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= hoe.Stamina;
         //1 - Left
         //2 - Right
         //3 - Up

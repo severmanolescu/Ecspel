@@ -37,6 +37,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        animator.SetTrigger("Explode");  
+        animator.SetTrigger("Explode");
     }
 }

@@ -58,6 +58,7 @@ public static class DefaulData
     public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
     public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
     public static Item hoe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Hoe.asset", typeof(Item));
+    public static Item sword= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Sword.asset", typeof(Item));
 
     //Enemy drops
     public static Item slime = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/EnemyDrop/Slime.asset", typeof(Item));

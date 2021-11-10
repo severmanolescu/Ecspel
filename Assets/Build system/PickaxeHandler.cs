@@ -10,17 +10,19 @@ public class PickaxeHandler : MonoBehaviour
 
     private void DamageStone(GameObject node, Item item)
     {
+        Pickaxe pickaxe = (Pickaxe)item;
+
         if (node != null)
         {
             StoneDamage stoneDamage = node.GetComponent<StoneDamage>();
 
             if (stoneDamage != null)
             {
-                Pickaxe pickaxe = (Pickaxe)item;
-
-                stoneDamage.TakeDamage(pickaxe.damage, pickaxe.level);
+                stoneDamage.TakeDamage(pickaxe.Damage, pickaxe.Level);
             }
         }
+
+        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= pickaxe.Stamina;
     }
 
     public void UsePickaxe(Vector3 position, int spawn, Item item)

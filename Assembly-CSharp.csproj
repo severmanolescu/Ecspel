@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.11</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.12</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2021.1.28f1</UnityVersion>
@@ -77,6 +77,7 @@
     <Compile Include="Assets\Quests\Scripts\QuestCutTrees.cs" />
     <Compile Include="Assets\Enemy\Scripts\EnemyDropLoot.cs" />
     <Compile Include="Assets\Items\Script\ItemWorld.cs" />
+    <Compile Include="Assets\Build system\AxeHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestButton.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestTabHandler.cs" />
     <Compile Include="Assets\QuickSlotsChanger.cs" />
@@ -114,12 +115,14 @@
     <Compile Include="Assets\Items\Script\Range.cs" />
     <Compile Include="Assets\Items\Script\ItemConstruct.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestDestroyStoneHandle.cs" />
+    <Compile Include="Assets\SaplingGrowHandler.cs" />
     <Compile Include="Assets\DefaulData.cs" />
     <Compile Include="Assets\Quests\Scripts\Quest.cs" />
     <Compile Include="Assets\Items\Script\ItemDropWrong.cs" />
     <Compile Include="Assets\Items\Script\Crop.cs" />
     <Compile Include="Assets\Build system\CropGrowHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\CutTrees.cs" />
+    <Compile Include="Assets\Build system\PickaxeHandler.cs" />
     <Compile Include="Assets\SunShadowHandler.cs" />
     <Compile Include="Assets\ParticleStart.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueChanger.cs" />
@@ -140,9 +143,7 @@
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Build system\CropGrow.cs" />
-    <Compile Include="Assets\Build system\PickaxeHandler.cs" />
-    <Compile Include="Assets\Build system\AxeHandler.cs" />
-    <Compile Include="Assets\SaplingGrowHandler.cs" />
+    <Compile Include="Assets\Effect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -5,22 +5,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Crop", order = 1)]
 public class Crop : Placeable
 {
-    public int dayToGrow;
+    [SerializeField] private int dayToGrow;
 
-    public List<Sprite> levels;
+    [SerializeField] private List<Sprite> levels;
 
-    public Sprite destroy;
+    [SerializeField] private Sprite destroy;
 
-    public Item crop;
+    [SerializeField] private Item crop;
 
-    public int minDrop;
-    public int maxDrop;
+    [SerializeField] private int minDrop;
+    [SerializeField] private int maxDrop;
 
-    public bool centerX = true;
-    public bool centerY = true;
+    [SerializeField] private bool centerX = true;
+    [SerializeField] private bool centerY = true;
 
-    public bool refil;
-    public int refilDecreseSpriteIndexStart;
+    [SerializeField] private bool refil;
+    [SerializeField] private int refilDecreseSpriteIndexStart;
 
     public Crop(string name, string details, int amount, int maxAmount, Sprite itemSprite, int sizeX, int sizeY, int dayToGrow, Item crop, int minDrop, int maxDrop, bool centerX, bool centerY, bool refil, int refilDecreseSpriteIndexStart)
         : base(name, details, amount, maxAmount, itemSprite, sizeX, sizeY)
@@ -36,4 +36,13 @@ public class Crop : Placeable
     }
 
     public int DayToGrow { get { return dayToGrow; } }
+    public List<Sprite> Levels { get => levels; set => levels = value; }
+    public Sprite Destroy1 { get => destroy; set => destroy = value; }
+    public Item CropItem { get => crop; set => crop = value; }
+    public int MinDrop { get => minDrop; set => minDrop = value; }
+    public int MaxDrop { get => maxDrop; set => maxDrop = value; }
+    public bool CenterX { get => centerX; set => centerX = value; }
+    public bool CenterY { get => centerY; set => centerY = value; }
+    public bool Refil { get => refil; set => refil = value; }
+    public int RefilDecreseSpriteIndexStart { get => refilDecreseSpriteIndexStart; set => refilDecreseSpriteIndexStart = value; }
 }

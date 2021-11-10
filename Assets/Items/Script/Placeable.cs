@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Placeable", order = 1)]
 public class Placeable : Item
 {
-    public int sizeX;
-    public int sizeY;
+    [SerializeField] private int sizeX;
+    [SerializeField] private int sizeY;
 
     public Placeable(string name, string details, int amount, int maxAmount, Sprite itemSprite, int sizeX, int sizeY)
         : base(name, details, amount, maxAmount, itemSprite)

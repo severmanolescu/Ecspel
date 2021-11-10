@@ -40,13 +40,13 @@ public class SaplingGrowHandler : MonoBehaviour
 
     public void DayChange(int day)
     {
-        if(day >= startDay + sapling.dayToGrow)
+        if(day >= startDay + sapling.DayToGrow)
         {
             currentSprite++;
 
-            if(currentSprite < sapling.levels.Count)
+            if(currentSprite < sapling.Levels.Count)
             {
-                spriteRenderer.sprite = sapling.levels[currentSprite];
+                spriteRenderer.sprite = sapling.Levels[currentSprite];
 
                 startDay = day;
             }
@@ -56,11 +56,11 @@ public class SaplingGrowHandler : MonoBehaviour
                 {
                     case 0:
                         {
-                            if(sapling.almostMature != null)
+                            if(sapling.AlmostMature != null)
                             {
                                 state = 1;
 
-                                GameObject tree = Instantiate(sapling.almostMature, transform.position, transform.rotation);
+                                GameObject tree = Instantiate(sapling.AlmostMature, transform.position, transform.rotation);
 
                                 tree.AddComponent<SaplingGrowHandler>().SetData(sapling, currentSprite, day, state);
 
@@ -69,11 +69,11 @@ public class SaplingGrowHandler : MonoBehaviour
                                 Destroy(gameObject);
 
                             }
-                            else if(sapling.mature != null)
+                            else if(sapling.Mature != null)
                             {
                                 state = 2;
 
-                                GameObject tree = Instantiate(sapling.mature, transform.position, transform.rotation);
+                                GameObject tree = Instantiate(sapling.Mature, transform.position, transform.rotation);
 
                                 Destroy(gameObject);
                             }
@@ -83,11 +83,11 @@ public class SaplingGrowHandler : MonoBehaviour
 
                     case 1:
                         {
-                            if (sapling.mature != null)
+                            if (sapling.Mature != null)
                             {
                                 state = 2;
 
-                                GameObject tree = Instantiate(sapling.mature, transform.position, transform.rotation);
+                                GameObject tree = Instantiate(sapling.Mature, transform.position, transform.rotation);
 
                                 Destroy(gameObject);
                             }

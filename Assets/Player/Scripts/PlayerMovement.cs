@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerItemUse playerItem;
 
+    private PlayerStats playerStats;
+
     private bool canMove = true;
 
     private bool tabOpen = false;
@@ -31,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
         playerItem = gameObject.GetComponent<PlayerItemUse>();
 
         playerInventory = gameObject.GetComponentInChildren<PlayerInventory>();
+
+        playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -43,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 inputs *= DefaulData.playerRunSpeed;
+
+                if (inputs != Vector2.zero)
+                {
+                    playerStats.Stamina -= 0.5f * Time.deltaTime;
+                }
             }
             else
             {
@@ -92,6 +101,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
             }
+        }
+        else if(collision.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(5);
         }
     }
 

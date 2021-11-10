@@ -56,13 +56,13 @@ public class BuildSystemHandler : MonoBehaviour
             {
                 Crop crop = (Crop)item;
 
-                @object.GetComponent<SpriteRenderer>().sprite = crop.levels[0];
+                @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
             }
             else if(item is Sapling)
             {
                 Sapling sapling = (Sapling)item;
 
-                @object.GetComponent<SpriteRenderer>().sprite = sapling.sapling;
+                @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
             }
             else
             {
@@ -75,13 +75,13 @@ public class BuildSystemHandler : MonoBehaviour
             {
                 Crop crop = (Crop)item;
 
-                @object.GetComponent<SpriteRenderer>().sprite = crop.levels[0];
+                @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
             }
             else if (item is Sapling)
             {
                 Sapling sapling = (Sapling)item;
 
-                @object.GetComponent<SpriteRenderer>().sprite = sapling.sapling;
+                @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
             }
             else
             {
@@ -129,7 +129,7 @@ public class BuildSystemHandler : MonoBehaviour
             newObject.AddComponent<SaplingGrowHandler>().Sapling = sapling;
 
             spriteRenderer.sortingOrder = 0;
-            spriteRenderer.sprite = sapling.sapling;
+            spriteRenderer.sprite = sapling.SaplingSprite;
 
             for (int i = gridNode.x - 1; i <= gridNode.x + 1; i++)
             {
@@ -166,12 +166,12 @@ public class BuildSystemHandler : MonoBehaviour
     {
         Placeable placeable = (Placeable)item;
 
-        if (gridNode.x + placeable.sizeX <= grid.gridArray.GetLength(0) &&
-            gridNode.y + placeable.sizeY <= grid.gridArray.GetLength(1))
+        if (gridNode.x + placeable.SizeX <= grid.gridArray.GetLength(0) &&
+            gridNode.y + placeable.SizeY <= grid.gridArray.GetLength(1))
         {
-            for (int i = gridNode.x; i < gridNode.x + placeable.sizeX; i++)
+            for (int i = gridNode.x; i < gridNode.x + placeable.SizeX; i++)
             {
-                for (int j = gridNode.y; j < gridNode.y + placeable.sizeY; j++)
+                for (int j = gridNode.y; j < gridNode.y + placeable.SizeY; j++)
                 {
                     if (grid.gridArray[i, j].canPlace == false)
                     {
@@ -190,9 +190,9 @@ public class BuildSystemHandler : MonoBehaviour
     {
         Placeable placeable = (Placeable)item;
 
-        for (int i = gridNode.x; i < gridNode.x + placeable.sizeX; i++)
+        for (int i = gridNode.x; i < gridNode.x + placeable.SizeX; i++)
         {
-            for (int j = gridNode.y; j < gridNode.y + placeable.sizeY; j++)
+            for (int j = gridNode.y; j < gridNode.y + placeable.SizeY; j++)
             {
                 if (item is Crop)
                 {
@@ -245,11 +245,11 @@ public class BuildSystemHandler : MonoBehaviour
                 {
                     Crop aux = (Crop)item;
 
-                    if(aux.centerX == true)
+                    if(aux.CenterX == true)
                     {
                         position.x += grid.CellSize / 2f;
                     }
-                    if (aux.centerY == true)
+                    if (aux.CenterY == true)
                     {
                         position.y += grid.CellSize / 2f;
                     }

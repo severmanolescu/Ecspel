@@ -35,7 +35,7 @@ public class PlayerItemUse : MonoBehaviour
                 {
                     Axe axe = (Axe)item;
 
-                    treeDamage.TakeDamage(axe.Damage, spawn, axe.level);
+                    treeDamage.TakeDamage(axe.Damage, spawn, axe.Level);
 
                     return;
                 }
@@ -61,7 +61,7 @@ public class PlayerItemUse : MonoBehaviour
 
                 if (stoneDamage != null)
                 {
-                    stoneDamage.TakeDamage(pickaxe.damage, pickaxe.level);
+                    stoneDamage.TakeDamage(pickaxe.Damage, pickaxe.Level);
 
                     return;
                 }
@@ -79,58 +79,41 @@ public class PlayerItemUse : MonoBehaviour
     {
         foreach (Collider2D auxObject in objects)
         {
-            if (auxObject.gameObject != this.gameObject)
+            if (auxObject.gameObject.tag == "Enemy")
             {
-                TreeDamage treeDamage = auxObject.GetComponent<TreeDamage>();
+                Weapon weapon = (Weapon)item;
 
-                if (treeDamage != null)
-                {
-                    treeDamage.TakeDamage(2, spawn);
-                }
+                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower);
+
+                auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
             }
         }
     }
 
-    private void SetCircleCast(ushort itemUse)
+    private void SetCircleCast()
     {
         Vector3 castPosition = gameObject.transform.position;
-
-        int spawn = 1;
 
         if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
             castPosition.y -= DefaulData.castPosition;
-
-            spawn = 2;
         }
         else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
         {
             castPosition.y += DefaulData.castPosition;
-
-            spawn = 2;
         }
         else if (inputs.x <= -1 && inputs.y == 0)
         {
             castPosition.x -= DefaulData.castPosition;
-
-            spawn = 1;
         }
         else if (inputs.x >= 1 && inputs.y == 0)
         {
             castPosition.x += DefaulData.castPosition;
-
-            spawn = 2;
         }
 
         Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
 
-        switch(itemUse)
-        {
-            case 1: AxeUse(objects, spawn); return;
-            case 2: PickaxeUse(objects, spawn); return;
-            case 3: SwordUse(objects, spawn); return;
-            default: return;
-        }
+        SwordUse(objects, GetSpawnLocation()); return;
     }
 
     private int GetSpawnLocation()
@@ -175,8 +158,13 @@ public class PlayerItemUse : MonoBehaviour
             {
                 animator.SetBool("Hoe", true);
 
+                GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation(), (Hoe)item);
+            }
+            else if (item is Weapon)
+            {
+                animator.SetBool("Sword", true);
 
-                GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation());
+                SetCircleCast();
             }
         }
     }
@@ -215,17 +203,3 @@ public class PlayerItemUse : MonoBehaviour
         }
     }
 }
-
-//if (Item is Placeable)
-//{
-//    buildSystem.StartPlace(Item);
-//}
-//else
-//{
-//    buildSystem.StopPlace();
-//}
-
-// itemUse:
-//  1 - Axe
-//  2 - Pickaxe
-//  3 - Sword
