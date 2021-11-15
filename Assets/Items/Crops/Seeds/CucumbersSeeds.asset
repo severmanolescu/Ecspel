@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: CucumbersSeeds
+  m_EditorClassIdentifier: 
+  name: Cucumbers Seeds
+  details: Cucumbers Seeds
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: -6539820868728430723, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 4
+  levels:
+  - {fileID: 397813293608086149, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 6831139753921842797, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 4435784651841869115, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 8915863871280154342, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 3325854418425322912, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  destroy: {fileID: -4809304420658024577, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: ac5d49cf07166f1479ad534a994dc07e, type: 2}
+  minDrop: 1
+  maxDrop: 2
+  centerX: 1
+  centerY: 1
+  refil: 0
+  refilDecreseSpriteIndexStart: 0

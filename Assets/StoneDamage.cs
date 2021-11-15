@@ -6,35 +6,78 @@ public class StoneDamage : MonoBehaviour
 
     private ParticleSystem particle;
 
-    private int health;
+    [SerializeField] private float health;
+    [SerializeField] private int stoneLevel;
+
+    public int startScaleX;
+    public int startScaleY;
+
+    public int scaleX;
+    public int scaleY;
 
     private void Awake()
     {
         particle = GetComponentInChildren<ParticleSystem>();
     }
 
-    private void Start()
+    public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
     {
-        health = DefaulData.stoneHealth;
+        this.startScaleX = startScaleX;
+        this.startScaleY = startScaleY;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
     }
 
-    public void TakeDamage(int damage)
+    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
     {
-        health -= damage;
-
-        particle.Play();
-
-        if(health <= 0)
+        for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
         {
-            GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
-
-            ItemWorld itemWorld = stone.GetComponent<ItemWorld>();
-
-            if(itemWorld != null)
+            for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
             {
-                itemWorld.SetItem(DefaulData.GetItemWithAmount(DefaulData.stone, 2));
+                if (grid.gridArray[i, j] != null)
+                {
+                    grid.gridArray[i, j].canPlace = true;
+                    grid.gridArray[i, j].canPlant = false;
+                    grid.gridArray[i, j].isWalkable = true;
+                    grid.gridArray[i, j].objectInSpace = null;
+                }
+            }
+        }
+    }
 
-                Destroy(this.gameObject);
+    public void TakeDamage(float damage, int level)
+    {
+        if (level >= stoneLevel)
+        { 
+            health -= damage;
+
+            particle.Play();
+
+            if (health <= 0)
+            {
+                GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
+
+                ItemWorld itemWorld = stone.GetComponent<ItemWorld>();
+
+                if (itemWorld != null)
+                {
+                    itemWorld.SetItem(DefaulData.GetItemWithAmount(DefaulData.stone, 2));
+
+                    itemWorld.MoveToPoint();
+
+                    Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+
+                    GridNode gridNode = grid.GetGridObject(transform.position);
+
+                    if (gridNode != null)
+                    {
+                        ChangeGridData(gridNode, grid);
+                    }
+
+                    Destroy(this.gameObject);
+                }
+
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
             }
         }
     }

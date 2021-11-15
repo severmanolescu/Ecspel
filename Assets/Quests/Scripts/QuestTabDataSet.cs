@@ -35,14 +35,24 @@ public class QuestTabDataSet : MonoBehaviour
         details.text = quest.Details;
 
         track.gameObject.SetActive(true);
-        if (quest.ItemsNeeds.Count > 0)
+        if (quest is GiveItem)
         {
+            GiveItem giveItem = (GiveItem)quest;
+
             track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
-            track.onClick.AddListener(delegate { questTrack.TrackQuest(quest.WhoToGive.transform.position); });
+            track.onClick.AddListener(delegate { questTrack.TrackQuest(giveItem.WhoToGive.transform.position); });
         }
-        else if(quest.Positions.Count > 0)
+        else if(quest is GoToLocation)
         {
             track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
+        }
+        else if(quest is CutTrees)
+        {
+            track.gameObject.SetActive(false);
+        }
+        else if (quest is DestroyStone)
+        {
+            track.gameObject.SetActive(false);
         }
 
     }

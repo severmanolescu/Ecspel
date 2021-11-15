@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: OnionSeeds
+  m_EditorClassIdentifier: 
+  name: Onion seeds
+  details: Onion seeds
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: 6593910471418514874, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 4
+  levels:
+  - {fileID: -3033743133309631873, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 2919736547599973458, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -3862906241107851721, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -1469742994379453474, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  destroy: {fileID: -3982774654945482378, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: 5597ae9f7521a4f4d928d1b443cf2294, type: 2}
+  minDrop: 2
+  maxDrop: 3
+  centerX: 1
+  centerY: 1
+  refil: 0
+  refilDecreseSpriteIndexStart: 0

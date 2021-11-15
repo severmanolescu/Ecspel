@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
+  m_Name: YellorBellPepperSeed
+  m_EditorClassIdentifier: 
+  name: Yellow Bell Pepper Seed
+  details: Yellow Bell Pepper Seed
+  amount: 0
+  maxAmount: 50
+  itemSprite: {fileID: 6334038392955928812, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 3
+  levels:
+  - {fileID: 6928591771732301807, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -6247276037711077161, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 8788758565588477987, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -3441875748663387523, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 7965507362246114982, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -6468340522351179836, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  destroy: {fileID: 8427453596970115845, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  crop: {fileID: 11400000, guid: 41fc69951f51d7646bbd987e4b6ebdda, type: 2}
+  minDrop: 1
+  maxDrop: 3
+  centerX: 1
+  centerY: 1
+  refil: 1
+  refilDecreseSpriteIndexStart: 2

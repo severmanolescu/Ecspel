@@ -31,6 +31,8 @@ public class TreeDamage : MonoBehaviour
 
         rigidbody.gravityScale = 0f;
         rigidbody.velocity = Vector2.zero;
+
+        rigidbody.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void TakeDamage(int damage, int spawn)
@@ -54,10 +56,10 @@ public class TreeDamage : MonoBehaviour
                 {
                     case 1:   animator.SetTrigger("Left"); break;
                     case 2:   animator.SetTrigger("Right"); break;
-                    case 3:   animator.SetTrigger("Up"); break;
-                    default:  animator.SetTrigger("Right"); break;
+                    default:  animator.SetTrigger("Right"); particleStart.Spawn = 2; break;
                 }
 
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().Trees++;
             }
         }
         else
@@ -76,6 +78,7 @@ public class TreeDamage : MonoBehaviour
                 }
 
                 stick.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.stick, 1));
+                stick.GetComponent<BoxCollider2D>().enabled = false;
 
                 StartCoroutine(Wait(stick.GetComponent<Rigidbody2D>()));
             }

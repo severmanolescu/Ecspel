@@ -7,17 +7,23 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private int selectedItemIndex;
 
+    private BuildSystemHandler buildSystem;
+
     public int SelectedItemIndex { get { return selectedItemIndex; } }
     public Item Item { get { return quickSlots[selectedItemIndex - 1].Item; } }
 
     private void Awake()
     {
         quickSlots = gameObject.GetComponentsInChildren<QuickSlot>();
+
+        buildSystem = GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>();
     }
 
     private void Start()
     {
         ChangeSelectedItem(1);
+
+        buildSystem.SetQuickSlotHandler(this);
     }
 
     public void Reinitialize()
@@ -81,6 +87,23 @@ public class QuickSlotsChanger : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             ChangeSelectedItem(10);
+        }
+
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (selectedItemIndex < 10)
+            {
+                selectedItemIndex++;
+                ChangeSelectedItem(selectedItemIndex);
+            }
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (selectedItemIndex > 1)
+            {
+                selectedItemIndex--;
+                ChangeSelectedItem(selectedItemIndex);
+            }
         }
     }
 }

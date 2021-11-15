@@ -85,8 +85,11 @@ public class AnswersHandler : MonoBehaviour
 
         ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = quest.Title;
 
-        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(quest.ItemsNeeds); });
-        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { quest.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
+        GiveItem giveItem = (GiveItem)quest;
+
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(giveItem.ItemsNeeds); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.AddItem(quest.ItemsReceive); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { giveItem.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(quest.NextDialogue); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTab.DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTrack.StopTrackQuest(); });
@@ -102,7 +105,9 @@ public class AnswersHandler : MonoBehaviour
 
         foreach (Quest quest in quests)
         {
-            foreach(QuestItems questItems in quest.ItemsNeeds)
+            GiveItem giveItem = (GiveItem)quest;
+
+            foreach (QuestItems questItems in giveItem.ItemsNeeds)
             {
                 if (playerInventory.SearchInventory(questItems.Item, questItems.Amount))
                 {

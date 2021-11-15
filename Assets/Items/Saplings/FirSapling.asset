@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1dcd248671184479fc0d36d9d476a6, type: 3}
+  m_Name: FirSapling
+  m_EditorClassIdentifier: 
+  name: Fir sapling
+  details: This can be planted for a fir tree
+  amount: 0
+  maxAmount: 20
+  itemSprite: {fileID: -1963167540777017609, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sizeX: 1
+  sizeY: 1
+  dayToGrow: 5
+  seed: {fileID: -2839635736360204513, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  sapling: {fileID: -1963167540777017609, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  levels:
+  - {fileID: -1857011369416646877, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: -5286114104911224460, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  - {fileID: 2667194898581995407, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  almostMature: {fileID: 5751394687521334620, guid: a5a1c5771fd1e294c95a0ebb9aa4e27b, type: 3}
+  mature: {fileID: 8944985852770749712, guid: ff326c6b651e46645bbebdc40434f1a1, type: 3}

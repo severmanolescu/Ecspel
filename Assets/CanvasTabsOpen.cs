@@ -6,15 +6,12 @@ public class CanvasTabsOpen : MonoBehaviour
 {
     private GameObject playerInventory;
     private QuickSlotsChanger quickSlot;
-    private GameObject chestSlots;
 
     private QuestTabDataSet questShow;
 
-    private ChestStorage chestStorage;
-    private List<Item> chestItems = new List<Item>();
-    private bool chestSet = false;
-
     private PlayerMovement playerMovement;
+
+    private GameObject canvasEffects;
 
     private bool canOpenTabs = true;
 
@@ -23,8 +20,7 @@ public class CanvasTabsOpen : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         playerInventory.SetActive(false);
-
-        chestSlots.SetActive(false);
+        canvasEffects.SetActive(false);
 
         questShow.DeleteData();
         questShow.gameObject.SetActive(false);
@@ -34,9 +30,10 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
+        canvasEffects = transform.Find("Field/Effect").gameObject;
+
         playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
-        chestSlots = transform.Find("Field/Inventory/PlayerInventory/ChestInventory").gameObject;
         questShow = transform.Find("Field/QuestTab").gameObject.GetComponent<QuestTabDataSet>();
     }
 
@@ -57,19 +54,24 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(true);
+                    canvasEffects.SetActive(true);
+
                     quickSlot.gameObject.SetActive(false);
 
-                    playerMovement.SetPlayerMovementFalse();
+                    playerMovement.TabOpen = true;
+
                 }
                 else if (playerInventory.activeSelf)
                 {
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    playerMovement.SetPlayerMovementTrue();
+                    playerMovement.TabOpen = false;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Tab))
@@ -79,9 +81,11 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(true);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(false);
 
-                    playerMovement.SetPlayerMovementFalse();
+                    playerMovement.TabOpen = true;
                 }
                 else if (questShow.gameObject.activeSelf)
                 {
@@ -89,10 +93,12 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    playerMovement.SetPlayerMovementTrue();
+                    playerMovement.TabOpen = false;
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
@@ -101,28 +107,14 @@ public class CanvasTabsOpen : MonoBehaviour
                 questShow.gameObject.SetActive(false);
 
                 playerInventory.SetActive(false);
+                canvasEffects.SetActive(false);
+
                 quickSlot.gameObject.SetActive(true);
                 quickSlot.Reinitialize();
 
-                playerMovement.SetPlayerMovementTrue();
+                playerMovement.TabOpen = false;
             }
         }
-    }
-
-    public void SetChestItems(List<Item> items, ChestStorage chestStorage)
-    {
-        this.chestItems = items;
-
-        chestSet = true;
-
-        this.chestStorage = chestStorage;
-    }
-
-    public void DeleteChestItems()
-    {
-        this.chestItems = null;
-
-        chestSet = false;
     }
 
     public void SetCanOpenTabs(bool canOpenTabs)
