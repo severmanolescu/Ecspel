@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5733261584188017117}
   - component: {fileID: 5733261584188017118}
   - component: {fileID: 5733261584188017116}
+  - component: {fileID: 1153658721}
   m_Layer: 0
   m_Name: DayTimer
   m_TagString: Untagged
@@ -49,8 +50,37 @@ MonoBehaviour:
   timeSpeed: 1
   intensity: 0
   minutes: 55
-  hours: 18
+  hours: 10
   days: 0
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.11764707, g: 0.14901961, b: 0.3254902, a: 1}
+    key1: {r: 0.17254902, g: 0.2784314, b: 0.4784314, a: 1}
+    key2: {r: 0.6431373, g: 0.6666667, b: 0.69803923, a: 1}
+    key3: {r: 1, g: 1, b: 1, a: 1}
+    key4: {r: 1, g: 1, b: 1, a: 1}
+    key5: {r: 0.16862746, g: 0.2784314, b: 0.47450984, a: 1}
+    key6: {r: 0.11764707, g: 0.14901961, b: 0.3254902, a: 1}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 7325
+    ctime1: 12914
+    ctime2: 18697
+    ctime3: 30840
+    ctime4: 47031
+    ctime5: 54934
+    ctime6: 65535
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 65535
+    atime5: 65535
+    atime6: 65535
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
 --- !u!114 &5733261584188017117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +125,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 010497a4fb65b98dcb99512f397a1411899d9d4f00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -153,3 +183,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 1.8436124, y: 0.28077906, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1153658721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0b23b8e53850844aa38e1f2e755825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

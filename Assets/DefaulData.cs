@@ -43,11 +43,11 @@ public static class DefaulData
 
     // Little Slime
     public static float slimeLittleAttackPower = 5f;
-    public static float slimeLittleAttackDistance = 1f;
+    public static float slimeLittleAttackDistance = 2f;
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
-    public static float slimeBigAttackDistance = 1f;    
+    public static float slimeBigAttackDistance = 2f;    
 
     // Items
     public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));

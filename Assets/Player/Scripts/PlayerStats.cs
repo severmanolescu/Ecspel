@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,5 +41,10 @@ public class PlayerStats : MonoBehaviour
     {
         healthSlider.maxValue = healthSlider.value  = maxHealth = DefaulData.maxPlayerHealth;
         staminaSlider.maxValue = staminaSlider.value = maxStamina = DefaulData.maxPlayerStamina;
+    }
+
+    public void TakeDamageEffect(float damage)
+    {
+        healthSlider.value -= damage;
     }
 }

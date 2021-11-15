@@ -14,13 +14,16 @@ public class PlayerItemUse : MonoBehaviour
 
     private Vector2 detectionZone = new Vector2(1f, 1f);
 
+    private float attackDecrease = 1f;
+
     public Vector2 Inputs { set { inputs = value; } }
+    public float AttackDecrease { set { attackDecrease = value; } }
 
     private void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
-        playerMovement = gameObject.GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void AxeUse(Collider2D[] objects, int spawn)
@@ -83,7 +86,9 @@ public class PlayerItemUse : MonoBehaviour
             {
                 Weapon weapon = (Weapon)item;
 
-                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower);
+                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease);
+
+                Debug.Log(weapon.AttackPower / attackDecrease);
 
                 auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
             }

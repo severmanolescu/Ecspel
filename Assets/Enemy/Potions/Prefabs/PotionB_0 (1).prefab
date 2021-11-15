@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6774421178202537146
 Transform:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 6774421178202537151}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3de70a17d9e75464bbcc042902e67a2d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 05c26f5919ed1b54b85269982e0fb108, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a59570cd3a81f4e972560860e223e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
+  effect: {fileID: 11400000, guid: f1e2318ca5b7c504ca6b8f92105c49ea, type: 2}
 --- !u!114 &6774421178202537141
 MonoBehaviour:
   m_ObjectHideFlags: 0

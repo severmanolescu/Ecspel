@@ -20,12 +20,23 @@ public class AxeHandler : MonoBehaviour
             {
                 damageTree.TakeDamage(axe.Damage, spawn, axe.Level);
             }
-
-            SaplingGrowHandler saplingGrow = node.GetComponent<SaplingGrowHandler>();
-
-            if (saplingGrow != null)
+            else
             {
-                saplingGrow.DestroyObject();
+                SaplingGrowHandler saplingGrow = node.GetComponent<SaplingGrowHandler>();
+
+                if (saplingGrow != null)
+                {
+                    saplingGrow.DestroyObject();
+                }
+                else
+                {
+                    GroundWoodDamage groundWood = node.GetComponent<GroundWoodDamage>();
+
+                    if(groundWood != null)
+                    {
+                        groundWood.AxeDestroy(axe.Level);
+                    }
+                }
             }
         }
 

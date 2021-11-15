@@ -20,9 +20,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed;
 
+    private float slowEffect = 1f;
+    private float fatiqueEffect = 1f;
+
     public float Speed { get { return speed; } }
     public bool CanMove { get { return canMove; } }
     public bool TabOpen { get { return tabOpen; } set { tabOpen = value; } }
+    public float SlowEffect { get { return slowEffect; } set { slowEffect = value; } }
+    public float FatiqueEffect { get { return fatiqueEffect; } set { fatiqueEffect = value; } }
 
     private void Awake()
     {
@@ -50,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (inputs != Vector2.zero)
                 {
-                    playerStats.Stamina -= 0.5f * Time.deltaTime;
+                    playerStats.Stamina -= 0.5f * Time.deltaTime * fatiqueEffect;
                 }
             }
             else
@@ -86,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if(canMove)
-            rigidbody.MovePosition(rigidbody.position + inputs * Time.fixedDeltaTime);
+            rigidbody.MovePosition(rigidbody.position + inputs * Time.fixedDeltaTime / slowEffect);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

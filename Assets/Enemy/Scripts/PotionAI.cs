@@ -13,6 +13,8 @@ public class PotionAI : MonoBehaviour
 
     [SerializeField] private float speed;
 
+    [SerializeField] private Effect effect;
+
     private float tolerance = .01f;
 
     private float nextAttackTime;
@@ -135,9 +137,9 @@ public class PotionAI : MonoBehaviour
 
     public void AttackPlayer()
     {
-        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.slimeLittleAttackDistance)
+        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.slimeLittleAttackDistance && effect != null)
         {
-            playerLocation.GetComponent<PlayerStats>().Health -= DefaulData.slimeLittleAttackPower;
+            playerLocation.GetComponent<EffectHandler>().AddEffect(effect);
         }
     }
 
@@ -160,3 +162,4 @@ public class PotionAI : MonoBehaviour
         Destroy(this);
     }
 }
+

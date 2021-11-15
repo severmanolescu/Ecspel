@@ -6,9 +6,8 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, 
                                        IEndDragHandler, IDropHandler, IPointerMoveHandler, IPointerExitHandler
 {
-    [SerializeField] private ItemDrag itemDrag;
-    [SerializeField] private ItemDetails itemDetails;
-    [SerializeField] private EquipItem equipItem;
+    private ItemDrag itemDrag;
+    private ItemDetails itemDetails;
 
     private Image itemSprite;
     private TextMeshProUGUI amount;
@@ -29,6 +28,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         amount.gameObject.SetActive(false);
 
         itemSprite.gameObject.SetActive(false);
+
+        itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
+        itemDetails = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ItemDetails").GetComponent<ItemDetails>();
     }
 
     private void ShowItem()
@@ -177,10 +179,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.clickCount == 2 && item != null)
-        {
-            equipItem.Equip(item, this);
-        }
+        
     }
 
     public void OnBeginDrag(PointerEventData eventData)

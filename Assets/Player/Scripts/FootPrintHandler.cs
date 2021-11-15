@@ -13,34 +13,58 @@ public class FootPrintHandler : MonoBehaviour
 
     private void SpawnFootPrintUpRight()
     {
-        Instantiate(footPrefabUp, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabUp.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabUp, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabUp.transform.rotation);
+        }
     }
     private void SpawnFootPrintUpLeft()
     {
-        Instantiate(footPrefabUp, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabUp.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabUp, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabUp.transform.rotation);
+        }
     }
     private void SpawnFootPrintDownRight()
     {
-        Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabDown.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabDown.transform.rotation);
+        }
     }
     private void SpawnFootPrintDownLeft()
     {
-        Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabDown.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabDown.transform.rotation);
+        }
     }
     private void SpawnFootPrintLeftRight()
     {
-        Instantiate(footPrefabLeft, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabLeft.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabLeft, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabLeft.transform.rotation);
+        }
     }
     private void SpawnFootPrintLeftLeft()
     {
-        Instantiate(footPrefabLeft, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabLeft.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabLeft, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabLeft.transform.rotation);
+        }
     }
     private void SpawnFootPrintRightRight()
     {
-        Instantiate(footPrefabRight, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabRight.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabRight, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabRight.transform.rotation);
+        }
     }
     private void SpawnFootPrintRightLeft()
     {
-        Instantiate(footPrefabRight, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabRight.transform.rotation);
+        if (spawnLocation.gameObject.activeSelf == true)
+        {
+            Instantiate(footPrefabRight, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabRight.transform.rotation);
+        }
     }
 }

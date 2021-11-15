@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,13 @@
     <UnityVersion>2021.1.28f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Dialogue\Scripts\DialogueAnswersClass.cs" />
     <Compile Include="Assets\Items\Script\Item.cs" />
     <Compile Include="Assets\Build system\HarvestCropHandler.cs" />
+    <Compile Include="Assets\TeleportPlayer.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueClass.cs" />
     <Compile Include="Assets\Berries\Scripts\BerrierBush.cs" />
     <Compile Include="Assets\Items\Script\Axe.cs" />
@@ -70,6 +74,7 @@
     <Compile Include="Assets\Quests\Scripts\DestroyStone.cs" />
     <Compile Include="Assets\LightHandler.cs" />
     <Compile Include="Assets\QuickSlot.cs" />
+    <Compile Include="Assets\TeleportPlayerKeyPress.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueDisplay.cs" />
     <Compile Include="Assets\DestroyTree.cs" />
     <Compile Include="Assets\Items\Script\ItemSlot.cs" />
@@ -85,6 +90,7 @@
     <Compile Include="Assets\Enemy\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestCutTreesHandler.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueScriptableObject.cs" />
+    <Compile Include="Assets\Effects\Scripts\EffectHandler.cs" />
     <Compile Include="Assets\Items\Script\Placeable.cs" />
     <Compile Include="Assets\Enemy\Scripts\PotionAI.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerAchievements.cs" />
@@ -99,6 +105,7 @@
     <Compile Include="Assets\Items\Script\Sapling.cs" />
     <Compile Include="Assets\Player\Scripts\FootPrintHandler.cs" />
     <Compile Include="Assets\Items\Script\EquipItem.cs" />
+    <Compile Include="Assets\ChestOpenHandler.cs" />
     <Compile Include="Assets\Build system\Grid.cs" />
     <Compile Include="Assets\Build system\GridNode.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestFollowHandler.cs" />
@@ -111,13 +118,17 @@
     <Compile Include="Assets\Quests\Scripts\GoToLocation.cs" />
     <Compile Include="Assets\CanvasTabsOpen.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerItemUse.cs" />
+    <Compile Include="Assets\Effects\Scripts\EffectHandlerClass.cs" />
     <Compile Include="Assets\Build system\BuildSystemHandler.cs" />
     <Compile Include="Assets\Items\Script\Range.cs" />
     <Compile Include="Assets\Items\Script\ItemConstruct.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestDestroyStoneHandle.cs" />
     <Compile Include="Assets\SaplingGrowHandler.cs" />
+    <Compile Include="Assets\GroundWoodDamage.cs" />
     <Compile Include="Assets\DefaulData.cs" />
+    <Compile Include="Assets\CanvasEffectDataSet.cs" />
     <Compile Include="Assets\Quests\Scripts\Quest.cs" />
+    <Compile Include="Assets\Effects\Scripts\Effect.cs" />
     <Compile Include="Assets\Items\Script\ItemDropWrong.cs" />
     <Compile Include="Assets\Items\Script\Crop.cs" />
     <Compile Include="Assets\Build system\CropGrowHandler.cs" />
@@ -143,7 +154,6 @@
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Build system\CropGrow.cs" />
-    <Compile Include="Assets\Effect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

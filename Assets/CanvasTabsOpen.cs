@@ -11,6 +11,8 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
+    private GameObject canvasEffects;
+
     private bool canOpenTabs = true;
 
     IEnumerator Wait()
@@ -18,6 +20,7 @@ public class CanvasTabsOpen : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         playerInventory.SetActive(false);
+        canvasEffects.SetActive(false);
 
         questShow.DeleteData();
         questShow.gameObject.SetActive(false);
@@ -26,6 +29,8 @@ public class CanvasTabsOpen : MonoBehaviour
     private void Awake()
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+        canvasEffects = transform.Find("Field/Effect").gameObject;
 
         playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
@@ -49,6 +54,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(true);
+                    canvasEffects.SetActive(true);
+
                     quickSlot.gameObject.SetActive(false);
 
                     playerMovement.TabOpen = true;
@@ -59,6 +66,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
@@ -72,6 +81,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(true);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(false);
 
                     playerMovement.TabOpen = true;
@@ -82,6 +93,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
@@ -94,6 +107,8 @@ public class CanvasTabsOpen : MonoBehaviour
                 questShow.gameObject.SetActive(false);
 
                 playerInventory.SetActive(false);
+                canvasEffects.SetActive(false);
+
                 quickSlot.gameObject.SetActive(true);
                 quickSlot.Reinitialize();
 
