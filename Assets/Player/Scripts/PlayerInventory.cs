@@ -20,10 +20,10 @@ public class PlayerInventory : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.hoe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.sword, 1));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 10));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 10));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.hoe, 10));
+        AddItem(DefaulData.GetItemWithAmount(DefaulData.sword, 10));
         
     }
 
@@ -206,6 +206,32 @@ public class PlayerInventory : MonoBehaviour
                         itemSlot.DeleteItem();
                         continue;
                     }
+                }
+            }
+        }
+
+        quickSlots.Reinitialize();
+    }
+
+    public void DeleteItem(Item item)
+    {
+        int amount = item.Amount;
+
+        foreach (ItemSlot itemSlot in itemsSlot)
+        {
+            if (itemSlot.Item != null && itemSlot.Item.Name == item.Name)
+            {
+                if (itemSlot.Item.Amount >= amount)
+                {
+                    itemSlot.DecreseAmount(amount);
+                    break;
+                }
+                else
+                {
+                    amount -= itemSlot.Item.Amount;
+
+                    itemSlot.DeleteItem();
+                    continue;
                 }
             }
         }
