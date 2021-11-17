@@ -9,6 +9,8 @@ public class ItemDrag : MonoBehaviour
 
     private Image itemImage;
 
+    private bool startDrag = false;
+
     public Item Item { get { return item; } }
     public GameObject PreviousItem { get { return previousSlot; } }
 
@@ -39,17 +41,20 @@ public class ItemDrag : MonoBehaviour
 
     public void HideData()
     {
-        ItemSlot auxCheckSlot = previousSlot.GetComponent<ItemSlot>();
-
-        if (auxCheckSlot != null)
+        if (previousSlot != null)
         {
-            auxCheckSlot.ReinitializeItem();
+            ItemSlot auxCheckSlot = previousSlot.GetComponent<ItemSlot>();
+
+            if (auxCheckSlot != null)
+            {
+                auxCheckSlot.ReinitializeItem();
+            }
+
+            item = null;
+            previousSlot = null;
+
+            itemImage.gameObject.SetActive(false);
         }
-
-        item = null;
-        previousSlot = null;
-
-        itemImage.gameObject.SetActive(false);
     }
 
     public void DeleteData()
@@ -85,7 +90,15 @@ public class ItemDrag : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
+            startDrag = true;
+
             transform.position = Input.mousePosition;
+        }
+        else if(startDrag)
+        {
+            startDrag = false;
+
+            HideData();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,6 @@
     <UnityVersion>2021.1.28f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Dialogue\Scripts\DialogueAnswersClass.cs" />
     <Compile Include="Assets\Items\Script\Item.cs" />
     <Compile Include="Assets\Build system\HarvestCropHandler.cs" />
@@ -82,6 +79,7 @@
     <Compile Include="Assets\Quests\Scripts\QuestCutTrees.cs" />
     <Compile Include="Assets\Enemy\Scripts\EnemyDropLoot.cs" />
     <Compile Include="Assets\Items\Script\ItemWorld.cs" />
+    <Compile Include="Assets\CraftingHandler.cs" />
     <Compile Include="Assets\Build system\AxeHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestButton.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestTabHandler.cs" />
@@ -105,11 +103,11 @@
     <Compile Include="Assets\Items\Script\Sapling.cs" />
     <Compile Include="Assets\Player\Scripts\FootPrintHandler.cs" />
     <Compile Include="Assets\Items\Script\EquipItem.cs" />
-    <Compile Include="Assets\ChestOpenHandler.cs" />
+    <Compile Include="Assets\Chest\Scripts\ChestOpenHandler.cs" />
     <Compile Include="Assets\Build system\Grid.cs" />
     <Compile Include="Assets\Build system\GridNode.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestFollowHandler.cs" />
-    <Compile Include="Assets\ChestStorage.cs" />
+    <Compile Include="Assets\Chest\Scripts\ChestStorage.cs" />
     <Compile Include="Assets\SourceLightShadow.cs" />
     <Compile Include="Assets\StoneDamage.cs" />
     <Compile Include="Assets\Enemy\Scripts\AIPathFinding.cs" />
@@ -147,13 +145,20 @@
     <Compile Include="Assets\Player\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Items\Script\EquipedITem.cs" />
     <Compile Include="Assets\test.cs" />
-    <Compile Include="Assets\ChestStorageCanvas.cs" />
+    <Compile Include="Assets\Chest\Scripts\ChestStorageCanvas.cs" />
     <Compile Include="Assets\Items\Script\ItemDetails.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestItems.cs" />
+    <Compile Include="Assets\Chest\Scripts\ChestStorageHandler.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueHandler.cs" />
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Build system\CropGrow.cs" />
+    <Compile Include="Assets\CraftSetData.cs" />
+    <Compile Include="Assets\Crafting\Scripts\Craft.cs" />
+    <Compile Include="Assets\Items\Script\ItemWithAmount.cs" />
+    <Compile Include="Assets\ChangeText.cs" />
+    <Compile Include="Assets\TestCraft.cs" />
+    <Compile Include="Assets\CraftCanvasHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
