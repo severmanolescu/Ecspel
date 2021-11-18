@@ -167,8 +167,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press F
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 97c629049165b344080a6e92fc62f151, type: 2}
+  m_sharedMaterial: {fileID: -5589589228179917810, guid: 97c629049165b344080a6e92fc62f151, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 1578004845640410782}
   - component: {fileID: 1578004845640410781}
   - component: {fileID: 4117057557308445182}
+  - component: {fileID: 1006055661655873558}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -334,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b714e1dc8042e4443a8fbeda3f41a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
 --- !u!114 &1578004845640410782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,9 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dca9fdfd9709164f932b0b4f48390b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 9ebc46f1b2e7c2345b52e3a5a2d30de3, type: 2}
-  chestMaxSlots: 20
+  items: []
+  chestMaxSlots: 9
 --- !u!61 &1578004845640410781
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -401,3 +402,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.375, y: 1.1875}
   m_EdgeRadius: 0
+--- !u!114 &1006055661655873558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578004845640410778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c2963b132fca74db5dbc59e03d5369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AxeHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject itemWorld;
+
     private Grid<GridNode> grid;
 
     public Grid<GridNode> Grid { set { grid = value; } }
@@ -36,11 +38,66 @@ public class AxeHandler : MonoBehaviour
                     {
                         groundWood.AxeDestroy(axe.Level);
                     }
+
+                    else
+                    {
+                        PlaceableDataSave placeableData = node.GetComponent<PlaceableDataSave>();
+
+                        if(placeableData != null)
+                        {
+                            ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
+
+                            world.transform.position = node.transform.position;
+
+                            Placeable newItem = (Placeable)placeableData.Placeable.Copy();
+
+                            newItem.Amount = 1;
+
+                            world.SetItem(newItem);
+
+                            world.MoveToPoint();
+
+                            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+
+                            GridNode gridNode = grid.GetGridObject(node.transform.position);
+
+                            if (gridNode != null)
+                            {
+                                ChangeGridData(gridNode, grid, newItem);
+                            }
+
+                            ChestOpenHandler chestOpen = node.GetComponent<ChestOpenHandler>();
+
+                            if (chestOpen != null)
+                            {
+                                chestOpen.DropAllItems();
+                            }
+
+                            Destroy(placeableData.gameObject);
+                        }
+                    }
                 }
             }
         }
 
         GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= axe.Stamina;
+    }
+
+    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)
+    {
+        for (int i = gridNode.x; i <= gridNode.x + placeable.SizeX; i++)
+        {
+            for (int j = gridNode.y; j <= gridNode.y + placeable.SizeY; j++)
+            {
+                if (grid.gridArray[i, j] != null)
+                {
+                    grid.gridArray[i, j].canPlace = true;
+                    grid.gridArray[i, j].canPlant = false;
+                    grid.gridArray[i, j].isWalkable = true;
+                    grid.gridArray[i, j].objectInSpace = null;
+                }
+            }
+        }
     }
 
     public void UseAxe(Vector3 position, int spawn, Item item)

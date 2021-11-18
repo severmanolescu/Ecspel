@@ -5,6 +5,8 @@ using TMPro;
 
 public class ChestOpenHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject itemWorld;
+
     private GameObject player = null;
 
     private TextMeshProUGUI text;
@@ -20,6 +22,8 @@ public class ChestOpenHandler : MonoBehaviour
     private CanvasTabsOpen canvasTabsOpen;
 
     private GameObject quickSlots;
+
+    public List<Item> items = new List<Item>();
 
     private void Awake()
     {
@@ -66,6 +70,29 @@ public class ChestOpenHandler : MonoBehaviour
         }
     }
 
+    public void DropAllItems()
+    {
+        items = chestStorage.Items;
+
+        foreach(Item item in items)
+        {
+            if (item != null)
+            {
+                ItemWorld newItemWorld = Instantiate(itemWorld).GetComponent<ItemWorld>();
+
+                newItemWorld.transform.position = transform.position;
+
+                Item newItem = item.Copy();
+
+                newItemWorld.SetItem(newItem);
+
+                newItemWorld.MoveToPoint();
+
+                Debug.Log(item.name);
+            }
+        }
+    }
+
     private void Update()
     {
         if (player != null)
@@ -88,11 +115,14 @@ public class ChestOpenHandler : MonoBehaviour
                     playerMovement.TabOpen = false;
                     playerInventory.SetActive(false);
                     chestStorageHandler.gameObject.SetActive(false);
+
                     chestStorage.SetItems(GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
 
                     canvasTabsOpen.SetCanOpenTabs(true);
 
                     quickSlots.SetActive(true);
+
+                    quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
                 }
             }
 
@@ -101,11 +131,14 @@ public class ChestOpenHandler : MonoBehaviour
                 playerMovement.TabOpen = false;
                 playerInventory.SetActive(false);
                 chestStorageHandler.gameObject.SetActive(false);
-                chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots);
+
+                chestStorage.SetItems(GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
 
                 canvasTabsOpen.SetCanOpenTabs(true);
 
                 quickSlots.SetActive(true);
+
+                quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
             }
         } 
     }

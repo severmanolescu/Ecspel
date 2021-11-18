@@ -50,11 +50,9 @@ public class EffectHandler : MonoBehaviour
         }
         Destroy(effectShow);
 
-        GameObject canvas = Instantiate(prefabEffectCanvas);
+        GameObject canvas = Instantiate(prefabEffectCanvas, spawnPointCanvas.transform);
 
         canvas.GetComponent<CanvasEffectDataSet>().DataSet(effect);
-
-        canvas.transform.SetParent(spawnPointCanvas.transform);
 
         EffectHandlerClass effectHandler = new EffectHandlerClass(effect, instatiate, canvas, Time.time);
         effects.Add(effectHandler);

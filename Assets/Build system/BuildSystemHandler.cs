@@ -104,7 +104,22 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void PlaceObject(GridNode gridNode)
     {
-        GameObject newObject = Instantiate(@object);
+        Placeable placeable = (Placeable)item;
+
+        GameObject newObject;
+
+        if (placeable != null && placeable.Prefab != null)
+        {
+            newObject = Instantiate(placeable.Prefab);
+
+            newObject.transform.position = @object.transform.position;
+
+            newObject.GetComponent<PlaceableDataSave>().Placeable = placeable;
+        }
+        else
+        {
+            newObject = Instantiate(@object);
+        }
 
         newObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
@@ -140,11 +155,31 @@ public class BuildSystemHandler : MonoBehaviour
                         grid.gridArray[i, j].canPlace = false;
                         grid.gridArray[i, j].canPlant = false;
                         grid.gridArray[i, j].isWalkable = false;
-                        grid.gridArray[i, j].objectInSpace = this.gameObject;
+                        grid.gridArray[i, j].objectInSpace = newObject;
                     }
                 }
             }
         }
+        else if(item is Placeable)
+        {
+            SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
+
+            spriteRenderer.sortingOrder = 0;
+
+            for (int i = gridNode.x; i <= gridNode.x + placeable.SizeX; i++)
+            {
+                for (int j = gridNode.y; j <= gridNode.y + placeable.SizeY; j++)
+                {
+                    if (grid.gridArray[i, j] != null)
+                    {
+                        grid.gridArray[i, j].canPlace = false;
+                        grid.gridArray[i, j].canPlant = false;
+                        grid.gridArray[i, j].isWalkable = false;
+                        grid.gridArray[i, j].objectInSpace = newObject;
+                    }
+                }
+            }
+        }        
         else
         {
             gridNode.objectInSpace = newObject;
