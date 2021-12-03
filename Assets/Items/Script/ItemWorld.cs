@@ -78,6 +78,8 @@ public class ItemWorld : MonoBehaviour
 
     public void MoveToPoint()
     {
+        tag = "Untagged";
+
         this.newPosition = new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0);
 
         move = true;
@@ -94,6 +96,8 @@ public class ItemWorld : MonoBehaviour
             else
             {
                 move = false;
+
+                tag = "ItemWorld";
             }
         }
     }

@@ -42,6 +42,14 @@ public class DamageTree : MonoBehaviour
         this.scaleY = scaleY;
     }
 
+    public void GetData(out int startScaleX, out int startScaleY, out int scaleX, out int scaleY)
+    {
+        startScaleX = this.startScaleX;
+        startScaleY = this.startScaleY;
+        scaleX = this.scaleX;
+        scaleY = this.scaleY;
+    }
+
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
     {
         for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
@@ -107,7 +115,7 @@ public class DamageTree : MonoBehaviour
                 game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 2));
                 game.MoveToPoint();
 
-                Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+                Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
                 GridNode gridNode = grid.GetGridObject(transform.position);
 

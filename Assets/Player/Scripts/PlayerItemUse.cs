@@ -88,8 +88,6 @@ public class PlayerItemUse : MonoBehaviour
 
                 auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease);
 
-                Debug.Log(weapon.AttackPower / attackDecrease);
-
                 auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
             }
         }

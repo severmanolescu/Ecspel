@@ -5,7 +5,7 @@ using TMPro;
 
 public class ChestStorage : MonoBehaviour
 {
-    [SerializeField] private List<Item> items = new List<Item>();
+    private  List<Item> items = new List<Item>();
 
     [SerializeField] private  int chestMaxSlots;
 

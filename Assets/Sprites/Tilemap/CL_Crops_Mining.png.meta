@@ -1323,6 +1323,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1376,6 +1377,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -5516,7 +5529,50 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.4720947, y: 0.12795816}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: 4, y: -13}
+        - {x: 2, y: -15}
+        - {x: -2, y: -15}
+        - {x: -6, y: -13}
+        - {x: -6, y: -7}
+        - {x: -4, y: -7}
+        - {x: -4, y: -5}
+        - {x: -6, y: -5}
+        - {x: -6, y: -3}
+        - {x: -8, y: -3}
+        - {x: -8, y: -1}
+        - {x: -6, y: -1}
+        - {x: -6, y: 1}
+        - {x: -8, y: 1}
+        - {x: -8, y: 3}
+        - {x: -10, y: 3}
+        - {x: -10, y: 7}
+        - {x: -8, y: 7}
+        - {x: -8, y: 9}
+        - {x: -5.8880615, y: 8.999939}
+        - {x: -6, y: 11}
+        - {x: -4, y: 11}
+        - {x: -4, y: 9}
+        - {x: -2, y: 9}
+        - {x: -2, y: 13}
+        - {x: 0, y: 15}
+        - {x: 2, y: 15}
+        - {x: 8, y: 13}
+        - {x: 10, y: 11}
+        - {x: 10, y: 5}
+        - {x: 8, y: 5}
+        - {x: 8, y: 3}
+        - {x: 6, y: 3}
+        - {x: 6, y: 1}
+        - {x: 8, y: 1}
+        - {x: 8, y: -1}
+        - {x: 10, y: -1}
+        - {x: 10, y: -3}
+        - {x: 8, y: -3}
+        - {x: 8, y: -5}
+        - {x: 6, y: -5}
+        - {x: 6, y: -7}
+        - {x: 4, y: -7}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -10429,6 +10485,437 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tree3Sapling: -8248838775534701058
+      CL_Crops_Mining_333: 1528868109070849299
+      greenPepper0: 5177798275492787413
+      CL_Crops_Mining_96: -3772024254680198704
+      melon5: -6286295482687621359
+      CL_Crops_Mining_305: 279133052048965975
+      CL_Crops_Mining_211: -5937456557063367429
+      CL_Crops_Mining_265: 563584489289030380
+      cucumbers5: 1877998631083042499
+      CL_Crops_Mining_2: 6678882550156909808
+      strawberry3: -601880910850122691
+      CL_Crops_Mining_340: 5758953916847818044
+      pineSeeds: -8073316598716206179
+      Wood2: 3525769285571978824
+      strawberrySeed: -3710977748065763369
+      CL_Crops_Mining_307: 5277835423467673109
+      CL_Crops_Mining_4: -3912749450539699125
+      greenPepper4: -6806033779370544636
+      pine1: 6417439478012406274
+      beetrootSeeds: 378647155908926686
+      greenBellPepper5: 1959946842842691679
+      redBellPepperSeed2: -7904473076147852924
+      Fir3: 2667194898581995407
+      CL_Crops_Mining_338: -2433691266316259583
+      CL_Crops_Mining_150: 454797761097270105
+      pine4: 439152015473002568
+      CL_Crops_Mining_262: 1799096514892269510
+      CL_Crops_Mining_240: 3861873979945414964
+      CL_Crops_Mining_263: 8899545440036634653
+      greenPepperDestory: -681668044466841974
+      CL_Crops_Mining_193: -6805735759826548755
+      greenBellPepper0: -2696994305677156204
+      CL_Crops_Mining_1: 5310530057854753309
+      Wood12: 4077704559896500356
+      CL_Crops_Mining_13: -6923193480849849420
+      GreenBellPepperDestroy: 1242723519147529558
+      cucumbers1: 6831139753921842797
+      CL_Crops_Mining_295: -6049004885787124339
+      CL_Crops_Mining_83: -8003940606170773875
+      CL_Crops_Mining_49: -469012787259855548
+      onion1: 2919736547599973458
+      CL_Crops_Mining_196: -8516213754690902637
+      CL_Crops_Mining_233: -2931530619173929020
+      cucumbersSeeds: -6539820868728430723
+      CL_Crops_Mining_408: 3294298583744411060
+      tomato0: -1798770582133672151
+      CL_Crops_Mining_321: -7747562580917820140
+      garlic3: -4977104604118758005
+      CL_Crops_Mining_144: -5727034278155493270
+      grapes5: -1449128383499467295
+      CL_Crops_Mining_169: 586396854151759011
+      potatoSeeds: 4147129709633304395
+      tomato4: -2419261919087593864
+      CL_Crops_Mining_163: -6390835187060877471
+      pineTrunk: 3959891433055340224
+      CL_Crops_Mining_227: -7821049608219898433
+      Fir1: -1857011369416646877
+      CL_Crops_Mining_267: -5121846660019126235
+      CL_Crops_Mining_395: 4633342116011203044
+      CL_Crops_Mining_128: -5311179733769599418
+      yellowBellPepperSeed: 6334038392955928812
+      YellorBellPepperDestroy: 8427453596970115845
+      CL_Crops_Mining_166: 922582119360321394
+      CL_Crops_Mining_219: -1806843878030330421
+      CL_Crops_Mining_280: -2924631007326733733
+      beansDestory: -844388399167576736
+      CL_Crops_Mining_337: 62408340068144813
+      Wood7: -8552298113879519789
+      tree1: -2006125320364168665
+      melonSeed: -3559217653539498635
+      CL_Crops_Mining_317: -4362581191054236552
+      CL_Crops_Mining_229: -5787619620070669517
+      CL_Crops_Mining_6: -6153356132890103828
+      CL_Crops_Mining_162: 5855159471812381268
+      CL_Crops_Mining_346: -5314137525221591428
+      CL_Crops_Mining_78: 926297158411035097
+      CL_Crops_Mining_210: 5521697704494594036
+      greenPepper6: 8679312121679298584
+      tree22: -5515134424041039055
+      yellowBellPepper0: 6928591771732301807
+      tree34: 3052878244565547472
+      garlicSeeds: 8309216781530312435
+      CL_Crops_Mining_246: -3275908217236465559
+      CL_Crops_Mining_396: 3684838325801902178
+      CL_Crops_Mining_273: 1455621001347679882
+      CL_Crops_Mining_42: 4382319732836191019
+      redBellPepperSeed0: -4444971275231507248
+      yellowBellPepper2: 8788758565588477987
+      garlic0: -8721482420497175514
+      grapes: -4626135825644025936
+      CL_Crops_Mining_298: -1275083526543818181
+      corn5: 8117906732687287236
+      corn3: 8635378994143969120
+      CL_Crops_Mining_320: -8041481734350780768
+      CL_Crops_Mining_191: 6124576109214746155
+      CL_Crops_Mining_393: 4390057281006458946
+      CL_Crops_Mining_207: -1590332283287351897
+      cucumberDestory: -4809304420658024577
+      wheatSeeds: 646470649645627498
+      potato0: -7031657593161221571
+      CL_Crops_Mining_220: -3862281119969268306
+      CL_Crops_Mining_309: -7387877426830904853
+      tree12: -3374055481724874355
+      CL_Crops_Mining_28: 3198458734171502668
+      tree2Trunk: 1106488863094957974
+      CL_Crops_Mining_215: -8501320129074669555
+      strawberry0: -3446264329504938187
+      potato3: 7471159180102663485
+      CL_Crops_Mining_230: 3286784192888241414
+      potatoDestroy: 8421945549763103090
+      CL_Crops_Mining_404: 8040838437230682780
+      CL_Crops_Mining_420: -2563332011379841532
+      tomatoSeeds: -215958242341156383
+      CL_Crops_Mining_153: -6716915415551269369
+      CL_Crops_Mining_234: 6596977040720608589
+      Wood11: 6784574147142236344
+      wheat2: -7367598500121239406
+      CL_Crops_Mining_400: 6318202788408571867
+      potato: 2335403385649038724
+      strawberry2: 4709467391096450210
+      CL_Crops_Mining_81: 7065254045365052369
+      strawberryDestroy: 4339089262534242483
+      cucumbers3: 8915863871280154342
+      lettuce1: -7446573835522786220
+      CL_Crops_Mining_418: -6489745858139575128
+      tree13: 4670446308142825516
+      tree11: 1293630813464954594
+      yellowBellPepper: 322545990556410298
+      onionDestroy: -3982774654945482378
+      carrot1: 4834548014334931520
+      CL_Crops_Mining_271: 5454729682283419551
+      CL_Crops_Mining_88: 2785965190123682583
+      CL_Crops_Mining_213: -370496922810213871
+      CL_Crops_Mining_161: 2391169775318719605
+      tomato: -1392132512204606760
+      CL_Crops_Mining_231: -5382679637799660420
+      greenPepper5: -2853568393931057514
+      beans6: 4142386988945927278
+      CL_Crops_Mining_165: 2365333951913284671
+      grapes4: -4937228829635442148
+      CL_Crops_Mining_189: 213293800881120158
+      CL_Crops_Mining_310: -104024114446692951
+      lettuceSeeds: -4139015936850525992
+      beetroot0: 2987216937838746734
+      cucumbers0: 397813293608086149
+      CL_Crops_Mining_427: -6281495204866053401
+      Fir5: -2586154693348341235
+      CL_Crops_Mining_115: 8373272952709666796
+      melon2: 9065264473920484245
+      tree3: 8367003098876595645
+      lettuce3: -2310056762829591286
+      wheatDestroy: 1228204421143514434
+      wheat1: 2674060437123045847
+      CL_Crops_Mining_290: -2410793471134216924
+      CL_Crops_Mining_380: 8221020408512015328
+      CL_Crops_Mining_316: -8497350441100202568
+      tree23: 4390505272057430455
+      CL_Crops_Mining_120: -6172728060381276790
+      CL_Crops_Mining_239: -5569862041181514800
+      grapes6: -6893517904170921001
+      lettuce: 5199727654652536998
+      greenBellPepper4: 2314530892819404001
+      CL_Crops_Mining_11: -1770643262615999758
+      CL_Crops_Mining_217: 6357666663028819263
+      CL_Crops_Mining_275: 767327098738829262
+      CL_Crops_Mining_7: -8655250705536626284
+      grapes0: -1439584136451277544
+      yellowBellPepper1: -6247276037711077161
+      tree2Sapling: 4050327701345965911
+      CL_Crops_Mining_232: -3582891429151642919
+      Wood1: -4987184783385217587
+      redBellPepperSeed1: 6400097610941325928
+      beans5: -4075776304616897763
+      tomato1: 1891719608972110627
+      greenPepper: -6422016801992539337
+      beetroot: -1450223164561897308
+      garlic2: 1550242810522349341
+      CL_Crops_Mining_422: 6904994221175217666
+      garlicDestroy: 2024549408202823877
+      CL_Crops_Mining_122: -1684912639561838758
+      CL_Crops_Mining_208: -8002180169244777330
+      greenPepperSeed: -1369129298888055804
+      Wood10: 5356254946593020359
+      tree24: 7900804680729064497
+      CL_Crops_Mining_214: 2170216308796203962
+      CL_Crops_Mining_86: 7227573407195618401
+      CL_Crops_Mining_270: -1559280379129493527
+      onion0: -3033743133309631873
+      CL_Crops_Mining_228: -772248330253839540
+      strawberry4: -1377444135385901245
+      greenBellPepper1: -7853990276037668996
+      CL_Crops_Mining_367: -9222263228082246764
+      garlic: 9091744052708691378
+      CL_Crops_Mining_5: -6265823121492426959
+      tree25: 535308395847025928
+      CL_Crops_Mining_387: 1934689722625745945
+      Wood4: -7729361297259135246
+      cucumbers4: 3325854418425322912
+      CL_Crops_Mining_110: -4561663348077138851
+      corn4: 7188030964878444364
+      yellowBellPepper4: 7965507362246114982
+      potato1: -210306236419657328
+      beans2: 904817610468248408
+      CL_Crops_Mining_180: -8628334740047116483
+      garlic1: 1448750351800781423
+      cornDestroy: -175381965077286491
+      CL_Crops_Mining_327: 3682329733028542582
+      melon1: -4765420755938042611
+      carrot3: -3385512821649987041
+      carrot0: -1604169939524408575
+      CL_Crops_Mining_222: -5702518030297451495
+      CL_Crops_Mining_77: 5453929798641431608
+      firSeeds: -2839635736360204513
+      onionSeeds: 6593910471418514874
+      CL_Crops_Mining_304: -9047362152706377323
+      CL_Crops_Mining_76: 3802846706208534244
+      CL_Crops_Mining_209: 7523208478377835892
+      CL_Crops_Mining_348: -6942215271510212534
+      CL_Crops_Mining_281: 2229018923646416293
+      CL_Crops_Mining_297: 4254821756061591869
+      CL_Crops_Mining_335: 5689502509768146842
+      carrotDestroy: -7107250490222982259
+      CL_Crops_Mining_112: 5966085481980849247
+      CL_Crops_Mining_285: -6696874746967162011
+      beansSeeds: -2892582423870770769
+      greenBellPepper2: 2295699917803268035
+      tree1Sapling: 6601832236507728873
+      CL_Crops_Mining_45: -4077264995419976964
+      wheat: -5166890997122943110
+      CL_Crops_Mining_296: -8900408803805780697
+      CL_Crops_Mining_306: -8804063337083304733
+      onion3: -1469742994379453474
+      CL_Crops_Mining_369: -8551445734380845050
+      tree21: -5116975035218462475
+      tree10: -2443972237029614974
+      CL_Crops_Mining_79: -6687025887613734646
+      Wood8: -432395791937533452
+      CL_Crops_Mining_114: -6141080642310890108
+      CL_Crops_Mining_331: -3501528027085458908
+      greenBellPepper: 2190929862246037659
+      cucumber: 4073867245294059953
+      CL_Crops_Mining_179: 2703366999216813090
+      CL_Crops_Mining_423: 1726926451874591998
+      tree2: -7667751336089097128
+      melon6: -7320461705754999028
+      melonDestory: 5635450421333992238
+      CL_Crops_Mining_158: -3870971613148175092
+      CL_Crops_Mining_277: 1480885492355348881
+      Wood9: 4052641328735873568
+      CL_Crops_Mining_181: -2829252553219942912
+      tree33: 1607911409318614997
+      corn2: -8415200704808140704
+      CL_Crops_Mining_264: -3897982534507482883
+      CL_Crops_Mining_43: 8104741377577353065
+      lettuce2: -5975105467210459912
+      CL_Crops_Mining_168: -2528322206756040507
+      CL_Crops_Mining_288: 1570311125307600529
+      CL_Crops_Mining_107: 4325150047244506495
+      beetroot3: 1523621330958578028
+      CL_Crops_Mining_244: -2565503238885247165
+      CL_Crops_Mining_351: 5825069580705326305
+      CL_Crops_Mining_315: 3882046195037440837
+      CL_Crops_Mining_284: 6054878084370955042
+      CL_Crops_Mining_97: -2249763422147537176
+      CL_Crops_Mining_152: 5368787370356310773
+      CL_Crops_Mining_381: -2762177765336027443
+      CL_Crops_Mining_314: 7666571108086105428
+      CL_Crops_Mining_108: -1407375401980719438
+      CL_Crops_Mining_303: 2074422873892976334
+      CL_Crops_Mining_197: 2296706105974120041
+      CL_Crops_Mining_249: 9168213863207009200
+      melon0: 7196204118683552569
+      greenPepper3: -7196988106980625342
+      CL_Crops_Mining_286: 2687250546549446529
+      CL_Crops_Mining_221: 7020751223343756479
+      CL_Crops_Mining_368: 2365967407858885270
+      CL_Crops_Mining_382: -1373560198322099761
+      CL_Crops_Mining_373: 4522924697448359912
+      redBellPepperSeed: 3443966495654013144
+      CL_Crops_Mining_224: 8046985539559220638
+      CL_Crops_Mining_339: -2741022127030756093
+      tomato5: -3439257915936802255
+      CL_Crops_Mining_330: -5860358483436274831
+      pine2: -7505170340409733096
+      Fir4: 7644043052272898840
+      CL_Crops_Mining_289: -5593257395143543451
+      lettuce0: 2038266066820636051
+      CL_Crops_Mining_223: 2196587850673688242
+      melon3: 7597997462438837095
+      CL_Crops_Mining_345: 3071417358425945744
+      CL_Crops_Mining_216: 3497127663545459159
+      corn0: -7364219717195643112
+      CL_Crops_Mining_374: -7718146274543603792
+      CL_Crops_Mining_399: -9166898904521733149
+      greenPepper2: 1363631698089673872
+      tree3Trunk: -654627717352968179
+      Wood5: 3470067080961639460
+      tomato3: -4143670234373046720
+      CL_Crops_Mining_237: -4047666869907740080
+      CL_Crops_Mining_347: 5742173706770147759
+      CL_Crops_Mining_190: -8957448169214793501
+      Wood6: -6579342103677180991
+      CL_Crops_Mining_242: -8798832663524441528
+      CL_Crops_Mining_403: -8713974017375457457
+      tree31: -4099243639674717333
+      wheat0: 8649183225580047826
+      corn1: -6795681572751872497
+      carrot2: 7742753776518343775
+      greenBellPepper3: -5658900384324587919
+      CL_Crops_Mining_371: -547865296119551044
+      beans3: -7307569614912520116
+      onion: 5484735643620001432
+      strawberry5: 1866268629573883466
+      greenBellPepperSeed: -8487368170775370531
+      CL_Crops_Mining_188: -6131174612223543604
+      CL_Crops_Mining_27: 9209680828038071874
+      CL_Crops_Mining_167: 5956556478088750424
+      wheat3: -2554914794393276864
+      beans1: -3325799152106651435
+      CL_Crops_Mining_29: -8841890362433731108
+      CL_Crops_Mining_80: -6971666747609896557
+      CL_Crops_Mining_336: -4946200713837256179
+      tree32: -114558855922539592
+      CL_Crops_Mining_95: 2896894091507949657
+      CL_Crops_Mining_159: -757609084400568426
+      cornSeeds: 1726333761540201801
+      corn: -3475747129262419176
+      firSappling: -1963167540777017609
+      CL_Crops_Mining_332: -6109774386050278269
+      CL_Crops_Mining_428: 8210985461671201797
+      CL_Crops_Mining_226: -962780733524250315
+      CL_Crops_Mining_212: -3676017889046491194
+      beetrootDestroy: 7027054720529048415
+      CL_Crops_Mining_194: 7357897992471194223
+      CL_Crops_Mining_334: 3595516410037664015
+      CL_Crops_Mining_272: -7224813070277082815
+      CL_Crops_Mining_350: 2031998080919879092
+      redBellPepperSeed4: -7026619378557266955
+      grapes1: 1626522942629454886
+      beans4: 5829353100834943415
+      melon4: -8425725622617219983
+      greenPepper1: -3970134405206944544
+      RedBellPepper: 6449900970205332426
+      CL_Crops_Mining_0: 1569945488147587712
+      CL_Crops_Mining_401: 5294731479653877617
+      yellowBellPepper5: -6468340522351179836
+      tree1Trunk: -1055834622716526254
+      CL_Crops_Mining_55: 6995374495036434318
+      Fir2: -5286114104911224460
+      grapes2: -7539393175627563276
+      onion2: -3862906241107851721
+      yellowBellPepper3: -3441875748663387523
+      CL_Crops_Mining_236: -5415401139211786194
+      CL_Crops_Mining_308: 7838861588344207700
+      strawberry1: -6351569731526715640
+      grapesSeed: -3309453895758867990
+      carrot: -4511194645843912265
+      CL_Crops_Mining_89: 7276870088108097565
+      CL_Crops_Mining_287: 6863493110389696534
+      CL_Crops_Mining_349: -2969975925958060623
+      CL_Crops_Mining_372: -1130837969703988921
+      potato2: -1836092902118127680
+      CL_Crops_Mining_261: -1687110953465654709
+      CL_Crops_Mining_429: 3590403178254859271
+      CL_Crops_Mining_192: -6985184025402895209
+      beans: 6178688708191447437
+      CL_Crops_Mining_148: -862598868812084748
+      CL_Crops_Mining_278: 8782469658539910297
+      CL_Crops_Mining_282: -5990934982055149062
+      redBellPepperSeed3: -3750409946025607185
+      CL_Crops_Mining_283: 8164607714757790798
+      CL_Crops_Mining_94: -174406041497868706
+      CL_Crops_Mining_370: 1559876122304483224
+      CL_Crops_Mining_318: 8320488506888735359
+      CL_Crops_Mining_319: -30851537160859112
+      strawberry: -5909421930688716367
+      Wood3: -7662106943335026113
+      CL_Crops_Mining_266: 6771721754043724798
+      carrotSeeds: 7324677650918126683
+      CL_Crops_Mining_186: 6909897661352979240
+      CL_Crops_Mining_248: -2672298398210383095
+      CL_Crops_Mining_160: -5892118011026286681
+      CL_Crops_Mining_421: 7128929261032482297
+      pine0: 432182594402757138
+      CL_Crops_Mining_274: 5166906888149732878
+      CL_Crops_Mining_47: 2335905759334087169
+      tree35: -7503048435143810929
+      tomatoDestroy: -5242555845900806480
+      CL_Crops_Mining_143: 998496267646272355
+      CL_Crops_Mining_279: 5460604433447207708
+      melon: 6862725416986578267
+      CL_Crops_Mining_235: -7222082607475648065
+      CL_Crops_Mining_383: -4194670108857202171
+      beans0: -7881877907920708156
+      CL_Crops_Mining_146: 1392748102482190963
+      CL_Crops_Mining_184: -1145102825311974007
+      CL_Crops_Mining_195: -4781181724563569343
+      lettuceDestroy: 3407694431314945038
+      CL_Crops_Mining_276: 7000221179813823119
+      pine3: 8073486974305160046
+      CL_Crops_Mining_183: -4018761851410495339
+      CL_Crops_Mining_328: -7682421860337117375
+      CL_Crops_Mining_329: -882763699235611233
+      CL_Crops_Mining_225: -8050936812182709587
+      CL_Crops_Mining_3: 6846734926791027510
+      beetroot1: 645286559212896247
+      CL_Crops_Mining_402: -3313756665326965736
+      FirTrunk: 2633669675102096989
+      grapesDestory: -990721511798661886
+      redBellPepperSeed5: -6777633012209802092
+      CL_Crops_Mining_238: -5507590667492458181
+      RedBellPepperDestroy: 7528208965663987384
+      CL_Crops_Mining_268: -2061974159547794773
+      cucumbers2: 4435784651841869115
+      tomato2: -5561610127479562760
+      CL_Crops_Mining_164: 6293162352832674552
+      grapes3: -810820319444354179
+      beetroot2: -6201834201181262206
+      CL_Crops_Mining_124: -3452126215549309226
+      CL_Crops_Mining_125: -6819523620387478297
+      CL_Crops_Mining_269: 2527274755825092277
+      CL_Crops_Mining_145: 7547656520941787949
+      CL_Crops_Mining_218: -5992473607244275056
+      CL_Crops_Mining_65: 8891115711381261102
+      tree14: -4566471581769381714
+      CL_Crops_Mining_344: -8984017242776099777
+      CL_Crops_Mining_394: -665012711302347702
+      CL_Crops_Mining_75: 8038035632142357274
+      pineSaoking: 5633153565634992467
+      CL_Crops_Mining_26: -6449572290422167936
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

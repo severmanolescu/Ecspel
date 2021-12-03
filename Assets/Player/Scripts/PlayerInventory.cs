@@ -16,26 +16,9 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1);
-
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.stoneAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.pickAxe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.hoe, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.sword, 1));
-        AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 30));
-        
-    }
-
     private void Awake()
     {
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
-    }
-
-    private void Start()
-    {
-        StartCoroutine(Wait());
     }
 
     private bool AddItemStackable(Item item)
@@ -117,7 +100,7 @@ public class PlayerInventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if(item.MaxAmount > 1)
+        if (item.MaxAmount > 1)
         {
              return AddItemStackable(item);
         }

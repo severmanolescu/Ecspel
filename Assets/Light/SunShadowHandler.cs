@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SunShadowHandler : MonoBehaviour
 {
+    [SerializeField] private float fadeSpeed;
+
     private List<Transform> sunShadows = new List<Transform>();
 
     private DayTimerHandler dayTimerHandler;
@@ -13,6 +15,8 @@ public class SunShadowHandler : MonoBehaviour
     private int dayStart;
     private int dayEnd;
     private int dayNightCycleTime;
+
+    private float alpha = 1f;
 
     private void Awake()
     {
@@ -58,11 +62,15 @@ public class SunShadowHandler : MonoBehaviour
         }
         else
         {
+            alpha -= fadeSpeed * Time.deltaTime;
+
+            Color color = new Color(1f, 1f, 1f, alpha);
+
             foreach (Transform shadow in sunShadows)
             {
                 if (shadow != null)
                 {
-                    shadow.gameObject.SetActive(false);
+                    shadow.GetComponent<SpriteRenderer>().color = color;
                 }
             }
         }

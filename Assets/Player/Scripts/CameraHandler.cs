@@ -12,6 +12,11 @@ public class CameraHandler : MonoBehaviour
 
     private Transform playerLocation;
 
+    public int MaxX { get => maxX; set => maxX = value; }
+    public int MinX { get => minX; set => minX = value; }
+    public int MaxY { get => maxY; set => maxY = value; }
+    public int MinY { get => minY; set => minY = value; }
+
     private void Awake()
     {
         playerLocation = GameObject.Find("Player").transform;
@@ -21,7 +26,7 @@ public class CameraHandler : MonoBehaviour
     {
         Vector3 position = new Vector3();
 
-        if(playerLocation.transform.position.x >= minX && playerLocation.transform.position.x <= maxX)
+        if(playerLocation.transform.position.x >= MinX && playerLocation.transform.position.x <= MaxX)
         {
             position.x = playerLocation.position.x;
         }
@@ -30,7 +35,7 @@ public class CameraHandler : MonoBehaviour
             position.x = transform.position.x;
         }
 
-        if (playerLocation.transform.position.y >= minY && playerLocation.transform.position.y <= maxY)
+        if (playerLocation.transform.position.y >= MinY && playerLocation.transform.position.y <= MaxY)
         {
             position.y = playerLocation.position.y;
         }

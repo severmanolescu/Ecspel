@@ -23,7 +23,7 @@ public class ChestOpenHandler : MonoBehaviour
 
     private GameObject quickSlots;
 
-    public List<Item> items = new List<Item>();
+    private List<Item> items = new List<Item>();
 
     private void Awake()
     {
@@ -87,8 +87,6 @@ public class ChestOpenHandler : MonoBehaviour
                 newItemWorld.SetItem(newItem);
 
                 newItemWorld.MoveToPoint();
-
-                Debug.Log(item.name);
             }
         }
     }

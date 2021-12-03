@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.853, y: 1.649, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 452593531612485043}
   m_RootOrder: 2
@@ -62,6 +63,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.73, y: 21.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5738853429015697789}
   - {fileID: 7805549327284903457}
@@ -182,11 +184,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShadowGroup: 0
+  m_ComponentVersion: 1
   m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_ApplyToSortingLayers: 010497a4fb65b98dcb99512f00000000
+  m_ApplyToSortingLayers: 858520fc010497a4fb65b98dcb99512f397a1411899d9d4f00000000
   m_ShapePath:
   - {x: -0.5242834, y: 0.059423447, z: 0}
   - {x: -0.45740843, y: 0.063967705, z: 0}
@@ -222,7 +225,7 @@ MonoBehaviour:
   - {x: -0.52405024, y: -0.057893753, z: 0}
   m_ShapePathHash: 1994659533
   m_Mesh: {fileID: 0}
-  m_InstanceId: -3242
+  m_InstanceId: 397158
 --- !u!114 &1863889285947451558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +257,7 @@ MonoBehaviour:
   startScaleY: -1
   scaleX: 1
   scaleY: 1
+  locationGrid: {fileID: 0}
 --- !u!1 &5578256073379015563
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +287,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.11, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1.0024529, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 452593531612485043}
   m_RootOrder: 0
@@ -307,7 +312,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1ad8509c1f7bd3040baec045dbe13cb9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -341,7 +346,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 1
 --- !u!95 &566578220111502036
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -354,6 +359,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -400,6 +406,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.544, y: 1.808, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 452593531612485043}
   m_RootOrder: 1
@@ -431,6 +438,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.071, y: 0.233, z: 0}
   m_LocalScale: {x: 1.8091111, y: 1.7397615, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 452593531612485043}
   m_RootOrder: 3

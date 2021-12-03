@@ -4,16 +4,19 @@ public class StoneDamage : MonoBehaviour
 {
     [SerializeField] private GameObject stonePrefab;
 
+    [SerializeField] private Item spawnItem;
+    [SerializeField] private int amount;
+
     private ParticleSystem particle;
 
     [SerializeField] private float health;
     [SerializeField] private int stoneLevel;
 
-    public int startScaleX;
-    public int startScaleY;
+    private int startScaleX;
+    private int startScaleY;
 
-    public int scaleX;
-    public int scaleY;
+    private int scaleX;
+    private int scaleY;
 
     private void Awake()
     {
@@ -26,6 +29,14 @@ public class StoneDamage : MonoBehaviour
         this.startScaleY = startScaleY;
         this.scaleX = scaleX;
         this.scaleY = scaleY;
+    }
+
+    public void GetData(out int startScaleX, out int startScaleY, out int scaleX, out int scaleY)
+    {
+        startScaleX = this.startScaleX;
+        startScaleY= this.startScaleY;
+        scaleX = this.scaleX;
+        scaleY = this.scaleY;
     }
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
@@ -61,11 +72,13 @@ public class StoneDamage : MonoBehaviour
 
                 if (itemWorld != null)
                 {
-                    itemWorld.SetItem(DefaulData.GetItemWithAmount(DefaulData.stone, 2));
+                    Item copyItem = spawnItem.Copy();
+
+                    itemWorld.SetItem(DefaulData.GetItemWithAmount(copyItem, amount));
 
                     itemWorld.MoveToPoint();
 
-                    Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+                    Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
                     GridNode gridNode = grid.GetGridObject(transform.position);
 

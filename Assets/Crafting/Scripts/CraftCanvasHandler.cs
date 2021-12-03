@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class CraftCanvasHandler : MonoBehaviour
 {
-    [SerializeField] List<CraftSetData> crafts = new List<CraftSetData>();
+    private  List<CraftSetData> crafts = new List<CraftSetData>();
+
+    [SerializeField] private List<Craft> initialCrafts = new List<Craft>();
 
     [SerializeField] GameObject craftPrefab;
     [SerializeField] Transform spawnLocation;
+
+    private void Start()
+    {
+        foreach(Craft craft in initialCrafts)
+        {
+            InstantiateCraft(craft);
+        }
+
+        ReinitializeAllCraftings();
+    }
 
     public void ReinitializeAllCraftings()
     {
@@ -34,13 +46,16 @@ public class CraftCanvasHandler : MonoBehaviour
     {
         if(SearchIfCraftExist(craft) == false)
         {
-            CraftSetData newCraft = Instantiate(craftPrefab, spawnLocation).GetComponent<CraftSetData>();
-
-            //newCraft.transform.SetParent(spawnLocation);
-
-            newCraft.Craft = craft;
-
-            crafts.Add(newCraft);
+            InstantiateCraft(craft);
         }
+    }
+
+    private void InstantiateCraft(Craft craft)
+    {
+        CraftSetData newCraft = Instantiate(craftPrefab, spawnLocation).GetComponent<CraftSetData>();
+
+        newCraft.Craft = craft;
+
+        crafts.Add(newCraft);
     }
 }

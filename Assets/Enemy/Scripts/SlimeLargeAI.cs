@@ -95,8 +95,6 @@ public class SlimeLargeAI : MonoBehaviour
                     {
                         animator.SetTrigger("Attack");
 
-
-
                         nextAttackTime = Time.time + DefaulData.slimeAttackRate;
                     }
 

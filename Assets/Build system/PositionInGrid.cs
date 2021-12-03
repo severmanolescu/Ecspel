@@ -10,9 +10,18 @@ public class PositionInGrid : MonoBehaviour
     [SerializeField] private int scaleX;
     [SerializeField] private int scaleY;
 
-    private void Update()
+    [SerializeField] LocationGridSave locationGrid;
+
+    public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
+
+    private void Start()
     {
-        Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+        if(locationGrid == null)
+        {
+            locationGrid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>();
+        }
+
+        Grid<GridNode> grid = LocationGrid.Grid;
 
         GridNode gridNode = grid.GetGridObject(transform.position);
 
@@ -30,12 +39,15 @@ public class PositionInGrid : MonoBehaviour
             {
                 for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
                 {
-                    if(grid.gridArray[i, j] != null)
+                    if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1))
                     {
-                        grid.gridArray[i, j].canPlace = false;
-                        grid.gridArray[i, j].canPlant = false;
-                        grid.gridArray[i, j].isWalkable = false;
-                        grid.gridArray[i, j].objectInSpace = this.gameObject;
+                        if (grid.gridArray[i, j] != null)
+                        {
+                            grid.gridArray[i, j].canPlace = false;
+                            grid.gridArray[i, j].canPlant = false;
+                            grid.gridArray[i, j].isWalkable = false;
+                            grid.gridArray[i, j].objectInSpace = this.gameObject;
+                        }
                     }
                 }
             }

@@ -6,7 +6,7 @@ public class HarvestCropHandler : MonoBehaviour
 {
     public void Harvest(Vector3 mousePosition)
     {
-        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grig;
+        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
 
         GridNode gridNode = grid.GetGridObject(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         GridNode gridNodePlayer = grid.GetGridObject(GameObject.Find("Player").transform.position);

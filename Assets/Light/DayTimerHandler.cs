@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class DayTimerHandler : MonoBehaviour
 {
@@ -17,17 +17,28 @@ public class DayTimerHandler : MonoBehaviour
 
     [SerializeField] private Gradient gradient;
 
-    private Light2D globalLight;
+    [Header("Wake up time:")]
+    [SerializeField] private int wakeupHour;
+    [SerializeField] private float sleepTimeSpeed;
+
+    private UnityEngine.Rendering.Universal.Light2D globalLight;
 
     private SourceLightShadow sourceLight;
+
+    private bool sleep = false;
+    private float speed;
+    private int startDay;
+    private SleepHandler sleepHandler;
 
     public int Days { get { return days; } }
 
     private void Awake()
     {
-        globalLight = gameObject.GetComponent<Light2D>();
+        globalLight = gameObject.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 
         sourceLight = gameObject.GetComponent<SourceLightShadow>();
+
+        speed = timeSpeed;
     }
 
     private void Update()
@@ -45,15 +56,27 @@ public class DayTimerHandler : MonoBehaviour
                 days++;
 
                 GetComponent<CropGrowHandler>().DayChange(days);
+                GetComponent<SpawnObjectsInAreaHandle>().DayChange(days);
             }
         }
 
         intensity = (hours + minutes / 60) / 24;
 
         globalLight.color = gradient.Evaluate(intensity);
+
+        if(sleep == true && wakeupHour == hours && days > startDay)
+        {
+            timeSpeed = speed;
+
+            sleep = false;
+
+            sleepHandler.StopSleep();
+
+            sleepHandler = null;
+        }
     }
 
-    public void SetTimer(int seconds, float minutes, int hours, int days)
+    public void SetTimer(float minutes, int hours, int days)
     {
         this.minutes = minutes;
         this.hours  = hours;
@@ -76,5 +99,16 @@ public class DayTimerHandler : MonoBehaviour
     public void GetIntensity(out float intensity)
     {
         intensity = this.intensity;
+    }
+
+    public void Sleep(SleepHandler sleepHandler)
+    {
+        this.sleepHandler = sleepHandler;
+
+        timeSpeed = sleepTimeSpeed;
+
+        startDay = days;
+
+        sleep = true;
     }
 }

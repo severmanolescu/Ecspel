@@ -13,6 +13,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
+    [SerializeField] private LocationGridSave newGrid;
+
     private GameObject text;
 
     private GameObject player = null;
@@ -62,6 +64,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
             {
                 gameObject.SetActive(true);
             }
+
+            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
         }
     }
 }

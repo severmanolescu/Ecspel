@@ -30,7 +30,11 @@ public class HoeSystemHandler : MonoBehaviour
 
     private GameObject prefabGameObject;
 
+    private Transform spawnLocation;
+
     private GameObject headlightObject;
+
+    private BuildSystemHandler buildSystem;
 
     private Grid<GridNode> grid;
 
@@ -41,13 +45,17 @@ public class HoeSystemHandler : MonoBehaviour
         prefabGameObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/GameObject.prefab", typeof(GameObject));
 
         headlightObject = null;
+
+        spawnLocation = GameObject.Find("PlayerHouseGround").transform;
+
+        buildSystem = GetComponent<BuildSystemHandler>();
     }
 
     private void Spawn(GridNode gridNode)
     {
         if(gridNode.isWalkable && gridNode.canPlant == false && gridNode.canPlace == true)
         {
-            GameObject soil = Instantiate(prefabGameObject);
+            GameObject soil = Instantiate(prefabGameObject, spawnLocation);
 
             SpriteRenderer sprite = soil.AddComponent<SpriteRenderer>();
 
@@ -327,24 +335,27 @@ public class HoeSystemHandler : MonoBehaviour
 
     public void PlaceSoil(Vector3 playerPosition, int spawn, Hoe hoe)
     {
-        GridNode gridNode = grid.GetGridObject(playerPosition);
-
-        if (gridNode != null)
+        if (buildSystem.canPlantGrid == true)
         {
-            switch (spawn)
-            {
-                case 1: if (gridNode.x - 1 >= 0) Spawn(grid.gridArray[gridNode.x - 1, gridNode.y]); break;
-                case 2: if (gridNode.x + 1 < grid.gridArray.GetLength(0)) Spawn(grid.gridArray[gridNode.x + 1, gridNode.y]); break;
-                case 3: if (gridNode.y + 1 < grid.gridArray.GetLength(1)) Spawn(grid.gridArray[gridNode.x, gridNode.y + 1]); break;
-                case 4: if (gridNode.y - 1 >= 0) Spawn(grid.gridArray[gridNode.x, gridNode.y - 1]); break;
-            }
-        }
+            GridNode gridNode = grid.GetGridObject(playerPosition);
 
-        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= hoe.Stamina;
-        //1 - Left
-        //2 - Right
-        //3 - Up
-        //4 - Down
+            if (gridNode != null)
+            {
+                switch (spawn)
+                {
+                    case 1: if (gridNode.x - 1 >= 0) Spawn(grid.gridArray[gridNode.x - 1, gridNode.y]); break;
+                    case 2: if (gridNode.x + 1 < grid.gridArray.GetLength(0)) Spawn(grid.gridArray[gridNode.x + 1, gridNode.y]); break;
+                    case 3: if (gridNode.y + 1 < grid.gridArray.GetLength(1)) Spawn(grid.gridArray[gridNode.x, gridNode.y + 1]); break;
+                    case 4: if (gridNode.y - 1 >= 0) Spawn(grid.gridArray[gridNode.x, gridNode.y - 1]); break;
+                }
+            }
+
+            GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= hoe.Stamina;
+            //1 - Left
+            //2 - Right
+            //3 - Up
+            //4 - Down
+        }
     }
 
     private void ChangeHeadlightPosition(GridNode gridNode)
@@ -379,77 +390,80 @@ public class HoeSystemHandler : MonoBehaviour
 
     public void HoeHeadlight(Vector3 playerPosition, int spawn)
     {
-        GridNode gridNode = grid.GetGridObject(playerPosition);
-
-        if (gridNode != null)
+        if (buildSystem.LocationGrid != null && buildSystem.canPlantGrid == true)
         {
-            if (headlightObject == null)
+            GridNode gridNode = grid.GetGridObject(playerPosition);
+
+            if (gridNode != null)
             {
-                headlightObject = Instantiate(prefabGameObject);
+                if (headlightObject == null)
+                {
+                    headlightObject = Instantiate(prefabGameObject);
 
-                headlightObject.AddComponent<SpriteRenderer>().sprite = headlight;
+                    headlightObject.AddComponent<SpriteRenderer>().sprite = headlight;
 
-                Vector3 scale = new Vector3(.75f, .75f, 1f);
-                
-                headlightObject.transform.localScale = scale;
+                    Vector3 scale = new Vector3(.75f, .75f, 1f);
+
+                    headlightObject.transform.localScale = scale;
+                }
+
+                switch (spawn)
+                {
+                    case 1:
+                        {
+                            if (gridNode.x - 1 >= 0)
+                            {
+                                ChangeHeadlightPosition(grid.gridArray[gridNode.x - 1, gridNode.y]);
+                            }
+                            else
+                            {
+                                Destroy(headlightObject);
+                            }
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (gridNode.x + 1 < grid.gridArray.GetLength(0))
+                            {
+                                ChangeHeadlightPosition(grid.gridArray[gridNode.x + 1, gridNode.y]);
+                            }
+                            else
+                            {
+                                Destroy(headlightObject);
+                            }
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (gridNode.y + 1 < grid.gridArray.GetLength(1))
+                            {
+                                ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y + 1]);
+                            }
+                            else
+                            {
+                                Destroy(headlightObject);
+                            }
+
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (gridNode.y - 1 >= 0)
+                            {
+                                ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y - 1]);
+                            }
+                            else
+                            {
+                                Destroy(headlightObject);
+                            }
+
+                            break;
+                        }
+                }
             }
-
-            switch(spawn)
-            {
-                case 1:
-                    {
-                        if (gridNode.x - 1 >= 0)
-                        {
-                            ChangeHeadlightPosition(grid.gridArray[gridNode.x - 1, gridNode.y]);
-                        }
-                        else
-                        {
-                            Destroy(headlightObject);
-                        }
-                        
-                        break;
-                    }
-                case 2:
-                    {
-                        if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-                        {
-                            ChangeHeadlightPosition(grid.gridArray[gridNode.x + 1, gridNode.y]);
-                        }
-                        else
-                        {
-                            Destroy(headlightObject);
-                        }
-
-                        break;
-                    }
-                case 3:
-                    {
-                        if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-                        {
-                            ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y + 1]);
-                        }
-                        else
-                        {
-                            Destroy(headlightObject);
-                        }
-
-                        break;
-                    }
-                case 4:
-                    {
-                        if (gridNode.y - 1 >= 0)
-                        {
-                            ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y - 1]);
-                        }
-                        else
-                        {
-                            Destroy(headlightObject);
-                        }
-
-                        break;
-                    }
-            }
-        }   
+        }
     }
 
     public void StopHeadlight()

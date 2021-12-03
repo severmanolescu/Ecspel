@@ -42,7 +42,7 @@ public class GroundWoodDamage : MonoBehaviour
             newItem.SetItem(newLog);
             newItem.MoveToPoint();
 
-            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
+            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
             GridNode gridNode = grid.GetGridObject(transform.position);
 

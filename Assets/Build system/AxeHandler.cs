@@ -45,6 +45,19 @@ public class AxeHandler : MonoBehaviour
 
                         if(placeableData != null)
                         {
+                            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+
+                            GridNode gridNode = grid.GetGridObject(node.transform.position);
+
+                            ChestOpenHandler chestOpen = node.GetComponent<ChestOpenHandler>();
+
+                            if (chestOpen != null)
+                            {
+                                chestOpen.DropAllItems();
+                            }
+
+                            Destroy(placeableData.gameObject);
+
                             ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
                             world.transform.position = node.transform.position;
@@ -57,23 +70,12 @@ public class AxeHandler : MonoBehaviour
 
                             world.MoveToPoint();
 
-                            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grig;
-
-                            GridNode gridNode = grid.GetGridObject(node.transform.position);
-
                             if (gridNode != null)
                             {
                                 ChangeGridData(gridNode, grid, newItem);
                             }
 
-                            ChestOpenHandler chestOpen = node.GetComponent<ChestOpenHandler>();
-
-                            if (chestOpen != null)
-                            {
-                                chestOpen.DropAllItems();
-                            }
-
-                            Destroy(placeableData.gameObject);
+                            Debug.Log(newItem.Amount);
                         }
                     }
                 }
@@ -89,7 +91,8 @@ public class AxeHandler : MonoBehaviour
         {
             for (int j = gridNode.y; j <= gridNode.y + placeable.SizeY; j++)
             {
-                if (grid.gridArray[i, j] != null)
+                if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1) && 
+                    grid.gridArray[i, j] != null)
                 {
                     grid.gridArray[i, j].canPlace = true;
                     grid.gridArray[i, j].canPlant = false;

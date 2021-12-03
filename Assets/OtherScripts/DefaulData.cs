@@ -26,8 +26,8 @@ public static class DefaulData
     // Player stats
     public static float maxPlayerHealth = 100f;
     public static float maxPlayerStamina = 100f;
-    public static float playerWalkSpeed = 5f;
-    public static float playerRunSpeed = 7f;
+    public static float playerWalkSpeed = 7.5f;
+    public static float playerRunSpeed = 10f;
     public static int   maximInventorySlots = 30;
 
     // Timer
@@ -42,12 +42,12 @@ public static class DefaulData
     public static int slimeAttackRate = 1;
 
     // Little Slime
-    public static float slimeLittleAttackPower = 5f;
-    public static float slimeLittleAttackDistance = 2f;
+    public static float slimeLittleAttackPower = 2.5f;
+    public static float slimeLittleAttackDistance = 1f;
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
-    public static float slimeBigAttackDistance = 2f;    
+    public static float slimeBigAttackDistance = 1.5f;    
 
     // Items
     public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));
