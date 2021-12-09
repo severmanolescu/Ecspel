@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class SourceLightShadow : MonoBehaviour
 {
-    List<UnityEngine.Rendering.Universal.Light2D> sourceLights = new List<UnityEngine.Rendering.Universal.Light2D>();
+    [SerializeField] private Gradient gradientSourceLight;
 
-    public void AddLight(UnityEngine.Rendering.Universal.Light2D light)
+    private List<LightHandler> sourceLights = new List<LightHandler>();
+
+    public void AddLight(LightHandler light)
     {
         if(!sourceLights.Contains(light))
         {
             sourceLights.Add(light);
+
+            light.Gradient = gradientSourceLight;
         }
     }
     
-    public void RemoveLight(UnityEngine.Rendering.Universal.Light2D light)
+    public void RemoveLight(LightHandler light)
     {
         if(sourceLights != null)
         {
@@ -27,9 +31,11 @@ public class SourceLightShadow : MonoBehaviour
     {
         if(sourceLights != null)
         {
-            foreach(UnityEngine.Rendering.Universal.Light2D light in sourceLights)
+            Color color = gradientSourceLight.Evaluate(intensity);
+
+            foreach (LightHandler light in sourceLights)
             {
-                light.intensity = intensity;
+                light.ChangeIntensity(color);
             }
         }
     }

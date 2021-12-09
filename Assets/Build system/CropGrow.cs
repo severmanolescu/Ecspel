@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEditor;
 
 public class CropGrow : MonoBehaviour
 {
+    private GameObject itemWorldPrefab;
+
     private Crop item;
 
     private int startDay;
@@ -21,11 +22,13 @@ public class CropGrow : MonoBehaviour
         gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
     }
 
-    public void SetItem(Item item, GridNode gridNode)
+    public void SetItem(Item item, GridNode gridNode, GameObject itemWorldPrefab)
     {
         this.item = (Crop)item;
 
         this.gridNode = gridNode;
+
+        this.itemWorldPrefab = itemWorldPrefab;
     }
 
     public void DayChange(int day)
@@ -81,7 +84,7 @@ public class CropGrow : MonoBehaviour
     {
         if (currentSprite == item.Levels.Count - 1)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
@@ -93,7 +96,7 @@ public class CropGrow : MonoBehaviour
         }
         else if (currentSprite == item.Levels.Count - 2)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
@@ -122,7 +125,7 @@ public class CropGrow : MonoBehaviour
     {
         if (currentSprite == item.Levels.Count - 2)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
@@ -134,7 +137,7 @@ public class CropGrow : MonoBehaviour
         }
         else if (currentSprite == item.Levels.Count - 3)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
@@ -177,7 +180,7 @@ public class CropGrow : MonoBehaviour
     {
         if (currentSprite == item.Levels.Count - 1)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
@@ -199,7 +202,7 @@ public class CropGrow : MonoBehaviour
     {
         if (currentSprite == item.Levels.Count - 3)
         {
-            ItemWorld itemWorld = Instantiate((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject))).GetComponent<ItemWorld>();
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 

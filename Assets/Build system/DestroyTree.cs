@@ -4,23 +4,19 @@ using UnityEditor;
 public class DestroyTree : MonoBehaviour
 {
     [SerializeField] private Item sapling;
+    [SerializeField] private Item logItem;
 
     [SerializeField] private int minSaplingDrop;
     [SerializeField] private int maxSaplingDrop;
 
     [SerializeField] private int logAmountDrop;
 
-    private GameObject itemWorld;
+    [SerializeField] private GameObject itemWorld;
 
     private int spawn;
 
     public int Spawn { set { spawn = value; } }
     public GameObject ItemWorld { get { return itemWorld; } }
-
-    private void Awake()
-    {
-        itemWorld = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject));
-    }
 
     public void Destroy()
     {
@@ -36,7 +32,7 @@ public class DestroyTree : MonoBehaviour
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, logAmountDrop));
+                    game.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
                     game.MoveToPoint();
 
                     game = Instantiate(itemWorld).GetComponent<ItemWorld>();
@@ -59,7 +55,7 @@ public class DestroyTree : MonoBehaviour
 
                     game.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, logAmountDrop));
+                    game.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
                     game.MoveToPoint();
 
                     game = Instantiate(itemWorld).GetComponent<ItemWorld>();

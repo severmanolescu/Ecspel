@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 
 public class AnswersHandler : MonoBehaviour
 {
-    private GameObject answerPrefab; 
+    [SerializeField] private GameObject answerPrefab; 
 
     private List<GameObject> answers = new List<GameObject>();
 
@@ -20,8 +19,6 @@ public class AnswersHandler : MonoBehaviour
 
     private void Awake()
     {
-        answerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Dialogue/Prefabs/AnswerPrefab.prefab", typeof(GameObject));
-
         playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>();
 
         questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();

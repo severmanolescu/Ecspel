@@ -1,17 +1,16 @@
 using UnityEngine;
-using UnityEditor;
 
 public class BuildSystemHandler : MonoBehaviour
 {
     [SerializeField] private LocationGridSave locationGrid;
+    [SerializeField] private GameObject prefabGameObject;
+    [SerializeField] private GameObject itemWorldPrefab;
 
     private Item item;
 
     private bool startPlace = false;
 
-    private GameObject @object;
-
-    private GameObject prefabGameObject;
+    private GameObject @object;    
 
     private QuickSlotsChanger quickSlots;
 
@@ -26,8 +25,6 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void Start()
     {
-        prefabGameObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/GameObject.prefab", typeof(GameObject));
-
         spawnPosition = GameObject.Find("PlayerHouseGround").transform;
 
         ChangeGridToSystems(Grid);
@@ -138,7 +135,7 @@ public class BuildSystemHandler : MonoBehaviour
 
         if(item is Crop)
         {
-            newObject.AddComponent<CropGrow>().SetItem(item, gridNode);
+            newObject.AddComponent<CropGrow>().SetItem(item, gridNode, itemWorldPrefab);
 
             newObject.tag = "Crop";
 

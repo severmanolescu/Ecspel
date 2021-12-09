@@ -1,5 +1,4 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 
 public static class DefaulData
@@ -48,27 +47,6 @@ public static class DefaulData
     // Big Slime
     public static float slimeBigAttackPower = 5f;
     public static float slimeBigAttackDistance = 1.5f;    
-
-    // Items
-    public static Item log      = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Log.asset", typeof(Item));
-    public static Item stick    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stick.asset", typeof(Item));
-    public static Item stone    = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Stone.asset", typeof(Item));
-
-    // Usable item
-    public static Item pickAxe = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/FirstPickaxe.asset", typeof(Item));
-    public static Item stoneAxe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/StoneAxe.asset", typeof(Item));
-    public static Item hoe= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Hoe.asset", typeof(Item));
-    public static Item sword= (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Sword.asset", typeof(Item));
-
-    //Enemy drops
-    public static Item slime = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/EnemyDrop/Slime.asset", typeof(Item));
-
-    //Berries
-    public static Item yellowRaspberry = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Berries/YellowRaspberry.asset", typeof(Item));
-
-    //Crops
-    public static Item PotatoSeeds = (Item)AssetDatabase.LoadAssetAtPath("Assets/Items/Crops/PotatoSeeds.asset", typeof(Item));
-
 
     public static Item GetItemWithAmount(Item item, int amount)
     {

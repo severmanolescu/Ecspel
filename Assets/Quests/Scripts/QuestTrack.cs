@@ -1,23 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class QuestTrack : MonoBehaviour
 {
     private Vector3 targetPosition = Vector3.zero;
 
-    private Sprite arrowSprite;
-    private Sprite crossSprite;
+    [SerializeField] private Sprite arrowSprite;
+    [SerializeField] private Sprite crossSprite;
 
     private Image pointerImage;
     private RectTransform pointerRectTransform;
 
     private void Awake()
     {
-        arrowSprite = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Quests/Sprites/QuestArrow.png", typeof(Sprite));
-        crossSprite = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Quests/Sprites/QuestCross.png", typeof(Sprite));
-
         pointerImage = gameObject.GetComponentInChildren<Image>();
         pointerRectTransform = pointerImage.gameObject.GetComponent<RectTransform>();
     }

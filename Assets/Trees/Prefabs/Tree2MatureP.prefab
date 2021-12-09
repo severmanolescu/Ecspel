@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ad8509c1f7bd3040baec045dbe13cb9, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,9 +119,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sapling: {fileID: 11400000, guid: 7594433fee63aa347b05754e24ae7e3a, type: 2}
+  logItem: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
   minSaplingDrop: 1
   maxSaplingDrop: 2
   logAmountDrop: 2
+  itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
 --- !u!1 &3463321030377379016
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +201,8 @@ GameObject:
   - component: {fileID: 3463321031269770792}
   - component: {fileID: 3463321031269770794}
   - component: {fileID: 3910214447203311139}
+  - component: {fileID: 7059674531856575834}
+  - component: {fileID: 3372756922395365252}
   m_Layer: 8
   m_Name: Tree2MatureP
   m_TagString: Tree
@@ -378,7 +382,7 @@ MonoBehaviour:
   - {x: -0.52405024, y: -0.057893753, z: 0}
   m_ShapePathHash: 1994659533
   m_Mesh: {fileID: 0}
-  m_InstanceId: 397094
+  m_InstanceId: 788398
 --- !u!114 &3463321031269770794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +398,7 @@ MonoBehaviour:
   health: 20
   treeLevel: 1
   trunkLevel: 2
+  logItem: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
 --- !u!114 &3910214447203311139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +416,45 @@ MonoBehaviour:
   scaleX: 1
   scaleY: 1
   locationGrid: {fileID: 0}
+--- !u!61 &7059674531856575834
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463321031269770793}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.003673315, y: 2.640441}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.52599525, y: 0.12926748}
+    oldSize: {x: 1, y: 1.4375}
+    newSize: {x: 0.203125, y: 0.1875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.52148, y: 3.6170712}
+  m_EdgeRadius: 0
+--- !u!114 &3372756922395365252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463321031269770793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300f964932ffe32438eaf74fd3c1cd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTransparency: 0.5
 --- !u!1 &3463321031433233199
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,7 +77,6 @@ public class TreeDamage : MonoBehaviour
                     stick = Instantiate(stickPrefab, prefabSpawnLocation2.transform.position, prefabSpawnLocation2.transform.rotation);
                 }
 
-                stick.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.stick, 1));
                 stick.GetComponent<BoxCollider2D>().enabled = false;
 
                 StartCoroutine(Wait(stick.GetComponent<Rigidbody2D>()));

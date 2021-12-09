@@ -7,6 +7,7 @@ public class DamageTree : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private int treeLevel;
     [SerializeField] private int trunkLevel;
+    [SerializeField] private Item logItem;
 
     private GameObject prefabLog;
 
@@ -112,7 +113,7 @@ public class DamageTree : MonoBehaviour
 
                 game.transform.position = transform.position;
 
-                game.SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 2));
+                game.SetItem(DefaulData.GetItemWithAmount(logItem, 2));
                 game.MoveToPoint();
 
                 Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;

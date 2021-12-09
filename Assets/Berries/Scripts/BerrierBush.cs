@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class BerrierBush : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class BerrierBush : MonoBehaviour
 
     private Sprite fullBush;
 
-    private GameObject prefab;
+    [SerializeField]  private GameObject prefab;
 
     private CanvasTabsOpen canvasTabs;
 
@@ -23,8 +22,6 @@ public class BerrierBush : MonoBehaviour
 
     private void Awake()
     {
-        prefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Berries/Prefab/YellowRaspberry.prefab", typeof(GameObject));
-
         fullBush = GetComponent<SpriteRenderer>().sprite;
     }
 

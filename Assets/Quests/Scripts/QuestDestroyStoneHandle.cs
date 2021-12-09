@@ -7,7 +7,7 @@ public class QuestDestroyStoneHandle : MonoBehaviour
 {
     public void SetDestroyStonequest(Quest quest)
     {
-        GameObject prefabGameObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/GameObject.prefab", typeof(GameObject));
+        GameObject prefabGameObject = new GameObject();
 
         GameObject @object = Instantiate(prefabGameObject);
 

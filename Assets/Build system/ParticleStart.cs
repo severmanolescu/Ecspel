@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEditor;
 
 public class ParticleStart : MonoBehaviour
 {
-    private GameObject log;
+    [SerializeField] private GameObject log;
     [SerializeField] private GameObject logSpawn;
+    [SerializeField] private Item logItem;
 
     private ParticleSystem[] particles;
 
@@ -15,8 +15,6 @@ public class ParticleStart : MonoBehaviour
     private void Awake()
     {
         particles = gameObject.GetComponentsInChildren<ParticleSystem>();
-
-        log = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Tilemap/Environemnt/Trees/Prefab/Log.prefab", typeof(GameObject));
 
         foreach (ParticleSystem particle in particles)
         {
@@ -42,44 +40,44 @@ public class ParticleStart : MonoBehaviour
 
             auxiliarPosition.x -= .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
 
             auxiliarPosition.x -= .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
         }
         else if (spawn == 2)
         {
             Vector3 auxiliarPosition = logSpawn.transform.position;
             auxiliarPosition.x += .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
 
             auxiliarPosition.x += .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
         }
         else if (spawn == 3)
         {
             Vector3 auxiliarPosition = logSpawn.transform.position;
             auxiliarPosition.y += .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
 
             auxiliarPosition.y += .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
         }
         else
         {
             Vector3 auxiliarPosition = logSpawn.transform.position;
             auxiliarPosition.y -= .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
 
             auxiliarPosition.y -= .75f;
             auxiliarInstantiate = Instantiate(log, auxiliarPosition, logSpawn.transform.rotation);
-            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(DefaulData.log, 1));
+            auxiliarInstantiate.GetComponent<ItemWorld>().SetItem(DefaulData.GetItemWithAmount(logItem, 1));
         }
 
         Destroy(gameObject);

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class QuestTabHandler : MonoBehaviour
 {
-    private GameObject answarePrefab;
+     [SerializeField] private GameObject answarePrefab;
 
     private Transform spawnLocation;
     
@@ -17,7 +16,6 @@ public class QuestTabHandler : MonoBehaviour
     {
         spawnLocation = transform.Find("ScrollView/Viewport/Content");
         questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
-        answarePrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Quests/Prefabs/QuestPrefab.prefab", typeof(GameObject));
     }
 
     private void InstantiateButton(Quest quest)

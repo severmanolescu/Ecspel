@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class EnemyDropLoot : MonoBehaviour
 {
     [SerializeField] private List<QuestItems> drops = new List<QuestItems>();
 
-    private GameObject itemWorldPrefab;
-
-    private void Awake()
-    {
-        itemWorldPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Items/ItemWorld.prefab", typeof(GameObject));
-    }
+    [SerializeField] private GameObject itemWorldPrefab;
 
     public void DropItem()
     {

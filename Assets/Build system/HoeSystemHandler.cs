@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class HoeSystemHandler : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public class HoeSystemHandler : MonoBehaviour
     public Sprite headlight;
     public Sprite headlightGreen;
 
-    private GameObject prefabGameObject;
+    [SerializeField] private GameObject prefabGameObject;
 
     private Transform spawnLocation;
 
@@ -42,8 +41,6 @@ public class HoeSystemHandler : MonoBehaviour
 
     private void Start()
     {
-        prefabGameObject = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/GameObject.prefab", typeof(GameObject));
-
         headlightObject = null;
 
         spawnLocation = GameObject.Find("PlayerHouseGround").transform;

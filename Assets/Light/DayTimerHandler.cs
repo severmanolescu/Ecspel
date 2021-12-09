@@ -62,6 +62,8 @@ public class DayTimerHandler : MonoBehaviour
 
         intensity = (hours + minutes / 60) / 24;
 
+        sourceLight.ChangeLightsIntensity(1 - intensity);
+
         globalLight.color = gradient.Evaluate(intensity);
 
         if(sleep == true && wakeupHour == hours && days > startDay)

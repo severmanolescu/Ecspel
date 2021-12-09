@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class QuestFollowHandler : MonoBehaviour
 {
-    private GameObject prefab;
+     [SerializeField] private GameObject prefab;
 
     private List<QuestLocationFollow> questLocations = new List<QuestLocationFollow>();
-
-    private void Awake()
-    {
-        prefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Quests/Prefabs/QuestFollowPrefab.prefab", typeof(GameObject));
-    }
 
     public QuestLocationFollow SetQuestFollow(Quest quest)
     {

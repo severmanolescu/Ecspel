@@ -8,14 +8,6 @@ public class PlayerInventory : MonoBehaviour
 
     private List<ItemSlot> itemsSlot;
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            AddItem(DefaulData.GetItemWithAmount(DefaulData.log, 10));
-        }
-    }
-
     private void Awake()
     {
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
