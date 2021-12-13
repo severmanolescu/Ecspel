@@ -18,7 +18,7 @@ public class PositionInGrid : MonoBehaviour
     {
         if(locationGrid == null)
         {
-            locationGrid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>();
+            locationGrid = GetComponentInParent<LocationGridSave>();
         }
 
         Grid<GridNode> grid = LocationGrid.Grid;

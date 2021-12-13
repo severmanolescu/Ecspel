@@ -60,11 +60,10 @@ public class SlimeAI : MonoBehaviour
         {
             case State.Walking:
                 {
-                    aIPath.MoveToLocation(roaming, speed);
 
                     if (Vector3.Distance(transform.position, roaming) <= tolerance)
                     {
-                        roaming = GetRoamingPosition(); 
+                        roaming = GetRoamingPosition();
                     }
 
                     FindPlayer();
@@ -74,17 +73,24 @@ public class SlimeAI : MonoBehaviour
 
             case State.GoToPlayer:
                 {
-                    aIPath.MoveToLocation(playerLocation.position, speed);
+                    if (aIPath.ToLocation == null)
+                    {
+                        aIPath.ToLocation = playerLocation;
+                    }
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);
 
                     if (distance <= DefaulData.slimeLittleAttackDistance)
                     {
                         state = State.Attack;
+
+                        aIPath.ToLocation = null;
                     }
-                    else if(distance >= DefaulData.maxDinstanceToCatch)
+                    else if (distance >= DefaulData.maxDinstanceToCatch)
                     {
                         state = State.Walking;
+
+                        aIPath.ToLocation = null;
                     }
 
                     break;

@@ -19,11 +19,7 @@ public class PotionAI : MonoBehaviour
 
     private float nextAttackTime;
 
-    private Vector2 roaming;
-
     private State state;
-
-    private Vector3 initialLocation;
 
     private AIPathFinding aIPath;
 
@@ -37,6 +33,8 @@ public class PotionAI : MonoBehaviour
     {
         aIPath = GetComponent<AIPathFinding>();
 
+        aIPath.Speed = speed;
+
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
         animator = GetComponent<Animator>();
@@ -46,18 +44,9 @@ public class PotionAI : MonoBehaviour
 
     private void Start()
     {
-        initialLocation = gameObject.transform.position;
-
-        roaming = GetRoamingPosition();
-
         nextAttackTime = DefaulData.slimeAttackRate;
 
         GetComponent<AIPathFinding>().SetCanMoveToTrue();
-    }
-
-    private Vector3 GetRoamingPosition()
-    {
-        return initialLocation + DefaulData.GetRandomMove() * Random.Range(2f, 5f);
     }
 
     private void Update()
@@ -66,12 +55,7 @@ public class PotionAI : MonoBehaviour
         {
             case State.Walking:
                 {
-                    aIPath.MoveToLocation(roaming, speed);
-
-                    if (Vector3.Distance(transform.position, roaming) <= tolerance)
-                    {
-                        roaming = GetRoamingPosition();
-                    }
+                    aIPath.Walking = true;
 
                     FindPlayer();
 
@@ -82,23 +66,35 @@ public class PotionAI : MonoBehaviour
                 {
                     animator.SetTrigger("Walk");
 
-                    aIPath.MoveToLocation(playerLocation.position, speed);
+                    aIPath.Walking = false;
+
+                    if (aIPath.ToLocation == null)
+                    {
+                        aIPath.ToLocation = playerLocation;
+                    }
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);
 
                     if (distance <= DefaulData.slimeLittleAttackDistance)
                     {
                         state = State.Attack;
+
+                        aIPath.ToLocation = null;
                     }
                     else if (distance >= DefaulData.maxDinstanceToCatch)
                     {
                         state = State.Walking;
+
+                        aIPath.ToLocation = null;
                     }
 
                     break;
                 }
             case State.Attack:
                 {
+                    aIPath.ToLocation = null;
+                    aIPath.Walking = false;
+
                     if (Time.time > nextAttackTime)
                     {
                         animator.SetTrigger("Prepare");

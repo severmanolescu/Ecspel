@@ -53,15 +53,22 @@ public class QuestTabHandler : MonoBehaviour
 
     private bool VerifyQuest(Quest quest)
     {
-        foreach(QuestButton questButton in questButtons)
+        if (quest.Title != string.Empty)
         {
-            if(questButton.Quest == quest)
+            foreach (QuestButton questButton in questButtons)
             {
-                return false;
+                if (questButton.Quest == quest)
+                {
+                    return false;
+                }
             }
-        }
 
-        return true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void AddQuest(Quest quest)
