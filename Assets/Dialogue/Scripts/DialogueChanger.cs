@@ -25,7 +25,7 @@ public class DialogueChanger : MonoBehaviour
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
         answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
-        questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
+        questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
     }
 
     private void Start()

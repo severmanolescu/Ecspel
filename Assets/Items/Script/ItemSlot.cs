@@ -30,7 +30,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         itemSprite.gameObject.SetActive(false);
 
         itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
-        itemDetails = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ItemDetails").GetComponent<ItemDetails>();
+        itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
     }
 
     private void ShowItem()

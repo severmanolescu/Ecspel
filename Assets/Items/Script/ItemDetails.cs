@@ -4,10 +4,20 @@ using TMPro;
 
 public class ItemDetails : MonoBehaviour
 {
+    [SerializeField] private GameObject playerItems;
+
     private Image itemSpriteObject;
 
     private TextMeshProUGUI itemNameObject;
     private TextMeshProUGUI itemDetailsObject;
+
+    private void Update()
+    {
+        if(playerItems.activeSelf == false)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     private void Awake()
     {

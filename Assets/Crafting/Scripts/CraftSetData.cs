@@ -21,7 +21,7 @@ public class CraftSetData : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/PlayerItems").GetComponent<PlayerInventory>();
+        playerInventory = GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
         Image[] images = GetComponentsInChildren<Image>();
 

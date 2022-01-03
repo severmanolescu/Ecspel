@@ -269,4 +269,11 @@ public class PrincipalMenuHandler : MonoBehaviour
     {
 
     }
+
+    public void ResumePlay()
+    {
+        principalMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+        quitConsole.SetActive(false);
+    }
 }

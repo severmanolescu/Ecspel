@@ -16,7 +16,7 @@ public class QuickSlot : MonoBehaviour
     {
         itemSprites = gameObject.GetComponentsInChildren<Image>();
 
-        equiped = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
+        equiped = GameObject.Find("Player/Canvas/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
 
         amount = GetComponentInChildren<TextMeshProUGUI>();
 

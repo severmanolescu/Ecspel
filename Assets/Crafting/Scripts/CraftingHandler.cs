@@ -26,7 +26,7 @@ public class CraftingHandler : MonoBehaviour
         text.gameObject.SetActive(false);
 
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory");
+        playerInventory = GameObject.Find("Player/Canvas/PlayerItems");
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
         craftCanvas = GameObject.Find("Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>();
 
@@ -67,7 +67,7 @@ public class CraftingHandler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").activeSelf == false)
+                if (playerInventory.activeSelf == false)
                 {
                     playerMovement.TabOpen = true;
                     playerInventory.SetActive(true);

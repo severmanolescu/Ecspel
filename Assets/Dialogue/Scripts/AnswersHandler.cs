@@ -19,9 +19,9 @@ public class AnswersHandler : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>();
+        playerInventory = GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
-        questTab = GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>();
+        questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
     }

@@ -34,9 +34,9 @@ public class ChestOpenHandler : MonoBehaviour
         chestStorage = GetComponent<ChestStorage>();
 
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        playerInventory = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory");
+        playerInventory = GameObject.Find("Player/Canvas/PlayerItems");
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
-        chestStorageHandler = GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ChestStorage").GetComponent<ChestStorageHandler>();
+        chestStorageHandler = GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
 
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
     }
@@ -97,7 +97,7 @@ public class ChestOpenHandler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").activeSelf == false)
+                if (GameObject.Find("Player/Canvas/PlayerItems").activeSelf == false)
                 {
                     playerMovement.TabOpen = true;
                     playerInventory.SetActive(true);
@@ -114,7 +114,7 @@ public class ChestOpenHandler : MonoBehaviour
                     playerInventory.SetActive(false);
                     chestStorageHandler.gameObject.SetActive(false);
 
-                    chestStorage.SetItems(GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
+                    chestStorage.SetItems(GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
 
                     canvasTabsOpen.SetCanOpenTabs(true);
 

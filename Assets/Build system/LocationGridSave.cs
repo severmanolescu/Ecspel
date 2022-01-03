@@ -24,7 +24,7 @@ public class LocationGridSave : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(WaitToCheck());
+        //StartCoroutine(WaitToCheck());
     }
 
     IEnumerator WaitToCheck()

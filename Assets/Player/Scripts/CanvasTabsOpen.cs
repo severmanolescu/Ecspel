@@ -13,6 +13,11 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private GameObject canvasEffects;
 
+    [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private GameObject menuSettingsCanvas;
+    [SerializeField] private GameObject menuQuitCanvas;
+    [SerializeField] private GameObject chestStorage;
+
     private bool canOpenTabs = true;
 
     IEnumerator Wait()
@@ -32,13 +37,17 @@ public class CanvasTabsOpen : MonoBehaviour
 
         canvasEffects = transform.Find("Field/Effect").gameObject;
 
-        playerInventory = transform.Find("Field/Inventory/PlayerInventory").gameObject;
+        playerInventory = transform.Find("PlayerItems").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
-        questShow = transform.Find("Field/QuestTab").gameObject.GetComponent<QuestTabDataSet>();
+        questShow = transform.Find("QuestTab").gameObject.GetComponent<QuestTabDataSet>();
+
+        chestStorage.SetActive(false);
     }
 
     private void Start()
     {
+        menuCanvas.SetActive(false);
+
         StartCoroutine(Wait());
     }
 
@@ -103,16 +112,41 @@ public class CanvasTabsOpen : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                questShow.DeleteData();
-                questShow.gameObject.SetActive(false);
+                if (menuSettingsCanvas.activeSelf == false && 
+                    menuQuitCanvas.gameObject.activeSelf == false)                    
+                {
+                    if(questShow.gameObject.activeSelf == false &&
+                       playerInventory.activeSelf == false)
+                    {
+                        if (menuCanvas.activeSelf == true)
+                        {
+                            Time.timeScale = 1f;
 
-                playerInventory.SetActive(false);
-                canvasEffects.SetActive(false);
+                            playerMovement.TabOpen = false;
+                        }
+                        else
+                        {
+                            Time.timeScale = 0;
 
-                quickSlot.gameObject.SetActive(true);
-                quickSlot.Reinitialize();
+                            playerMovement.TabOpen = true;
+                        }
 
-                playerMovement.TabOpen = false;
+                        menuCanvas.SetActive(!menuCanvas.activeSelf);
+                    }
+                    else
+                    {
+                        questShow.DeleteData();
+                        questShow.gameObject.SetActive(false);
+
+                        playerInventory.SetActive(false);
+                        canvasEffects.SetActive(false);
+
+                        quickSlot.gameObject.SetActive(true);
+                        quickSlot.Reinitialize();
+
+                        playerMovement.TabOpen = false;
+                    }
+                }                             
             }
         }
     }
