@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
+
     private new Rigidbody2D rigidbody;
 
     private Animator animator;
@@ -49,9 +52,11 @@ public class PlayerMovement : MonoBehaviour
             inputs.x = Input.GetAxisRaw("Horizontal");
             inputs.y = Input.GetAxisRaw("Vertical");
 
+            inputs = inputs.normalized;
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                inputs *= DefaulData.playerRunSpeed;
+                inputs *= runSpeed;
 
                 if (inputs != Vector2.zero)
                 {
@@ -60,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                inputs *= DefaulData.playerWalkSpeed;
+                inputs *= walkSpeed;
             }
 
             speed = inputs.SqrMagnitude();

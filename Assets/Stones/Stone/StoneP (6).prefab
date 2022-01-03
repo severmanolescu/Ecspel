@@ -192,10 +192,6 @@ MonoBehaviour:
   amount: 2
   health: 13
   stoneLevel: 3
-  startScaleX: 0
-  startScaleY: 0
-  scaleX: 0
-  scaleY: 0
 --- !u!50 &1219495173672104083
 Rigidbody2D:
   serializedVersion: 4
@@ -277,7 +273,7 @@ MonoBehaviour:
   - {x: 0.10457802, y: 0.037568092, z: 0}
   m_ShapePathHash: -1090450547
   m_Mesh: {fileID: 0}
-  m_InstanceId: -4644
+  m_InstanceId: -20394
 --- !u!68 &1219495173672104081
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -331,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967b766f9db088a4e90a4c1dcd0857ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScaleX: 0
+  startScaleX: -1
   startScaleY: 0
   scaleX: 1
   scaleY: 1

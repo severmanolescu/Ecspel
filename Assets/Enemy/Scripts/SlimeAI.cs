@@ -60,11 +60,7 @@ public class SlimeAI : MonoBehaviour
         {
             case State.Walking:
                 {
-
-                    if (Vector3.Distance(transform.position, roaming) <= tolerance)
-                    {
-                        roaming = GetRoamingPosition();
-                    }
+                    aIPath.Walking = true;
 
                     FindPlayer();
 
@@ -76,6 +72,8 @@ public class SlimeAI : MonoBehaviour
                     if (aIPath.ToLocation == null)
                     {
                         aIPath.ToLocation = playerLocation;
+
+                        aIPath.Walking = false;
                     }
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);

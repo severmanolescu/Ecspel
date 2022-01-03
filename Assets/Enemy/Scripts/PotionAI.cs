@@ -95,12 +95,7 @@ public class PotionAI : MonoBehaviour
                     aIPath.ToLocation = null;
                     aIPath.Walking = false;
 
-                    if (Time.time > nextAttackTime)
-                    {
-                        animator.SetTrigger("Prepare");
-
-                        nextAttackTime = Time.time + DefaulData.slimeAttackRate;
-                    }
+                    animator.SetTrigger("Prepare");
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);
 

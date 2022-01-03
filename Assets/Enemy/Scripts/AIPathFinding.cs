@@ -21,7 +21,7 @@ public class AIPathFinding : MonoBehaviour
 
     private Pathfinding pathfinding;
 
-    public List<Vector3> path;
+    private List<Vector3> path;
 
     private float speed;
 
@@ -104,27 +104,48 @@ public class AIPathFinding : MonoBehaviour
                     {
                         path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
 
-                        path.RemoveAt(0);
+                        if (path != null && path.Count > 1)
+                        {
+                            path.RemoveAt(0);
 
-                        lastPosition = ToLocation.position;
+                            lastPosition = ToLocation.position;
+                        }
+                        else
+                        {
+                            path = null;
+                        }
                     }
                 }
                 else if (lastPosition != ToLocation.position)
                 {
                     path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
 
-                    path.RemoveAt(0);
+                    if (path != null && path.Count > 1)
+                    {
+                        path.RemoveAt(0);
 
-                    lastPosition = ToLocation.position;
+                        lastPosition = ToLocation.position;
+                    }
+                    else
+                    {
+                        path = null;
+                    }
                 }
             }
             else
             {
                 path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
 
-                path.RemoveAt(0);
+                if (path != null && path.Count > 1)
+                {
+                    path.RemoveAt(0);
 
-                lastPosition = ToLocation.position;
+                    lastPosition = ToLocation.position;
+                }
+                else
+                {
+                    path = null;
+                }
             }
         }
         else if (Walking)
@@ -143,16 +164,24 @@ public class AIPathFinding : MonoBehaviour
                 else
                 {
                     path = null;
-                    roaming = GetRoamingPosition();
                 }
             }
             else
             {
+                roaming = GetRoamingPosition();
+
                 path = pathfinding.FindPath(transform.position, new Vector3(roaming.x, roaming.y));
 
-                path.RemoveAt(0);
+                if (path != null && path.Count > 1)
+                {
+                    path.RemoveAt(0);
 
-                currentIndex = 0;
+                    currentIndex = 0;
+                }
+                else
+                {
+                    path = null;
+                }
             }
         }
     }
