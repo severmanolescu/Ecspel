@@ -13,6 +13,7 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private GameObject canvasEffects;
 
+    [Header("Menu canvas")]
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private GameObject menuSettingsCanvas;
     [SerializeField] private GameObject menuQuitCanvas;
@@ -123,12 +124,16 @@ public class CanvasTabsOpen : MonoBehaviour
                             Time.timeScale = 1f;
 
                             playerMovement.TabOpen = false;
+
+                            quickSlot.gameObject.SetActive(true);
                         }
                         else
                         {
                             Time.timeScale = 0;
 
                             playerMovement.TabOpen = true;
+
+                            quickSlot.gameObject.SetActive(false);
                         }
 
                         menuCanvas.SetActive(!menuCanvas.activeSelf);

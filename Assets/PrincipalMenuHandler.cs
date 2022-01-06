@@ -1,22 +1,31 @@
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
+using UnityEngine.Audio;
 
 public class PrincipalMenuHandler : MonoBehaviour
 {
+    [Header("Principal buttons")]
     [SerializeField] private GameObject principalMenu;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject quitConsole;
 
+    [Header("Settings")]
     [SerializeField] private Toggle fullScreenToggle;
+    [SerializeField] private Slider volumePrincipalSlider;
+    [SerializeField] private Slider volumeEffectSlider;
     [SerializeField] private TMP_Dropdown qualityDropdown;
-    [SerializeField] private Slider volumeSlider;
-
     [SerializeField] private TMP_Dropdown resolutionDropDown;
+
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip buttonClick;
+    [SerializeField] private AudioMixer effectAudioMixer;
+    [SerializeField] private AudioMixer principalAudioMixer;
+
+    private AudioSource audioSource;
 
     private string pathToSaveSettings;
 
@@ -26,6 +35,8 @@ public class PrincipalMenuHandler : MonoBehaviour
     {
         settingsMenu.SetActive(false);
         quitConsole.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -59,6 +70,12 @@ public class PrincipalMenuHandler : MonoBehaviour
         if(!File.Exists(pathToSaveSettings))
         {
             CreateDirectoryIni(currentResolutionIndex);
+
+            ChangeFullScreed();
+            ChangeResolution();
+            ChangeQuality();
+            ChangeVolume();
+            ChangeEffectsVolume();
         }
         else
         {
@@ -102,14 +119,10 @@ public class PrincipalMenuHandler : MonoBehaviour
                     bool fullScreen = bool.Parse(line.Substring(line.IndexOf(":") + 1));
 
                     fullScreenToggle.isOn = fullScreen;
-
-                    ChangeFullScreed();
                 }
                 catch
                 {
-                    fullScreenToggle.isOn = true;
-
-                    ChangeFullScreed();
+                    fullScreenToggle.isOn = true; 
                 }
             }
             else if (line.Contains("Resolution"))
@@ -120,8 +133,6 @@ public class PrincipalMenuHandler : MonoBehaviour
 
                     resolutionDropDown.value = index;
                     resolutionDropDown.RefreshShownValue();
-
-                    ChangeResolution();
                 }
                 catch
                 {
@@ -129,8 +140,6 @@ public class PrincipalMenuHandler : MonoBehaviour
 
                     resolutionDropDown.value = lastIndex;
                     resolutionDropDown.RefreshShownValue();
-
-                    ChangeResolution();
                 }
             }
             else if (line.Contains("Quality"))
@@ -141,8 +150,6 @@ public class PrincipalMenuHandler : MonoBehaviour
 
                     qualityDropdown.value = index;
                     qualityDropdown.RefreshShownValue();
-
-                    ChangeQuality();
                 }
                 catch
                 {
@@ -150,28 +157,41 @@ public class PrincipalMenuHandler : MonoBehaviour
 
                     qualityDropdown.value = lastIndex;
                     qualityDropdown.RefreshShownValue();
-
-                    ChangeQuality();
                 }
             }
-            else if (line.Contains("Volume"))
+            else if (line.Contains("VolumePrincipal"))
             {
                 try
                 {
                     float value = float.Parse(line.Substring(line.IndexOf(":") + 1));
 
-                    volumeSlider.value = value;
-
-                    ChangeVolume();
+                    volumePrincipalSlider.value = value;
                 }
                 catch
                 {
-                    volumeSlider.value = 1f;
+                    volumePrincipalSlider.value = volumePrincipalSlider.maxValue;
+                }
+            }
+            else if (line.Contains("VolumeEffect"))
+            {
+                try
+                {
+                    float value = float.Parse(line.Substring(line.IndexOf(":") + 1));
 
-                    ChangeVolume();
+                    volumeEffectSlider.value = value;
+                }
+                catch
+                {
+                    volumeEffectSlider.value = volumeEffectSlider.maxValue;
                 }
             }
         }
+
+        ChangeFullScreed();
+        ChangeResolution();
+        ChangeQuality();
+        ChangeVolume();
+        ChangeEffectsVolume();
     }
 
     private void CreateDirectoryIni(int currentResolutionIndex)
@@ -202,7 +222,8 @@ public class PrincipalMenuHandler : MonoBehaviour
             text += "FullScreen:" + fullScreenToggle.isOn + "\n";
             text += "Resolution:" + resolutionDropDown.value + "\n";
             text += "Quality:" + qualityDropdown.value + "\n";
-            text += "Volume:" + volumeSlider.value + "\n";
+            text += "VolumePrincipal:" + volumePrincipalSlider.value + "\n";
+            text += "VolumeEffect:" + volumeEffectSlider.value + "\n";
 
             File.WriteAllText(pathToSaveSettings, text);
         }
@@ -229,6 +250,11 @@ public class PrincipalMenuHandler : MonoBehaviour
     public void PlayButton()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void OpenQuitConcole()
@@ -265,15 +291,30 @@ public class PrincipalMenuHandler : MonoBehaviour
         WriteDataToIni();
     }
 
-    public void ChangeVolume()
-    {
-
-    }
-
     public void ResumePlay()
     {
         principalMenu.SetActive(false);
         settingsMenu.SetActive(false);
         quitConsole.SetActive(false);
+    }
+
+    public void ChangeVolume()
+    {
+        principalAudioMixer.SetFloat("Volume", volumePrincipalSlider.value);
+
+        WriteDataToIni();
+    }
+
+    public void ChangeEffectsVolume()
+    {
+        effectAudioMixer.SetFloat("Volume", volumeEffectSlider.value);
+
+        WriteDataToIni();
+    }
+
+    public void PlayButtonClip()
+    {
+        audioSource.clip = buttonClick;
+        audioSource.Play();
     }
 }
