@@ -6,8 +6,20 @@ using TMPro;
 public class ChestOpenHandler : MonoBehaviour
 {
     [SerializeField] private GameObject itemWorld;
+    [SerializeField] private Sprite openSprite;
+    private Sprite closeSprite;
+
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip chestOpen;
+    [SerializeField] private AudioClip chestClose;
+
+    private AudioSource audioSource;
 
     private GameObject player = null;
+    private GameObject playerInventory;
+    private GameObject quickSlots;
+
+    private SpriteRenderer spriteRenderer;
 
     private TextMeshProUGUI text;
 
@@ -15,13 +27,9 @@ public class ChestOpenHandler : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    private GameObject playerInventory;
-
     private ChestStorageHandler chestStorageHandler;
 
     private CanvasTabsOpen canvasTabsOpen;
-
-    private GameObject quickSlots;
 
     private List<Item> items = new List<Item>();
 
@@ -39,6 +47,12 @@ public class ChestOpenHandler : MonoBehaviour
         chestStorageHandler = GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
 
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+
+        audioSource = GetComponent<AudioSource>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        closeSprite = spriteRenderer.sprite;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,7 +76,7 @@ public class ChestOpenHandler : MonoBehaviour
             playerMovement.TabOpen = false;
             playerInventory.SetActive(false);
             chestStorageHandler.gameObject.SetActive(false);
-            chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots);
+            chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots, this); 
 
             canvasTabsOpen.SetCanOpenTabs(true);
 
@@ -91,6 +105,43 @@ public class ChestOpenHandler : MonoBehaviour
         }
     }
 
+    private void OpenChest()
+    {
+        audioSource.clip = chestOpen;
+        audioSource.Play();
+
+        spriteRenderer.sprite = openSprite;
+
+        playerMovement.TabOpen = true;
+        playerInventory.SetActive(true);
+        chestStorageHandler.gameObject.SetActive(true);
+        chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots, this);
+
+        canvasTabsOpen.SetCanOpenTabs(false);
+
+        quickSlots.SetActive(false);
+    }
+
+    private void CloseChestKeyPress()
+    {
+        audioSource.clip = chestClose;
+        audioSource.Play();
+
+        spriteRenderer.sprite = closeSprite;
+
+        playerMovement.TabOpen = false;
+        playerInventory.SetActive(false);
+        chestStorageHandler.gameObject.SetActive(false);
+
+        chestStorage.SetItems(GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
+
+        canvasTabsOpen.SetCanOpenTabs(true);
+
+        quickSlots.SetActive(true);
+
+        quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
+    }
+
     private void Update()
     {
         if (player != null)
@@ -99,45 +150,31 @@ public class ChestOpenHandler : MonoBehaviour
             {
                 if (GameObject.Find("Player/Canvas/PlayerItems").activeSelf == false)
                 {
-                    playerMovement.TabOpen = true;
-                    playerInventory.SetActive(true);
-                    chestStorageHandler.gameObject.SetActive(true);
-                    chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots);
-
-                    canvasTabsOpen.SetCanOpenTabs(false);
-
-                    quickSlots.SetActive(false);
+                    OpenChest();
                 }
                 else
                 {
-                    playerMovement.TabOpen = false;
-                    playerInventory.SetActive(false);
-                    chestStorageHandler.gameObject.SetActive(false);
-
-                    chestStorage.SetItems(GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
-
-                    canvasTabsOpen.SetCanOpenTabs(true);
-
-                    quickSlots.SetActive(true);
-
-                    quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
+                    CloseChestKeyPress();
                 }
             }
-
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                playerMovement.TabOpen = false;
-                playerInventory.SetActive(false);
-                chestStorageHandler.gameObject.SetActive(false);
-
-                chestStorage.SetItems(GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
-
-                canvasTabsOpen.SetCanOpenTabs(true);
-
-                quickSlots.SetActive(true);
-
-                quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
-            }
         } 
+    }
+
+    public void CloseChest()
+    {
+        audioSource.clip = chestClose;
+        audioSource.Play();
+
+        playerMovement.TabOpen = false;
+        playerInventory.SetActive(false);
+        chestStorageHandler.gameObject.SetActive(false);
+
+        chestStorage.SetItems(GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
+
+        canvasTabsOpen.SetCanOpenTabs(true);
+
+        quickSlots.SetActive(true);
+
+        quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class DamageTree : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class DamageTree : MonoBehaviour
     [SerializeField] private int treeLevel;
     [SerializeField] private int trunkLevel;
     [SerializeField] private Item logItem;
+
+    [Header("Audio effects")]
+    [SerializeField] private List<AudioClip> woodChop;
+
+    private AudioSource audioSource;
 
     private GameObject prefabLog;
 
@@ -28,6 +34,8 @@ public class DamageTree : MonoBehaviour
         destroyTree = GetComponentInChildren<DestroyTree>();
 
         animator = GetComponentInChildren<Animator>();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -75,6 +83,8 @@ public class DamageTree : MonoBehaviour
             if(itemLevel >= treeLevel)
             {
                 health -= damage;
+
+                PlayChopClip();
             }
         }
         else 
@@ -82,6 +92,8 @@ public class DamageTree : MonoBehaviour
             if (itemLevel >= trunkLevel)
             {
                 health -= damage;
+
+                PlayChopClip();
             }
         }
 
@@ -128,5 +140,11 @@ public class DamageTree : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    public void PlayChopClip()
+    {
+        audioSource.clip = woodChop[Random.Range(0, woodChop.Count)];
+        audioSource.Play();
     }
 }

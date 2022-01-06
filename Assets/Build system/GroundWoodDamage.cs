@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GroundWoodDamage : MonoBehaviour
 {
@@ -9,6 +9,17 @@ public class GroundWoodDamage : MonoBehaviour
     [SerializeField] private GameObject itemWorld;
 
     [SerializeField] private int level;
+
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip woodChop;
+    [SerializeField] private AudioMixer effectAudioMixer;
+
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+         audioSource =  GetComponent<AudioSource>();
+    }
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
     {
@@ -31,6 +42,9 @@ public class GroundWoodDamage : MonoBehaviour
     {
         if (level >= this.level)
         {
+            audioSource.clip = woodChop;
+            audioSource.Play();
+
             ItemWorld newItem = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
             newItem.transform.position = transform.position;
@@ -51,7 +65,22 @@ public class GroundWoodDamage : MonoBehaviour
                 ChangeGridData(gridNode, grid);
             }
 
-            Destroy(gameObject);
+            StartCoroutine(WaitForClip());
         }
+    }
+
+    IEnumerator WaitForClip()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        GetComponentsInChildren<SpriteRenderer>()[1].enabled = false;
+
+        while(audioSource.isPlaying)
+        {
+            yield return null;  
+        }
+
+        Destroy(gameObject);
     }
 }

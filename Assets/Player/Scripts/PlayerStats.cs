@@ -1,9 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip damageClip;
+
+    private AudioSource audioSource;
+
     private float maxHealth;
     private float maxStamina;
 
@@ -12,7 +18,7 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer playerSprite;
 
-    public float Health { get { return healthSlider.value; } set { healthSlider.value = value; StartCoroutine(WaitDamage()); } }
+    public float Health { get { return healthSlider.value; } set { healthSlider.value = value; PlayDamageClip(); StartCoroutine(WaitDamage()); } }
     public float Stamina { get { return staminaSlider.value; } set { staminaSlider.value = value; } }
 
     public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
@@ -35,6 +41,8 @@ public class PlayerStats : MonoBehaviour
         staminaSlider = slider[1];
 
         playerSprite = GetComponentInParent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -46,5 +54,13 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamageEffect(float damage)
     {
         healthSlider.value -= damage;
+
+        PlayDamageClip();
     }
+
+    private void PlayDamageClip()
+    {
+        audioSource.clip = damageClip;
+        audioSource.Play();
+    }    
 }

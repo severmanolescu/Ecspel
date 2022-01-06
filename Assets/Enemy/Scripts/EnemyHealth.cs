@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Enemy stats")]
     [SerializeField] private float maxHealth;
 
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip damageClip;
+    [SerializeField] private AudioClip dieClip;
+
+    private AudioSource audioSource;
+
     private Animator animator;
+
+    private SpriteRenderer enemySprite;
 
     private float health;
 
@@ -15,14 +24,19 @@ public class EnemyHealth : MonoBehaviour
         health = maxHealth;
 
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
+
+        enemySprite = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    IEnumerator WaitDamage()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            TakeDamage(5);
-        }
+        enemySprite.color = Color.red;
+
+        yield return new WaitForSeconds(0.2f);
+
+        enemySprite.color = Color.white;
     }
 
     public void TakeDamage(float damage)
@@ -33,10 +47,20 @@ public class EnemyHealth : MonoBehaviour
         {
             DestroyEnemy();
         }
+        else
+        {
+            audioSource.clip = damageClip;
+            audioSource.Play();
+
+            StartCoroutine(WaitDamage());
+        }
     }
 
     private void DestroyEnemy()
     {
         animator.SetTrigger("Explode");
+
+        audioSource.clip = dieClip;
+        audioSource.Play();
     }
 }

@@ -6,6 +6,12 @@ public class AIPathFinding : MonoBehaviour
 {
     [SerializeField] private LocationGridSave locationGrid;
 
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip slimeJump;
+    [SerializeField] private AudioClip slimeHitGround;
+
+    AudioSource audioSource;
+
     private bool walking;
 
     private float initialScaleX;
@@ -40,6 +46,8 @@ public class AIPathFinding : MonoBehaviour
         changeScale = transform.localScale;
 
         roaming = GetRoamingPosition();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -84,10 +92,16 @@ public class AIPathFinding : MonoBehaviour
     public void SetCanMoveToTrue()
     {
         canMove = true;
+
+        audioSource.clip = slimeJump;
+        audioSource.Play();
     }
     public void SetCanMoveToFalse()
     {
         canMove = false;
+
+        audioSource.clip = slimeHitGround;
+        audioSource.Play();
     }
 
     private void FixedUpdate()

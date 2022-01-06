@@ -11,17 +11,12 @@ public class SlimeAI : MonoBehaviour
         Attack,
     }
 
+    [Header("Slime stats")]
     [SerializeField] private float speed;
-
-    private float tolerance = .01f;
 
     private float nextAttackTime;
 
-    private Vector2 roaming;
-
     private State state;
-
-    private Vector3 initialLocation;
 
     private AIPathFinding aIPath;
 
@@ -33,6 +28,8 @@ public class SlimeAI : MonoBehaviour
     {
         aIPath = GetComponent<AIPathFinding>();
 
+        aIPath.Speed = speed;
+
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
         animator = GetComponent<Animator>();
@@ -42,16 +39,7 @@ public class SlimeAI : MonoBehaviour
 
     private void Start()
     {
-        initialLocation = gameObject.transform.position;
-
-        roaming = GetRoamingPosition();
-
         nextAttackTime = DefaulData.slimeAttackRate;
-    }
-
-    private Vector3 GetRoamingPosition()
-    {
-        return initialLocation + DefaulData.GetRandomMove() * Random.Range(2f, 5f);
     }
 
     private void Update()
@@ -69,11 +57,11 @@ public class SlimeAI : MonoBehaviour
 
             case State.GoToPlayer:
                 {
+                    aIPath.Walking = false;
+
                     if (aIPath.ToLocation == null)
                     {
                         aIPath.ToLocation = playerLocation;
-
-                        aIPath.Walking = false;
                     }
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);

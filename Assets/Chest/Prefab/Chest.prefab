@@ -29,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1578004844254970175}
   m_Father: {fileID: 1578004845640410780}
@@ -128,6 +129,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004844161814491}
   m_RootOrder: 0
@@ -249,6 +251,7 @@ GameObject:
   - component: {fileID: 1578004845640410781}
   - component: {fileID: 4117057557308445182}
   - component: {fileID: 1006055661655873558}
+  - component: {fileID: 1641920595}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -266,6 +269,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.778597, y: -47.74952, z: 22.42484}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1578004844161814491}
   m_Father: {fileID: 0}
@@ -348,8 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dca9fdfd9709164f932b0b4f48390b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
-  chestMaxSlots: 9
+  chestMaxSlots: 22
 --- !u!61 &1578004845640410781
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -414,3 +417,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2963b132fca74db5dbc59e03d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1641920595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578004845640410778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311c1b6e012a91c499a8236a5788c41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 11400000, guid: cd2fff303c8e2d3408f91e1e66dc06dd, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c23f13222ecb8374a937d3f9e7069885, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: e1cfe82af8785924995e1ab240c4eb74, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 5f0df2080ea2d4a4da009a50236eb95f, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: f64fbebbac408354ca4d7ac08c4993f1, type: 2}
+    amount: 10
+  - item: {fileID: 11400000, guid: 3e205327d5200f0478ea7bc7f8a45e10, type: 2}
+    amount: 20
+  - item: {fileID: 11400000, guid: 7594433fee63aa347b05754e24ae7e3a, type: 2}
+    amount: 20
+  - item: {fileID: 11400000, guid: a4cb991476908cf46a28f79dc90cd251, type: 2}
+    amount: 20
+  - item: {fileID: 11400000, guid: 8ccaca578dea93e488123240cf4aa432, type: 2}
+    amount: 20
+  - item: {fileID: 11400000, guid: 24034e2df200811449bbe1df6b9c1047, type: 2}
+    amount: 20

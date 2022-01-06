@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ChestStorageHandler : MonoBehaviour
 {
     [SerializeField] private GameObject slotPrefab;
     [SerializeField] private Transform slotParent;
 
+    private ChestOpenHandler chestOpenHandler;
+
     private List<ItemSlot> itemSlots = new List<ItemSlot>();
 
-    public void SetChestStorage(List<Item> items, int maxSlots)
+    public ChestOpenHandler ChestOpenHandler { get => chestOpenHandler; set => chestOpenHandler = value; }
+
+    public void SetChestStorage(List<Item> items, int maxSlots, ChestOpenHandler chestOpenHandler)
     {
         ReinitializeStorage();
+
+        this.ChestOpenHandler = chestOpenHandler;
 
         int slots = items.Count;
 

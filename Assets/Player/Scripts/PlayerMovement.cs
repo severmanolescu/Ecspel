@@ -5,6 +5,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip itemPickup;
+
+    private AudioSource audioSource;
+
     private new Rigidbody2D rigidbody;
 
     private Animator animator;
@@ -43,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         playerInventory = gameObject.GetComponentInChildren<PlayerInventory>();
 
         playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
+
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -106,15 +113,14 @@ public class PlayerMovement : MonoBehaviour
             if(playerInventory.AddItem(collision.gameObject.GetComponent<ItemWorld>().Item) == true)
             {
                 collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
+
+                audioSource.clip = itemPickup;
+                audioSource.Play();
             }
             else
             {
                 collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
             }
-        }
-        else if(collision.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(5);
         }
     }
 

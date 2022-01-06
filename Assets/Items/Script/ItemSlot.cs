@@ -2,9 +2,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, 
-                                       IEndDragHandler, IDropHandler, IPointerMoveHandler, IPointerExitHandler
+                                       IEndDragHandler, IDropHandler, IPointerExitHandler, IPointerEnterHandler
 {
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
@@ -186,12 +187,12 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            itemDrag.SetData(item, this.gameObject);
+            itemDrag.SetData(item, this.gameObject);        
         }
         else
         {
-        }
 
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -272,13 +273,13 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
     }
 
-    public void OnPointerMove(PointerEventData eventData)
-    {
-        itemDetails.SetItem(item);
-    }
-
     public void OnPointerExit(PointerEventData eventData)
     {
         itemDetails.HideData();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        itemDetails.SetItem(item);
     }
 }

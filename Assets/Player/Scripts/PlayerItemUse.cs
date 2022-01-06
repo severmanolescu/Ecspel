@@ -4,6 +4,11 @@ public class PlayerItemUse : MonoBehaviour
 {
     [SerializeField] private QuickSlotsChanger selectedSlot;
 
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip attackClip;
+
+    private AudioSource audioSource;
+
     private Item item;
 
     private PlayerMovement playerMovement;
@@ -24,6 +29,8 @@ public class PlayerItemUse : MonoBehaviour
         animator = GetComponent<Animator>();
 
         playerMovement = GetComponent<PlayerMovement>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void AxeUse(Collider2D[] objects, int spawn)
@@ -82,6 +89,9 @@ public class PlayerItemUse : MonoBehaviour
     {
         foreach (Collider2D auxObject in objects)
         {
+            audioSource.clip = attackClip;
+            audioSource.Play();
+
             if (auxObject.gameObject.tag == "Enemy")
             {
                 Weapon weapon = (Weapon)item;

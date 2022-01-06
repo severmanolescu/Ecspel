@@ -11,17 +11,12 @@ public class SlimeLargeAI : MonoBehaviour
         Attack,
     }
 
+    [Header("Slime stats")]
     [SerializeField] private float speed;
-
-    private float tolerance = .01f;
 
     private float nextAttackTime;
 
-    private Vector2 roaming;
-
     private State state;
-
-    private Vector3 initialLocation;
 
     private AIPathFinding aIPath;
 
@@ -33,6 +28,8 @@ public class SlimeLargeAI : MonoBehaviour
     {
         aIPath = GetComponent<AIPathFinding>();
 
+        aIPath.Speed = speed;
+
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
         animator = GetComponent<Animator>();
@@ -42,16 +39,7 @@ public class SlimeLargeAI : MonoBehaviour
 
     private void Start()
     {
-        initialLocation = gameObject.transform.position;
-
-        roaming = GetRoamingPosition();
-
         nextAttackTime = DefaulData.slimeAttackRate;
-    }
-
-    private Vector3 GetRoamingPosition()
-    {
-        return initialLocation + DefaulData.GetRandomMove() * Random.Range(2f, 5f);
     }
 
     private void Update()
@@ -60,11 +48,7 @@ public class SlimeLargeAI : MonoBehaviour
         {
             case State.Walking:
                 {
-
-                    if (Vector3.Distance(transform.position, roaming) <= tolerance)
-                    {
-                        roaming = GetRoamingPosition();
-                    }
+                    aIPath.Walking = true;
 
                     FindPlayer();
 
@@ -73,6 +57,8 @@ public class SlimeLargeAI : MonoBehaviour
 
             case State.GoToPlayer:
                 {
+                    aIPath.Walking = false;
+
                     if (aIPath.ToLocation == null)
                     {
                         aIPath.ToLocation = playerLocation;
@@ -80,7 +66,7 @@ public class SlimeLargeAI : MonoBehaviour
 
                     float distance = Vector3.Distance(transform.position, playerLocation.position);
 
-                    if (distance <= DefaulData.slimeLittleAttackDistance)
+                    if (distance <= DefaulData.slimeBigAttackDistance)
                     {
                         state = State.Attack;
 
@@ -141,7 +127,7 @@ public class SlimeLargeAI : MonoBehaviour
         Destroy(GetComponent<BoxCollider2D>());
         gameObject.AddComponent<TimeDegradation>();
 
-        GameObject.Find("Player").GetComponent<PlayerAchievements>().largeSlime++;
+        GameObject.Find("Player").GetComponent<PlayerAchievements>().smallSlime++;
 
         Destroy(this);
     }

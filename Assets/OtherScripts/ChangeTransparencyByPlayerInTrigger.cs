@@ -15,7 +15,7 @@ public class ChangeTransparencyByPlayerInTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Player"))
+        if(collision != null && collision.CompareTag("Player") && treeCrown != null)
         {
             Color newColor = treeCrown.color;
 
@@ -27,7 +27,7 @@ public class ChangeTransparencyByPlayerInTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision != null && collision.CompareTag("Player"))
+        if (collision != null && collision.CompareTag("Player") && treeCrown != null)
         {
             Color newColor = treeCrown.color;
 

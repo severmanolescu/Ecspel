@@ -30,6 +30,8 @@ public class CanvasTabsOpen : MonoBehaviour
 
         questShow.DeleteData();
         questShow.gameObject.SetActive(false);
+
+        menuCanvas.SetActive(false);
     }
 
     private void Awake()
@@ -47,7 +49,7 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private void Start()
     {
-        menuCanvas.SetActive(false);
+
 
         StartCoroutine(Wait());
     }
@@ -113,45 +115,56 @@ public class CanvasTabsOpen : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (menuSettingsCanvas.activeSelf == false && 
-                    menuQuitCanvas.gameObject.activeSelf == false)                    
+                if(questShow.gameObject.activeSelf == false &&
+                    playerInventory.activeSelf == false && 
+                    chestStorage.activeSelf == false)
                 {
-                    if(questShow.gameObject.activeSelf == false &&
-                       playerInventory.activeSelf == false)
+                    if (menuCanvas.activeSelf == true)
                     {
-                        if (menuCanvas.activeSelf == true)
-                        {
-                            Time.timeScale = 1f;
+                        Time.timeScale = 1f;
 
-                            playerMovement.TabOpen = false;
+                        playerMovement.TabOpen = false;
 
-                            quickSlot.gameObject.SetActive(true);
-                        }
-                        else
-                        {
-                            Time.timeScale = 0;
-
-                            playerMovement.TabOpen = true;
-
-                            quickSlot.gameObject.SetActive(false);
-                        }
-
-                        menuCanvas.SetActive(!menuCanvas.activeSelf);
+                        quickSlot.gameObject.SetActive(true);
                     }
                     else
                     {
-                        questShow.DeleteData();
-                        questShow.gameObject.SetActive(false);
+                        Time.timeScale = 0;
 
-                        playerInventory.SetActive(false);
-                        canvasEffects.SetActive(false);
+                        playerMovement.TabOpen = true;
 
-                        quickSlot.gameObject.SetActive(true);
-                        quickSlot.Reinitialize();
-
-                        playerMovement.TabOpen = false;
+                        quickSlot.gameObject.SetActive(false);
                     }
-                }                             
+
+                    menuCanvas.SetActive(!menuCanvas.activeSelf);
+                }
+                else
+                {
+                    questShow.DeleteData();
+                    questShow.gameObject.SetActive(false);
+
+                    playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
+                    quickSlot.gameObject.SetActive(true);
+                    quickSlot.Reinitialize();
+
+                    playerMovement.TabOpen = false;
+
+                    chestStorage.SetActive(false);
+
+                    quickSlot.Reinitialize();
+                }                           
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(chestStorage.activeSelf == true)
+                {
+                    chestStorage.GetComponent<ChestStorageHandler>().ChestOpenHandler.CloseChest();
+                }
             }
         }
     }
