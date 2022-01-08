@@ -124,68 +124,6 @@ MonoBehaviour:
   maxSaplingDrop: 2
   logAmountDrop: 2
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
---- !u!1 &3463321030377379016
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3463321030377378871}
-  m_Layer: 8
-  m_Name: StickSpawnLocation (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3463321030377378871
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463321030377379016}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.853, y: 1.649, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3463321029866614959}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3463321031231221124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3463321031231221123}
-  m_Layer: 8
-  m_Name: StickSpawnLocation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3463321031231221123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3463321031231221124}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.544, y: 1.808, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3463321029866614959}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3463321031269770793
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,8 +162,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3463321030097029416}
-  - {fileID: 3463321031231221123}
-  - {fileID: 3463321030377378871}
   - {fileID: 3463321031433233198}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -383,7 +319,7 @@ MonoBehaviour:
   - {x: -0.52405024, y: -0.057893753, z: 0}
   m_ShapePathHash: 1994659533
   m_Mesh: {fileID: 0}
-  m_InstanceId: 788398
+  m_InstanceId: 171676
 --- !u!114 &3463321031269770794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +341,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
   - {fileID: 8300000, guid: c708bb13b0fc09d44af5f272134bcc54, type: 3}
   - {fileID: 8300000, guid: 42063a4ad661c77409d2a3c4dc85d997, type: 3}
-  effectAudioMixer: {fileID: 24100000, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
 --- !u!114 &3910214447203311139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +523,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3463321029866614959}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3463321031433233197
 SpriteRenderer:

@@ -32,7 +32,14 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            position.x = transform.position.x;
+            if(playerLocation.transform.position.x < MinX)
+            {
+                position.x = minX;
+            }   
+            else if(playerLocation.transform.position.x > MaxX)
+            {
+                position.x = maxX;
+            }
         }
 
         if (playerLocation.transform.position.y >= MinY && playerLocation.transform.position.y <= MaxY)
@@ -41,7 +48,14 @@ public class CameraHandler : MonoBehaviour
         }
         else
         {
-            position.y = transform.position.y;
+            if (playerLocation.transform.position.y < MinY)
+            {
+                position.y = MinY;
+            }
+            else if (playerLocation.transform.position.y > MaxY)
+            {
+                position.y = MaxY;
+            }
         }
 
         position.z = transform.position.z;

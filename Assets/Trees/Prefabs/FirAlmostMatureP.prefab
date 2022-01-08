@@ -38,8 +38,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5751394689243815386}
-  - {fileID: 5751394688578923698}
-  - {fileID: 5751394687766265991}
   - {fileID: 5751394688974475852}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -165,7 +163,7 @@ MonoBehaviour:
   - {x: -0.34369516, y: 0.04505062, z: 0}
   m_ShapePathHash: 395494325
   m_Mesh: {fileID: 0}
-  m_InstanceId: 786472
+  m_InstanceId: 171028
 --- !u!114 &5751394687521334623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +185,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
   - {fileID: 8300000, guid: c708bb13b0fc09d44af5f272134bcc54, type: 3}
   - {fileID: 8300000, guid: 42063a4ad661c77409d2a3c4dc85d997, type: 3}
-  effectAudioMixer: {fileID: 24100000, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
 --- !u!114 &5751394687521334618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,68 +363,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &5751394687766265990
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5751394687766265991}
-  m_Layer: 8
-  m_Name: StickSpawnLocation (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5751394687766265991
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751394687766265990}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.853, y: 1.649, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5751394687521334562}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5751394688578923697
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5751394688578923698}
-  m_Layer: 8
-  m_Name: StickSpawnLocation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5751394688578923698
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5751394688578923697}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.544, y: 1.808, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5751394687521334562}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5751394688974475851
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +393,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5751394687521334562}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5751394688974475853
 SpriteRenderer:

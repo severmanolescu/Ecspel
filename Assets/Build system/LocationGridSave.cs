@@ -22,12 +22,7 @@ public class LocationGridSave : MonoBehaviour
         grid = new Grid<GridNode>(height, weight, cellSize, position, (Grid<GridNode> g, int x, int y) => new GridNode(g, x, y));
     }
 
-    private void Start()
-    {
-        //StartCoroutine(WaitToCheck());
-    }
-
-    IEnumerator WaitToCheck()
+    IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)
     {
         for (int indexCellX = 0; indexCellX < grid.gridArray.GetLength(0); indexCellX++)
         {
@@ -50,11 +45,14 @@ public class LocationGridSave : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
-        GameObject loadScene = GameObject.FindGameObjectWithTag("LoadScene");
-
-        if (loadScene != null)
+        if (newGameLoading != null)
         {
-            loadScene.GetComponent<LoadSceneHandler>().FinishGridSearchProcess++;
+            newGameLoading.IncreseGridCheck();
         }
+    }
+
+    public void CheckGridForObjects(NewGameLoadingHandler newGameLoading)
+    {
+        StartCoroutine(WaitToCheck(newGameLoading));
     }
 }

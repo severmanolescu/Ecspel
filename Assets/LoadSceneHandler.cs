@@ -8,11 +8,11 @@ public class LoadSceneHandler : MonoBehaviour
 {
     [SerializeField] private GameObject loadObject;
 
-    private int finishGridSearchProcess = 0;
+    private bool finishGridSearchProcess = false;
 
     private TextMeshProUGUI loadText;
 
-    public int FinishGridSearchProcess { get => finishGridSearchProcess; set { finishGridSearchProcess = value; Debug.Log(FinishGridSearchProcess); } }
+    public bool FinishGridSearchProcess { get => finishGridSearchProcess; set { finishGridSearchProcess = value; } }
 
     private void Awake()
     {
@@ -32,13 +32,17 @@ public class LoadSceneHandler : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        NewGameLoadingHandler newGameLoading = GameObject.Find("NewGameLoading").GetComponent<NewGameLoadingHandler>();
+
+        newGameLoading.StartNewGame(this);
+
         loadObject.SetActive(true);
 
         loadText.text = "Loading.";
 
         int dotNo = 0;
 
-        while(FinishGridSearchProcess < 5)
+        while(FinishGridSearchProcess == false)
         {
             yield return new WaitForSeconds(1);
 

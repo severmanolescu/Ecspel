@@ -165,6 +165,8 @@ public class ChestOpenHandler : MonoBehaviour
         audioSource.clip = chestClose;
         audioSource.Play();
 
+        spriteRenderer.sprite = closeSprite;
+
         playerMovement.TabOpen = false;
         playerInventory.SetActive(false);
         chestStorageHandler.gameObject.SetActive(false);

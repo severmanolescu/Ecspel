@@ -117,4 +117,25 @@ public class SpawnObjectsArea : MonoBehaviour
             }
         }
     }
+
+    public void SpawnObjectAtLoad()
+    {
+        for (int noItem = 0; noItem < maxItems; noItem++)
+        {
+            int spawnItemNo = Random.Range(0, spawnObjects.Count - 1);
+
+            Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
+                                                transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
+                                                0);
+            if (VerifyGridPosition(spawnPosition, spawnObjects[spawnItemNo]) == true)
+            {
+                GameObject spawnObject = Instantiate(spawnObjects[spawnItemNo]);
+
+                spawnObject.GetComponent<PositionInGrid>().LocationGrid = gridSave;
+
+                spawnObject.transform.position = spawnPosition;
+                spawnObject.transform.SetParent(transform);
+            }
+        }
+    }
 }
