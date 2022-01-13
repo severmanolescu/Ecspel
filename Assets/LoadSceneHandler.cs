@@ -32,6 +32,11 @@ public class LoadSceneHandler : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        while(!operation.isDone)
+        {
+            yield return null;
+        }
+
         NewGameLoadingHandler newGameLoading = GameObject.Find("NewGameLoading").GetComponent<NewGameLoadingHandler>();
 
         newGameLoading.StartNewGame(this);

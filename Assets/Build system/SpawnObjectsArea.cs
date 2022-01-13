@@ -54,25 +54,36 @@ public class SpawnObjectsArea : MonoBehaviour
     {
         GetObjectScale(out bool dataFound, out int startScaleX, out int startScaleY, out int scaleX, out int scaleY, spawnObject);
 
-        if(dataFound == true)
+        Grid<GridNode> grid = gridSave.Grid;
+
+        if (dataFound == true && grid != null)
         {
             GridNode gridNode = gridSave.Grid.GetGridObject(position);
 
-            for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
+            if (gridNode != null &&
+                gridNode.x + startScaleX < grid.gridArray.GetLength(0) && gridNode.x + scaleX < grid.gridArray.GetLength(0) &&
+                gridNode.y + startScaleY < grid.gridArray.GetLength(1) && gridNode.y + scaleY < grid.gridArray.GetLength(1))
             {
-                for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
+                for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
                 {
-                    if (i < gridSave.Grid.gridArray.GetLength(0) && j < gridSave.Grid.gridArray.GetLength(1))
+                    for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
                     {
-                        if (gridSave.Grid.gridArray[i, j] != null)
+                        if (i < gridSave.Grid.gridArray.GetLength(0) && j < gridSave.Grid.gridArray.GetLength(1))
                         {
-                            if( gridSave.Grid.gridArray[i, j].canPlace == false)
+                            if (gridSave.Grid.gridArray[i, j] != null)
                             {
-                                return false;
+                                if (gridSave.Grid.gridArray[i, j].canPlace == false)
+                                {
+                                    return false;
+                                }
                             }
                         }
                     }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
         else
@@ -93,11 +104,12 @@ public class SpawnObjectsArea : MonoBehaviour
             {
                 if (objectsNo < maxItems)
                 {
-                    int spawnItemNo = Random.Range(0, spawnObjects.Count - 1);
+                    int spawnItemNo = Random.Range(0, spawnObjects.Count);
 
                     Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
                                                         transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),
                                                         0);
+
                     if (VerifyGridPosition(spawnPosition, spawnObjects[spawnItemNo]) == true)
                     {
                         GameObject spawnObject = Instantiate(spawnObjects[spawnItemNo]);

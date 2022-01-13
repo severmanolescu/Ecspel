@@ -12,16 +12,44 @@ public class TeleportPlayer : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
-    [SerializeField] private LocationGridSave newGrid;
+    private LocationGridSave newGrid;
+    private LocationGridSave oldGrid;
+
+    public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
+
+    private void Awake()
+    {
+        newGrid = newCamera.GetComponentInParent<LocationGridSave>();
+        oldGrid = currentCamera.GetComponentInParent<LocationGridSave>();
+    }
+
+    private void SetObject()
+    {
+        foreach (GameObject gameObject in objectsToSetActiveToFalse)
+        {
+            gameObject.SetActive(false);
+        }
+
+        foreach (GameObject gameObject in objectsToSetActiveToTrue)
+        {
+            gameObject.SetActive(true);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            collision.transform.position = teleportToPoint.position;
+            newGrid.gameObject.SetActive(true);
+
+            collision.transform.position = TeleportToPoint.position;
+
+            if (oldGrid != null)
+            {
+                oldGrid.ChangeLocation();
+            }
 
             currentCamera.SetActive(false);
-            newCamera.SetActive(true);
 
             Vector3 positionCamera = new Vector3();
 
@@ -29,51 +57,15 @@ public class TeleportPlayer : MonoBehaviour
 
             CameraHandler newCameraPositon = newCamera.GetComponent<CameraHandler>();
 
-            if(collision.transform.position.x >= newCameraPositon.MinX && collision.transform.position.x <= newCameraPositon.MaxX)
-            {
-                positionCamera.x = collision.transform.position.x;
-            }
-            else
-            {
-                if(collision.transform.position.x < newCameraPositon.MinX)
-                {
-                    positionCamera.x = newCameraPositon.MinX;
-                }
-                else
-                {
-                    positionCamera.x = newCameraPositon.MaxX;
-                }
-            }
-
-            if (collision.transform.position.y >= newCameraPositon.MinY && collision.transform.position.y <= newCameraPositon.MaxY)
-            {
-                positionCamera.y = collision.transform.position.y;
-            }
-            else
-            {
-                if (collision.transform.position.y < newCameraPositon.MinY)
-                {
-                    positionCamera.y = newCameraPositon.MinY;
-                }
-                else
-                {
-                    positionCamera.y = newCameraPositon.MaxY;
-                }
-            }
-
             newCamera.transform.position = positionCamera;
 
-            foreach (GameObject gameObject in objectsToSetActiveToFalse)
-            {
-                gameObject.SetActive(false);
-            }
-
-            foreach(GameObject gameObject in objectsToSetActiveToTrue)
-            {
-                gameObject.SetActive(true);
-            }
+            SetObject();
 
             GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
+
+            newCamera.SetActive(true);
+
+            newGrid.SpawnEnemy();
         }
     }
 }

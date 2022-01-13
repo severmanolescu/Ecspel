@@ -12,9 +12,9 @@ public class SunShadowHandler : MonoBehaviour
 
     private float rotation;
 
-    private int dayStart;
-    private int dayEnd;
-    private int dayNightCycleTime;
+    [SerializeField] private int dayStart;
+    [SerializeField] private int dayEnd;
+    [SerializeField] private int dayNightCycleTime;
 
     private float alpha = 1f;
 
@@ -32,13 +32,6 @@ public class SunShadowHandler : MonoBehaviour
         dayTimerHandler = gameObject.GetComponent<DayTimerHandler>();
     }
 
-    private void Start()
-    {
-        dayStart = DefaulData.dayStart;
-        dayEnd = DefaulData.dayEnd;
-        dayNightCycleTime = DefaulData.dayNightCycleTime;
-    }
-
     private void Update()
     {
         dayTimerHandler.GetTimer(out float minutes, out int hours);
@@ -46,6 +39,8 @@ public class SunShadowHandler : MonoBehaviour
 
         if (hours >= dayStart && hours <= dayEnd + dayNightCycleTime)
         {
+            alpha = 1f;
+
             rotation = Mathf.SmoothStep(-90, 90, (hours + minutes / 60f) / 25f);
 
             foreach(Transform shadow in sunShadows)

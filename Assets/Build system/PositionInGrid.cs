@@ -14,61 +14,69 @@ public class PositionInGrid : MonoBehaviour
 
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
 
-    private void Start()
+    private void Update()
     {
         if(locationGrid == null)
         {
-            locationGrid = GetComponentInParent<LocationGridSave>();
+            if(gameObject.tag == "Tree")
+            {
+                locationGrid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>();
+            }
         }
 
-        Grid<GridNode> grid = LocationGrid.Grid;
 
-        GridNode gridNode = grid.GetGridObject(transform.position);
-
-        if(gridNode != null)
+        if (locationGrid != null)
         {
-            Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
+            Grid<GridNode> grid = LocationGrid.Grid;
 
-            position.x += grid.CellSize / 2;
-            position.y += grid.CellSize / 2;
-            position.z = 0;
+            GridNode gridNode = grid.GetGridObject(transform.position);
 
-            transform.position = position;
-
-            for(int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
+            if (gridNode != null)
             {
-                for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
+                Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
+
+                position.x += grid.CellSize / 2;
+                position.y += grid.CellSize / 2;
+                position.z = 0;
+
+                transform.position = position;
+
+                for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
                 {
-                    if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1))
+                    for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
                     {
-                        if (grid.gridArray[i, j] != null)
+                        if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1))
                         {
-                            grid.gridArray[i, j].canPlace = false;
-                            grid.gridArray[i, j].canPlant = false;
-                            grid.gridArray[i, j].isWalkable = false;
-                            grid.gridArray[i, j].objectInSpace = this.gameObject;
+                            if (i >= 0 && i < locationGrid.Grid.gridArray.GetLength(0) &&
+                                j >= 0 && j < locationGrid.Grid.gridArray.GetLength(1))
+                            {
+                                grid.gridArray[i, j].canPlace = false;
+                                grid.gridArray[i, j].canPlant = false;
+                                grid.gridArray[i, j].isWalkable = false;
+                                grid.gridArray[i, j].objectInSpace = this.gameObject;
+                            }
                         }
                     }
                 }
-            }
 
-            DamageTree damageTree = GetComponent<DamageTree>();
+                DamageTree damageTree = GetComponent<DamageTree>();
 
-            if(damageTree != null)
-            {
-                damageTree.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
-            }
-            else
-            {
-                StoneDamage stoneDamage = GetComponent<StoneDamage>();
-
-                if (stoneDamage != null)
+                if (damageTree != null)
                 {
-                    stoneDamage.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
+                    damageTree.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
                 }
-            }
+                else
+                {
+                    StoneDamage stoneDamage = GetComponent<StoneDamage>();
 
-            Destroy(this);
+                    if (stoneDamage != null)
+                    {
+                        stoneDamage.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
+                    }
+                }
+
+                Destroy(this);
+            }
         }
     }
 }

@@ -6,6 +6,8 @@ public class AIPathFinding : MonoBehaviour
 {
     [SerializeField] private LocationGridSave locationGrid;
 
+    [SerializeField] private float distanceTolerance = .1f;
+
     [Header("Audio effects")]
     [SerializeField] private AudioClip slimeJump;
     [SerializeField] private AudioClip slimeHitGround;
@@ -14,22 +16,22 @@ public class AIPathFinding : MonoBehaviour
 
     private bool walking;
 
+    private bool canMove = true;
+
     private float initialScaleX;
 
-    private Vector3 changeScale;
+    private float speed;
 
-    private bool canMove = true;
+    private int currentIndex;
+
+    private Vector3 changeScale;
 
     private Transform toLocation;
     private Vector3 lastPosition;
 
-    private int currentIndex;
-
     private Pathfinding pathfinding;
 
     private List<Vector3> path;
-
-    private float speed;
 
     private Vector2 roaming;
 
@@ -38,6 +40,7 @@ public class AIPathFinding : MonoBehaviour
     public Transform ToLocation { get => toLocation; set { toLocation = value; path = null; } }
     public float Speed { get => speed; set => speed = value; }
     public bool Walking { get => walking; set => walking = value; }
+    public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
 
     private void Awake()
     {
@@ -52,7 +55,7 @@ public class AIPathFinding : MonoBehaviour
 
     private void Start()
     {
-        pathfinding = new Pathfinding(locationGrid.Grid);
+        pathfinding = new Pathfinding(LocationGrid.Grid);
 
         initialLocation = transform.position;
 
@@ -114,9 +117,9 @@ public class AIPathFinding : MonoBehaviour
                 {
                     MoveToLocation(path[0]);
 
-                    if (Vector3.Distance(transform.position, path[0]) <= 0.1f)
+                    if (Vector3.Distance(transform.position, path[0]) <= distanceTolerance)
                     {
-                        path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
+                        path = pathfinding.FindPath(transform.position, toLocation.position);
 
                         if (path != null && path.Count > 1)
                         {
@@ -132,7 +135,7 @@ public class AIPathFinding : MonoBehaviour
                 }
                 else if (lastPosition != ToLocation.position)
                 {
-                    path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
+                    path = pathfinding.FindPath(transform.position, toLocation.position);
 
                     if (path != null && path.Count > 1)
                     {
@@ -148,7 +151,7 @@ public class AIPathFinding : MonoBehaviour
             }
             else
             {
-                path = pathfinding.FindPath(transform.position, new Vector3(ToLocation.position.x, ToLocation.position.y));
+                path = pathfinding.FindPath(transform.position, toLocation.position);
 
                 if (path != null && path.Count > 1)
                 {
@@ -170,7 +173,7 @@ public class AIPathFinding : MonoBehaviour
                 {
                     MoveToLocation(path[currentIndex]);
 
-                    if (Vector3.Distance(transform.position, path[currentIndex]) <= 0.1f)
+                    if (Vector3.Distance(transform.position, path[currentIndex]) <= distanceTolerance)
                     {
                         currentIndex++;
                     }

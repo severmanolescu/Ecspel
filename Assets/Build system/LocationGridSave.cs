@@ -11,6 +11,10 @@ public class LocationGridSave : MonoBehaviour
 
     [SerializeField] private bool canPlantToGrid;
 
+    private SpawnEnemyInArea[] spawnLocations;
+
+    private DayTimerHandler dayTimer;
+
     private Grid<GridNode> grid;
 
     public Grid<GridNode> Grid { get { return grid; } }
@@ -20,6 +24,10 @@ public class LocationGridSave : MonoBehaviour
     private void Awake()
     {
         grid = new Grid<GridNode>(height, weight, cellSize, position, (Grid<GridNode> g, int x, int y) => new GridNode(g, x, y));
+
+        dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
+
+        spawnLocations =  gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
     }
 
     IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)
@@ -54,5 +62,28 @@ public class LocationGridSave : MonoBehaviour
     public void CheckGridForObjects(NewGameLoadingHandler newGameLoading)
     {
         StartCoroutine(WaitToCheck(newGameLoading));
+    }
+
+    public void SpawnEnemy()
+    {
+        if(dayTimer.CanSpawnEnemy() == true)
+        {
+            foreach(SpawnEnemyInArea spawnLocation in spawnLocations)
+            {
+                spawnLocation.SpawnEnemy();
+            }
+        }
+    }
+
+    public void ChangeLocation()
+    {
+        AIPathFinding[] enemy = gameObject.GetComponentsInChildren<AIPathFinding>();
+
+        foreach(AIPathFinding aIPathFinding in enemy)
+        {
+            Destroy(aIPathFinding.gameObject);
+        }
+
+        gameObject.SetActive(false);
     }
 }

@@ -75,8 +75,6 @@ public class CraftingHandler : MonoBehaviour
                     craftCanvas.gameObject.SetActive(true);
                     craftCanvas.ReinitializeAllCraftings();
 
-                    canvasTabsOpen.SetCanOpenTabs(false);
-
                     quickSlots.SetActive(false);
                 }
                 else
@@ -85,21 +83,8 @@ public class CraftingHandler : MonoBehaviour
                     playerInventory.SetActive(false);
                     craftCanvas.gameObject.SetActive(false);
 
-                    canvasTabsOpen.SetCanOpenTabs(true);
-
                     quickSlots.SetActive(true);
                 }
-            }
-
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                playerMovement.TabOpen = false;
-                playerInventory.SetActive(false);
-                craftCanvas.gameObject.SetActive(false);
-
-                canvasTabsOpen.SetCanOpenTabs(true);
-
-                quickSlots.SetActive(true);
             }
         }
     }

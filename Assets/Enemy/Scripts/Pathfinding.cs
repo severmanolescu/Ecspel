@@ -29,7 +29,10 @@ public class Pathfinding
         grid.GetXY(startWorldPosition, out int startX, out int startY);
         grid.GetXY(endWorldPosition, out int endX, out int endY);
 
-        if(grid.gridArray[endX, endY].isWalkable == false)
+        if(grid != null && 
+           grid.gridArray.GetLength(0) > endX && 
+           grid.gridArray.GetLength(1) > endY &&
+           grid.gridArray[endX, endY].isWalkable == false)
         {
             return null;
         }

@@ -71,9 +71,12 @@ public class DialogueDisplay : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            dialogueChanger.DeleteNPC();
+            if (dialogueChanger != null)
+            {
+                dialogueChanger.DeleteNPC();
 
-            dialogueChanger = null;
+                dialogueChanger = null;
+            }
 
             DeleteDialogue();
         }

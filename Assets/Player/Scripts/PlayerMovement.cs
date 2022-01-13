@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
             inputs.x = Input.GetAxisRaw("Horizontal");
             inputs.y = Input.GetAxisRaw("Vertical");
 
-            inputs = inputs.normalized;
+            inputs = inputs.normalized;        
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -77,8 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
             speed = inputs.SqrMagnitude();
 
-            animator.SetFloat("Horizontal", inputs.x);
-            animator.SetFloat("Vertical", inputs.y);
+            SetAnimatorVariables();
+
             animator.SetFloat("Speed", speed);
 
             if (inputs != Vector2.zero)
@@ -97,6 +97,35 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", 0f);
             animator.SetFloat("Vertical", 0f);
             animator.SetFloat("Speed", 0f);
+        }
+    }
+
+    private void SetAnimatorVariables()
+    {
+        if (inputs.x > 0 && inputs.y > 0) //Up right
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", inputs.y);
+        }
+        else if (inputs.x < 0 && inputs.y > 0) //Up left
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", inputs.y);
+        }
+        else if (inputs.x > 0 && inputs.y < 0) //Down right
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", inputs.y);
+        }
+        else if (inputs.x < 0 && inputs.y < 0) //Down left
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", inputs.y);
+        }
+        else
+        {
+            animator.SetFloat("Horizontal", inputs.x);
+            animator.SetFloat("Vertical", inputs.y);
         }
     }
 

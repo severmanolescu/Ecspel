@@ -15,11 +15,11 @@ public class CanvasTabsOpen : MonoBehaviour
 
     [Header("Menu canvas")]
     [SerializeField] private GameObject menuCanvas;
-    [SerializeField] private GameObject menuSettingsCanvas;
-    [SerializeField] private GameObject menuQuitCanvas;
+    [SerializeField] private GameObject menuPrincipal;
     [SerializeField] private GameObject chestStorage;
+    [SerializeField] private GameObject craftingCanvas;
 
-    private bool canOpenTabs = true;
+    public bool canOpenTabs = true;
 
     IEnumerator Wait()
     {
@@ -38,7 +38,7 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
-        canvasEffects = transform.Find("Field/Effect").gameObject;
+        canvasEffects = transform.Find("EffectDetailed").gameObject;
 
         playerInventory = transform.Find("PlayerItems").gameObject;
         quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
@@ -116,27 +116,32 @@ public class CanvasTabsOpen : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if(questShow.gameObject.activeSelf == false &&
-                    playerInventory.activeSelf == false && 
-                    chestStorage.activeSelf == false)
+                   playerInventory.activeSelf == false && 
+                   chestStorage.activeSelf == false &&
+                   craftingCanvas.activeSelf == false)
                 {
-                    if (menuCanvas.activeSelf == true)
+                    if (menuPrincipal.activeSelf == true)
                     {
-                        Time.timeScale = 1f;
 
-                        playerMovement.TabOpen = false;
+                        if (menuCanvas.activeSelf == true)
+                        {
+                            Time.timeScale = 1f;
 
-                        quickSlot.gameObject.SetActive(true);
+                            playerMovement.TabOpen = false;
+
+                            quickSlot.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            Time.timeScale = 0;
+
+                            playerMovement.TabOpen = true;
+
+                            quickSlot.gameObject.SetActive(false);
+                        }
+
+                        menuCanvas.SetActive(!menuCanvas.activeSelf);
                     }
-                    else
-                    {
-                        Time.timeScale = 0;
-
-                        playerMovement.TabOpen = true;
-
-                        quickSlot.gameObject.SetActive(false);
-                    }
-
-                    menuCanvas.SetActive(!menuCanvas.activeSelf);
                 }
                 else
                 {
@@ -154,6 +159,9 @@ public class CanvasTabsOpen : MonoBehaviour
                     chestStorage.SetActive(false);
 
                     quickSlot.Reinitialize();
+
+                    craftingCanvas.SetActive(false);
+
                 }                           
             }
         }

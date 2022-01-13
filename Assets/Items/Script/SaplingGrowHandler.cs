@@ -66,16 +66,18 @@ public class SaplingGrowHandler : MonoBehaviour
 
                                 GameObject.Find("Global/DayTimer").GetComponent<CropGrowHandler>().RemoveSaplingList(this);
 
-                                Destroy(gameObject);
+                                DestroyObject();
 
                             }
                             else if(sapling.Mature != null)
                             {
                                 state = 2;
 
-                                GameObject tree = Instantiate(sapling.Mature, transform.position, transform.rotation);
+                                GameObject tree = Instantiate(sapling.AlmostMature, transform.position, transform.rotation);
 
-                                Destroy(gameObject);
+                                tree.GetComponent<PositionInGrid>().LocationGrid = GetComponentInParent<LocationGridSave>();
+
+                                DestroyObject();
                             }
 
                             break;
@@ -87,9 +89,11 @@ public class SaplingGrowHandler : MonoBehaviour
                             {
                                 state = 2;
 
-                                GameObject tree = Instantiate(sapling.Mature, transform.position, transform.rotation);
+                                GameObject tree = Instantiate(sapling.AlmostMature, transform.position, transform.rotation);
 
-                                Destroy(gameObject);
+                                tree.GetComponent<PositionInGrid>().LocationGrid = GetComponentInParent<LocationGridSave>();
+
+                                DestroyObject();
                             }
 
                             break;

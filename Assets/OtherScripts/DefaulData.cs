@@ -42,11 +42,11 @@ public static class DefaulData
 
     // Little Slime
     public static float slimeLittleAttackPower = 2.5f;
-    public static float slimeLittleAttackDistance = 1f;
+    public static float slimeLittleAttackDistance = 2f;
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
-    public static float slimeBigAttackDistance = 1.5f;    
+    public static float slimeBigAttackDistance = 2f;    
 
     public static Item GetItemWithAmount(Item item, int amount)
     {

@@ -65,25 +65,4 @@ public class NewGameLoadingHandler : MonoBehaviour
 
         StartCoroutine(WaitForAllLocations(loadSceneHandler));
     }
-
-    IEnumerator WaitForAllLocations1()
-    {
-        SpawnObjectsInAreas();
-
-        yield return new WaitForSeconds(2);
-
-        while (gridCheck < noOfGrid)
-        {
-            yield return null;
-        }
-
-        Destroy(gameObject);
-    }
-
-    private void Start()
-    {
-        StartAllGridLocationCheckObjects();
-
-        StartCoroutine(WaitForAllLocations1());
-    }
 }

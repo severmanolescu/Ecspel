@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class DayTimerHandler : MonoBehaviour
 {
+    [SerializeField] private int hourToSpawnEnemyStart;
+    [SerializeField] private int hourToSpawnEnemyFinal;
+
     [Header("Day details:")]
     [SerializeField] private float timeSpeed = .5f;
 
@@ -62,7 +65,7 @@ public class DayTimerHandler : MonoBehaviour
 
         intensity = (hours + minutes / 60) / 24;
 
-        sourceLight.ChangeLightsIntensity(1 - intensity);
+        sourceLight.ChangeLightsIntensity(1f - intensity);
 
         globalLight.color = gradient.Evaluate(intensity);
 
@@ -112,5 +115,15 @@ public class DayTimerHandler : MonoBehaviour
         startDay = days;
 
         sleep = true;
+    }
+
+    public bool CanSpawnEnemy()
+    {
+        if((hours >= hourToSpawnEnemyStart && hours <= 23) ||
+           (hours >= 0 && hours <= hourToSpawnEnemyFinal))
+        {
+            return true;
+        }
+        return false;
     }
 }

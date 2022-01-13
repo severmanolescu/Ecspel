@@ -6,6 +6,8 @@ public class BuildSystemHandler : MonoBehaviour
     [SerializeField] private GameObject prefabGameObject;
     [SerializeField] private GameObject itemWorldPrefab;
 
+    private Transform playerHouseGround;
+
     private Item item;
 
     private bool startPlace = false;
@@ -26,6 +28,8 @@ public class BuildSystemHandler : MonoBehaviour
     private void Start()
     {
         spawnPosition = GameObject.Find("PlayerHouseGround").transform;
+
+        playerHouseGround = GameObject.Find("PlayerHouseGround").transform;
 
         ChangeGridToSystems(Grid);
     }
@@ -160,7 +164,8 @@ public class BuildSystemHandler : MonoBehaviour
             {
                 for (int j = gridNode.y - 1; j <= gridNode.y + 1; j++)
                 {
-                    if (Grid.gridArray[i, j] != null)
+                    if (i >= 0 && i < Grid.gridArray.GetLength(0) &&
+                        j >= 0 && j < Grid.gridArray.GetLength(1))
                     {
                         Grid.gridArray[i, j].canPlace = false;
                         Grid.gridArray[i, j].canPlant = false;
@@ -195,6 +200,9 @@ public class BuildSystemHandler : MonoBehaviour
         {
             gridNode.objectInSpace = newObject;
         }
+
+
+        newObject.transform.SetParent(playerHouseGround);
 
         item.Amount -= 1;
 
