@@ -35,6 +35,8 @@ public class DayTimerHandler : MonoBehaviour
 
     public int Days { get { return days; } }
 
+    public int Hours { get => hours; set => hours = value; }
+
     private void Awake()
     {
         globalLight = gameObject.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
@@ -51,11 +53,11 @@ public class DayTimerHandler : MonoBehaviour
         if(minutes >= 60)
         {
             minutes = 0;
-            hours++;
+            Hours++;
 
-            if(hours >= 24)
+            if(Hours >= 24)
             {
-                hours = 0;
+                Hours = 0;
                 days++;
 
                 GetComponent<CropGrowHandler>().DayChange(days);
@@ -63,13 +65,13 @@ public class DayTimerHandler : MonoBehaviour
             }
         }
 
-        intensity = (hours + minutes / 60) / 24;
+        intensity = (Hours + minutes / 60) / 24;
 
         sourceLight.ChangeLightsIntensity(1f - intensity);
 
         globalLight.color = gradient.Evaluate(intensity);
 
-        if(sleep == true && wakeupHour == hours && days > startDay)
+        if(sleep == true && wakeupHour == Hours && days > startDay)
         {
             timeSpeed = speed;
 
@@ -84,21 +86,21 @@ public class DayTimerHandler : MonoBehaviour
     public void SetTimer(float minutes, int hours, int days)
     {
         this.minutes = minutes;
-        this.hours  = hours;
+        this.Hours  = hours;
         this.days   = days;
     }
 
     public void GetTimer(out float minutes, out int hours, out int days)
     {
         minutes = (int)this.minutes;
-        hours   = this.hours;
-        days    = this.hours;
+        hours   = this.Hours;
+        days    = this.Hours;
     }
 
     public void GetTimer(out float minutes, out int hours)
     {
         minutes = this.minutes;
-        hours = this.hours;
+        hours = this.Hours;
     }
 
     public void GetIntensity(out float intensity)
@@ -119,8 +121,8 @@ public class DayTimerHandler : MonoBehaviour
 
     public bool CanSpawnEnemy()
     {
-        if((hours >= hourToSpawnEnemyStart && hours <= 23) ||
-           (hours >= 0 && hours <= hourToSpawnEnemyFinal))
+        if((Hours >= hourToSpawnEnemyStart && Hours <= 23) ||
+           (Hours >= 0 && Hours <= hourToSpawnEnemyFinal))
         {
             return true;
         }

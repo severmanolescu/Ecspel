@@ -16,6 +16,13 @@ public class TeleportNPC : MonoBehaviour
         if(collision.CompareTag("NPC"))
         {
             collision.transform.position = teleportToPoint.position;
+
+            NpcAIHandler npcAIHandler = collision.GetComponent<NpcAIHandler>();
+
+            if(npcAIHandler != null)
+            {
+                npcAIHandler.LocationChange();
+            }
         }
     }
 }

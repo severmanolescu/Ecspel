@@ -8,15 +8,13 @@ public class NpcPathFinding : MonoBehaviour
 
     [SerializeField] private float distanceTolerance = .1f;
 
-    [SerializeField] private LocationGridSave locationGrid;
+    private LocationGridSave locationGrid;
 
-    private float initialScaleX;
+    private bool canWalk;
 
     private List<Vector3> path = new List<Vector3>();
 
-    private Vector3 changeScale;
-
-    [SerializeField] private Vector3 toLocation;
+    private Vector3 toLocation;
 
     private int pathCurrentIndex;
 
@@ -24,17 +22,19 @@ public class NpcPathFinding : MonoBehaviour
 
     private Animator animator;
 
-    public LocationGridSave LocationGrid { set { locationGrid = value; LocationGridChange(value); } }
+    private NpcAIHandler npcAIHandler;
+
+    public LocationGridSave LocationGrid { set { locationGrid = value; ChangePathfindingLocation(); } }
+
+    public Vector3 ToLocation { get { return toLocation; } set { toLocation = value; GetNewPath(); } }
+
+    public bool CanWalk { get => canWalk; set => canWalk = value; }
 
     private void Awake()
     {
-        initialScaleX = transform.localScale.x;
-
-        changeScale = transform.localScale;
-
-        pathfinding = new Pathfinding(locationGrid.Grid);
-
         animator = GetComponent<Animator>();
+
+        npcAIHandler = GetComponent<NpcAIHandler>();
     }
 
     private void MoveToPoint(Vector3 position)
@@ -44,24 +44,13 @@ public class NpcPathFinding : MonoBehaviour
         float distanceBefore = Vector3.Distance(transform.position, position);
 
         transform.position = transform.position + moveDir * speed * Time.deltaTime;
-
-        if (position.x > transform.position.x)
-        {
-            changeScale.x = initialScaleX;
-
-            transform.localScale = changeScale;
-        }
-        else
-        {
-            changeScale.x = -initialScaleX;
-
-            transform.localScale = changeScale;
-        }
     }
 
     private void GetNewPath()
     {
-        path = pathfinding.FindPath(transform.position, toLocation);
+        path = pathfinding.FindPath(transform.position, ToLocation);
+
+        pathCurrentIndex = 0;
 
         if (path != null && path.Count > 1)
         {
@@ -80,12 +69,8 @@ public class NpcPathFinding : MonoBehaviour
         if(transform.position.x < position.x)
         {
             direction.x = 1;
-        }
-        else if (transform.position.x == position.x)
-        {
-            direction.x = 0;
-        }
-        else
+        } 
+        else if(transform.position.x > position.x)
         {
             direction.x = -1;
         }
@@ -94,36 +79,38 @@ public class NpcPathFinding : MonoBehaviour
         {
             direction.y = 1;
         }
-        else if (transform.position.y - position.y <= .1f)
-        {
-            direction.y = 0;
-        }
-        else
+        else if (transform.position.y > position.y)
         {
             direction.y = -1;
-        }
-
-        if(direction != Vector3.zero)
-        {
-            animator.SetFloat("HorizontalFacing", direction.x);
-            animator.SetFloat("VerticalFacing", direction.y);
         }
 
         animator.SetFloat("Horizontal", direction.x);
         animator.SetFloat("Vertical", direction.y);
 
-        animator.SetBool("Walking", true);
+        if (direction != Vector3.zero)
+        {
+            animator.SetFloat("HorizontalFacing", direction.x);
+            animator.SetFloat("VerticalFacing", direction.y);
+
+            animator.SetBool("Walking", true);
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        if(toLocation != null && locationGrid != null)
+        if(ToLocation != null && 
+           locationGrid != null && 
+           CanWalk == true)
         {
             if(path == null || path.Count == 0)
             {
                 GetNewPath();   
             }
-
             else
             {
                 if (pathCurrentIndex < path.Count)
@@ -142,18 +129,63 @@ public class NpcPathFinding : MonoBehaviour
                     animator.SetBool("Walking", false);
 
                     path.Clear();
+
+                    npcAIHandler.ArrivedAtLocation();
                 }
             }
         }
     }
 
-    public void ChangeToLocation(Vector3 location)
+    private void ChangePathfindingLocation()
     {
-        this.toLocation = location;
+        pathfinding = new Pathfinding(locationGrid.Grid);
     }
 
-    private void LocationGridChange(LocationGridSave locationGrid)
+    public void ChangeLocation(LocationGridSave locationGrid, Vector3 toLocation)
     {
+        this.locationGrid = locationGrid;
 
+        ChangePathfindingLocation();
+
+        ToLocation = toLocation;
+    }
+
+    public void MoveIdleAnimation(int direction) // 0 - left; 1 - up; 2 - right; 3 - down
+    {
+        Vector3 newDirection = Vector3.zero;
+
+        switch(direction)
+        {
+            case 0:
+                {
+                    newDirection = Vector3.left;
+
+                    break;
+                }
+            case 1:
+                {
+                    newDirection = Vector3.up;
+
+                    break;
+                }
+            case 2:
+                {
+                    newDirection = Vector3.right;
+
+                    break;
+                }
+            case 3:
+                {
+                    newDirection = Vector3.down;
+
+                    break;
+                }
+        }
+
+        if(newDirection != Vector3.zero)
+        {
+            animator.SetFloat("HorizontalFacing", newDirection.x);
+            animator.SetFloat("VerticalFacing", newDirection.y);
+        }
     }
 }

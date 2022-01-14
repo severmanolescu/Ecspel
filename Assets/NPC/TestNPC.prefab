@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.1898, y: -0.5351}
+  m_AnchoredPosition: {x: 0.18979979, y: -0.5351}
   m_SizeDelta: {x: -0.8448, y: -1.4256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6239223006671365135
@@ -145,10 +145,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6239223006972227989}
   - component: {fileID: 6239223006972227990}
+  - component: {fileID: 1302526018}
   - component: {fileID: 6239223006972227988}
   - component: {fileID: 1302526016}
   - component: {fileID: 6239223006972227987}
   - component: {fileID: 1302526012}
+  - component: {fileID: 5682173443252739459}
   m_Layer: 0
   m_Name: TestNPC
   m_TagString: NPC
@@ -225,6 +227,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1302526018
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239223006972227991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd147c725b3c6b24684007beadb582a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!58 &6239223006972227988
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -289,7 +311,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcTimeSchedules: []
   locationGrid: {fileID: 0}
-  speed: 0
+--- !u!114 &5682173443252739459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239223006972227991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c0360d22cb5ef428e8138e8cbe08c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  distanceTolerance: 0.1
 --- !u!1 &6239223007117830053
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,8 +452,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6239223007131335126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.003, y: 0.777, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: -0.018, y: 2.895, z: 0}
+  m_LocalScale: {x: 3.8749502, y: 3.87495, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6239223006972227989}
@@ -531,7 +566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.104500055, y: 0.0021998882}
+  m_AnchoredPosition: {x: 0.10450053, y: 0.0021998882}
   m_SizeDelta: {x: 0.3484, y: -0.0073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6239223007426510808

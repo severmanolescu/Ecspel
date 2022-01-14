@@ -11,6 +11,8 @@ public class LocationGridSave : MonoBehaviour
 
     [SerializeField] private bool canPlantToGrid;
 
+    public bool test = false;
+
     private SpawnEnemyInArea[] spawnLocations;
 
     private DayTimerHandler dayTimer;
@@ -85,5 +87,13 @@ public class LocationGridSave : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if(test)
+        {
+            StartCoroutine(WaitToCheck(null));
+        }
     }
 }

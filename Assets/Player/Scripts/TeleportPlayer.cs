@@ -12,6 +12,8 @@ public class TeleportPlayer : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
+    [SerializeField] private bool deactivatePrevLocation = true;
+
     private LocationGridSave newGrid;
     private LocationGridSave oldGrid;
 
@@ -44,7 +46,7 @@ public class TeleportPlayer : MonoBehaviour
 
             collision.transform.position = TeleportToPoint.position;
 
-            if (oldGrid != null)
+            if (oldGrid != null && deactivatePrevLocation == true)
             {
                 oldGrid.ChangeLocation();
             }
