@@ -8,6 +8,9 @@ using UnityEngine.Audio;
 
 public class PrincipalMenuHandler : MonoBehaviour
 {
+    [Header("Load game object")]
+    [SerializeField] private LoadSceneHandler loadSceneHandler;
+
     [Header("Principal buttons")]
     [SerializeField] private GameObject principalMenu;
     [SerializeField] private GameObject settingsMenu;
@@ -19,6 +22,15 @@ public class PrincipalMenuHandler : MonoBehaviour
     [SerializeField] private Slider volumeEffectSlider;
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private TMP_Dropdown resolutionDropDown;
+
+    [Header("Load save game")]
+    [SerializeField] private GameObject loadGameMenu;
+    [SerializeField] private GameObject deleteSave;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject deleteButton;
+
+    [Header("Open principal scene")]
+    [SerializeField] private GameObject openMenu;
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip buttonClick;
@@ -35,6 +47,16 @@ public class PrincipalMenuHandler : MonoBehaviour
     {
         settingsMenu.SetActive(false);
         quitConsole.SetActive(false);
+
+        if (loadGameMenu != null)
+        {
+            loadGameMenu.SetActive(false);
+        }
+
+        if (openMenu != null)
+        {
+            openMenu.SetActive(false);
+        }
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -97,6 +119,22 @@ public class PrincipalMenuHandler : MonoBehaviour
                 quitConsole.SetActive(false);
                 principalMenu.SetActive(true);
             }
+            else if (deleteSave != null && deleteSave.activeSelf == true)
+            {
+                deleteSave.SetActive(false);
+            }
+            else if (loadGameMenu != null && loadGameMenu.activeSelf == true)
+            {
+                loadGameMenu.SetActive(false);
+                principalMenu.SetActive(true);
+
+                HideSaveButtons();
+            }
+            else if(openMenu != null && openMenu.activeSelf == true)
+            {
+                openMenu.SetActive(false);
+                principalMenu.SetActive(true);
+            }
             else
             {
                 settingsMenu.SetActive(false);
@@ -104,6 +142,12 @@ public class PrincipalMenuHandler : MonoBehaviour
                 quitConsole.SetActive(true);
             }
         }
+    }
+
+    public void HideSaveButtons()
+    {
+        playButton.SetActive(false);
+        deleteButton.SetActive(false);
     }
 
     private void ReadDataFromIni()
@@ -238,6 +282,19 @@ public class PrincipalMenuHandler : MonoBehaviour
         principalMenu.SetActive(false);
         settingsMenu.SetActive(true);
         quitConsole.SetActive(false);
+
+        if (loadGameMenu != null)
+        {
+            loadGameMenu.SetActive(false);
+        }
+    }
+
+    public void OpenLoadGame()
+    {
+        principalMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+        quitConsole.SetActive(false);
+        loadGameMenu.SetActive(true);
     }
 
     public void OpenPrincipalMenu()
@@ -245,15 +302,31 @@ public class PrincipalMenuHandler : MonoBehaviour
         settingsMenu.SetActive(false);
         principalMenu.SetActive(true);
         quitConsole.SetActive(false);
+
+        if (loadGameMenu != null)
+        {
+            loadGameMenu.SetActive(false);
+        }
+
+        if (openMenu != null)
+        {
+            openMenu.SetActive(false);
+        }
     }
 
-    public void PlayButton()
+    public void PlayButton(int indexOfSaveGame)
     {
+        loadGameMenu.gameObject.SetActive(true);
+
+        loadSceneHandler.LoadScene(1, indexOfSaveGame);
+
         SceneManager.LoadScene(1);
     }
 
     public void BackToMenu()
     {
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene(0);
     }
 
@@ -316,5 +389,19 @@ public class PrincipalMenuHandler : MonoBehaviour
     {
         audioSource.clip = buttonClick;
         audioSource.Play();
+    }
+
+    public void OpenMenuConsole()
+    {
+        openMenu.SetActive(true);
+
+        principalMenu.SetActive(false);
+    }
+
+    public void CloseMenuConsole()
+    {
+        openMenu.SetActive(false);
+
+        principalMenu.SetActive(true);
     }
 }

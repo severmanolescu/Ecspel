@@ -73,7 +73,14 @@ public class NpcAIHandler : MonoBehaviour
 
     public void ArrivedAtLocation()
     {
-        if (npcTimeSchedules[scheduleIndex].Seconds != 0)
+        if(npcTimeSchedules[scheduleIndex].Location == transform)
+        {
+            if (npcTimeSchedules[scheduleIndex].Seconds != 0)
+            {
+                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
+            }
+        }
+        else if (npcTimeSchedules[scheduleIndex].Seconds != 0)
         {
             StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
         }

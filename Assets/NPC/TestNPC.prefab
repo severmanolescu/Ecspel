@@ -157,7 +157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6239223006972227989
 Transform:
   m_ObjectHideFlags: 0
@@ -309,8 +309,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288ff9824ae5f3f4588182768b31dbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcTimeSchedules: []
-  locationGrid: {fileID: 0}
+  npcTimeSchedules:
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 0
+    point: {fileID: 6239223006972227989}
 --- !u!114 &5682173443252739459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c0360d22cb5ef428e8138e8cbe08c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3.5
   distanceTolerance: 0.1
 --- !u!1 &6239223007117830053
 GameObject:

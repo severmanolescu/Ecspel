@@ -8,7 +8,21 @@ public class TeleportNPC : MonoBehaviour
 
     private void Awake()
     {
-        teleportToPoint = GetComponent<TeleportPlayer>().TeleportToPoint;
+        TeleportPlayer teleportPlayer = GetComponent<TeleportPlayer>();
+
+        if(teleportPlayer != null)
+        {
+            teleportToPoint = teleportPlayer.TeleportToPoint;
+        }
+        else
+        {
+            TeleportPlayerKeyPress teleportPlayerKey = GetComponent<TeleportPlayerKeyPress>();
+
+            if (teleportPlayerKey != null)
+            {
+                teleportToPoint = teleportPlayerKey.TeleportToPoint;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

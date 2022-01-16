@@ -8,6 +8,8 @@ public class CropGrowHandler : MonoBehaviour
 
     private List<SaplingGrowHandler> saplingGrows = new List<SaplingGrowHandler>();
 
+    private List<SaplingGrowHandler> toRemoveFromList = new List<SaplingGrowHandler>();
+
     public void DayChange(int day)
     {
         if (cropGrows.Count > 0)
@@ -22,8 +24,21 @@ public class CropGrowHandler : MonoBehaviour
         {
             foreach (SaplingGrowHandler sapling in saplingGrows)
             {
-                sapling.DayChange(day);
+                if (sapling != null)
+                {
+                    sapling.DayChange(day);
+                }
             }
+        }
+
+        if(toRemoveFromList.Count > 0)
+        {
+            foreach (SaplingGrowHandler sapling in toRemoveFromList)
+            {
+                saplingGrows.Remove(sapling);
+            }
+
+            toRemoveFromList.Clear();
         }
     }
 
@@ -44,6 +59,6 @@ public class CropGrowHandler : MonoBehaviour
 
     public void RemoveSaplingList(SaplingGrowHandler crop)
     {
-        saplingGrows.Remove(crop);
+        toRemoveFromList.Remove(crop);
     }
 }

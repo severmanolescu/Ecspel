@@ -27,6 +27,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private GameObject player = null;
 
+    public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>().gameObject;
@@ -62,9 +64,11 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     {
         if(player != null && Input.GetKeyDown(KeyCode.F))
         {
-            if (dayTimer.Hours >= startHour && dayTimer.Hours <= finishHour)
+            if ((startHour == 0 && finishHour == 0) || 
+                 dayTimer.Hours >= startHour && 
+                 dayTimer.Hours <= finishHour)
             {
-                player.transform.position = teleportToPoint.position;
+                player.transform.position = TeleportToPoint.position;
 
                 currentCamera.SetActive(false);
                 newCamera.SetActive(true);

@@ -134,6 +134,10 @@ public class NpcPathFinding : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            animator.SetBool("Walking", false);
+        }
     }
 
     private void ChangePathfindingLocation()

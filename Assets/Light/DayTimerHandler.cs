@@ -33,7 +33,7 @@ public class DayTimerHandler : MonoBehaviour
     private int startDay;
     private SleepHandler sleepHandler;
 
-    public int Days { get { return days; } }
+    public int Days { get { return days; } set { days = value; } }
 
     public int Hours { get => hours; set => hours = value; }
 
