@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,12 @@ public class PlayerInventory : MonoBehaviour
 
     private List<ItemSlot> itemsSlot;
 
+    private GetItemFromNO getItem;
+
     private void Awake()
     {
+        getItem = GameObject.Find("Global").GetComponent<GetItemFromNO>();
+
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
     }
 
@@ -214,5 +219,38 @@ public class PlayerInventory : MonoBehaviour
         }
 
         quickSlots.Reinitialize();
+    }
+
+    public List<Tuple<int, int>> GetAllItemsNo()
+    {
+        List<Tuple<int, int>> items = new List<Tuple<int, int>>();
+
+        foreach(ItemSlot itemSlot in itemsSlot)
+        {
+            if(itemSlot.Item != null)
+            {
+                items.Add(new Tuple<int, int>(getItem.GetItemNO(itemSlot.Item), itemSlot.Item.Amount));
+            }
+        }
+
+        return items;
+    }
+
+    public void SetInventoryFromSave(List<Tuple<int, int>> itemsNo)
+    {
+        foreach(ItemSlot slot in itemsSlot)
+        {
+            slot.Item = null;
+
+            slot.ReinitializeItem();
+        }
+
+        foreach(Tuple<int, int> item in itemsNo)
+        {
+            Item newItem = getItem.ItemFromNo(item.Item1).Copy();
+            newItem.Amount = item.Item2;
+
+            AddItem(newItem);
+        }
     }
 }

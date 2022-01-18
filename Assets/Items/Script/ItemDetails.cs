@@ -6,22 +6,18 @@ public class ItemDetails : MonoBehaviour
 {
     [SerializeField] private GameObject playerItems;
 
+    private ItemSprites itemSprites;
+
     private Image itemSpriteObject;
 
     private TextMeshProUGUI itemNameObject;
     private TextMeshProUGUI itemDetailsObject;
 
-    private void Update()
-    {
-        if(playerItems.activeSelf == false)
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
     private void Awake()
     {
         gameObject.SetActive(false);
+
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
         Image[] auxiliarObjectImage = gameObject.GetComponentsInChildren<Image>();
         TextMeshProUGUI[] auxiliarObjectText = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
@@ -32,11 +28,19 @@ public class ItemDetails : MonoBehaviour
         itemDetailsObject = auxiliarObjectText[1];
     }
 
+    private void Update()
+    {
+        if (playerItems.activeSelf == false)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     public void SetItem(Item item)
     {
         if (item != null)
         {
-            itemSpriteObject.sprite = item.Sprite;
+            itemSpriteObject.sprite = itemSprites.GetItemSprite(item.ItemNO);
             itemNameObject.text = item.Name;
             itemDetailsObject.text = item.Details;
 

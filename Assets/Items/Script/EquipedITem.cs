@@ -10,7 +10,9 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     [SerializeField] private PlayerInventory playerInventory;
 
     [SerializeField] private ItemDrag itemDrag;
-    
+
+    private ItemSprites itemSprites;
+
     private Item item = null;
 
     private Image image;
@@ -19,6 +21,8 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private void Awake()
     {
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         Image[] auxiliarImage = gameObject.GetComponentsInChildren<Image>();
 
         image = auxiliarImage[1];
@@ -36,7 +40,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 if(previousSlot != null)
                     previousSlot.DeleteItem();
 
-                image.sprite = item.Sprite;
+                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
                 image.gameObject.SetActive(true);
             }
@@ -49,7 +53,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 if (previousSlot != null)
                     previousSlot.SetItem(auxItemChange);
 
-                image.sprite = item.Sprite;
+                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
                 image.gameObject.SetActive(true);
             }
@@ -64,7 +68,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             {
                 this.item = item;
 
-                image.sprite = item.Sprite;
+                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
                 image.gameObject.SetActive(true);
             }
@@ -74,7 +78,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
                 this.item = item;
 
-                image.sprite = item.Sprite;
+                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
                 image.gameObject.SetActive(true);
             }

@@ -26,7 +26,13 @@ public class DayTimerHandler : MonoBehaviour
 
     private UnityEngine.Rendering.Universal.Light2D globalLight;
 
+    private CropGrowHandler cropGrow;
+
+    private SpawnObjectsInAreaHandle spawnObjects;
+
     private SourceLightShadow sourceLight;
+
+    private SaveSystemHandler saveSystem;
 
     private bool sleep = false;
     private float speed;
@@ -44,6 +50,12 @@ public class DayTimerHandler : MonoBehaviour
         sourceLight = gameObject.GetComponent<SourceLightShadow>();
 
         speed = timeSpeed;
+
+        spawnObjects = GetComponent<SpawnObjectsInAreaHandle>();
+
+        cropGrow = GetComponent<CropGrowHandler>();
+
+        saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
     }
 
     private void Update()
@@ -60,8 +72,10 @@ public class DayTimerHandler : MonoBehaviour
                 Hours = 0;
                 days++;
 
-                GetComponent<CropGrowHandler>().DayChange(days);
-                GetComponent<SpawnObjectsInAreaHandle>().DayChange(days);
+                cropGrow.DayChange(days);
+                spawnObjects.DayChange(days);
+
+                saveSystem.SaveGame();
             }
         }
 

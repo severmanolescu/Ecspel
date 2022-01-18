@@ -111,4 +111,19 @@ public class QuestTabHandler : MonoBehaviour
             }
         }
     }
+
+    public List<Quest> GetAllQuests()
+    {
+        List<Quest> quests = new List<Quest>();
+
+        foreach(QuestButton questButton in questButtons)
+        {
+            if(questButton.Quest != null)
+            {
+                quests.Add(questButton.Quest);
+            }
+        }    
+
+        return quests;
+    }
 }

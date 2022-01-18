@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CraftSetData : MonoBehaviour
 {
+    private ItemSprites itemSprites;
+
     private Craft craft = null;
 
     private bool haveItems = false;
@@ -21,7 +23,9 @@ public class CraftSetData : MonoBehaviour
 
     private void Awake()
     {
-        playerInventory = GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
+        playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
+
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
         Image[] images = GetComponentsInChildren<Image>();
 
@@ -38,7 +42,7 @@ public class CraftSetData : MonoBehaviour
         {
             this.craft = craft;
 
-            receiveItem.sprite = craft.ReceiveItem.Item.Sprite;
+            receiveItem.sprite = itemSprites.GetItemSprite(craft.ReceiveItem.Item.ItemNO);
             receiveItem.GetComponent<ChangeText>().Change(craft.ReceiveItem.Amount.ToString());
 
             GetComponent<Button>().onClick.AddListener(delegate { CraftItem(); });
@@ -47,7 +51,7 @@ public class CraftSetData : MonoBehaviour
             {
                 case 1:
                     {
-                        needItem1.sprite = craft.NeedItem[0].Item.Sprite;
+                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
                         needItem2.gameObject.SetActive(false);
@@ -57,10 +61,10 @@ public class CraftSetData : MonoBehaviour
                     }
                 case 2:
                     {
-                        needItem1.sprite = craft.NeedItem[0].Item.Sprite;
+                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
-                        needItem2.sprite = craft.NeedItem[1].Item.Sprite;
+                        needItem2.sprite = itemSprites.GetItemSprite(craft.NeedItem[1].Item.ItemNO);
                         needItem2.GetComponent<ChangeText>().Change(craft.NeedItem[1].Amount.ToString());
                                                                         
                         needItem3.gameObject.SetActive(false);
@@ -69,13 +73,13 @@ public class CraftSetData : MonoBehaviour
                     }
                 case 3:
                     {
-                        needItem1.sprite = craft.NeedItem[0].Item.Sprite;
+                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
-                        needItem2.sprite = craft.NeedItem[1].Item.Sprite;
+                        needItem2.sprite = itemSprites.GetItemSprite(craft.NeedItem[1].Item.ItemNO);
                         needItem2.GetComponent<ChangeText>().Change(craft.NeedItem[1].Amount.ToString());
 
-                        needItem3.sprite = craft.NeedItem[2].Item.Sprite;
+                        needItem3.sprite = itemSprites.GetItemSprite(craft.NeedItem[2].Item.ItemNO);
                         needItem3.GetComponent<ChangeText>().Change(craft.NeedItem[2].Amount.ToString());
 
                         break;

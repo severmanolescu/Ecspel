@@ -8,12 +8,16 @@ public class QuickSlot : MonoBehaviour
 
     private TextMeshProUGUI amount;
 
+    private ItemSprites itemSprite;
+
     private Image[] itemSprites;
 
     public Item Item { get { return equiped.Item; } }
 
     private void Awake()
     {
+        itemSprite = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         itemSprites = gameObject.GetComponentsInChildren<Image>();
 
         equiped = GameObject.Find("Player/Canvas/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
@@ -22,7 +26,7 @@ public class QuickSlot : MonoBehaviour
 
         if (equiped.Item != null)
         {
-            itemSprites[1].sprite = equiped.Item.Sprite;
+            itemSprites[1].sprite = itemSprite.GetItemSprite(equiped.Item.ItemNO);
         }
         else
         {
@@ -38,7 +42,7 @@ public class QuickSlot : MonoBehaviour
     {
         if (equiped.Item != null)
         {
-            itemSprites[1].sprite = equiped.Item.Sprite;
+            itemSprites[1].sprite = itemSprite.GetItemSprite(equiped.Item.ItemNO);
             itemSprites[1].gameObject.SetActive(true);
 
             if(equiped.Item.Amount <= 0)

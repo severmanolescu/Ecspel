@@ -13,12 +13,16 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private Image itemSprite;
     private TextMeshProUGUI amount;
 
+    private ItemSprites itemSprites;
+
     private Item item = null;
 
-    public Item Item { get { return item; } }
+    public Item Item { get { return item; } set { item = value; } }
 
     private void Awake()
     {
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         Image[] itemsSprite = gameObject.GetComponentsInChildren<Image>();
 
         itemSprite = itemsSprite[1];
@@ -38,9 +42,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         itemSprite.gameObject.SetActive(true);
 
-        itemSprite.sprite = item.Sprite;
+        itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
-        if(item.Amount > 1)
+        if (item.Amount > 1)
         {
             amount.text = item.Amount.ToString();
 
@@ -83,7 +87,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void ReinitializeItem()
     {
-        if(item.Amount > 1)
+        if(item != null && item.Amount > 1)
         {
             amount.text = item.Amount.ToString();
 
@@ -91,7 +95,14 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
         else
         {
-            amount.gameObject.SetActive(false);
+            if (item == null)
+            {
+                HideItem();
+            }
+            else
+            {
+                amount.gameObject.SetActive(false);
+            }
         }
     }
 

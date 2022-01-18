@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Axe", order = 1)]
+[Serializable]
 public class Axe : Item
 {
     [SerializeField] private float damage;
@@ -10,7 +12,7 @@ public class Axe : Item
 
     [SerializeField] private float stamina;
 
-    public Axe(string name, string details, int amount, int maxAmount, Sprite itemSprite, float damage, int level, float stamina)
+    public Axe(string name, string details, int amount, int maxAmount, int itemSprite, float damage, int level, float stamina)
     : base(name, details, amount, maxAmount, itemSprite)
     {
         this.damage = damage;

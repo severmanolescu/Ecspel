@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Crop", order = 1)]
+[Serializable]
 public class Crop : Placeable
 {
     [SerializeField] private int dayToGrow;
@@ -22,7 +24,7 @@ public class Crop : Placeable
     [SerializeField] private bool refil;
     [SerializeField] private int refilDecreseSpriteIndexStart;
 
-    public Crop(string name, string details, int amount, int maxAmount, Sprite itemSprite, int sizeX, int sizeY, int dayToGrow, Item crop, int minDrop, int maxDrop, bool centerX, bool centerY, bool refil, int refilDecreseSpriteIndexStart)
+    public Crop(string name, string details, int amount, int maxAmount, int itemSprite, int sizeX, int sizeY, int dayToGrow, Item crop, int minDrop, int maxDrop, bool centerX, bool centerY, bool refil, int refilDecreseSpriteIndexStart)
         : base(name, details, amount, maxAmount, itemSprite, sizeX, sizeY, null)
     {
         this.dayToGrow = dayToGrow;

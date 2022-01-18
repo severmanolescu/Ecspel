@@ -13,22 +13,22 @@ public class Item : ScriptableObject
 
     [SerializeField] private int maxAmount;
 
-    [SerializeField] private Sprite itemSprite;
+    [SerializeField] private int itemNO;
 
-    public Item(string name, string details,  int amount, int maxAmount, Sprite itemSprite)
+    public Item(string name, string details,  int amount, int maxAmount, int itemNO)
     {
         this.name = name;
         this.details = details;
 
         this.amount = amount;
         this.maxAmount = maxAmount;
-        this.itemSprite = itemSprite;
+        this.itemNO = itemNO;
     }
 
     public string Name { get { return name; } }
     public string Details { get { return details; } }
     public int Amount { get { return amount; } set { amount = value; } }
-    public Sprite Sprite { get { return itemSprite; } }
+    public int ItemNO { get { return itemNO; } }
     public int MaxAmount { get { return maxAmount; } }
 
     public Item Copy()

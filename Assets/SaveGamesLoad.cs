@@ -101,21 +101,6 @@ public class SaveGamesLoad : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            System.IO.Directory.CreateDirectory(path);
-
-            string filePath = path + @"\SaveGame1.svj";
-
-            SaveGame saveGame = new SaveGame(10, 0);
-
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            FileStream stream = new FileStream(filePath, FileMode.Create);
-
-            formatter.Serialize(stream, saveGame);
-            stream.Close();
-        }
     }
 
     private SaveGame ReadData(string path)

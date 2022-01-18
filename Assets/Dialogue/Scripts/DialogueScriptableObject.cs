@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue/New Dialogue", order = 1)]
+[Serializable]
 public class DialogueScriptableObject : ScriptableObject
 {
     [Header("NPC name: ")]

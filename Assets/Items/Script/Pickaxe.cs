@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Pickaxe", order = 1)]
+[System.Serializable]
 public class Pickaxe : Item
 {
     [SerializeField] private float damage;
@@ -10,7 +11,7 @@ public class Pickaxe : Item
 
     [SerializeField] private float stamina;
 
-    public Pickaxe(string name, string details, int amount, int maxAmount, Sprite itemSprite, float damage, int level, float stamina)
+    public Pickaxe(string name, string details, int amount, int maxAmount, int itemSprite, float damage, int level, float stamina)
     : base(name, details, amount, maxAmount, itemSprite)
     {
         this.damage = damage;

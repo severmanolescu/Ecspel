@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Placeable", order = 1)]
+[System.Serializable]
 public class Placeable : Item
 {
     [SerializeField] private int sizeX;
@@ -10,7 +11,7 @@ public class Placeable : Item
 
     [SerializeField] private GameObject prefab;
 
-    public Placeable(string name, string details, int amount, int maxAmount, Sprite itemSprite, int sizeX, int sizeY, GameObject prefab)
+    public Placeable(string name, string details, int amount, int maxAmount, int itemSprite, int sizeX, int sizeY, GameObject prefab)
         : base(name, details, amount, maxAmount, itemSprite)
     {
         this.sizeX = sizeX;

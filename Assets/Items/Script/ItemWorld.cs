@@ -7,6 +7,8 @@ public class ItemWorld : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private ItemSprites itemSprites;
+
     private TextMeshProUGUI amount;
 
     private SunShadowHandler sunTimer;
@@ -33,6 +35,8 @@ public class ItemWorld : MonoBehaviour
 
     private void Awake()
     {
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -61,7 +65,7 @@ public class ItemWorld : MonoBehaviour
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        spriteRenderer.sprite = items.Sprite;
+        spriteRenderer.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
         if (amount != null)
         {

@@ -6,6 +6,8 @@ public class BuildSystemHandler : MonoBehaviour
     [SerializeField] private GameObject prefabGameObject;
     [SerializeField] private GameObject itemWorldPrefab;
 
+    private ItemSprites itemSprites;
+
     private Transform playerHouseGround;
 
     private Item item;
@@ -27,6 +29,8 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void Start()
     {
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         spawnPosition = GameObject.Find("PlayerHouseGround").transform;
 
         playerHouseGround = GameObject.Find("PlayerHouseGround").transform;
@@ -79,7 +83,7 @@ public class BuildSystemHandler : MonoBehaviour
                 }
                 else
                 {
-                    @object.GetComponent<SpriteRenderer>().sprite = item.Sprite;
+                    @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
                 }
             }
             else
@@ -98,7 +102,7 @@ public class BuildSystemHandler : MonoBehaviour
                 }
                 else
                 {
-                    @object.GetComponent<SpriteRenderer>().sprite = item.Sprite;
+                    @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
                 }
             }
         }

@@ -7,6 +7,8 @@ public class ItemDrag : MonoBehaviour
 
     private GameObject previousSlot;
 
+    private ItemSprites itemSprites;
+
     private Image itemImage;
 
     private bool startDrag = false;
@@ -16,6 +18,8 @@ public class ItemDrag : MonoBehaviour
 
     private void Awake()
     {
+        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
         itemImage = gameObject.GetComponentInChildren<Image>();
 
         itemImage.gameObject.SetActive(false);
@@ -30,7 +34,7 @@ public class ItemDrag : MonoBehaviour
                 this.item = item;
                 this.previousSlot = previousSlot;
 
-                itemImage.sprite = item.Sprite;
+                itemImage.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
                 itemImage.gameObject.SetActive(true);
 
