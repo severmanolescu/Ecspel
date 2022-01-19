@@ -8,6 +8,8 @@ public class SaveSystemHandler : MonoBehaviour
 {
     [SerializeField] private List<LocationGridSave> locationGridSaves = new List<LocationGridSave>();
 
+    [SerializeField] private GameObject spawnAreas;
+
     private PlayerInventory playerInventory;
 
     private PlayerAchievements playerAchievements;
@@ -20,12 +22,18 @@ public class SaveSystemHandler : MonoBehaviour
 
     private GetItemFromNO getItem;
 
+    private GetObjectsFromWorld getObjects;
+
     private int indexOfSaveGame;
+
+    private string pathToSaveGameFolder;
 
     private string pathToSaves;
 
     private void Awake()
     {
+        getObjects = GetComponent<GetObjectsFromWorld>();
+
         getItem = GameObject.Find("Global").GetComponent<GetItemFromNO>();
 
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
@@ -39,6 +47,8 @@ public class SaveSystemHandler : MonoBehaviour
         pathToSaves = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 
         pathToSaves = Path.Combine(pathToSaves, @"Sooth\Saves");
+
+        pathToSaveGameFolder = pathToSaves;
     }
 
     private void VerifyPathToSave()
@@ -77,6 +87,8 @@ public class SaveSystemHandler : MonoBehaviour
 
         playerInventory.SetInventoryFromSave(saveGame.PlayerInventory);
 
+        getObjects.SetObjectsToWorld(saveGame.ObjectsInGame);
+
         if (loadSceneHandler != null)
         {
             loadSceneHandler.FinishGridSearchProcess = true;
@@ -85,7 +97,7 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void VerifyFiles(string pathToSaveGame)
     {
-        if(File.Exists(pathToSaves))
+        if(File.Exists(pathToSaveGameFolder))
         {
             if(File.Exists(pathToSaveGame))
             {
@@ -94,7 +106,7 @@ public class SaveSystemHandler : MonoBehaviour
         }
         else
         {
-            Directory.CreateDirectory(pathToSaves);
+            Directory.CreateDirectory(pathToSaveGameFolder);
         }    
     }
 
@@ -114,24 +126,6 @@ public class SaveSystemHandler : MonoBehaviour
         stream.Close();
     }
 
-    private List<GridNode[,]> GetAllGridNodes()
-    {
-        List<GridNode[,]> gridNodes = new List<GridNode[,]>();
-
-        foreach (LocationGridSave locationGrid in locationGridSaves)
-        {
-            if (locationGrid != null)
-            {
-                if (locationGrid.Grid.gridArray != null)
-                {
-                    gridNodes.Add(locationGrid.Grid.gridArray);
-                }
-            }
-        }
-
-        return gridNodes;
-    }
-
     private SaveGame GetDataFromGame()
     {
         SaveGame saveGame = new SaveGame();
@@ -144,7 +138,7 @@ public class SaveSystemHandler : MonoBehaviour
 
         //saveGame.PlayerQuests = questTab.GetAllQuests();
 
-        saveGame.GridNodes = GetAllGridNodes();
+        saveGame.ObjectsInGame = getObjects.GetAllObjectsFromArea();
 
         return saveGame;
     }

@@ -5,10 +5,9 @@ public class BuildSystemHandler : MonoBehaviour
     [SerializeField] private LocationGridSave locationGrid;
     [SerializeField] private GameObject prefabGameObject;
     [SerializeField] private GameObject itemWorldPrefab;
+    [SerializeField] private Transform spawnPosition;
 
     private ItemSprites itemSprites;
-
-    private Transform playerHouseGround;
 
     private Item item;
 
@@ -20,8 +19,6 @@ public class BuildSystemHandler : MonoBehaviour
 
     private bool canPlace = true;
 
-    private Transform spawnPosition;
-
     public Grid<GridNode> Grid { get { return LocationGrid.Grid; } }
     public bool canPlantGrid { get { return LocationGrid.CanPlantToGrid; } }
 
@@ -30,10 +27,6 @@ public class BuildSystemHandler : MonoBehaviour
     private void Start()
     {
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-
-        spawnPosition = GameObject.Find("PlayerHouseGround").transform;
-
-        playerHouseGround = GameObject.Find("PlayerHouseGround").transform;
 
         ChangeGridToSystems(Grid);
     }
@@ -204,9 +197,6 @@ public class BuildSystemHandler : MonoBehaviour
         {
             gridNode.objectInSpace = newObject;
         }
-
-
-        newObject.transform.SetParent(playerHouseGround);
 
         item.Amount -= 1;
 

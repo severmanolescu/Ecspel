@@ -29,7 +29,7 @@ public class HoeSystemHandler : MonoBehaviour
 
     [SerializeField] private GameObject prefabGameObject;
 
-    private Transform spawnLocation;
+    [SerializeField] private Transform spawnLocation;
 
     private GameObject headlightObject;
 
@@ -42,8 +42,6 @@ public class HoeSystemHandler : MonoBehaviour
     private void Start()
     {
         headlightObject = null;
-
-        spawnLocation = GameObject.Find("PlayerHouseGround").transform;
 
         buildSystem = GetComponent<BuildSystemHandler>();
     }

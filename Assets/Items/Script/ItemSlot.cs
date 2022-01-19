@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Audio;
 
 public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, 
-                                       IEndDragHandler, IDropHandler, IPointerExitHandler, IPointerEnterHandler
+                                       IEndDragHandler, IDropHandler, IPointerExitHandler, IPointerEnterHandler, IPointerClickHandler
 {
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
@@ -15,6 +15,16 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private ItemSprites itemSprites;
 
+    private PlayerInventory inventory;
+
+    private ChestStorageHandler chestStorage;
+
+    private QuickSlotsChanger quickSlots;
+
+    //true  - player inventory
+    //false - chest storage
+    private bool locationOfItem;
+
     private Item item = null;
 
     public Item Item { get { return item; } set { item = value; } }
@@ -22,6 +32,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private void Awake()
     {
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
+        quickSlots = GameObject.Find("Global/Player/Canvas/Field/QuickSlots").GetComponent<QuickSlotsChanger>();
 
         Image[] itemsSprite = gameObject.GetComponentsInChildren<Image>();
 
@@ -36,6 +48,23 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
         itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
+
+        inventory = GetComponentInParent<PlayerInventory>();
+
+        if (inventory == null)
+        {
+            locationOfItem = false;
+
+            chestStorage = GetComponentInParent<ChestStorageHandler>();
+
+            inventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
+        }
+        else
+        {
+            locationOfItem = true;
+
+            chestStorage = GameObject.Find("Global/Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
+        }
     }
 
     private void ShowItem()
@@ -95,9 +124,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
         else
         {
-            if (item == null)
+            if (item == null || item.Amount == 0)
             {
                 HideItem();
+
+                item = null;
             }
             else
             {
@@ -202,7 +233,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
         else
         {
-
+            itemDrag.SetDataHalf(item, this.gameObject);
         }
     }
 
@@ -292,5 +323,47 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void OnPointerEnter(PointerEventData eventData)
     {
         itemDetails.SetItem(item);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == 0 && eventData.clickCount == 2)
+        {
+            if(locationOfItem == true)
+            {
+                if (chestStorage.gameObject.activeSelf == true)
+                {
+                    bool canTransferToPlayerInventory = chestStorage.AddItem(Item);
+
+                    if (canTransferToPlayerInventory == true)
+                    {
+                        HideItem();
+
+                        Item = null;
+                    }
+                    else
+                    {
+                        ReinitializeItem();
+                    }
+                }
+            }
+            else
+            {
+                bool canTransferToPlayerInventory = inventory.AddItem(Item);
+
+                if (canTransferToPlayerInventory == true)
+                {
+                    HideItem();
+
+                    Item = null;
+                }
+                else
+                {
+                    ReinitializeItem();
+                }
+            }
+
+            quickSlots.Reinitialize();
+        }
     }
 }

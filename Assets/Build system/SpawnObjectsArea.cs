@@ -72,7 +72,8 @@ public class SpawnObjectsArea : MonoBehaviour
                         {
                             if (gridSave.Grid.gridArray[i, j] != null)
                             {
-                                if (gridSave.Grid.gridArray[i, j].canPlace == false)
+                                if (gridSave.Grid.gridArray[i, j].canPlace == false && 
+                                    gridSave.Grid.gridArray[i, j].isWalkable == false)
                                 {
                                     return false;
                                 }

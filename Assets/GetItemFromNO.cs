@@ -68,7 +68,7 @@ public class GetItemFromNO : MonoBehaviour
 
     public Item ItemFromNo(int itemNo)
     {
-        if(itemNo > 0 && itemNo < items.Count)
+        if(itemNo > 0 && itemNo <= items.Count)
         {
             return items[itemNo - 1];
         }

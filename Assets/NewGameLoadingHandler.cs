@@ -47,9 +47,11 @@ public class NewGameLoadingHandler : MonoBehaviour
     {
         SpawnObjectsInAreas();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
-        while(gridCheck < noOfGrid)
+        StartAllGridLocationCheckObjects();
+
+        while (gridCheck < noOfGrid)
         {
             yield return null;
         }
@@ -61,8 +63,6 @@ public class NewGameLoadingHandler : MonoBehaviour
 
     public void StartNewGame(LoadSceneHandler loadSceneHandler)
     {
-        StartAllGridLocationCheckObjects();
-
         StartCoroutine(WaitForAllLocations(loadSceneHandler));
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2021.2.8f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Dialogue\Scripts\DialogueAnswersClass.cs" />
     <Compile Include="Assets\Items\Script\Item.cs" />
     <Compile Include="Assets\Build system\HarvestCropHandler.cs" />
@@ -61,12 +64,14 @@
     <Compile Include="Assets\Berries\Scripts\BerrierBush.cs" />
     <Compile Include="Assets\Items\Script\Axe.cs" />
     <Compile Include="Assets\Items\Script\Weapon.cs" />
+    <Compile Include="Assets\SaveObjectID.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeAI.cs" />
     <Compile Include="Assets\Items\Script\Pickaxe.cs" />
     <Compile Include="Assets\OtherScripts\ChangeTransparencyByPlayerInTrigger.cs" />
     <Compile Include="Assets\Items\Script\ItemWorldSpawn.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Player\Scripts\CameraHandler.cs" />
+    <Compile Include="Assets\GetLocationGrid.cs" />
     <Compile Include="Assets\Build system\PositionInGrid.cs" />
     <Compile Include="Assets\OtherScripts\TimeDegradation.cs" />
     <Compile Include="Assets\Quests\Scripts\DestroyStone.cs" />
@@ -149,6 +154,7 @@
     <Compile Include="Assets\OtherScripts\DefaulData.cs" />
     <Compile Include="Assets\Effects\Scripts\CanvasEffectDataSet.cs" />
     <Compile Include="Assets\Chest\Scripts\ChestStorageInitial.cs" />
+    <Compile Include="Assets\ObjectSaveGame.cs" />
     <Compile Include="Assets\TeleportNPC.cs" />
     <Compile Include="Assets\Quests\Scripts\Quest.cs" />
     <Compile Include="Assets\Effects\Scripts\Effect.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="Assets\Build system\PickaxeHandler.cs" />
     <Compile Include="Assets\Player\Scripts\StopFootPrintByPass.cs" />
     <Compile Include="Assets\Light\SunShadowHandler.cs" />
+    <Compile Include="Assets\GetObjectsFromWorld.cs" />
     <Compile Include="Assets\Build system\ParticleStart.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueChanger.cs" />
     <Compile Include="Assets\SaveGame.cs" />
@@ -188,7 +195,6 @@
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Build system\CropGrow.cs" />
-    <Compile Include="Assets\GetObjectsFromWorld.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

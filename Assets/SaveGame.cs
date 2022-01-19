@@ -14,11 +14,9 @@ public class SaveGame
 
     private List<int> playerAchievements;
 
-    //private List<Quest> playerQuests;
-
     private List<int> chestStorage;
 
-    private List<GridNode[,]> gridNodes;
+    private List<ObjectSaveGame> objectsInGame;
 
     public SaveGame(int days, int playedMinutes)
     {
@@ -37,6 +35,6 @@ public class SaveGame
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
     public List<int> ChestStorage { get => chestStorage; set => chestStorage = value; }
     public List<int> PlayerAchievements { get => playerAchievements; set => playerAchievements = value; }
+    public List<ObjectSaveGame> ObjectsInGame { get => objectsInGame; set => objectsInGame = value; }
     //public List<Quest> PlayerQuests { get => playerQuests; set => playerQuests = value; }
-    public List<GridNode[,]> GridNodes { get => gridNodes; set => gridNodes = value; }
 }

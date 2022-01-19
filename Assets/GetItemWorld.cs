@@ -54,7 +54,7 @@ public class GetItemWorld : MonoBehaviour
 
     public GameObject GetObjectFromNo(int objectNo)
     {
-        if(objectNo > 0 && objectNo < listOfObjects.Count)
+        if(objectNo > 0 && objectNo <= listOfObjects.Count)
         {
             return listOfObjects[objectNo - 1];
         }

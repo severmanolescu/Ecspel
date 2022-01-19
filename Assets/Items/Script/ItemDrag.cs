@@ -11,6 +11,8 @@ public class ItemDrag : MonoBehaviour
 
     private Image itemImage;
 
+    private bool halfOfAmount;
+
     private bool startDrag = false;
 
     public Item Item { get { return item; } }
@@ -39,6 +41,30 @@ public class ItemDrag : MonoBehaviour
                 itemImage.gameObject.SetActive(true);
 
                 transform.position = Input.mousePosition;
+
+                halfOfAmount = false;
+            }
+        }
+    }
+
+    public void SetDataHalf(Item item, GameObject previousSlot)
+    {
+        if (item != null)
+        {
+            if (this.item == null)
+            {
+                this.item = item.Copy();
+                this.item.Amount = (int)Mathf.Ceil(this.item.Amount / 2f);
+
+                this.previousSlot = previousSlot;
+
+                itemImage.sprite = itemSprites.GetItemSprite(item.ItemNO);
+
+                itemImage.gameObject.SetActive(true);
+
+                transform.position = Input.mousePosition;
+
+                halfOfAmount = true;
             }
         }
     }
@@ -61,13 +87,37 @@ public class ItemDrag : MonoBehaviour
         }
     }
 
+    public void ChangeItemHalfAmount()
+    {
+        ItemSlot auxCheckSlot = previousSlot.GetComponent<ItemSlot>();
+
+        if (auxCheckSlot != null)
+        {
+            auxCheckSlot.Item.Amount -= item.Amount;
+
+            auxCheckSlot.ReinitializeItem();
+        }
+
+        item = null;
+        previousSlot = null;
+
+        itemImage.gameObject.SetActive(false);
+    }
+
     public void DeleteData()
     {
         ItemSlot auxCheckSlot = previousSlot.GetComponent<ItemSlot>();
 
         if (auxCheckSlot != null)
         {
-            auxCheckSlot.DeleteItem();
+            if (halfOfAmount == true)
+            {
+                ChangeItemHalfAmount();
+            }
+            else
+            {
+                auxCheckSlot.DeleteItem();
+            }
         }
         else
         {
@@ -92,7 +142,7 @@ public class ItemDrag : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) || Input.GetMouseButton(1))
         {
             startDrag = true;
 

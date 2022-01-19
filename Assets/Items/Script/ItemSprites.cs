@@ -11,7 +11,7 @@ public class ItemSprites : MonoBehaviour
 
     public Sprite GetItemSprite(int itemNO)
     {
-        if(itemNO > 0 && itemNO < sprites.Count)
+        if(itemNO > 0 && itemNO <= sprites.Count)
         {
             return sprites[itemNO - 1];
         }

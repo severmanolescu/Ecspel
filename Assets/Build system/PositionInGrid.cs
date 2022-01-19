@@ -18,7 +18,9 @@ public class PositionInGrid : MonoBehaviour
     {
         if(locationGrid == null)
         {
-            if(gameObject.tag == "Tree")
+            locationGrid = GetComponentInParent<LocationGridSave>();
+
+            if(locationGrid == null && gameObject.tag == "Tree")
             {
                 locationGrid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>();
             }
