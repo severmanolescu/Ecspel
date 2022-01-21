@@ -10,7 +10,7 @@ public class LoadGamePositionNPC : MonoBehaviour
     {
         transform.position = position;
 
-        DestroyScript();
+        GetComponent<NpcAIHandler>().DayChange();
     }
 
     public void DestroyScript()

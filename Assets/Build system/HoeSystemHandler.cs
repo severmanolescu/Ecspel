@@ -113,11 +113,14 @@ public class HoeSystemHandler : MonoBehaviour
     {
         GridNode gridNode = grid.GetGridObject(position);
 
-        gridNode.isWalkable = true;
-        gridNode.canPlant = false;
-        gridNode.canPlace = true;
-        gridNode.cropPlaced = false;
-        gridNode.currentObject = null;
+        if (gridNode != null)
+        {
+            gridNode.isWalkable = true;
+            gridNode.canPlant = false;
+            gridNode.canPlace = true;
+            gridNode.cropPlaced = false;
+            gridNode.currentObject = null;
+        }
     }
 
     //1-up

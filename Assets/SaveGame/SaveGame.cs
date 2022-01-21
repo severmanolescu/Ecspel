@@ -8,7 +8,9 @@ public class SaveGame
 {
     private int days;
 
-    private int playedMinutes;
+    private ulong playedMinutes;
+
+    private ushort playedSecundes;
 
     private List<Tuple<int, int>> playerInventory;
 
@@ -24,20 +26,12 @@ public class SaveGame
 
     private List<Tuple<float, float>> plots;
 
-    public SaveGame(int days, int playedMinutes)
-    {
-        this.days = days;
+    private List<CropSave> cropSaves;
 
-        this.playedMinutes = playedMinutes;
-    }
-
-    public SaveGame()
-    {
-
-    }
+    private List<ChestSave> chests; 
 
     public int Days { get => days; set => days = value; }
-    public int PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
+    public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
     public List<int> ChestStorage { get => chestStorage; set => chestStorage = value; }
     public List<int> PlayerAchievements { get => playerAchievements; set => playerAchievements = value; }
@@ -45,4 +39,7 @@ public class SaveGame
     public List<int> PlayerQuests { get => playerQuests; set => playerQuests = value; }
     public List<ObjectSaveGame> ObjectsInPlayerGround { get => objectsInPlayerGround; set => objectsInPlayerGround = value; }
     public List<Tuple<float, float>> Plots { get => plots; set => plots = value; }
+    public List<CropSave> CropSaves { get => cropSaves; set => cropSaves = value; }
+    public ushort PlayedSecundes { get => playedSecundes; set => playedSecundes = value; }
+    public List<ChestSave> Chests { get => chests; set => chests = value; }
 }

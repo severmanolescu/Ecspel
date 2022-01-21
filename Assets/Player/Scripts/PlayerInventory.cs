@@ -98,25 +98,30 @@ public class PlayerInventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (item.MaxAmount > 1)
+        if (item != null)
         {
-             return AddItemStackable(item);
-        }
-        else
-        {
-            foreach (ItemSlot auxItem in itemsSlot)
+            if (item.MaxAmount > 1)
             {
-                if (auxItem.Item == null)
-                {
-                    auxItem.SetItem(item);
-
-                    quickSlots.Reinitialize();
-                    return true;
-                }
+                return AddItemStackable(item);
             }
+            else
+            {
+                foreach (ItemSlot auxItem in itemsSlot)
+                {
+                    if (auxItem.Item == null)
+                    {
+                        auxItem.SetItem(item);
 
-            return false;
+                        quickSlots.Reinitialize();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
+
+        return false;
     }
 
     public bool AddItem(List<QuestItems> questItems)

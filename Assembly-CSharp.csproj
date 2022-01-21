@@ -138,6 +138,7 @@
     <Compile Include="Assets\SaveGame\SaveGamesLoad.cs" />
     <Compile Include="Assets\Player\Scripts\CanvasTabsOpen.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerItemUse.cs" />
+    <Compile Include="Assets\SaveGame\CropSave.cs" />
     <Compile Include="Assets\Effects\Scripts\EffectHandlerClass.cs" />
     <Compile Include="Assets\Build system\BuildSystemHandler.cs" />
     <Compile Include="Assets\NPC\Scripts\NpcPathFinding.cs" />
@@ -164,8 +165,10 @@
     <Compile Include="Assets\Build system\PickaxeHandler.cs" />
     <Compile Include="Assets\Player\Scripts\StopFootPrintByPass.cs" />
     <Compile Include="Assets\Light\SunShadowHandler.cs" />
+    <Compile Include="Assets\PositionPlayerAtLoad.cs" />
     <Compile Include="Assets\SaveGame\GetAllObjectsInPlayerGround.cs" />
     <Compile Include="Assets\SaveGame\GetObjectsFromWorld.cs" />
+    <Compile Include="Assets\SaveGame\GetFarmPlots.cs" />
     <Compile Include="Assets\Build system\ParticleStart.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueChanger.cs" />
     <Compile Include="Assets\SaveGame\SaveGame.cs" />
@@ -194,8 +197,10 @@
     <Compile Include="Assets\Quests\Scripts\GiveItem.cs" />
     <Compile Include="Assets\Enemy\Scripts\SlimeLargeAI.cs" />
     <Compile Include="Assets\Build system\CropGrow.cs" />
-    <Compile Include="Assets\SaveGame\GetFarmPlots.cs" />
-    <Compile Include="Assets\SaveGame\CropSave.cs" />
+    <Compile Include="Assets\CountPlayedMinutes.cs" />
+    <Compile Include="Assets\GetAllChestsStorage.cs" />
+    <Compile Include="Assets\GetChestType.cs" />
+    <Compile Include="Assets\ChestSave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

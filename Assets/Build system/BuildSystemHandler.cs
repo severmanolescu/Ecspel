@@ -48,6 +48,30 @@ public class BuildSystemHandler : MonoBehaviour
         this.quickSlots = quickSlots;
     }
 
+    private void CreateObject()
+    {
+        @object = Instantiate(prefabGameObject, spawnPosition);
+
+        @object.AddComponent<SpriteRenderer>().sortingOrder = 1;
+
+        if (item is Crop)
+        {
+            Crop crop = (Crop)item;
+
+            @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
+        }
+        else if (item is Sapling)
+        {
+            Sapling sapling = (Sapling)item;
+
+            @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
+        }
+        else
+        {
+            @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
+        }
+    }
+
     public void StartPlace(Item item)
     {
         if (LocationGrid != null && canPlantGrid == true)
@@ -56,29 +80,10 @@ public class BuildSystemHandler : MonoBehaviour
 
             startPlace = true;
 
-            if (@object == null)
+            if(@object == null)
             {
-                @object = Instantiate(prefabGameObject, spawnPosition);
-
-                @object.AddComponent<SpriteRenderer>().sortingOrder = 1;
-
-                if (item is Crop)
-                {
-                    Crop crop = (Crop)item;
-
-                    @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
-                }
-                else if (item is Sapling)
-                {
-                    Sapling sapling = (Sapling)item;
-
-                    @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
-                }
-                else
-                {
-                    @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
-                }
-            }
+                CreateObject();
+            }            
             else
             {
                 if (item is Crop)
@@ -113,7 +118,7 @@ public class BuildSystemHandler : MonoBehaviour
         }
     }
 
-    private void PlaceObject(GridNode gridNode)
+    private GameObject PlaceObject(GridNode gridNode)
     {
         Placeable placeable = (Placeable)item;
 
@@ -208,6 +213,20 @@ public class BuildSystemHandler : MonoBehaviour
         }
 
         ChangeCanPlace(gridNode);
+
+        return newObject;
+    }
+
+    public GameObject PlaceObject(Vector3 position, Item item)
+    {
+        this.item = item;
+
+        if (@object == null)
+        {
+            CreateObject();
+        }
+
+        return PlaceObject(Grid.GetGridObject(position));
     }
 
     private bool VerifyCanPlace(GridNode gridNode)

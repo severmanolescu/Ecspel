@@ -16,6 +16,10 @@ public class CropGrow : MonoBehaviour
 
     public bool Destroyed { get { return destroyed; } }
 
+    public Crop Item { get => item; set => item = value; }
+    public int StartDay { get => startDay; set => startDay = value; }
+    public int CurrentSprite { get => currentSprite; set { currentSprite = value; ChangeSprite(); } }
+
     private void Start()
     {
         GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().CropAddList(this);
@@ -25,7 +29,7 @@ public class CropGrow : MonoBehaviour
 
     public void SetItem(Item item, GridNode gridNode, GameObject itemWorldPrefab)
     {
-        this.item = (Crop)item;
+        this.Item = (Crop)item;
 
         this.gridNode = gridNode;
 
@@ -34,74 +38,74 @@ public class CropGrow : MonoBehaviour
 
     public void DayChange(int day)
     {
-        if(day >= startDay + item.DayToGrow)
+        if(day >= StartDay + Item.DayToGrow)
         {
-            currentSprite++;
+            CurrentSprite++;
 
-            if (item.Refil == false)
+            if (Item.Refil == false)
             {
-                if (currentSprite < item.Levels.Count)
+                if (CurrentSprite < Item.Levels.Count)
                 {
-                    GetComponent<SpriteRenderer>().sprite = item.Levels[currentSprite];
+                    ChangeSprite();
                 }
                 else
                 {
-                    currentSprite = item.Levels.Count - 1;
+                    CurrentSprite = Item.Levels.Count - 1;
                 }
             }
             else
             {
-                if (currentSprite == item.Levels.Count - 1)
+                if (CurrentSprite == Item.Levels.Count - 1)
                 {
-                    currentSprite -= item.RefilDecreseSpriteIndexStart;
+                    CurrentSprite -= Item.RefilDecreseSpriteIndexStart;
 
-                    GetComponent<SpriteRenderer>().sprite = item.Levels[currentSprite];
+                    ChangeSprite();
                 }
-                else if (currentSprite <= item.Levels.Count - 2)
+                else if (CurrentSprite <= Item.Levels.Count - 2)
                 {
-                    GetComponent<SpriteRenderer>().sprite = item.Levels[currentSprite];
+                    ChangeSprite();
 
-                    if(currentSprite == item.Levels.Count - 2)
+                    if (CurrentSprite == Item.Levels.Count - 2)
                     {
-                        currentSprite--;
+                        CurrentSprite--;
                     }
                 }
                 else
                 {
-                    currentSprite = item.Levels.Count - 2;
+                    CurrentSprite = Item.Levels.Count - 2;
                 }
             }
 
-            if(currentSprite == 2)
+            if(CurrentSprite == 2)
             {
                 GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
 
-            startDay = day;
+            StartDay = day;
         }
     }
 
     private void DestroyNotRefil()
     {
-        if (currentSprite == item.Levels.Count - 1)
+        if (CurrentSprite == Item.Levels.Count - 1)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
-            drop.Amount = Random.Range(item.MinDrop, item.MaxDrop);
+            Item drop = Item.CropItem.Copy();
+            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
             itemWorld.SetItem(drop);
             itemWorld.MoveToPoint();
         }
-        else if (currentSprite == item.Levels.Count - 2)
+        else if (CurrentSprite == Item.Levels.Count - 2)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
+            Item drop = Item.CropItem.Copy();
             drop.Amount = 1;
 
             itemWorld.SetItem(drop);
@@ -110,9 +114,9 @@ public class CropGrow : MonoBehaviour
 
         GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().RemoveCropList(this);
 
-        if (currentSprite >= 2)
+        if (CurrentSprite >= 2)
         {
-            GetComponent<SpriteRenderer>().sprite = item.Destroy1;
+            GetComponent<SpriteRenderer>().sprite = Item.Destroy1;
             GetComponent<SpriteRenderer>().sortingOrder = -1;
             destroyed = true;
         }
@@ -124,25 +128,25 @@ public class CropGrow : MonoBehaviour
 
     private void DestroyRefil()
     {
-        if (currentSprite == item.Levels.Count - 2)
+        if (CurrentSprite == Item.Levels.Count - 2)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
-            drop.Amount = Random.Range(item.MinDrop, item.MaxDrop);
+            Item drop = Item.CropItem.Copy();
+            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
             itemWorld.SetItem(drop);
             itemWorld.MoveToPoint();
         }
-        else if (currentSprite == item.Levels.Count - 3)
+        else if (CurrentSprite == Item.Levels.Count - 3)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
+            Item drop = Item.CropItem.Copy();
             drop.Amount = 1;
 
             itemWorld.SetItem(drop);
@@ -151,9 +155,9 @@ public class CropGrow : MonoBehaviour
 
         GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().RemoveCropList(this);
 
-        if (currentSprite >= 2)
+        if (CurrentSprite >= 2)
         {
-            GetComponent<SpriteRenderer>().sprite = item.Destroy1;
+            GetComponent<SpriteRenderer>().sprite = Item.Destroy1;
             GetComponent<SpriteRenderer>().sortingOrder = -1;
             destroyed = true;
         }
@@ -167,7 +171,7 @@ public class CropGrow : MonoBehaviour
     {
         GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>().ChangeGridCropPlaced(gridNode, true);
 
-        if (item.Refil == false)
+        if (Item.Refil == false)
         {
             DestroyNotRefil();
         }
@@ -177,23 +181,39 @@ public class CropGrow : MonoBehaviour
         }
     }
 
+    public void DestroyCropOnLoadGame()
+    {
+        GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>().ChangeGridCropPlaced(gridNode, true);
+
+        if (CurrentSprite >= 2)
+        {
+            GetComponent<SpriteRenderer>().sprite = Item.Destroy1;
+            GetComponent<SpriteRenderer>().sortingOrder = -1;
+            destroyed = true;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void HarvestNotRefil()
     {
-        if (currentSprite == item.Levels.Count - 1)
+        if (CurrentSprite == Item.Levels.Count - 1)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
-            drop.Amount = Random.Range(item.MinDrop, item.MaxDrop);
+            Item drop = Item.CropItem.Copy();
+            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
             itemWorld.SetItem(drop);
             itemWorld.MoveToPoint();
 
             GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().RemoveCropList(this);
 
-            GetComponent<SpriteRenderer>().sprite = item.Destroy1;
+            GetComponent<SpriteRenderer>().sprite = Item.Destroy1;
             GetComponent<SpriteRenderer>().sortingOrder = -1;
             destroyed = true;
         }
@@ -201,35 +221,43 @@ public class CropGrow : MonoBehaviour
 
     private void HarvestRefil()
     {
-        if (currentSprite == item.Levels.Count - 3)
+        if (CurrentSprite == Item.Levels.Count - 3)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
             itemWorld.transform.position = transform.position;
 
-            Item drop = item.CropItem.Copy();
-            drop.Amount = Random.Range(item.MinDrop, item.MaxDrop);
+            Item drop = Item.CropItem.Copy();
+            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
             itemWorld.SetItem(drop);
             itemWorld.MoveToPoint();
 
-            startDay = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>().Days;
+            StartDay = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>().Days;
 
-            currentSprite = item.Levels.Count - 1;
+            CurrentSprite = Item.Levels.Count - 1;
 
-            GetComponent<SpriteRenderer>().sprite = item.Levels[currentSprite];
+            GetComponent<SpriteRenderer>().sprite = Item.Levels[CurrentSprite];
         }
     }
 
     public void HarverstCrop()
     {
-        if(item.Refil == false)
+        if(Item.Refil == false)
         {
             HarvestNotRefil();
         }
         else
         {
             HarvestRefil();
+        }
+    }
+
+    private void ChangeSprite()
+    {
+        if (currentSprite < Item.Levels.Count)
+        {
+            GetComponent<SpriteRenderer>().sprite = Item.Levels[CurrentSprite];
         }
     }
 }

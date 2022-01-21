@@ -23,4 +23,23 @@ public class HarvestCropHandler : MonoBehaviour
             }
         }
     }
+
+    public void DestroyCrop(Vector3 position)
+    {
+        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
+
+        GridNode gridNode = grid.GetGridObject(position);
+
+        if (gridNode != null)
+        {
+            if (gridNode.crop != null)
+            {
+                gridNode.crop = null;
+
+                gridNode.canPlace = true;
+                gridNode.canPlant = false;
+                gridNode.isWalkable = true;
+            }
+        }
+    }
 }

@@ -38,8 +38,8 @@ public class SaveGamesLoad : MonoBehaviour
 
         text[1].text = "Zile: " + saveGame.Days;
 
-        int hours = 0;
-        int minutes = 0;
+        ulong hours = 0;
+        ulong minutes = 0;
 
         if (saveGame.PlayedMinutes > 0)
         {

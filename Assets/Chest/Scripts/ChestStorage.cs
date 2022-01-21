@@ -31,4 +31,8 @@ public class ChestStorage : MonoBehaviour
         items.Remove(item);
     }
 
+    public void RemoveAllItems()
+    {
+        items.Clear();
+    }
 }

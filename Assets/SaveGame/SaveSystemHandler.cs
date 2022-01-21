@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SaveSystemHandler : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> deactivateObjectsAtLoad = new List<GameObject>();
+
+    private GameObject[] positionNpcAtLoad;
+
     private PlayerInventory playerInventory;
 
     private PlayerAchievements playerAchievements;
@@ -21,6 +25,8 @@ public class SaveSystemHandler : MonoBehaviour
     private GetObjectsFromWorld getObjects;
 
     private SunShadowHandler sunShadowHandler;
+
+    private CountPlayedMinutes countPlayedMinutes;
 
     private int indexOfSaveGame;
 
@@ -42,6 +48,8 @@ public class SaveSystemHandler : MonoBehaviour
 
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
+        countPlayedMinutes = GameObject.Find("Global").GetComponent<CountPlayedMinutes>();
+
         sunShadowHandler = dayTimerHandler.GetComponent<SunShadowHandler>();
 
         pathToSaves = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
@@ -49,6 +57,8 @@ public class SaveSystemHandler : MonoBehaviour
         pathToSaves = Path.Combine(pathToSaves, @"Sooth\Saves");
 
         pathToSaveGameFolder = pathToSaves;
+
+        positionNpcAtLoad = GameObject.FindGameObjectsWithTag("NPC");
     }
 
     private void VerifyPathToSave()
@@ -66,7 +76,29 @@ public class SaveSystemHandler : MonoBehaviour
 
         VerifyPathToSave();
 
-        SetDataToGame(ReadDataFromSave(pathToSaves));  
+        SetDataToGame(ReadDataFromSave(pathToSaves));
+
+        SetLocation(false);
+
+        PositionNpcAtStartLocation();
+
+        playerAchievements.GetComponent<PositionPlayerAtLoad>().PositionPlayer();
+    }
+
+    private void PositionNpcAtStartLocation()
+    {
+        foreach(GameObject npc in positionNpcAtLoad)
+        {
+            npc.GetComponent<LoadGamePositionNPC>().LoadGame();
+        }
+    }
+
+    private void SetLocation(bool active)
+    {
+        foreach (GameObject location in deactivateObjectsAtLoad)
+        {
+            location.SetActive(active);
+        }
     }
 
     private SaveGame ReadDataFromSave(string path)
@@ -93,7 +125,11 @@ public class SaveSystemHandler : MonoBehaviour
 
         getAllObjectsInPlayerGround.SetObjectsInArea(saveGame.ObjectsInPlayerGround);
 
+        GetComponent<GetAllChestsStorage>().SetAllChestToWorld(saveGame.Chests);
+
         GetComponent<GetFarmPlots>().PositionFarmingPlots(saveGame.Plots);
+
+        GetComponent<GetFarmPlots>().SetCroptsToWorld(saveGame.CropSaves);
 
         if (loadSceneHandler != null)
         {
@@ -101,6 +137,9 @@ public class SaveSystemHandler : MonoBehaviour
         }
 
         sunShadowHandler.ReinitializeShadows();
+
+        countPlayedMinutes.Minutes = saveGame.PlayedMinutes;
+        countPlayedMinutes.Seconds = saveGame.PlayedSecundes;
     }
 
     private void VerifyFiles(string pathToSaveGame)
@@ -146,11 +185,21 @@ public class SaveSystemHandler : MonoBehaviour
 
         saveGame.PlayerQuests = questTab.GetAllQuestID();
 
+        SetLocation(true);
         saveGame.ObjectsInGame = getObjects.GetAllObjectsFromArea();
+        SetLocation(false);
 
         saveGame.ObjectsInPlayerGround = getAllObjectsInPlayerGround.GetAllObjects();
 
         saveGame.Plots = GetComponent<GetFarmPlots>().GetAllFarmingPlots();
+
+        saveGame.CropSaves = GetComponent<GetFarmPlots>().GetAllCrops();
+
+        saveGame.PlayedMinutes = countPlayedMinutes.Minutes;
+
+        saveGame.PlayedSecundes = countPlayedMinutes.Seconds;
+
+        saveGame.Chests = GetComponent<GetAllChestsStorage>().GetAllChestStorage();
 
         return saveGame;
     }

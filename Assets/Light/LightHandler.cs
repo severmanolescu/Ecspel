@@ -28,30 +28,4 @@ public class LightHandler : MonoBehaviour
     {
         lightSource.color = color;
     }
-
-    public void Update()
-    {
-        if(direction)
-        {
-            if(lightSource.pointLightInnerRadius >= maxRadius)
-            {
-                direction = false;
-            }
-            else
-            {
-                lightSource.pointLightInnerRadius += speedIntensityChange * Time.deltaTime;
-            }
-        }
-        else
-        {
-            if (lightSource.pointLightInnerRadius <= minRadius)
-            {
-                direction = true;
-            }
-            else
-            {
-                lightSource.pointLightInnerRadius -= speedIntensityChange * Time.deltaTime;
-            }
-        }
-    }
 }

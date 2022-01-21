@@ -9,6 +9,8 @@ public class ChestOpenHandler : MonoBehaviour
     [SerializeField] private Sprite openSprite;
     private Sprite closeSprite;
 
+    [SerializeField] private int chestId;
+
     [Header("Audio effects")]
     [SerializeField] private AudioClip chestOpen;
     [SerializeField] private AudioClip chestClose;
@@ -32,6 +34,8 @@ public class ChestOpenHandler : MonoBehaviour
     private CanvasTabsOpen canvasTabsOpen;
 
     private List<Item> items = new List<Item>();
+
+    public int ChestId { get => chestId; set => chestId = value; }
 
     private void Awake()
     {

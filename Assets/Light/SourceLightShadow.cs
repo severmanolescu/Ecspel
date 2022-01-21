@@ -7,6 +7,8 @@ public class SourceLightShadow : MonoBehaviour
 {
     [SerializeField] private Gradient gradientSourceLight;
 
+    private bool lightStatus = true;
+
     private List<LightHandler> sourceLights = new List<LightHandler>();
 
     public void AddLight(LightHandler light)
@@ -29,14 +31,33 @@ public class SourceLightShadow : MonoBehaviour
 
     public void ChangeLightsIntensity(float intensity)
     {
-        if(sourceLights != null)
+        if (!(intensity <= 0.23f || intensity >= 0.68f))
+        {
+            if (lightStatus == true)
+            {
+                foreach (LightHandler light in sourceLights)
+                {
+                    light.gameObject.SetActive(false);
+                }
+
+                lightStatus = false;
+            }
+        }
+        else if (sourceLights != null)
         {
             Color color = gradientSourceLight.Evaluate(intensity);
 
             foreach (LightHandler light in sourceLights)
             {
                 light.ChangeIntensity(color);
+
+                if (lightStatus == false)
+                {
+                    light.gameObject.SetActive(true);
+                }
             }
+
+            lightStatus = true;
         }
     }
 }

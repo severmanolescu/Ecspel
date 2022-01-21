@@ -36,7 +36,7 @@ public class GetObjectsFromWorld : MonoBehaviour
 
                     foreach (BoxCollider2D obj in objectsInArea)
                     {
-                        if (!obj.CompareTag("Area"))
+                        if (!obj.CompareTag("Area") && obj.isTrigger == false)
                         {
                             int itemNo = obj.gameObject.GetComponent<SaveObjectID>().itemID;
 
@@ -87,27 +87,30 @@ public class GetObjectsFromWorld : MonoBehaviour
             }
         }
 
-        foreach(ObjectSaveGame objectSave in objects)
+        foreach (ObjectSaveGame objectSave in objects)
         {
-            if (spawnAreas[objectSave.LocationIndex - 1] != null)
+            if (objectSave.LocationIndex > 0)
             {
-                GameObject instantiateObject = Instantiate(getItemWorld.GetObjectFromNo(objectSave.ItemNo));
-
-                instantiateObject.GetComponent<PositionInGrid>().LocationGrid = getLocationGrid.GetLocationFromNo(objectSave.LocationIndex);
-
-                instantiateObject.transform.position = new Vector3(objectSave.PositionX, objectSave.PositionY);
-
-                Transform spawnLocation = spawnAreas[objectSave.LocationIndex - 1].GetComponentsInChildren<SpawnObjectsArea>()[objectSave.AreaIndex].transform;
-
-                instantiateObject.transform.SetParent(spawnLocation);
-
-                if(instantiateObject.tag == "Tree")
+                if (spawnAreas[objectSave.LocationIndex - 1] != null)
                 {
-                    DamageTree tree = instantiateObject.GetComponent<DamageTree>();
+                    GameObject instantiateObject = Instantiate(getItemWorld.GetObjectFromNo(objectSave.ItemNo));
 
-                    tree.Destroyed = objectSave.TreeCrowDestroy;
+                    instantiateObject.GetComponent<PositionInGrid>().LocationGrid = getLocationGrid.GetLocationFromNo(objectSave.LocationIndex);
 
-                    tree.ChangeCrowDesroy();
+                    instantiateObject.transform.position = new Vector3(objectSave.PositionX, objectSave.PositionY);
+
+                    Transform spawnLocation = spawnAreas[objectSave.LocationIndex - 1].GetComponentsInChildren<SpawnObjectsArea>()[objectSave.AreaIndex].transform;
+
+                    instantiateObject.transform.SetParent(spawnLocation);
+
+                    if (instantiateObject.tag == "Tree")
+                    {
+                        DamageTree tree = instantiateObject.GetComponent<DamageTree>();
+
+                        tree.Destroyed = objectSave.TreeCrowDestroy;
+
+                        tree.ChangeCrowDesroy();
+                    }
                 }
             }
         }

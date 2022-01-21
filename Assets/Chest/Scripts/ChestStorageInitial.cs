@@ -6,11 +6,13 @@ public class ChestStorageInitial : MonoBehaviour
 {
     [SerializeField] private List<ItemWithAmount> items = new List<ItemWithAmount>();
 
+    public List<ItemWithAmount> Items { get => items; set => items = value; }
+
     private void Start()
     {
         ChestStorage chestStorage = GetComponent<ChestStorage>();
 
-        foreach(ItemWithAmount item in items)
+        foreach(ItemWithAmount item in Items)
         {
             Item itemCopy = item.Item.Copy();
             itemCopy.Amount = item.Amount;
