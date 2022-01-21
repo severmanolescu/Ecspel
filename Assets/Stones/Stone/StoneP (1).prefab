@@ -4909,9 +4909,9 @@ GameObject:
   - component: {fileID: 4915168469496177217}
   - component: {fileID: 4915168469496177216}
   - component: {fileID: 4915168469496177219}
-  - component: {fileID: 4915168469496177218}
   - component: {fileID: 2133377954}
   - component: {fileID: 2044582333254578012}
+  - component: {fileID: 929743952427478994}
   m_Layer: 0
   m_Name: StoneP (1)
   m_TagString: Stone
@@ -5072,43 +5072,7 @@ MonoBehaviour:
   - {x: -0.19750309, y: -0.11743069, z: 0}
   m_ShapePathHash: -1762545443
   m_Mesh: {fileID: 0}
-  m_InstanceId: -4902
---- !u!68 &4915168469496177218
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4915168469496177220}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.3918991, y: 0.21964741}
-  - {x: -0.38495684, y: 0.37368965}
-  - {x: -0.33209133, y: 0.37219143}
-  - {x: -0.32610154, y: 0.4328699}
-  - {x: -0.20186496, y: 0.43743515}
-  - {x: -0.07429695, y: 0.55874634}
-  - {x: 0.102838516, y: 0.5575285}
-  - {x: 0.22662258, y: 0.49821568}
-  - {x: 0.35484672, y: 0.3712635}
-  - {x: 0.3549049, y: 0.0031909943}
-  - {x: 0.108144045, y: -0.06106949}
-  - {x: 0.10585284, y: -0.12176895}
-  - {x: -0.20330739, y: -0.11685085}
-  - {x: -0.32656813, y: -0.06028557}
-  - {x: -0.38940477, y: 0.002729416}
-  - {x: -0.3953066, y: 0.21824741}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_InstanceId: 247726
 --- !u!114 &2133377954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5139,3 +5103,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 5
+--- !u!61 &929743952427478994
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4915168469496177220}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.016899109, y: 0.21964741}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.52253217, y: 0.18051286}
+    oldSize: {x: 0.75, y: 0.6875}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 0.6875}
+  m_EdgeRadius: 0

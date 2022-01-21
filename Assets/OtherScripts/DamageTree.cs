@@ -29,6 +29,8 @@ public class DamageTree : MonoBehaviour
     private int scaleX;
     private int scaleY;
 
+    public bool Destroyed { get => destroyed; set { destroyed = value; } }
+
     private void Awake()
     {
         destroyTree = GetComponentInChildren<DestroyTree>();
@@ -78,7 +80,7 @@ public class DamageTree : MonoBehaviour
 
     public void TakeDamage(float damage, int spawn, int itemLevel)
     {
-        if(destroyed == false)
+        if(Destroyed == false)
         {
             if(itemLevel >= treeLevel)
             {
@@ -99,7 +101,7 @@ public class DamageTree : MonoBehaviour
 
         if (health <= 0)
         {
-            if (destroyed == false)
+            if (Destroyed == false)
             {
                 destroyTree.Spawn = spawn;
 
@@ -117,7 +119,7 @@ public class DamageTree : MonoBehaviour
 
                 health = 10;
 
-                destroyed = true;
+                Destroyed = true;
             }
             else
             {
@@ -146,5 +148,19 @@ public class DamageTree : MonoBehaviour
     {
         audioSource.clip = woodChop[Random.Range(0, woodChop.Count)];
         audioSource.Play();
+    }
+
+    public void ChangeCrowDesroy()
+    {
+        if(destroyed == true)
+        {
+            Destroy(GetComponentInChildren<DestroyTree>().gameObject);
+
+            Vector3 newScale = transform.Find("Shadow").localScale;
+
+            newScale.y /= 2;
+
+            transform.Find("Shadow").localScale = newScale;
+        }
     }
 }

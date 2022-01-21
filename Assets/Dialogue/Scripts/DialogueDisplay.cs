@@ -33,11 +33,16 @@ public class DialogueDisplay : MonoBehaviour
 
         ChangeQuestMarkState();
 
+        ChangeQuestWhoToGive();
+    }
+
+    private void ChangeQuestWhoToGive()
+    {
         if (dialogueScriptable != null)
         {
             foreach (Quest quest in dialogueScriptable.Quest)
-            {  
-                if(quest is GiveItem)
+            {
+                if (quest is GiveItem)
                 {
                     GiveItem giveItem = (GiveItem)quest;
 
@@ -89,6 +94,8 @@ public class DialogueDisplay : MonoBehaviour
             if (dialogueScriptable.HaveQuest == true)
             {
                 questMark.SetActive(true);
+
+                ChangeQuestWhoToGive();
             }
             else
             {

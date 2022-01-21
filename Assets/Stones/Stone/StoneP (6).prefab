@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 1219495173672104092}
   - component: {fileID: 1219495173672104083}
   - component: {fileID: 1219495173672104082}
-  - component: {fileID: 1219495173672104081}
   - component: {fileID: 243124534}
   - component: {fileID: -1951144722597577198}
+  - component: {fileID: -4879995640856928738}
   m_Layer: 0
   m_Name: StoneP (6)
   m_TagString: Stone
@@ -274,48 +274,7 @@ MonoBehaviour:
   - {x: 0.10457802, y: 0.037568092, z: 0}
   m_ShapePathHash: -1090450547
   m_Mesh: {fileID: 0}
-  m_InstanceId: -20394
---- !u!68 &1219495173672104081
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219495173672104087}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.4607315, y: 0.31415343}
-  - {x: -0.46356678, y: 0.5303612}
-  - {x: -0.27212095, y: 0.7113733}
-  - {x: -0.08663607, y: 0.7778492}
-  - {x: 0.090836525, y: 0.7812052}
-  - {x: 0.16411018, y: 0.7150698}
-  - {x: 0.2811494, y: 0.6513281}
-  - {x: 0.35060024, y: 0.585165}
-  - {x: 0.40819263, y: 0.5284176}
-  - {x: 0.47228527, y: 0.40229988}
-  - {x: 0.47868824, y: 0.22499752}
-  - {x: 0.4198718, y: 0.165164}
-  - {x: 0.2892828, y: 0.099422455}
-  - {x: 0.15895557, y: 0.031362534}
-  - {x: 0.10806036, y: -0.025596619}
-  - {x: -0.13794088, y: -0.029530525}
-  - {x: -0.26759672, y: 0.040906906}
-  - {x: -0.33630753, y: 0.097623825}
-  - {x: -0.393085, y: 0.15554237}
-  - {x: -0.4504876, y: 0.21626282}
-  - {x: -0.4642191, y: 0.31415248}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_InstanceId: 248356
 --- !u!114 &243124534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +305,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 10
+--- !u!61 &-4879995640856928738
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219495173672104087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.039268494, y: 0.37743294}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.4607315, y: 0.164903}
+    oldSize: {x: 1, y: 0.9375}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.810941}
+  m_EdgeRadius: 0
 --- !u!1 &1219495174386706559
 GameObject:
   m_ObjectHideFlags: 0

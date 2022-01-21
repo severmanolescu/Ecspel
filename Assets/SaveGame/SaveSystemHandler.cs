@@ -1,0 +1,169 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+
+public class SaveSystemHandler : MonoBehaviour
+{
+    private PlayerInventory playerInventory;
+
+    private PlayerAchievements playerAchievements;
+
+    private QuestTabHandler questTab;
+
+    private DayTimerHandler dayTimerHandler;
+
+    private LoadSceneHandler loadSceneHandler;
+
+    private GetAllObjectsInPlayerGround getAllObjectsInPlayerGround;
+
+    private GetObjectsFromWorld getObjects;
+
+    private SunShadowHandler sunShadowHandler;
+
+    private int indexOfSaveGame;
+
+    private string pathToSaveGameFolder;
+
+    private string pathToSaves;
+
+    private void Awake()
+    {
+        getObjects = GetComponent<GetObjectsFromWorld>();
+
+        getAllObjectsInPlayerGround = GameObject.Find("PlayerHouseGround").GetComponent<GetAllObjectsInPlayerGround>();
+
+        playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
+
+        playerAchievements = GameObject.Find("Global/Player").GetComponent<PlayerAchievements>();
+
+        questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
+
+        dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
+
+        sunShadowHandler = dayTimerHandler.GetComponent<SunShadowHandler>();
+
+        pathToSaves = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+
+        pathToSaves = Path.Combine(pathToSaves, @"Sooth\Saves");
+
+        pathToSaveGameFolder = pathToSaves;
+    }
+
+    private void VerifyPathToSave()
+    {
+        if(pathToSaves != null && !pathToSaves.Contains(".svj"))
+        {
+            pathToSaves += @"\SaveGame" + indexOfSaveGame + ".svj";
+        }
+    }
+
+    public void LoadSaveGame(int indexOfSaveGame, LoadSceneHandler loadSceneHandler)
+    {
+        this.loadSceneHandler = loadSceneHandler;
+        this.indexOfSaveGame = indexOfSaveGame;
+
+        VerifyPathToSave();
+
+        SetDataToGame(ReadDataFromSave(pathToSaves));  
+    }
+
+    private SaveGame ReadDataFromSave(string path)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(path, FileMode.Open);
+
+        SaveGame data = formatter.Deserialize(stream) as SaveGame;
+        stream.Close();
+
+        return data;
+    }
+
+    private void SetDataToGame(SaveGame saveGame)
+    {
+        dayTimerHandler.Days = saveGame.Days;
+
+        playerInventory.SetInventoryFromSave(saveGame.PlayerInventory);
+
+        getObjects.SetObjectsToWorld(saveGame.ObjectsInGame);
+
+        questTab.SetQuestsWithID(saveGame.PlayerQuests);
+
+        getAllObjectsInPlayerGround.SetObjectsInArea(saveGame.ObjectsInPlayerGround);
+
+        GetComponent<GetFarmPlots>().PositionFarmingPlots(saveGame.Plots);
+
+        if (loadSceneHandler != null)
+        {
+            loadSceneHandler.FinishGridSearchProcess = true;
+        }
+
+        sunShadowHandler.ReinitializeShadows();
+    }
+
+    private void VerifyFiles(string pathToSaveGame)
+    {
+        if(File.Exists(pathToSaveGameFolder))
+        {
+            if(File.Exists(pathToSaveGame))
+            {
+                File.Delete(pathToSaveGame);
+            }
+        }
+        else
+        {
+            Directory.CreateDirectory(pathToSaveGameFolder);
+        }    
+    }
+
+    public void SaveGame()
+    {
+        SaveGame saveGame = GetDataFromGame();
+
+        VerifyPathToSave();
+
+        VerifyFiles(pathToSaves);
+
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(pathToSaves, FileMode.Create);
+
+        formatter.Serialize(stream, saveGame);
+        stream.Close();
+    }
+
+    private SaveGame GetDataFromGame()
+    {
+        SaveGame saveGame = new SaveGame();
+
+        saveGame.Days = dayTimerHandler.Days;
+
+        saveGame.PlayerInventory = playerInventory.GetAllItemsNo();
+
+        saveGame.PlayerAchievements = playerAchievements.GetAllAchievements();
+
+        saveGame.PlayerQuests = questTab.GetAllQuestID();
+
+        saveGame.ObjectsInGame = getObjects.GetAllObjectsFromArea();
+
+        saveGame.ObjectsInPlayerGround = getAllObjectsInPlayerGround.GetAllObjects();
+
+        saveGame.Plots = GetComponent<GetFarmPlots>().GetAllFarmingPlots();
+
+        return saveGame;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SaveGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadSaveGame(0, null);
+        }
+    }
+}

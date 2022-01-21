@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SaplingGrowHandler : MonoBehaviour
 {
+    public Transform newLocationAfterFullGrow;
+
     private Sapling sapling;
 
     private int currentSprite = 0;
@@ -28,6 +30,8 @@ public class SaplingGrowHandler : MonoBehaviour
         GameObject.Find("Global/DayTimer").GetComponent<CropGrowHandler>().SaplingAddList(this);
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        newLocationAfterFullGrow = GameObject.Find("PlayerHouseGround/Environment").transform;
     }
 
     public void SetData(Sapling sapling, int currentSprite, int startDay, uint state)
@@ -77,6 +81,8 @@ public class SaplingGrowHandler : MonoBehaviour
 
                                 tree.GetComponent<PositionInGrid>().LocationGrid = GetComponentInParent<LocationGridSave>();
 
+                                tree.transform.SetParent(newLocationAfterFullGrow);
+
                                 DestroyObject();
                             }
 
@@ -92,6 +98,8 @@ public class SaplingGrowHandler : MonoBehaviour
                                 GameObject tree = Instantiate(sapling.AlmostMature, transform.position, transform.rotation);
 
                                 tree.GetComponent<PositionInGrid>().LocationGrid = GetComponentInParent<LocationGridSave>();
+
+                                tree.transform.SetParent(newLocationAfterFullGrow);
 
                                 DestroyObject();
                             }

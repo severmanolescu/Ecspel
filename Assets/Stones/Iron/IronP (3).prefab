@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1688537554099973805}
   - component: {fileID: 1688537554099973806}
   - component: {fileID: 1688537554099973807}
-  - component: {fileID: 1688537554099973800}
   - component: {fileID: 3525827955589672068}
   - component: {fileID: -3002834158311395499}
+  - component: {fileID: 6421380444967358566}
   m_Layer: 0
   m_Name: IronP (3)
   m_TagString: Iron
@@ -220,54 +220,7 @@ MonoBehaviour:
   - {x: -0.19723535, y: -0.13086605, z: 0}
   m_ShapePathHash: 440058457
   m_Mesh: {fileID: 0}
-  m_InstanceId: -108320
---- !u!68 &1688537554099973800
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688537554099973802}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.82411575, y: 0.57594633}
-  - {x: -0.75542355, y: 0.7359209}
-  - {x: -0.6983652, y: 0.7878227}
-  - {x: -0.635067, y: 1.0401402}
-  - {x: -0.31638265, y: 1.228159}
-  - {x: -0.13755226, y: 1.2926846}
-  - {x: -0.072598934, y: 1.349905}
-  - {x: 0.29285932, y: 1.3462543}
-  - {x: 0.54722023, y: 1.2289591}
-  - {x: 0.6106057, y: 1.1623783}
-  - {x: 0.6183009, y: 0.744277}
-  - {x: 0.8051479, y: 0.59814835}
-  - {x: 0.8586178, y: 0.47027397}
-  - {x: 0.8703084, y: 0.1676073}
-  - {x: 0.5445068, y: -0.08915043}
-  - {x: 0.29592633, y: -0.13681126}
-  - {x: 0.11727381, y: -0.14303112}
-  - {x: 0.05103159, y: -0.074780464}
-  - {x: -0.13137984, y: -0.08243179}
-  - {x: -0.20313239, y: -0.20716953}
-  - {x: -0.44632697, y: -0.2029581}
-  - {x: -0.5680413, y: -0.14272213}
-  - {x: -0.62786293, y: -0.073672295}
-  - {x: -0.6943996, y: -0.020401955}
-  - {x: -0.75459003, y: 0.047919273}
-  - {x: -0.8294947, y: 0.2972679}
-  - {x: -0.8199277, y: 0.5783334}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_InstanceId: 248708
 --- !u!114 &3525827955589672068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +251,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 14
+--- !u!61 &6421380444967358566
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688537554099973802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0000019073486, y: 0.6004429}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.50000113, y: 0.115716554}
+    oldSize: {x: 1.6875, y: 1.5625}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6875, y: 1.5625}
+  m_EdgeRadius: 0
 --- !u!1 &1688537554747351979
 GameObject:
   m_ObjectHideFlags: 0

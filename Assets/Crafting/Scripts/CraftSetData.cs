@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class CraftSetData : MonoBehaviour
 {
+    [SerializeField] private GameObject itemWorldPrefab;
+
     private ItemSprites itemSprites;
 
     private Craft craft = null;
+
+    private Transform playerLocation;
 
     private bool haveItems = false;
 
@@ -25,6 +29,8 @@ public class CraftSetData : MonoBehaviour
     {
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
+        playerLocation = GameObject.Find("Global/Player").transform;
+       
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
         Image[] images = GetComponentsInChildren<Image>();
@@ -105,7 +111,18 @@ public class CraftSetData : MonoBehaviour
             auxItem = craft.ReceiveItem.Item.Copy();
             auxItem.Amount = craft.ReceiveItem.Amount;
 
-            playerInventory.AddItem(auxItem);
+            bool canAddItemToPlayerInventory = playerInventory.AddItem(auxItem);
+
+            if(canAddItemToPlayerInventory == false)
+            {
+                ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+
+                itemWorld.SetItem(auxItem);
+
+                itemWorld.transform.position = playerLocation.position;
+
+                itemWorld.MoveToPoint();
+            }
         }
 
         GetComponentInParent<CraftCanvasHandler>().ReinitializeAllCraftings();

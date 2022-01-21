@@ -4909,9 +4909,9 @@ GameObject:
   - component: {fileID: 8094447620366313442}
   - component: {fileID: 8094447620366313443}
   - component: {fileID: 8094447620366313440}
-  - component: {fileID: 8094447620366313441}
   - component: {fileID: 1565058899287160002}
   - component: {fileID: 7512415800842462146}
+  - component: {fileID: 7220192162323254284}
   m_Layer: 0
   m_Name: IronP (2)
   m_TagString: Iron
@@ -5064,37 +5064,7 @@ MonoBehaviour:
   - {x: -0.13294125, y: -0.06254196, z: 0}
   m_ShapePathHash: -323701963
   m_Mesh: {fileID: 0}
-  m_InstanceId: -108224
---- !u!68 &8094447620366313441
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8094447620366313455}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.2643566, y: 0.18585539}
-  - {x: -0.26484632, y: 0.3713541}
-  - {x: -0.19980717, y: 0.43325996}
-  - {x: 0.1044054, y: 0.43162537}
-  - {x: 0.3007617, y: 0.3076849}
-  - {x: 0.29734278, y: -0.0012817383}
-  - {x: 0.23642635, y: -0.0621109}
-  - {x: -0.13400793, y: -0.06049633}
-  - {x: -0.26189756, y: 0.060798645}
-  - {x: -0.26219893, y: 0.18393373}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_InstanceId: 248616
 --- !u!114 &1565058899287160002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5125,3 +5095,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 13
+--- !u!61 &7220192162323254284
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8094447620366313455}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03602791, y: 0.2461822}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5640496, y: 0.10610847}
+    oldSize: {x: 0.5625, y: 0.625}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5625, y: 0.625}
+  m_EdgeRadius: 0

@@ -83,6 +83,8 @@ public class SunShadowHandler : MonoBehaviour
     {
         GameObject[] shadows = GameObject.FindGameObjectsWithTag("SunShadow");
 
+        sunShadows.Clear();
+
         foreach (GameObject shadow in shadows)
         {
             sunShadows.Add(shadow.transform);

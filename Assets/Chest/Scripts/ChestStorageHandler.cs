@@ -146,23 +146,28 @@ public class ChestStorageHandler : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (item.MaxAmount > 1)
+        if (item != null)
         {
-            return AddItemStackable(item);
-        }
-        else
-        {
-            foreach (ItemSlot auxItem in itemSlots)
+            if (item.MaxAmount > 1)
             {
-                if (auxItem.Item == null)
-                {
-                    auxItem.SetItem(item);
-
-                    return true;
-                }
+                return AddItemStackable(item);
             }
+            else
+            {
+                foreach (ItemSlot auxItem in itemSlots)
+                {
+                    if (auxItem.Item == null)
+                    {
+                        auxItem.SetItem(item);
 
-            return false;
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
+
+        return false;
     }
 }

@@ -52,6 +52,8 @@ public class HoeSystemHandler : MonoBehaviour
         {
             GameObject soil = Instantiate(prefabGameObject, spawnLocation);
 
+            soil.tag = "FarmPlot";
+
             SpriteRenderer sprite = soil.AddComponent<SpriteRenderer>();
 
             sprite.sortingOrder = -2;
@@ -100,6 +102,22 @@ public class HoeSystemHandler : MonoBehaviour
             gridNode.canPlace = false;
             gridNode.cropPlaced = false;
         }
+    }
+
+    public void Spawn(Vector3 position)
+    {
+        Spawn(grid.GetGridObject(position));
+    }
+
+    public void DestroyPlot(Vector3 position)
+    {
+        GridNode gridNode = grid.GetGridObject(position);
+
+        gridNode.isWalkable = true;
+        gridNode.canPlant = false;
+        gridNode.canPlace = true;
+        gridNode.cropPlaced = false;
+        gridNode.currentObject = null;
     }
 
     //1-up

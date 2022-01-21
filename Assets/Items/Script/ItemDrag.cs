@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemDrag : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ItemDrag : MonoBehaviour
     private ItemSprites itemSprites;
 
     private Image itemImage;
+
+    private TextMeshProUGUI amount;
 
     private bool halfOfAmount;
 
@@ -25,6 +28,10 @@ public class ItemDrag : MonoBehaviour
         itemImage = gameObject.GetComponentInChildren<Image>();
 
         itemImage.gameObject.SetActive(false);
+
+        amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        amount.gameObject.SetActive(false);
     }
 
     public void SetData(Item item, GameObject previousSlot)
@@ -43,6 +50,13 @@ public class ItemDrag : MonoBehaviour
                 transform.position = Input.mousePosition;
 
                 halfOfAmount = false;
+
+                if(item.Amount > 1)
+                {
+                    amount.text = item.Amount.ToString();
+
+                    amount.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -65,6 +79,13 @@ public class ItemDrag : MonoBehaviour
                 transform.position = Input.mousePosition;
 
                 halfOfAmount = true;
+
+                if (item.Amount > 1)
+                {
+                    amount.text = this.item.Amount.ToString();
+
+                    amount.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -84,6 +105,8 @@ public class ItemDrag : MonoBehaviour
             previousSlot = null;
 
             itemImage.gameObject.SetActive(false);
+
+            amount.gameObject.SetActive(false);
         }
     }
 
@@ -138,6 +161,8 @@ public class ItemDrag : MonoBehaviour
         previousSlot = null;
 
         itemImage.gameObject.SetActive(false);
+
+        amount.gameObject.SetActive(false);
     }
 
     public void Update()

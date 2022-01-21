@@ -327,7 +327,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == 0 && eventData.clickCount == 2)
+        if (eventData.button == 0 && (eventData.clickCount == 2 ||
+           (eventData.clickCount == 1 && Input.GetKey(KeyCode.LeftShift))))
         {
             if(locationOfItem == true)
             {

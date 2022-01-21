@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ItemWorld : MonoBehaviour
 {
     private Item item;
 
-    private SpriteRenderer spriteRenderer;
+    private Image itemSprite;
 
     private ItemSprites itemSprites;
 
@@ -37,7 +38,7 @@ public class ItemWorld : MonoBehaviour
     {
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        itemSprite = gameObject.GetComponentInChildren<Image>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
@@ -63,9 +64,7 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = items;
 
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-        spriteRenderer.sprite = itemSprites.GetItemSprite(item.ItemNO);
+        itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
         if (amount != null)
         {

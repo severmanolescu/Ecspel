@@ -19,6 +19,7 @@ public class CropGrow : MonoBehaviour
     private void Start()
     {
         GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().CropAddList(this);
+
         gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
     }
 

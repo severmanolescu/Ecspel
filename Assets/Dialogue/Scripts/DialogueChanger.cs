@@ -56,12 +56,30 @@ public class DialogueChanger : MonoBehaviour
 
     private void SetQuest()
     {
+        SetQuestWhoToGive();
+
         answersHandler.SetAnswers(NPCDialogue.Quest);
 
         answersHandler.gameObject.SetActive(true);
         dialogueHandler.gameObject.SetActive(false);
 
         NPCDialogue.DeleteDialogue();
+    }
+
+    private void SetQuestWhoToGive()
+    {
+        foreach (Quest quest in dialogueScriptable.Quest)
+        {
+            if (quest != null && quest is GiveItem)
+            {
+                GiveItem giveItem = (GiveItem)quest;
+
+                if (giveItem != null && giveItem.WhoToGive == null)
+                {
+                    giveItem.WhoToGive = NPCDialogue.gameObject;
+                }
+            }
+        }
     }
 
     private void DialogueEnd()
@@ -93,7 +111,11 @@ public class DialogueChanger : MonoBehaviour
 
         if(dialogueScriptable.Quest.Count > 0)
         {
+            SetQuestWhoToGive();
+
             questTab.AddQuest(dialogueScriptable.Quest);
+
+            NPCDialogue.DeleteDialogue();
         } 
 
         stop = true;
