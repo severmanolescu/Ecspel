@@ -17,6 +17,8 @@ public class AnswersHandler : MonoBehaviour
 
     private QuestTrack questTrack;
 
+    private NpcId npcId;
+
     private void Awake()
     {
         playerInventory = GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
@@ -24,6 +26,8 @@ public class AnswersHandler : MonoBehaviour
         questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
+
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
     }
 
     public void SetDialogueChanger(DialogueChanger dialogueChanger)
@@ -86,7 +90,7 @@ public class AnswersHandler : MonoBehaviour
 
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(giveItem.ItemsNeeds); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.AddItem(quest.ItemsReceive); });
-        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { giveItem.WhoToGive.GetComponent<DialogueDisplay>().DeleteQuest(quest); });
+        ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { npcId.GetNpcFromId(giveItem.whoToGiveId).DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(quest.NextDialogue); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTab.DeleteQuest(quest); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { questTrack.StopTrackQuest(); });

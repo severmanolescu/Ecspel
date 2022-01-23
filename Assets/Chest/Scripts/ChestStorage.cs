@@ -20,7 +20,7 @@ public class ChestStorage : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        if(!items.Contains(item) && items.Count + 1 < chestMaxSlots)
+        if(items.Count + 1 < chestMaxSlots)
         {
             items.Add(item);
         }

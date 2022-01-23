@@ -37,6 +37,8 @@ public class SunShadowHandler : MonoBehaviour
         dayTimerHandler.GetTimer(out float minutes, out int hours);
         dayTimerHandler.GetIntensity(out float intensity);
 
+        List<Transform> toRemoveFromList = new List<Transform>();
+
         if (hours >= dayStart && hours <= dayEnd + dayNightCycleTime)
         {
             alpha = 1f;
@@ -53,6 +55,10 @@ public class SunShadowHandler : MonoBehaviour
 
                     shadow.gameObject.SetActive(true);
                 }
+                else
+                {
+                    toRemoveFromList.Add(shadow);
+                }
             }
         }
         else
@@ -67,8 +73,14 @@ public class SunShadowHandler : MonoBehaviour
                 {
                     shadow.GetComponent<SpriteRenderer>().color = color;
                 }
+                else
+                {
+                    toRemoveFromList.Add(shadow);
+                }
             }
         }
+
+
     }
 
     public void ChangeShadowAlpha(float alpha)

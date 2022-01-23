@@ -70,7 +70,7 @@ public class Pathfinding
         openList = new List<GridNode> { startNode };
         closedList = new List<GridNode>();
 
-        for (int x = 0; x < grid.Weight; x++)
+        for (int x = 0; x < grid.Width; x++)
         {
             for (int y = 0; y < grid.Height; y++)
             {
@@ -139,7 +139,7 @@ public class Pathfinding
             // Left Up
             if (currentNode.y + 1 < grid.Height) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
         }
-        if (currentNode.x + 1 < grid.Weight)
+        if (currentNode.x + 1 < grid.Width)
         {
             // Right
             neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y));

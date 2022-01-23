@@ -75,7 +75,7 @@ public class DayTimerHandler : MonoBehaviour
                 cropGrow.DayChange(days);
                 spawnObjects.DayChange(days);
 
-                saveSystem.SaveGame();
+                //saveSystem.SaveGame();
             }
         }
 

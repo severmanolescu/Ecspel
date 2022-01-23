@@ -72,7 +72,7 @@ public class SpawnObjectsArea : MonoBehaviour
                         {
                             if (gridSave.Grid.gridArray[i, j] != null)
                             {
-                                if (gridSave.Grid.gridArray[i, j].canPlace == false && 
+                                if (gridSave.Grid.gridArray[i, j].canPlace == false || 
                                     gridSave.Grid.gridArray[i, j].isWalkable == false)
                                 {
                                     return false;
@@ -131,7 +131,7 @@ public class SpawnObjectsArea : MonoBehaviour
         }
     }
 
-    public void SpawnObjectAtLoad()
+    public IEnumerator SpawnObjectAtLoad()
     {
         for (int noItem = 0; noItem < maxItems; noItem++)
         {
@@ -149,6 +149,8 @@ public class SpawnObjectsArea : MonoBehaviour
                 spawnObject.transform.position = spawnPosition;
                 spawnObject.transform.SetParent(transform);
             }
+
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }

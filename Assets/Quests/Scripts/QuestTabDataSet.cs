@@ -14,6 +14,8 @@ public class QuestTabDataSet : MonoBehaviour
 
     private Button track;
 
+    private NpcId npcId;
+
     private void Awake()
     {
         TextMeshProUGUI[] texts = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
@@ -25,6 +27,8 @@ public class QuestTabDataSet : MonoBehaviour
 
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
         questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
+
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
 
         track.gameObject.SetActive(false);
     }
@@ -40,7 +44,7 @@ public class QuestTabDataSet : MonoBehaviour
             GiveItem giveItem = (GiveItem)quest;
 
             track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
-            track.onClick.AddListener(delegate { questTrack.TrackQuest(giveItem.WhoToGive.transform.position); });
+            track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform.position); });
         }
         else if(quest is GoToLocation)
         {

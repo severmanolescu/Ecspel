@@ -64,17 +64,24 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = items;
 
-        itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
-
-        if (amount != null)
+        if (item == null || item.Amount == 0)
         {
-            if (item.Amount > 1)
+            Destroy(gameObject);
+        }
+        else
+        {
+            itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
+
+            if (amount != null)
             {
-                amount.SetText(item.Amount.ToString());
-            }
-            else
-            {
-                amount.SetText("");
+                if (item.Amount > 1)
+                {
+                    amount.SetText(item.Amount.ToString());
+                }
+                else
+                {
+                    amount.SetText("");
+                }
             }
         }
     }

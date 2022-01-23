@@ -28,6 +28,10 @@ public class SaveSystemHandler : MonoBehaviour
 
     private CountPlayedMinutes countPlayedMinutes;
 
+    private NPCDialogueSave npcDialogue;
+
+    private GridSaveHadler gridSave;
+
     private int indexOfSaveGame;
 
     private string pathToSaveGameFolder;
@@ -49,6 +53,10 @@ public class SaveSystemHandler : MonoBehaviour
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         countPlayedMinutes = GameObject.Find("Global").GetComponent<CountPlayedMinutes>();
+
+        npcDialogue = countPlayedMinutes.GetComponent<NPCDialogueSave>();
+
+        gridSave = countPlayedMinutes.GetComponent<GridSaveHadler>();
 
         sunShadowHandler = dayTimerHandler.GetComponent<SunShadowHandler>();
 
@@ -125,11 +133,19 @@ public class SaveSystemHandler : MonoBehaviour
 
         getAllObjectsInPlayerGround.SetObjectsInArea(saveGame.ObjectsInPlayerGround);
 
+        npcDialogue.SetNpcsDialogue(saveGame.NpcDialogues);
+
         GetComponent<GetAllChestsStorage>().SetAllChestToWorld(saveGame.Chests);
+
+        GetComponent<GetAllChestsStorage>().SetItemsToPlayerHouseChest(saveGame.PlayerHouseChest);
+
+        GetComponent<GetAllSapling>().SetSaplingsToWorld(saveGame.Saplings);
 
         GetComponent<GetFarmPlots>().PositionFarmingPlots(saveGame.Plots);
 
         GetComponent<GetFarmPlots>().SetCroptsToWorld(saveGame.CropSaves);
+
+        gridSave.SetDataToGridLocations(saveGame.GridSaves);
 
         if (loadSceneHandler != null)
         {
@@ -200,6 +216,14 @@ public class SaveSystemHandler : MonoBehaviour
         saveGame.PlayedSecundes = countPlayedMinutes.Seconds;
 
         saveGame.Chests = GetComponent<GetAllChestsStorage>().GetAllChestStorage();
+        
+        saveGame.PlayerHouseChest = GetComponent<GetAllChestsStorage>().GetPlayerHouseChestStorage();
+
+        saveGame.Saplings = GetComponent<GetAllSapling>().GetAllObjects();
+
+        saveGame.NpcDialogues = npcDialogue.GetNpcsDialogue();
+
+        saveGame.GridSaves = gridSave.GetAllGridLocationData();
 
         return saveGame;
     }

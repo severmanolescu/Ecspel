@@ -13,6 +13,8 @@ public class DialogueDisplay : MonoBehaviour
     private DialogueHandler dialogueHandler;
     private AnswersHandler answersHandler;
 
+    private NpcId npcId;
+
     private List<Quest> quests = new List<Quest>();
 
     public List<Quest> Quest { get { return quests; } }
@@ -24,6 +26,8 @@ public class DialogueDisplay : MonoBehaviour
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
         answersHandler = gameObject.GetComponentInChildren<AnswersHandler>();
         questMark = gameObject.transform.Find("QuestMark").gameObject;
+
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
     }
 
     public void Start()
@@ -46,13 +50,13 @@ public class DialogueDisplay : MonoBehaviour
                 {
                     GiveItem giveItem = (GiveItem)quest;
 
-                    giveItem.WhoToGive = this.gameObject;
+                    giveItem.WhoToGive = npcId.GetNpcId(this);
 
                     if (giveItem.nextDialogue != null && giveItem.NextQuest is GiveItem)
                     {
                         GiveItem giveItem1 = (GiveItem)giveItem.NextQuest;
 
-                        giveItem1.WhoToGive = this.gameObject;
+                        giveItem1.WhoToGive = npcId.GetNpcId(this);
                     }
                 }
 

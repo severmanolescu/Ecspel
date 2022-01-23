@@ -5,9 +5,9 @@ using UnityEngine;
 public class GiveItem : Quest
 {
     [Header("Requirement quest:")]
-    public GameObject whoToGive;
+    public int whoToGiveId = -1;
     public List<QuestItems> itemsNeeds;
 
-    public GameObject WhoToGive { get { return whoToGive; } set { whoToGive = value; } }
+    public int WhoToGive { get { return whoToGiveId; } set { whoToGiveId = value; } }
     public List<QuestItems> ItemsNeeds { get { return itemsNeeds; } }
 }

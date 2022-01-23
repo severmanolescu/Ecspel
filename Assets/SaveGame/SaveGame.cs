@@ -18,8 +18,6 @@ public class SaveGame
 
     private List<int> playerQuests;
 
-    private List<int> chestStorage;
-
     private List<ObjectSaveGame> objectsInGame;
 
     private List<ObjectSaveGame> objectsInPlayerGround;
@@ -28,12 +26,19 @@ public class SaveGame
 
     private List<CropSave> cropSaves;
 
-    private List<ChestSave> chests; 
+    private List<Tuple<int, int>> playerHouseChest;
+
+    private List<ChestSave> chests;
+
+    private List<SaplingSave> saplings;
+
+    private List<int> npcDialogues;
+
+    private List<GridSave[,]> gridSaves;
 
     public int Days { get => days; set => days = value; }
     public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
-    public List<int> ChestStorage { get => chestStorage; set => chestStorage = value; }
     public List<int> PlayerAchievements { get => playerAchievements; set => playerAchievements = value; }
     public List<ObjectSaveGame> ObjectsInGame { get => objectsInGame; set => objectsInGame = value; }
     public List<int> PlayerQuests { get => playerQuests; set => playerQuests = value; }
@@ -42,4 +47,8 @@ public class SaveGame
     public List<CropSave> CropSaves { get => cropSaves; set => cropSaves = value; }
     public ushort PlayedSecundes { get => playedSecundes; set => playedSecundes = value; }
     public List<ChestSave> Chests { get => chests; set => chests = value; }
+    public List<Tuple<int, int>> PlayerHouseChest { get => playerHouseChest; set => playerHouseChest = value; }
+    public List<SaplingSave> Saplings { get => saplings; set => saplings = value; }
+    public List<int> NpcDialogues { get => npcDialogues; set => npcDialogues = value; }
+    public List<GridSave[,]> GridSaves { get => gridSaves; set => gridSaves = value; }
 }

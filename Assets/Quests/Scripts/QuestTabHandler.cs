@@ -14,12 +14,16 @@ public class QuestTabHandler : MonoBehaviour
 
     private GetQuest getQuest;
 
+    private NpcId npcId;
+
     private void Awake()
     {
         getQuest = GameObject.Find("Global").GetComponent<GetQuest>();
 
         spawnLocation = transform.Find("ScrollView/Viewport/Content");
         questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
+
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
     }
 
     private void InstantiateButton(Quest quest)
@@ -39,7 +43,7 @@ public class QuestTabHandler : MonoBehaviour
         {
             GiveItem giveItem = (GiveItem)quest;
 
-            giveItem.WhoToGive.GetComponent<DialogueDisplay>().AddQuest(quest);
+            npcId.GetNpcFromId(giveItem.whoToGiveId).AddQuest(quest);
         }
         else if(quest is GoToLocation)
         {

@@ -38,7 +38,7 @@ public class NewGameLoadingHandler : MonoBehaviour
 
             if (spawnObjects != null)
             {
-                spawnObjects.SpawnObjectAtLoad();
+                StartCoroutine(spawnObjects.SpawnObjectAtLoad());
             }
         }
     }

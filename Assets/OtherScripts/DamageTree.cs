@@ -43,6 +43,18 @@ public class DamageTree : MonoBehaviour
     private void Start()
     {
         prefabLog = destroyTree.ItemWorld;
+
+        SpriteRenderer[] objects = gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach(SpriteRenderer obj in objects)
+        {
+            if(obj.CompareTag("SunShadow"))
+            {
+                GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(obj.transform);
+
+                break;
+            }
+        }
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)

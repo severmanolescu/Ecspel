@@ -20,7 +20,7 @@ public class QuestTrack : MonoBehaviour
 
     private void Update()
     {
-        if (targetPosition != Vector3.zero)
+        if (targetPosition != Vector3.zero && targetPosition != null)
         {
             Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
 

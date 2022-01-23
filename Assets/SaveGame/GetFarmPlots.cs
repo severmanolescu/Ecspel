@@ -95,6 +95,8 @@ public class GetFarmPlots : MonoBehaviour
             if (crop.CompareTag("Crop"))
             {
                 harvestCrop.DestroyCrop(crop.transform.position);
+
+                Destroy(crop.gameObject);
             }
         }
 

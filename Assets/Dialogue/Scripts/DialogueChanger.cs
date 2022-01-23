@@ -15,6 +15,8 @@ public class DialogueChanger : MonoBehaviour
 
     private QuestTabHandler questTab;
 
+    private NpcId npcId;
+
     private bool firstDialogue = false;
 
     private bool stop = true;
@@ -24,8 +26,12 @@ public class DialogueChanger : MonoBehaviour
     private void Awake()
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
+
         answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
+
         questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
+
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
     }
 
     private void Start()
@@ -74,9 +80,9 @@ public class DialogueChanger : MonoBehaviour
             {
                 GiveItem giveItem = (GiveItem)quest;
 
-                if (giveItem != null && giveItem.WhoToGive == null)
+                if (giveItem != null && giveItem.WhoToGive == -1)
                 {
-                    giveItem.WhoToGive = NPCDialogue.gameObject;
+                    giveItem.WhoToGive = npcId.GetNpcId(NPCDialogue.GetComponent<DialogueDisplay>());
                 }
             }
         }

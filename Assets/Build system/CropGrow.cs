@@ -243,13 +243,16 @@ public class CropGrow : MonoBehaviour
 
     public void HarverstCrop()
     {
-        if(Item.Refil == false)
+        if (Destroyed == false)
         {
-            HarvestNotRefil();
-        }
-        else
-        {
-            HarvestRefil();
+            if (Item.Refil == false)
+            {
+                HarvestNotRefil();
+            }
+            else
+            {
+                HarvestRefil();
+            }
         }
     }
 

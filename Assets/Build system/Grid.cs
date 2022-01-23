@@ -19,7 +19,7 @@ public class Grid<TGridObject>
     public TGridObject[,] gridArray;
 
     public int Height { get { return height; } }
-    public int Weight { get { return width; } }
+    public int Width { get { return width; } }
     public float CellSize { get { return cellSize; } }
 
     public Grid(int height, int width, float cellSize,  Vector3 originPosition, Func<Grid<TGridObject>, int, int, TGridObject> createGridObject)

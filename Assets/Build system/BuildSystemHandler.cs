@@ -151,7 +151,7 @@ public class BuildSystemHandler : MonoBehaviour
         }
         else if(item is Sapling)
         {
-            newObject.tag = "Tree";
+            newObject.tag = "TreeSapling";
 
             SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
 
