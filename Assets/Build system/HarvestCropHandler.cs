@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HarvestCropHandler : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class HarvestCropHandler : MonoBehaviour
     {
         Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
 
-        GridNode gridNode = grid.GetGridObject(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        GridNode gridNode = grid.GetGridObject(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
         GridNode gridNodePlayer = grid.GetGridObject(GameObject.Find("Player").transform.position);
 
         if(gridNode != null && gridNodePlayer != null)

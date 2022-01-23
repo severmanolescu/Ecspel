@@ -18,7 +18,7 @@ public class GetItemFromNO : MonoBehaviour
                 case "Sword": return 4;
                 case "Pickaxe": return 5;
                 case "Hoe": return 6;
-                case "Iron": return 7;
+                case "Fier": return 7;
                 case "Beans": return 8;
                 case "Beetroot": return 9;
                 case "Carrot": return 10;

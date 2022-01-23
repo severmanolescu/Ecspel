@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SaveSystemHandler : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class SaveSystemHandler : MonoBehaviour
     private NPCDialogueSave npcDialogue;
 
     private GridSaveHadler gridSave;
+
+    private Keyboard keyboard;
 
     private int indexOfSaveGame;
 
@@ -67,6 +70,8 @@ public class SaveSystemHandler : MonoBehaviour
         pathToSaveGameFolder = pathToSaves;
 
         positionNpcAtLoad = GameObject.FindGameObjectsWithTag("NPC");
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void VerifyPathToSave()
@@ -230,11 +235,11 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(keyboard.pKey.isPressed)
         {
             SaveGame();
         }
-        else if (Input.GetKeyDown(KeyCode.L))
+        else if (keyboard.lKey.isPressed)
         {
             LoadSaveGame(0, null);
         }

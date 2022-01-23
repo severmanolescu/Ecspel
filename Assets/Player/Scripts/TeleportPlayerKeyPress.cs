@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class TeleportPlayerKeyPress : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private GameObject player = null;
 
+    private Keyboard keyboard;
+
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
 
     private void Awake()
@@ -38,6 +41,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         worldText = GameObject.Find("Global/Player/Canvas/WorldTextDetails").GetComponent<WorldTextDetails>();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -62,7 +67,7 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private void Update()
     {
-        if(player != null && Input.GetKeyDown(KeyCode.F))
+        if(player != null && keyboard.fKey.wasPressedThisFrame)
         {
             if ((startHour == 0 && finishHour == 0) || 
                  dayTimer.Hours >= startHour && 

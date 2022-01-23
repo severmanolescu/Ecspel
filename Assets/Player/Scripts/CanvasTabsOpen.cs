@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CanvasTabsOpen : MonoBehaviour
 {
@@ -13,17 +14,20 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private GameObject canvasEffects;
 
+    private Keyboard keyboard;
+
     [Header("Menu canvas")]
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private GameObject menuPrincipal;
     [SerializeField] private GameObject chestStorage;
     [SerializeField] private GameObject craftingCanvas;
+    [SerializeField] private GameObject forgeCanvas;
 
     public bool canOpenTabs = true;
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         playerInventory.SetActive(false);
         canvasEffects.SetActive(false);
@@ -45,12 +49,14 @@ public class CanvasTabsOpen : MonoBehaviour
         questShow = transform.Find("QuestTab").gameObject.GetComponent<QuestTabDataSet>();
 
         chestStorage.SetActive(false);
+
+        forgeCanvas.SetActive(false);
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void Start()
     {
-
-
         StartCoroutine(Wait());
     }
 
@@ -58,7 +64,7 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         if (canOpenTabs == true)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (keyboard.eKey.wasPressedThisFrame)
             {
                 if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
@@ -86,7 +92,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Tab))
+            else if (keyboard.tabKey.wasPressedThisFrame)
             {
                 if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
                 {
@@ -113,12 +119,13 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (keyboard.escapeKey.wasPressedThisFrame)
             {
                 if(questShow.gameObject.activeSelf == false &&
-                   playerInventory.activeSelf == false && 
+                   playerInventory.activeSelf == false &&
                    chestStorage.activeSelf == false &&
-                   craftingCanvas.activeSelf == false)
+                   craftingCanvas.activeSelf == false &&
+                   forgeCanvas.activeSelf == false)
                 {
                     if (menuPrincipal.activeSelf == true)
                     {
@@ -162,12 +169,13 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     craftingCanvas.SetActive(false);
 
+                    forgeCanvas.SetActive(false);
                 }                           
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (keyboard.escapeKey.wasPressedThisFrame)
             {
                 if(chestStorage.activeSelf == true)
                 {
@@ -180,5 +188,10 @@ public class CanvasTabsOpen : MonoBehaviour
     public void SetCanOpenTabs(bool canOpenTabs)
     {
         this.canOpenTabs = canOpenTabs;
+    }
+
+    public void ControllerTabPress()
+    {
+        Debug.Log("Das");
     }
 }

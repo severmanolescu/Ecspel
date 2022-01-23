@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class CraftingHandler : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class CraftingHandler : MonoBehaviour
 
     private GameObject quickSlots;
 
+    private Keyboard keyboard;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -31,6 +34,8 @@ public class CraftingHandler : MonoBehaviour
         craftCanvas = GameObject.Find("Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>();
 
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,7 +70,7 @@ public class CraftingHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 if (playerInventory.activeSelf == false)
                 {

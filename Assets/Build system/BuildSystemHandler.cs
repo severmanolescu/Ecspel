@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BuildSystemHandler : MonoBehaviour
 {
@@ -183,17 +184,23 @@ public class BuildSystemHandler : MonoBehaviour
 
             spriteRenderer.sortingOrder = 0;
 
-            for (int i = gridNode.x; i <= gridNode.x + placeable.SizeX; i++)
+            if (gridNode.x + placeable.StartX >= 0 &&
+            gridNode.x + placeable.StartY >= 0 &&
+            gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
+            gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
             {
-                for (int j = gridNode.y; j <= gridNode.y + placeable.SizeY; j++)
+                for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
                 {
-                    if (i < Grid.gridArray.GetLength(0) && j < Grid.gridArray.GetLength(1) &&
-                        Grid.gridArray[i, j] != null)
+                    for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
                     {
-                        Grid.gridArray[i, j].canPlace = false;
-                        Grid.gridArray[i, j].canPlant = false;
-                        Grid.gridArray[i, j].isWalkable = false;
-                        Grid.gridArray[i, j].objectInSpace = newObject;
+                        if (i < Grid.gridArray.GetLength(0) && j < Grid.gridArray.GetLength(1) &&
+                            Grid.gridArray[i, j] != null)
+                        {
+                            Grid.gridArray[i, j].canPlace = false;
+                            Grid.gridArray[i, j].canPlant = false;
+                            Grid.gridArray[i, j].isWalkable = false;
+                            Grid.gridArray[i, j].objectInSpace = newObject;
+                        }
                     }
                 }
             }
@@ -233,12 +240,14 @@ public class BuildSystemHandler : MonoBehaviour
     {
         Placeable placeable = (Placeable)item;
 
-        if (gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
+        if (gridNode.x + placeable.StartX >=0 &&
+            gridNode.x + placeable.StartY >=0 &&
+            gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
             gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
         {
-            for (int i = gridNode.x; i < gridNode.x + placeable.SizeX; i++)
+            for (int i = gridNode.x + placeable.StartX; i < gridNode.x + placeable.SizeX; i++)
             {
-                for (int j = gridNode.y; j < gridNode.y + placeable.SizeY; j++)
+                for (int j = gridNode.y + placeable.StartY; j < gridNode.y + placeable.SizeY; j++)
                 {
                     if (Grid.gridArray[i, j].canPlace == false)
                     {
@@ -281,7 +290,7 @@ public class BuildSystemHandler : MonoBehaviour
     {
         if(LocationGrid != null && startPlace)
         {
-            GridNode gridNode = Grid.GetGridObject(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            GridNode gridNode = Grid.GetGridObject(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
 
             if (gridNode != null)
             {
@@ -331,7 +340,7 @@ public class BuildSystemHandler : MonoBehaviour
 
                 @object.transform.position = position; 
 
-                if(Input.GetMouseButtonDown(0) && canPlace == true)
+                if(Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
                 {
                     PlaceObject(gridNode);
                 }

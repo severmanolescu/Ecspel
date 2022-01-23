@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class SleepHandler : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class SleepHandler : MonoBehaviour
 
     private DayTimerHandler dayTimer;
 
+    private Keyboard keyboard;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -37,6 +40,8 @@ public class SleepHandler : MonoBehaviour
         playerStats = GameObject.Find("Player/Canvas/Stats");
 
         dayTimer = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -85,7 +90,7 @@ public class SleepHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 ChangeObjectsStates(false);
 

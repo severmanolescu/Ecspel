@@ -3,10 +3,13 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, 
                                        IEndDragHandler, IDropHandler, IPointerExitHandler, IPointerEnterHandler, IPointerClickHandler
 {
+    [SerializeField] private bool canDrop = true;
+
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
 
@@ -20,6 +23,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private ChestStorageHandler chestStorage;
 
     private QuickSlotsChanger quickSlots;
+
+    private Keyboard keyboard;
+
+    private ForgeHandler forgeHandler;
 
     //true  - player inventory
     //false - chest storage
@@ -35,10 +42,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         quickSlots = GameObject.Find("Global/Player/Canvas/Field/QuickSlots").GetComponent<QuickSlotsChanger>();
 
-        Image[] itemsSprite = gameObject.GetComponentsInChildren<Image>();
+        Image[] itemsSprite = GetComponentsInChildren<Image>();
 
         itemSprite = itemsSprite[1];
-        amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        amount = GetComponentInChildren<TextMeshProUGUI>();
 
         item = null;
 
@@ -65,6 +72,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
             chestStorage = GameObject.Find("Global/Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
         }
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
+
+        forgeHandler = GetComponentInParent<ForgeHandler>();
     }
 
     private void ShowItem()
@@ -106,11 +117,17 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void SetItem(Item item)
     {
-        if (item != null)
+        if (item != null && item.Amount > 0)
         {
             this.item = item;
 
             ShowItem();
+        }
+        else
+        {
+            HideItem();
+
+            item = null;
         }
     }    
 
@@ -135,11 +152,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 amount.gameObject.SetActive(false);
             }
         }
+
+        ForgeSlotItemChange();
     }
 
     public void DeleteItem()
     {
         item = null;
+
+        ForgeSlotItemChange();
 
         HideItem();
     }
@@ -158,65 +179,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             ReinitializeItem();
         }
+
+        ForgeSlotItemChange();
     }
 
-    private bool VerifyItem()
+    private void ForgeSlotItemChange()
     {
-        if (item != null && itemDrag.Item != null)
+        if (forgeHandler != null)
         {
-            if (item is Weapon && itemDrag.Item is Weapon)
-            {
-                return true;
-            }
-            if (item is Axe && itemDrag.Item is Axe)
-            {
-                return true;
-            }
-            if (item is Pickaxe && itemDrag.Item is Pickaxe)
-            {
-                return true;
-            }
-            if (item is Range && itemDrag.Item is Range)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void ChangeSlotToEquiped()
-    {
-        Item auxSwapItems = item;
-
-        SetItem(itemDrag.Item);
-
-        itemDrag.PreviousItem.GetComponent<EquipedITem>().SetItem(auxSwapItems);
-
-        itemDrag.HideData();
-    }
-
-    private void ChangeSlotToSlot()
-    {
-        Item auxSwapItems = item;
-
-        SetItem(itemDrag.Item);
-
-        itemDrag.PreviousItem.GetComponent<ItemSlot>().SetItem(auxSwapItems);
-
-        itemDrag.HideData();
-
-    }
-
-    private void ChangeEquipedItem()
-    {
-        if(itemDrag.PreviousItem.GetComponent<ItemSlot>() != null)
-        {
-            ChangeSlotToSlot();
-        }
-        else
-        {
-            ChangeSlotToEquiped();
+            forgeHandler.ChangeItemInSlot(this);
         }
     }
 
@@ -249,15 +220,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(itemDrag.PreviousItem != this.gameObject)
+        if(itemDrag.PreviousItem != this.gameObject && canDrop == true)
         {
-            if (VerifyItem())
-            {
-                ChangeEquipedItem();
-
-                return;
-            }
-
             if (item == null)
             {
                 if (itemDrag.Item != null)
@@ -266,6 +230,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
                     itemDrag.DeleteData();
 
+                    ForgeSlotItemChange();
+
                     return;
                 }
                 else
@@ -273,12 +239,14 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     itemDrag.HideData();
                 }
             }
-            else
+            else if(itemDrag != null)
             {
                 if (item.Name == itemDrag.Item.Name)
                 {
                     if (item.Amount <= item.MaxAmount)
                     {
+                        ShowItem();
+
                         int auxiliar = item.MaxAmount - item.Amount;
 
                         if (itemDrag.Item.Amount <= auxiliar)
@@ -288,6 +256,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                             itemDrag.DeleteData();
 
                             ReinitializeItem();
+
+                            ForgeSlotItemChange();
 
                             return;
                         }
@@ -300,6 +270,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                             ReinitializeItem();
 
                             itemDrag.HideData();
+
+                            ForgeSlotItemChange();
 
                             return;
                         }
@@ -328,7 +300,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == 0 && (eventData.clickCount == 2 ||
-           (eventData.clickCount == 1 && Input.GetKey(KeyCode.LeftShift))))
+           (eventData.clickCount == 1 && keyboard.shiftKey.isPressed)))
         {
             if(locationOfItem == true)
             {
@@ -363,6 +335,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     ReinitializeItem();
                 }
             }
+
+            ForgeSlotItemChange();
 
             quickSlots.Reinitialize();
         }

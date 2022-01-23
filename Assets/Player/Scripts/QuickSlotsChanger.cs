@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class QuickSlotsChanger : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private BuildSystemHandler buildSystem;
 
+    private Keyboard keyboard;
+    private Mouse mouse;
+
+    private bool forwardButtonPress = false;
+    private bool backButtonPress = false;
+
     public int SelectedItemIndex { get { return selectedItemIndex; } }
     public Item Item { get { return quickSlots[selectedItemIndex - 1].Item; } }
 
@@ -17,6 +24,9 @@ public class QuickSlotsChanger : MonoBehaviour
         quickSlots = gameObject.GetComponentsInChildren<QuickSlot>();
 
         buildSystem = GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
+        mouse = InputSystem.GetDevice<Mouse>();
     }
 
     private void Start()
@@ -48,62 +58,75 @@ public class QuickSlotsChanger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (keyboard.digit1Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (keyboard.digit2Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (keyboard.digit3Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(3);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (keyboard.digit4Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(4);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        else if (keyboard.digit5Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(5);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        else if (keyboard.digit6Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(6);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        else if (keyboard.digit7Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(7);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        else if (keyboard.digit8Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(8);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        else if (keyboard.digit9Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(9);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        else if (keyboard.digit0Key.wasPressedThisFrame)
         {
             ChangeSelectedItem(10);
         }
 
-        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if(mouse.scroll.y.ReadValue() == 120 || (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == false && forwardButtonPress == false))
         {
             if (selectedItemIndex > 1)
             {
                 selectedItemIndex--;
                 ChangeSelectedItem(selectedItemIndex);
             }
+
+            forwardButtonPress = true;
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if(Joystick.current != null && Joystick.current.allControls[6].IsPressed() == true)
+        {
+            forwardButtonPress = false;
+        }
+
+        if (mouse.scroll.y.ReadValue() == -120 || (Joystick.current != null && Joystick.current.allControls[7].IsPressed() == false && backButtonPress == false))
         {
             if (selectedItemIndex < 10)
             {
                 selectedItemIndex++;
                 ChangeSelectedItem(selectedItemIndex);
             }
+
+            backButtonPress = true;
+        }
+        else if (Joystick.current != null && Joystick.current.allControls[7].IsPressed() == true)
+        {
+            backButtonPress = false;
         }
     }
 }

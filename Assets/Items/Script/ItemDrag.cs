@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class ItemDrag : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class ItemDrag : MonoBehaviour
 
     private TextMeshProUGUI amount;
 
+    private Mouse mouse;
+
     private bool halfOfAmount;
 
-    private bool startDrag = false;
+    public bool startDrag = false;
 
     public Item Item { get { return item; } }
     public GameObject PreviousItem { get { return previousSlot; } }
@@ -32,6 +35,8 @@ public class ItemDrag : MonoBehaviour
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
         amount.gameObject.SetActive(false);
+
+        mouse = InputSystem.GetDevice<Mouse>();
     }
 
     public void SetData(Item item, GameObject previousSlot)
@@ -47,7 +52,7 @@ public class ItemDrag : MonoBehaviour
 
                 itemImage.gameObject.SetActive(true);
 
-                transform.position = Input.mousePosition;
+                transform.position = Mouse.current.position.ReadValue();
 
                 halfOfAmount = false;
 
@@ -76,7 +81,7 @@ public class ItemDrag : MonoBehaviour
 
                 itemImage.gameObject.SetActive(true);
 
-                transform.position = Input.mousePosition;
+                transform.position = Mouse.current.position.ReadValue();
 
                 halfOfAmount = true;
 
@@ -167,11 +172,11 @@ public class ItemDrag : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        if(mouse.leftButton.isPressed || mouse.rightButton.isPressed)
         {
             startDrag = true;
 
-            transform.position = Input.mousePosition;
+            transform.position = Mouse.current.position.ReadValue();
         }
         else if(startDrag)
         {

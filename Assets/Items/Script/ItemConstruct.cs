@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ItemConstruct : MonoBehaviour
 {
@@ -30,14 +31,14 @@ public class ItemConstruct : MonoBehaviour
                 spriteRenderer.color = Color.red;
             }
 
-            Vector3 objectPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 objectPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
             objectPosition.z = gameObject.transform.position.z;
 
             gameObject.transform.position = objectPosition;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (canPlace)
             {

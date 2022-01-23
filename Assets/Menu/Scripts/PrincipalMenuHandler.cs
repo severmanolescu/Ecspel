@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class PrincipalMenuHandler : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class PrincipalMenuHandler : MonoBehaviour
     [SerializeField] private AudioMixer effectAudioMixer;
     [SerializeField] private AudioMixer principalAudioMixer;
 
+    private Keyboard keyboard;
+
     private AudioSource audioSource;
 
     private string pathToSaveSettings;
@@ -59,6 +62,8 @@ public class PrincipalMenuHandler : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void Start()
@@ -107,7 +112,7 @@ public class PrincipalMenuHandler : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(keyboard.escapeKey.wasPressedThisFrame)
         {
             if(settingsMenu.activeSelf == true)
             {

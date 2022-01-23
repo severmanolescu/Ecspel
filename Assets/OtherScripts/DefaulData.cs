@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public static class DefaulData
 {
@@ -132,19 +133,19 @@ public static class DefaulData
 
     public static Vector3 GetMouseWorldPosition()
     {
-        Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+        Vector3 vec = GetMouseWorldPositionWithZ(Mouse.current.position.ReadValue(), Camera.main);
         vec.z = 0f;
         return vec;
     }
 
     public static Vector3 GetMouseWorldPositionWithZ()
     {
-        return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+        return GetMouseWorldPositionWithZ(Mouse.current.position.ReadValue(), Camera.main);
     }
 
     public static Vector3 GetMouseWorldPositionWithZ(Camera worldCamera)
     {
-        return GetMouseWorldPositionWithZ(Input.mousePosition, worldCamera);
+        return GetMouseWorldPositionWithZ(Mouse.current.position.ReadValue(), worldCamera);
     }
 
     public static Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)

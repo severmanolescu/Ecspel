@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueChanger : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class DialogueChanger : MonoBehaviour
 
     private int dialogueIndex = 0;
 
+    private Keyboard keyboard;
+
     private void Awake()
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
@@ -32,6 +35,8 @@ public class DialogueChanger : MonoBehaviour
         questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
         npcId = GameObject.Find("Global").GetComponent<NpcId>();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void Start()
@@ -146,7 +151,7 @@ public class DialogueChanger : MonoBehaviour
                 firstDialogue = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (keyboard.spaceKey.wasPressedThisFrame)
             {
                 if(dialogueRespons[dialogueIndex - 1].NextDialogue != null)
                 {
@@ -175,7 +180,7 @@ public class DialogueChanger : MonoBehaviour
 
         else if(NPCDialogue != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 SetDialogue(NPCDialogue.Dialogue);
             }

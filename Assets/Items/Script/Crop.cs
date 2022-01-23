@@ -24,8 +24,8 @@ public class Crop : Placeable
     [SerializeField] private bool refil;
     [SerializeField] private int refilDecreseSpriteIndexStart;
 
-    public Crop(string name, string details, int amount, int maxAmount, int itemSprite, int sizeX, int sizeY, int dayToGrow, Item crop, int minDrop, int maxDrop, bool centerX, bool centerY, bool refil, int refilDecreseSpriteIndexStart)
-        : base(name, details, amount, maxAmount, itemSprite, sizeX, sizeY, null)
+    public Crop(string name, string details, int amount, int maxAmount, int itemSprite, int sizeX, int sizeY, int startX, int startY, int dayToGrow, Item crop, int minDrop, int maxDrop, bool centerX, bool centerY, bool refil, int refilDecreseSpriteIndexStart)
+        : base(name, details, amount, maxAmount, itemSprite, sizeX, sizeY, null, startX, startY)
     {
         this.dayToGrow = dayToGrow;
         this.crop = crop;

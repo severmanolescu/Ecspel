@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerItemUse : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerItemUse : MonoBehaviour
     private PlayerMovement playerMovement;
 
     private Animator animator;
+
+    private Mouse mouse;
 
     private Vector2 inputs = Vector2.zero;
 
@@ -31,6 +34,8 @@ public class PlayerItemUse : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
 
         audioSource = GetComponent<AudioSource>();
+
+        mouse = InputSystem.GetDevice<Mouse>();
     }
 
     private void AxeUse(Collider2D[] objects, int spawn)
@@ -186,15 +191,15 @@ public class PlayerItemUse : MonoBehaviour
     {
         if(playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (mouse.leftButton.isPressed)
             {
                 Item item = selectedSlot.Item;
 
                 SelectedItemAction(item);
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (mouse.rightButton.isPressed)
             {
-                GameObject.Find("Global/BuildSystem").GetComponent<HarvestCropHandler>().Harvest(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                GameObject.Find("Global/BuildSystem").GetComponent<HarvestCropHandler>().Harvest(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
             }
             
         }

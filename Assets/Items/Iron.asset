@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe30c6f651e25444bb7dfb7b94a8f7fe, type: 3}
+  m_Script: {fileID: 11500000, guid: d7dc1e8a19e0f204dab1bb6699c5ecd4, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: 
-  name: Iton
-  details: Iron ore
+  name: Fier
+  details: Poate sa fie topit intr-un furnal pentru a primi fier
   amount: 0
   maxAmount: 30
   itemNO: 7
+  duration: 5
+  nextItem: {fileID: 11400000, guid: 2acfd8e5b121a9d479d9436f52917d57, type: 2}

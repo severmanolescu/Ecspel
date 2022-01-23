@@ -252,10 +252,16 @@ public class PlayerInventory : MonoBehaviour
 
         foreach(Tuple<int, int> item in itemsNo)
         {
-            Item newItem = getItem.ItemFromNo(item.Item1).Copy();
-            newItem.Amount = item.Item2;
+            Item newItem = getItem.ItemFromNo(item.Item1);
 
-            AddItem(newItem);
+            if (newItem != null)
+            {
+                newItem = newItem.Copy();
+
+                newItem.Amount = item.Item2;
+
+                AddItem(newItem);
+            }
         }
     }
 }

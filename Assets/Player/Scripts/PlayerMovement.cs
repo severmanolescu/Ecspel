@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class PlayerMovement : MonoBehaviour
     private PlayerItemUse playerItem;
 
     private PlayerStats playerStats;
+
+    private GameplayInputs gameplay;
+
+    private Keyboard keyboard;
+
+    private Joystick joystick;
 
     private bool canMove = true;
 
@@ -50,18 +57,68 @@ public class PlayerMovement : MonoBehaviour
         playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
 
         audioSource = gameObject.GetComponent<AudioSource>();
+
+        gameplay = new GameplayInputs();
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
+
+        joystick = InputSystem.GetDevice<Joystick>();
+    }
+
+    private void GetInputs()
+    {
+        inputs = Vector2.zero;
+
+        if (keyboard.aKey.isPressed ||
+            keyboard.leftArrowKey.isPressed ||
+            (joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0))
+        {
+            inputs.x = -1;
+        }
+        if (keyboard.dKey.isPressed ||
+            keyboard.rightArrowKey.isPressed ||
+           (joystick != null &&  joystick.stick.left.ReadValue() < 1 && joystick.stick.left.ReadValue() > 0))
+        {
+            if(inputs.x == 0)
+            {
+                inputs.x = 1;
+            }
+            else
+            {
+                inputs.x = 0;
+            }
+        }
+
+        if (keyboard.sKey.isPressed ||
+            keyboard.downArrowKey.isPressed ||
+            (joystick != null &&  joystick.stick.up.ReadValue() < 1 && joystick.stick.up.ReadValue() > 0))
+        {
+            inputs.y = -1;
+        }
+        if (keyboard.wKey.isPressed ||
+            keyboard.upArrowKey.isPressed ||
+            (joystick != null && joystick.stick.down.ReadValue() > 0))
+        {
+            if (inputs.y == 0)
+            {
+                inputs.y = 1;
+            }
+            else
+            {
+                inputs.y = 0;
+            }
+        }
     }
 
     private void Update()
     {
         if (canMove == true && tabOpen == false)
         {
-            inputs.x = Input.GetAxisRaw("Horizontal");
-            inputs.y = Input.GetAxisRaw("Vertical");
+            GetInputs();
 
             inputs = inputs.normalized;        
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (keyboard.leftShiftKey.isPressed || (joystick != null && joystick.allControls[10].IsPressed() == false))
             {
                 inputs *= runSpeed;
 

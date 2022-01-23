@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class test : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class test : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             for(int i = 0; i < locationGrid.Grid.gridArray.GetLength(0) - 1; i++)
                 for(int j = 0; j < locationGrid.Grid.gridArray.GetLength(1) - 1; j++)

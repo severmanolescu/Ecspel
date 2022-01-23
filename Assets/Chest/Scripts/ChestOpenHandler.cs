@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class ChestOpenHandler : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class ChestOpenHandler : MonoBehaviour
 
     private List<Item> items = new List<Item>();
 
+    private Keyboard keyboard;
+
     public int ChestId { get => chestId; set => chestId = value; }
 
     private void Awake()
@@ -57,6 +60,8 @@ public class ChestOpenHandler : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         closeSprite = spriteRenderer.sprite;
+
+        keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -150,7 +155,7 @@ public class ChestOpenHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 if (GameObject.Find("Player/Canvas/PlayerItems").activeSelf == false)
                 {
