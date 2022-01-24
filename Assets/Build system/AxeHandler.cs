@@ -56,6 +56,13 @@ public class AxeHandler : MonoBehaviour
                                 chestOpen.DropAllItems();
                             }
 
+                            ForgeOpenHandler forge = node.GetComponent<ForgeOpenHandler>();
+
+                            if (forge != null)
+                            {
+                                forge.DropAllItems();
+                            }
+
                             Destroy(placeableData.gameObject);
 
                             ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
@@ -87,9 +94,9 @@ public class AxeHandler : MonoBehaviour
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)
     {
-        for (int i = gridNode.x; i <= gridNode.x + placeable.SizeX; i++)
+        for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
         {
-            for (int j = gridNode.y; j <= gridNode.y + placeable.SizeY; j++)
+            for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
             {
                 if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1) && 
                     grid.gridArray[i, j] != null)

@@ -245,11 +245,11 @@ public class BuildSystemHandler : MonoBehaviour
             gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
             gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
         {
-            for (int i = gridNode.x + placeable.StartX; i < gridNode.x + placeable.SizeX; i++)
+            for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
             {
-                for (int j = gridNode.y + placeable.StartY; j < gridNode.y + placeable.SizeY; j++)
+                for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
                 {
-                    if (Grid.gridArray[i, j].canPlace == false)
+                    if (Grid.gridArray[i, j].canPlace == false || Grid.gridArray[i, j].isWalkable == false)
                     {
                         return false;
                     }

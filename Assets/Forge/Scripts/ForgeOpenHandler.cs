@@ -10,6 +10,8 @@ public class ForgeOpenHandler : MonoBehaviour
     [SerializeField] private ParticleSystem smokeParticle;
     [SerializeField] private ParticleSystem fireParticle;
 
+    [SerializeField] private ItemWorld itemSlotPrefab;
+
     private Item inputItem;
 
     private Item fuelItem;
@@ -284,16 +286,25 @@ public class ForgeOpenHandler : MonoBehaviour
 
         main.loop = false;
 
-        if(canvasOpen == true)
-        {
-            forgeHandler.HideForgeProgress();
-        }
+        DeleteDataFromCanvas();
 
         fuelConsumeCoroutineStart = false;
 
         smeltingConsumeCoroutineStart = false;
 
         GetComponent<SpriteRenderer>().sprite = notWorkingForge;
+    }
+
+    private void DeleteDataFromCanvas()
+    {
+        if (canvasOpen == true)
+        {
+            forgeHandler.SetValuetoForgeSlider(0f);
+            forgeHandler.SetValuetoFuelSlider(1f);
+
+            forgeHandler.HideForgeProgress();
+            forgeHandler.HideFuelProgress();
+        }
     }
 
     public void ItemsChange()
@@ -361,9 +372,36 @@ public class ForgeOpenHandler : MonoBehaviour
 
                     quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
 
+                    DeleteDataFromCanvas();
+
                     canvasOpen = false;
                 }
             }
         }
+    }
+
+    private void InstantiateItemWorld(Item item)
+    {
+        if (item != null)
+        {
+            ItemWorld instantiateItem = Instantiate(itemSlotPrefab).GetComponent<ItemWorld>();
+
+            instantiateItem.transform.position = transform.position;
+
+            instantiateItem.SetItem(item);
+
+            instantiateItem.MoveToPoint();
+        }
+    }
+
+    public void DropAllItems()
+    {
+        StopForge();
+
+        InstantiateItemWorld(inputItem);
+        InstantiateItemWorld(outputItem);
+        InstantiateItemWorld(fuelItem);
+
+        Destroy(gameObject);
     }
 }
