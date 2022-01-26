@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class SleepHandler : MonoBehaviour
 {
+    [SerializeField] private SaveSystemHandler saveSystem;
+
     [SerializeField] private GameObject currentCamera;
     [SerializeField] private GameObject sleepCamera;
 
@@ -102,5 +104,7 @@ public class SleepHandler : MonoBehaviour
     public void StopSleep()
     {
         ChangeObjectsStates(true);
+
+        saveSystem.StartSaveGame();
     }
 }

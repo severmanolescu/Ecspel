@@ -81,6 +81,8 @@ public class CraftingHandler : MonoBehaviour
                     craftCanvas.ReinitializeAllCraftings();
 
                     quickSlots.SetActive(false);
+
+                    canvasTabsOpen.SetCanOpenTabs(false);
                 }
                 else
                 {
@@ -89,6 +91,8 @@ public class CraftingHandler : MonoBehaviour
                     craftCanvas.gameObject.SetActive(false);
 
                     quickSlots.SetActive(true);
+
+                    canvasTabsOpen.SetCanOpenTabs(true);
                 }
             }
         }

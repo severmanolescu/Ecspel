@@ -12,11 +12,15 @@ public class PlayerInventory : MonoBehaviour
 
     private GetItemFromNO getItem;
 
+    private CoinsHandler coinsHandler;
+
     private void Awake()
     {
         getItem = GameObject.Find("Global").GetComponent<GetItemFromNO>();
 
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
+
+        coinsHandler = GetComponentInChildren<CoinsHandler>();
     }
 
     private bool AddItemStackable(Item item)
@@ -100,24 +104,33 @@ public class PlayerInventory : MonoBehaviour
     {
         if (item != null)
         {
-            if (item.MaxAmount > 1)
+            if (item.name == "Coin")
             {
-                return AddItemStackable(item);
+                coinsHandler.Amount += item.Amount;
+
+                return true;
             }
             else
             {
-                foreach (ItemSlot auxItem in itemsSlot)
+                if (item.MaxAmount > 1)
                 {
-                    if (auxItem.Item == null)
-                    {
-                        auxItem.SetItem(item);
-
-                        quickSlots.Reinitialize();
-                        return true;
-                    }
+                    return AddItemStackable(item);
                 }
+                else
+                {
+                    foreach (ItemSlot auxItem in itemsSlot)
+                    {
+                        if (auxItem.Item == null)
+                        {
+                            auxItem.SetItem(item);
 
-                return false;
+                            quickSlots.Reinitialize();
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
             }
         }
 
@@ -128,27 +141,7 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (QuestItems quest in questItems)
         {
-            Item item = quest.Item;
-
-            item.Amount = quest.Amount;
-
-            if (item.MaxAmount > 1)
-            {
-                return AddItemStackable(item);
-            }
-            else
-            {
-                foreach (ItemSlot auxItem in itemsSlot)
-                {
-                    if (auxItem.Item == null)
-                    {
-                        auxItem.SetItem(item);
-
-                        quickSlots.Reinitialize();
-                        return true;
-                    }
-                }
-            }
+            AddItem(quest.Item);
         }
 
         return false;
@@ -158,7 +151,7 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach(ItemSlot itemSlot in itemsSlot)
         {
-            if(itemSlot.Item != null && itemSlot.Item.Name == item.name)
+            if(itemSlot.Item != null && itemSlot.Item.Name == item.Name)
             {
                 amount -= itemSlot.Item.Amount;
             }

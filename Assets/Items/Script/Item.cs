@@ -9,13 +9,15 @@ public class Item : ScriptableObject
 
     [SerializeField] private string details;
 
+    [SerializeField] private int sellPrice;
+
     [SerializeField] private int amount;
 
     [SerializeField] private int maxAmount;
 
     [SerializeField] private int itemNO;
 
-    public Item(string name, string details,  int amount, int maxAmount, int itemNO)
+    public Item(string name, string details, int amount, int maxAmount, int itemNO, int sellPrice)
     {
         this.name = name;
         this.details = details;
@@ -23,6 +25,7 @@ public class Item : ScriptableObject
         this.amount = amount;
         this.maxAmount = maxAmount;
         this.itemNO = itemNO;
+        this.SellPrice = sellPrice;
     }
 
     public string Name { get { return name; } }
@@ -30,6 +33,8 @@ public class Item : ScriptableObject
     public int Amount { get { return amount; } set { amount = value; } }
     public int ItemNO { get { return itemNO; } }
     public int MaxAmount { get { return maxAmount; } }
+
+    public int SellPrice { get => sellPrice; set => sellPrice = value; }
 
     public Item Copy()
     {

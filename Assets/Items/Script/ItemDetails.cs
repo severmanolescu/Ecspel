@@ -6,6 +6,12 @@ public class ItemDetails : MonoBehaviour
 {
     [SerializeField] private GameObject playerItems;
 
+    [SerializeField] private GameObject spawnLocation;
+    [SerializeField] private GameObject statPrefab;
+    [SerializeField] private Sprite coinSprite;
+    [SerializeField] private Sprite attackSprite;
+    [SerializeField] private Sprite powerSprite;
+
     private ItemSprites itemSprites;
 
     private Image itemSpriteObject;
@@ -42,9 +48,58 @@ public class ItemDetails : MonoBehaviour
         {
             itemSpriteObject.sprite = itemSprites.GetItemSprite(item.ItemNO);
             itemNameObject.text = item.Name;
-            itemDetailsObject.text = item.Details;
+            itemDetailsObject.text = "    " + item.Details;
+
+            StatDataSet[] oldStats = spawnLocation.GetComponentsInChildren<StatDataSet>();
+            
+            foreach(StatDataSet stat in oldStats)
+            {
+                Destroy(stat.gameObject);
+            }
+
+            SetDataToStats(item);
 
             gameObject.SetActive(true);
+        }
+    }
+
+    private void SetDataToStats(Item item)
+    {
+        GameObject instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+        instantiateStat.GetComponent<StatDataSet>().SetData(coinSprite, item.SellPrice.ToString());
+
+        if(item is Weapon)
+        {
+            Weapon weapon = (Weapon)item;
+
+            instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+            instantiateStat.GetComponent<StatDataSet>().SetData(attackSprite, weapon.AttackPower.ToString());
+        }
+        else if(item is Pickaxe)
+        {
+            Pickaxe pickaxe = (Pickaxe)item;
+
+            instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+            instantiateStat.GetComponent<StatDataSet>().SetData(attackSprite, pickaxe.Damage.ToString());
+
+            instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+            instantiateStat.GetComponent<StatDataSet>().SetData(powerSprite, pickaxe.Level.ToString());
+        }
+        else if(item is Axe)
+        {
+            Axe axe = (Axe)item;
+
+            instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+            instantiateStat.GetComponent<StatDataSet>().SetData(attackSprite, axe.Damage.ToString());
+
+            instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+            instantiateStat.GetComponent<StatDataSet>().SetData(powerSprite, axe.Level.ToString());
         }
     }
 

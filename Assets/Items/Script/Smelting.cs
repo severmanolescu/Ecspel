@@ -8,8 +8,8 @@ public class Smelting : Item
 
     [SerializeField] private Item nextItem;
 
-    public Smelting(string name, string details, int amount, int maxAmount, int itemSprite, int duration, Item nextItem)
-    : base(name, details, amount, maxAmount, itemSprite)
+    public Smelting(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, int duration, Item nextItem)
+    : base(name, details, amount, maxAmount, itemSprite, sellPrice)
     {
         this.duration = duration;
 

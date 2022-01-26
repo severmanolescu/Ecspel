@@ -14,8 +14,8 @@ public class Placeable : Item
 
     [SerializeField] private GameObject prefab;
 
-    public Placeable(string name, string details, int amount, int maxAmount, int itemSprite, int sizeX, int sizeY, GameObject prefab, int startX, int startY)
-        : base(name, details, amount, maxAmount, itemSprite)
+    public Placeable(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, int sizeX, int sizeY, GameObject prefab, int startX, int startY)
+        : base(name, details, amount, maxAmount, itemSprite, sellPrice)
     {
         this.sizeX = sizeX;
         this.sizeY = sizeY;

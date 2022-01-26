@@ -101,7 +101,19 @@ public class BuildSystemHandler : MonoBehaviour
                 }
                 else
                 {
-                    @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
+                    if(item is Placeable)
+                    {
+                        Placeable placeable = (Placeable)item;
+
+                        if(placeable.Prefab != null)
+                        {
+                            @object.GetComponent<SpriteRenderer>().sprite = placeable.Prefab.GetComponent<SpriteRenderer>().sprite;
+                        }
+                    }
+                    else
+                    {
+                        @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
+                    }
                 }
             }
         }

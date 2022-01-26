@@ -12,8 +12,8 @@ public class Axe : Item
 
     [SerializeField] private float stamina;
 
-    public Axe(string name, string details, int amount, int maxAmount, int itemSprite, float damage, int level, float stamina)
-    : base(name, details, amount, maxAmount, itemSprite)
+    public Axe(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, float damage, int level, float stamina)
+    : base(name, details, amount, maxAmount, itemSprite, sellPrice)
     {
         this.damage = damage;
         this.level = level;

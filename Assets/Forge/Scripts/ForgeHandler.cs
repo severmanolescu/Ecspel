@@ -25,13 +25,19 @@ public class ForgeHandler : MonoBehaviour
         fireImage.color = Color.white;
     }
 
-    public void SetDataAtOpen(Item inputItem, Item fuelItem, Item outputItem, ForgeOpenHandler forgeOpenHandler)
+    public void SetDataAtOpen(Item inputItem, Item fuelItem, Item outputItem, ForgeOpenHandler forgeOpenHandler, float smeltingProgress, float fuelProgress, bool working)
     {
         inputSlot.SetItem(inputItem);
         fuelSlot.SetItem(fuelItem);
         outputSlot.SetItem(outputItem);
 
         forge = forgeOpenHandler;
+
+        if(working)
+        {
+            SetValuetoForgeSlider(smeltingProgress);
+            SetValuetoFuelSlider(fuelProgress);
+        }
     }
 
     public void HideDataAtClose()
@@ -54,6 +60,10 @@ public class ForgeHandler : MonoBehaviour
             else if (itemSlot == fuelSlot)
             {
                 forge.FuelItem = fuelSlot.Item;
+            }
+            else if (itemSlot == outputSlot)
+            {
+                forge.OutputItem = outputSlot.Item;
             }
         }
     }

@@ -76,9 +76,9 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void VerifyPathToSave()
     {
-        if(pathToSaves != null && !pathToSaves.Contains(".svj"))
+        if(pathToSaves != null || !pathToSaves.Contains(".svj"))
         {
-            pathToSaves += @"\SaveGame" + indexOfSaveGame + ".svj";
+            pathToSaves = pathToSaveGameFolder + @"\SaveGame" + indexOfSaveGame + ".svj";
         }
     }
 
@@ -165,20 +165,17 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void VerifyFiles(string pathToSaveGame)
     {
-        if(File.Exists(pathToSaveGameFolder))
+        if(!File.Exists(pathToSaveGameFolder))
         {
-            if(File.Exists(pathToSaveGame))
-            {
-                File.Delete(pathToSaveGame);
-            }
-        }
-        else
-        {
-            Directory.CreateDirectory(pathToSaveGameFolder);
+           Directory.CreateDirectory(pathToSaveGameFolder);
+
+           FileStream file = File.Create(pathToSaveGame);
+
+           file.Close();
         }    
     }
 
-    public void SaveGame()
+    private void SaveGame()
     {
         SaveGame saveGame = GetDataFromGame();
 
@@ -233,13 +230,14 @@ public class SaveSystemHandler : MonoBehaviour
         return saveGame;
     }
 
+    public void StartSaveGame()
+    {
+        SaveGame();
+    }
+
     private void Update()
     {
-        if(keyboard.pKey.isPressed)
-        {
-            SaveGame();
-        }
-        else if (keyboard.lKey.isPressed)
+        if (keyboard.lKey.isPressed)
         {
             LoadSaveGame(0, null);
         }

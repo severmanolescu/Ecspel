@@ -19,6 +19,8 @@ public class CraftCanvasHandler : MonoBehaviour
         }
 
         ReinitializeAllCraftings();
+
+        gameObject.SetActive(false);
     }
 
     public void ReinitializeAllCraftings()

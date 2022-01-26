@@ -8,8 +8,8 @@ public class Weapon : Item
 {
     [SerializeField] private float attackPower;
 
-    public Weapon(string name, string details, int amount, int maxAmount, int itemSprite, float attackPower)
-        : base(name, details, amount, maxAmount, itemSprite)
+    public Weapon(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, float attackPower)
+        : base(name, details, amount, maxAmount, itemSprite, sellPrice)
     {
         this.attackPower = attackPower;
     }

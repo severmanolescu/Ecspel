@@ -12,6 +12,8 @@ public class SaveGame
 
     private ushort playedSecundes;
 
+    private int coins;
+
     private List<Tuple<int, int>> playerInventory;
 
     private List<int> playerAchievements;
@@ -51,4 +53,5 @@ public class SaveGame
     public List<SaplingSave> Saplings { get => saplings; set => saplings = value; }
     public List<int> NpcDialogues { get => npcDialogues; set => npcDialogues = value; }
     public List<GridSave[,]> GridSaves { get => gridSaves; set => gridSaves = value; }
+    public int Coins { get => coins; set => coins = value; }
 }

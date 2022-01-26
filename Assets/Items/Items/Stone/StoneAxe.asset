@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe30c6f651e25444bb7dfb7b94a8f7fe, type: 3}
-  m_Name: Coal
-  m_EditorClassIdentifier: 
-  name: Carbune
-  details: Poate sa fie folosit intr-un furnal
+  m_Script: {fileID: 11500000, guid: 9a81e75d1ed9820418874e2f30332a7e, type: 3}
+  m_Name: StoneAxe
+  m_EditorClassIdentifier: Assembly-CSharp::Axe
+  name: StoneAxe
+  details: StoneAxe
   amount: 0
-  maxAmount: 50
-  itemNO: 56
+  maxAmount: 1
+  itemNO: 3
+  damage: 5
+  level: 1
+  stamina: 1

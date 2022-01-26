@@ -43,7 +43,8 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
-    private int fuelDuration = 30;
+    int elapsedTimeSmelting;
+    int elapsedTimeFuel;
 
     public Item InputItem { get => inputItem; set { inputItem = value; ItemsChange(); } }
     public Item FuelItem { get => fuelItem; set { fuelItem = value; ItemsChange(); } }
@@ -104,11 +105,14 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private IEnumerator FuelConsume()
     {
-        int elapsedTime = 0;
-
         if (fuelItem != null && fuelItem.Amount > 0 &&
+            fuelItem is Fuel &&
             inputItem != null && inputItem.Amount > 0)
         {
+            elapsedTimeFuel = 0;
+
+            Fuel fuel = (Fuel)fuelItem;
+
             workingForge = true;
 
             fuelItem.Amount--;
@@ -120,15 +124,15 @@ public class ForgeOpenHandler : MonoBehaviour
                 forgeHandler.SetValuetoFuelSlider(1f);
             }
 
-            while (elapsedTime < fuelDuration)
+            while (elapsedTimeFuel < fuel.Duration)
             {
                 yield return new WaitForSeconds(1);
 
-                elapsedTime++;
+                elapsedTimeFuel++;
 
                 if (canvasOpen == true)
                 {
-                    forgeHandler.SetValuetoFuelSlider(1f - (float)elapsedTime / fuelDuration);
+                    forgeHandler.SetValuetoFuelSlider(1f - (float)elapsedTimeFuel / fuel.Duration);
                 }
             }
 
@@ -156,7 +160,7 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private IEnumerator Smelting()
     {
-        int elapsedTime = 0;
+        elapsedTimeSmelting = 0;
 
         Smelting smelting = (Smelting)inputItem;
 
@@ -171,15 +175,15 @@ public class ForgeOpenHandler : MonoBehaviour
                 forgeHandler.SetValuetoForgeSlider(0f);
             }
 
-            while (elapsedTime < smelting.Duration && inputItem != null)
+            while (elapsedTimeSmelting < smelting.Duration && inputItem != null)
             {
                 yield return new WaitForSeconds(1);
 
-                elapsedTime++;
+                elapsedTimeSmelting++;
 
                 if (canvasOpen == true)
                 {
-                    forgeHandler.SetValuetoForgeSlider((float)elapsedTime / smelting.Duration);
+                    forgeHandler.SetValuetoForgeSlider((float)elapsedTimeSmelting / smelting.Duration);
                 }
             }
 
@@ -311,7 +315,7 @@ public class ForgeOpenHandler : MonoBehaviour
     {
         if(inputItem != null && inputItem.Amount > 0)
         {
-            if(fuelItem != null && fuelItem.Amount > 0 && fuelItem.name == "Log")
+            if(fuelItem != null && fuelItem.Amount > 0 && fuelItem is Fuel)
             {
                 if(inputItem is Smelting)
                 {
@@ -351,14 +355,30 @@ public class ForgeOpenHandler : MonoBehaviour
                 {
                     playerMovement.TabOpen = true;
                     playerInventory.SetActive(true);
-                    
-                    forgeHandler.gameObject.SetActive(true);
 
-                    forgeHandler.SetDataAtOpen(InputItem, FuelItem, OutputItem, this);
+                    float smeltingProgress = 0;
+                    float fuelProgress = 0;
+
+                    if(inputItem != null && inputItem is Smelting)
+                    {
+                        Smelting smelting = (Smelting)(inputItem);
+
+                        smeltingProgress = (float)elapsedTimeSmelting / smelting.Duration;
+                    }
+                    if(fuelItem != null && fuelItem is Fuel)
+                    {
+                        Fuel smelting = (Fuel)(fuelItem);
+
+                        fuelProgress = 1f -  (float)elapsedTimeFuel / smelting.Duration;
+                    }
+
+                    forgeHandler.SetDataAtOpen(InputItem, FuelItem, OutputItem, this, smeltingProgress, fuelProgress, workingForge);
 
                     quickSlots.SetActive(false);
 
-                    canvasOpen = true; 
+                    canvasOpen = true;
+
+                    forgeHandler.gameObject.SetActive(true);
                 }
                 else
                 {
