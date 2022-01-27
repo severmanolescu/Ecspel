@@ -7,7 +7,7 @@ public class CoinsHandler : MonoBehaviour
 
     private TextMeshProUGUI amountText;
 
-    public int Amount { get => amount; set { amount = value; ResetCoinAmount();   } }
+    public int Amount { get => amount; set { amount = value; ResetCoinAmount(); } }
 
     private void Awake()
     {

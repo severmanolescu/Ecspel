@@ -42,7 +42,7 @@ public class ItemDetails : MonoBehaviour
         }
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item item, int price = -1)
     {
         if (item != null)
         {
@@ -57,17 +57,24 @@ public class ItemDetails : MonoBehaviour
                 Destroy(stat.gameObject);
             }
 
-            SetDataToStats(item);
+            SetDataToStats(item, price);
 
             gameObject.SetActive(true);
         }
     }
 
-    private void SetDataToStats(Item item)
+    private void SetDataToStats(Item item, int price)
     {
         GameObject instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
 
-        instantiateStat.GetComponent<StatDataSet>().SetData(coinSprite, item.SellPrice.ToString());
+        if (price == -1)
+        {
+            instantiateStat.GetComponent<StatDataSet>().SetData(coinSprite, item.SellPrice.ToString());
+        }
+        else
+        {
+            instantiateStat.GetComponent<StatDataSet>().SetData(coinSprite, price.ToString());
+        }
 
         if(item is Weapon)
         {

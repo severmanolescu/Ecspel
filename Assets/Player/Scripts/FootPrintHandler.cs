@@ -15,6 +15,8 @@ public class FootPrintHandler : MonoBehaviour
     [Header("Audio effects")]
     [SerializeField] private AudioClip footstep;
     [SerializeField] private AudioClip footstep1;
+    [SerializeField] private AudioClip footstepWood;
+    [SerializeField] private AudioClip footstepWood1;
 
     private AudioSource audioSource;
 
@@ -27,72 +29,127 @@ public class FootPrintHandler : MonoBehaviour
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabUp, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabUp.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabUp, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabUp.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstepClip();
+        }
+        else
+        {
+            PlayFootstepWoodClip();
         }
     }
     private void SpawnFootPrintUpLeft()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabUp, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabUp.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabUp, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabUp.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstep1Clip();
+        }
+        else
+        {
+            PlayFootstepWood1Clip();
         }
     }
     private void SpawnFootPrintDownRight()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabDown.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabDown.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstepClip();
+        }
+        else
+        {
+            PlayFootstepWoodClip();
         }
     }
     private void SpawnFootPrintDownLeft()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabDown.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabDown.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstep1Clip();
+        }
+        else
+        {
+            PlayFootstepWood1Clip();
         }
     }
     private void SpawnFootPrintLeftRight()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabLeft, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabLeft.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabLeft, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabLeft.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstepClip();
+        }else
+        {
+            PlayFootstepWoodClip();
         }
     }
     private void SpawnFootPrintLeftLeft()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabLeft, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabLeft.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabLeft, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabLeft.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstep1Clip();
+        }
+        else
+        {
+            PlayFootstepWood1Clip();
         }
     }
     private void SpawnFootPrintRightRight()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabRight, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabRight.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabRight, spawnLocation.position + new Vector3(0, .70f, 0), footPrefabRight.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstepClip();
+        }
+        else
+        {
+            PlayFootstepWoodClip();
         }
     }
     private void SpawnFootPrintRightLeft()
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            Instantiate(footPrefabRight, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabRight.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabRight, spawnLocation.position - new Vector3(0, -.62f, 0), footPrefabRight.transform.rotation);
+
+            instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
+            instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstep1Clip();
+        }
+        else
+        {
+            PlayFootstepWood1Clip();
         }
     }
 
@@ -105,6 +162,18 @@ public class FootPrintHandler : MonoBehaviour
     private void PlayFootstep1Clip()
     {
         audioSource.clip = footstep1;
+        audioSource.Play();
+    }
+
+    private void PlayFootstepWoodClip()
+    {
+        audioSource.clip = footstepWood;
+        audioSource.Play();
+    }
+
+    private void PlayFootstepWood1Clip()
+    {
+        audioSource.clip = footstepWood1;
         audioSource.Play();
     }
 }

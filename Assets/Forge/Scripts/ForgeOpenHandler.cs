@@ -355,6 +355,7 @@ public class ForgeOpenHandler : MonoBehaviour
                 {
                     playerMovement.TabOpen = true;
                     playerInventory.SetActive(true);
+                    canvasTabsOpen.SetCanOpenTabs(false);
 
                     float smeltingProgress = 0;
                     float fuelProgress = 0;
@@ -384,6 +385,7 @@ public class ForgeOpenHandler : MonoBehaviour
                 {
                     playerMovement.TabOpen = false;
                     playerInventory.SetActive(false);
+                    canvasTabsOpen.SetCanOpenTabs(true);
 
                     forgeHandler.HideDataAtClose();
                     forgeHandler.gameObject.SetActive(false);

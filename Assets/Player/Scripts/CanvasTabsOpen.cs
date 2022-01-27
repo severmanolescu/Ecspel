@@ -22,6 +22,7 @@ public class CanvasTabsOpen : MonoBehaviour
     [SerializeField] private GameObject chestStorage;
     [SerializeField] private GameObject craftingCanvas;
     [SerializeField] private GameObject forgeCanvas;
+    [SerializeField] private GameObject shopItems;
 
     public bool canOpenTabs = true;
 
@@ -51,6 +52,8 @@ public class CanvasTabsOpen : MonoBehaviour
         chestStorage.SetActive(false);
 
         forgeCanvas.SetActive(false);
+
+        shopItems.SetActive(false);
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }

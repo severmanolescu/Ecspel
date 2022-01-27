@@ -10,6 +10,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 {
     [SerializeField] private bool canDrop = true;
 
+    private bool shopItems = false;
+
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
 
@@ -28,6 +30,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private ForgeHandler forgeHandler;
 
+    private SetDataToBuySlider setData;
+
+    private ShopInventory shopInventory;
+
     //true  - player inventory
     //false - chest storage
     private bool locationOfItem;
@@ -35,6 +41,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private Item item = null;
 
     public Item Item { get { return item; } set { item = value; } }
+
+    public bool ShopItems { get => shopItems; set { shopItems = value; SearchForBuySlider(); } }
 
     private void Awake()
     {
@@ -52,6 +60,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         amount.gameObject.SetActive(false);
 
         itemSprite.gameObject.SetActive(false);
+
+        shopInventory = GameObject.Find("Global/Player/Canvas/ShopItems").GetComponent<ShopInventory>();
 
         itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
         itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
@@ -76,6 +86,13 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         forgeHandler = GetComponentInParent<ForgeHandler>();
+
+        SearchForBuySlider();
+    }
+
+    private void SearchForBuySlider()
+    {
+        setData = GameObject.Find("Global/Player/Canvas/GetItems").GetComponent<SetDataToBuySlider>();
     }
 
     private void ShowItem()
@@ -96,7 +113,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
     }
 
-    private void HideItem()
+    public void HideItem()
     {
         itemSprite.gameObject.SetActive(false);
         itemSprite.sprite = null;
@@ -198,13 +215,16 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (shopItems == false)
         {
-            itemDrag.SetData(item, this.gameObject);        
-        }
-        else
-        {
-            itemDrag.SetDataHalf(item, this.gameObject);
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                itemDrag.SetData(item, this.gameObject);
+            }
+            else
+            {
+                itemDrag.SetDataHalf(item, this.gameObject);
+            }
         }
     }
 
@@ -220,64 +240,71 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-        if(itemDrag.PreviousItem != this.gameObject && canDrop == true)
+        if (shopItems == false)
         {
-            if (item == null)
+            if (itemDrag.PreviousItem != this.gameObject && canDrop == true)
             {
-                if (itemDrag.Item != null)
+                if (item == null)
                 {
-                    SetItem(itemDrag.Item);
+                    if (itemDrag.Item != null)
+                    {
+                        SetItem(itemDrag.Item);
 
-                    itemDrag.DeleteData();
+                        itemDrag.DeleteData();
 
-                    ForgeSlotItemChange();
+                        ForgeSlotItemChange();
 
-                    return;
+                        return;
+                    }
+                    else
+                    {
+                        itemDrag.HideData();
+                    }
                 }
-                else
+                else if (itemDrag != null)
                 {
+                    if (item.Name == itemDrag.Item.Name)
+                    {
+                        if (item.Amount <= item.MaxAmount)
+                        {
+                            ShowItem();
+
+                            int auxiliar = item.MaxAmount - item.Amount;
+
+                            if (itemDrag.Item.Amount <= auxiliar)
+                            {
+                                item.Amount += itemDrag.Item.Amount;
+
+                                itemDrag.DeleteData();
+
+                                ReinitializeItem();
+
+                                ForgeSlotItemChange();
+
+                                return;
+                            }
+                            else
+                            {
+                                item.Amount = item.MaxAmount;
+
+                                itemDrag.Item.Amount -= auxiliar;
+
+                                ReinitializeItem();
+
+                                itemDrag.HideData();
+
+                                ForgeSlotItemChange();
+
+                                return;
+                            }
+                        }
+                    }
+
                     itemDrag.HideData();
                 }
             }
-            else if(itemDrag != null)
+            else
             {
-                if (item.Name == itemDrag.Item.Name)
-                {
-                    if (item.Amount <= item.MaxAmount)
-                    {
-                        ShowItem();
-
-                        int auxiliar = item.MaxAmount - item.Amount;
-
-                        if (itemDrag.Item.Amount <= auxiliar)
-                        {
-                            item.Amount += itemDrag.Item.Amount;
-
-                            itemDrag.DeleteData();
-
-                            ReinitializeItem();
-
-                            ForgeSlotItemChange();
-
-                            return;
-                        }
-                        else
-                        {
-                            item.Amount = item.MaxAmount;
-
-                            itemDrag.Item.Amount -= auxiliar;
-
-                            ReinitializeItem();
-
-                            itemDrag.HideData();
-
-                            ForgeSlotItemChange();
-
-                            return;
-                        }
-                    }                    
-                }
-
                 itemDrag.HideData();
             }
         }
@@ -294,19 +321,63 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        itemDetails.SetItem(item);
+        if (shopItems == true)
+        {
+            if (item != null)
+            {
+                itemDetails.SetItem(Item, 2 * Item.SellPrice);
+            }
+        }
+        else
+        {
+            itemDetails.SetItem(item);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == 0 && (eventData.clickCount == 2 ||
-           (eventData.clickCount == 1 && keyboard.shiftKey.isPressed)))
+        if(shopInventory.gameObject.activeSelf == true && shopItems == false)
         {
-            if(locationOfItem == true)
+            if (eventData.button == 0)
             {
-                if (chestStorage.gameObject.activeSelf == true)
+                if (keyboard.shiftKey.isPressed || item.Amount == 1)
                 {
-                    bool canTransferToPlayerInventory = chestStorage.AddItem(Item);
+                    setData.SellItem(this);
+                }
+                else
+                {
+                    setData.gameObject.SetActive(true);
+
+                    setData.SetDataToSell(this);
+                }
+            }
+        }
+        else if (shopItems == false)
+        {
+            if (eventData.button == 0 && (eventData.clickCount == 2 ||
+               (eventData.clickCount == 1 && keyboard.shiftKey.isPressed)))
+            {
+                if (locationOfItem == true)
+                {
+                    if (chestStorage.gameObject.activeSelf == true)
+                    {
+                        bool canTransferToPlayerInventory = chestStorage.AddItem(Item);
+
+                        if (canTransferToPlayerInventory == true)
+                        {
+                            HideItem();
+
+                            Item = null;
+                        }
+                        else
+                        {
+                            ReinitializeItem();
+                        }
+                    }
+                }
+                else
+                {
+                    bool canTransferToPlayerInventory = inventory.AddItem(Item);
 
                     if (canTransferToPlayerInventory == true)
                     {
@@ -319,26 +390,27 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                         ReinitializeItem();
                     }
                 }
+
+                ForgeSlotItemChange();
+
+                quickSlots.Reinitialize();
             }
-            else
+        }
+        else
+        {
+            if (eventData.button == 0)
             {
-                bool canTransferToPlayerInventory = inventory.AddItem(Item);
-
-                if (canTransferToPlayerInventory == true)
+                if (keyboard.shiftKey.isPressed || item.Amount == 1)
                 {
-                    HideItem();
-
-                    Item = null;
+                    setData.BuyItem(this);
                 }
                 else
                 {
-                    ReinitializeItem();
+                    setData.gameObject.SetActive(true);
+
+                    setData.SetDataToBuy(this);
                 }
             }
-
-            ForgeSlotItemChange();
-
-            quickSlots.Reinitialize();
         }
     }
 }

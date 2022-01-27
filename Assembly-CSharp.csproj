@@ -71,10 +71,12 @@
     <Compile Include="Assets\Items\Script\ItemWithAmount.cs" />
     <Compile Include="Assets\SaveGame\NPCDialogueSave.cs" />
     <Compile Include="Assets\Build system\SpawnObjectsInArea.cs" />
+    <Compile Include="Assets\CoinsHandler.cs" />
     <Compile Include="Assets\Enemy\Scripts\EnemyDropLoot.cs" />
     <Compile Include="Assets\Crafting\Scripts\CraftingHandler.cs" />
     <Compile Include="Assets\Build system\AxeHandler.cs" />
-    <Compile Include="Assets\Fuel.cs" />
+    <Compile Include="Assets\Items\Script\Fuel.cs" />
+    <Compile Include="Assets\SetDataToBuySlider.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestButton.cs" />
     <Compile Include="Assets\Build system\ChangeGridCellValuesByObjects.cs" />
     <Compile Include="Assets\Gameplay.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\Effects\Scripts\EffectHandlerClass.cs" />
     <Compile Include="Assets\Forge\Scripts\ForgeHandler.cs" />
     <Compile Include="Assets\NPC\Scripts\NpcPathFinding.cs" />
+    <Compile Include="Assets\StatDataSet.cs" />
     <Compile Include="Assets\SaveGame\SaveSystemHandler.cs" />
     <Compile Include="Assets\Items\Script\ItemConstruct.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestDestroyStoneHandle.cs" />
@@ -169,6 +172,7 @@
     <Compile Include="Assets\OtherScripts\WorldTextDetails.cs" />
     <Compile Include="Assets\Menu\Scripts\PrincipalMenuHandler.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueScriptableObject.cs" />
+    <Compile Include="Assets\ShopInventory.cs" />
     <Compile Include="Assets\Items\Script\Placeable.cs" />
     <Compile Include="Assets\Crafting\Scripts\CraftSetData.cs" />
     <Compile Include="Assets\OtherScripts\SleepHandler.cs" />
@@ -204,6 +208,7 @@
     <Compile Include="Assets\SaveGame\PositionPlayerAtLoad.cs" />
     <Compile Include="Assets\SaveGame\GridSaveHadler.cs" />
     <Compile Include="Assets\SaveGame\GetFarmPlots.cs" />
+    <Compile Include="Assets\OpenShopHandler.cs" />
     <Compile Include="Assets\Build system\ParticleStart.cs" />
     <Compile Include="Assets\SaveGame\SaveGame.cs" />
     <Compile Include="Assets\Quests\Scripts\QuestTrack.cs" />
@@ -214,8 +219,6 @@
     <Compile Include="Assets\Items\Script\EquipedITem.cs" />
     <Compile Include="Assets\Chest\Scripts\ChestStorageCanvas.cs" />
     <Compile Include="Assets\Dialogue\Scripts\DialogueHandler.cs" />
-    <Compile Include="Assets\CoinsHandler.cs" />
-    <Compile Include="Assets\StatDataSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
