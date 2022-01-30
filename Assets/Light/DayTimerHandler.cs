@@ -19,6 +19,7 @@ public class DayTimerHandler : MonoBehaviour
     [SerializeField] private int days  = 0;
 
     [SerializeField] private Gradient gradient;
+    [SerializeField] private Gradient gradientWindowLight;
 
     [Header("Wake up time:")]
     [SerializeField] private int wakeupHour;
@@ -33,6 +34,8 @@ public class DayTimerHandler : MonoBehaviour
     private SourceLightShadow sourceLight;
 
     private SaveSystemHandler saveSystem;
+
+    private ChangeWindowLightIntensity changeWindowLight;
 
     private bool sleep = false;
     private float speed;
@@ -54,6 +57,8 @@ public class DayTimerHandler : MonoBehaviour
         spawnObjects = GetComponent<SpawnObjectsInAreaHandle>();
 
         cropGrow = GetComponent<CropGrowHandler>();
+
+        changeWindowLight = GetComponent<ChangeWindowLightIntensity>();
 
         saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
     }
@@ -84,6 +89,8 @@ public class DayTimerHandler : MonoBehaviour
         sourceLight.ChangeLightsIntensity(1f - intensity);
 
         globalLight.color = gradient.Evaluate(intensity);
+
+        changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
 
         if(sleep == true && wakeupHour == Hours && days > startDay)
         {

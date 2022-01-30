@@ -12,6 +12,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private bool shopItems = false;
 
+    [SerializeField]  private bool playerInventory = false;
+
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
 
@@ -33,6 +35,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private SetDataToBuySlider setData;
 
     private ShopInventory shopInventory;
+
+    private CoinsHandler coinsHandler;
 
     //true  - player inventory
     //false - chest storage
@@ -81,6 +85,11 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             locationOfItem = true;
 
             chestStorage = GameObject.Find("Global/Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
+        }
+
+        if(playerInventory == true)
+        {
+            coinsHandler = GameObject.Find("Global/Player/Canvas/PlayerItems/Coins").GetComponent<CoinsHandler>();
         }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
@@ -136,6 +145,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         if (item != null && item.Amount > 0)
         {
+            if(item.ItemNO == 69 && playerInventory == true)
+            {
+                Debug.Log("das");
+
+                coinsHandler.Amount += item.Amount;
+
+                return;
+            }
+
             this.item = item;
 
             ShowItem();
