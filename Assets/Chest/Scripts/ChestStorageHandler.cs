@@ -27,7 +27,7 @@ public class ChestStorageHandler : MonoBehaviour
             InstantiateSlot(item);
         }
 
-        for(int emptySlots = slots; emptySlots <= maxSlots; emptySlots++)
+        for(int emptySlots = slots; emptySlots < maxSlots; emptySlots++)
         {
             InstantiateSlot(null);
         }

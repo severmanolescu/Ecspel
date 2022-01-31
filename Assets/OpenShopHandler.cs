@@ -7,6 +7,12 @@ public class OpenShopHandler : MonoBehaviour
 {
     [SerializeField] private List<ItemWithAmount> items;
 
+    //Types:
+    //0 - Nothing
+    //1 - normal items
+    //2 - library items: books, crafting recipes
+    [SerializeField] private int typeOfBuyItems;
+
     private TextMeshProUGUI text;
 
     private bool playerInArea = false;
@@ -54,7 +60,22 @@ public class OpenShopHandler : MonoBehaviour
             text.gameObject.SetActive(false);
 
             playerInArea = false;
+
+            DeactivateAll();
         }
+    }
+
+    private void DeactivateAll()
+    {
+        playerMovement.TabOpen = false;
+        playerInventory.SetActive(false);
+        quickSlots.SetActive(true);
+        quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
+        canvasTabsOpen.SetCanOpenTabs(true);
+
+        items = shopInventory.GetAllItems();
+
+        shopInventory.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -72,18 +93,11 @@ public class OpenShopHandler : MonoBehaviour
 
                     shopInventory.gameObject.SetActive(true);
 
-                    shopInventory.SetItems(Items);
+                    shopInventory.SetItems(Items, typeOfBuyItems);
                 }
                 else
                 {
-                    playerMovement.TabOpen = false;
-                    playerInventory.SetActive(false);
-                    quickSlots.SetActive(true);
-                    canvasTabsOpen.SetCanOpenTabs(true);
-
-                    items = shopInventory.GetAllItems();
-
-                    shopInventory.gameObject.SetActive(false);
+                    DeactivateAll();
                 }
             }
         }

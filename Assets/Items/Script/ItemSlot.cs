@@ -147,11 +147,25 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             if(item.ItemNO == 69 && playerInventory == true)
             {
-                Debug.Log("das");
-
                 coinsHandler.Amount += item.Amount;
 
                 return;
+            }
+            else if(item is CraftRecipe && playerInventory == true)
+            {
+                CraftRecipe craft = (CraftRecipe)item;
+
+                if(GameObject.Find("Global/Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>().AddCraft(craft.Recipe) == true)
+                {
+                    if(item.Amount > 0)
+                    {
+                        item.Amount--;
+                    }
+                    else
+                    {
+                        return;
+                    }    
+                }                
             }
 
             this.item = item;
@@ -356,6 +370,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         if(shopInventory.gameObject.activeSelf == true && shopItems == false)
         {
+            if(shopInventory.TypeOfBuyItems != 0 && 
+             ((shopInventory.TypeOfBuyItems == 2 && item is CraftRecipe) ||
+               shopInventory.TypeOfBuyItems == 1 && !(item is CraftRecipe)))
             if (eventData.button == 0)
             {
                 if (keyboard.shiftKey.isPressed || item.Amount == 1)

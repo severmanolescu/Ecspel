@@ -8,6 +8,14 @@ public class ShopInventory : MonoBehaviour
 
     [SerializeField] private Transform spawnLocation;
 
+    //Types:
+    //0 - Nothing
+    //1 - normal items
+    //2 - library items: books, crafting recipes
+    private int typeOfBuyItems;
+
+    public int TypeOfBuyItems { get => typeOfBuyItems; }
+
     private void DeleteAllOldItems()
     {
         ItemSlot[] itemSlots = GetComponentsInChildren<ItemSlot>();
@@ -18,9 +26,11 @@ public class ShopInventory : MonoBehaviour
         }
     }
 
-    public void SetItems(List<ItemWithAmount> items)
+    public void SetItems(List<ItemWithAmount> items, int typeOfBuyItems)
     {
         DeleteAllOldItems();
+
+        this.typeOfBuyItems = typeOfBuyItems;
 
         foreach (ItemWithAmount item in items)
         {

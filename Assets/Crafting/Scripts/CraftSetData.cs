@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,17 +33,25 @@ public class CraftSetData : MonoBehaviour
 
         Image[] images = GetComponentsInChildren<Image>();
 
-        background  = images[0];
-        receiveItem = images[1];
-        needItem1   = images[2];
-        needItem2   = images[3];
-        needItem3   = images[4];
+        if (images.Length >= 5)
+        {
+            background = images[0];
+            receiveItem = images[1];
+            needItem1 = images[2];
+            needItem2 = images[3];
+            needItem3 = images[4];
+        }
     }
 
     private void SetData(Craft craft)
     {
         if (craft != null)
         {
+            if(itemSprites == null)
+            {
+                Awake();
+            }
+
             this.craft = craft;
 
             receiveItem.sprite = itemSprites.GetItemSprite(craft.ReceiveItem.Item.ItemNO);
@@ -128,36 +134,50 @@ public class CraftSetData : MonoBehaviour
         GetComponentInParent<CraftCanvasHandler>().ReinitializeAllCraftings();
     }
 
-    private void ChangeColorSprites(Color color)
+    private void ChangeColorSprites(int indexOfItem, Color color)
     {
-        background.color = color;
-        receiveItem.color = color;
-        needItem1.color = color;
-        needItem2.color = color;
-        needItem3.color = color;
+        switch (indexOfItem)
+        {
+            case 0: needItem1.color = color; break;
+            case 1: needItem2.color = color; break;
+            case 2: needItem3.color = color; break;
+        }
+    }
+
+    private void SetAmountToItem(int indexOfItem, int itemAmount, int amountInInventory)
+    {
+        switch (indexOfItem)
+        {
+            case 0: needItem1.GetComponent<ChangeText>().Change(amountInInventory + @"\" + itemAmount); break;
+            case 1: needItem2.GetComponent<ChangeText>().Change(amountInInventory + @"\" + itemAmount); break;
+            case 2: needItem3.GetComponent<ChangeText>().Change(amountInInventory + @"\" + itemAmount); break;
+        }
     }
 
     public void CheckIfItemsAreAvaible()
     {
         haveItems = true;
 
+        int indexOfItem = 0;
+
         foreach (ItemWithAmount item in craft.NeedItem)
         {
-            if (playerInventory.SearchInventory(item.Item, item.Amount) == false)
+            int amountInInventory = playerInventory.GetAmountOfItem(item.Item);
+
+            if (amountInInventory < item.Amount)
             {
+                ChangeColorSprites(indexOfItem, Color.red);
+
                 haveItems = false;
-
-                break;
             }
-        }
+            else
+            {
+                ChangeColorSprites(indexOfItem, Color.white);
+            }
 
-        if(haveItems)
-        {
-            ChangeColorSprites(Color.white);   
-        }
-        else
-        {
-            ChangeColorSprites(Color.red);
+            SetAmountToItem(indexOfItem, item.Amount, amountInInventory);
+
+            indexOfItem++;
         }
     }
 }

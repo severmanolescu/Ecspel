@@ -21,8 +21,21 @@ public class NpcAIHandler : MonoBehaviour
     {
         if (scheduleIndex < npcTimeSchedules.Count)
         {
-            npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
-                                   npcTimeSchedules[scheduleIndex].Location.position);
+            if (npcTimeSchedules[scheduleIndex].Location == transform)
+            {
+                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
+            }
+            else
+            {
+                npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
+                                    npcTimeSchedules[scheduleIndex].Location.position);
+            }
+        }
+        else
+        {
+            npcPath.CanWalk = false;
+
+            npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
         }
 
         npcPath.CanWalk = true;
@@ -32,20 +45,19 @@ public class NpcAIHandler : MonoBehaviour
     {
         npcPath.CanWalk = false;
 
-        if (npcTimeSchedules[scheduleIndex].Point.position != transform.position)
+        if (scheduleIndex < npcTimeSchedules.Count && 
+            npcTimeSchedules[scheduleIndex].Point.position != transform.position)
         {
-            Vector3 currentPosition = transform.position;
-
-            transform.position = Vector3.MoveTowards(transform.position, npcTimeSchedules[scheduleIndex].Point.position, 5f);
-
             npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
 
             yield return new WaitForSeconds(seconds);
 
-            transform.position = Vector3.MoveTowards(transform.position, currentPosition, 5f);
+            transform.position = Vector3.MoveTowards(transform.position, npcTimeSchedules[scheduleIndex].Point.position, 5f);
         }
         else
         {
+            npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
+
             yield return new WaitForSeconds(seconds);
         }
 
@@ -57,36 +69,50 @@ public class NpcAIHandler : MonoBehaviour
     private void ChangeScheduleIndex()
     {
         scheduleIndex++;
-
+        
         if (scheduleIndex < npcTimeSchedules.Count)
         {
-            npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
+            if (npcTimeSchedules[scheduleIndex].Location == transform)
+            {
+                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
+            }
+            else
+            {
+                npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
                                     npcTimeSchedules[scheduleIndex].Location.position);
+            }
+        }
+        else
+        {
+            npcPath.CanWalk = false;
+        }
+    }
+
+    public void ArrivedAtLocation()
+    {
+        if (npcPath.CanWalk == true && scheduleIndex < npcTimeSchedules.Count)
+        {
+            if (npcTimeSchedules[scheduleIndex].Location == transform)
+            {
+                if (npcTimeSchedules[scheduleIndex].Seconds != 0)
+                {
+                    StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
+                }
+            }
+            else if (npcTimeSchedules[scheduleIndex].Seconds != 0)
+            {
+                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
+            }
+            else
+            {
+                ChangeScheduleIndex();
+            }
         }
         else
         {
             npcPath.CanWalk = false;
 
             npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
-        }
-    }
-
-    public void ArrivedAtLocation()
-    {
-        if(npcTimeSchedules[scheduleIndex].Location == transform)
-        {
-            if (npcTimeSchedules[scheduleIndex].Seconds != 0)
-            {
-                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-            }
-        }
-        else if (npcTimeSchedules[scheduleIndex].Seconds != 0)
-        {
-            StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-        }
-        else
-        {
-            ChangeScheduleIndex();
         }
     }
 

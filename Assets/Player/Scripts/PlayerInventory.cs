@@ -164,6 +164,21 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    public int GetAmountOfItem(Item item)
+    {
+        int amount = 0;
+
+        foreach (ItemSlot itemSlot in itemsSlot)
+        {
+            if (itemSlot.Item != null && itemSlot.Item.ItemNO == item.ItemNO)
+            {
+                amount += itemSlot.Item.Amount;
+            }
+        }
+
+        return amount;
+    }
+
     public void DeteleItems(List<QuestItems> items)
     {
         foreach (QuestItems questItem in items)

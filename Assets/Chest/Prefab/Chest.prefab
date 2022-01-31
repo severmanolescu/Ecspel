@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 1006055661655873558}
   - component: {fileID: 1641920595}
   - component: {fileID: 372845165}
+  - component: {fileID: 6543699444024554376}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   openSprite: {fileID: -5629346081597729148, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  chestId: 0
   chestOpen: {fileID: 8300000, guid: e0652c71b9bb5964b8c9ae150ad1152c, type: 3}
   chestClose: {fileID: 8300000, guid: 66ec24e4a8b120e4a8507192d16da11a, type: 3}
 --- !u!114 &1578004845640410782
@@ -356,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dca9fdfd9709164f932b0b4f48390b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestMaxSlots: 22
+  chestMaxSlots: 7
 --- !u!61 &1578004845640410781
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -530,3 +532,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6543699444024554376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578004845640410778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 858520fc010497a4fb65b98de9d95986cb99512f397a1411899d9d4f00000000
+  m_ShapePath:
+  - {x: -0.67790556, y: 0.06476593, z: 0}
+  - {x: -0.68510103, y: 1.1347313, z: 0}
+  - {x: 0.6851015, y: 1.117939, z: 0}
+  - {x: 0.6875, y: 0.062366486, z: 0}
+  - {x: 0.61936045, y: 0.064899445, z: 0}
+  - {x: 0.6265564, y: 0.0073280334, z: 0}
+  - {x: -0.61834097, y: 0.009731293, z: 0}
+  - {x: -0.62073946, y: 0.0625, z: 0}
+  m_ShapePathHash: -413763843
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -96044

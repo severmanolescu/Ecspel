@@ -44,12 +44,16 @@ public class CraftCanvasHandler : MonoBehaviour
         return false;
     }
 
-    public void AddCraft(Craft craft)
+    public bool AddCraft(Craft craft)
     {
-        if(SearchIfCraftExist(craft) == false)
+        if(craft != null && SearchIfCraftExist(craft) == false)
         {
             InstantiateCraft(craft);
+
+            return true;
         }
+
+        return false;
     }
 
     private void InstantiateCraft(Craft craft)
