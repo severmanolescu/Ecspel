@@ -26,6 +26,8 @@ public class DialogueChanger : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private SetDialogueToPlayer setDialogueToPlayer = null;
+
     private void Awake()
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
@@ -55,9 +57,12 @@ public class DialogueChanger : MonoBehaviour
 
             dialogueHandler.SetDialogue(dialogue.Dialogue);
 
-            NPCDialogue.DeleteDialogue();
+            if (NPCDialogue != null)
+            {
+                NPCDialogue.DeleteDialogue();
+            }
         }
-        else
+        else if(NPCDialogue != null)
         {
             NPCDialogue.SetDialogue(dialogue.Dialogue);
 
@@ -107,20 +112,20 @@ public class DialogueChanger : MonoBehaviour
             NPCDialogue.DeleteDialogue();
         }
 
-        if(NPCDialogue.Quest.Count > 0)
+        if(NPCDialogue != null && NPCDialogue.Quest.Count > 0)
         {
             SetQuest();
         }
-        else if (dialogueScriptable.NextDialogue != null)
+        else if (NPCDialogue != null && dialogueScriptable.NextDialogue != null)
         {
             NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
         }
-        else if(dialogueScriptable.NextDialogue == null)
+        else if(NPCDialogue != null && dialogueScriptable.NextDialogue == null)
         {
             NPCDialogue.Dialogue = null;
         }
 
-        if(dialogueScriptable.Quest.Count > 0)
+        if(NPCDialogue != null && dialogueScriptable.Quest.Count > 0)
         {
             SetQuestWhoToGive();
 
@@ -128,6 +133,13 @@ public class DialogueChanger : MonoBehaviour
 
             NPCDialogue.DeleteDialogue();
         } 
+
+        if(setDialogueToPlayer != null)
+        {
+            setDialogueToPlayer.DialogueEnd();
+        }
+
+        setDialogueToPlayer = null;
 
         stop = true;
     }
@@ -187,8 +199,10 @@ public class DialogueChanger : MonoBehaviour
         }
     }
 
-    public void SetDialogue(DialogueScriptableObject dialogueScriptable)
+    public void SetDialogue(DialogueScriptableObject dialogueScriptable, SetDialogueToPlayer setDialogueToPlayer = null)
     {
+        this.setDialogueToPlayer = setDialogueToPlayer;
+
         if (dialogueScriptable != null)
         {
             this.dialogueScriptable = dialogueScriptable;
@@ -224,6 +238,8 @@ public class DialogueChanger : MonoBehaviour
 
         dialogueHandler.gameObject.SetActive(false);
         answersHandler.gameObject.SetActive(false);
+
+        setDialogueToPlayer = null;
     }
 
     public void SetNCP(DialogueDisplay NPCDialogue)

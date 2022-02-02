@@ -7,6 +7,7 @@ public class NpcPathFinding : MonoBehaviour
     [SerializeField] private float speed;
 
     [SerializeField] private float distanceTolerance = .1f;
+    [SerializeField] private float distanceToleranceDirection = .05f;
 
     private LocationGridSave locationGrid;
 
@@ -41,8 +42,6 @@ public class NpcPathFinding : MonoBehaviour
     {
         Vector3 moveDir = (position - transform.position).normalized;
 
-        float distanceBefore = Vector3.Distance(transform.position, position);
-
         transform.position = transform.position + moveDir * speed * Time.deltaTime;
     }
 
@@ -65,23 +64,31 @@ public class NpcPathFinding : MonoBehaviour
     private void SetAnimator(Vector3 position)
     {
         Vector3 direction = Vector3.zero;
-        
-        if(transform.position.x < position.x)
+
+        if (transform.position.x + distanceToleranceDirection < position.x ||
+            transform.position.x - distanceToleranceDirection > position.x)
         {
-            direction.x = 1;
-        } 
-        else if(transform.position.x > position.x)
-        {
-            direction.x = -1;
+            if (transform.position.x  < position.x)
+            {
+                direction.x = 1;
+            }
+            else if (transform.position.x > position.x)
+            {
+                direction.x = -1;
+            }
         }
 
-        if (transform.position.y < position.y)
+        if (transform.position.y + distanceToleranceDirection < position.y ||
+            transform.position.y - distanceToleranceDirection > position.y)
         {
-            direction.y = 1;
-        }
-        else if (transform.position.y > position.y)
-        {
-            direction.y = -1;
+            if (transform.position.y < position.y)
+            {
+                direction.y = 1;
+            }
+            else if (transform.position.y > position.y)
+            {
+                direction.y = -1;
+            }
         }
 
         animator.SetFloat("Horizontal", direction.x);
