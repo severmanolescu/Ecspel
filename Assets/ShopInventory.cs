@@ -8,6 +8,8 @@ public class ShopInventory : MonoBehaviour
 
     [SerializeField] private Transform spawnLocation;
 
+    [SerializeField] private SetDataToBuySlider setDataToBuy;
+
     //Types:
     //0 - Nothing
     //1 - normal items
@@ -15,6 +17,13 @@ public class ShopInventory : MonoBehaviour
     private int typeOfBuyItems;
 
     public int TypeOfBuyItems { get => typeOfBuyItems; }
+
+    public void Close()
+    {
+        setDataToBuy.Close();
+
+        gameObject.SetActive(false);
+    }
 
     private void DeleteAllOldItems()
     {

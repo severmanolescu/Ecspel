@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class SetDataToBuySlider : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI value;
+    [SerializeField] private TextMeshProUGUI coins;
 
     [SerializeField] private Button buySellButton;
 
@@ -24,7 +25,9 @@ public class SetDataToBuySlider : MonoBehaviour
 
     private ItemSlot itemSlot;
 
-    private Animator animator;
+    //true - buy
+    //false - sell
+    private bool getItemType = false;
 
     private void Awake()
     {
@@ -32,13 +35,15 @@ public class SetDataToBuySlider : MonoBehaviour
 
         slider.minValue = 1;
 
+        slider.value = 1;
+
         value.text = "1";
 
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
         coinsHandler = playerInventory.GetComponentInChildren<CoinsHandler>();
 
-        animator = GetComponent<Animator>();
+        coins.text = "";
 
         gameObject.SetActive(false);
     }
@@ -60,6 +65,10 @@ public class SetDataToBuySlider : MonoBehaviour
             buySellButton.onClick.AddListener(delegate { BuyButton(); });
 
             buySellButton.GetComponentInChildren<TextMeshProUGUI>().text = "Cumpara";
+
+            getItemType = true;
+
+            SetTextToCoin();
         }
         else
         {
@@ -84,6 +93,10 @@ public class SetDataToBuySlider : MonoBehaviour
             buySellButton.onClick.AddListener(delegate { SellButton(); });
 
             buySellButton.GetComponentInChildren<TextMeshProUGUI>().text = "Vinde";
+
+            getItemType = false;
+
+            SetTextToCoin();
         }
         else
         {
@@ -91,9 +104,43 @@ public class SetDataToBuySlider : MonoBehaviour
         }
     }
 
+    private void SetTextToCoin()
+    {
+        if (itemSlot != null)
+        {
+            switch (getItemType)
+            {
+                case true:
+                    {
+                        coins.text = (int.Parse(slider.value.ToString()) * (int)itemSlot.Item.SellPrice * 2).ToString() + "\\" +
+                                     coinsHandler.Amount;
+
+                        if (coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * 2)
+                        {
+                            coins.color = Color.white;
+                        }
+                        else
+                        {
+                            coins.color = Color.red;
+                        }
+
+                        break;
+                    }
+                case false:
+                    {
+                        coins.text = (int.Parse(slider.value.ToString()) * (int)itemSlot.Item.SellPrice).ToString();
+
+                        break;
+                    }
+            }
+        }
+    }
+
     public void SliderValueChange()
     {
         value.text = slider.value.ToString();
+
+        SetTextToCoin();
     }
 
     public void BuyButton()
@@ -128,8 +175,6 @@ public class SetDataToBuySlider : MonoBehaviour
             {
                 audioSource.clip = errorSound;
                 audioSource.Play();
-
-                animator.SetTrigger("Start");
             }
         }
         else
@@ -213,5 +258,16 @@ public class SetDataToBuySlider : MonoBehaviour
 
             itemSlot.DeleteItem();
         }
+    }
+
+    public void Close()
+    {
+        slider.minValue = 1;
+
+        slider.value = 1;
+
+        value.text = "1";
+
+        gameObject.SetActive(false);
     }
 }

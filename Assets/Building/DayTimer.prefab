@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 5733261584188017116}
   - component: {fileID: 1153658721}
   - component: {fileID: 1153658726}
+  - component: {fileID: 4521495975421510741}
+  - component: {fileID: 1153658733}
+  - component: {fileID: 1153658740}
   m_Layer: 0
   m_Name: DayTimer
   m_TagString: Untagged
@@ -49,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c1d8ce915edf479e302f44bac1da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hourToSpawnEnemyStart: 19
+  hourToSpawnEnemyFinal: 3
   timeSpeed: 1
   intensity: 0
   minutes: 55
@@ -83,6 +88,35 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
+  gradientWindowLight:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.059409656, b: 0.5188679, a: 1}
+    key1: {r: 0.2667764, g: 0.29643428, b: 0.5188679, a: 1}
+    key2: {r: 0.4765931, g: 0.6856891, b: 0.9622642, a: 1}
+    key3: {r: 0.473774, g: 0.68048334, b: 0.9562934, a: 1}
+    key4: {r: 0.26666668, g: 0.29803923, b: 0.5176471, a: 1}
+    key5: {r: 0.011764707, g: 0.07058824, b: 0.5176471, a: 1}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 15998
+    ctime2: 26291
+    ctime3: 46139
+    ctime4: 52583
+    ctime5: 65535
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 14649
+    atime2: 25829
+    atime3: 41634
+    atime4: 50308
+    atime5: 65535
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 6
   wakeupHour: 7
   sleepTimeSpeed: 120
 --- !u!114 &5733261584188017117
@@ -98,6 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 0.3
+  dayStart: 7
+  dayEnd: 19
+  dayNightCycleTime: 1
 --- !u!114 &5733261584188017118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +147,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101357858dda0654b86e35f4dd664f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gradientSourceLight:
+    serializedVersion: 2
+    key0: {r: 0.6698113, g: 0.3782066, b: 0.22432362, a: 1}
+    key1: {r: 0.11764707, g: 0.14901961, b: 0.3254902, a: 1}
+    key2: {r: 0.11764707, g: 0.14901961, b: 0.3254902, a: 1}
+    key3: {r: 0.67058825, g: 0.38039216, b: 0.22745098, a: 1}
+    key4: {r: 0.67058825, g: 0.38039216, b: 0.22745098, a: 1}
+    key5: {r: 0.67058825, g: 0.38039216, b: 0.22745098, a: 1}
+    key6: {r: 0.67058825, g: 0.38039216, b: 0.22745098, a: 1}
+    key7: {r: 0.67058825, g: 0.38039216, b: 0.22745098, a: 0}
+    ctime0: 0
+    ctime1: 22166
+    ctime2: 41056
+    ctime3: 65535
+    ctime4: 65535
+    ctime5: 65535
+    ctime6: 65535
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 65535
+    atime5: 65535
+    atime6: 65535
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
 --- !u!114 &5733261584188017116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +196,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 858520fc010497a4fb65b98dcb99512f397a1411899d9d4f00000000
+  m_ApplyToSortingLayers: 858520fc010497a4fb65b98dcb99512f397a1411899d9d4f00000000e9d95986
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -200,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0b23b8e53850844aa38e1f2e755825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saplingGrows: []
 --- !u!114 &1153658726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +279,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3256299ddc5e7d841a06da4d39363d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4521495975421510741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e23600bb1b5c454ba9550e067f8f49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1153658733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7829d40235e024f41adc7a9acc710041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1153658740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b10be54b004cb94db3cb357f4b0c4ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: {fileID: 2100000, guid: 3b95f768fa39707459903898d5ae8148, type: 2}

@@ -23,6 +23,7 @@ public class CanvasTabsOpen : MonoBehaviour
     [SerializeField] private GameObject craftingCanvas;
     [SerializeField] private GameObject forgeCanvas;
     [SerializeField] private GameObject shopItems;
+    [SerializeField] private GameObject tips;
 
     public bool canOpenTabs = true;
 
@@ -54,6 +55,8 @@ public class CanvasTabsOpen : MonoBehaviour
         forgeCanvas.SetActive(false);
 
         shopItems.SetActive(false);
+
+        tips.SetActive(false);
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -132,7 +135,6 @@ public class CanvasTabsOpen : MonoBehaviour
                 {
                     if (menuPrincipal.activeSelf == true)
                     {
-
                         if (menuCanvas.activeSelf == true)
                         {
                             Time.timeScale = 1f;
@@ -140,6 +142,8 @@ public class CanvasTabsOpen : MonoBehaviour
                             playerMovement.TabOpen = false;
 
                             quickSlot.gameObject.SetActive(true);
+
+                            canOpenTabs = true;
                         }
                         else
                         {
@@ -148,6 +152,8 @@ public class CanvasTabsOpen : MonoBehaviour
                             playerMovement.TabOpen = true;
 
                             quickSlot.gameObject.SetActive(false);
+
+                            canOpenTabs = false;
                         }
 
                         menuCanvas.SetActive(!menuCanvas.activeSelf);
@@ -173,6 +179,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     craftingCanvas.SetActive(false);
 
                     forgeCanvas.SetActive(false);
+
+                    tips.SetActive(false);
                 }                           
             }
         }

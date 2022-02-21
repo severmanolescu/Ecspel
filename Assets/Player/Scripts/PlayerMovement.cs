@@ -223,4 +223,23 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", 0);
         animator.SetFloat("Speed", 0);
     }
+
+    public void ChangeIdleAnimationDirection(int direction)
+    {
+        Vector3 directionToChange = Vector3.zero;
+
+        switch(direction)
+        {
+            case 0: directionToChange = Vector3.left; break;
+            case 1: directionToChange = Vector3.right; break;
+            case 2: directionToChange = Vector3.up; break;
+            case 3: directionToChange = Vector3.down; break;
+        }
+
+        if(directionToChange != Vector3.zero)
+        {
+            animator.SetFloat("HorizontalFacing", directionToChange.x);
+            animator.SetFloat("VerticalFacing", directionToChange.y);
+        }
+    }
 }

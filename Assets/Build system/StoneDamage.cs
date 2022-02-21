@@ -12,6 +12,11 @@ public class StoneDamage : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private int stoneLevel;
 
+    [Header("Audio effects")]
+    [SerializeField] private AudioClip soundEffect;
+
+    private AudioSource audioSource;
+
     private int startScaleX;
     private int startScaleY;
 
@@ -21,6 +26,8 @@ public class StoneDamage : MonoBehaviour
     private void Awake()
     {
         particle = GetComponentInChildren<ParticleSystem>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
@@ -59,7 +66,10 @@ public class StoneDamage : MonoBehaviour
     public void TakeDamage(float damage, int level)
     {
         if (level >= stoneLevel)
-        { 
+        {
+            audioSource.clip = soundEffect;
+            audioSource.Play();
+
             health -= damage;
 
             particle.Play();

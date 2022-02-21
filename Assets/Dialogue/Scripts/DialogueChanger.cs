@@ -24,6 +24,8 @@ public class DialogueChanger : MonoBehaviour
 
     private int dialogueIndex = 0;
 
+    private Transform playerLocation;
+
     private Keyboard keyboard;
 
     private SetDialogueToPlayer setDialogueToPlayer = null;
@@ -39,6 +41,8 @@ public class DialogueChanger : MonoBehaviour
         npcId = GameObject.Find("Global").GetComponent<NpcId>();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        playerLocation = GameObject.Find("Global/Player").transform;
     }
 
     private void Start()
@@ -53,14 +57,14 @@ public class DialogueChanger : MonoBehaviour
     {
         if(dialogue.WhoReply == false)
         { 
-            dialogueHandler.gameObject.SetActive(true);
-
             dialogueHandler.SetDialogue(dialogue.Dialogue);
 
             if (NPCDialogue != null)
             {
                 NPCDialogue.DeleteDialogue();
             }
+
+            dialogueHandler.gameObject.SetActive(true);
         }
         else if(NPCDialogue != null)
         {
@@ -84,15 +88,18 @@ public class DialogueChanger : MonoBehaviour
 
     private void SetQuestWhoToGive()
     {
-        foreach (Quest quest in dialogueScriptable.Quest)
+        if (dialogueScriptable != null)
         {
-            if (quest != null && quest is GiveItem)
+            foreach (Quest quest in dialogueScriptable.Quest)
             {
-                GiveItem giveItem = (GiveItem)quest;
-
-                if (giveItem != null && giveItem.WhoToGive == -1)
+                if (quest != null && quest is GiveItem)
                 {
-                    giveItem.WhoToGive = npcId.GetNpcId(NPCDialogue.GetComponent<DialogueDisplay>());
+                    GiveItem giveItem = (GiveItem)quest;
+
+                    if (giveItem != null && giveItem.WhoToGive == -1)
+                    {
+                        giveItem.WhoToGive = npcId.GetNpcId(NPCDialogue.GetComponent<DialogueDisplay>());
+                    }
                 }
             }
         }
@@ -151,6 +158,8 @@ public class DialogueChanger : MonoBehaviour
             if (dialogueRespons.Count == 0)
             {
                 DialogueEnd();
+
+                NPCDialogue.CanWalkAgain();
             }
 
             if (firstDialogue == true)
@@ -194,7 +203,16 @@ public class DialogueChanger : MonoBehaviour
         {
             if (keyboard.fKey.wasPressedThisFrame)
             {
-                SetDialogue(NPCDialogue.Dialogue);
+                if (stop)
+                {
+                    NPCDialogue.ChangeIdleAnimationToPlayerPosition(playerLocation.position);
+
+                    SetDialogue(NPCDialogue.Dialogue);
+                }
+                else
+                {
+                    DialogueEnd();
+                }
             }
         }
     }

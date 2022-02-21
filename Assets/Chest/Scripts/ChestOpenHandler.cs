@@ -93,6 +93,13 @@ public class ChestOpenHandler : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitToNextFrame()
+    {
+        yield return new WaitForEndOfFrame();
+
+        canvasTabsOpen.SetCanOpenTabs(true);
+    }
+
     public void DropAllItems()
     {
         items = chestStorage.Items;
@@ -144,7 +151,8 @@ public class ChestOpenHandler : MonoBehaviour
 
         chestStorage.SetItems(GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>().GetChestStorage());
 
-        canvasTabsOpen.SetCanOpenTabs(true);
+        StopAllCoroutines();
+        StartCoroutine(WaitToNextFrame());
 
         quickSlots.SetActive(true);
 
@@ -166,7 +174,11 @@ public class ChestOpenHandler : MonoBehaviour
                     CloseChestKeyPress();
                 }
             }
-        } 
+            else if (keyboard.fKey.wasPressedThisFrame)
+            {
+                CloseChestKeyPress();
+            }
+        }
     }
 
     public void CloseChest()

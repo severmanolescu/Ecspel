@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     [Header("Audio effects")]
     [SerializeField] private AudioClip damageClip;
+    [SerializeField] private AudioClip eatClip;
 
     private AudioSource audioSource;
 
@@ -19,7 +20,7 @@ public class PlayerStats : MonoBehaviour
     private SpriteRenderer playerSprite;
 
     public float Health { get { return healthSlider.value; } set { healthSlider.value = value; PlayDamageClip(); StartCoroutine(WaitDamage()); } }
-    public float Stamina { get { return staminaSlider.value; } set { staminaSlider.value = value; } }
+    public float Stamina { get { return staminaSlider.value; } set { staminaSlider.value = value;} }
 
     public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
     public float MaxStamina { get { return maxStamina; } set { maxStamina = value; } }
@@ -63,4 +64,20 @@ public class PlayerStats : MonoBehaviour
         audioSource.clip = damageClip;
         audioSource.Play();
     }    
+
+    public bool Eat(Consumable consumable)
+    {
+        if(Health < healthSlider.maxValue || Stamina < staminaSlider.maxValue)
+        {
+            healthSlider.value  += consumable.Health;
+            Stamina += consumable.Stamina;
+
+            audioSource.clip = eatClip;
+            audioSource.Play();
+
+            return true;
+        }
+
+        return false;
+    }
 }

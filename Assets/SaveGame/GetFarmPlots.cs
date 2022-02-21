@@ -74,7 +74,7 @@ public class GetFarmPlots : MonoBehaviour
             {
                 CropGrow cropGrow = crop.GetComponent<CropGrow>();
 
-                cropSaves.Add(new CropSave(getItem.GetItemNO(cropGrow.Item),
+                cropSaves.Add(new CropSave(cropGrow.Item.ItemNO,
                                            cropGrow.CurrentSprite,
                                            cropGrow.StartDay,
                                            cropGrow.Destroyed,

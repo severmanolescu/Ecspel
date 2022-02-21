@@ -61,7 +61,7 @@ public class NpcPathFinding : MonoBehaviour
         }
     }
 
-    private void SetAnimator(Vector3 position)
+    private Vector3 GetDirection(Vector3 position)
     {
         Vector3 direction = Vector3.zero;
 
@@ -91,8 +91,36 @@ public class NpcPathFinding : MonoBehaviour
             }
         }
 
-        animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.y);
+        return direction;
+    }
+
+    private void SetAnimator(Vector3 direction)
+    {
+        if (direction.x > 0 && direction.y > 0) //Up right
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", direction.y);
+        }
+        else if (direction.x < 0 && direction.y > 0) //Up left
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", direction.y);
+        }
+        else if (direction.x > 0 && direction.y < 0) //Down right
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", direction.y);
+        }
+        else if (direction.x < 0 && direction.y < 0) //Down left
+        {
+            animator.SetFloat("Horizontal", 0);
+            animator.SetFloat("Vertical", direction.y);
+        }
+        else
+        {
+            animator.SetFloat("Horizontal", direction.x);
+            animator.SetFloat("Vertical", direction.y);
+        }
 
         if (direction != Vector3.zero)
         {
@@ -105,7 +133,6 @@ public class NpcPathFinding : MonoBehaviour
         {
             animator.SetBool("Walking", false);
         }
-        
     }
 
     private void FixedUpdate()
@@ -124,7 +151,7 @@ public class NpcPathFinding : MonoBehaviour
                 {
                     MoveToPoint(path[pathCurrentIndex]);
 
-                    SetAnimator(path[pathCurrentIndex]);
+                    SetAnimator(GetDirection(path[pathCurrentIndex]));
 
                     if (Vector3.Distance(transform.position, path[pathCurrentIndex]) <= distanceTolerance)
                     {
@@ -197,6 +224,26 @@ public class NpcPathFinding : MonoBehaviour
         {
             animator.SetFloat("HorizontalFacing", newDirection.x);
             animator.SetFloat("VerticalFacing", newDirection.y);
+        }
+    }
+
+    public int GetIdleDirection()
+    {
+        Vector3 direction = Vector3.zero;
+
+        direction.x =  animator.GetFloat("HorizontalFacing");
+        direction.y = animator.GetFloat("VerticalFacing");
+
+        Debug.Log(direction);
+
+        switch (direction)
+        {
+            case Vector3 idleDirection when idleDirection.Equals(Vector3.left): return 0;
+            case Vector3 idleDirection when idleDirection.Equals(Vector3.up): return 1;
+            case Vector3 idleDirection when idleDirection.Equals(Vector3.right): return 2;
+            case Vector3 idleDirection when idleDirection.Equals(Vector3.down): return 3;
+
+            default: return 3;
         }
     }
 }

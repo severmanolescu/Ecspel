@@ -14,13 +14,15 @@ public class PlayerInventory : MonoBehaviour
 
     private CoinsHandler coinsHandler;
 
+    public CoinsHandler CoinsHandler { get => coinsHandler; set => coinsHandler = value; }
+
     private void Awake()
     {
         getItem = GameObject.Find("Global").GetComponent<GetItemFromNO>();
 
         itemsSlot = new List<ItemSlot>(gameObject.GetComponentsInChildren<ItemSlot>());
 
-        coinsHandler = GetComponentInChildren<CoinsHandler>();
+        CoinsHandler = GetComponentInChildren<CoinsHandler>();
     }
 
     private bool AddItemStackable(Item item)
@@ -106,7 +108,7 @@ public class PlayerInventory : MonoBehaviour
         {
             if (item.name == "Coin")
             {
-                coinsHandler.Amount += item.Amount;
+                CoinsHandler.Amount += item.Amount;
 
                 return true;
             }
@@ -242,7 +244,12 @@ public class PlayerInventory : MonoBehaviour
         {
             if(itemSlot.Item != null)
             {
-                items.Add(new Tuple<int, int>(getItem.GetItemNO(itemSlot.Item), itemSlot.Item.Amount));
+                items.Add(new Tuple<int, int>(itemSlot.Item.ItemNO, itemSlot.Item.Amount));
+            }
+            else
+            {
+                items.Add(new Tuple<int, int>(-1, -1));
+
             }
         }
 
@@ -254,9 +261,9 @@ public class PlayerInventory : MonoBehaviour
         foreach(ItemSlot slot in itemsSlot)
         {
             slot.Item = null;
-
-            slot.ReinitializeItem();
         }
+
+        int indexOfItemSlot = 0;
 
         foreach(Tuple<int, int> item in itemsNo)
         {
@@ -268,8 +275,14 @@ public class PlayerInventory : MonoBehaviour
 
                 newItem.Amount = item.Item2;
 
-                AddItem(newItem);
+                itemsSlot[indexOfItemSlot].SetItem(newItem);                
             }
+            else
+            {
+                itemsSlot[indexOfItemSlot].SetItem(null);
+            }
+
+            indexOfItemSlot++;
         }
     }
 }

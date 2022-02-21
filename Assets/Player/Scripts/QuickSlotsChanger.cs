@@ -44,6 +44,16 @@ public class QuickSlotsChanger : MonoBehaviour
         }
     }
 
+    public void ReinitializeSelectedSlot()
+    {
+        quickSlots[selectedItemIndex - 1].Reinitialize();
+    }
+
+    public void DecreseAmountSelected(int amount)
+    {
+        quickSlots[selectedItemIndex - 1].Equiped.DecreseAmount(amount);
+    }
+
     private void ChangeSelectedItem(int selected)
     {
         foreach (QuickSlot slot in quickSlots)

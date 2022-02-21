@@ -13,6 +13,8 @@ public class CraftSetData : MonoBehaviour
 
     private bool haveItems = false;
 
+    private CraftCanvasHandler canvasHandler = null;
+
     private Image background;
     private Image receiveItem;
     private Image needItem1;
@@ -22,6 +24,7 @@ public class CraftSetData : MonoBehaviour
     private PlayerInventory playerInventory;
 
     public Craft Craft { get => craft; set => SetData(value); }
+    public CraftCanvasHandler CanvasHandler { get => canvasHandler; set => canvasHandler = value; }
 
     private void Awake()
     {
@@ -105,6 +108,11 @@ public class CraftSetData : MonoBehaviour
         if(haveItems == true)
         {
             Item auxItem;
+
+            if(canvasHandler != null)
+            {
+                canvasHandler.PlaySoundEffect();
+            }
 
             foreach (ItemWithAmount item in craft.NeedItem)
             {

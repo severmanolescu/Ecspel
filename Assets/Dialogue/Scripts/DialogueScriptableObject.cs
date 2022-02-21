@@ -24,10 +24,15 @@ public class DialogueScriptableObject : ScriptableObject
     [Header("Dialogue quests:")]
     [SerializeField] private List<Quest> quests;
 
+    [Header("Dialogue id:")]
+    [SerializeField] private int dialogueID;
+
     public string Name { get { return name; } }
     public bool HaveQuest { get { return haveQuest; } }
     public List<DialogueClass> DialogueRespons { get { return dialogueRespons; } }
     public List<DialogueAnswersClass> DialogueAnswers { get { return dialogueAnswers; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public List<Quest> Quest { get { return quests; } }
+
+    public int DialogueID { get => dialogueID; set => dialogueID = value; }
 }

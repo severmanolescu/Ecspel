@@ -39,7 +39,7 @@ public class GetAllSapling : MonoBehaviour
             {
                 SaplingSave saplingSave = new SaplingSave();
 
-                saplingSave.Sapling = getItem.GetItemNO(sapling.Sapling);
+                saplingSave.Sapling = sapling.Sapling.ItemNO;
 
                 saplingSave.PositionX = sapling.transform.position.x;
                 saplingSave.PositionY = sapling.transform.position.y;

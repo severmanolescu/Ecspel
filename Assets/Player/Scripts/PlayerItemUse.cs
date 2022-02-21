@@ -8,6 +8,8 @@ public class PlayerItemUse : MonoBehaviour
     [Header("Audio effects")]
     [SerializeField] private AudioClip attackClip;
 
+    private PlayerStats playerStats;
+
     private AudioSource audioSource;
 
     private Item item;
@@ -36,61 +38,11 @@ public class PlayerItemUse : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         mouse = InputSystem.GetDevice<Mouse>();
+
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
     }
 
-    private void AxeUse(Collider2D[] objects, int spawn)
-    {
-        foreach (Collider2D auxObject in objects)
-        {
-            if (auxObject.gameObject != this.gameObject)
-            {
-                DamageTree treeDamage = auxObject.GetComponent<DamageTree>();
-
-                if (treeDamage != null)
-                {
-                    Axe axe = (Axe)item;
-
-                    treeDamage.TakeDamage(axe.Damage, spawn, axe.Level);
-
-                    return;
-                }
-                else if (auxObject.CompareTag("Crop"))
-                {
-                    auxObject.GetComponent<CropGrow>().Destroy();
-
-                    return;
-                }
-            }
-        }
-    }
-
-    private void PickaxeUse(Collider2D[] objects, int spawn)
-    {
-        foreach (Collider2D auxObject in objects)
-        {
-            if (auxObject.gameObject != this.gameObject)
-            {
-                StoneDamage stoneDamage = auxObject.GetComponent<StoneDamage>();
-
-                Pickaxe pickaxe= (Pickaxe)item;
-
-                if (stoneDamage != null)
-                {
-                    stoneDamage.TakeDamage(pickaxe.Damage, pickaxe.Level);
-
-                    return;
-                }
-                else if (auxObject.CompareTag("Crop"))
-                {
-                    auxObject.GetComponent<CropGrow>().Destroy();
-
-                    return;
-                }
-            }
-        }
-    }
-
-    private void SwordUse(Collider2D[] objects, int spawn)
+    private void SwordUse(Collider2D[] objects)
     {
         foreach (Collider2D auxObject in objects)
         {
@@ -131,7 +83,7 @@ public class PlayerItemUse : MonoBehaviour
 
         Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
 
-        SwordUse(objects, GetSpawnLocation()); return;
+        SwordUse(objects); return;
     }
 
     private int GetSpawnLocation()
@@ -184,6 +136,15 @@ public class PlayerItemUse : MonoBehaviour
 
                 SetCircleCast();
             }
+            else if(item is Consumable)
+            {
+                if (playerStats.Eat((Consumable)item))
+                {
+                    selectedSlot.DecreseAmountSelected(1);
+
+                    selectedSlot.ReinitializeSelectedSlot();
+                }
+            }
         }
     }
 
@@ -191,7 +152,7 @@ public class PlayerItemUse : MonoBehaviour
     {
         if(playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
         {
-            if (mouse.leftButton.isPressed)
+            if (mouse.leftButton.wasPressedThisFrame)
             {
                 Item item = selectedSlot.Item;
 

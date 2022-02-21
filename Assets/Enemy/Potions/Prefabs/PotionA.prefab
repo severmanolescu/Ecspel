@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationGrid: {fileID: 0}
+  distanceTolerance: 0.1
   slimeJump: {fileID: 0}
   slimeHitGround: {fileID: 0}
 --- !u!114 &2614618032491226853
@@ -232,7 +233,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

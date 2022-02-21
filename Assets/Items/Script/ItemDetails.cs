@@ -11,6 +11,8 @@ public class ItemDetails : MonoBehaviour
     [SerializeField] private Sprite coinSprite;
     [SerializeField] private Sprite attackSprite;
     [SerializeField] private Sprite powerSprite;
+    [SerializeField] private Sprite heartSprite;
+    [SerializeField] private Sprite lightningSprite;
 
     private ItemSprites itemSprites;
 
@@ -107,6 +109,24 @@ public class ItemDetails : MonoBehaviour
             instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
 
             instantiateStat.GetComponent<StatDataSet>().SetData(powerSprite, axe.Level.ToString());
+        }
+        else if(item is Consumable)
+        {
+            Consumable consumable = (Consumable)item;
+
+            if (consumable.Health > 0)
+            {
+                instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+                instantiateStat.GetComponent<StatDataSet>().SetData(heartSprite, consumable.Health.ToString());
+            }
+
+            if (consumable.Stamina > 0)
+            {
+                instantiateStat = Instantiate(statPrefab, spawnLocation.transform);
+
+                instantiateStat.GetComponent<StatDataSet>().SetData(lightningSprite, consumable.Stamina.ToString());
+            }
         }
     }
 

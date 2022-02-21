@@ -144,6 +144,7 @@ public class PrincipalMenuHandler : MonoBehaviour
             {
                 settingsMenu.SetActive(false);
                 principalMenu.SetActive(false);
+
                 quitConsole.SetActive(true);
             }
         }
@@ -408,5 +409,10 @@ public class PrincipalMenuHandler : MonoBehaviour
         openMenu.SetActive(false);
 
         principalMenu.SetActive(true);
+    }
+
+    public void CloseMenu()
+    {
+        gameObject.SetActive(false);
     }
 }

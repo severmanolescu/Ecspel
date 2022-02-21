@@ -27,6 +27,8 @@ public class OpenShopHandler : MonoBehaviour
 
     private GameObject quickSlots;
 
+    private bool wasOpen = false;
+
     public List<ItemWithAmount> Items { get => items; set => items = value; }
 
     private void Awake()
@@ -41,6 +43,8 @@ public class OpenShopHandler : MonoBehaviour
         shopInventory = GameObject.Find("Player/Canvas/ShopItems").GetComponent<ShopInventory>();
 
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+
+        wasOpen = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,9 +77,14 @@ public class OpenShopHandler : MonoBehaviour
         quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
         canvasTabsOpen.SetCanOpenTabs(true);
 
-        items = shopInventory.GetAllItems();
+        if (wasOpen == true)
+        {
+            items = shopInventory.GetAllItems();
 
-        shopInventory.gameObject.SetActive(false);
+            wasOpen = false;
+        }
+
+        shopInventory.Close();
     }
 
     private void Update()
@@ -94,6 +103,8 @@ public class OpenShopHandler : MonoBehaviour
                     shopInventory.gameObject.SetActive(true);
 
                     shopInventory.SetItems(Items, typeOfBuyItems);
+
+                    wasOpen = true;
                 }
                 else
                 {

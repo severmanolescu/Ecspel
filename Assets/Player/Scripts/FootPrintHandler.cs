@@ -25,6 +25,14 @@ public class FootPrintHandler : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    public void ChangeFootprintSpawnLocationState(bool state)
+    {
+        if(spawnLocation != null)
+        {
+            spawnLocation.gameObject.SetActive(state);
+        }
+    }
+
     private void SpawnFootPrintUpRight()
     {
         if (spawnLocation.gameObject.activeSelf == true)

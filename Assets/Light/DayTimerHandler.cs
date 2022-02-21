@@ -45,6 +45,8 @@ public class DayTimerHandler : MonoBehaviour
     public int Days { get { return days; } set { days = value; } }
 
     public int Hours { get => hours; set => hours = value; }
+    public float Minutes { get => minutes; }
+    public float Intensity { get => intensity; set => intensity = value; }
 
     private void Awake()
     {
@@ -67,7 +69,7 @@ public class DayTimerHandler : MonoBehaviour
     {
         minutes += timeSpeed * Time.deltaTime;
 
-        if(minutes >= 60)
+        if(Minutes >= 60)
         {
             minutes = 0;
             Hours++;
@@ -84,7 +86,7 @@ public class DayTimerHandler : MonoBehaviour
             }
         }
 
-        intensity = (Hours + minutes / 60) / 24;
+        intensity = (Hours + Minutes / 60) / 24;
 
         sourceLight.ChangeLightsIntensity(1f - intensity);
 
@@ -113,14 +115,14 @@ public class DayTimerHandler : MonoBehaviour
 
     public void GetTimer(out float minutes, out int hours, out int days)
     {
-        minutes = (int)this.minutes;
+        minutes = (int)this.Minutes;
         hours   = this.Hours;
         days    = this.Hours;
     }
 
     public void GetTimer(out float minutes, out int hours)
     {
-        minutes = this.minutes;
+        minutes = this.Minutes;
         hours = this.Hours;
     }
 

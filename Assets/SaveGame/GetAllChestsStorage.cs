@@ -16,7 +16,7 @@ public class GetAllChestsStorage : MonoBehaviour
     {
         getItemFromNO = GameObject.Find("Global").GetComponent<GetItemFromNO>();
 
-        chestType = gameObject.GetComponent<GetChestType>();
+        chestType = GetComponent<GetChestType>();   
     }
 
     public List<ChestSave> GetAllChestStorage()
@@ -40,11 +40,13 @@ public class GetAllChestsStorage : MonoBehaviour
 
             foreach(Item item in chestStorage.Items)
             {
-                int itemId = getItemFromNO.GetItemNO(item);
-
-                if (itemId != -1)
+                if (item != null && item.ItemNO != -1)
                 {
-                    chestSave.Items.Add(new Tuple<int, int>(itemId, item.Amount));
+                    chestSave.Items.Add(new Tuple<int, int>(item.ItemNO, item.Amount));
+                }
+                else
+                {
+                    chestSave.Items.Add(new Tuple<int, int>(-1, -1));
                 }
             }
 
@@ -65,21 +67,35 @@ public class GetAllChestsStorage : MonoBehaviour
 
         foreach (ChestSave chestSave in chestSaves)
         {
-            GameObject chest = Instantiate(chestType.GetChestObject(chestSave.ChestID), placedObjects.transform);
-
-            chest.transform.position = new Vector3(chestSave.PositionX, chestSave.PositionY);
-
-            ChestStorage chestStorage = chest.GetComponent<ChestStorage>();
-
-            if (chestStorage != null)
+            if (chestSave != null)
             {
-                foreach(Tuple<int, int> item in chestSave.Items)
+                GameObject chest = Instantiate(chestType.GetChestObject(chestSave.ChestID), placedObjects.transform);
+
+                chest.transform.position = new Vector3(chestSave.PositionX, chestSave.PositionY);
+                
+                chest.transform.parent = placedObjects.transform;
+
+                ChestStorage chestStorage = chest.GetComponent<ChestStorage>();
+
+                if (chestStorage != null)
                 {
-                    Item itemToAdd = getItemFromNO.ItemFromNo(item.Item1).Copy();
+                    foreach (Tuple<int, int> item in chestSave.Items)
+                    {
+                        Item newItem = getItemFromNO.ItemFromNo(item.Item1);
 
-                    itemToAdd.Amount = item.Item2;
+                        if (newItem != null)
+                        {
+                            Item itemToAdd = newItem.Copy();
 
-                    chestStorage.AddItem(itemToAdd);
+                            itemToAdd.Amount = item.Item2;
+
+                            chestStorage.AddItem(itemToAdd);
+                        }
+                        else
+                        {
+                            chestStorage.AddItem(null);
+                        }
+                    }
                 }
             }
         }
@@ -95,11 +111,13 @@ public class GetAllChestsStorage : MonoBehaviour
 
             foreach (Item item in chestStorage.Items)
             {
-                int itemId = getItemFromNO.GetItemNO(item);
-
-                if (itemId != -1)
+                if (item != null && item.ItemNO != -1)
                 {
-                    houseChest.Add(new Tuple<int, int>(itemId, item.Amount));
+                    houseChest.Add(new Tuple<int, int>(item.ItemNO, item.Amount));
+                }
+                else
+                {
+                    houseChest.Add(new Tuple<int, int>(-1, -1));
                 }
             }
         }
@@ -115,11 +133,20 @@ public class GetAllChestsStorage : MonoBehaviour
 
         foreach (Tuple<int, int> item in chestSave)
         {
-            Item itemToAdd = getItemFromNO.ItemFromNo(item.Item1).Copy();
+            Item newItem = getItemFromNO.ItemFromNo(item.Item1);
 
-            itemToAdd.Amount = item.Item2;
+            if (newItem != null)
+            {
+                Item itemToAdd = newItem.Copy();
 
-            chestStorage.AddItem(itemToAdd);
+                itemToAdd.Amount = item.Item2;
+
+                chestStorage.AddItem(itemToAdd);
+            }
+            else
+            {
+                chestStorage.AddItem(null);
+            }
         }
     }
 }

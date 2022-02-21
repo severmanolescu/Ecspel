@@ -66,6 +66,13 @@ public class CraftingHandler : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitToNextFrame()
+    {
+        yield return new WaitForEndOfFrame();
+
+        canvasTabsOpen.SetCanOpenTabs(true);
+    }
+
     private void Update()
     {
         if (player != null)
@@ -94,6 +101,17 @@ public class CraftingHandler : MonoBehaviour
 
                     canvasTabsOpen.SetCanOpenTabs(true);
                 }
+            }
+            else if (keyboard.escapeKey.wasPressedThisFrame)
+            {
+                playerMovement.TabOpen = false;
+                playerInventory.SetActive(false);
+                craftCanvas.gameObject.SetActive(false);
+
+                quickSlots.SetActive(true);
+
+                StopAllCoroutines();
+                StartCoroutine(WaitToNextFrame());
             }
         }
     }

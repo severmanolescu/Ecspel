@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,6 +7,8 @@ using UnityEngine.InputSystem;
 public class SaveSystemHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> deactivateObjectsAtLoad = new List<GameObject>();
+
+    [SerializeField] private GameObject playerGround;
 
     private GameObject[] positionNpcAtLoad;
 
@@ -33,6 +34,8 @@ public class SaveSystemHandler : MonoBehaviour
 
     private GridSaveHadler gridSave;
 
+    private TipsCanvas tipsCanvas;
+
     private Keyboard keyboard;
 
     private int indexOfSaveGame;
@@ -52,6 +55,8 @@ public class SaveSystemHandler : MonoBehaviour
         playerAchievements = GameObject.Find("Global/Player").GetComponent<PlayerAchievements>();
 
         questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
+        
+        tipsCanvas = GameObject.Find("Global/Player/Canvas/Tips").GetComponent<TipsCanvas>();
 
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
@@ -110,7 +115,10 @@ public class SaveSystemHandler : MonoBehaviour
     {
         foreach (GameObject location in deactivateObjectsAtLoad)
         {
-            location.SetActive(active);
+            if (location != null)
+            {
+                location.SetActive(active);
+            }
         }
     }
 
@@ -149,6 +157,18 @@ public class SaveSystemHandler : MonoBehaviour
         GetComponent<GetFarmPlots>().PositionFarmingPlots(saveGame.Plots);
 
         GetComponent<GetFarmPlots>().SetCroptsToWorld(saveGame.CropSaves);
+
+        GetComponent<GetAllForgesStorage>().SetAllForges(saveGame.ForgeStorages);
+
+        GetComponent<GetAllTipsLocation>().SetTipToWorld(saveGame.TipsSaves);
+
+        GetComponent<GetAllDialogueAppear>().SetDialogueToWorld(saveGame.DialogueAppear);
+
+        playerGround.SetActive(true);
+
+        tipsCanvas.NotShow = saveGame.TipShowState;
+
+        playerInventory.CoinsHandler.Amount = saveGame.Coins;
 
         gridSave.SetDataToGridLocations(saveGame.GridSaves);
 
@@ -227,6 +247,16 @@ public class SaveSystemHandler : MonoBehaviour
 
         saveGame.GridSaves = gridSave.GetAllGridLocationData();
 
+        saveGame.ForgeStorages = GetComponent<GetAllForgesStorage>().GetAllForges();
+
+        saveGame.Coins = playerInventory.CoinsHandler.Amount;
+
+        saveGame.TipShowState = tipsCanvas.NotShow;
+
+        saveGame.TipsSaves = GetComponent<GetAllTipsLocation>().GetAllTips();
+
+        saveGame.DialogueAppear = GetComponent<GetAllDialogueAppear>().GetAllDialogue();
+
         return saveGame;
     }
 
@@ -240,6 +270,10 @@ public class SaveSystemHandler : MonoBehaviour
         if (keyboard.lKey.isPressed)
         {
             LoadSaveGame(0, null);
+        }
+        else if(keyboard.pKey.isPressed)
+        {
+            SaveGame();
         }
     }
 }

@@ -25,7 +25,7 @@ public class Item : ScriptableObject
         this.amount = amount;
         this.maxAmount = maxAmount;
         this.itemNO = itemNO;
-        this.SellPrice = sellPrice;
+        SellPrice = sellPrice;
     }
 
     public string Name { get { return name; } }

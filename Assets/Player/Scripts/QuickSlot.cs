@@ -12,7 +12,9 @@ public class QuickSlot : MonoBehaviour
 
     private Image[] itemSprites;
 
-    public Item Item { get { return equiped.Item; } }
+    public Item Item { get { return Equiped.Item; } }
+
+    public ItemSlot Equiped { get => equiped; set => equiped = value; }
 
     private void Awake()
     {
@@ -20,13 +22,13 @@ public class QuickSlot : MonoBehaviour
 
         itemSprites = gameObject.GetComponentsInChildren<Image>();
 
-        equiped = GameObject.Find("Player/Canvas/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
+        Equiped = GameObject.Find("Player/Canvas/PlayerItems/Slots/" + gameObject.name).GetComponent<ItemSlot>();
 
         amount = GetComponentInChildren<TextMeshProUGUI>();
 
-        if (equiped.Item != null)
+        if (Equiped.Item != null)
         {
-            itemSprites[1].sprite = itemSprite.GetItemSprite(equiped.Item.ItemNO);
+            itemSprites[1].sprite = itemSprite.GetItemSprite(Equiped.Item.ItemNO);
         }
         else
         {
@@ -40,30 +42,30 @@ public class QuickSlot : MonoBehaviour
 
     public void Reinitialize()
     {
-        if (equiped.Item != null)
+        if (Equiped.Item != null)
         {
-            itemSprites[1].sprite = itemSprite.GetItemSprite(equiped.Item.ItemNO);
+            itemSprites[1].sprite = itemSprite.GetItemSprite(Equiped.Item.ItemNO);
             itemSprites[1].gameObject.SetActive(true);
 
-            if(equiped.Item.Amount <= 0)
+            if(Equiped.Item.Amount <= 0)
             {
-                equiped.DeleteItem();
+                Equiped.DeleteItem();
 
                 itemSprites[1].gameObject.SetActive(false);
 
                 amount.gameObject.SetActive(false);
             }
-            else if (equiped.Item.Amount > 1)
+            else if (Equiped.Item.Amount > 1)
             {
-                amount.text = equiped.Item.Amount.ToString();
+                amount.text = Equiped.Item.Amount.ToString();
 
                 amount.gameObject.SetActive(true);
 
-                equiped.ReinitializeItem();
+                Equiped.ReinitializeItem();
             }
             else
             {
-                equiped.ReinitializeItem();
+                Equiped.ReinitializeItem();
 
                 amount.gameObject.SetActive(false);
             }

@@ -70,6 +70,11 @@ public class ItemWorld : MonoBehaviour
         }
         else
         {
+            if(itemSprite == null)
+            {
+                itemSprite = gameObject.GetComponentInChildren<Image>();
+            }
+
             itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
 
             if (amount != null)

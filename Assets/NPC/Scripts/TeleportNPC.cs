@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TeleportNPC : MonoBehaviour
 {
+   [SerializeField] private bool footsteps;
+
     private Transform teleportToPoint;
 
     private void Awake()
@@ -36,6 +38,13 @@ public class TeleportNPC : MonoBehaviour
             if(npcAIHandler != null)
             {
                 npcAIHandler.LocationChange();
+
+                FootPrintHandler footPrintHandler = npcAIHandler.GetComponent<FootPrintHandler>();
+
+                if(footPrintHandler != null)
+                {
+                    footPrintHandler.ChangeFootprintSpawnLocationState(footsteps);
+                }
             }
         }
     }

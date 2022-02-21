@@ -12,6 +12,8 @@ public class ForgeOpenHandler : MonoBehaviour
 
     [SerializeField] private ItemWorld itemSlotPrefab;
 
+    [SerializeField] private int forgeID;
+
     private Item inputItem;
 
     private Item fuelItem;
@@ -49,6 +51,8 @@ public class ForgeOpenHandler : MonoBehaviour
     public Item InputItem { get => inputItem; set { inputItem = value; ItemsChange(); } }
     public Item FuelItem { get => fuelItem; set { fuelItem = value; ItemsChange(); } }
     public Item OutputItem { get => outputItem; set { outputItem= value; ItemsChange(); } }
+
+    public int ForgeID { get => forgeID; set => forgeID = value; }
 
     private void Awake()
     {
@@ -101,6 +105,22 @@ public class ForgeOpenHandler : MonoBehaviour
 
             canvasOpen = false;
         }
+    }
+
+    public Item GetFuelItem()
+    {
+        if (OutputItem != null)
+        {
+            Item newItem = OutputItem.Copy();
+
+            if (workingForge == true)
+            {
+                newItem.Amount++;
+            }
+            return newItem;
+        }
+        return null;
+    
     }
 
     private IEnumerator FuelConsume()

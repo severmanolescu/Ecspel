@@ -13,6 +13,10 @@ public class DialogueDisplay : MonoBehaviour
     private DialogueHandler dialogueHandler;
     private AnswersHandler answersHandler;
 
+    private NpcPathFinding npcPathFinding;
+
+    private int lastIdledirection = -1;
+
     private NpcId npcId;
 
     private List<Quest> quests = new List<Quest>();
@@ -28,6 +32,8 @@ public class DialogueDisplay : MonoBehaviour
         questMark = gameObject.transform.Find("QuestMark").gameObject;
 
         npcId = GameObject.Find("Global").GetComponent<NpcId>();
+
+        npcPathFinding = GetComponent<NpcPathFinding>();
     }
 
     public void Start()
@@ -87,7 +93,25 @@ public class DialogueDisplay : MonoBehaviour
                 dialogueChanger = null;
             }
 
+            CanWalkAgain();
+
             DeleteDialogue();
+        }
+    }
+
+    public void ChangeIdleAnimationToPlayerPosition(Vector3 position)
+    {
+        lastIdledirection = npcPathFinding.GetIdleDirection();
+
+        npcPathFinding.CanWalk = false;
+
+        if(transform.position.x >= position.x)
+        {
+            npcPathFinding.MoveIdleAnimation(0);
+        }
+        else if(transform.position.x < position.x)
+        {
+            npcPathFinding.MoveIdleAnimation(2);
         }
     }
 
@@ -124,6 +148,18 @@ public class DialogueDisplay : MonoBehaviour
         dialogueHandler.StopDialogue();
 
         dialogueHandler.gameObject.SetActive(false);
+    }
+
+    public void CanWalkAgain()
+    {
+        if (lastIdledirection != -1)
+        {
+            npcPathFinding.MoveIdleAnimation(lastIdledirection);
+
+            lastIdledirection = -1;
+
+            npcPathFinding.CanWalk = true;
+        }
     }
 
     public void AddQuest(Quest quest)

@@ -11,6 +11,8 @@ public class CraftCanvasHandler : MonoBehaviour
     [SerializeField] GameObject craftPrefab;
     [SerializeField] Transform spawnLocation;
 
+    private AudioSource audioSource;
+
     private void Start()
     {
         foreach(Craft craft in initialCrafts)
@@ -20,7 +22,9 @@ public class CraftCanvasHandler : MonoBehaviour
 
         ReinitializeAllCraftings();
 
-        gameObject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
+
+        gameObject.SetActive(false); 
     }
 
     public void ReinitializeAllCraftings()
@@ -29,6 +33,11 @@ public class CraftCanvasHandler : MonoBehaviour
         {
             craft.CheckIfItemsAreAvaible();
         }
+    }
+
+    public void PlaySoundEffect()
+    {
+        audioSource.Play();
     }
 
     private bool SearchIfCraftExist(Craft craft)
@@ -61,6 +70,8 @@ public class CraftCanvasHandler : MonoBehaviour
         CraftSetData newCraft = Instantiate(craftPrefab, spawnLocation).GetComponent<CraftSetData>();
 
         newCraft.Craft = craft;
+
+        newCraft.CanvasHandler = this;
 
         crafts.Add(newCraft);
     }

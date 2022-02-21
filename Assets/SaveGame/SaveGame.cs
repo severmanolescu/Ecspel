@@ -38,6 +38,14 @@ public class SaveGame
 
     private List<GridSave[,]> gridSaves;
 
+    private List<ForgeStorage> forgeStorages;
+
+    private bool tipShowState;
+
+    private List<TipsSave> tipsSaves;
+
+    private List<DialogueAppearSave> dialogueAppear;
+
     public int Days { get => days; set => days = value; }
     public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
@@ -54,4 +62,8 @@ public class SaveGame
     public List<int> NpcDialogues { get => npcDialogues; set => npcDialogues = value; }
     public List<GridSave[,]> GridSaves { get => gridSaves; set => gridSaves = value; }
     public int Coins { get => coins; set => coins = value; }
+    public List<ForgeStorage> ForgeStorages { get => forgeStorages; set => forgeStorages = value; }
+    public bool TipShowState { get => tipShowState; set => tipShowState = value; }
+    public List<TipsSave> TipsSaves { get => tipsSaves; set => tipsSaves = value; }
+    public List<DialogueAppearSave> DialogueAppear { get => dialogueAppear; set => dialogueAppear = value; }
 }

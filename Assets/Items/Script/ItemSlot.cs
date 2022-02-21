@@ -38,13 +38,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private CoinsHandler coinsHandler;
 
+    private PlayerStats playerStats;
+
     //true  - player inventory
     //false - chest storage
     private bool locationOfItem;
 
     private Item item = null;
 
-    public Item Item { get { return item; } set { item = value; } }
+    public Item Item { get { return item; } set { item = value; ReinitializeItem(); } }
 
     public bool ShopItems { get => shopItems; set { shopItems = value; SearchForBuySlider(); } }
 
@@ -90,6 +92,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         if(playerInventory == true)
         {
             coinsHandler = GameObject.Find("Global/Player/Canvas/PlayerItems/Coins").GetComponent<CoinsHandler>();
+
+            playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
         }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
@@ -295,7 +299,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 }
                 else if (itemDrag != null)
                 {
-                    if (item.Name == itemDrag.Item.Name)
+                    if (item != null && item.Name == itemDrag.Item.Name)
                     {
                         if (item.Amount <= item.MaxAmount)
                         {
@@ -409,6 +413,18 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                             ReinitializeItem();
                         }
                     }
+                    else
+                    {
+                        if(item is Consumable)
+                        {
+                            Consumable consumable = (Consumable)item;
+
+                            if (playerStats.Eat(consumable))
+                            {
+                                DecreseAmount(1);
+                            }
+                        }
+                    }    
                 }
                 else
                 {

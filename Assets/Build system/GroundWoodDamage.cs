@@ -12,7 +12,6 @@ public class GroundWoodDamage : MonoBehaviour
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip woodChop;
-    [SerializeField] private AudioMixer effectAudioMixer;
 
     private AudioSource audioSource;
 

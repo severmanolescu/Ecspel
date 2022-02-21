@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationGrid: {fileID: 0}
+  distanceTolerance: 0.1
   slimeJump: {fileID: 8300000, guid: 842e709322cb2c042be4a973222b47d0, type: 3}
   slimeHitGround: {fileID: 8300000, guid: 08096d7448c75f741b1d00043a915de9, type: 3}
 --- !u!114 &6493036377115406201
@@ -231,7 +232,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 8300000, guid: 842e709322cb2c042be4a973222b47d0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.6
   m_Pitch: 0.88
   Loop: 0
