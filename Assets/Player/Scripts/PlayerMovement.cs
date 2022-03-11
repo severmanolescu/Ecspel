@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private float runSpaminaUse;
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip itemPickup;
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private Keyboard keyboard;
 
     private Joystick joystick;
+
+    private PlaySound playSound;
 
     private bool canMove = true;
 
@@ -63,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         joystick = InputSystem.GetDevice<Joystick>();
+
+        playSound = GetComponentInChildren<PlaySound>();
     }
 
     private void GetInputs()
@@ -124,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (inputs != Vector2.zero)
                 {
-                    playerStats.Stamina -= 0.5f * Time.deltaTime * fatiqueEffect;
+                    playerStats.DecreseStamina(runSpaminaUse * Time.deltaTime * fatiqueEffect);
                 }
             }
             else
@@ -196,12 +201,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.CompareTag("ItemWorld"))
         {
-            if(playerInventory.AddItem(collision.gameObject.GetComponent<ItemWorld>().Item) == true)
+            if(playerInventory.AddItemWithAnimation(collision.gameObject.GetComponent<ItemWorld>().Item) == true)
             {
                 collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
 
-                audioSource.clip = itemPickup;
-                audioSource.Play();
+                playSound.Play(itemPickup);
             }
             else
             {

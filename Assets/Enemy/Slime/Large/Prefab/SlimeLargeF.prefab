@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.75
+  attackSound: {fileID: 8300000, guid: b835e23f7a033e54990d2a70b6984a67, type: 3}
 --- !u!82 &5069913585618109017
 AudioSource:
   m_ObjectHideFlags: 0
@@ -233,7 +234,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 8300000, guid: 842e709322cb2c042be4a973222b47d0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.1
   m_Pitch: 0.88
   Loop: 0
   Mute: 0

@@ -95,7 +95,7 @@ public class SpawnObjectsArea : MonoBehaviour
         return true;
     }
 
-    public void DayChange(int day)
+    public IEnumerator DayChange(int day)
     {
         int objectsNo = GetComponentsInChildren<Rigidbody2D>().Length;
 
@@ -122,6 +122,8 @@ public class SpawnObjectsArea : MonoBehaviour
 
                         objectsNo++;
                     }
+
+                    yield return new WaitForSeconds(.05f);
                 }
                 else
                 {
@@ -150,7 +152,7 @@ public class SpawnObjectsArea : MonoBehaviour
                 spawnObject.transform.SetParent(transform);
             }
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }

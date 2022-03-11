@@ -44,7 +44,7 @@ public class QuestTabDataSet : MonoBehaviour
             GiveItem giveItem = (GiveItem)quest;
 
             track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
-            track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform.position); });
+            track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform); });
         }
         else if(quest is GoToLocation)
         {

@@ -65,25 +65,28 @@ public class GetAllObjectsInPlayerGround : MonoBehaviour
             Destroy(box.gameObject);
         }
 
-        objectsInArea = null;
-
         foreach (ObjectSaveGame obj in objects)
         {
             if (obj.ItemNo != -1)
             {
-                GameObject instantiateObject = Instantiate(getItemWorld.GetObjectFromNo(obj.ItemNo), objectLocation.transform);
+                GameObject game = getItemWorld.GetObjectFromNo(obj.ItemNo);
 
-                instantiateObject.GetComponent<PositionInGrid>().LocationGrid = getLocationGrid.GetLocationFromNo(obj.LocationIndex);
-
-                instantiateObject.transform.position = new Vector3(obj.PositionX, obj.PositionY);
-
-                if (instantiateObject.CompareTag("Tree"))
+                if (game != null)
                 {
-                    DamageTree tree = instantiateObject.GetComponent<DamageTree>();
+                    GameObject instantiateObject = Instantiate(game, objectLocation.transform);
 
-                    tree.Destroyed = obj.TreeCrowDestroy;
+                    instantiateObject.GetComponent<PositionInGrid>().LocationGrid = getLocationGrid.GetLocationFromNo(obj.LocationIndex);
 
-                    tree.ChangeCrowDesroy();
+                    instantiateObject.transform.position = new Vector3(obj.PositionX, obj.PositionY);
+
+                    if (instantiateObject.CompareTag("Tree"))
+                    {
+                        DamageTree tree = instantiateObject.GetComponent<DamageTree>();
+
+                        tree.Destroyed = obj.TreeCrowDestroy;
+
+                        tree.ChangeCrowDesroy();
+                    }
                 }
             }
         }

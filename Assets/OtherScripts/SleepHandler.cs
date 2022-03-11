@@ -8,8 +8,12 @@ public class SleepHandler : MonoBehaviour
 {
     [SerializeField] private SaveSystemHandler saveSystem;
 
-    [SerializeField] private GameObject currentCamera;
+    [SerializeField] private List<GameObject> currentCamera;
+    [SerializeField] private GameObject playerHouseCamera;
     [SerializeField] private GameObject sleepCamera;
+    [SerializeField] private GameObject playerHouseGround;
+
+    [SerializeField] private Transform bedLocation;
 
     private GameObject player = null;
 
@@ -79,13 +83,27 @@ public class SleepHandler : MonoBehaviour
         canvasTabsOpen.SetCanOpenTabs(state);
 
         quickSlots.SetActive(state);
+        playerHouseCamera.SetActive(state);
 
         playerStats.SetActive(state);
 
-        currentCamera.SetActive(state);
+        playerHouseGround.SetActive(true);
 
-        currentCamera.SetActive(state);
+        foreach (GameObject camera in currentCamera)
+        {
+            camera.SetActive(false);
+        }
+
         sleepCamera.SetActive(!state);
+    }
+
+    public void Sleep()
+    {
+        ChangeObjectsStates(false);
+
+        dayTimer.Sleep(this);
+
+        playerMovement.transform.position = bedLocation.position;
     }
 
     private void Update()
@@ -94,9 +112,7 @@ public class SleepHandler : MonoBehaviour
         {
             if (keyboard.fKey.wasPressedThisFrame)
             {
-                ChangeObjectsStates(false);
-
-                dayTimer.Sleep(this);
+                Sleep();
             }
         }
     }

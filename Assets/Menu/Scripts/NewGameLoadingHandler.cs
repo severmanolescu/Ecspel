@@ -30,17 +30,7 @@ public class NewGameLoadingHandler : MonoBehaviour
 
     public void SpawnObjectsInAreas()
     {
-        GameObject[] areaSpawn = GameObject.FindGameObjectsWithTag("Area");
-
-        foreach (GameObject area in areaSpawn)
-        {
-            SpawnObjectsArea spawnObjects = area.GetComponent<SpawnObjectsArea>();
-
-            if (spawnObjects != null)
-            {
-                StartCoroutine(spawnObjects.SpawnObjectAtLoad());
-            }
-        }
+        GameObject.Find("Global/DayTimer").GetComponent<SpawnObjectsInAreaHandle>().SpawnObjectsAtNewGame();
     }
 
     IEnumerator WaitForAllLocations(LoadSceneHandler loadSceneHandler)

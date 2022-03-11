@@ -9,6 +9,8 @@ public class TipsCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tipDetails;
     [SerializeField] private Toggle stopShow;
 
+    [SerializeField] private PlayerMovement playerMovement;
+
     private bool notShow;
 
     public bool NotShow { get => notShow; set { notShow = value; stopShow.isOn = value; } }
@@ -24,9 +26,9 @@ public class TipsCanvas : MonoBehaviour
     {
         notShow = stopShow.isOn;
 
-        Time.timeScale = 1f;
-
         canvasTabs.canOpenTabs = true;
+
+        playerMovement.TabOpen = false;
 
         gameObject.SetActive(false);
     }
@@ -37,9 +39,9 @@ public class TipsCanvas : MonoBehaviour
         {
             tipDetails.text = tip;
 
-            Time.timeScale = 0;
-
             canvasTabs.canOpenTabs = false;
+
+            playerMovement.TabOpen = true;
         }
         else
         {

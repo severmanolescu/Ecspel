@@ -8,8 +8,11 @@ public class CraftCanvasHandler : MonoBehaviour
 
     [SerializeField] private List<Craft> initialCrafts = new List<Craft>();
 
-    [SerializeField] GameObject craftPrefab;
-    [SerializeField] Transform spawnLocation;
+    [SerializeField] private GameObject craftPrefab;
+    [SerializeField] private Transform spawnLocation;
+
+    [SerializeField] private NewRecipeHandler newRecipeHandler;
+    [SerializeField] private ItemSprites itemSprites;
 
     private AudioSource audioSource;
 
@@ -53,11 +56,44 @@ public class CraftCanvasHandler : MonoBehaviour
         return false;
     }
 
-    public bool AddCraft(Craft craft)
+    public List<Craft> GetAllCrafts()
+    {
+        List<Craft> list = new List<Craft>();
+
+        foreach (CraftSetData craftSet in crafts)
+        {
+            if (craftSet.Craft != null)
+            {
+                list.Add(craftSet.Craft);
+            }
+        }
+
+        return list;
+    }
+
+    public void DeleteAllCrafts()
+    {
+        foreach (CraftSetData craftSet in crafts)
+        {
+            if (craftSet.Craft != null)
+            {
+                Destroy(craftSet.gameObject);
+            }
+        }
+
+        crafts.Clear();
+    }
+
+    public bool AddCraft(Craft craft, bool showAnimation = true)
     {
         if(craft != null && SearchIfCraftExist(craft) == false)
         {
             InstantiateCraft(craft);
+
+            if (showAnimation == true)
+            {
+                newRecipeHandler.AddNewRecipie(itemSprites.GetItemSprite(craft.ReceiveItem.Item.ItemNO));
+            }
 
             return true;
         }

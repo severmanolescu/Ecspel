@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class StoneDamage : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class StoneDamage : MonoBehaviour
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip soundEffect;
+    [SerializeField] private AudioClip soundEffectNotLevel;
 
     private AudioSource audioSource;
 
@@ -52,7 +55,9 @@ public class StoneDamage : MonoBehaviour
         {
             for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
             {
-                if (grid.gridArray[i, j] != null)
+                if (i < grid.gridArray.GetLength(0) &&
+                    j < grid.gridArray.GetLength(1) &&
+                    grid.gridArray[i, j] != null)
                 {
                     grid.gridArray[i, j].canPlace = true;
                     grid.gridArray[i, j].canPlant = false;
@@ -61,6 +66,28 @@ public class StoneDamage : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator WaitForSoundEffect()
+    {
+        Destroy(GetComponent<SpriteRenderer>());
+
+        Destroy(GetComponent<BoxCollider2D>());
+
+        Destroy(GetComponent<ShadowCaster2D>());
+
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        if(sprites.Length >= 1)
+        {
+            Destroy(sprites[1].gameObject);
+        }
+
+        while(audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage(float damage, int level)
@@ -72,7 +99,10 @@ public class StoneDamage : MonoBehaviour
 
             health -= damage;
 
-            particle.Play();
+            if (particle != null)
+            {
+                particle.Play();
+            }
 
             if (health <= 0)
             {
@@ -88,6 +118,8 @@ public class StoneDamage : MonoBehaviour
 
                     itemWorld.MoveToPoint();
 
+                    itemWorld.transform.parent = transform.parent;
+
                     Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
                     GridNode gridNode = grid.GetGridObject(transform.position);
@@ -97,11 +129,23 @@ public class StoneDamage : MonoBehaviour
                         ChangeGridData(gridNode, grid);
                     }
 
-                    Destroy(this.gameObject);
-                }
+                    GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
 
-                GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
+                    IncreseCaveObjects increseCave = GetComponent<IncreseCaveObjects>();
+
+                    if(increseCave != null)
+                    {
+                        increseCave.Increse();
+                    }
+
+                    StartCoroutine(WaitForSoundEffect());
+                }
             }
+        }
+        else
+        {
+            audioSource.clip = soundEffectNotLevel;
+            audioSource.Play();
         }
     }
 }

@@ -95,15 +95,21 @@ public class AIPathFinding : MonoBehaviour
     public void SetCanMoveToTrue()
     {
         canMove = true;
-
-        audioSource.clip = slimeJump;
-        audioSource.Play();
     }
     public void SetCanMoveToFalse()
     {
         canMove = false;
+    }
 
+    public void PlayHitGroundSound()
+    {
         audioSource.clip = slimeHitGround;
+        audioSource.Play();
+    }
+
+    public void PlayJumpSound()
+    {
+        audioSource.clip = slimeJump;
         audioSource.Play();
     }
 

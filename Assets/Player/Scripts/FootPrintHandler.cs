@@ -20,6 +20,11 @@ public class FootPrintHandler : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public AudioClip Footstep { get => footstep; set => footstep = value; }
+    public AudioClip Footstep1 { get => footstep1; set => footstep1 = value; }
+    public AudioClip FootstepWood { get => footstepWood; set => footstepWood = value; }
+    public AudioClip FootstepWood1 { get => footstepWood1; set => footstepWood1 = value; }
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -175,13 +180,13 @@ public class FootPrintHandler : MonoBehaviour
 
     private void PlayFootstepWoodClip()
     {
-        audioSource.clip = footstepWood;
+        audioSource.clip = FootstepWood;
         audioSource.Play();
     }
 
     private void PlayFootstepWood1Clip()
     {
-        audioSource.clip = footstepWood1;
+        audioSource.clip = FootstepWood1;
         audioSource.Play();
     }
 }

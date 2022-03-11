@@ -60,7 +60,7 @@ public class ItemWorld : MonoBehaviour
         }
     }
 
-    public void SetItem(Item items)
+    public void SetItem(Item items, bool luck = true)
     {
         this.item = items;
 
@@ -68,7 +68,7 @@ public class ItemWorld : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
+        else if(item != null)
         {
             if(itemSprite == null)
             {
@@ -79,6 +79,18 @@ public class ItemWorld : MonoBehaviour
 
             if (amount != null)
             {
+                SkillsHandler skillsHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+
+                if (luck)
+                {
+                    int chanceForanotherItem = Random.Range(0, 100);
+
+                    if (chanceForanotherItem >= skillsHandler.LuckLevel * 3.5)
+                    {
+                        item.Amount++;
+                    }
+                }
+
                 if (item.Amount > 1)
                 {
                     amount.SetText(item.Amount.ToString());

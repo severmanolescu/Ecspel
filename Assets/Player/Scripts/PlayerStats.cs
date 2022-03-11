@@ -19,6 +19,8 @@ public class PlayerStats : MonoBehaviour
 
     private SpriteRenderer playerSprite;
 
+    private SkillsHandler skillsHandler;
+
     public float Health { get { return healthSlider.value; } set { healthSlider.value = value; PlayDamageClip(); StartCoroutine(WaitDamage()); } }
     public float Stamina { get { return staminaSlider.value; } set { staminaSlider.value = value;} }
 
@@ -44,6 +46,8 @@ public class PlayerStats : MonoBehaviour
         playerSprite = GetComponentInParent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
+
+        skillsHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
     }
 
     private void Start()
@@ -65,6 +69,19 @@ public class PlayerStats : MonoBehaviour
         audioSource.Play();
     }    
 
+    public void SetToMaxStats()
+    {
+        healthSlider.value = healthSlider.maxValue;
+        staminaSlider.value = staminaSlider.maxValue;
+    }
+
+    public void DecreseStamina(float stamina)
+    {
+        float skillStamina = skillsHandler.StaminaLevel * 0.025f * stamina;
+
+        staminaSlider.value -= (stamina - skillStamina);
+    }
+
     public bool Eat(Consumable consumable)
     {
         if(Health < healthSlider.maxValue || Stamina < staminaSlider.maxValue)
@@ -79,5 +96,13 @@ public class PlayerStats : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ChangeHealthSkillLevel(int newLevel)
+    {
+        float toAddHealth = newLevel * 0.04f * DefaulData.maxPlayerHealth;
+
+        healthSlider.maxValue = DefaulData.maxPlayerHealth + toAddHealth;
+        healthSlider.value = healthSlider.maxValue;
     }
 }

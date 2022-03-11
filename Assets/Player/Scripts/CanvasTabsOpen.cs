@@ -24,6 +24,9 @@ public class CanvasTabsOpen : MonoBehaviour
     [SerializeField] private GameObject forgeCanvas;
     [SerializeField] private GameObject shopItems;
     [SerializeField] private GameObject tips;
+    [SerializeField] private GameObject caveSelect;
+    [SerializeField] private GameObject skills;
+    [SerializeField] private GameObject help;
 
     public bool canOpenTabs = true;
 
@@ -38,6 +41,7 @@ public class CanvasTabsOpen : MonoBehaviour
         questShow.gameObject.SetActive(false);
 
         menuCanvas.SetActive(false);
+        skills.SetActive(false);
     }
 
     private void Awake()
@@ -57,6 +61,8 @@ public class CanvasTabsOpen : MonoBehaviour
         shopItems.SetActive(false);
 
         tips.SetActive(false);
+
+        caveSelect.SetActive(false);
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -82,6 +88,9 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     quickSlot.gameObject.SetActive(false);
 
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
+
                     playerMovement.TabOpen = true;
 
                 }
@@ -94,6 +103,9 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
+
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
 
                     playerMovement.TabOpen = false;
                 }
@@ -109,6 +121,9 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     quickSlot.gameObject.SetActive(false);
 
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
+
                     playerMovement.TabOpen = true;
                 }
                 else if (questShow.gameObject.activeSelf)
@@ -122,28 +137,64 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
+
                     playerMovement.TabOpen = false;
+                }
+            }
+            else if(keyboard.qKey.wasPressedThisFrame)
+            {
+                if (skills.activeSelf)
+                {
+                    questShow.gameObject.SetActive(false);
+
+                    playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
+                    quickSlot.gameObject.SetActive(true);
+                    quickSlot.Reinitialize();
+
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
+
+                    playerMovement.TabOpen = false;
+                }
+                else
+                {
+                    questShow.gameObject.SetActive(false);
+
+                    playerInventory.SetActive(false);
+                    canvasEffects.SetActive(false);
+
+                    quickSlot.gameObject.SetActive(false);
+                    
+
+                    caveSelect.SetActive(false);
+
+                    skills.SetActive(true);
+
+                    skills.GetComponent<SkillsHandler>().ShowSkills();
+
+                    playerMovement.TabOpen = true;
                 }
             }
             else if (keyboard.escapeKey.wasPressedThisFrame)
             {
-                if(questShow.gameObject.activeSelf == false &&
+                if (questShow.gameObject.activeSelf == false &&
                    playerInventory.activeSelf == false &&
                    chestStorage.activeSelf == false &&
                    craftingCanvas.activeSelf == false &&
-                   forgeCanvas.activeSelf == false)
+                   forgeCanvas.activeSelf == false &&
+                   caveSelect.activeSelf == false &&
+                   skills.activeSelf == false &&
+                   help.activeSelf == false)
                 {
                     if (menuPrincipal.activeSelf == true)
                     {
                         if (menuCanvas.activeSelf == true)
                         {
-                            Time.timeScale = 1f;
-
-                            playerMovement.TabOpen = false;
-
-                            quickSlot.gameObject.SetActive(true);
-
-                            canOpenTabs = true;
+                            CloseMenu();
                         }
                         else
                         {
@@ -181,6 +232,9 @@ public class CanvasTabsOpen : MonoBehaviour
                     forgeCanvas.SetActive(false);
 
                     tips.SetActive(false);
+                    caveSelect.SetActive(false);
+                    skills.SetActive(false);
+                    help.SetActive(false);
                 }                           
             }
         }
@@ -194,6 +248,19 @@ public class CanvasTabsOpen : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CloseMenu()
+    {
+        Time.timeScale = 1f;
+
+        playerMovement.TabOpen = false;
+
+        quickSlot.gameObject.SetActive(true);
+
+        canOpenTabs = true;
+
+        menuCanvas.SetActive(false);
     }
 
     public void SetCanOpenTabs(bool canOpenTabs)

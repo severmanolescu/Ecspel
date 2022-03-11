@@ -25,11 +25,16 @@ public class LocationGridSave : MonoBehaviour
 
     private void Awake()
     {
-        grid = new Grid<GridNode>(height, weight, cellSize, position, (Grid<GridNode> g, int x, int y) => new GridNode(g, x, y));
+        ReinitializeGrid();
 
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         spawnLocations =  gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
+    }
+
+    public void ReinitializeGrid()
+    {
+        grid = new Grid<GridNode>(height, weight, cellSize, position, (Grid<GridNode> g, int x, int y) => new GridNode(g, x, y));
     }
 
     IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)

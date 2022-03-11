@@ -7,9 +7,13 @@ public class DialogueHandler : MonoBehaviour
 {
     private TextMeshProUGUI dialogueText;
 
+    private AudioSource audioSource;
+
     private void Awake()
     {
         dialogueText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        audioSource = GetComponent<AudioSource>(); 
     }
 
     private void Start()
@@ -19,9 +23,16 @@ public class DialogueHandler : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         dialogueText.text = "";
 
         bool stepOver = false;
+
+        audioSource.Play();
 
         foreach (char letter in sentence.ToCharArray())
         {
@@ -55,13 +66,8 @@ public class DialogueHandler : MonoBehaviour
 
             yield return new WaitForSeconds(DefaulData.dialogueSpeed);
         }
-    }
 
-    IEnumerator Wait(string sentence)
-    {
-        yield return new WaitForSeconds(3f);
-
-        SetDialogue(sentence);
+        audioSource.Stop();
     }
 
     public void SetDialogue(string dialogue)
@@ -76,5 +82,7 @@ public class DialogueHandler : MonoBehaviour
     public void StopDialogue()
     {
         StopAllCoroutines();
+
+        audioSource.Stop();
     }
 }

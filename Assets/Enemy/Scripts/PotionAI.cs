@@ -15,9 +15,8 @@ public class PotionAI : MonoBehaviour
 
     [SerializeField] private Effect effect;
 
-    private float tolerance = .01f;
-
-    private float nextAttackTime;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip rotateSound;
 
     private State state;
 
@@ -28,6 +27,8 @@ public class PotionAI : MonoBehaviour
     private Animator animator;
 
     private ushort rotation = 0;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -40,12 +41,12 @@ public class PotionAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         state = State.Walking;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        nextAttackTime = DefaulData.slimeAttackRate;
-
         GetComponent<AIPathFinding>().SetCanMoveToTrue();
     }
 
@@ -73,7 +74,7 @@ public class PotionAI : MonoBehaviour
                         aIPath.ToLocation = playerLocation;
                     }
 
-                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+                    float distance = Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z));
 
                     if (distance <= DefaulData.slimeLittleAttackDistance)
                     {
@@ -97,7 +98,7 @@ public class PotionAI : MonoBehaviour
 
                     animator.SetTrigger("Prepare");
 
-                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+                    float distance = Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z));
 
                     if (distance > DefaulData.slimeLittleAttackDistance)
                     {
@@ -115,7 +116,11 @@ public class PotionAI : MonoBehaviour
     {
         rotation++;
 
-        if(rotation >= 2)
+        audioSource.clip = rotateSound;
+
+        audioSource.Play();
+
+        if (rotation >= 2)
         {
             animator.SetTrigger("Attack");
         }
@@ -128,15 +133,19 @@ public class PotionAI : MonoBehaviour
 
     public void AttackPlayer()
     {
-        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.slimeLittleAttackDistance && effect != null)
+        if (Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z)) <= DefaulData.slimeLittleAttackDistance && effect != null)
         {
             playerLocation.GetComponent<EffectHandler>().AddEffect(effect);
         }
+
+        audioSource.clip = attackSound;
+
+        audioSource.Play();
     }
 
     private void FindPlayer()
     {
-        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.distanceToFind)
+        if (Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z)) <= DefaulData.distanceToFind)
         {
             state = State.GoToPlayer;
         }

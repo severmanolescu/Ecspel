@@ -14,10 +14,10 @@ public class GetLocationGrid : MonoBehaviour
         {
             switch (@object.name)
             {
-                case "PlayerHouseGround": return 1;
-                case "Road": return 2;
-                case "Lake": return 3;
-                case "CaveArea": return 4;
+                case "PlayerHouseGround": return 0;
+                case "Road": return 1;
+                case "Lake": return 2;
+                case "CaveArea": return 3;
                 case "Ocean": return 4;
 
                 default: return -1;
@@ -29,9 +29,9 @@ public class GetLocationGrid : MonoBehaviour
 
     public LocationGridSave GetLocationFromNo(int locationNo)
     {
-        if (locationNo > 0 && locationNo <= ListOfLocations.Count)
+        if (locationNo > 0 && locationNo < ListOfLocations.Count)
         {
-            return ListOfLocations[locationNo - 1];
+            return ListOfLocations[locationNo];
         }
 
         return null;

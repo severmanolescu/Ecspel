@@ -114,7 +114,7 @@ public class ChestOpenHandler : MonoBehaviour
 
                 Item newItem = item.Copy();
 
-                newItemWorld.SetItem(newItem);
+                newItemWorld.SetItem(newItem, false);
 
                 newItemWorld.MoveToPoint();
             }
@@ -199,5 +199,12 @@ public class ChestOpenHandler : MonoBehaviour
         quickSlots.SetActive(true);
 
         quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
+    }
+
+    public void DeleteAllItems()
+    {
+        Debug.Log("delete all");
+
+        chestStorage.RemoveAllItems();
     }
 }

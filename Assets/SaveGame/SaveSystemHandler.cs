@@ -10,6 +10,8 @@ public class SaveSystemHandler : MonoBehaviour
 
     [SerializeField] private GameObject playerGround;
 
+    [SerializeField] private QuickSlotsChanger quickSlots;
+
     private GameObject[] positionNpcAtLoad;
 
     private PlayerInventory playerInventory;
@@ -36,6 +38,8 @@ public class SaveSystemHandler : MonoBehaviour
 
     private TipsCanvas tipsCanvas;
 
+    private SkillsHandler skillsHandler;
+
     private Keyboard keyboard;
 
     private int indexOfSaveGame;
@@ -43,6 +47,8 @@ public class SaveSystemHandler : MonoBehaviour
     private string pathToSaveGameFolder;
 
     private string pathToSaves;
+
+    public int IndexOfSaveGame { get => indexOfSaveGame; set => indexOfSaveGame = value; }
 
     private void Awake()
     {
@@ -76,6 +82,8 @@ public class SaveSystemHandler : MonoBehaviour
 
         positionNpcAtLoad = GameObject.FindGameObjectsWithTag("NPC");
 
+        skillsHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
 
@@ -83,14 +91,14 @@ public class SaveSystemHandler : MonoBehaviour
     {
         if(pathToSaves != null || !pathToSaves.Contains(".svj"))
         {
-            pathToSaves = pathToSaveGameFolder + @"\SaveGame" + indexOfSaveGame + ".svj";
+            pathToSaves = pathToSaveGameFolder + @"\SaveGame" + IndexOfSaveGame + ".svj";
         }
     }
 
     public void LoadSaveGame(int indexOfSaveGame, LoadSceneHandler loadSceneHandler)
     {
         this.loadSceneHandler = loadSceneHandler;
-        this.indexOfSaveGame = indexOfSaveGame;
+        this.IndexOfSaveGame = indexOfSaveGame;
 
         VerifyPathToSave();
 
@@ -101,6 +109,8 @@ public class SaveSystemHandler : MonoBehaviour
         PositionNpcAtStartLocation();
 
         playerAchievements.GetComponent<PositionPlayerAtLoad>().PositionPlayer();
+
+        playerGround.SetActive(true);
     }
 
     private void PositionNpcAtStartLocation()
@@ -118,6 +128,11 @@ public class SaveSystemHandler : MonoBehaviour
             if (location != null)
             {
                 location.SetActive(active);
+
+                if(active == false)
+                {
+                    location.GetComponent<DeactivateCamera>().Deactivate();
+                }
             }
         }
     }
@@ -137,14 +152,21 @@ public class SaveSystemHandler : MonoBehaviour
     private void SetDataToGame(SaveGame saveGame)
     {
         dayTimerHandler.Days = saveGame.Days;
+        dayTimerHandler.LoadGameSetWakeUpHour();
+
+        dayTimerHandler.GetComponent<CropGrowHandler>().ReinitializeLists();
 
         playerInventory.SetInventoryFromSave(saveGame.PlayerInventory);
 
+        SetLocation(true);
+        
         getObjects.SetObjectsToWorld(saveGame.ObjectsInGame);
 
-        questTab.SetQuestsWithID(saveGame.PlayerQuests);
-
         getAllObjectsInPlayerGround.SetObjectsInArea(saveGame.ObjectsInPlayerGround);
+
+        SetLocation(false);
+
+        questTab.SetQuestsWithID(saveGame.PlayerQuests);
 
         npcDialogue.SetNpcsDialogue(saveGame.NpcDialogues);
 
@@ -164,7 +186,15 @@ public class SaveSystemHandler : MonoBehaviour
 
         GetComponent<GetAllDialogueAppear>().SetDialogueToWorld(saveGame.DialogueAppear);
 
-        playerGround.SetActive(true);
+        GetComponent<GetAllGrass>().SetGrassToWorld(saveGame.GrassSaveGames);
+
+        GetComponent<GetAllCrafts>().SetCrafts(saveGame.Crafts);
+
+        skillsHandler.SetSkillsLevels(saveGame.SkillsLevels);
+
+        dayTimerHandler.SetWeatherAtLoad(saveGame.Raining, saveGame.Fog, saveGame.FogIntensity);
+
+        GameObject.Find("Caves").GetComponent<CaveSystemHandler>().MaxCaveIndex = saveGame.MaxCaveIndex;
 
         tipsCanvas.NotShow = saveGame.TipShowState;
 
@@ -181,6 +211,8 @@ public class SaveSystemHandler : MonoBehaviour
 
         countPlayedMinutes.Minutes = saveGame.PlayedMinutes;
         countPlayedMinutes.Seconds = saveGame.PlayedSecundes;
+
+        quickSlots.Reinitialize();
     }
 
     private void VerifyFiles(string pathToSaveGame)
@@ -225,7 +257,6 @@ public class SaveSystemHandler : MonoBehaviour
 
         SetLocation(true);
         saveGame.ObjectsInGame = getObjects.GetAllObjectsFromArea();
-        SetLocation(false);
 
         saveGame.ObjectsInPlayerGround = getAllObjectsInPlayerGround.GetAllObjects();
 
@@ -257,12 +288,28 @@ public class SaveSystemHandler : MonoBehaviour
 
         saveGame.DialogueAppear = GetComponent<GetAllDialogueAppear>().GetAllDialogue();
 
+        saveGame.GrassSaveGames = GetComponent<GetAllGrass>().GetAll();
+
+        saveGame.Crafts = GetComponent<GetAllCrafts>().GetCrafts();
+
+        saveGame.MaxCaveIndex = GameObject.Find("Caves").GetComponent<CaveSystemHandler>().MaxCaveIndex;
+
+        saveGame.Raining = dayTimerHandler.Raining;
+        saveGame.Fog = dayTimerHandler.Fog;
+        saveGame.FogIntensity = dayTimerHandler.FogAlpha;
+
+        saveGame.SkillsLevels = skillsHandler.GetAllSkillsLevels();
+
         return saveGame;
     }
 
     public void StartSaveGame()
     {
         SaveGame();
+
+        PositionNpcAtStartLocation();
+
+        playerGround.SetActive(true);
     }
 
     private void Update()
@@ -273,7 +320,7 @@ public class SaveSystemHandler : MonoBehaviour
         }
         else if(keyboard.pKey.isPressed)
         {
-            SaveGame();
+            StartSaveGame();
         }
     }
 }

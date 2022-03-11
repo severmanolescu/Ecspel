@@ -128,11 +128,14 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void HideItem()
     {
-        itemSprite.gameObject.SetActive(false);
-        itemSprite.sprite = null;
+        if (itemSprite != null)
+        {
+            itemSprite.gameObject.SetActive(false);
+            itemSprite.sprite = null;
 
-        amount.SetText("0");
-        amount.gameObject.SetActive(false);
+            amount.SetText("0");
+            amount.gameObject.SetActive(false);
+        }
     }
 
     public bool ExistItem()

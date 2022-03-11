@@ -8,6 +8,8 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private QuickSlotsChanger quickSlots;
 
+    [SerializeField] private Animator animator;
+
     private List<ItemSlot> itemsSlot;
 
     private GetItemFromNO getItem;
@@ -127,6 +129,7 @@ public class PlayerInventory : MonoBehaviour
                             auxItem.SetItem(item);
 
                             quickSlots.Reinitialize();
+
                             return true;
                         }
                     }
@@ -134,6 +137,18 @@ public class PlayerInventory : MonoBehaviour
                     return false;
                 }
             }
+        }
+
+        return false;
+    }
+
+    public bool AddItemWithAnimation(Item item)
+    {
+        if(AddItem(item))
+        {
+            animator.SetTrigger("Pickup");
+
+            return true;
         }
 
         return false;

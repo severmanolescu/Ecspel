@@ -27,9 +27,30 @@ public class ForgeHandler : MonoBehaviour
 
     public void SetDataAtOpen(Item inputItem, Item fuelItem, Item outputItem, ForgeOpenHandler forgeOpenHandler, float smeltingProgress, float fuelProgress, bool working)
     {
-        inputSlot.SetItem(inputItem);
-        fuelSlot.SetItem(fuelItem);
-        outputSlot.SetItem(outputItem);
+        if (inputItem == null)
+        {
+            inputSlot.DeleteItem();
+        }
+        else
+        {
+            inputSlot.SetItem(inputItem);
+        }
+        if (fuelItem == null)
+        {
+            fuelSlot.DeleteItem();
+        }
+        else
+        {
+            fuelSlot.SetItem(fuelItem);
+        }
+        if (outputItem == null)
+        {
+            outputSlot.DeleteItem();
+        }
+        else
+        {
+            outputSlot.SetItem(outputItem);
+        }
 
         forge = forgeOpenHandler;
 
@@ -40,12 +61,38 @@ public class ForgeHandler : MonoBehaviour
         }
     }
 
+    public void GetItems(out Item inputItem, out Item fuelItem, out Item outputItem)
+    {
+        if (inputSlot.Item != null)
+        {
+            inputItem = inputSlot.Item.Copy();
+        }
+        else
+        {
+            inputItem = null;
+        }
+
+        if (fuelSlot.Item != null)
+        {
+            fuelItem = fuelSlot.Item.Copy();
+        }
+        else
+        {
+            fuelItem = null;
+        }
+
+        if (outputSlot.Item != null)
+        {
+            outputItem = outputSlot.Item.Copy();
+        }
+        else
+        {
+            outputItem = null;
+        }
+    }
+
     public void HideDataAtClose()
     {
-        inputSlot.Item = null;
-        fuelSlot.Item = null;
-        outputSlot.Item = null;
-
         forge = null;
     }
 

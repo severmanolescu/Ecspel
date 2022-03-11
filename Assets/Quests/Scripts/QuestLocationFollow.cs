@@ -36,7 +36,10 @@ public class QuestLocationFollow : MonoBehaviour
             {
                 if(track == true)
                 {
-                    questTrack.TrackQuest(goToLocation.Positions[atIndex]);
+                    GameObject location = new GameObject();
+                    location.transform.position = goToLocation.Positions[atIndex];
+
+                    questTrack.TrackQuest(location.transform);
                 }
 
                 if(Vector3.Distance(playerLocation.localPosition, goToLocation.Positions[atIndex]) < DefaulData.maxQuestDistante)

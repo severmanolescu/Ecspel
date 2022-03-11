@@ -4829,6 +4829,7 @@ GameObject:
   - component: {fileID: -8040780864218222978}
   - component: {fileID: 6829817087105140051}
   - component: {fileID: 7014174904272798640}
+  - component: {fileID: 7390008548151745928}
   m_Layer: 0
   m_Name: StoneP (2)
   m_TagString: Stone
@@ -4916,12 +4917,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0209edc40efbaa40a1517a577786da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stonePrefab: {fileID: 5330104649764483067, guid: 2ddf1a4c6fe261b4d8a2dae337dbad62, type: 3}
+  stonePrefab: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   spawnItem: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
   amount: 1
   health: 5
   stoneLevel: 1
   soundEffect: {fileID: 8300000, guid: 8f393617e15e105438c889e203fc25aa, type: 3}
+  soundEffectNotLevel: {fileID: 8300000, guid: 5a408f6809fd5584dad0c809648a6a9f, type: 3}
 --- !u!50 &7344656308959293648
 Rigidbody2D:
   serializedVersion: 4
@@ -4981,7 +4983,7 @@ MonoBehaviour:
   - {x: -0.13294125, y: -0.06254196, z: 0}
   m_ShapePathHash: -323701963
   m_Mesh: {fileID: 0}
-  m_InstanceId: -4244
+  m_InstanceId: -3702
 --- !u!114 &1287267313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4999,6 +5001,8 @@ MonoBehaviour:
   scaleX: 0
   scaleY: 0
   locationGrid: {fileID: 0}
+  isWalkable: 0
+  positionInCenterOfGridNode: 1
 --- !u!114 &-8040780864218222978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5050,7 +5054,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: e79a1ec99251eb344a4f82145967d3ad, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.235
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5134,3 +5138,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7390008548151745928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344656308959293660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1fbe77f6af9bb489636085cd450bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class QuestTrack : MonoBehaviour
 {
-    private Vector3 targetPosition = Vector3.zero;
+    public Transform targetPosition;
 
     [SerializeField] private Sprite arrowSprite;
     [SerializeField] private Sprite crossSprite;
@@ -20,9 +20,9 @@ public class QuestTrack : MonoBehaviour
 
     private void Update()
     {
-        if (targetPosition != Vector3.zero && targetPosition != null)
+        if (targetPosition != null)
         {
-            Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition);
+            Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(targetPosition.position);
 
             bool isOffScreen = targetPositionScreenPoint.x <= DefaulData.borderSizeQuestTrack ||
                                targetPositionScreenPoint.x >= Screen.width - DefaulData.borderSizeQuestTrack ||
@@ -83,7 +83,7 @@ public class QuestTrack : MonoBehaviour
 
     private void RotatePointerTorwardsTargetPosition()
     {
-        Vector3 toPosition = targetPosition;
+        Vector3 toPosition = targetPosition.position;
         Vector3 fromPosition = Camera.main.transform.position;
         fromPosition.z = 0f;
         Vector3 direction = (toPosition - fromPosition).normalized;
@@ -93,13 +93,13 @@ public class QuestTrack : MonoBehaviour
         pointerRectTransform.localEulerAngles = new Vector3(0, 0, angle - 90);
     }
 
-    public void TrackQuest(Vector3 targetPosition)
+    public void TrackQuest(Transform targetPosition)
     {
         this.targetPosition = targetPosition;
     }
 
     public void StopTrackQuest()
     {
-        targetPosition = Vector3.zero;
+        targetPosition = null;
     }
 }

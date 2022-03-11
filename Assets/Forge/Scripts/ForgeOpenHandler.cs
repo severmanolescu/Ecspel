@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class ForgeOpenHandler : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class ForgeOpenHandler : MonoBehaviour
     [SerializeField] private ItemWorld itemSlotPrefab;
 
     [SerializeField] private int forgeID;
+
+    private new Light2D light;
 
     private Item inputItem;
 
@@ -45,8 +48,10 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
-    int elapsedTimeSmelting;
-    int elapsedTimeFuel;
+    private AudioSource audioSource;
+
+    private int elapsedTimeSmelting;
+    private int elapsedTimeFuel;
 
     public Item InputItem { get => inputItem; set { inputItem = value; ItemsChange(); } }
     public Item FuelItem { get => fuelItem; set { fuelItem = value; ItemsChange(); } }
@@ -60,6 +65,8 @@ public class ForgeOpenHandler : MonoBehaviour
 
         text.gameObject.SetActive(false);
 
+        light = GetComponentInChildren<Light2D>();
+
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerInventory = GameObject.Find("Player/Canvas/PlayerItems");
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
@@ -69,8 +76,12 @@ public class ForgeOpenHandler : MonoBehaviour
 
         notWorkingForge = GetComponent<SpriteRenderer>().sprite;
 
+        audioSource = GetComponent<AudioSource>();
+
         smokeParticle.Stop();
         fireParticle.Stop();
+        audioSource.Stop();
+        light.enabled = false;
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -282,6 +293,9 @@ public class ForgeOpenHandler : MonoBehaviour
 
         fireParticle.Play();
         smokeParticle.Play();
+        audioSource.Play();
+
+        light.enabled = true;
 
         if (fuelConsumeCoroutineStart == false)
         {
@@ -309,6 +323,10 @@ public class ForgeOpenHandler : MonoBehaviour
         main = smokeParticle.main;
 
         main.loop = false;
+
+        audioSource.Stop();
+
+        light.enabled = false;
 
         DeleteDataFromCanvas();
 
@@ -407,6 +425,8 @@ public class ForgeOpenHandler : MonoBehaviour
                     playerInventory.SetActive(false);
                     canvasTabsOpen.SetCanOpenTabs(true);
 
+                    forgeHandler.GetItems(out inputItem, out fuelItem, out outputItem);
+
                     forgeHandler.HideDataAtClose();
                     forgeHandler.gameObject.SetActive(false);
 
@@ -430,7 +450,7 @@ public class ForgeOpenHandler : MonoBehaviour
 
             instantiateItem.transform.position = transform.position;
 
-            instantiateItem.SetItem(item);
+            instantiateItem.SetItem(item, false);
 
             instantiateItem.MoveToPoint();
         }

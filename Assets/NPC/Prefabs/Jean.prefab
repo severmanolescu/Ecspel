@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7576218967781906797
 Transform:
   m_ObjectHideFlags: 0
@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 8197317955322875962}
   - component: {fileID: 8197317955322875963}
   - component: {fileID: 8197317955322875960}
+  - component: {fileID: 1471142718}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -435,6 +436,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aedfc1420e56fb48b6f706ac0f5af98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1471142718
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197317955322875958}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 20a88e90cd9424b49a074b49ec124759, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.176
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8197317955524714162
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +921,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -858,7 +955,147 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288ff9824ae5f3f4588182768b31dbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcTimeSchedules: []
+  npcTimeSchedules:
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 0
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 2
+    seconds: 0
+    hours: 20
+    minutes: 14
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    idleDirection: 1
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 8197317955775389307}
 --- !u!114 &7606500465548112493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4ed9df182578044849a9f9f61a7fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 42.2, y: 241.22, z: 0}
+  position: {x: -110.37, y: -153.28, z: 42.39918}
 --- !u!114 &2572261375553963623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,7 +1166,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 2.179245
-  MaxDistance: 23.63
+  MaxDistance: 14.97997
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

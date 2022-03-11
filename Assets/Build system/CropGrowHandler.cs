@@ -6,7 +6,7 @@ public class CropGrowHandler : MonoBehaviour
 {
     private List<CropGrow> cropGrows = new List<CropGrow>();
 
-    public List<SaplingGrowHandler> saplingGrows = new List<SaplingGrowHandler>();
+    private List<SaplingGrowHandler> saplingGrows = new List<SaplingGrowHandler>();
 
     private List<SaplingGrowHandler> toRemoveFromList = new List<SaplingGrowHandler>();
 
@@ -65,4 +65,13 @@ public class CropGrowHandler : MonoBehaviour
     {
         toRemoveFromList.Remove(sapling);
     }
+
+    public void ReinitializeLists()
+    {
+        cropGrows = new List<CropGrow>();
+
+        saplingGrows = new List<SaplingGrowHandler>();
+
+        toRemoveFromList = new List<SaplingGrowHandler>();
+}
 }

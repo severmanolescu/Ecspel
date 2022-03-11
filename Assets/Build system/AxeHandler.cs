@@ -8,7 +8,14 @@ public class AxeHandler : MonoBehaviour
 
     private Grid<GridNode> grid;
 
+    private SkillsHandler skillHandler;
+
     public Grid<GridNode> Grid { set { grid = value; } }
+
+    private void Awake()
+    {
+        skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+    }
 
     private void DamageTree(GameObject node, int spawn, Item item)
     {
@@ -20,7 +27,9 @@ public class AxeHandler : MonoBehaviour
 
             if (damageTree != null)
             {
-                damageTree.TakeDamage(axe.Damage, spawn, axe.Level);
+                float skillsAttackBonus = axe.Damage * skillHandler.PowerLevel * 0.05f;
+
+                damageTree.TakeDamage(axe.Damage + skillsAttackBonus, spawn, axe.Level);
             }
             else
             {
@@ -89,7 +98,7 @@ public class AxeHandler : MonoBehaviour
             }
         }
 
-        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= axe.Stamina;
+        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
     }
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)

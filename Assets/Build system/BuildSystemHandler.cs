@@ -20,10 +20,19 @@ public class BuildSystemHandler : MonoBehaviour
 
     private bool canPlace = true;
 
+    private AudioSource audioSource;
+
     public Grid<GridNode> Grid { get { return LocationGrid.Grid; } }
     public bool canPlantGrid { get { return LocationGrid.CanPlantToGrid; } }
 
     public LocationGridSave LocationGrid { get => locationGrid; set { locationGrid = value; ChangeGridToSystems(Grid); StopPlace(); } }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.Stop();
+    }
 
     private void Start()
     {
@@ -232,6 +241,8 @@ public class BuildSystemHandler : MonoBehaviour
         }
 
         ChangeCanPlace(gridNode);
+
+        audioSource.Play();
 
         return newObject;
     }

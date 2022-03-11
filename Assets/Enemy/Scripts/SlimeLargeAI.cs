@@ -14,6 +14,8 @@ public class SlimeLargeAI : MonoBehaviour
     [Header("Slime stats")]
     [SerializeField] private float speed;
 
+    [SerializeField] private AudioClip attackSound;
+
     private float nextAttackTime;
 
     private State state;
@@ -21,6 +23,8 @@ public class SlimeLargeAI : MonoBehaviour
     private AIPathFinding aIPath;
 
     private Transform playerLocation;
+
+    private AudioSource audioSource;
 
     private Animator animator;
 
@@ -33,6 +37,8 @@ public class SlimeLargeAI : MonoBehaviour
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
 
         state = State.Walking;
     }
@@ -64,7 +70,7 @@ public class SlimeLargeAI : MonoBehaviour
                         aIPath.ToLocation = playerLocation;
                     }
 
-                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+                    float distance = Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z));
 
                     if (distance <= DefaulData.slimeBigAttackDistance)
                     {
@@ -90,7 +96,7 @@ public class SlimeLargeAI : MonoBehaviour
                         nextAttackTime = Time.time + DefaulData.slimeAttackRate;
                     }
 
-                    float distance = Vector3.Distance(transform.position, playerLocation.position);
+                    float distance = Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z));
 
                     if (distance > DefaulData.slimeBigAttackDistance)
                     {
@@ -104,15 +110,19 @@ public class SlimeLargeAI : MonoBehaviour
 
     public void AttackPlayer()
     {
-        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.slimeBigAttackDistance)
+        if (Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z)) <= DefaulData.slimeBigAttackDistance)
         {
             playerLocation.GetComponent<PlayerStats>().Health -= DefaulData.slimeBigAttackPower;
         }
+
+        audioSource.clip = attackSound;
+
+        audioSource.Play();
     }
 
     private void FindPlayer()
     {
-        if (Vector3.Distance(transform.position, playerLocation.position) <= DefaulData.distanceToFind)
+        if (Vector3.Distance(transform.position, new Vector3(playerLocation.position.x, playerLocation.position.y, transform.position.z)) <= DefaulData.distanceToFind)
         {
             state = State.GoToPlayer;
         }

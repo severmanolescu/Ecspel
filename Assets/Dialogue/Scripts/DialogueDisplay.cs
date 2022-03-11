@@ -103,7 +103,7 @@ public class DialogueDisplay : MonoBehaviour
     {
         lastIdledirection = npcPathFinding.GetIdleDirection();
 
-        npcPathFinding.CanWalk = false;
+        npcPathFinding.Talking = true;
 
         if(transform.position.x >= position.x)
         {
@@ -158,7 +158,7 @@ public class DialogueDisplay : MonoBehaviour
 
             lastIdledirection = -1;
 
-            npcPathFinding.CanWalk = true;
+            npcPathFinding.Talking = false;
         }
     }
 

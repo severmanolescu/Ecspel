@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnObjectsInAreaHandle : MonoBehaviour
 {
     private List<SpawnObjectsArea> spawnObjectsInAreaList = new List<SpawnObjectsArea>();
+    private List<SpawnCollectableInArea> spawnCollectableInAreaList = new List<SpawnCollectableInArea>();
 
     private void Start()
     {
@@ -19,13 +20,43 @@ public class SpawnObjectsInAreaHandle : MonoBehaviour
                 spawnObjectsInAreaList.Add(spawnObjectsInArea);
             }
         }
+
+        gameObjects = GameObject.FindGameObjectsWithTag("AreaCollectable");
+
+        foreach (GameObject gameObject in gameObjects)
+        {
+            SpawnCollectableInArea spawnObjectsInArea = gameObject.GetComponent<SpawnCollectableInArea>();
+
+            if (spawnObjectsInArea != null)
+            {
+                spawnCollectableInAreaList.Add(spawnObjectsInArea);
+            }
+        }
     }
 
     public void DayChange(int day)
     {
         foreach (SpawnObjectsArea spawn in spawnObjectsInAreaList)
         {
-            spawn.DayChange(day);
+            StartCoroutine(spawn.DayChange(day));
+        }
+
+        foreach (SpawnCollectableInArea spawn in spawnCollectableInAreaList)
+        {
+            StartCoroutine(spawn.DayChange(day));
+        }
+    }
+
+    public void SpawnObjectsAtNewGame()
+    {
+        foreach (SpawnObjectsArea spawn in spawnObjectsInAreaList)
+        {
+            StartCoroutine(spawn.SpawnObjectAtLoad());
+        }
+
+        foreach (SpawnCollectableInArea spawn in spawnCollectableInAreaList)
+        {
+            spawn.SpawnObjectAtLoad();
         }
     }
 }

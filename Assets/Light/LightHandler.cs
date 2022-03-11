@@ -7,8 +7,6 @@ public class LightHandler : MonoBehaviour
     [SerializeField] private float maxRadius;
     [SerializeField] private float speedIntensityChange;
 
-    private bool direction = false;
-
     private Gradient gradient;
 
     private Light2D lightSource;

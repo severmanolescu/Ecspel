@@ -30,6 +30,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private AudioSource audioSource;
+
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
 
     private void Awake()
@@ -41,6 +43,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         worldText = GameObject.Find("Global/Player/Canvas/WorldTextDetails").GetComponent<WorldTextDetails>();
+
+        audioSource = GetComponent<AudioSource>();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -73,6 +77,11 @@ public class TeleportPlayerKeyPress : MonoBehaviour
                  dayTimer.Hours >= startHour && 
                  dayTimer.Hours <= finishHour)
             {
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
+
                 player.transform.position = TeleportToPoint.position;
 
                 currentCamera.SetActive(false);
@@ -89,6 +98,7 @@ public class TeleportPlayerKeyPress : MonoBehaviour
                 }
 
                 GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
+                GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopSoundEffects();
             }
             else
             {

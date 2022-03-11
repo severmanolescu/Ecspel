@@ -6,6 +6,8 @@ public class NpcAIHandler : MonoBehaviour
 {
     [SerializeField] private List<NpcTimeSchedule> npcTimeSchedules = new List<NpcTimeSchedule>();
 
+    private DayTimerHandler dayTimerHandler;
+
     private NpcPathFinding npcPath;
 
     private int scheduleIndex = 0;
@@ -15,6 +17,8 @@ public class NpcAIHandler : MonoBehaviour
         scheduleIndex = 0;
 
         npcPath = GetComponent<NpcPathFinding>();
+
+        dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
     }
 
     private void Start()
@@ -69,6 +73,24 @@ public class NpcAIHandler : MonoBehaviour
         npcPath.CanWalk = true;
     }
 
+    private IEnumerator WaitForHour()
+    {
+        npcPath.CanWalk = false;
+
+        npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
+
+        while (dayTimerHandler.Hours < npcTimeSchedules[scheduleIndex].Hours ||
+             (dayTimerHandler.Hours == npcTimeSchedules[scheduleIndex].Hours &&
+              dayTimerHandler.Minutes <= npcTimeSchedules[scheduleIndex].Minutes))
+        {
+            yield return new WaitForSeconds(2);
+        }
+
+        ChangeScheduleIndex();
+
+        npcPath.CanWalk= true;
+    }
+
     private void ChangeScheduleIndex()
     {
         scheduleIndex++;
@@ -93,9 +115,13 @@ public class NpcAIHandler : MonoBehaviour
 
     public void ArrivedAtLocation()
     {
-        if (npcPath.CanWalk == true && scheduleIndex < npcTimeSchedules.Count)
+        if (npcPath.CanWalk == true && scheduleIndex < npcTimeSchedules.Count && npcTimeSchedules.Count > 0)
         {
-            if (npcTimeSchedules[scheduleIndex].Location == transform)
+            if (npcTimeSchedules[scheduleIndex].Hours > -1)
+            {
+                StartCoroutine(WaitForHour());
+            }
+            else if(npcTimeSchedules[scheduleIndex].Location == transform)
             {
                 if (npcTimeSchedules[scheduleIndex].Seconds != 0)
                 {
@@ -114,8 +140,15 @@ public class NpcAIHandler : MonoBehaviour
         else
         {
             npcPath.CanWalk = false;
-
-            npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
+            if (scheduleIndex < npcTimeSchedules.Count && 
+                npcTimeSchedules[scheduleIndex].Hours > -1)
+            {
+                StartCoroutine(WaitForHour());
+            }
+            else if (scheduleIndex - 1 < npcTimeSchedules.Count && npcTimeSchedules.Count > 0)
+            {
+                npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
+            }
         }
     }
 
@@ -126,6 +159,12 @@ public class NpcAIHandler : MonoBehaviour
 
     public void DayChange()
     {
-        scheduleIndex = 0;
+        scheduleIndex = -1;
+
+        StopAllCoroutines();
+
+        npcPath.CanWalk = true;
+
+        ChangeScheduleIndex();
     }
 }

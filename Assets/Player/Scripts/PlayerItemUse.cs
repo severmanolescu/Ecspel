@@ -18,11 +18,13 @@ public class PlayerItemUse : MonoBehaviour
 
     private Animator animator;
 
+    private SkillsHandler skillsHandler;
+
     private Mouse mouse;
 
     private Vector2 inputs = Vector2.zero;
 
-    private Vector2 detectionZone = new Vector2(1f, 1f);
+    private Vector2 detectionZone = new Vector2(1.5f, 1.5f);
 
     private float attackDecrease = 1f;
 
@@ -40,10 +42,16 @@ public class PlayerItemUse : MonoBehaviour
         mouse = InputSystem.GetDevice<Mouse>();
 
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
+        skillsHandler = GetComponentInChildren<SkillsHandler>();
     }
 
     private void SwordUse(Collider2D[] objects)
     {
+        Weapon weapon = (Weapon)item;
+
+        float skillAttackBonus = weapon.AttackPower * 0.02f * skillsHandler.AttackLevel;
+
         foreach (Collider2D auxObject in objects)
         {
             audioSource.clip = attackClip;
@@ -51,16 +59,18 @@ public class PlayerItemUse : MonoBehaviour
 
             if (auxObject.gameObject.tag == "Enemy")
             {
-                Weapon weapon = (Weapon)item;
-
-                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease);
+                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
 
                 auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
+            }
+            else if(auxObject.gameObject.tag == "Barrel")
+            {
+                auxObject.GetComponent<BarrelHandler>().GetDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
         }
     }
 
-    private void SetCircleCast()
+    private void SetCircleCastForSword()
     {
         Vector3 castPosition = gameObject.transform.position;
 
@@ -83,7 +93,49 @@ public class PlayerItemUse : MonoBehaviour
 
         Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
 
-        SwordUse(objects); return;
+        SwordUse(objects);
+    }
+
+    private void SickleUse(Collider2D[] objects)
+    {
+        foreach (Collider2D auxObject in objects)
+        {
+            audioSource.clip = attackClip;
+            audioSource.Play();
+
+            if (auxObject.gameObject.tag == "Grass")
+            {
+                Sickle sickle = (Sickle)item;
+
+                auxObject.GetComponent<GrassDamage>().GetDamage(sickle.Attack);
+            }
+        }
+    }
+
+    private void SetCircleCastForSickle()
+    {
+        Vector3 castPosition = gameObject.transform.position;
+
+        if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        {
+            castPosition.y -= DefaulData.castPosition;
+        }
+        else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
+        {
+            castPosition.y += DefaulData.castPosition;
+        }
+        else if (inputs.x <= -1 && inputs.y == 0)
+        {
+            castPosition.x -= DefaulData.castPosition;
+        }
+        else if (inputs.x >= 1 && inputs.y == 0)
+        {
+            castPosition.x += DefaulData.castPosition;
+        }
+
+        Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
+
+        SickleUse(objects);
     }
 
     private int GetSpawnLocation()
@@ -114,18 +166,27 @@ public class PlayerItemUse : MonoBehaviour
         {
             if (item is Axe)
             {
+                audioSource.clip = attackClip;
+                audioSource.Play();
+
                 animator.SetBool("Axe", true);
 
                 GameObject.Find("Global/BuildSystem").GetComponent<AxeHandler>().UseAxe(transform.position, GetSpawnLocation(), item);
             }
             else if (item is Pickaxe)
             {
+                audioSource.clip = attackClip;
+                audioSource.Play();
+
                 animator.SetBool("Pickaxe", true);
 
                 GameObject.Find("Global/BuildSystem").GetComponent<PickaxeHandler>().UsePickaxe(transform.position, GetSpawnLocation(), item);
             }
             else if(item is Hoe)
             {
+                audioSource.clip = attackClip;
+                audioSource.Play();
+
                 animator.SetBool("Hoe", true);
 
                 GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation(), (Hoe)item);
@@ -134,9 +195,15 @@ public class PlayerItemUse : MonoBehaviour
             {
                 animator.SetBool("Sword", true);
 
-                SetCircleCast();
+                SetCircleCastForSword();
             }
-            else if(item is Consumable)
+            else if (item is Sickle)
+            {
+                animator.SetBool("Sickle", true);
+
+                SetCircleCastForSickle();
+            }
+            else if (item is Consumable)
             {
                 if (playerStats.Eat((Consumable)item))
                 {

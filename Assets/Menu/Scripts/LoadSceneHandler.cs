@@ -12,6 +12,8 @@ public class LoadSceneHandler : MonoBehaviour
 
     private TextMeshProUGUI loadText;
 
+    private static LoadSceneHandler loadSceneHandler;
+
     private int dotNo;
 
     public bool FinishGridSearchProcess { get => finishGridSearchProcess; set { finishGridSearchProcess = value; } }
@@ -23,6 +25,15 @@ public class LoadSceneHandler : MonoBehaviour
         loadObject.SetActive(false);
 
         DontDestroyOnLoad(this);
+
+        if (loadSceneHandler == null)
+        {
+            loadSceneHandler = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         dotNo = 0;
     }
@@ -36,18 +47,27 @@ public class LoadSceneHandler : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
-        while(!operation.isDone)
+        loadObject.SetActive(true);
+
+        loadText.text = "Loading.";
+
+        while (!operation.isDone)
         {
-            yield return null;
+            yield return new WaitForSeconds(1);
+
+            LoadingDotChange();
         }
+
+        PlayerMovement playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
+        CanvasTabsOpen canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+
+        playerMovement.TabOpen = true;
+
+        canvasTabs.canOpenTabs = false;
 
         NewGameLoadingHandler newGameLoading = GameObject.Find("GameLoading").GetComponent<NewGameLoadingHandler>();
 
         newGameLoading.StartNewGame(this);
-
-        loadObject.SetActive(true);
-
-        loadText.text = "Loading.";
 
         while(FinishGridSearchProcess == false)
         {
@@ -57,6 +77,16 @@ public class LoadSceneHandler : MonoBehaviour
         }
 
         loadObject.SetActive(false);
+
+        SaveSystemHandler saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
+
+        saveSystem.IndexOfSaveGame = indexOfSaveGame;
+
+        playerMovement.TabOpen = false;
+
+        canvasTabs.canOpenTabs = true;
+
+        GameObject.Find("Global/Player/Canvas/Help").GetComponent<HelpHandler>().StartHelp();
 
         Destroy(gameObject);
     }
@@ -88,16 +118,24 @@ public class LoadSceneHandler : MonoBehaviour
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        loadText.text = "Loading.";
+
         while (!operation.isDone)
         {
-            yield return null;
+            yield return new WaitForSeconds(1);
+
+            LoadingDotChange();
         }
+
+        PlayerMovement playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
+        CanvasTabsOpen canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+
+        playerMovement.TabOpen = true;
+        canvasTabs.canOpenTabs = false;
 
         SaveSystemHandler saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
 
         saveSystem.LoadSaveGame(indexOfSaveGame, this);
-
-        loadText.text = "Loading.";
 
         dotNo = 0;
 
@@ -111,6 +149,10 @@ public class LoadSceneHandler : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         loadObject.SetActive(false);
+
+        playerMovement.TabOpen = false;
+
+        canvasTabs.canOpenTabs = true;
 
         Destroy(gameObject);
     }

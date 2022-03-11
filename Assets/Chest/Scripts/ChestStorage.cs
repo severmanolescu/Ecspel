@@ -33,6 +33,13 @@ public class ChestStorage : MonoBehaviour
 
     public void RemoveAllItems()
     {
+        ChestStorageInitial chestStorageInitial = GetComponent<ChestStorageInitial>();
+
+        if(chestStorageInitial != null)
+        {
+            chestStorageInitial.RemoveAll();
+        }
+
         items.Clear();
     }
 }

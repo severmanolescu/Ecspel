@@ -46,6 +46,19 @@ public class SaveGame
 
     private List<DialogueAppearSave> dialogueAppear;
 
+    private List<GrassSaveGame> grassSaveGames;
+
+    private List<int> crafts;
+
+    private int maxCaveIndex;
+
+    private bool raining;
+    private bool fog;
+
+    private int fogIntensity;
+
+    private List<int> skillsLevels;
+
     public int Days { get => days; set => days = value; }
     public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
@@ -66,4 +79,11 @@ public class SaveGame
     public bool TipShowState { get => tipShowState; set => tipShowState = value; }
     public List<TipsSave> TipsSaves { get => tipsSaves; set => tipsSaves = value; }
     public List<DialogueAppearSave> DialogueAppear { get => dialogueAppear; set => dialogueAppear = value; }
+    public List<GrassSaveGame> GrassSaveGames { get => grassSaveGames; set => grassSaveGames = value; }
+    public List<int> Crafts { get => crafts; set => crafts = value; }
+    public int MaxCaveIndex { get => maxCaveIndex; set => maxCaveIndex = value; }
+    public bool Raining { get => raining; set => raining = value; }
+    public bool Fog { get => fog; set => fog = value; }
+    public int FogIntensity { get => fogIntensity; set => fogIntensity = value; }
+    public List<int> SkillsLevels { get => skillsLevels; set => skillsLevels = value; }
 }

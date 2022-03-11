@@ -22,4 +22,9 @@ public class ChestStorageInitial : MonoBehaviour
 
         Destroy(this);
     }
+
+    public void RemoveAll()
+    {
+        items.Clear();
+    }
 }

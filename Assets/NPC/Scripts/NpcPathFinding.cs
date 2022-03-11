@@ -12,6 +12,7 @@ public class NpcPathFinding : MonoBehaviour
     private LocationGridSave locationGrid;
 
     private bool canWalk;
+    private bool talking = false;
 
     private List<Vector3> path = new List<Vector3>();
 
@@ -30,6 +31,7 @@ public class NpcPathFinding : MonoBehaviour
     public Vector3 ToLocation { get { return toLocation; } set { toLocation = value; GetNewPath(); } }
 
     public bool CanWalk { get => canWalk; set => canWalk = value; }
+    public bool Talking { get => talking; set => talking = value; }
 
     private void Awake()
     {
@@ -139,7 +141,8 @@ public class NpcPathFinding : MonoBehaviour
     {
         if(ToLocation != null && 
            locationGrid != null && 
-           CanWalk == true)
+           CanWalk == true && 
+           talking == false)
         {
             if(path == null || path.Count == 0)
             {
@@ -233,8 +236,6 @@ public class NpcPathFinding : MonoBehaviour
 
         direction.x =  animator.GetFloat("HorizontalFacing");
         direction.y = animator.GetFloat("VerticalFacing");
-
-        Debug.Log(direction);
 
         switch (direction)
         {

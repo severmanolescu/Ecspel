@@ -19,7 +19,16 @@ public class HarvestCropHandler : MonoBehaviour
                 if (gridNode.x >= gridNodePlayer.x - 1 && gridNode.x <= gridNodePlayer.x + 1 &&
                     gridNode.y >= gridNodePlayer.y - 1 && gridNode.y <= gridNodePlayer.y + 1)
                 {
-                    gridNode.crop.GetComponent<CropGrow>().HarverstCrop();
+                    CropGrow cropGrow = gridNode.crop.GetComponent<CropGrow>();
+
+                    if (cropGrow != null)
+                    {
+                        cropGrow.HarverstCrop();
+                    }
+                    else
+                    {
+                        gridNode.crop.GetComponent<CollectHarvest>().HarvestItem();
+                    }
                 }
             }
         }

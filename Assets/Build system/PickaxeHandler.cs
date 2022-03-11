@@ -8,6 +8,13 @@ public class PickaxeHandler : MonoBehaviour
 
     public Grid<GridNode> Grid { set { grid = value; } }
 
+    private SkillsHandler skillHandler;
+
+    private void Awake()
+    {
+        skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+    }
+
     private void DamageStone(GameObject node, Item item)
     {
         Pickaxe pickaxe = (Pickaxe)item;
@@ -18,11 +25,13 @@ public class PickaxeHandler : MonoBehaviour
 
             if (stoneDamage != null)
             {
-                stoneDamage.TakeDamage(pickaxe.Damage, pickaxe.Level);
+                float skillsAttackBonus = pickaxe.Damage * skillHandler.PowerLevel * 0.05f;
+
+                stoneDamage.TakeDamage(pickaxe.Damage + skillsAttackBonus, pickaxe.Level);
             }
         }
 
-        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().Stamina -= pickaxe.Stamina;
+        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().DecreseStamina(pickaxe.Stamina);
     }
 
     public void UsePickaxe(Vector3 position, int spawn, Item item)

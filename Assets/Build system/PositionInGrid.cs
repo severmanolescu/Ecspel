@@ -12,6 +12,10 @@ public class PositionInGrid : MonoBehaviour
 
     [SerializeField] LocationGridSave locationGrid;
 
+    [SerializeField] private bool isWalkable = false;
+
+    [SerializeField] private bool positionInCenterOfGridNode = true;
+
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
 
     private void Update()
@@ -37,8 +41,14 @@ public class PositionInGrid : MonoBehaviour
             {
                 Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
 
+                if (positionInCenterOfGridNode == true)
+                {
+                    position.y += grid.CellSize / 2;
+
+                    transform.position = position;
+                }
+
                 position.x += grid.CellSize / 2;
-                position.y += grid.CellSize / 2;
                 position.z = 0;
 
                 transform.position = position;
@@ -54,8 +64,8 @@ public class PositionInGrid : MonoBehaviour
                             {
                                 grid.gridArray[i, j].canPlace = false;
                                 grid.gridArray[i, j].canPlant = false;
-                                grid.gridArray[i, j].isWalkable = false;
-                                grid.gridArray[i, j].objectInSpace = this.gameObject;
+                                grid.gridArray[i, j].isWalkable = isWalkable;
+                                grid.gridArray[i, j].objectInSpace = gameObject;
                             }
                         }
                     }

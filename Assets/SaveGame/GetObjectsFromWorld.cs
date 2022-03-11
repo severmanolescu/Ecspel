@@ -48,7 +48,7 @@ public class GetObjectsFromWorld : MonoBehaviour
                                                                    obj.transform.position.x,
                                                                    obj.transform.position.y,
                                                                    indexOfArea,
-                                                                   getLocationGrid.GetNoFromLocation(location),
+                                                                   getLocationGrid.GetNoFromLocation(location) - 1,
                                                                    obj.GetComponent<DamageTree>().Destroyed));
                                 }
                                 else
@@ -57,7 +57,7 @@ public class GetObjectsFromWorld : MonoBehaviour
                                                                    obj.transform.position.x,
                                                                    obj.transform.position.y,
                                                                    indexOfArea,
-                                                                   getLocationGrid.GetNoFromLocation(location)));
+                                                                   getLocationGrid.GetNoFromLocation(location) - 1));
                                 }
                             }
                         }
@@ -89,9 +89,9 @@ public class GetObjectsFromWorld : MonoBehaviour
 
         foreach (ObjectSaveGame objectSave in objects)
         {
-            if (objectSave.LocationIndex > 0)
+            if (objectSave.LocationIndex >= 0)
             {
-                if (spawnAreas[objectSave.LocationIndex - 1] != null)
+                if (spawnAreas[objectSave.LocationIndex])
                 {
                     GameObject instantiateObject = Instantiate(getItemWorld.GetObjectFromNo(objectSave.ItemNo));
 
@@ -99,7 +99,7 @@ public class GetObjectsFromWorld : MonoBehaviour
 
                     instantiateObject.transform.position = new Vector3(objectSave.PositionX, objectSave.PositionY);
 
-                    Transform spawnLocation = spawnAreas[objectSave.LocationIndex - 1].GetComponentsInChildren<SpawnObjectsArea>()[objectSave.AreaIndex].transform;
+                    Transform spawnLocation = spawnAreas[objectSave.LocationIndex].GetComponentsInChildren<SpawnObjectsArea>()[objectSave.AreaIndex].transform;
 
                     instantiateObject.transform.SetParent(spawnLocation);
 

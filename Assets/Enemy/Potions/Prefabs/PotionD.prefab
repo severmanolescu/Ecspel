@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   effect: {fileID: 11400000, guid: 0ac6399961ebddf40ab921fce2fc6d06, type: 2}
+  attackSound: {fileID: 8300000, guid: 1081357758b065d4daff6a1f12e5b7e7, type: 3}
+  rotateSound: {fileID: 8300000, guid: 280e65e207a9fcf48a423dc2892e258b, type: 3}
 --- !u!114 &3657237526254399107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationGrid: {fileID: 0}
   distanceTolerance: 0.1
-  slimeJump: {fileID: 0}
+  slimeJump: {fileID: 8300000, guid: 3c052161838bd794d8bd59ea7bd99cb0, type: 3}
   slimeHitGround: {fileID: 0}
 --- !u!114 &3657237526254399106
 MonoBehaviour:
@@ -234,18 +236,18 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.1
+  m_Pitch: 2.25
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 2.179245
+  MaxDistance: 23.63
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -278,7 +280,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class DayTimerHandler : MonoBehaviour
 {
+    [Header("Enemy hours spawn")]
+    [Range(0, 23)]
     [SerializeField] private int hourToSpawnEnemyStart;
+    [Range(0, 23)]
     [SerializeField] private int hourToSpawnEnemyFinal;
 
     [Header("Day details:")]
@@ -22,8 +25,43 @@ public class DayTimerHandler : MonoBehaviour
     [SerializeField] private Gradient gradientWindowLight;
 
     [Header("Wake up time:")]
+    [Range(0, 23)]
     [SerializeField] private int wakeupHour;
+    [Range(0, 100)]
     [SerializeField] private float sleepTimeSpeed;
+
+    [Header("Fog data:")]
+    [Range(0, 100)]
+    [SerializeField] private int percentOfFog;
+    [Range(5, 100)]
+    [SerializeField] private int smokeMaxAlpha = 50;
+
+    [Header("Rain data:")]
+    [Range(0, 100)]
+    [SerializeField] private int percentOfRain;
+    [Range(0, 1)]
+    [SerializeField] private float rainIntensity;
+
+    [Header("Firefly data:")]
+    [Range(0, 100)]
+    [SerializeField] private int percentOfFirefly;
+
+    [Header("Soundeffects:")]
+    [SerializeField] private AudioClip daySound;
+    [SerializeField] private AudioClip nightSound;
+    [SerializeField] private AudioClip rainSound;
+
+    [Header("Hours of sleep"), Range(0, 23)]
+    [SerializeField] private int sleepHour;
+
+    private int fogAlpha;
+    private bool raining = false;
+    private bool fog = false;
+    private bool soundEffectSetted = true;
+    private bool stopSoundEffects = false;
+
+    private bool startFeelingTired = false;
+    private bool sleepNotFromBed = false;
 
     private UnityEngine.Rendering.Universal.Light2D globalLight;
 
@@ -37,6 +75,14 @@ public class DayTimerHandler : MonoBehaviour
 
     private ChangeWindowLightIntensity changeWindowLight;
 
+    private AudioSource audioSource;
+
+    private PlayerStats playerStats;
+
+    private WorldTextDetails worldTextDetails;
+
+    private StartAllFireflyParticles startAllFirefly;
+
     private bool sleep = false;
     private float speed;
     private int startDay;
@@ -47,9 +93,14 @@ public class DayTimerHandler : MonoBehaviour
     public int Hours { get => hours; set => hours = value; }
     public float Minutes { get => minutes; }
     public float Intensity { get => intensity; set => intensity = value; }
+    public int FogAlpha { get => fogAlpha; set => fogAlpha = value; }
+    public bool Raining { get => raining; set => raining = value; }
+    public bool Fog { get => fog; set => fog = value; }
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         globalLight = gameObject.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
 
         sourceLight = gameObject.GetComponent<SourceLightShadow>();
@@ -63,6 +114,17 @@ public class DayTimerHandler : MonoBehaviour
         changeWindowLight = GetComponent<ChangeWindowLightIntensity>();
 
         saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
+
+        startAllFirefly = GetComponent<StartAllFireflyParticles>();
+
+        startAllFirefly.StopParticles();
+
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
+        worldTextDetails = GameObject.Find("Global/Player/Canvas/WorldTextDetails").GetComponent<WorldTextDetails>();
+
+        audioSource.clip = daySound;
+        audioSource.Play();
     }
 
     private void Update()
@@ -74,16 +136,83 @@ public class DayTimerHandler : MonoBehaviour
             minutes = 0;
             Hours++;
 
+            if((hours >= hourToSpawnEnemyStart && hours <= 23) || 
+               (hours >= 0 && hours <= hourToSpawnEnemyFinal) &&
+               raining == false)
+            {
+                float chance = Random.Range(0, 100);
+
+                if (chance <= percentOfFirefly)
+                {
+                    if (fog == false && raining == false)
+                    {
+                        startAllFirefly.StartParticles();
+                    }
+                }
+
+                if(soundEffectSetted == true)
+                {
+                    audioSource.clip = nightSound;
+
+                    if (stopSoundEffects == false)
+                    {
+                        audioSource.Play();
+                    }
+
+
+                    soundEffectSetted = false;
+                }
+            }
+            else
+            {
+                startAllFirefly.StopParticles();
+
+                if(fog == false && raining == false && soundEffectSetted == false)
+                {
+                    audioSource.clip = daySound;
+
+                    if (stopSoundEffects == false)
+                    {
+                        audioSource.Play();
+                    }
+
+                    soundEffectSetted = true;
+                }
+            }
+
             if(Hours >= 24)
             {
                 Hours = 0;
                 days++;
 
                 cropGrow.DayChange(days);
-                spawnObjects.DayChange(days);
-
-                //saveSystem.SaveGame();
             }
+
+            if(hours == sleepHour && sleep == false)
+            {
+                worldTextDetails.ShowText("Esti obosit!");
+
+                startFeelingTired = true;
+            }
+            else
+            {
+                startFeelingTired = false;
+            }
+            if (hours == sleepHour + 1 && sleep == false)
+            {
+                sleepNotFromBed = true;
+
+                sleep = true;
+
+                GameObject.Find("PlayerHouse/Bed").GetComponent<SleepHandler>().Sleep();
+            }
+        }
+
+        if(startFeelingTired == true && minutes >= 30)
+        {
+            startFeelingTired = false;
+
+            worldTextDetails.ShowText("Esti foarte obosit!");
         }
 
         intensity = (Hours + Minutes / 60) / 24;
@@ -94,16 +223,121 @@ public class DayTimerHandler : MonoBehaviour
 
         changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
 
-        if(sleep == true && wakeupHour == Hours && days > startDay)
+        if(sleep == true && (days > startDay || sleepNotFromBed == true))
         {
-            timeSpeed = speed;
-
-            sleep = false;
-
-            sleepHandler.StopSleep();
-
-            sleepHandler = null;
+            if (wakeupHour == Hours )
+            {
+                WakeUp();
+            }
+            else if(Hours == wakeupHour - 3)
+            {
+                StartTodayWeather();
+            }
         }
+    }
+
+    private void WakeUp()
+    {
+        cropGrow.DayChange(days);
+        spawnObjects.DayChange(days);
+
+        saveSystem.StartSaveGame();
+
+        timeSpeed = speed;
+
+        Time.timeScale = 1;
+
+        sleep = false;
+
+        if(sleepNotFromBed == true)
+        {
+            worldTextDetails.ShowText("Ai adormit, dar te-ai trezit in pat!");
+
+            sleepNotFromBed = false;
+        }
+
+        sleepHandler.StopSleep();
+
+        sleepHandler = null; 
+
+        playerStats.SetToMaxStats();
+
+        startAllFirefly.StopParticles();
+    }
+
+    private void StartTodayWeather()
+    {
+        float chanceOfFog = Random.Range(0, 100);
+
+        if (chanceOfFog <= percentOfFog)
+        {
+            fogAlpha = Random.Range(5, smokeMaxAlpha);
+
+            GetComponent<FogHandler>().StartParticle(fogAlpha);
+
+            fog = true;
+        }
+        else
+        {
+            GetComponent<FogHandler>().StopPArticles();
+
+            fog = false;
+        }
+
+        float changeOfRain = Random.Range(0, 100);
+
+        if (changeOfRain <= percentOfRain)
+        {
+            GetComponent<RainHandler>().StartParticle();
+
+            globalLight.intensity = rainIntensity;
+
+            raining = true;
+
+            PlayRainSound();
+        }
+        else
+        {
+            GetComponent<RainHandler>().StopPArticles();
+
+            audioSource.Stop();
+
+            raining = false;
+
+            globalLight.intensity = 1;
+        }
+    }
+
+    public void PlayRainSound()
+    {
+        if(raining == true)
+        {
+            audioSource.clip = rainSound;
+
+            if (stopSoundEffects == false)
+            {
+                audioSource.Play();
+            }
+        }
+    }
+
+    public void StopRainSound()
+    {
+        audioSource.Stop();
+    }
+
+    public void StopSoundEffects()
+    {
+        stopSoundEffects = true;
+
+        audioSource.Stop();
+    }
+
+    public void StartSoundEffects()
+    {
+        stopSoundEffects = false;
+
+        audioSource.Play();
     }
 
     public void SetTimer(float minutes, int hours, int days)
@@ -137,6 +371,8 @@ public class DayTimerHandler : MonoBehaviour
 
         timeSpeed = sleepTimeSpeed;
 
+        Time.timeScale = 50f;
+
         startDay = days;
 
         sleep = true;
@@ -150,5 +386,61 @@ public class DayTimerHandler : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void LoadGameSetWakeUpHour()
+    {
+        hours = wakeupHour;
+
+        if (fog == false && raining == false && soundEffectSetted == false)
+        {
+            audioSource.clip = daySound;
+
+            if (stopSoundEffects == false)
+            {
+                audioSource.Play();
+            }
+
+            soundEffectSetted = true;
+        }
+    }
+
+    public void SetWeatherAtLoad(bool rain, bool fog, int fogIntensity)
+    {
+        if(rain == true)
+        {
+            GetComponent<RainHandler>().StartParticle();
+
+            globalLight.intensity = rainIntensity;
+
+            raining = true;
+
+            PlayRainSound();
+        }
+        else
+        {
+            GetComponent<RainHandler>().StopPArticles();
+
+            audioSource.Stop();
+
+            raining = false;
+
+            globalLight.intensity = 1;
+        }
+
+        if(fog == true)
+        {
+            fogAlpha = fogIntensity;
+
+            GetComponent<FogHandler>().StartParticle(fogAlpha);
+
+            fog = true;
+        }
+        else
+        {
+            GetComponent<FogHandler>().StopPArticles();
+
+            fog = false;
+        }
     }
 }

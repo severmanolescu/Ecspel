@@ -1,7 +1,8 @@
-using UnityEngine;
+ using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CraftSetData : MonoBehaviour
+public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHandler
 {
     [SerializeField] private GameObject itemWorldPrefab;
 
@@ -13,15 +14,20 @@ public class CraftSetData : MonoBehaviour
 
     private bool haveItems = false;
 
+    private bool haveStamina = false;
+
     private CraftCanvasHandler canvasHandler = null;
 
-    private Image background;
-    private Image receiveItem;
-    private Image needItem1;
-    private Image needItem2;
-    private Image needItem3;
+    [SerializeField] private Image receiveItem;
+    [SerializeField] private Image needItem1;
+    [SerializeField] private Image needItem2;
+    [SerializeField] private Image needItem3;
+    [SerializeField] private Image staminaNeed;
 
     private PlayerInventory playerInventory;
+
+    private ItemDetails itemDetails;
+    private PlayerStats playerStats;
 
     public Craft Craft { get => craft; set => SetData(value); }
     public CraftCanvasHandler CanvasHandler { get => canvasHandler; set => canvasHandler = value; }
@@ -31,19 +37,12 @@ public class CraftSetData : MonoBehaviour
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
         playerLocation = GameObject.Find("Global/Player").transform;
-       
+
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
-        Image[] images = GetComponentsInChildren<Image>();
-
-        if (images.Length >= 5)
-        {
-            background = images[0];
-            receiveItem = images[1];
-            needItem1 = images[2];
-            needItem2 = images[3];
-            needItem3 = images[4];
-        }
+        itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
     }
 
     private void SetData(Craft craft)
@@ -61,6 +60,8 @@ public class CraftSetData : MonoBehaviour
             receiveItem.GetComponent<ChangeText>().Change(craft.ReceiveItem.Amount.ToString());
 
             GetComponent<Button>().onClick.AddListener(delegate { CraftItem(); });
+
+            staminaNeed.GetComponent<ChangeText>().Change(craft.Stamina.ToString());
 
             switch (craft.NeedItem.Count)
             {
@@ -105,7 +106,7 @@ public class CraftSetData : MonoBehaviour
 
     public void CraftItem()
     {
-        if(haveItems == true)
+        if(haveItems == true && haveStamina)
         {
             Item auxItem;
 
@@ -131,15 +132,17 @@ public class CraftSetData : MonoBehaviour
             {
                 ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
-                itemWorld.SetItem(auxItem);
+                itemWorld.SetItem(auxItem, false);
 
                 itemWorld.transform.position = playerLocation.position;
 
                 itemWorld.MoveToPoint();
             }
-        }
 
-        GetComponentInParent<CraftCanvasHandler>().ReinitializeAllCraftings();
+            playerStats.DecreseStamina(craft.Stamina);
+
+            GetComponentInParent<CraftCanvasHandler>().ReinitializeAllCraftings();
+        }
     }
 
     private void ChangeColorSprites(int indexOfItem, Color color)
@@ -149,6 +152,7 @@ public class CraftSetData : MonoBehaviour
             case 0: needItem1.color = color; break;
             case 1: needItem2.color = color; break;
             case 2: needItem3.color = color; break;
+            case 3: staminaNeed.color = color; break;
         }
     }
 
@@ -165,6 +169,8 @@ public class CraftSetData : MonoBehaviour
     public void CheckIfItemsAreAvaible()
     {
         haveItems = true;
+
+        haveStamina = true;
 
         int indexOfItem = 0;
 
@@ -186,6 +192,33 @@ public class CraftSetData : MonoBehaviour
             SetAmountToItem(indexOfItem, item.Amount, amountInInventory);
 
             indexOfItem++;
+        }
+
+        if(playerStats.Stamina >= craft.Stamina)
+        {
+            ChangeColorSprites(3, Color.white);
+        }
+        else
+        {
+            haveStamina = false;
+
+            ChangeColorSprites(3, Color.red);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (itemDetails != null)
+        {
+            itemDetails.HideData();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(itemDetails != null)
+        {
+            itemDetails.SetItem(craft.ReceiveItem.Item);
         }
     }
 }

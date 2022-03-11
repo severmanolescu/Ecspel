@@ -413,6 +413,8 @@ public class PrincipalMenuHandler : MonoBehaviour
 
     public void CloseMenu()
     {
+        Time.timeScale = 1f;
+
         gameObject.SetActive(false);
     }
 }

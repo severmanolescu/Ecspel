@@ -42,8 +42,8 @@ public static class DefaulData
     public static int slimeAttackRate = 1;
 
     // Little Slime
-    public static float slimeLittleAttackPower = 2.5f;
-    public static float slimeLittleAttackDistance = 2f;
+    public static float slimeLittleAttackPower = 2f;
+    public static float slimeLittleAttackDistance = 1.5f;
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
