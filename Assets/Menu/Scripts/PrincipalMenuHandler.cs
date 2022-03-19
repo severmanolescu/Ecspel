@@ -38,6 +38,10 @@ public class PrincipalMenuHandler : MonoBehaviour
     [SerializeField] private AudioMixer effectAudioMixer;
     [SerializeField] private AudioMixer principalAudioMixer;
 
+    [SerializeField] private bool openQuitConsoleWithEsc = true;
+
+    private CanvasTabsOpen canvasTabs;
+
     private Keyboard keyboard;
 
     private AudioSource audioSource;
@@ -60,6 +64,8 @@ public class PrincipalMenuHandler : MonoBehaviour
         {
             openMenu.SetActive(false);
         }
+
+        canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -142,10 +148,19 @@ public class PrincipalMenuHandler : MonoBehaviour
             }
             else
             {
-                settingsMenu.SetActive(false);
-                principalMenu.SetActive(false);
+                if (openQuitConsoleWithEsc == true)
+                {
+                    settingsMenu.SetActive(false);
+                    principalMenu.SetActive(false);
 
-                quitConsole.SetActive(true);
+                    quitConsole.SetActive(true);
+                }
+                else
+                {
+                    canvasTabs.CloseMenu();
+
+                    CloseMenu();
+                }
             }
         }
     }

@@ -10,6 +10,8 @@ public class NpcTimeSchedule
 
     [Header("Where to go:")]
     [SerializeField] private Transform location;
+    [Header("This is for dialogues:")]
+    [SerializeField] private Vector3 position;
 
     [Header("Idle facing: 0 - left; 1 - up; 2 - right; 3 - down")]
     [Range(0, 3)]
@@ -34,4 +36,5 @@ public class NpcTimeSchedule
     public Transform Point { get => point; set => point = value; }
     public int Hours { get => hours; set => hours = value; }
     public int Minutes { get => minutes; set => minutes = value; }
+    public Vector3 Position { get => position; set => position = value; }
 }

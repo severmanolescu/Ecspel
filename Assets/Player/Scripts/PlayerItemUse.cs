@@ -8,6 +8,9 @@ public class PlayerItemUse : MonoBehaviour
     [Header("Audio effects")]
     [SerializeField] private AudioClip attackClip;
 
+    [SerializeField] private Item emptyBucket;
+    [SerializeField] private Item fullBucket;
+
     private PlayerStats playerStats;
 
     private AudioSource audioSource;
@@ -19,6 +22,15 @@ public class PlayerItemUse : MonoBehaviour
     private Animator animator;
 
     private SkillsHandler skillsHandler;
+
+    private AxeHandler axeHandler;
+    private PickaxeHandler pickaxeHandler;
+    private HoeSystemHandler hoeSystemHandler;
+    private WateringCanHandler wateringCanHandler;
+    private HarvestCropHandler harvestCropHandler;
+    private BuildSystemHandler buildSystemHandler;
+
+    private bool water = false;
 
     private Mouse mouse;
 
@@ -43,7 +55,14 @@ public class PlayerItemUse : MonoBehaviour
 
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
-        skillsHandler = GetComponentInChildren<SkillsHandler>();
+        skillsHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+
+        axeHandler = GameObject.Find("Global/BuildSystem").GetComponent<AxeHandler>();
+        pickaxeHandler = axeHandler.GetComponent<PickaxeHandler>();
+        hoeSystemHandler = axeHandler.GetComponent<HoeSystemHandler>();
+        wateringCanHandler = axeHandler.GetComponent<WateringCanHandler>();
+        harvestCropHandler = axeHandler.GetComponent<HarvestCropHandler>();
+        buildSystemHandler = axeHandler.GetComponent<BuildSystemHandler>();
     }
 
     private void SwordUse(Collider2D[] objects)
@@ -57,15 +76,19 @@ public class PlayerItemUse : MonoBehaviour
             audioSource.clip = attackClip;
             audioSource.Play();
 
-            if (auxObject.gameObject.tag == "Enemy")
+            if (auxObject.gameObject.CompareTag("Enemy"))
             {
                 auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
 
                 auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
             }
-            else if(auxObject.gameObject.tag == "Barrel")
+            else if(auxObject.gameObject.CompareTag("Barrel"))
             {
                 auxObject.GetComponent<BarrelHandler>().GetDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
+            }
+            else if(auxObject.gameObject.CompareTag("EnemyNoForce"))
+            {
+                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
         }
     }
@@ -171,7 +194,7 @@ public class PlayerItemUse : MonoBehaviour
 
                 animator.SetBool("Axe", true);
 
-                GameObject.Find("Global/BuildSystem").GetComponent<AxeHandler>().UseAxe(transform.position, GetSpawnLocation(), item);
+                axeHandler.UseAxe(transform.position, GetSpawnLocation(), item);
             }
             else if (item is Pickaxe)
             {
@@ -180,7 +203,7 @@ public class PlayerItemUse : MonoBehaviour
 
                 animator.SetBool("Pickaxe", true);
 
-                GameObject.Find("Global/BuildSystem").GetComponent<PickaxeHandler>().UsePickaxe(transform.position, GetSpawnLocation(), item);
+                pickaxeHandler.UsePickaxe(transform.position, GetSpawnLocation(), item);
             }
             else if(item is Hoe)
             {
@@ -189,7 +212,7 @@ public class PlayerItemUse : MonoBehaviour
 
                 animator.SetBool("Hoe", true);
 
-                GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().PlaceSoil(transform.position, GetSpawnLocation(), (Hoe)item);
+                hoeSystemHandler.PlaceSoil(transform.position, GetSpawnLocation(), (Hoe)item);
             }
             else if (item is Weapon)
             {
@@ -212,6 +235,31 @@ public class PlayerItemUse : MonoBehaviour
                     selectedSlot.ReinitializeSelectedSlot();
                 }
             }
+            else if(item is WateringCan)
+            {
+                WateringCan wateringCan = (WateringCan)item;
+
+                if (wateringCan.RemainWater > 0)
+                {
+                    animator.SetBool("Wateringcan", true);
+
+                    wateringCan.RemainWater--;
+
+                    selectedSlot.ReinitializeSelectedSlot();
+
+                    wateringCanHandler.UseWateringcan(transform.position, GetSpawnLocation(), (WateringCan)item);
+
+                    if(wateringCan.RemainWater <= 0)
+                    {
+                        Item newItem = emptyBucket.Copy();
+                        newItem.Amount = 1;
+
+                        selectedSlot.SetItem(newItem);
+
+                        selectedSlot.ReinitializeSelectedSlot();
+                    }
+                }
+            }
         }
     }
 
@@ -227,25 +275,58 @@ public class PlayerItemUse : MonoBehaviour
             }
             else if (mouse.rightButton.isPressed)
             {
-                GameObject.Find("Global/BuildSystem").GetComponent<HarvestCropHandler>().Harvest(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+                if (selectedSlot.Item is WateringCan && water == true)
+                {
+                    WateringCan newItem = (WateringCan)fullBucket.Copy();
+                    newItem.Amount = 1;
+
+                    newItem.RemainWater = newItem.NoOfUses;
+
+                    selectedSlot.SetItem(newItem);
+
+                    selectedSlot.ReinitializeSelectedSlot();
+
+                    animator.SetBool("WateringcanFill", true);
+                }
+                else
+                {
+                    harvestCropHandler.Harvest(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+                }
             }
-            
+
+                        
         }
         if (selectedSlot.Item is Hoe)
         {
-            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().HoeHeadlight(playerMovement.transform.position, GetSpawnLocation());
+            hoeSystemHandler.HoeHeadlight(playerMovement.transform.position, GetSpawnLocation());
 
-            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StopPlace();
+            buildSystemHandler.StopPlace();
         }
         else if (selectedSlot.Item is Placeable && playerMovement.TabOpen == false)
         {
-            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StartPlace(selectedSlot.Item);
-            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().StopHeadlight();
+            buildSystemHandler.StartPlace(selectedSlot.Item);
+            hoeSystemHandler.StopHeadlight();
         }
         else
         {
-            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().StopPlace();
-            GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>().StopHeadlight();
+            buildSystemHandler.StopPlace();
+            hoeSystemHandler.StopHeadlight();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision != null && collision.CompareTag("Water"))
+        {
+            water = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision != null && collision.CompareTag("Water"))
+        {
+           water = false;
         }
     }
 }

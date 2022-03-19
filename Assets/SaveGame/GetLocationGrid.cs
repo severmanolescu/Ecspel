@@ -29,7 +29,7 @@ public class GetLocationGrid : MonoBehaviour
 
     public LocationGridSave GetLocationFromNo(int locationNo)
     {
-        if (locationNo > 0 && locationNo < ListOfLocations.Count)
+        if (locationNo >= 0 && locationNo < ListOfLocations.Count)
         {
             return ListOfLocations[locationNo];
         }

@@ -2,16 +2,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System;
 
 public class OpenShopHandler : MonoBehaviour
 {
-    [SerializeField] private List<ItemWithAmount> items;
-
-    //Types:
-    //0 - Nothing
-    //1 - normal items
-    //2 - library items: books, crafting recipes
+     //Types:
+     //0 - Nothing
+     //1 - normal items
+     //2 - library items: books, crafting recipes
     [SerializeField] private int typeOfBuyItems;
+
+    [SerializeField] private int minItems;
+    [SerializeField] private int maxItems;
+
+    [SerializeField] private List<ItemWithAmount> shopItems;
+
+    [SerializeField] private List<Item> items;
 
     private TextMeshProUGUI text;
 
@@ -29,7 +35,7 @@ public class OpenShopHandler : MonoBehaviour
 
     private bool wasOpen = false;
 
-    public List<ItemWithAmount> Items { get => items; set => items = value; }
+    public List<Item> Items { get => items; set => items = value; }
 
     private void Awake()
     {
@@ -45,6 +51,10 @@ public class OpenShopHandler : MonoBehaviour
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
 
         wasOpen = false;
+
+        RefreshItems(0);
+
+        GameObject.Find("Global/DayTimer").GetComponent<RefreshShopItems>().AddShop(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,6 +76,26 @@ public class OpenShopHandler : MonoBehaviour
             playerInArea = false;
 
             DeactivateAll();
+        }
+    }
+
+    public void RefreshItems(int days)
+    {
+        items.Clear();
+
+        int noOfItems = UnityEngine.Random.Range(minItems, maxItems);
+
+        for(int noOfItem = 0; noOfItem < noOfItems; noOfItem++)
+        {
+            int indexOfItemToAdd = UnityEngine.Random.Range(0, shopItems.Count);
+
+            Item newItem = shopItems[indexOfItemToAdd].Item.Copy();
+            newItem.Amount = shopItems[indexOfItemToAdd].Amount;
+
+            if (!items.Contains(newItem))
+            {
+                items.Add(newItem);
+            }
         }
     }
 

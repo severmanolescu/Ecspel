@@ -10,7 +10,11 @@ public class NpcAIHandler : MonoBehaviour
 
     private NpcPathFinding npcPath;
 
-    private int scheduleIndex = 0;
+    public int scheduleIndex = 0;
+
+    public int ScheduleIndex { get => scheduleIndex; set => scheduleIndex = value; }
+    public List<NpcTimeSchedule> NpcTimeSchedules { get => npcTimeSchedules; set => npcTimeSchedules = value; }
+    public NpcPathFinding NpcPath { get => npcPath; set => npcPath = value; }
 
     private void Awake()
     {
@@ -19,6 +23,11 @@ public class NpcAIHandler : MonoBehaviour
         npcPath = GetComponent<NpcPathFinding>();
 
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
+    }
+
+    public void GetNpcPath()
+    {
+        npcPath = GetComponent<NpcPathFinding>();
     }
 
     private void Start()
@@ -91,7 +100,7 @@ public class NpcAIHandler : MonoBehaviour
         npcPath.CanWalk= true;
     }
 
-    private void ChangeScheduleIndex()
+    public void ChangeScheduleIndex()
     {
         scheduleIndex++;
         

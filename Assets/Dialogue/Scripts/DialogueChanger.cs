@@ -164,26 +164,39 @@ public class DialogueChanger : MonoBehaviour
 
             if (firstDialogue == true)
             {
-                dialogueHandler.SetDialogue(dialogueRespons[0].Dialogue);
-                SetDialogue(dialogueRespons[0]);
+                if (dialogueRespons.Count > 0)
+                {
+                    dialogueHandler.SetDialogue(dialogueRespons[0].Dialogue);
+                    SetDialogue(dialogueRespons[0]);
 
-                dialogueIndex = 1;
+                    dialogueIndex = 1;
 
-                firstDialogue = false;
+                    firstDialogue = false;
+                }
+                else
+                {
+                    DialogueEnd();
+
+                    return;
+                }
             }
 
             if (keyboard.spaceKey.wasPressedThisFrame)
             {
                 if(dialogueRespons[dialogueIndex - 1].NextDialogue != null)
                 {
-                    SetDialogue(dialogueRespons[dialogueIndex - 1]);
+                    Debug.Log("asd");
 
-                    stop = true;
+                    NPCDialogue.DeleteDialogue();
+
+                    DeleteDialogue();
+
+                    SetDialogue(dialogueRespons[dialogueIndex - 1].NextDialogue);
 
                     return;
                 }
 
-                if(dialogueIndex == dialogueRespons.Count)
+                if(dialogueIndex >= dialogueRespons.Count)
                 {
                     DialogueEnd();
 
@@ -267,6 +280,8 @@ public class DialogueChanger : MonoBehaviour
 
     public void DeleteNPC()
     {
+        NPCDialogue.DeleteDialogue();
+
         NPCDialogue = null;
 
         DeleteDialogue();

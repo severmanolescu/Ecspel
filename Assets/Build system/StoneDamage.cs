@@ -85,6 +85,8 @@ public class StoneDamage : MonoBehaviour
         while(audioSource.isPlaying)
         {
             yield return null;
+
+            yield return new WaitForSeconds(10);
         }
 
         Destroy(this.gameObject);

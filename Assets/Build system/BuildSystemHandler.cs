@@ -46,6 +46,7 @@ public class BuildSystemHandler : MonoBehaviour
         GetComponent<HoeSystemHandler>().Grid = Grid;
         GetComponent<PickaxeHandler>().Grid = Grid;
         GetComponent<AxeHandler>().Grid = Grid;
+        GetComponent<WateringCanHandler>().Grid = Grid;
     }
 
     public void ChangeGridCropPlaced(GridNode gridNode, bool cropPlaced)
@@ -307,6 +308,30 @@ public class BuildSystemHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public GameObject GetCropFromPosition(Vector3 position)
+    {
+        GridNode gridNode = Grid.GetGridObject(position);
+
+        if (gridNode != null)
+        {
+            return gridNode.crop;
+        }
+
+        return null;
+    }
+
+    public GameObject GetObjectInPosition(Vector3 position)
+    {
+        GridNode gridNode = Grid.GetGridObject(position);
+
+        if(gridNode != null)
+        {
+            return gridNode.objectInSpace;
+        }
+
+        return null;
     }
 
     private void Update()

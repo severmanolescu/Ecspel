@@ -250,6 +250,15 @@ public class CropGrow : MonoBehaviour
         }
     }
 
+    public void DryCrop()
+    {
+        GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>().ChangeGridCropPlaced(gridNode, true);
+
+        GetComponent<SpriteRenderer>().sprite = Item.Destroy1;
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
+        destroyed = true;
+    }
+
     private void HarvestNotRefil()
     {
         if (CurrentSprite == Item.Levels.Count - 1)

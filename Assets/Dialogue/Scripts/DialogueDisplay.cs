@@ -127,7 +127,10 @@ public class DialogueDisplay : MonoBehaviour
             }
             else
             {
-                questMark.SetActive(false);
+                if (questMark != null)
+                {
+                    questMark.SetActive(false);
+                }
             }
         }
         else

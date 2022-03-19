@@ -7,6 +7,7 @@ public class DialogueClass
     [Header("false - Player\ntrue - NPC")]
     [SerializeField] private bool whoReply;
 
+    [TextArea(4, 4)]
     [SerializeField] private string dialogue;
 
     [SerializeField] private DialogueScriptableObject nextDialogue;

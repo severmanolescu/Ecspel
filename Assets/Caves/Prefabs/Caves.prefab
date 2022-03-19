@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7523571619440106507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.7, y: -88.8, z: -4.814991}
+  m_LocalPosition: {x: 14.8438835, y: -28.26658, z: -4.814991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -244,9 +244,19 @@ MonoBehaviour:
   - {fileID: 1434700955289975456, guid: f8a97804d2bec4d4eb6b053a4bb72256, type: 3}
   - {fileID: 2201738335982318974, guid: 7925116eae79ced449d7a5fa324116d2, type: 3}
   - {fileID: 5657345639990270013, guid: 6e37c32f6a7f9d648b30545668b21bd7, type: 3}
+  - {fileID: 3400740476471472944, guid: 556476854971a5c4ea313531df6b505c, type: 3}
   - {fileID: 7883176271346111165, guid: 71bb6f5bae8e4b045ab58a1953528b15, type: 3}
   - {fileID: 1440233242221756360, guid: 5af0d776a56587840a92393cb8739e95, type: 3}
   - {fileID: 6912513903714992735, guid: e739fabb303af4f469fe7cfdad063366, type: 3}
+  - {fileID: 8622062280872440463, guid: f68a6ac3c38791d4a928208a1eb193f7, type: 3}
+  - {fileID: 796734154404442330, guid: 6afb9a1d941e48341a15085cf4dc1baf, type: 3}
+  - {fileID: 5117706409612216293, guid: 327a7a596e8069849a1af914495a8797, type: 3}
+  - {fileID: 570236014374419496, guid: 458a34c716d49d84ebb57ece5f811ab1, type: 3}
+  newCamera: {fileID: 7523571619440106507}
+  objectsToSetActiveToFalse:
+  - {fileID: 0}
+  objectsToSetActiveToTrue: []
+  newGrid: {fileID: 7523571619472840750}
 --- !u!114 &7523571619472840720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,11 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de9b5837e8645d48bc076e6b1c91052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCamera: {fileID: 7523571619440106507}
-  objectsToSetActiveToFalse:
-  - {fileID: 0}
-  objectsToSetActiveToTrue: []
-  newGrid: {fileID: 7523571619472840750}
   caveSystemHandler: {fileID: 7523571619472840721}
 --- !u!1 &7523571619989788872
 GameObject:

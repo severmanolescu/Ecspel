@@ -67,6 +67,8 @@ public class DayTimerHandler : MonoBehaviour
 
     private CropGrowHandler cropGrow;
 
+    private RefreshShopItems refreshShopItems;
+
     private SpawnObjectsInAreaHandle spawnObjects;
 
     private SourceLightShadow sourceLight;
@@ -82,6 +84,8 @@ public class DayTimerHandler : MonoBehaviour
     private WorldTextDetails worldTextDetails;
 
     private StartAllFireflyParticles startAllFirefly;
+
+    private ChangeSoilsState changeSoilsState;
 
     private bool sleep = false;
     private float speed;
@@ -109,6 +113,8 @@ public class DayTimerHandler : MonoBehaviour
 
         spawnObjects = GetComponent<SpawnObjectsInAreaHandle>();
 
+        refreshShopItems = GetComponent<RefreshShopItems>();
+
         cropGrow = GetComponent<CropGrowHandler>();
 
         changeWindowLight = GetComponent<ChangeWindowLightIntensity>();
@@ -122,6 +128,8 @@ public class DayTimerHandler : MonoBehaviour
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
         worldTextDetails = GameObject.Find("Global/Player/Canvas/WorldTextDetails").GetComponent<WorldTextDetails>();
+
+        changeSoilsState = GetComponent<ChangeSoilsState>();
 
         audioSource.clip = daySound;
         audioSource.Play();
@@ -240,8 +248,16 @@ public class DayTimerHandler : MonoBehaviour
     {
         cropGrow.DayChange(days);
         spawnObjects.DayChange(days);
+        refreshShopItems.Refresh(days);
 
-        saveSystem.StartSaveGame();
+        if (raining)
+        {
+            changeSoilsState.WetAllDoils();
+        }
+        else
+        {
+            changeSoilsState.DryAllDoils();
+        }
 
         timeSpeed = speed;
 
@@ -262,7 +278,9 @@ public class DayTimerHandler : MonoBehaviour
 
         playerStats.SetToMaxStats();
 
-        startAllFirefly.StopParticles();
+        startAllFirefly.StopParticles();        
+
+        saveSystem.StartSaveGame();
     }
 
     private void StartTodayWeather()
@@ -272,6 +290,8 @@ public class DayTimerHandler : MonoBehaviour
         if (chanceOfFog <= percentOfFog)
         {
             fogAlpha = Random.Range(5, smokeMaxAlpha);
+
+            GetComponent<FogHandler>().StopPArticles();
 
             GetComponent<FogHandler>().StartParticle(fogAlpha);
 

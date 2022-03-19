@@ -35,17 +35,15 @@ public class ShopInventory : MonoBehaviour
         }
     }
 
-    public void SetItems(List<ItemWithAmount> items, int typeOfBuyItems)
+    public void SetItems(List<Item> items, int typeOfBuyItems)
     {
         DeleteAllOldItems();
 
         this.typeOfBuyItems = typeOfBuyItems;
 
-        foreach (ItemWithAmount item in items)
+        foreach (Item item in items)
         {
-            Item newItem = item.Item.Copy();
-
-            newItem.Amount = item.Amount;
+            Item newItem = item.Copy();
 
             SetItem(newItem);
         }
@@ -65,11 +63,11 @@ public class ShopInventory : MonoBehaviour
         GetComponent<AudioSource>().clip = null;
     }
 
-    public List<ItemWithAmount> GetAllItems()
+    public List<Item> GetAllItems()
     {
         DeleteAudioSourceClip();
 
-        List<ItemWithAmount> items = new List<ItemWithAmount>();
+        List<Item> items = new List<Item>();
 
         ItemSlot[] slots = spawnLocation.GetComponentsInChildren<ItemSlot>();
 
@@ -77,7 +75,7 @@ public class ShopInventory : MonoBehaviour
         {
             if (slot.Item != null)
             {
-                items.Add(new ItemWithAmount(slot.Item, slot.Item.Amount));
+                items.Add(slot.Item.Copy());
             }
         }
 

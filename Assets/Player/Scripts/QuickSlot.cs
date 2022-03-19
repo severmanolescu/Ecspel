@@ -40,6 +40,11 @@ public class QuickSlot : MonoBehaviour
         DeselectItem();
     }
 
+    public void SetItem(Item item)
+    {
+        equiped.SetItem(item);
+    }
+
     public void Reinitialize()
     {
         if (Equiped.Item != null)
@@ -68,6 +73,15 @@ public class QuickSlot : MonoBehaviour
                 Equiped.ReinitializeItem();
 
                 amount.gameObject.SetActive(false);
+            }
+
+            if (equiped.Item is WateringCan)
+            {
+                WateringCan wateringCan = (WateringCan)equiped.Item;
+
+                amount.text = wateringCan.RemainWater.ToString();
+
+                amount.gameObject.SetActive(true);
             }
         }
         else

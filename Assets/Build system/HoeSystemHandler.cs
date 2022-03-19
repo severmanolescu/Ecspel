@@ -24,6 +24,26 @@ public class HoeSystemHandler : MonoBehaviour
     public Sprite leftright;
     public Sprite updown;
 
+    public Sprite centerWater;
+    public Sprite leftWater;
+    public Sprite upWater;
+    public Sprite rightWater;
+    public Sprite downWater;
+    public Sprite fullWater;
+
+    public Sprite centerDownWater;
+    public Sprite centerLeftWater;
+    public Sprite centerUpWater;
+    public Sprite centerRightWater;
+
+    public Sprite cornerLeftDownWater;
+    public Sprite cornerLeftUpWater;
+    public Sprite cornerRightDownWater;
+    public Sprite cornerRightUpWater;
+
+    public Sprite leftrightWater;
+    public Sprite updownWater;
+
     public Sprite headlight;
     public Sprite headlightGreen;
 
@@ -46,7 +66,7 @@ public class HoeSystemHandler : MonoBehaviour
         buildSystem = GetComponent<BuildSystemHandler>();
     }
 
-    private void Spawn(GridNode gridNode)
+    private GameObject Spawn(GridNode gridNode)
     {
         if(gridNode.isWalkable && gridNode.canPlant == false && gridNode.canPlace == true)
         {
@@ -73,8 +93,11 @@ public class HoeSystemHandler : MonoBehaviour
             gridNode.canPlace = false;
             gridNode.cropPlaced = false;
             gridNode.currentObject = soil.GetComponent<SpriteRenderer>();
+            gridNode.objectInSpace = soil;
 
-            ChangeSprite(gridNode, sprite);
+            soil.AddComponent<FarmPlotHandler>();
+
+            ChangeSprite(gridNode, sprite, soil.GetComponent<FarmPlotHandler>());
 
             if (gridNode.x - 1 >= 0)
             {
@@ -92,8 +115,10 @@ public class HoeSystemHandler : MonoBehaviour
             {
                 ChangeNeighbor(grid.gridArray[gridNode.x, gridNode.y - 1], 2);
             }
+
+            return soil;
         }
-        else if(gridNode.crop!= null && gridNode.crop.GetComponent<CropGrow>().Destroyed == true)
+        else if(gridNode.crop != null && gridNode.crop.GetComponent<CropGrow>().Destroyed == true)
         {
             Destroy(gridNode.crop);
             gridNode.crop = null;
@@ -101,12 +126,21 @@ public class HoeSystemHandler : MonoBehaviour
             gridNode.canPlant = true;
             gridNode.canPlace = false;
             gridNode.cropPlaced = false;
+
+            return null;
         }
+
+        return null;
     }
 
-    public void Spawn(Vector3 position)
+    public void Spawn(Vector3 position, int noOfDryDays = -1)
     {
-        Spawn(grid.GetGridObject(position));
+        GameObject soil = Spawn(grid.GetGridObject(position));
+
+        if (soil != null && noOfDryDays >= 0)
+        {
+            soil.GetComponent<FarmPlotHandler>().NoOfDryDays = noOfDryDays;
+        }
     }
 
     public void DestroyPlot(Vector3 position)
@@ -127,7 +161,7 @@ public class HoeSystemHandler : MonoBehaviour
     //2-down
     //3-left
     //4-right
-
+   
     private void ChangeNeighbor(GridNode gridNode, int type)
     {
         if (gridNode.currentObject != null)
@@ -136,97 +170,97 @@ public class HoeSystemHandler : MonoBehaviour
             {
                 switch(type)
                 {
-                    case 1: gridNode.currentObject.sprite = up; break;
-                    case 2: gridNode.currentObject.sprite = down; break;
-                    case 3: gridNode.currentObject.sprite = left; break;
-                    case 4: gridNode.currentObject.sprite = right; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(up, upWater); break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(down, downWater); break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(left, leftWater); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(right, rightWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == up)
             {
                 switch (type)
                 {
-                    case 2: gridNode.currentObject.sprite = updown; break;
-                    case 3: gridNode.currentObject.sprite = cornerLeftUp; break;
-                    case 4: gridNode.currentObject.sprite = cornerRightUp; break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(updown, updownWater); break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerLeftUp, cornerLeftUpWater); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightUp, cornerRightUpWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == down)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = updown; break;
-                    case 3: gridNode.currentObject.sprite = cornerLeftDown; break;
-                    case 4: gridNode.currentObject.sprite = cornerRightDown; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(updown, updownWater); ; break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerLeftDown, cornerLeftDownWater); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightDown, cornerRightDownWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == right)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = cornerRightUp; break;
-                    case 2: gridNode.currentObject.sprite = cornerRightDown; break;
-                    case 3: gridNode.currentObject.sprite = leftright; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightUp, cornerRightUpWater); break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightDown, cornerRightDownWater);  break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(leftright, leftrightWater); ; break;
                 }
             }
             else if (gridNode.currentObject.sprite == left)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = cornerLeftUp; break;
-                    case 2: gridNode.currentObject.sprite = cornerLeftDown; break;
-                    case 4: gridNode.currentObject.sprite = leftright; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerLeftUp, cornerLeftUpWater); break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerLeftDown, cornerLeftDown); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(leftright, leftrightWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == updown)
             {
                 switch (type)
                 {
-                    case 3: gridNode.currentObject.sprite = centerLeft; break;
-                    case 4: gridNode.currentObject.sprite = centerRight; break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerLeft, centerLeftWater); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerRight, centerRightWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == leftright)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = centerUp; break;
-                    case 2: gridNode.currentObject.sprite = centerDown; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerUp, centerUpWater); break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerDown, centerDownWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == centerLeft)
             {
                 switch (type)
                 {
-                    case 4: gridNode.currentObject.sprite = center; break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == centerRight)
             {
                 switch (type)
                 {
-                    case 3: gridNode.currentObject.sprite = center; break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == centerDown)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = center; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == centerUp)
             {
                 switch (type)
                 {
-                    case 2: gridNode.currentObject.sprite = center; break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == cornerLeftUp)
             {
                 switch (type)
                 {
-                    case 2: gridNode.currentObject.sprite = centerLeft; break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerLeft, centerLeftWater); break;
                     case 4: gridNode.currentObject.sprite = centerUp; break;
                 }
             }
@@ -234,30 +268,30 @@ public class HoeSystemHandler : MonoBehaviour
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = centerLeft; break;
-                    case 4: gridNode.currentObject.sprite = centerDown; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerLeft, centerLeftWater); break;
+                    case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerDown, centerDownWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == cornerRightUp)
             {
                 switch (type)
                 {
-                    case 2: gridNode.currentObject.sprite = centerRight; break;
-                    case 3: gridNode.currentObject.sprite = centerUp; break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerRight, centerRightWater); break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerUp, centerUpWater); break;
                 }
             }
             else if (gridNode.currentObject.sprite == cornerRightDown)
             {
                 switch (type)
                 {
-                    case 1: gridNode.currentObject.sprite = centerRight; break;
-                    case 3: gridNode.currentObject.sprite = centerDown; break;
+                    case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerRight, centerRightWater); break;
+                    case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerDown, centerDownWater); break;
                 }
             }
         }
 }
 
-    private void ChangeSprite(GridNode gridNode, SpriteRenderer sprite)
+    private void ChangeSprite(GridNode gridNode, SpriteRenderer sprite, FarmPlotHandler farmPlot)
     {
         if(gridNode.x + 1 < grid.gridArray.GetLength(0) && grid.gridArray[gridNode.x + 1, gridNode.y].canPlant == true)
         {
@@ -268,10 +302,16 @@ public class HoeSystemHandler : MonoBehaviour
                     if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                     {
                         sprite.sprite = center;
+
+                        farmPlot.WetSoil = centerWater;
+                        farmPlot.DrySoil = center;
                     }
                     else
                     {
                         sprite.sprite = centerDown;
+
+                        farmPlot.WetSoil = centerDownWater;
+                        farmPlot.DrySoil = centerDown;
                     }
                 }
                 else
@@ -279,10 +319,16 @@ public class HoeSystemHandler : MonoBehaviour
                     if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                     {
                         sprite.sprite = centerLeft;
+
+                        farmPlot.WetSoil = centerLeftWater;
+                        farmPlot.DrySoil = centerLeft;
                     }
                     else
                     {
                         sprite.sprite = cornerLeftDown;
+
+                        farmPlot.WetSoil = cornerLeftDownWater;
+                        farmPlot.DrySoil = cornerLeftDown;
                     }
                 }
             }
@@ -291,19 +337,31 @@ public class HoeSystemHandler : MonoBehaviour
                 if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                 {
                     sprite.sprite = centerUp;
+
+                    farmPlot.WetSoil = centerUpWater;
+                    farmPlot.DrySoil = centerUp;
                 }
                 else
                 {
                     sprite.sprite = leftright;
+
+                    farmPlot.WetSoil = leftrightWater;
+                    farmPlot.DrySoil = leftright;
                 }
             }
             else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
                 sprite.sprite = cornerLeftUp;
+
+                farmPlot.WetSoil = cornerLeftUpWater;
+                farmPlot.DrySoil = cornerLeftUp;
             }
             else
             {
                 sprite.sprite = left;
+
+                farmPlot.WetSoil = leftWater;
+                farmPlot.DrySoil = left;
             }
         }
         else if (gridNode.y + 1 < grid.gridArray.GetLength(1) && grid.gridArray[gridNode.x, gridNode.y + 1].canPlant == true)
@@ -313,19 +371,31 @@ public class HoeSystemHandler : MonoBehaviour
                 if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                 {
                     sprite.sprite = centerRight;
+
+                    farmPlot.WetSoil = centerRightWater;
+                    farmPlot.DrySoil = centerRight;
                 }
                 else
                 {
                     sprite.sprite = cornerRightDown;
+
+                    farmPlot.WetSoil = cornerRightDownWater;
+                    farmPlot.DrySoil = cornerRightDown;
                 }
             }
             else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
                 sprite.sprite = updown;
+
+                farmPlot.WetSoil = updownWater;
+                farmPlot.DrySoil = updown;
             }
             else
             {
                 sprite.sprite = down;
+
+                farmPlot.WetSoil = downWater;
+                farmPlot.DrySoil = down;
             }
         }
         else if (gridNode.x - 1 >= 0 && grid.gridArray[gridNode.x - 1, gridNode.y].canPlant == true)
@@ -333,19 +403,31 @@ public class HoeSystemHandler : MonoBehaviour
             if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
                 sprite.sprite = cornerRightUp;
+
+                farmPlot.WetSoil = cornerRightUpWater;
+                farmPlot.DrySoil = cornerRightUp;
             }
             else
             {
                 sprite.sprite = right;
+
+                farmPlot.WetSoil = rightWater;
+                farmPlot.DrySoil = right;
             }
         }
         else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
         {
             sprite.sprite = up;
+
+            farmPlot.WetSoil = upWater;
+            farmPlot.DrySoil = up;
         }
         else
         {
             sprite.sprite = full;
+
+            farmPlot.WetSoil = fullWater;
+            farmPlot.DrySoil = full;
         }
     }
 

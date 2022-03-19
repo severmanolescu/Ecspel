@@ -4,6 +4,14 @@ using TMPro;
 
 public class QuestTabDataSet : MonoBehaviour
 {
+    [SerializeField] private GameObject textGiveItems;
+    [SerializeField] private Transform spawnLocationGiveItems;
+
+    [SerializeField] private GameObject textReceiveItems;
+    [SerializeField] private Transform spawnLocationReceiveItems;
+
+    [SerializeField] private GameObject itemSlotPrefab;
+
     private QuestFollowHandler questFollow;
 
     private QuestTrack questTrack;
@@ -23,6 +31,9 @@ public class QuestTabDataSet : MonoBehaviour
         title = texts[0];
         details = texts[1];
 
+        textGiveItems.SetActive(false);
+        textReceiveItems.SetActive(false);
+
         track = gameObject.GetComponentInChildren<Button>();
 
         questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
@@ -37,6 +48,74 @@ public class QuestTabDataSet : MonoBehaviour
     {
         title.text = quest.Title;
         details.text = quest.Details;
+
+        ItemSlot[] itemSlots = spawnLocationGiveItems.GetComponentsInChildren<ItemSlot>();
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            Destroy(itemSlot.gameObject);
+        }
+
+        itemSlots = spawnLocationReceiveItems.GetComponentsInChildren<ItemSlot>();
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            Destroy(itemSlot.gameObject);
+        }
+
+        if (quest is GiveItem)
+        {
+            GiveItem giveItem = (GiveItem)quest;
+
+            if(giveItem.itemsNeeds.Count > 0)
+            {
+                textGiveItems.SetActive(true);
+
+                foreach (QuestItems item in giveItem.ItemsNeeds)
+                {
+                    Item newItem = item.Item.Copy();
+                    newItem.Amount = item.Amount;
+
+                    ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
+
+                    itemSlot.transform.SetParent(spawnLocationGiveItems);
+
+                    itemSlot.SetItem(newItem);
+
+                    itemSlot.DontShowDetails = true;
+                }
+            }
+            else
+            {
+                textGiveItems.SetActive(false);
+            }
+
+            if(quest.itemsReceive.Count > 0)
+            {
+                textReceiveItems.SetActive(true);
+
+                foreach (QuestItems item in quest.itemsReceive)
+                {
+                    Item newItem = item.Item.Copy();
+                    newItem.Amount = item.Amount;
+
+                    ItemSlot itemSlot = Instantiate(itemSlotPrefab, spawnLocationGiveItems.position, spawnLocationGiveItems.rotation).GetComponent<ItemSlot>();
+
+                    itemSlot.SetItem(newItem);
+
+                    itemSlot.DontShowDetails = true;
+                }
+            }
+            else
+            {
+                textReceiveItems.SetActive(false);
+            }
+        }
+        else
+        {
+            textGiveItems.SetActive(false);
+            textReceiveItems.SetActive(false);
+        }
 
         track.gameObject.SetActive(true);
         if (quest is GiveItem)
@@ -65,6 +144,23 @@ public class QuestTabDataSet : MonoBehaviour
     {
         title.text = "";
         details.text = "";
+
+        textGiveItems.SetActive(false);
+        textReceiveItems.SetActive(false);
+
+        ItemSlot[] itemSlots = spawnLocationGiveItems.GetComponentsInChildren<ItemSlot>();
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            Destroy(itemSlot.gameObject);
+        }
+
+        itemSlots = spawnLocationReceiveItems.GetComponentsInChildren<ItemSlot>();
+
+        foreach (ItemSlot itemSlot in itemSlots)
+        {
+            Destroy(itemSlot.gameObject);
+        }
 
         track.gameObject.SetActive(false);
     }

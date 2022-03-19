@@ -66,6 +66,11 @@ public class QuickSlotsChanger : MonoBehaviour
         selectedItemIndex = selected;
     }
 
+    public void SetItem(Item item)
+    {
+        quickSlots[selectedItemIndex - 1].SetItem(item);
+    }
+
     private void Update()
     {
         if (keyboard.digit1Key.wasPressedThisFrame)

@@ -95,12 +95,7 @@ public class QuestTabHandler : MonoBehaviour
         {
             foreach (Quest quest in questList)
             {
-                if (VerifyQuest(quest))
-                {
-                    InstantiateButton(quest);
-
-                    SetQuestWorld(quest);
-                }
+                AddQuest(quest);
             }
         }
     }

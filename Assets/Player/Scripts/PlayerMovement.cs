@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool tabOpen = false;
 
+    private bool dialogue = false;
+
     private float speed;
 
     private float slowEffect = 1f;
@@ -46,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     public bool TabOpen { get { return tabOpen; } set { tabOpen = value; } }
     public float SlowEffect { get { return slowEffect; } set { slowEffect = value; } }
     public float FatiqueEffect { get { return fatiqueEffect; } set { fatiqueEffect = value; } }
+
+    public bool Dialogue { get => dialogue; set => dialogue = value; }
 
     private void Awake()
     {
@@ -117,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canMove == true && tabOpen == false)
+        if (canMove == true && tabOpen == false && dialogue == false)
         {
             GetInputs();
 

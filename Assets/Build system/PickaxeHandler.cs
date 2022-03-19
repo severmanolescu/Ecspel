@@ -10,9 +10,13 @@ public class PickaxeHandler : MonoBehaviour
 
     private SkillsHandler skillHandler;
 
+    private PlayerStats playerStats;
+
     private void Awake()
     {
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
+
+        playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
     }
 
     private void DamageStone(GameObject node, Item item)
@@ -31,7 +35,7 @@ public class PickaxeHandler : MonoBehaviour
             }
         }
 
-        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().DecreseStamina(pickaxe.Stamina);
+        playerStats.DecreseStamina(pickaxe.Stamina);
     }
 
     public void UsePickaxe(Vector3 position, int spawn, Item item)

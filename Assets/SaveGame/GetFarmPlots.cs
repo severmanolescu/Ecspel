@@ -25,9 +25,9 @@ public class GetFarmPlots : MonoBehaviour
         getItem = GameObject.Find("Global").GetComponent<GetItemFromNO>();
     }
 
-    public List<Tuple<float, float>> GetAllFarmingPlots()
+    public List<FarmPlotSave> GetAllFarmingPlots()
     {
-        List<Tuple<float, float>> plots = new List<Tuple<float, float>>();
+        List<FarmPlotSave> plots = new();
 
         SpriteRenderer[] plotsInGame = objectsLocation.GetComponentsInChildren<SpriteRenderer>();
 
@@ -35,14 +35,21 @@ public class GetFarmPlots : MonoBehaviour
         {
             if(plot.CompareTag("FarmPlot"))
             {
-                plots.Add(new Tuple<float, float>(plot.transform.position.x, plot.transform.position.y));
+                FarmPlotSave farmPlot = new FarmPlotSave();
+
+                farmPlot.PositionX = plot.transform.position.x;
+                farmPlot.PositionY = plot.transform.position.y;
+
+                farmPlot.NoOfDryDays = plot.GetComponent<FarmPlotHandler>().NoOfDryDays;
+
+                plots.Add(farmPlot);
             }
         }
 
         return plots;
     }
 
-    public void PositionFarmingPlots(List<Tuple<float, float>> farmPlots)
+    public void PositionFarmingPlots(List<FarmPlotSave> farmPlots)
     {
         SpriteRenderer[] plotsInGame = objectsLocation.GetComponentsInChildren<SpriteRenderer>();
 
@@ -56,9 +63,9 @@ public class GetFarmPlots : MonoBehaviour
             }
         }
 
-        foreach (Tuple<float, float> farmPlot in farmPlots)
+        foreach (FarmPlotSave farmPlot in farmPlots)
         {
-            hoeSystem.Spawn(new Vector3(farmPlot.Item1, farmPlot.Item2));
+            hoeSystem.Spawn(new Vector3(farmPlot.PositionX, farmPlot.PositionY), farmPlot.NoOfDryDays);
         }
     }
 

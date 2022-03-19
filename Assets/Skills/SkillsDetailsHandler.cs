@@ -14,6 +14,8 @@ public class SkillsDetailsHandler : MonoBehaviour
         details = GetComponentInChildren<TextMeshProUGUI>();
 
         details.text = string.Empty;
+
+        gameObject.SetActive(false);
     }
 
     public void SetDetails(string details, int coins, int playerCoins, ShowSkillDetails showSkillDetails)

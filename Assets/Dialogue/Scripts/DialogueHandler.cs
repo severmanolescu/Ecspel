@@ -75,6 +75,9 @@ public class DialogueHandler : MonoBehaviour
         if(dialogue != null)
         {
             StopAllCoroutines();
+
+            gameObject.SetActive(true);
+
             StartCoroutine(TypeSentence(dialogue));
         }
     }

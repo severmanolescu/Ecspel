@@ -13,6 +13,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
             " 1 - right\n" +
             " 2 - up\n" +
             " 3 - down\n")]
+    [Range(-1, 3)]
     [SerializeField] private int idleAnimationDirection = -1;
 
     [SerializeField] private int dialogueId;
@@ -53,7 +54,9 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
             playerMovement.ChangeIdleAnimationDirection(idleAnimationDirection);
 
-            if (StartAnimator == false)
+            StartWalkToNPC startWalk = GetComponent<StartWalkToNPC>();
+
+            if (StartAnimator == false && startWalk == null)
             {
                 DestroyObject();
             }
@@ -68,7 +71,10 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
     public void DialogueEnd()
     {
-        animator.SetTrigger("Start");
+        if (startAnimator == true)
+        {
+            animator.SetTrigger("Start");
+        }
     }
 
     public void DestroyObject()

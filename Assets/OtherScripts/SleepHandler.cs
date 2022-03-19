@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class SleepHandler : MonoBehaviour
 {
     [SerializeField] private SaveSystemHandler saveSystem;
+    [SerializeField] private GameObject questdirection;
 
     [SerializeField] private List<GameObject> currentCamera;
     [SerializeField] private GameObject playerHouseCamera;
@@ -93,6 +94,8 @@ public class SleepHandler : MonoBehaviour
         {
             camera.SetActive(false);
         }
+
+        questdirection.SetActive(state);
 
         sleepCamera.SetActive(!state);
     }

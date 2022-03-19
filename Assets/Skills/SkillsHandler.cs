@@ -25,7 +25,7 @@ public class SkillsHandler : MonoBehaviour
 
     private PlayerStats playerStats;
 
-    private SkillsDetailsHandler skillsDetails;
+    [SerializeField] private SkillsDetailsHandler skillsDetails;
 
     private int powerLevel;
     private int attackLevel;
@@ -45,8 +45,6 @@ public class SkillsHandler : MonoBehaviour
     {
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
         coinsHandler = GameObject.Find("Global/Player/Canvas/PlayerItems/Coins").GetComponent<CoinsHandler>();
-
-        skillsDetails = GetComponentInChildren<SkillsDetailsHandler>();
 
         gameObject.SetActive(false);
     }

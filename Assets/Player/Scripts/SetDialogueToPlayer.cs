@@ -22,7 +22,7 @@ public class SetDialogueToPlayer : MonoBehaviour
 
     public void SetDialogue(DialogueScriptableObject dialogue, DialoguePlayerEnterInTrigger dialoguePlayerEnter = null)
     {
-        playerMovement.TabOpen = true;
+        playerMovement.Dialogue = true;
 
         dialogueChanger.SetDialogue(dialogue, this);
 
@@ -31,7 +31,7 @@ public class SetDialogueToPlayer : MonoBehaviour
 
     public void DialogueEnd()
     {
-        playerMovement.TabOpen = false;
+        playerMovement.Dialogue = false;
 
         if(dialoguePlayerEnter != null)
         {

@@ -49,6 +49,8 @@ public class ChestStorageHandler : MonoBehaviour
         itemSlot.SetItem(newItem);
 
         itemSlots.Add(itemSlot);
+
+        itemSlot.transform.localScale = new Vector3(.5f, .5f, 1);
     }
 
     private void ReinitializeStorage()

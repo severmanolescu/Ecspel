@@ -24,7 +24,7 @@ public class SaveGame
 
     private List<ObjectSaveGame> objectsInPlayerGround;
 
-    private List<Tuple<float, float>> plots;
+    private List<FarmPlotSave> plots;
 
     private List<CropSave> cropSaves;
 
@@ -66,7 +66,7 @@ public class SaveGame
     public List<ObjectSaveGame> ObjectsInGame { get => objectsInGame; set => objectsInGame = value; }
     public List<int> PlayerQuests { get => playerQuests; set => playerQuests = value; }
     public List<ObjectSaveGame> ObjectsInPlayerGround { get => objectsInPlayerGround; set => objectsInPlayerGround = value; }
-    public List<Tuple<float, float>> Plots { get => plots; set => plots = value; }
+    public List<FarmPlotSave> Plots { get => plots; set => plots = value; }
     public List<CropSave> CropSaves { get => cropSaves; set => cropSaves = value; }
     public ushort PlayedSecundes { get => playedSecundes; set => playedSecundes = value; }
     public List<ChestSave> Chests { get => chests; set => chests = value; }

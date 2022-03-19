@@ -4,6 +4,7 @@ using UnityEngine;
 [Serializable]
 public class DialogueAnswersClass
 {
+    [TextArea(3, 3)]
     [SerializeField] private string answer;
     [SerializeField] private DialogueScriptableObject nextDialogue;
 
