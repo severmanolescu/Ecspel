@@ -191,6 +191,8 @@ MonoBehaviour:
   scaleX: 0
   scaleY: 1
   locationGrid: {fileID: 0}
+  isWalkable: 0
+  positionInCenterOfGridNode: 1
 --- !u!61 &6586950714174751585
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,7 +235,6 @@ MonoBehaviour:
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   level: 1
   woodChop: {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
-  effectAudioMixer: {fileID: 24100000, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
 --- !u!82 &8417569105516370424
 AudioSource:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.366
   m_Pitch: 1
   Loop: 0
   Mute: 0

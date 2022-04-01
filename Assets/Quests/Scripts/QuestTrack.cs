@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class QuestTrack : MonoBehaviour
 {
-    public Transform targetPosition;
+    private Transform targetPosition;
 
     [SerializeField] private Sprite arrowSprite;
     [SerializeField] private Sprite crossSprite;

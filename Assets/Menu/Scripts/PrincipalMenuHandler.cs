@@ -65,7 +65,12 @@ public class PrincipalMenuHandler : MonoBehaviour
             openMenu.SetActive(false);
         }
 
-        canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+        GameObject playerCanvas = GameObject.Find("Global/Player/Canvas");
+
+        if (playerCanvas != null)
+        {
+            canvasTabs = playerCanvas.GetComponent<CanvasTabsOpen>();
+        }
 
         audioSource = GetComponent<AudioSource>();
 

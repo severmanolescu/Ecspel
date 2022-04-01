@@ -107,6 +107,8 @@ MonoBehaviour:
   scaleX: 0
   scaleY: 1
   locationGrid: {fileID: 0}
+  isWalkable: 0
+  positionInCenterOfGridNode: 1
 --- !u!61 &2053851443797049483
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ BoxCollider2D:
   m_Offset: {x: -0.2612419, y: 0.25941277}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.80570877, y: 0.15760677}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.875, y: 0.75}
     newSize: {x: 0.875, y: 0.75}
     adaptiveTilingThreshold: 0.5
@@ -149,7 +151,6 @@ MonoBehaviour:
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   level: 1
   woodChop: {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
-  effectAudioMixer: {fileID: 24100000, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
 --- !u!82 &4336658161469937620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: e6edcdfa7e6d4d24cadb2f018cb106bf, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.366
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -283,14 +284,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4306262706990106791}
-  m_LocalRotation: {x: 0, y: -0, z: 0.08715466, w: -0.9961948}
-  m_LocalPosition: {x: -0.36, y: 0.24, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7009087, w: -0.71325105}
+  m_LocalPosition: {x: 0.098, y: 0.369, z: 0}
   m_LocalScale: {x: 0.96126544, y: 0.82451624, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2053851443797049486}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1889}
 --- !u!212 &2482975647498355883
 SpriteRenderer:
   m_ObjectHideFlags: 0

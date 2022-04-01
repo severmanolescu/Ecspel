@@ -14,18 +14,11 @@ public class ChangeGridCellValuesByObjects : MonoBehaviour
         {
             StopAllCoroutines();
 
-            if (GetComponent<BoxCollider2D>().isTrigger == true)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                GridNode gridNode = grid.GetGridObject(transform.position);
+            GridNode gridNode = grid.GetGridObject(transform.position);
 
-                gridNode.isWalkable = false;
+            gridNode.isWalkable = false;
 
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
         else
         {

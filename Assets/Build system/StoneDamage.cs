@@ -76,8 +76,10 @@ public class StoneDamage : MonoBehaviour
 
         Destroy(GetComponent<ShadowCaster2D>());
 
+        Destroy(GetComponentInChildren<ParticleSystem>().gameObject);
+
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        if(sprites.Length >= 1)
+        if(sprites != null && sprites.Length > 1)
         {
             Destroy(sprites[1].gameObject);
         }

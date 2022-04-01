@@ -266,8 +266,8 @@ public class BuildSystemHandler : MonoBehaviour
 
         if (gridNode.x + placeable.StartX >=0 &&
             gridNode.x + placeable.StartY >=0 &&
-            gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
-            gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
+            gridNode.x + placeable.SizeX < Grid.gridArray.GetLength(0) &&
+            gridNode.y + placeable.SizeY < Grid.gridArray.GetLength(1))
         {
             for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
             {

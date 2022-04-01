@@ -185,8 +185,6 @@ public class DialogueChanger : MonoBehaviour
             {
                 if(dialogueRespons[dialogueIndex - 1].NextDialogue != null)
                 {
-                    Debug.Log("asd");
-
                     NPCDialogue.DeleteDialogue();
 
                     DeleteDialogue();

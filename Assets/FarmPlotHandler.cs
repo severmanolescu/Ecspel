@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FarmPlotHandler : MonoBehaviour
 {
-    private Sprite drySoil;
-    private Sprite wetSoil;
+    public Sprite drySoil;
+    public Sprite wetSoil;
 
     private SpriteRenderer spriteRenderer;
 
