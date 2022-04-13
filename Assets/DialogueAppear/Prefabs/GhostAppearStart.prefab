@@ -84,7 +84,7 @@ MonoBehaviour:
     minutes: 0
     point: {fileID: 0}
   seconds: 5
-  stopPlayerForMoving: 1
+  stopPlayerFromMoving: 0
 --- !u!114 &6439741141152490085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,3 +102,6 @@ MonoBehaviour:
   teleportPlayerToPoint: {fileID: 0}
   idleAnimationDirection: 0
   dialogueId: 5
+  toDestroyObjects:
+  - {fileID: 0}
+  - {fileID: 0}

@@ -12,7 +12,7 @@ public class StartWalkToNPC : MonoBehaviour
 
     [SerializeField] private int seconds;
 
-    [SerializeField] private bool stopPlayerForMoving;
+    [SerializeField] private bool stopPlayerFromMoving;
 
     private bool spawned = false;
 
@@ -23,13 +23,13 @@ public class StartWalkToNPC : MonoBehaviour
     public GameObject NPC { get => Npc; set => Npc = value; }
     public Vector3 PositionToSpawn { get => positionToSpawn; set => positionToSpawn = value; }
     public int Seconds { get => seconds; set => seconds = value; }
-    public bool StopPlayerForMoving { get => stopPlayerForMoving; set => stopPlayerForMoving = value; }
+    public bool StopPlayerFromMoving { get => stopPlayerFromMoving; set => stopPlayerFromMoving = value; }
 
     private IEnumerator WaitForSeconds()
     {
         yield return new WaitForSeconds(Seconds);
 
-        if (StopPlayerForMoving == true)
+        if (StopPlayerFromMoving == true)
         {
             playerMovement.TabOpen = false;
             canvas.canOpenTabs = true;
@@ -71,7 +71,7 @@ public class StartWalkToNPC : MonoBehaviour
 
                 NPC = npcAI.gameObject;
 
-                if(StopPlayerForMoving == true)
+                if(StopPlayerFromMoving == true)
                 {
                     playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
                     canvas =  GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();

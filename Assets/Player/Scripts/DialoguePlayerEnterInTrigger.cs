@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DialoguePlayerEnterInTrigger : MonoBehaviour
@@ -17,6 +18,8 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
     [SerializeField] private int idleAnimationDirection = -1;
 
     [SerializeField] private int dialogueId;
+
+    [SerializeField] private List<GameObject> toDestroyObjects = new();
 
     private SetDialogueToPlayer setDialogueToPlayer;
 
@@ -44,6 +47,17 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
         }
     }
 
+    private void DestroyObjects()
+    {
+        foreach(GameObject @object in toDestroyObjects)
+        {
+            if (@object != null)
+            {
+                Destroy(@object);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") &&
@@ -54,6 +68,8 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
             playerMovement.ChangeIdleAnimationDirection(idleAnimationDirection);
 
+            DestroyObjects();
+
             StartWalkToNPC startWalk = GetComponent<StartWalkToNPC>();
 
             if (StartAnimator == false && startWalk == null)
@@ -62,9 +78,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
             }
             else
             {
-
                 canStartDialogue = false;
-
             }
         }
     }

@@ -53,7 +53,7 @@ public class GetAllDialogueAppear : MonoBehaviour
                     newDialogueSave.Path = paths;
 
                     newDialogueSave.SecondsToDestroy = startWalk.Seconds;
-                    newDialogueSave.StopPlayerForMoving = startWalk.StopPlayerForMoving;
+                    newDialogueSave.StopPlayerForMoving = startWalk.StopPlayerFromMoving;
                 }
                 else
                 {
@@ -99,14 +99,11 @@ public class GetAllDialogueAppear : MonoBehaviour
                     }
                     else
                     {
-
                         StartWalkToNPC startWalk = newObject.GetComponent<StartWalkToNPC>();
 
                         if (startWalk != null)
                         {
                             startWalk.NPC = getObject.GetObjectFromId(dialogue.IdToAnotherObject);
-                            startWalk.Seconds = startWalk.Seconds;
-                            startWalk.StopPlayerForMoving = startWalk.StopPlayerForMoving;
 
                             startWalk.NpcTimeSchedules.Clear();
 
