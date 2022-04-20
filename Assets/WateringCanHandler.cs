@@ -12,7 +12,7 @@ public class WateringCanHandler : MonoBehaviour
 
     private void Awake()
     {
-        playerStats = playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
+        playerStats = playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>();
         grid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>().Grid;
     }
 

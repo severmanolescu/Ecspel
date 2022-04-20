@@ -22,6 +22,8 @@ public class CraftingHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool fKeyPress = true;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -77,8 +79,10 @@ public class CraftingHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
+                fKeyPress = true;
+
                 if (playerInventory.activeSelf == false)
                 {
                     playerMovement.TabOpen = true;
@@ -112,6 +116,11 @@ public class CraftingHandler : MonoBehaviour
 
                 StopAllCoroutines();
                 StartCoroutine(WaitToNextFrame());
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
             }
         }
     }

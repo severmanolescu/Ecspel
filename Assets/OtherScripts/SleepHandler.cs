@@ -44,7 +44,7 @@ public class SleepHandler : MonoBehaviour
 
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
 
-        playerStats = GameObject.Find("Player/Canvas/Stats");
+        playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats");
 
         dayTimer = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>();
 

@@ -16,7 +16,7 @@ public class PickaxeHandler : MonoBehaviour
     {
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
 
-        playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>();
     }
 
     private void DamageStone(GameObject node, Item item)

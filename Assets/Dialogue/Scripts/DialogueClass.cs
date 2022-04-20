@@ -7,12 +7,9 @@ public class DialogueClass
     [Header("false - Player\ntrue - NPC")]
     [SerializeField] private bool whoReply;
 
-    [TextArea(4, 4)]
+    [TextArea(6, 6)]
     [SerializeField] private string dialogue;
-
-    [SerializeField] private DialogueScriptableObject nextDialogue;
 
     public bool WhoReply { get { return whoReply; } }
     public string Dialogue { get { return dialogue; } }
-    public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
 }

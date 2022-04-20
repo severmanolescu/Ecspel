@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerInventory = gameObject.GetComponentInChildren<PlayerInventory>();
 
-        playerStats = GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>();
 
         audioSource = gameObject.GetComponent<AudioSource>();
 

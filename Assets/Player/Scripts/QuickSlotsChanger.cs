@@ -13,8 +13,8 @@ public class QuickSlotsChanger : MonoBehaviour
     private Keyboard keyboard;
     private Mouse mouse;
 
-    private bool forwardButtonPress = false;
-    private bool backButtonPress = false;
+    private bool forwardButtonPress = true;
+    private bool backButtonPress = true;
 
     public int SelectedItemIndex { get { return selectedItemIndex; } }
     public Item Item { get { return quickSlots[selectedItemIndex - 1].Item; } }

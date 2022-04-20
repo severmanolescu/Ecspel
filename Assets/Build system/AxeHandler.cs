@@ -98,7 +98,7 @@ public class AxeHandler : MonoBehaviour
             }
         }
 
-        GameObject.Find("Global/Player/Canvas/Stats").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
+        GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
     }
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)

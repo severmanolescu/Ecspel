@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestTabHandler : MonoBehaviour
 {
-     [SerializeField] private GameObject answarePrefab;
+    [SerializeField] private GameObject answarePrefab;
 
     private Transform spawnLocation;
     

@@ -8,7 +8,7 @@ public class Quest : ScriptableObject
 { 
     public string title;
 
-    [TextArea(1, 10)]
+    [TextArea(10, 10)]
     public string details;
 
     [Header("Item receive:")]

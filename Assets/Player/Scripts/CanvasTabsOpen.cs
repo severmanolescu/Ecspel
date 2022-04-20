@@ -16,6 +16,10 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool inventoryButtonPress = true;
+    private bool questButtonPress = true;
+    private bool skillsButtonPress = true;
+
     [Header("Menu canvas")]
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private GameObject menuPrincipal;
@@ -76,8 +80,10 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         if (canOpenTabs == true)
         {
-            if (keyboard.eKey.wasPressedThisFrame)
+            if (keyboard.eKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[1].IsPressed() == false && inventoryButtonPress == false))
             {
+                inventoryButtonPress = true;
+
                 if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
                     questShow.DeleteData();
@@ -110,8 +116,10 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if (keyboard.tabKey.wasPressedThisFrame)
+            else if (keyboard.tabKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[4].IsPressed() == false && questButtonPress == false))
             {
+                questButtonPress = true;
+
                 if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
                 {
                     questShow.gameObject.SetActive(true);
@@ -143,8 +151,10 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if(keyboard.qKey.wasPressedThisFrame)
+            else if(keyboard.qKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == false && skillsButtonPress == false))
             {
+                skillsButtonPress = true;
+
                 if (skills.activeSelf)
                 {
                     questShow.gameObject.SetActive(false);
@@ -237,6 +247,19 @@ public class CanvasTabsOpen : MonoBehaviour
                     help.SetActive(false);
                 }                           
             }
+
+            if (Joystick.current != null && Joystick.current.allControls[1].IsPressed() == true)
+            {
+                inventoryButtonPress = false;
+            }
+            if (Joystick.current != null && Joystick.current.allControls[4].IsPressed() == true)
+            {
+                questButtonPress = false;
+            }
+            if (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == true)
+            {
+                skillsButtonPress = false;
+            }
         }
         else
         {
@@ -266,10 +289,5 @@ public class CanvasTabsOpen : MonoBehaviour
     public void SetCanOpenTabs(bool canOpenTabs)
     {
         this.canOpenTabs = canOpenTabs;
-    }
-
-    public void ControllerTabPress()
-    {
-        Debug.Log("Das");
     }
 }

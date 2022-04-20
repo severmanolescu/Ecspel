@@ -9,6 +9,8 @@ public class DialogueHandler : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private string sentace;
+
     private void Awake()
     {
         dialogueText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -74,12 +76,23 @@ public class DialogueHandler : MonoBehaviour
     {
         if(dialogue != null)
         {
+            sentace = dialogue;
+
             StopAllCoroutines();
 
             gameObject.SetActive(true);
 
             StartCoroutine(TypeSentence(dialogue));
         }
+    }
+
+    public void ShowAllText()
+    {
+        StopAllCoroutines();
+
+        audioSource.Stop();
+
+        dialogueText.text = sentace;
     }
 
     public void StopDialogue()

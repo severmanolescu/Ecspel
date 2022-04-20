@@ -12,20 +12,14 @@ public class NPCDialogueSave : MonoBehaviour
 
     private int GetDialogueId(DialogueScriptableObject dialogue)
     {
-        return dialogue.DialogueID;
+        return dialogueClasses.IndexOf(dialogue);
     }
 
     public DialogueScriptableObject GetDialogueFromId(int id)
     {
-        if(id != -1 && id < dialogueClasses.Count)
+        if(id >= 0 && id < dialogueClasses.Count)
         {
-            foreach(DialogueScriptableObject dialogue in dialogueClasses)
-            {
-                if(dialogue.DialogueID == id)
-                {
-                    return dialogue;
-                }
-            }
+            return dialogueClasses[id];
         }
 
         return null;

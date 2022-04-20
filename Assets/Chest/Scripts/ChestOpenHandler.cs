@@ -38,6 +38,8 @@ public class ChestOpenHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool fKeyPress = true;
+
     public int ChestId { get => chestId; set => chestId = value; }
 
     private void Awake()
@@ -163,8 +165,10 @@ public class ChestOpenHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
+                fKeyPress = true;
+
                 if (GameObject.Find("Player/Canvas/PlayerItems").activeSelf == false)
                 {
                     OpenChest();
@@ -174,9 +178,16 @@ public class ChestOpenHandler : MonoBehaviour
                     CloseChestKeyPress();
                 }
             }
-            else if (keyboard.fKey.wasPressedThisFrame)
+            else if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
+                fKeyPress = true;
+
                 CloseChestKeyPress();
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
             }
         }
     }

@@ -99,7 +99,9 @@ public class QuestTabDataSet : MonoBehaviour
                     Item newItem = item.Item.Copy();
                     newItem.Amount = item.Amount;
 
-                    ItemSlot itemSlot = Instantiate(itemSlotPrefab, spawnLocationGiveItems.position, spawnLocationGiveItems.rotation).GetComponent<ItemSlot>();
+                    ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
+
+                    itemSlot.transform.SetParent(spawnLocationReceiveItems);
 
                     itemSlot.SetItem(newItem);
 
@@ -117,26 +119,26 @@ public class QuestTabDataSet : MonoBehaviour
             textReceiveItems.SetActive(false);
         }
 
-        track.gameObject.SetActive(true);
-        if (quest is GiveItem)
-        {
-            GiveItem giveItem = (GiveItem)quest;
+        //track.gameObject.SetActive(true);
+        //if (quest is GiveItem)
+        //{
+        //    GiveItem giveItem = (GiveItem)quest;
 
-            track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
-            track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform); });
-        }
-        else if(quest is GoToLocation)
-        {
-            track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
-        }
-        else if(quest is CutTrees)
-        {
-            track.gameObject.SetActive(false);
-        }
-        else if (quest is DestroyStone)
-        {
-            track.gameObject.SetActive(false);
-        }
+        //    track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
+        //    track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform); });
+        //}
+        //else if(quest is GoToLocation)
+        //{
+        //    track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
+        //}
+        //else if(quest is CutTrees)
+        //{
+        //    track.gameObject.SetActive(false);
+        //}
+        //else if (quest is DestroyStone)
+        //{
+        //    track.gameObject.SetActive(false);
+        //}
 
     }
 

@@ -32,6 +32,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool fKeyPress = true;
+
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
 
     private void Awake()
@@ -71,8 +73,10 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private void Update()
     {
-        if(player != null && keyboard.fKey.wasPressedThisFrame)
+        if(player != null && (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false)))
         {
+            fKeyPress = true;
+
             if ((startHour == 0 && finishHour == 0) || 
                  dayTimer.Hours >= startHour && 
                  dayTimer.Hours <= finishHour)
@@ -104,6 +108,11 @@ public class TeleportPlayerKeyPress : MonoBehaviour
             {
                 worldText.ShowText("Usa inchisa!");
             }
+        }
+
+        if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+        {
+            fKeyPress = false;
         }
     }
 }

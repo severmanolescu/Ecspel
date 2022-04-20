@@ -18,7 +18,7 @@ public class DialogueChanger : MonoBehaviour
 
     private NpcId npcId;
 
-    private bool firstDialogue = false;
+    private bool firstDialogue = true;
 
     private bool stop = true;
 
@@ -27,6 +27,11 @@ public class DialogueChanger : MonoBehaviour
     private Transform playerLocation;
 
     private Keyboard keyboard;
+
+    private bool fKeyPress = true;
+    private bool spaceKeyPress = true;
+
+    private bool spaceKeyPressedFirstTime = false;
 
     private SetDialogueToPlayer setDialogueToPlayer = null;
 
@@ -118,7 +123,7 @@ public class DialogueChanger : MonoBehaviour
 
             NPCDialogue.DeleteDialogue();
         }
-
+        
         if(NPCDialogue != null && NPCDialogue.Quest.Count > 0)
         {
             SetQuest();
@@ -132,16 +137,9 @@ public class DialogueChanger : MonoBehaviour
             NPCDialogue.Dialogue = null;
         }
 
-        if(NPCDialogue != null && dialogueScriptable.Quest.Count > 0)
-        {
-            SetQuestWhoToGive();
+        VerifyDialogueForQuests();
 
-            questTab.AddQuest(dialogueScriptable.Quest);
-
-            NPCDialogue.DeleteDialogue();
-        } 
-
-        if(setDialogueToPlayer != null)
+        if (setDialogueToPlayer != null)
         {
             setDialogueToPlayer.DialogueEnd();
         }
@@ -151,15 +149,25 @@ public class DialogueChanger : MonoBehaviour
         stop = true;
     }
 
+    private void VerifyDialogueForQuests()
+    {
+        if (NPCDialogue != null && dialogueScriptable.Quest.Count > 0)
+        {
+            SetQuestWhoToGive();
+
+            questTab.AddQuest(dialogueScriptable.Quest);
+
+            NPCDialogue.DeleteDialogue();
+        }
+    }
+
     private void Update()
     {
-        if (!stop && dialogueScriptable != null && dialogueIndex <= dialogueRespons.Count)
+        if (!stop && dialogueScriptable != null)
         {
-            if (dialogueRespons.Count == 0)
+            if (NPCDialogue != null && dialogueRespons.Count == 0)
             {
                 DialogueEnd();
-
-                NPCDialogue.CanWalkAgain();
             }
 
             if (firstDialogue == true)
@@ -181,39 +189,61 @@ public class DialogueChanger : MonoBehaviour
                 }
             }
 
-            if (keyboard.spaceKey.wasPressedThisFrame)
+            if (keyboard.spaceKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[8].IsPressed() == false && spaceKeyPress == false))
             {
-                if(dialogueRespons[dialogueIndex - 1].NextDialogue != null)
+                spaceKeyPress = true;
+
+                if (spaceKeyPressedFirstTime == false)
                 {
-                    NPCDialogue.DeleteDialogue();
+                    spaceKeyPressedFirstTime = true;
 
-                    DeleteDialogue();
+                    dialogueHandler.ShowAllText();
 
-                    SetDialogue(dialogueRespons[dialogueIndex - 1].NextDialogue);
-
-                    return;
+                    if (NPCDialogue != null)
+                    {
+                        NPCDialogue.ShowAllText();
+                    }
                 }
-
-                if(dialogueIndex >= dialogueRespons.Count)
+                else
                 {
-                    DialogueEnd();
+                    spaceKeyPressedFirstTime = false;
 
-                    return;
-                }
+                    if (dialogueIndex >= dialogueRespons.Count)
+                    {
+                        DialogueEnd();
 
-                if(dialogueRespons[dialogueIndex] != null)
-                {
-                    SetDialogue(dialogueRespons[dialogueIndex]);
+                        if (NPCDialogue != null && dialogueScriptable.NextDialogue != null)
+                        {
+                            SetDialogue(dialogueScriptable.NextDialogue);
+                        }
+                        else
+                        {
+                            if (NPCDialogue != null)
+                            {
+                                NPCDialogue.DeleteDialogue();
+                            }
+                        }
+                    }
+                    else if (dialogueRespons[dialogueIndex] != null)
+                    {
+                        SetDialogue(dialogueRespons[dialogueIndex]);
 
-                    dialogueIndex++;
+                        dialogueIndex++;
+                    }
                 }
             }
-        }
 
+            if (Joystick.current != null && Joystick.current.allControls[8].IsPressed() == true)
+            {
+                spaceKeyPress = false;
+            }
+        }
         else if(NPCDialogue != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
+                fKeyPress = true;
+
                 if (stop)
                 {
                     NPCDialogue.ChangeIdleAnimationToPlayerPosition(playerLocation.position);
@@ -225,11 +255,23 @@ public class DialogueChanger : MonoBehaviour
                     DialogueEnd();
                 }
             }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
+            }
         }
     }
 
     public void SetDialogue(DialogueScriptableObject dialogueScriptable, SetDialogueToPlayer setDialogueToPlayer = null)
     {
+        if (firstDialogue == true && NPCDialogue != null)
+        {
+            NPCDialogue.AddDialogueToStart();
+
+            dialogueScriptable = NPCDialogue.Dialogue;
+        }
+
         this.setDialogueToPlayer = setDialogueToPlayer;
 
         if (dialogueScriptable != null)
@@ -247,6 +289,14 @@ public class DialogueChanger : MonoBehaviour
 
             firstDialogue = true;
             stop = false;
+        }
+        else if (NPCDialogue != null && dialogueScriptable == null)
+        {
+            DialogueEnd();
+
+            DeleteDialogue();
+
+            NPCDialogue.DeleteDialogue();
         }
         else if (NPCDialogue.Quest != null)
         {
@@ -278,9 +328,12 @@ public class DialogueChanger : MonoBehaviour
 
     public void DeleteNPC()
     {
-        NPCDialogue.DeleteDialogue();
+        if (NPCDialogue != null)
+        {
+            NPCDialogue.DeleteDialogue();
 
-        NPCDialogue = null;
+            NPCDialogue = null;
+        }
 
         DeleteDialogue();
     }

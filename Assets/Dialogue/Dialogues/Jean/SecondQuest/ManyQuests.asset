@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: ManyQuests
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Incep sa cred ca nu doresti sa ma ajuti si nu doresti nici recompensele
+      mele
+  dialogueAnswers:
+  - answer: Vreau sa te ajut
+    nextDialogue: {fileID: 11400000, guid: 686e228265266ff44bf46d67192406f2, type: 2}
+  - answer: Sunt doar curios
+    nextDialogue: {fileID: 11400000, guid: df45aff3adfdbdf44a828358760cbe01, type: 2}
+  nextDialogue: {fileID: 0}
+  quests: []

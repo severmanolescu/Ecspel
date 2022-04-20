@@ -55,14 +55,14 @@ public class AnswersHandler : MonoBehaviour
 
             ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = answer.Answer;
 
+            ansferInstance.GetComponent<SetDataToAnsware>().HideReward();
+
             if (answer.NextDialogue == null)
             {
                 ansferInstance.GetComponent<Button>().onClick.AddListener(DeleteAll);
             }
-            else
-            {
-                ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(answer.NextDialogue); });
-            }
+
+            ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { dialogueChanger.SetDialogue(answer.NextDialogue); });
 
             answers.Add(ansferInstance);
         }
@@ -87,6 +87,8 @@ public class AnswersHandler : MonoBehaviour
         ansferInstance.GetComponentInChildren<TextMeshProUGUI>().text = quest.Title;
 
         GiveItem giveItem = (GiveItem)quest;
+
+        ansferInstance.GetComponent<SetDataToAnsware>().ChangeReward(giveItem);
 
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.DeteleItems(giveItem.ItemsNeeds); });
         ansferInstance.GetComponent<Button>().onClick.AddListener(delegate { playerInventory.AddItem(quest.ItemsReceive); });

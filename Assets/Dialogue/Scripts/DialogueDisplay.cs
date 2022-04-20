@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueDisplay : MonoBehaviour
 {
     [SerializeField] private DialogueScriptableObject dialogueScriptable;
+
+    [SerializeField] private bool randomQuest = false;
 
     private GameObject questMark;
 
@@ -14,6 +15,8 @@ public class DialogueDisplay : MonoBehaviour
     private AnswersHandler answersHandler;
 
     private NpcPathFinding npcPathFinding;
+
+    private ChangeDialogue changeDialogue;
 
     private int lastIdledirection = -1;
 
@@ -34,6 +37,8 @@ public class DialogueDisplay : MonoBehaviour
         npcId = GameObject.Find("Global").GetComponent<NpcId>();
 
         npcPathFinding = GetComponent<NpcPathFinding>();
+
+        changeDialogue = GetComponent<ChangeDialogue>();
     }
 
     public void Start()
@@ -44,6 +49,25 @@ public class DialogueDisplay : MonoBehaviour
         ChangeQuestMarkState();
 
         ChangeQuestWhoToGive();
+    }
+
+    private void ChangeDialogue(DialogueScriptableObject dialogue)
+    {
+        if(changeDialogue != null)
+        {
+            if(changeDialogue.VerifyNewDialogueInList(dialogue) == true)
+            {
+                dialogueScriptable = dialogue;
+            }
+            else
+            {
+                dialogueScriptable = null;
+            }
+        }
+        else
+        {
+            dialogueScriptable = dialogue;
+        }
     }
 
     private void ChangeQuestWhoToGive()
@@ -119,7 +143,7 @@ public class DialogueDisplay : MonoBehaviour
     {
         if (dialogueScriptable != null)
         {
-            if (dialogueScriptable.HaveQuest == true)
+            if (dialogueScriptable.Quest.Count > 0)
             {
                 questMark.SetActive(true);
 
@@ -146,6 +170,14 @@ public class DialogueDisplay : MonoBehaviour
         dialogueHandler.SetDialogue(dialogue);
     }
 
+    public void ShowAllText()
+    {
+        if(dialogueHandler != null && dialogueHandler.gameObject.activeSelf == true)
+        {
+            dialogueHandler.ShowAllText();
+        }
+    }
+
     public void DeleteDialogue()
     {
         dialogueHandler.StopDialogue();
@@ -162,6 +194,14 @@ public class DialogueDisplay : MonoBehaviour
             lastIdledirection = -1;
 
             npcPathFinding.Talking = false;
+        }
+    }
+
+    public void AddDialogueToStart()
+    {
+        if (changeDialogue != null)
+        {
+            dialogueScriptable = changeDialogue.GetDialogue();
         }
     }
 

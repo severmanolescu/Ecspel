@@ -40,6 +40,9 @@ public class PlayerItemUse : MonoBehaviour
 
     private float attackDecrease = 1f;
 
+    private bool leftMousePress = true;
+    private bool rightMousePress = true;
+
     public Vector2 Inputs { set { inputs = value; } }
     public float AttackDecrease { set { attackDecrease = value; } }
 
@@ -267,14 +270,18 @@ public class PlayerItemUse : MonoBehaviour
     {
         if(playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
         {
-            if (mouse.leftButton.wasPressedThisFrame)
+            if (mouse.leftButton.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[5].IsPressed() == false && leftMousePress == false))
             {
+                leftMousePress = true;
+
                 Item item = selectedSlot.Item;
 
                 SelectedItemAction(item);
             }
-            else if (mouse.rightButton.isPressed)
+            else if (mouse.rightButton.isPressed || (Joystick.current != null && Joystick.current.allControls[9].IsPressed() == false && rightMousePress == false))
             {
+                rightMousePress = true;
+
                 if (selectedSlot.Item is WateringCan && water == true)
                 {
                     WateringCan newItem = (WateringCan)fullBucket.Copy();
@@ -294,7 +301,14 @@ public class PlayerItemUse : MonoBehaviour
                 }
             }
 
-                        
+            if (Joystick.current != null && Joystick.current.allControls[5].IsPressed() == true)
+            {
+                leftMousePress = false;
+            }
+            if (Joystick.current != null && Joystick.current.allControls[9].IsPressed() == true)
+            {
+                rightMousePress = false;
+            }
         }
         if (selectedSlot.Item is Hoe)
         {
