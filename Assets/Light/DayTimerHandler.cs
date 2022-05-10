@@ -46,7 +46,7 @@ public class DayTimerHandler : MonoBehaviour
     [Range(0, 100)]
     [SerializeField] private int percentOfFirefly;
 
-    [Header("Soundeffects:")]
+    [Header("Sound effects:")]
     [SerializeField] private AudioClip daySound;
     [SerializeField] private AudioClip nightSound;
     [SerializeField] private AudioClip rainSound;
@@ -86,6 +86,8 @@ public class DayTimerHandler : MonoBehaviour
     private StartAllFireflyParticles startAllFirefly;
 
     private ChangeSoilsState changeSoilsState;
+
+    private bool sleepFromStamina = false;
 
     private bool sleep = false;
     private float speed;
@@ -208,11 +210,7 @@ public class DayTimerHandler : MonoBehaviour
             }
             if (hours == sleepHour + 1 && sleep == false)
             {
-                sleepNotFromBed = true;
-
-                sleep = true;
-
-                GameObject.Find("PlayerHouse/Bed").GetComponent<SleepHandler>().Sleep();
+                Sleep();
             }
         }
 
@@ -244,6 +242,20 @@ public class DayTimerHandler : MonoBehaviour
         }
     }
 
+    public void Sleep(bool sleepOutOfStamina = false)
+    {
+        sleepNotFromBed = true;
+
+        sleep = true;
+
+        if(sleepOutOfStamina == true)
+        {
+            sleepFromStamina = true;
+        }
+
+        GameObject.Find("PlayerHouse/Bed").GetComponent<SleepHandler>().Sleep();
+    }
+
     private void WakeUp()
     {
         cropGrow.DayChange(days);
@@ -265,11 +277,19 @@ public class DayTimerHandler : MonoBehaviour
 
         sleep = false;
 
-        if(sleepNotFromBed == true)
+        if(sleepNotFromBed == true && sleepFromStamina == false)
         {
             worldTextDetails.ShowText("Ai adormit, dar te-ai trezit in pat!");
 
             sleepNotFromBed = false;
+        }
+        else if(sleepFromStamina == true)
+        {
+            worldTextDetails.ShowText("Ai obosit foarte rau asa ca ai ajuns ca prin miracol acasa");
+
+            sleepNotFromBed = false;
+
+            sleepFromStamina = false;
         }
 
         sleepHandler.StopSleep();

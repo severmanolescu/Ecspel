@@ -42,6 +42,8 @@ public class SaveSystemHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private ChangeDataFromQuest changeDataFromQuest;
+
     private int indexOfSaveGame;
 
     private string pathToSaveGameFolder;
@@ -67,6 +69,7 @@ public class SaveSystemHandler : MonoBehaviour
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         countPlayedMinutes = GameObject.Find("Global").GetComponent<CountPlayedMinutes>();
+        changeDataFromQuest = countPlayedMinutes.GetComponent<ChangeDataFromQuest>();
 
         npcDialogue = countPlayedMinutes.GetComponent<NPCDialogueSave>();
 
@@ -93,6 +96,21 @@ public class SaveSystemHandler : MonoBehaviour
         {
             pathToSaves = pathToSaveGameFolder + @"\SaveGame" + IndexOfSaveGame + ".svj";
         }
+    }
+
+    public void LoadSaveGame()
+    {
+        VerifyPathToSave();
+
+        SetDataToGame(ReadDataFromSave(pathToSaves));
+
+        SetLocation(false);
+
+        PositionNpcAtStartLocation();
+
+        playerAchievements.GetComponent<PositionPlayerAtLoad>().PositionPlayer();
+
+        playerGround.SetActive(true);
     }
 
     public void LoadSaveGame(int indexOfSaveGame, LoadSceneHandler loadSceneHandler)
@@ -212,6 +230,8 @@ public class SaveSystemHandler : MonoBehaviour
         countPlayedMinutes.Minutes = saveGame.PlayedMinutes;
         countPlayedMinutes.Seconds = saveGame.PlayedSecundes;
 
+        changeDataFromQuest.SetData(saveGame.Bonuses);
+
         quickSlots.Reinitialize();
     }
 
@@ -299,6 +319,8 @@ public class SaveSystemHandler : MonoBehaviour
         saveGame.FogIntensity = dayTimerHandler.FogAlpha;
 
         saveGame.SkillsLevels = skillsHandler.GetAllSkillsLevels();
+
+        saveGame.Bonuses = changeDataFromQuest.GetData();
 
         return saveGame;
     }

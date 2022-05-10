@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: JeanHowDoYouGetHere
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Toti de aici nu stim ce s-a intamplat cu noi, doar ne-am trezit aici
+      si am inceput sa ne facem locul nostru
+  - whoReply: 1
+    dialogue: Dar se mai intampla rar ca persoane de aici sa dispara si sa apare
+      altcineva in locul lor
+  dialogueAnswers:
+  - answer: Cine a fost inaintea mea?
+    nextDialogue: {fileID: 11400000, guid: d49956cab00a21f4684402270a22da96, type: 2}
+  - answer: Inapoi...
+    nextDialogue: {fileID: 11400000, guid: 5e8859a4a53c32845b0d5a5e3526ff9b, type: 2}
+  nextDialogue: {fileID: 0}
+  quests: []

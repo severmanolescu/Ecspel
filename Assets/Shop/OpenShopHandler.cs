@@ -6,10 +6,10 @@ using System;
 
 public class OpenShopHandler : MonoBehaviour
 {
-     //Types:
-     //0 - Nothing
-     //1 - normal items
-     //2 - library items: books, crafting recipes
+    [Header("Types: \n" +
+        "0 - Nothing \n" +
+        "1 - normal items \n" +
+        "2 - library items: books, crafting recipes")]
     [SerializeField] private int typeOfBuyItems;
 
     [SerializeField] private int minItems;
@@ -35,7 +35,12 @@ public class OpenShopHandler : MonoBehaviour
 
     private bool wasOpen = false;
 
+    private bool fKeyPress = true;
+
+    public bool discount = false;
+
     public List<Item> Items { get => items; set => items = value; }
+    public bool Discount { get => discount; set => discount = value; }
 
     private void Awake()
     {
@@ -121,7 +126,7 @@ public class OpenShopHandler : MonoBehaviour
     {
         if(playerInArea)
         {
-            if(Keyboard.current.fKey.wasPressedThisFrame)
+            if(Keyboard.current.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
                 if(shopInventory.gameObject.activeSelf == false)
                 {
@@ -132,7 +137,7 @@ public class OpenShopHandler : MonoBehaviour
 
                     shopInventory.gameObject.SetActive(true);
 
-                    shopInventory.SetItems(Items, typeOfBuyItems);
+                    shopInventory.SetItems(Items, typeOfBuyItems, discount);
 
                     wasOpen = true;
                 }
@@ -140,6 +145,11 @@ public class OpenShopHandler : MonoBehaviour
                 {
                     DeactivateAll();
                 }
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
             }
         }
     }

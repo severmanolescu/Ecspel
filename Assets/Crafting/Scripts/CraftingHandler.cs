@@ -16,6 +16,8 @@ public class CraftingHandler : MonoBehaviour
 
     private CraftCanvasHandler craftCanvas;
 
+    private GameObject chestCanvas;
+
     private CanvasTabsOpen canvasTabsOpen;
 
     private GameObject quickSlots;
@@ -23,6 +25,8 @@ public class CraftingHandler : MonoBehaviour
     private Keyboard keyboard;
 
     private bool fKeyPress = true;
+
+    private bool opened = false;
 
     private void Awake()
     {
@@ -38,6 +42,8 @@ public class CraftingHandler : MonoBehaviour
         quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        chestCanvas = GameObject.Find("Global/Player/Canvas/ChestStorage");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,6 +71,8 @@ public class CraftingHandler : MonoBehaviour
             canvasTabsOpen.SetCanOpenTabs(true);
 
             quickSlots.SetActive(true);
+
+            opened = false;
         }
     }
 
@@ -83,39 +91,29 @@ public class CraftingHandler : MonoBehaviour
             {
                 fKeyPress = true;
 
-                if (playerInventory.activeSelf == false)
+                if (playerMovement.MenuOpen == false && canvasTabsOpen.CanOpenTab())
                 {
-                    playerMovement.TabOpen = true;
-                    playerInventory.SetActive(true);
+                    if(playerInventory.activeSelf == false)
+                    {
+                        playerMovement.TabOpen = true;
+                        playerInventory.SetActive(true);
 
-                    craftCanvas.gameObject.SetActive(true);
-                    craftCanvas.ReinitializeAllCraftings();
+                        craftCanvas.gameObject.SetActive(true);
+                        craftCanvas.ReinitializeAllCraftings();
 
-                    quickSlots.SetActive(false);
+                        quickSlots.SetActive(false);
 
-                    canvasTabsOpen.SetCanOpenTabs(false);
+                        canvasTabsOpen.SetCanOpenTabs(false);
+
+                        craftCanvas.CraftingHandler = this;
+
+                        opened = true;
+                    }
                 }
-                else
+                else if(opened == true)
                 {
-                    playerMovement.TabOpen = false;
-                    playerInventory.SetActive(false);
-                    craftCanvas.gameObject.SetActive(false);
-
-                    quickSlots.SetActive(true);
-
-                    canvasTabsOpen.SetCanOpenTabs(true);
+                    CloseCraft();
                 }
-            }
-            else if (keyboard.escapeKey.wasPressedThisFrame)
-            {
-                playerMovement.TabOpen = false;
-                playerInventory.SetActive(false);
-                craftCanvas.gameObject.SetActive(false);
-
-                quickSlots.SetActive(true);
-
-                StopAllCoroutines();
-                StartCoroutine(WaitToNextFrame());
             }
 
             if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
@@ -123,5 +121,18 @@ public class CraftingHandler : MonoBehaviour
                 fKeyPress = false;
             }
         }
+    }
+
+    public void CloseCraft()
+    {
+        playerMovement.TabOpen = false;
+        playerInventory.SetActive(false);
+        craftCanvas.gameObject.SetActive(false);
+
+        quickSlots.SetActive(true);
+
+        canvasTabsOpen.SetCanOpenTabs(true);
+
+        opened = false;
     }
 }

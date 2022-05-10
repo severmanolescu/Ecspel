@@ -3,7 +3,7 @@ using TMPro;
 
 public class CoinsHandler : MonoBehaviour
 {
-    private int amount;
+    public int amount;
 
     private TextMeshProUGUI amountText;
 

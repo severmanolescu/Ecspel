@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: FirstDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Buna, eu sunt Jean si detin magazinul din acest sat, tu cine esti?
+  - whoReply: 0
+    dialogue: Eu sunt...
+  - whoReply: 1
+    dialogue: Nu conteaza cine esti, toata lumea este bine venita la magazinul meu,
+      acesta este deschis in fiecare zi intre orele 10-20
+  - whoReply: 1
+    dialogue: In fiecare zi sunt aduse produse noi si daca doresti pot sa cumpar
+      si eu de la tine diferite produse, dar cu pretul corespunzator
+  - whoReply: 1
+    dialogue: Si pentru ca te vad nou pe aici pot sa te ajut sa faci rost de obiecte
+      importante si chiar de bani dar pentru asta trebuie sa faci si tu anumite chestii
+      pentru mine
+  - whoReply: 1
+    dialogue: Si poate la final daca te descurci, pot sa-ti ofer ceva pentru care
+      aproape toti de aici se lupta
+  dialogueAnswers:
+  - answer: Suna foarte bine
+    nextDialogue: {fileID: 11400000, guid: c1bf03a62dd523144bd096e16a62961f, type: 2}
+  - answer: Ce anume ai de oferit?
+    nextDialogue: {fileID: 11400000, guid: d286fdd5ed6f5ae46b0ccbe81ee8fd38, type: 2}
+  nextDialogue: {fileID: 0}
+  quests: []
+  startDialogue: 1

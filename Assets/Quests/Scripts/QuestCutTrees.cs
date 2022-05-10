@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestCutTrees : MonoBehaviour
@@ -28,9 +26,10 @@ public class QuestCutTrees : MonoBehaviour
         {
             if (playerAchievements.Trees >= initialCutTrees + cutTrees.Number)
             {
-                GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(cutTrees);
+                GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(cutTrees);
+                GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(cutTrees.nextQuest);
                 
-                GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>().AddItem(cutTrees.itemsReceive);
+                GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>().AddItem(cutTrees.itemsReceive);
 
                 Destroy(this.gameObject);
             }

@@ -14,6 +14,8 @@ public class TeleportPlayerToCaves : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool fKeyPress = true;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>().gameObject;
@@ -45,9 +47,17 @@ public class TeleportPlayerToCaves : MonoBehaviour
 
     private void Update()
     {
-        if (player != null && keyboard.fKey.wasPressedThisFrame)
+        if (player != null)
         {
-            caveSystemHandler.TeleportToCaves();
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
+            {
+                caveSystemHandler.TeleportToCaves();
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
+            }
         }
     }
 }

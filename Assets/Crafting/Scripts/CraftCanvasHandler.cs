@@ -16,6 +16,10 @@ public class CraftCanvasHandler : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private CraftingHandler craftingHandler;
+
+    public CraftingHandler CraftingHandler { get => craftingHandler; set => craftingHandler = value; }
+
     private void Start()
     {
         foreach(Craft craft in initialCrafts)
@@ -54,6 +58,14 @@ public class CraftCanvasHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Close()
+    {
+        if (CraftingHandler != null)
+        {
+            craftingHandler.CloseCraft();
+        }
     }
 
     public List<Craft> GetAllCrafts()

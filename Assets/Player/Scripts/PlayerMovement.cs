@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
-    [SerializeField] private float runSpaminaUse;
+    [SerializeField] private float runStaminaUse;
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip itemPickup;
@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool tabOpen = false;
 
+    private bool menuOpen = false;
+
     private bool dialogue = false;
 
     private float speed;
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     public float FatiqueEffect { get { return fatiqueEffect; } set { fatiqueEffect = value; } }
 
     public bool Dialogue { get => dialogue; set => dialogue = value; }
+    public bool MenuOpen { get => menuOpen; set => menuOpen = value; }
 
     private void Awake()
     {
@@ -61,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
         playerInventory = gameObject.GetComponentInChildren<PlayerInventory>();
 
-        playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
         audioSource = gameObject.GetComponent<AudioSource>();
 
@@ -133,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (inputs != Vector2.zero)
                 {
-                    playerStats.DecreseStamina(runSpaminaUse * Time.deltaTime * fatiqueEffect);
+                    playerStats.DecreseStamina(runStaminaUse * Time.deltaTime * fatiqueEffect);
                 }
             }
             else

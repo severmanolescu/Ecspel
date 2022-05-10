@@ -89,33 +89,28 @@ public class QuestTabDataSet : MonoBehaviour
             {
                 textGiveItems.SetActive(false);
             }
+        }
 
-            if(quest.itemsReceive.Count > 0)
+        if (quest.itemsReceive.Count > 0)
+        {
+            textReceiveItems.SetActive(true);
+
+            foreach (QuestItems item in quest.itemsReceive)
             {
-                textReceiveItems.SetActive(true);
+                Item newItem = item.Item.Copy();
+                newItem.Amount = item.Amount;
 
-                foreach (QuestItems item in quest.itemsReceive)
-                {
-                    Item newItem = item.Item.Copy();
-                    newItem.Amount = item.Amount;
+                ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
 
-                    ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
+                itemSlot.transform.SetParent(spawnLocationReceiveItems);
 
-                    itemSlot.transform.SetParent(spawnLocationReceiveItems);
+                itemSlot.SetItem(newItem);
 
-                    itemSlot.SetItem(newItem);
-
-                    itemSlot.DontShowDetails = true;
-                }
-            }
-            else
-            {
-                textReceiveItems.SetActive(false);
+                itemSlot.DontShowDetails = true;
             }
         }
         else
         {
-            textGiveItems.SetActive(false);
             textReceiveItems.SetActive(false);
         }
 

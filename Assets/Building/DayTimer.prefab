@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 1153658734}
   - component: {fileID: 5733261584188017116}
   - component: {fileID: 1153658746}
+  - component: {fileID: 1153658735}
+  - component: {fileID: 1153658749}
   m_Layer: 0
   m_Name: DayTimer
   m_TagString: Untagged
@@ -61,7 +63,7 @@ MonoBehaviour:
   timeSpeed: 1
   intensity: 0
   minutes: 55
-  hours: 0
+  hours: 13
   days: 0
   gradient:
     serializedVersion: 2
@@ -123,9 +125,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 6
   wakeupHour: 8
   sleepTimeSpeed: 8
-  percentOfFog: 100
+  percentOfFog: 11
   smokeMaxAlpha: 70
-  percentOfRain: 100
+  percentOfRain: 15
   rainIntensity: 0.75
   percentOfFirefly: 18
   daySound: {fileID: 8300000, guid: cc0e2f11dee0dd945869738ebe62ffda, type: 3}
@@ -467,3 +469,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1153658735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1663fbcd0a951d74495882ef033416a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1153658749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733261584188017105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9494159be7f03a47a2c5e1eb49d2fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

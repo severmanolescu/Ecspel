@@ -38,7 +38,11 @@ public class ChestOpenHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private GameObject playerItems;
+
     private bool fKeyPress = true;
+
+    private bool opened = false;
 
     public int ChestId { get => chestId; set => chestId = value; }
 
@@ -64,6 +68,8 @@ public class ChestOpenHandler : MonoBehaviour
         closeSprite = spriteRenderer.sprite;
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        playerItems = GameObject.Find("Global/Player/Canvas/PlayerItems");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -138,6 +144,8 @@ public class ChestOpenHandler : MonoBehaviour
         canvasTabsOpen.SetCanOpenTabs(false);
 
         quickSlots.SetActive(false);
+
+        opened = true;
     }
 
     private void CloseChestKeyPress()
@@ -158,6 +166,8 @@ public class ChestOpenHandler : MonoBehaviour
 
         quickSlots.SetActive(true);
 
+        opened = false;
+
         quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
     }
 
@@ -169,20 +179,17 @@ public class ChestOpenHandler : MonoBehaviour
             {
                 fKeyPress = true;
 
-                if (GameObject.Find("Player/Canvas/PlayerItems").activeSelf == false)
+                if (playerMovement.MenuOpen == false && canvasTabsOpen.CanOpenTab())
                 {
-                    OpenChest();
+                    if (playerItems.activeSelf == false)
+                    {
+                        OpenChest();
+                    }
                 }
-                else
+                else if(opened == true)
                 {
                     CloseChestKeyPress();
                 }
-            }
-            else if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
-            {
-                fKeyPress = true;
-
-                CloseChestKeyPress();
             }
 
             if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
@@ -209,13 +216,13 @@ public class ChestOpenHandler : MonoBehaviour
 
         quickSlots.SetActive(true);
 
+        opened = false;
+
         quickSlots.GetComponent<QuickSlotsChanger>().Reinitialize();
     }
 
     public void DeleteAllItems()
     {
-        Debug.Log("delete all");
-
         chestStorage.RemoveAllItems();
     }
 }

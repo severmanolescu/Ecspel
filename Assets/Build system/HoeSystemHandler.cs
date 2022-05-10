@@ -448,7 +448,7 @@ public class HoeSystemHandler : MonoBehaviour
                 }
             }
 
-            GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>().DecreseStamina(hoe.Stamina);
+            GameObject.Find("Global/Player").GetComponent<PlayerStats>().DecreseStamina(hoe.Stamina);
             //1 - Left
             //2 - Right
             //3 - Up

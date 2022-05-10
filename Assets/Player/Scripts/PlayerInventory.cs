@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (ItemSlot auxItem in itemsSlot)
         {
-            if (auxItem.Item != null && auxItem.Item.Name == item.Name && item.Amount > 0)
+            if (auxItem.Item != null && auxItem.Item.ItemNO == item.ItemNO && item.Amount > 0)
             {
                 if (auxItem.Item.Amount < item.MaxAmount)
                 {
@@ -158,7 +158,11 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach (QuestItems quest in questItems)
         {
-            AddItem(quest.Item);
+            Item newItem = quest.Item.Copy();
+
+            newItem.Amount = quest.Amount;
+
+            AddItem(newItem);
         }
 
         return false;
@@ -168,7 +172,7 @@ public class PlayerInventory : MonoBehaviour
     {
         foreach(ItemSlot itemSlot in itemsSlot)
         {
-            if(itemSlot.Item != null && itemSlot.Item.Name == item.Name)
+            if(itemSlot.Item != null && itemSlot.Item.ItemNO == item.ItemNO)
             {
                 amount -= itemSlot.Item.Amount;
             }
@@ -204,7 +208,7 @@ public class PlayerInventory : MonoBehaviour
 
             foreach (ItemSlot itemSlot in itemsSlot)
             {
-                if (itemSlot.Item != null && itemSlot.Item.Name == questItem.Item.Name)
+                if (itemSlot.Item != null && itemSlot.Item.ItemNO == questItem.Item.ItemNO)
                 {
                     if (itemSlot.Item.Amount >= amount)
                     {
@@ -231,7 +235,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (ItemSlot itemSlot in itemsSlot)
         {
-            if (itemSlot.Item != null && itemSlot.Item.Name == item.Name)
+            if (itemSlot.Item != null && itemSlot.Item.ItemNO == item.ItemNO)
             {
                 if (itemSlot.Item.Amount >= amount)
                 {

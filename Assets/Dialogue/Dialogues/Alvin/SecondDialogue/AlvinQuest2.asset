@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b4ae7bae617243979e178b7cff26a, type: 3}
+  m_Name: AlvinQuest2
+  m_EditorClassIdentifier: 
+  title: Alvin si ciupercile
+  details: 'Alvin doreste sa-i aduci cateva ciuperci si cateva scoici
+
+    Ciupercile
+    apar prin preajma si pot sa fie colectate in fiecare zi, iar scoicile apar zilnic
+    pe plaja'
+  itemsReceive:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 300
+    minDrop: 0
+    maxDrop: 0
+  nextDialogue: {fileID: 11400000, guid: e6e11ea11d2f71f4eb4843b2fbf0789b, type: 2}
+  nextQuest: {fileID: 0}
+  indexOfBonus: -1
+  value: 0
+  whoToGiveId: 0
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: 7a210ccd303edf74e8aef9ee9d56b0df, type: 2}
+    amount: 5
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: ebdc09fd34bf58b4d8d393efee62669b, type: 2}
+    amount: 5
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: 0257f463842893a4eb37cec2f4580c0d, type: 2}
+    amount: 5
+    minDrop: 0
+    maxDrop: 0

@@ -32,6 +32,8 @@ public class SleepHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool fKeyPress = true;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
@@ -102,20 +104,25 @@ public class SleepHandler : MonoBehaviour
 
     public void Sleep()
     {
+        playerMovement.transform.position = bedLocation.position;
+
         ChangeObjectsStates(false);
 
-        dayTimer.Sleep(this);
-
-        playerMovement.transform.position = bedLocation.position;
+        dayTimer.Sleep(this); 
     }
 
     private void Update()
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
                 Sleep();
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
             }
         }
     }

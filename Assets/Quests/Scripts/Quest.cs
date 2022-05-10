@@ -20,10 +20,17 @@ public class Quest : ScriptableObject
     [Header("Next quest:")]
     public Quest nextQuest;
 
+    [Header("Give bonuses")]
+    [SerializeField] private int indexOfBonus = -1;
+    [SerializeField] private bool value = false;
+
     public string Title { get { return title; } }
     public string Details { get { return details; } }
    
     public List<QuestItems> ItemsReceive { get { return itemsReceive; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public Quest NextQuest { get { return nextQuest; } }
+
+    public int IndexOfBonus { get => indexOfBonus; set => indexOfBonus = value; }
+    public bool Value { get => value; set => this.value = value; }
 }

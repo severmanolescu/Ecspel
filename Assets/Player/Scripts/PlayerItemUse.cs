@@ -30,6 +30,8 @@ public class PlayerItemUse : MonoBehaviour
     private HarvestCropHandler harvestCropHandler;
     private BuildSystemHandler buildSystemHandler;
 
+    private LetterHandler letterHandler;
+
     private bool water = false;
 
     private Mouse mouse;
@@ -66,6 +68,8 @@ public class PlayerItemUse : MonoBehaviour
         wateringCanHandler = axeHandler.GetComponent<WateringCanHandler>();
         harvestCropHandler = axeHandler.GetComponent<HarvestCropHandler>();
         buildSystemHandler = axeHandler.GetComponent<BuildSystemHandler>();
+
+        letterHandler = GameObject.Find("Global/Player/Canvas/Letters").GetComponent<LetterHandler>();
     }
 
     private void SwordUse(Collider2D[] objects)
@@ -262,6 +266,12 @@ public class PlayerItemUse : MonoBehaviour
                         selectedSlot.ReinitializeSelectedSlot();
                     }
                 }
+            }
+            else if(item is Letter)
+            {
+                letterHandler.gameObject.SetActive(true);
+
+                letterHandler.SetData((Letter)item);
             }
         }
     }

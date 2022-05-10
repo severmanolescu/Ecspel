@@ -159,7 +159,7 @@ public class PotionAI : MonoBehaviour
 
         gameObject.AddComponent<TimeDegradation>();
 
-        GameObject.Find("Player").GetComponent<PlayerAchievements>().SmallSlime++;
+        GameObject.Find("Player").GetComponent<PlayerAchievements>().PotionKill++;
 
         Destroy(this);
     }

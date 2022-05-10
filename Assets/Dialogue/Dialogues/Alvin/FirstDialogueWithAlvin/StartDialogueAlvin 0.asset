@@ -12,19 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
   m_Name: StartDialogueAlvin 0
   m_EditorClassIdentifier: 
-  name: 
-  haveQuest: 0
   dialogueRespons:
   - whoReply: 1
-    dialogue: Salut, tu cine esti, esti unul dintre ei nu e asa?
-    nextDialogue: {fileID: 0}
-  dialogueAnswers:
-  - answer: Unul dintre ei?
-    nextDialogue: {fileID: 11400000, guid: a40fd0a1441553240b81240fd73dabe6, type: 2}
-  - answer: Nu stiu despre ce vorbesti
-    nextDialogue: {fileID: 11400000, guid: 42cdf575357c92a41a32e420a280759a, type: 2}
-  nextDialogue: {fileID: 0}
+    dialogue: Salut, eu sunt Alvin, tu esti o persoana noua pe aici, nu te cunosc
+  - whoReply: 1
+    dialogue: Presupun ca ai ceva intrebari
+  dialogueAnswers: []
+  nextDialogue: {fileID: 11400000, guid: 6160fc2b5f68fa846a8dacdd895c3f85, type: 2}
   quests:
   - {fileID: 0}
-  dialogueID: 17
-  important: 1
+  startDialogue: 1

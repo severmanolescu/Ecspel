@@ -16,6 +16,8 @@ public class ShopInventory : MonoBehaviour
     //2 - library items: books, crafting recipes
     private int typeOfBuyItems;
 
+    private bool discount = false;
+
     public int TypeOfBuyItems { get => typeOfBuyItems; }
 
     public void Close()
@@ -35,11 +37,13 @@ public class ShopInventory : MonoBehaviour
         }
     }
 
-    public void SetItems(List<Item> items, int typeOfBuyItems)
+    public void SetItems(List<Item> items, int typeOfBuyItems, bool discount)
     {
         DeleteAllOldItems();
 
         this.typeOfBuyItems = typeOfBuyItems;
+
+        this.discount = discount;
 
         foreach (Item item in items)
         {
@@ -53,7 +57,7 @@ public class ShopInventory : MonoBehaviour
     {
         ItemSlot itemSlot = Instantiate(itemSlotPrefab, spawnLocation).GetComponent<ItemSlot>();
 
-        itemSlot.SetItem(item);
+        itemSlot.SetItem(item, discount);
 
         itemSlot.ShopItems = true;
     }

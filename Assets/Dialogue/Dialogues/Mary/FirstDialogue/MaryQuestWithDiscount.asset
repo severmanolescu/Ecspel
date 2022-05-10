@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b4ae7bae617243979e178b7cff26a, type: 3}
+  m_Name: MaryQuestWithDiscount
+  m_EditorClassIdentifier: 
+  title: Misiunea de la Mary
+  details: 'Mary are o pasiune pentru stelele de mare si doreste sa-i duci cateva,
+    aceasta ti-a recomandat sa mergi la plaja din apropiere pentru a colecta stelele
+    de mare
+
+    Mary a spus ca o sa-ti ofere si un discount la toate produsele vandute
+    de catre ea dupa finalizarea misiunii'
+  itemsReceive:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 500
+    minDrop: 0
+    maxDrop: 0
+  nextDialogue: {fileID: 11400000, guid: 52c18e549cdd1544fa5047bf86e505d0, type: 2}
+  nextQuest: {fileID: 0}
+  indexOfBonus: 2
+  value: 1
+  whoToGiveId: 2
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: 0404a60bf3d342644a8f65b9e85e255f, type: 2}
+    amount: 40
+    minDrop: 0
+    maxDrop: 0

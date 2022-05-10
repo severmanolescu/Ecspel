@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b4ae7bae617243979e178b7cff26a, type: 3}
+  m_Name: JeanFiveQuest
+  m_EditorClassIdentifier: 
+  title: A cincea misiune de la Jean
+  details: Jean a spus ca este ultima misiune si ca de data asta doreste cateva smaralde
+    si cateva rubine
+  itemsReceive:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 2000
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: c8a70acfe0434c247a1fb6ac126416c5, type: 2}
+    amount: 10
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: e07cd025057570947a7eb5c9700de79c, type: 2}
+    amount: 10
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: d711f37711b9dba489b4465bfb9e2138, type: 2}
+    amount: 10
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: 531ecccfeae2327448580a705c496699, type: 2}
+    amount: 10
+    minDrop: 0
+    maxDrop: 0
+  nextDialogue: {fileID: 11400000, guid: f611e59cf0feed449b60033de40c1b7e, type: 2}
+  nextQuest: {fileID: 0}
+  indexOfBonus: 1
+  value: 1
+  whoToGiveId: 1
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: d79f7eac8d4b82048b4d15d5384c9cf6, type: 2}
+    amount: 40
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: cb89632992dec994e986f383cbdaca11, type: 2}
+    amount: 40
+    minDrop: 0
+    maxDrop: 0

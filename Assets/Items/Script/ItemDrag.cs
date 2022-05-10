@@ -24,6 +24,8 @@ public class ItemDrag : MonoBehaviour
     public Item Item { get { return item; } }
     public GameObject PreviousItem { get { return previousSlot; } }
 
+    public GameObject PreviousSlot { get => previousSlot; set => previousSlot = value; }
+
     private void Awake()
     {
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();

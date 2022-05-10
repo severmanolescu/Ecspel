@@ -26,9 +26,10 @@ public class QuestDestroyStone : MonoBehaviour
         {
             if (playerAchievements.Stones >= initialDestroyStone + destroyStone.Number)
             {
-                GameObject.Find("Player/Canvas/Field/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(destroyStone);
+                GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(destroyStone);
+                GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(destroyStone.NextQuest);
 
-                GameObject.Find("Player/Canvas/Field/Inventory/PlayerInventory").GetComponent<PlayerInventory>().AddItem(destroyStone.itemsReceive);
+                GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>().AddItem(destroyStone.itemsReceive);
 
                 Destroy(this.gameObject);
             }

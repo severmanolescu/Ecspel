@@ -20,6 +20,8 @@ public class TeleportPlayerOutsideOfCave : MonoBehaviour
 
     private Keyboard keyboard;
 
+    private bool fKeyPress = true;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>().gameObject;
@@ -59,24 +61,32 @@ public class TeleportPlayerOutsideOfCave : MonoBehaviour
 
     private void Update()
     {
-        if (player != null && keyboard.fKey.wasPressedThisFrame)
+        if (player != null)
         {
-            currentCamera.SetActive(false);
-
-            foreach (GameObject gameObject in objectsToSetActiveToFalse)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
-                gameObject.SetActive(false);
+                currentCamera.SetActive(false);
+
+                foreach (GameObject gameObject in objectsToSetActiveToFalse)
+                {
+                    gameObject.SetActive(false);
+                }
+
+                foreach (GameObject gameObject in objectsToSetActiveToTrue)
+                {
+                    gameObject.SetActive(true);
+                }
+
+                GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
+                GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopRainSound();
+
+                caveSystemHandler.TeleportOutside();
             }
 
-            foreach (GameObject gameObject in objectsToSetActiveToTrue)
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
             {
-                gameObject.SetActive(true);
+                fKeyPress = false;
             }
-
-            GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
-            GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopRainSound();
-
-            caveSystemHandler.TeleportOutside();
         }
     }
 }

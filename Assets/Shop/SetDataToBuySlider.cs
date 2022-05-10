@@ -10,6 +10,13 @@ public class SetDataToBuySlider : MonoBehaviour
 
     [SerializeField] private Button buySellButton;
 
+    [Header("Prices")]
+    [SerializeField] private float priceBuyWithoutDiscount = 2f;
+    [SerializeField] private float priceBuyWithDiscount = 1.5f;
+
+    [SerializeField] private float priceSellWithoutDiscount = 1f;
+    [SerializeField] private float priceSellWithDiscount = 1.25f;
+
     [Header("Audio effects")]
     [SerializeField] private AudioClip buySound;
     [SerializeField] private AudioClip errorSound;
@@ -24,6 +31,8 @@ public class SetDataToBuySlider : MonoBehaviour
     private Slider slider;
 
     private ItemSlot itemSlot;
+
+    private bool discount;
 
     //true - buy
     //false - sell
@@ -48,10 +57,12 @@ public class SetDataToBuySlider : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetDataToBuy(ItemSlot itemSlot)
+    public void SetDataToBuy(ItemSlot itemSlot, bool discount)
     {
         if (itemSlot.Item != null && itemSlot.Item.Amount > 0)
         {
+            this.discount = discount;
+
             slider.maxValue = itemSlot.Item.Amount;
 
             slider.value = 1;
@@ -76,10 +87,12 @@ public class SetDataToBuySlider : MonoBehaviour
         }
     }
 
-    public void SetDataToSell(ItemSlot itemSlot)
+    public void SetDataToSell(ItemSlot itemSlot, bool discount)
     {
         if (itemSlot.Item != null && itemSlot.Item.Amount > 0)
         {
+            this.discount = discount;
+
             slider.maxValue = itemSlot.Item.Amount;
 
             slider.value = 1;
@@ -106,22 +119,41 @@ public class SetDataToBuySlider : MonoBehaviour
 
     private void SetTextToCoin()
     {
-        if (itemSlot != null)
+        if (itemSlot != null && itemSlot.Item != null)
         {
+            Debug.Log(discount + " " + ((int)itemSlot.Item.SellPrice * priceBuyWithDiscount).ToString());
+
             switch (getItemType)
             {
                 case true:
                     {
-                        coins.text = (int.Parse(slider.value.ToString()) * (int)itemSlot.Item.SellPrice * 2).ToString() + "\\" +
-                                     coinsHandler.Amount;
-
-                        if (coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * 2)
+                        if (discount == false)
                         {
-                            coins.color = Color.white;
+                            coins.text = (int.Parse(slider.value.ToString()) * (int)itemSlot.Item.SellPrice * priceBuyWithoutDiscount).ToString() + "\\" +
+                                         coinsHandler.Amount;
+
+                            if (coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithoutDiscount)
+                            {
+                                coins.color = Color.white;
+                            }
+                            else
+                            {
+                                coins.color = Color.red;
+                            }
                         }
                         else
                         {
-                            coins.color = Color.red;
+                            coins.text = (int.Parse(slider.value.ToString()) * (int)itemSlot.Item.SellPrice * priceBuyWithDiscount).ToString() + "\\" +
+                                         coinsHandler.Amount;
+
+                            if (coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithDiscount)
+                            {
+                                coins.color = Color.white;
+                            }
+                            else
+                            {
+                                coins.color = Color.red;
+                            }
                         }
 
                         break;
@@ -147,9 +179,17 @@ public class SetDataToBuySlider : MonoBehaviour
     {
         if (itemSlot != null && itemSlot.Item != null)
         {
-            if (coinsHandler.Amount >= (int)slider.value * itemSlot.Item.SellPrice * 2)
+            if ((discount == false && coinsHandler.Amount >= (int)slider.value * itemSlot.Item.SellPrice * priceBuyWithoutDiscount) ||
+                (discount == true && coinsHandler.Amount >= (int)slider.value * itemSlot.Item.SellPrice * priceBuyWithDiscount))
             {
-                coinsHandler.Amount -= (int)slider.value * itemSlot.Item.SellPrice * 2;
+                if (discount == false)
+                {
+                    coinsHandler.Amount -= (int)(slider.value * itemSlot.Item.SellPrice * priceBuyWithoutDiscount);
+                }
+                else
+                {
+                    coinsHandler.Amount -= (int)(slider.value * itemSlot.Item.SellPrice * priceBuyWithDiscount);
+                }
 
                 audioSource.clip = buySound;
                 audioSource.Play();
@@ -187,7 +227,8 @@ public class SetDataToBuySlider : MonoBehaviour
     {
         if (itemSlot != null && itemSlot.Item != null)
         {
-            if (coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * 2)
+            if ((discount == false && coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithoutDiscount) ||
+                (discount == true  && coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithDiscount))
             {
                 coinsHandler.Amount -= itemSlot.Item.Amount * itemSlot.Item.SellPrice * 2;
 
@@ -249,12 +290,17 @@ public class SetDataToBuySlider : MonoBehaviour
     {
         if (itemSlot != null && itemSlot.Item != null)
         {
-            coinsHandler.Amount += itemSlot.Item.SellPrice * itemSlot.Item.Amount;
+            if (discount == false)
+            {
+                coinsHandler.Amount += (int)(itemSlot.Item.SellPrice * itemSlot.Item.Amount * priceSellWithoutDiscount);
+            }
+            else
+            {
+                coinsHandler.Amount += (int)(itemSlot.Item.SellPrice * itemSlot.Item.Amount * priceSellWithDiscount);
+            }
 
             audioSource.clip = buySound;
             audioSource.Play();
-
-            itemSlot.DeleteItem();
 
             itemSlot.DeleteItem();
         }

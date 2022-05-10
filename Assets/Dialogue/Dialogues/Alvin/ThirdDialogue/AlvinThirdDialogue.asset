@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: AlvinThirdDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Super! Acum ca am vazut ca pot avea incredere in tine trebuie sa vorbimd
+      espre lucruri mai serioase
+  - whoReply: 1
+    dialogue: 'Cred ca exista o cale de iesire de aici, dar nu este nimic sigur,
+      nu stiu daca a mai incercat cineva '
+  - whoReply: 1
+    dialogue: Exista un portal pe undeva pe aici care poate sa fie activat cu 4 
+      obiecte gasite pe aici, dar nu sunt sigur care sunt aceste obiecte
+  - whoReply: 1
+    dialogue: Nu stiu daca ai vazut, dar prin zona exista o pestera, mai bine zis
+      un sistem de pester, eu sunt sigur ca la ultima pestera exista un obiect de
+      genul, dar ne mai lipses 3
+  - whoReply: 1
+    dialogue: O sa trebuiasca sa mai explorezi ca sa le gasesti si pe celelalte,
+      poate cineva din sat stie mai multe despre asta
+  - whoReply: 1
+    dialogue: Revin-o la mine cand o gasesti pe cea din pesteri
+  dialogueAnswers: []
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: 35d522b68df60b3429734641abdade61, type: 2}
+  startDialogue: 1

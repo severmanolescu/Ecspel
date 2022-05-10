@@ -5,8 +5,6 @@ public class DialogueDisplay : MonoBehaviour
 {
     [SerializeField] private DialogueScriptableObject dialogueScriptable;
 
-    [SerializeField] private bool randomQuest = false;
-
     private GameObject questMark;
 
     private DialogueChanger dialogueChanger;
@@ -22,7 +20,7 @@ public class DialogueDisplay : MonoBehaviour
 
     private NpcId npcId;
 
-    private List<Quest> quests = new List<Quest>();
+    public List<Quest> quests = new List<Quest>();
 
     public List<Quest> Quest { get { return quests; } }
 

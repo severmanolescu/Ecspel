@@ -20,6 +20,10 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     [SerializeField] private LocationGridSave newGrid;
 
+    private CanvasTabsOpen canvasTabsOpen;
+
+    private PlayerMovement playerMovement;
+
     private WorldTextDetails worldText;
 
     private DayTimerHandler dayTimer;
@@ -49,6 +53,9 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        canvasTabsOpen = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+        playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -77,36 +84,39 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         {
             fKeyPress = true;
 
-            if ((startHour == 0 && finishHour == 0) || 
-                 dayTimer.Hours >= startHour && 
-                 dayTimer.Hours <= finishHour)
+            if (canvasTabsOpen.CanOpenTab() && playerMovement.MenuOpen == false && playerMovement.TabOpen == false)
             {
-                if (audioSource != null)
+                if ((startHour == 0 && finishHour == 0) ||
+                     dayTimer.Hours >= startHour &&
+                     dayTimer.Hours <= finishHour)
                 {
-                    audioSource.Play();
+                    if (audioSource != null)
+                    {
+                        audioSource.Play();
+                    }
+
+                    player.transform.position = TeleportToPoint.position;
+
+                    currentCamera.SetActive(false);
+                    newCamera.SetActive(true);
+
+                    foreach (GameObject gameObject in objectsToSetActiveToFalse)
+                    {
+                        gameObject.SetActive(false);
+                    }
+
+                    foreach (GameObject gameObject in objectsToSetActiveToTrue)
+                    {
+                        gameObject.SetActive(true);
+                    }
+
+                    GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
+                    GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopSoundEffects();
                 }
-
-                player.transform.position = TeleportToPoint.position;
-
-                currentCamera.SetActive(false);
-                newCamera.SetActive(true);
-
-                foreach (GameObject gameObject in objectsToSetActiveToFalse)
+                else
                 {
-                    gameObject.SetActive(false);
+                    worldText.ShowText("Usa inchisa!");
                 }
-
-                foreach (GameObject gameObject in objectsToSetActiveToTrue)
-                {
-                    gameObject.SetActive(true);
-                }
-
-                GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
-                GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopSoundEffects();
-            }
-            else
-            {
-                worldText.ShowText("Usa inchisa!");
             }
         }
 

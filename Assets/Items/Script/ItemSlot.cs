@@ -49,6 +49,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     //false - chest storage
     private bool locationOfItem;
 
+    private bool discount = false;
+
     private Item item = null;
 
     public Item Item { get { return item; } set { item = value; ReinitializeItem(); } }
@@ -56,6 +58,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public bool ShopItems { get => shopItems; set { shopItems = value; SearchForBuySlider(); } }
 
     public bool DontShowDetails { get => dontShowDetails; set => dontShowDetails = value; }
+    public bool PlayerInventory { get => playerInventory;}
 
     private void Awake()
     {
@@ -164,10 +167,12 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         return false;
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item item, bool discount = false)
     {
         if (item != null && item.Amount > 0)
         {
+            this.discount = discount;
+
             if(item.ItemNO == 69 && playerInventory == true)
             {
                 coinsHandler.Amount += item.Amount;
@@ -400,7 +405,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             {
                 if (item != null)
                 {
-                    itemDetails.SetItem(Item, 2 * Item.SellPrice);
+                    itemDetails.SetItem(Item, Item.SellPrice);
                 }
             }
             else
@@ -417,11 +422,12 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             if (shopInventory.gameObject.activeSelf == true && shopItems == false)
             {
                 if (shopInventory.TypeOfBuyItems != 0 &&
-                 ((shopInventory.TypeOfBuyItems == 2 && item is CraftRecipe) ||
-                   shopInventory.TypeOfBuyItems == 1 && !(item is CraftRecipe)))
+                   !(item is Letter) &&
+                   ((shopInventory.TypeOfBuyItems == 2 && item is CraftRecipe) ||
+                     shopInventory.TypeOfBuyItems == 1 && !(item is CraftRecipe)))
                     if (eventData.button == 0)
                     {
-                        if (keyboard.shiftKey.isPressed || item.Amount == 1)
+                        if (item != null &&( keyboard.shiftKey.isPressed || item.Amount == 1))
                         {
                             setData.SellItem(this);
                         }
@@ -429,7 +435,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                         {
                             setData.gameObject.SetActive(true);
 
-                            setData.SetDataToSell(this);
+                            setData.SetDataToSell(this, discount);
                         }
                     }
             }
@@ -491,7 +497,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             }
             else
             {
-                if (eventData.button == 0)
+                if (eventData.button == 0 && item != null)
                 {
                     if (keyboard.shiftKey.isPressed || item.Amount == 1)
                     {
@@ -501,7 +507,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     {
                         setData.gameObject.SetActive(true);
 
-                        setData.SetDataToBuy(this);
+                        setData.SetDataToBuy(this, discount);
                     }
                 }
             }

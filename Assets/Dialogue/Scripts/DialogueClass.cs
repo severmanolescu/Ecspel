@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogueClass
 {
     [Header("false - Player\ntrue - NPC")]
-    [SerializeField] private bool whoReply;
+    [SerializeField] private bool whoReply = true;
 
     [TextArea(6, 6)]
     [SerializeField] private string dialogue;

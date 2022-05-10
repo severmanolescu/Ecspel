@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6314945634445620416}
   - component: {fileID: 6314945634445620417}
   - component: {fileID: 6314945634445620418}
+  - component: {fileID: 344512573}
   m_Layer: 0
   m_Name: SaveSystem
   m_TagString: Untagged
@@ -62,6 +63,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   playerGround: {fileID: 0}
+  quickSlots: {fileID: 0}
 --- !u!114 &6314945634445620425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationOfDialogue: {fileID: 0}
   getObject: {fileID: 0}
+  getLocation: {fileID: 0}
 --- !u!114 &6314945634445620418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,3 +208,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnLocation: {fileID: 0}
   getItemWorld: {fileID: 0}
+--- !u!114 &344512573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314945634445620430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b033b27bc74e6f547a524be7bbf55338, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crafts:
+  - {fileID: 11400000, guid: 1eb0d8e11c1261543aca0ebdfc633d98, type: 2}
+  - {fileID: 11400000, guid: 8f5e0471fa3a2bb4ebe4660a5a51716d, type: 2}
+  - {fileID: 11400000, guid: 84af4ed1a05efe54795422e5dfc15ce2, type: 2}
+  - {fileID: 11400000, guid: 27e106f6453ac5949b6bb93a5b2d0240, type: 2}
+  - {fileID: 11400000, guid: 914ca18f68ac0ac48a3ccb5b0108ef6b, type: 2}
+  - {fileID: 11400000, guid: bf63436ef803ef540814becb9a279fae, type: 2}
+  - {fileID: 11400000, guid: 6790022a26e629d419465bc0b3b7e4fa, type: 2}
+  - {fileID: 11400000, guid: 26d9e606096f8e24ba63bde8387d33d9, type: 2}
+  - {fileID: 11400000, guid: 3a2ba2838da6faa4eb1a00df4fa06f0a, type: 2}
+  - {fileID: 11400000, guid: 248cbb4f6a6702e43bdb1564d9045e57, type: 2}
+  - {fileID: 11400000, guid: 26ddb45180b81f444a8fdf713c0b7d3f, type: 2}
+  - {fileID: 11400000, guid: 866c3d526d524a24989a3e81f0f75845, type: 2}
+  - {fileID: 11400000, guid: 9ededd5ffee92be4cb556928e16d2b8b, type: 2}
+  - {fileID: 11400000, guid: ab94611c56205c74c9af5e26fc3af496, type: 2}
+  - {fileID: 11400000, guid: 2e7e3260e4a522547b4d9aaee0ffa1f5, type: 2}
+  - {fileID: 11400000, guid: 8f7eb13bffac5f649930e6e071fa40c8, type: 2}
+  - {fileID: 11400000, guid: a4f26f8e385c2374d815eb6b0c7c8fec, type: 2}
+  - {fileID: 11400000, guid: f5dac51fb6f478545b1650610103fa72, type: 2}
+  - {fileID: 11400000, guid: 6e89d53bcf770b14595d97eac623da48, type: 2}
+  - {fileID: 11400000, guid: cea49e61b5011c749bb84ae1f9b13c47, type: 2}
+  - {fileID: 11400000, guid: 0e02ee4d33e6c4146b9d75020d83247b, type: 2}
+  craftCanvas: {fileID: 0}

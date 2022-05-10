@@ -7,6 +7,7 @@ public class Item : ScriptableObject
 {
     [SerializeField] private new string name;
 
+    [TextArea(5, 5)]
     [SerializeField] private string details;
 
     [SerializeField] private int sellPrice;
@@ -16,6 +17,8 @@ public class Item : ScriptableObject
     [SerializeField] private int maxAmount;
 
     [SerializeField] private int itemNO;
+
+    [SerializeField] private bool importantItem = false;
 
     public Item(string name, string details, int amount, int maxAmount, int itemNO, int sellPrice)
     {
@@ -35,6 +38,7 @@ public class Item : ScriptableObject
     public int MaxAmount { get { return maxAmount; } }
 
     public int SellPrice { get => sellPrice; set => sellPrice = value; }
+    public bool ImportantItem { get => importantItem; set => importantItem = value; }
 
     public Item Copy()
     {

@@ -35,6 +35,8 @@ public class DialogueChanger : MonoBehaviour
 
     private SetDialogueToPlayer setDialogueToPlayer = null;
 
+    public DialogueScriptableObject startDialogue = null;
+
     private void Awake()
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
@@ -135,6 +137,11 @@ public class DialogueChanger : MonoBehaviour
         else if(NPCDialogue != null && dialogueScriptable.NextDialogue == null)
         {
             NPCDialogue.Dialogue = null;
+        }
+
+        if(dialogueScriptable.DialogueAnswers.Count == 0 && dialogueScriptable.NextDialogue == null)
+        {
+            startDialogue = null;
         }
 
         VerifyDialogueForQuests();
@@ -276,6 +283,11 @@ public class DialogueChanger : MonoBehaviour
 
         if (dialogueScriptable != null)
         {
+            if(dialogueScriptable.StartDialogue == true)
+            {
+                startDialogue = dialogueScriptable;
+            }
+
             this.dialogueScriptable = dialogueScriptable;
 
             dialogueRespons = dialogueScriptable.DialogueRespons;
@@ -330,7 +342,12 @@ public class DialogueChanger : MonoBehaviour
     {
         if (NPCDialogue != null)
         {
-            NPCDialogue.DeleteDialogue();
+            if (startDialogue != null)
+            {
+                NPCDialogue.Dialogue = startDialogue;
+
+                startDialogue = null;
+            }
 
             NPCDialogue = null;
         }

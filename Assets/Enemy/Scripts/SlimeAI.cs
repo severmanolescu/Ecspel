@@ -137,7 +137,7 @@ public class SlimeAI : MonoBehaviour
         Destroy(GetComponent<BoxCollider2D>());
         gameObject.AddComponent<TimeDegradation>();
 
-        GameObject.Find("Player").GetComponent<PlayerAchievements>().SmallSlime++;
+        GameObject.Find("Player").GetComponent<PlayerAchievements>().SlimeKill++;
 
         Destroy(this);
     }

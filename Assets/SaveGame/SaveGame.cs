@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using UnityEngine;
 
 [Serializable]
 public class SaveGame
@@ -59,6 +58,8 @@ public class SaveGame
 
     private List<int> skillsLevels;
 
+    private List<bool> bonuses;
+
     public int Days { get => days; set => days = value; }
     public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
@@ -86,4 +87,5 @@ public class SaveGame
     public bool Fog { get => fog; set => fog = value; }
     public int FogIntensity { get => fogIntensity; set => fogIntensity = value; }
     public List<int> SkillsLevels { get => skillsLevels; set => skillsLevels = value; }
+    public List<bool> Bonuses { get => bonuses; set => bonuses = value; }
 }

@@ -50,6 +50,8 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool fKeyPress = true;
+
     private int elapsedTimeSmelting;
     private int elapsedTimeFuel;
 
@@ -387,7 +389,7 @@ public class ForgeOpenHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame)
+            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
                 if (playerInventory.activeSelf == false)
                 {
@@ -438,6 +440,11 @@ public class ForgeOpenHandler : MonoBehaviour
 
                     canvasOpen = false;
                 }
+            }
+
+            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
+            {
+                fKeyPress = false;
             }
         }
     }

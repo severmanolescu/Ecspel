@@ -58,12 +58,12 @@ public class SkillsHandler : MonoBehaviour
     {
         switch (skill)
         {
-            case 0: value = (powerLevel + 1) * 50; break;
-            case 1: value = (attackLevel + 1) * 50; break;
-            case 2: value = (farmingLevel + 1) * 50; break;
-            case 3: value = (staminaLevel + 1) * 50; break;
-            case 4: value = (healthLevel + 1) * 50; break;
-            case 5: value = (luckLevel + 1) * 50; break;
+            case 0: value = (powerLevel + 1) * 100; break;
+            case 1: value = (attackLevel + 1) * 100; break;
+            case 2: value = (farmingLevel + 1) * 100; break;
+            case 3: value = (staminaLevel + 1) * 100; break;
+            case 4: value = (healthLevel + 1) * 100; break;
+            case 5: value = (luckLevel + 1) * 100; break;
             default: value = 0; break;
         }
 
@@ -72,7 +72,7 @@ public class SkillsHandler : MonoBehaviour
 
     public void IncresePowerLevel()
     {
-        int skillValue = (powerLevel + 1) * 50;
+        int skillValue = (powerLevel + 1) * 100;
 
         if (powerLevel < 10 && coinsHandler.Amount >= skillValue)
         {
@@ -81,7 +81,7 @@ public class SkillsHandler : MonoBehaviour
     }
     public void IncreseAttackLevel()
     {
-        int skillValue = (attackLevel + 1) * 50;
+        int skillValue = (attackLevel + 1) * 100;
 
         if (attackLevel < 10 && coinsHandler.Amount >= skillValue)
         {
@@ -90,7 +90,7 @@ public class SkillsHandler : MonoBehaviour
     }
     public void IncreseFarmingLevel()
     {
-        int skillValue = (farmingLevel + 1) * 50;
+        int skillValue = (farmingLevel + 1) * 100;
 
         if (farmingLevel < 10 && coinsHandler.Amount >= skillValue)
         {
@@ -99,7 +99,7 @@ public class SkillsHandler : MonoBehaviour
     }
     public void IncreseStaminaLevel()
     {
-        int skillValue = (staminaLevel + 1) * 50;
+        int skillValue = (staminaLevel + 1) * 100;
 
         if (staminaLevel < 10 && coinsHandler.Amount >= skillValue)
         {            
@@ -108,7 +108,7 @@ public class SkillsHandler : MonoBehaviour
     }
     public void IncreseHealthLevel()
     {
-        int skillValue = (healthLevel + 1) * 50;
+        int skillValue = (healthLevel + 1) * 100;
 
         if (healthLevel < 10 && coinsHandler.Amount >= skillValue)
         {            
@@ -117,7 +117,7 @@ public class SkillsHandler : MonoBehaviour
     }
     public void IncreseLuckLevel()
     {
-        int skillValue = (luckLevel + 1) * 50;
+        int skillValue = (luckLevel + 1) * 100;
 
         if (luckLevel < 10 && coinsHandler.Amount >= skillValue)
         {            

@@ -57,6 +57,16 @@ public class QuestTabHandler : MonoBehaviour
         {
             GetComponent<QuestDestroyStoneHandle>().SetDestroyStonequest(quest);
         }
+        else if (quest is KillEnemy)
+        {
+            GetComponent<QuestKillEnemyHandle>().SetKillEnemyQuest(quest);
+        }
+        else if(quest is QuestTalk)
+        {
+            QuestTalk questTalk = (QuestTalk)quest;
+
+           npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
+        }
     }
 
     private bool VerifyQuest(Quest quest)

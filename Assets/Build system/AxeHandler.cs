@@ -90,15 +90,13 @@ public class AxeHandler : MonoBehaviour
                             {
                                 ChangeGridData(gridNode, grid, newItem);
                             }
-
-                            Debug.Log(newItem.Amount);
                         }
                     }
                 }
             }
         }
 
-        GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
+        GameObject.Find("Global/Player").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
     }
 
     private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)
