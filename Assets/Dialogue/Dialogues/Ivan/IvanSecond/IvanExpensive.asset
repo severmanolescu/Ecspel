@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
   m_Name: IvanExpensive
   m_EditorClassIdentifier: 
-  dialogueRespons: []
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: 'O sa vezi ca o sa merite '
   dialogueAnswers: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000}
   quests: []
-  startDialogue: 0
+  startDialogue: 1

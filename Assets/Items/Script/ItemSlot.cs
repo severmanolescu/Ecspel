@@ -218,6 +218,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
                 amount.gameObject.SetActive(true);
             }
+            else
+            {
+                DeleteItem();
+            }
 
             if (item is WateringCan)
             {
@@ -340,7 +344,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                     }
                     else if (itemDrag != null)
                     {
-                        if (item != null && item.Name == itemDrag.Item.Name)
+                        if (item != null && itemDrag.Item != null && item.Name == itemDrag.Item.Name)
                         {
                             if (item.Amount <= item.MaxAmount)
                             {

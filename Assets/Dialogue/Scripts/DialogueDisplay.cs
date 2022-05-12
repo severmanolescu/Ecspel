@@ -20,7 +20,7 @@ public class DialogueDisplay : MonoBehaviour
 
     private NpcId npcId;
 
-    public List<Quest> quests = new List<Quest>();
+    private List<Quest> quests = new List<Quest>();
 
     public List<Quest> Quest { get { return quests; } }
 

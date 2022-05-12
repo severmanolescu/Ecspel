@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,9 @@ public class OpenDoorWithItem : MonoBehaviour
 
     [Header("Input text")]
     [SerializeField] private GameObject text;
+
+    [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
+    [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
     private GameObject player = null;
 
@@ -86,6 +90,18 @@ public class OpenDoorWithItem : MonoBehaviour
                         dayTimer.StopSoundEffects();
 
                         audioSource.Play();
+
+                        foreach (GameObject gameObject in objectsToSetActiveToFalse)
+                        {
+                            gameObject.SetActive(false);
+                        }
+
+                        foreach (GameObject gameObject in objectsToSetActiveToTrue)
+                        {
+                            gameObject.SetActive(true);
+                        }
+
+                        GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopSoundEffects();
                     }
                     else
                     {

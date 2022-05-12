@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
   m_Name: IvanHardQuest
   m_EditorClassIdentifier: 
-  dialogueRespons: []
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Daca e vorba despre siguranta oamenilor mei, o sa astept cat este nevoie
   dialogueAnswers: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 20b1b2d6dd1e5e04caae2b402d9730c4, type: 2}
   quests: []
-  startDialogue: 0
+  startDialogue: 1

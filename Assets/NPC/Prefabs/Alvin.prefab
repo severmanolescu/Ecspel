@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 1302526019}
   - component: {fileID: 1302526030}
   - component: {fileID: 1302526031}
+  - component: {fileID: 1940712298}
   m_Layer: 0
   m_Name: Alvin
   m_TagString: NPC
@@ -473,7 +474,143 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288ff9824ae5f3f4588182768b31dbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcTimeSchedules: []
+  npcTimeSchedules:
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 0
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 3
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 3
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 3
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 1
+    seconds: 10
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 3
+    seconds: 13
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 1
+    seconds: 18
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 2
+    seconds: 13
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 1
+    seconds: 16
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 0
+    seconds: 21
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 0
+    seconds: 20
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 0
+    seconds: 18
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 2
+    seconds: 18
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 2
+    seconds: 0
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
+  - locationGrid: {fileID: 0}
+    location: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    idleDirection: 2
+    seconds: 30
+    hours: -1
+    minutes: 0
+    point: {fileID: 6239223006972227989}
   scheduleIndex: 0
 --- !u!114 &5682173443252739459
 MonoBehaviour:
@@ -502,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4ed9df182578044849a9f9f61a7fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 42.2, y: 241.22, z: 0}
+  position: {x: 44.47, y: 240.58, z: 0}
 --- !u!114 &1302526030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +757,71 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1940712298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239223006972227991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a448638de49bf3548a7e834323f4b203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueChoose:
+  - dialogue: {fileID: 11400000, guid: 0c38739a227aab340b3d07f3570c8f9f, type: 2}
+    weatherType: -1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: 7ef9185d5dea6b5438c5865556382e03, type: 2}
+    weatherType: -1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: c5bc187c40726b7408c6346f687ac712, type: 2}
+    weatherType: 2
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: 363839c81f930df41be5c952962334b4, type: 2}
+    weatherType: 1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e4cb253d6749f194e8c924b35312ea0e, type: 2}
+    weatherType: 3
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e4cb253d6749f194e8c924b35312ea0e, type: 2}
+    weatherType: 3
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e36a88301db261e47ab7114ac2a6dbb3, type: 2}
+    weatherType: -1
+    hourOfStart: 0
+    hourOfEnd: 0
+  - dialogue: {fileID: 11400000, guid: c8895a408c3ab4344a451f61f7d6b89d, type: 2}
+    weatherType: -1
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 7904e289c441c6349b41f719f089e44d, type: 2}
+    weatherType: 2
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 3e6c58e70451b41459d5ce3c5c53c006, type: 2}
+    weatherType: 1
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 431f54d37772e924fa5db05310abba4f, type: 2}
+    weatherType: 3
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 902919aa63363db4ba142a0f3298738b, type: 2}
+    weatherType: 0
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 902919aa63363db4ba142a0f3298738b, type: 2}
+    weatherType: 0
+    hourOfStart: 6
+    hourOfEnd: 10
 --- !u!1 &6239223007117830053
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6239223007131335125
 Transform:
   m_ObjectHideFlags: 0

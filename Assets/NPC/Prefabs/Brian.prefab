@@ -608,6 +608,7 @@ GameObject:
   - component: {fileID: 3357436720274116015}
   - component: {fileID: 445672068709447117}
   - component: {fileID: 4890060051191335511}
+  - component: {fileID: 5860926312294920134}
   m_Layer: 0
   m_Name: Brian
   m_TagString: NPC
@@ -1219,6 +1220,71 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5860926312294920134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783777804508563968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a448638de49bf3548a7e834323f4b203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueChoose:
+  - dialogue: {fileID: 11400000, guid: 0c38739a227aab340b3d07f3570c8f9f, type: 2}
+    weatherType: -1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: 7ef9185d5dea6b5438c5865556382e03, type: 2}
+    weatherType: -1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: c5bc187c40726b7408c6346f687ac712, type: 2}
+    weatherType: 2
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: 363839c81f930df41be5c952962334b4, type: 2}
+    weatherType: 1
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e4cb253d6749f194e8c924b35312ea0e, type: 2}
+    weatherType: 3
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e4cb253d6749f194e8c924b35312ea0e, type: 2}
+    weatherType: 3
+    hourOfStart: 11
+    hourOfEnd: 17
+  - dialogue: {fileID: 11400000, guid: e36a88301db261e47ab7114ac2a6dbb3, type: 2}
+    weatherType: -1
+    hourOfStart: 0
+    hourOfEnd: 0
+  - dialogue: {fileID: 11400000, guid: c8895a408c3ab4344a451f61f7d6b89d, type: 2}
+    weatherType: -1
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 7904e289c441c6349b41f719f089e44d, type: 2}
+    weatherType: 2
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 3e6c58e70451b41459d5ce3c5c53c006, type: 2}
+    weatherType: 1
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 431f54d37772e924fa5db05310abba4f, type: 2}
+    weatherType: 3
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 902919aa63363db4ba142a0f3298738b, type: 2}
+    weatherType: 0
+    hourOfStart: 6
+    hourOfEnd: 10
+  - dialogue: {fileID: 11400000, guid: 902919aa63363db4ba142a0f3298738b, type: 2}
+    weatherType: 0
+    hourOfStart: 6
+    hourOfEnd: 10
 --- !u!1 &6783777804878667653
 GameObject:
   m_ObjectHideFlags: 0

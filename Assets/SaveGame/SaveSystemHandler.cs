@@ -44,6 +44,8 @@ public class SaveSystemHandler : MonoBehaviour
 
     private ChangeDataFromQuest changeDataFromQuest;
 
+    private SpecialFlowerHandler specialFlowerHandler;
+
     private int indexOfSaveGame;
 
     private string pathToSaveGameFolder;
@@ -88,6 +90,8 @@ public class SaveSystemHandler : MonoBehaviour
         skillsHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        specialFlowerHandler = GameObject.Find("RoadCave/StoryPlace").GetComponent<SpecialFlowerHandler>();
     }
 
     private void VerifyPathToSave()
@@ -208,6 +212,8 @@ public class SaveSystemHandler : MonoBehaviour
 
         GetComponent<GetAllCrafts>().SetCrafts(saveGame.Crafts);
 
+        specialFlowerHandler.SetFlowersStatus(saveGame.FlowersPlaced, saveGame.CollectedItemTable);
+
         skillsHandler.SetSkillsLevels(saveGame.SkillsLevels);
 
         dayTimerHandler.SetWeatherAtLoad(saveGame.Raining, saveGame.Fog, saveGame.FogIntensity);
@@ -321,6 +327,9 @@ public class SaveSystemHandler : MonoBehaviour
         saveGame.SkillsLevels = skillsHandler.GetAllSkillsLevels();
 
         saveGame.Bonuses = changeDataFromQuest.GetData();
+
+        saveGame.FlowersPlaced = specialFlowerHandler.GetFlowerStatus();
+        saveGame.CollectedItemTable = specialFlowerHandler.CollectedItem;
 
         return saveGame;
     }

@@ -60,6 +60,9 @@ public class SaveGame
 
     private List<bool> bonuses;
 
+    private List<bool> flowersPlaced;
+    private bool collectedItemTable;
+
     public int Days { get => days; set => days = value; }
     public ulong PlayedMinutes { get => playedMinutes; set => playedMinutes = value; }
     public List<Tuple<int, int>> PlayerInventory { get => playerInventory; set => playerInventory = value; }
@@ -88,4 +91,6 @@ public class SaveGame
     public int FogIntensity { get => fogIntensity; set => fogIntensity = value; }
     public List<int> SkillsLevels { get => skillsLevels; set => skillsLevels = value; }
     public List<bool> Bonuses { get => bonuses; set => bonuses = value; }
+    public List<bool> FlowersPlaced { get => flowersPlaced; set => flowersPlaced = value; }
+    public bool CollectedItemTable { get => collectedItemTable; set => collectedItemTable = value; }
 }

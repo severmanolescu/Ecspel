@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562b4ae7bae617243979e178b7cff26a, type: 3}
+  m_Name: JeremyEnemy
+  m_EditorClassIdentifier: 
+  title: Jeremy si monstrii
+  details: Jeremy doreste sa-i duci obiecte de la monstrii noptii, i poti gasi peste
+    tot pe timpul serii
+  itemsReceive:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 300
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: 791f0a00936e5a6429c58c9283aa7010, type: 2}
+    amount: 3
+    minDrop: 0
+    maxDrop: 0
+  nextDialogue: {fileID: 11400000, guid: a6f81413255c134468b2787f7dc0baef, type: 2}
+  nextQuest: {fileID: 0}
+  indexOfBonus: -1
+  value: 0
+  whoToGiveId: 5
+  itemsNeeds:
+  - item: {fileID: 11400000, guid: dd2151b939c5697499e64389c92a4e2f, type: 2}
+    amount: 20
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: 49cb99a8b1b652e4f9a2e49d88042ff6, type: 2}
+    amount: 20
+    minDrop: 0
+    maxDrop: 0
+  - item: {fileID: 11400000, guid: 3b5671bfda15aef47a46fb8d9a47810d, type: 2}
+    amount: 20
+    minDrop: 0
+    maxDrop: 0
