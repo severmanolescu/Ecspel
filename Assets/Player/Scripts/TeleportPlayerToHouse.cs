@@ -8,17 +8,15 @@ public class TeleportPlayerToHouse : MonoBehaviour
 
     [SerializeField] private GameObject houseCamera;
 
-    GameObject footprintSpawnLocation;
+    private GameObject footprintSpawnLocation;
 
-    private GameObject[] cameras;
+    [SerializeField] private GameObject[] cameras;
 
     private Transform playerTransform;
 
     private void Awake()
     {
         playerTransform = GameObject.Find("Global/Player").transform;
-
-        cameras = GameObject.FindGameObjectsWithTag("MainCamera");
 
         footprintSpawnLocation = GameObject.FindWithTag("FoorprintSpawn");
     }

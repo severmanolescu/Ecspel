@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &241151227454211601
+--- !u!1 &2618964446320295289
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 241151227454211613}
-  - component: {fileID: 241151227454211603}
-  - component: {fileID: 2887875870249889165}
-  - component: {fileID: 6093507217744381237}
+  - component: {fileID: 2618964446320295285}
+  - component: {fileID: 2618964446320295291}
+  - component: {fileID: 1086238630871570149}
+  - component: {fileID: 8327348184098307677}
   m_Layer: 0
   m_Name: GhostAppearStartCaveAreaFromRoad
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &241151227454211613
+--- !u!4 &2618964446320295285
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241151227454211601}
+  m_GameObject: {fileID: 2618964446320295289}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -46.87, y: 66.4, z: 4.7487307}
   m_LocalScale: {x: 6.51, y: 6.92, z: 1}
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!61 &241151227454211603
+--- !u!61 &2618964446320295291
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241151227454211601}
+  m_GameObject: {fileID: 2618964446320295289}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -60,13 +60,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6097674, y: 1.3857727}
   m_EdgeRadius: 0
---- !u!114 &2887875870249889165
+--- !u!114 &1086238630871570149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241151227454211601}
+  m_GameObject: {fileID: 2618964446320295289}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0f3f5e608bf841479903aef8b0167f1, type: 3}
@@ -83,15 +83,15 @@ MonoBehaviour:
     hours: -1
     minutes: 0
     point: {fileID: 0}
-  seconds: 5
+  seconds: 8
   stopPlayerFromMoving: 1
---- !u!114 &6093507217744381237
+--- !u!114 &8327348184098307677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241151227454211601}
+  m_GameObject: {fileID: 2618964446320295289}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b46374a4e0d8a4f823de2d2f144482, type: 3}
@@ -101,7 +101,6 @@ MonoBehaviour:
   startAnimator: 0
   teleportPlayerToPoint: {fileID: 0}
   idleAnimationDirection: 1
-  dialogueId: 5
   toDestroyObjects:
   - {fileID: 0}
   - {fileID: 0}

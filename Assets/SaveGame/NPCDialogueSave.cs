@@ -10,7 +10,7 @@ public class NPCDialogueSave : MonoBehaviour
 
     public List<DialogueDisplay> NpcDialogue { get => npcDialogue; }
 
-    private int GetDialogueId(DialogueScriptableObject dialogue)
+    public int GetDialogueId(DialogueScriptableObject dialogue)
     {
         return dialogueClasses.IndexOf(dialogue);
     }

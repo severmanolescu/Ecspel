@@ -17,9 +17,9 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
     [Range(-1, 3)]
     [SerializeField] private int idleAnimationDirection = -1;
 
-    [SerializeField] private int dialogueId;
-
     [SerializeField] private List<GameObject> toDestroyObjects = new();
+
+    public int dialogueId = -1;
 
     private SetDialogueToPlayer setDialogueToPlayer;
 
@@ -40,6 +40,11 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
         setDialogueToPlayer = GameObject.Find("Global").GetComponent<SetDialogueToPlayer>();
 
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
+
+        if (dialogueId == -1)
+        {
+            dialogueId = GameObject.Find("Global").GetComponent<GetObjectReference>().GetObjectId(gameObject);
+        }
 
         if(StartAnimator)
         {
@@ -78,6 +83,8 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
             }
             else
             {
+                playerMovement.TabOpen = true;
+
                 canStartDialogue = false;
             }
         }
@@ -88,6 +95,12 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
         if (startAnimator == true)
         {
             animator.SetTrigger("Start");
+
+            playerMovement.TabOpen = true;
+        }
+        else
+        {
+            playerMovement.TabOpen = false;
         }
     }
 
@@ -101,5 +114,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
         GameObject.Find("PlayerHouse").GetComponent<TeleportPlayerToHouse>().Teleport();
 
         DestroyObject();
+
+        playerMovement.TabOpen = false;
     }
 }

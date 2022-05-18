@@ -79,8 +79,6 @@ public class SunShadowHandler : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     public void ChangeShadowAlpha(float alpha)

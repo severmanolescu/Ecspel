@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5998568348744767619
+--- !u!1 &6051316653519587528
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5998568348744767631}
-  - component: {fileID: 5998568348744767617}
-  - component: {fileID: 5998568348744767616}
-  - component: {fileID: 8679637352851780383}
+  - component: {fileID: 6051316653519587524}
+  - component: {fileID: 6051316653519587530}
+  - component: {fileID: 6051316653519587531}
+  - component: {fileID: 8696994457088992084}
   m_Layer: 0
   m_Name: GhostAppearHouseStart
   m_TagString: Untagged
@@ -19,14 +19,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5998568348744767631
+--- !u!4 &6051316653519587524
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998568348744767619}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 6051316653519587528}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -40.94, y: 16.044426, z: 4.7487307}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5998568348744767617
+--- !u!61 &6051316653519587530
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998568348744767619}
+  m_GameObject: {fileID: 6051316653519587528}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -60,13 +60,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6097674, y: 1.3857727}
   m_EdgeRadius: 0
---- !u!114 &5998568348744767616
+--- !u!114 &6051316653519587531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998568348744767619}
+  m_GameObject: {fileID: 6051316653519587528}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b46374a4e0d8a4f823de2d2f144482, type: 3}
@@ -76,15 +76,14 @@ MonoBehaviour:
   startAnimator: 0
   teleportPlayerToPoint: {fileID: 0}
   idleAnimationDirection: 1
-  dialogueId: 4
   toDestroyObjects: []
---- !u!114 &8679637352851780383
+--- !u!114 &8696994457088992084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998568348744767619}
+  m_GameObject: {fileID: 6051316653519587528}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0f3f5e608bf841479903aef8b0167f1, type: 3}

@@ -81,13 +81,19 @@ public class GetAllDialogueAppear : MonoBehaviour
         {
             GameObject dialogueObject = getObject.GetObjectFromId(dialogue.DialogueID);
 
+            Debug.Log(dialogue.DialogueID);
+
             if(dialogueObject != null)
             {
                 GameObject newObject = Instantiate(dialogueObject);
 
+                newObject.name = newObject.name.Replace("(Clone)", "");
+
                 newObject.transform.position = new Vector3(dialogue.PositionX, dialogue.PositionY);
 
                 newObject.transform.parent = locationOfDialogue.transform;
+
+                newObject.GetComponent<DialoguePlayerEnterInTrigger>().DialogueId = dialogue.DialogueID;
 
                 if (dialogue.IdToAnotherObject != -1)
                 {

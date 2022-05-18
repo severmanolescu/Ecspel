@@ -12,7 +12,7 @@ public class GetObjectReference : MonoBehaviour
         {
             for(int indexOfObject = 0; indexOfObject < objects.Count; indexOfObject++)
             {
-                if(objects[indexOfObject] == gameObject)
+                if(objects[indexOfObject].name == gameObject.name)
                 {
                     return indexOfObject;
                 }
@@ -24,24 +24,6 @@ public class GetObjectReference : MonoBehaviour
 
     public GameObject GetObjectFromId(int id)
     {
-        if(id >= 0 && id < objects.Count)
-        {
-            for(int indexOfObject = 0; indexOfObject < objects.Count; indexOfObject++)
-            {
-                DialoguePlayerEnterInTrigger dialogue = objects[indexOfObject].GetComponent<DialoguePlayerEnterInTrigger>();
-
-                if(dialogue != null)
-                {
-                    if(dialogue.DialogueId == id)
-                    {
-                        return objects[indexOfObject];
-                    }
-                }
-            }
-
-            return objects[id];
-        }
-
-        return null;
+        return objects[id];
     }
 }

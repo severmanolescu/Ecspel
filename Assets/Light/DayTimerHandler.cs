@@ -132,9 +132,6 @@ public class DayTimerHandler : MonoBehaviour
         worldTextDetails = GameObject.Find("Global/Player/Canvas/WorldTextDetails").GetComponent<WorldTextDetails>();
 
         changeSoilsState = GetComponent<ChangeSoilsState>();
-
-        audioSource.clip = daySound;
-        audioSource.Play();
     }
 
     private void Update()
@@ -301,6 +298,16 @@ public class DayTimerHandler : MonoBehaviour
         startAllFirefly.StopParticles();        
 
         saveSystem.StartSaveGame();
+    }
+
+    public void StopTime()
+    {
+        timeSpeed = 0;
+    }
+
+    public void StartTime()
+    {
+        timeSpeed = 1;
     }
 
     private void StartTodayWeather()
