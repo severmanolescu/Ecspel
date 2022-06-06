@@ -19,7 +19,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
     [SerializeField] private List<GameObject> toDestroyObjects = new();
 
-    public int dialogueId = -1;
+    private int dialogueId = -1;
 
     private SetDialogueToPlayer setDialogueToPlayer;
 

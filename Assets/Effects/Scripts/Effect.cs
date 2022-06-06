@@ -35,9 +35,9 @@ public class Effect : ScriptableObject
 
 public enum EffectType
 {
-    Poison,
-    InstantDamage,
-    LowDamage,
-    Slow,
-    Fatigue,
+    Otrava,
+    AtacInstant,
+    AtacSlab,
+    Incetinire,
+    Oboseala
 }

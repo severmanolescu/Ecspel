@@ -10,8 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio effects")]
     [SerializeField] private AudioClip itemPickup;
 
-    private AudioSource audioSource;
-
     private new Rigidbody2D rigidbody;
 
     private Animator animator;
@@ -23,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerItemUse playerItem;
 
     private PlayerStats playerStats;
-
-    private GameplayInputs gameplay;
 
     private Keyboard keyboard;
 
@@ -65,10 +61,6 @@ public class PlayerMovement : MonoBehaviour
         playerInventory = gameObject.GetComponentInChildren<PlayerInventory>();
 
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
-
-        audioSource = gameObject.GetComponent<AudioSource>();
-
-        gameplay = new GameplayInputs();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
 
@@ -128,7 +120,9 @@ public class PlayerMovement : MonoBehaviour
         {
             GetInputs();
 
-            inputs = inputs.normalized;        
+            inputs = inputs.normalized;
+
+                Debug.Log(inputs.magnitude);
 
             if (keyboard.leftShiftKey.isPressed || (joystick != null && joystick.allControls[10].IsPressed() == false))
             {
@@ -174,27 +168,27 @@ public class PlayerMovement : MonoBehaviour
         if (inputs.x > 0 && inputs.y > 0) //Up right
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", inputs.y);
+            animator.SetFloat("Vertical",   inputs.y);
         }
         else if (inputs.x < 0 && inputs.y > 0) //Up left
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", inputs.y);
+            animator.SetFloat("Vertical",   inputs.y);
         }
         else if (inputs.x > 0 && inputs.y < 0) //Down right
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", inputs.y);
+            animator.SetFloat("Vertical",   inputs.y);
         }
         else if (inputs.x < 0 && inputs.y < 0) //Down left
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", inputs.y);
+            animator.SetFloat("Vertical",   inputs.y);
         }
         else
         {
             animator.SetFloat("Horizontal", inputs.x);
-            animator.SetFloat("Vertical", inputs.y);
+            animator.SetFloat("Vertical",   inputs.y);
         }
     }
 
@@ -231,8 +225,8 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
 
         animator.SetFloat("Horizontal", 0);
-        animator.SetFloat("Vertical", 0);
-        animator.SetFloat("Speed", 0);
+        animator.SetFloat("Vertical",   0);
+        animator.SetFloat("Speed",      0);
     }
 
     public void ChangeIdleAnimationDirection(int direction)
@@ -241,16 +235,16 @@ public class PlayerMovement : MonoBehaviour
 
         switch(direction)
         {
-            case 0: directionToChange = Vector3.left; break;
-            case 1: directionToChange = Vector3.right; break;
-            case 2: directionToChange = Vector3.up; break;
-            case 3: directionToChange = Vector3.down; break;
+            case 0: directionToChange = Vector3.left;   break;
+            case 1: directionToChange = Vector3.right;  break;
+            case 2: directionToChange = Vector3.up;     break;
+            case 3: directionToChange = Vector3.down;   break;
         }
 
         if(directionToChange != Vector3.zero)
         {
             animator.SetFloat("HorizontalFacing", directionToChange.x);
-            animator.SetFloat("VerticalFacing", directionToChange.y);
+            animator.SetFloat("VerticalFacing",   directionToChange.y);
         }
     }
 }

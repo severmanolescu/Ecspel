@@ -27,7 +27,22 @@ public class StartWalkToNPC : MonoBehaviour
 
     private IEnumerator WaitForSeconds()
     {
-        yield return new WaitForSeconds(Seconds);
+        int second = 0;
+
+        Debug.Log("asdasd");
+
+        while(second < seconds)
+        {
+            yield return new WaitForSeconds(1);
+
+            second++;
+
+            if (StopPlayerFromMoving == true)
+            {
+                playerMovement.TabOpen = true;
+                canvas.canOpenTabs = false;
+            }
+        }
 
         if (StopPlayerFromMoving == true)
         {

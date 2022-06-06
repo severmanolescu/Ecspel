@@ -65,9 +65,9 @@ public class EffectHandler : MonoBehaviour
 
             switch(effect.Effect.EffectType)
             {
-                case EffectType.Poison: playerStats.TakeDamageEffect(effect.Effect.Power * Time.deltaTime); break;
+                case EffectType.Otrava: playerStats.TakeDamageEffect(effect.Effect.Power * Time.deltaTime); break;
 
-                case EffectType.InstantDamage:
+                case EffectType.AtacInstant:
                     {
                         if (effect.StartEffect == false)
                         {
@@ -79,7 +79,7 @@ public class EffectHandler : MonoBehaviour
                         break;
                     }
 
-                case EffectType.LowDamage:
+                case EffectType.AtacSlab:
                     {
                         if (effect.StartEffect == false)
                         {
@@ -91,7 +91,7 @@ public class EffectHandler : MonoBehaviour
                         break;
                     }
 
-                case EffectType.Slow:
+                case EffectType.Incetinire:
                     {
                         if (effect.StartEffect == false)
                         {
@@ -104,7 +104,7 @@ public class EffectHandler : MonoBehaviour
 
                         break;
                     }
-                case EffectType.Fatigue:
+                case EffectType.Oboseala:
                     {
                         if (effect.StartEffect == false)
                         {
@@ -122,11 +122,11 @@ public class EffectHandler : MonoBehaviour
             {
                 switch(effect.Effect.EffectType)
                 {
-                    case EffectType.LowDamage: playerItemUse.AttackDecrease = 1f; break;
+                    case EffectType.AtacSlab: playerItemUse.AttackDecrease = 1f; break;
 
-                    case EffectType.Slow: playerMovement.SlowEffect = 1f; GetComponent<Animator>().speed *= effect.Effect.Power; break;
+                    case EffectType.Incetinire: playerMovement.SlowEffect = 1f; GetComponent<Animator>().speed *= effect.Effect.Power; break;
 
-                    case EffectType.Fatigue: playerMovement.FatiqueEffect = 1f; break;
+                    case EffectType.Oboseala: playerMovement.FatiqueEffect = 1f; break;
                 }
 
                 Destroy(effect.GameObject);
