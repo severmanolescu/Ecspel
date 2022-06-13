@@ -122,8 +122,6 @@ public class PlayerMovement : MonoBehaviour
 
             inputs = inputs.normalized;
 
-                Debug.Log(inputs.magnitude);
-
             if (keyboard.leftShiftKey.isPressed || (joystick != null && joystick.allControls[10].IsPressed() == false))
             {
                 inputs *= runSpeed;

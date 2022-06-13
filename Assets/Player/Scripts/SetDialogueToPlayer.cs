@@ -38,12 +38,4 @@ public class SetDialogueToPlayer : MonoBehaviour
             dialoguePlayerEnter.DialogueEnd();
         }
     }
-
-    private void Update()
-    {
-        if(Keyboard.current.gKey.wasPressedThisFrame)
-        {
-            SetDialogue(initialDialogue);
-        }
-    }
 }

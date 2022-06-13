@@ -151,10 +151,7 @@ public class DayTimerHandler : MonoBehaviour
 
                 if (chance <= percentOfFirefly)
                 {
-                    if (fog == false && raining == false)
-                    {
-                        startAllFirefly.StartParticles();
-                    }
+                    startAllFirefly.StartParticles();
                 }
 
                 if(soundEffectSetted == true)
@@ -166,7 +163,6 @@ public class DayTimerHandler : MonoBehaviour
                         audioSource.Play();
                     }
 
-
                     soundEffectSetted = false;
                 }
             }
@@ -174,7 +170,7 @@ public class DayTimerHandler : MonoBehaviour
             {
                 startAllFirefly.StopParticles();
 
-                if(fog == false && raining == false && soundEffectSetted == false)
+                if(raining == false && soundEffectSetted == false)
                 {
                     audioSource.clip = daySound;
 
@@ -228,7 +224,7 @@ public class DayTimerHandler : MonoBehaviour
 
         if(sleep == true && (days > startDay || sleepNotFromBed == true))
         {
-            if (wakeupHour == Hours )
+            if (Hours == wakeupHour)
             {
                 WakeUp();
             }

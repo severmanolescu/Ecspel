@@ -121,8 +121,6 @@ public class SetDataToBuySlider : MonoBehaviour
     {
         if (itemSlot != null && itemSlot.Item != null)
         {
-            Debug.Log(discount + " " + ((int)itemSlot.Item.SellPrice * priceBuyWithDiscount).ToString());
-
             switch (getItemType)
             {
                 case true:

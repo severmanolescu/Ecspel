@@ -5,8 +5,6 @@ public class DialogueDisplay : MonoBehaviour
 {
     [SerializeField] private DialogueScriptableObject dialogueScriptable;
 
-    private GameObject questMark;
-
     private DialogueChanger dialogueChanger;
 
     private DialogueHandler dialogueHandler;
@@ -30,7 +28,6 @@ public class DialogueDisplay : MonoBehaviour
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
         answersHandler = gameObject.GetComponentInChildren<AnswersHandler>();
-        questMark = gameObject.transform.Find("QuestMark").gameObject;
 
         npcId = GameObject.Find("Global").GetComponent<NpcId>();
 
@@ -143,21 +140,8 @@ public class DialogueDisplay : MonoBehaviour
         {
             if (dialogueScriptable.Quest.Count > 0)
             {
-                questMark.SetActive(true);
-
                 ChangeQuestWhoToGive();
             }
-            else
-            {
-                if (questMark != null)
-                {
-                    questMark.SetActive(false);
-                }
-            }
-        }
-        else
-        {
-            questMark.SetActive(false);
         }
     }
 

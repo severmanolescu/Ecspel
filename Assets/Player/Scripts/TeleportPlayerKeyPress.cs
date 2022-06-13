@@ -58,15 +58,15 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+private void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Player"))
     {
-        if (collision.CompareTag("Player"))
-        {
-            player = collision.gameObject;
+        player = collision.gameObject;
 
-            text.SetActive(true);
-        }
+        text.SetActive(true);
     }
+}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
