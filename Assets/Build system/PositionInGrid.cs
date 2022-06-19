@@ -30,7 +30,6 @@ public class PositionInGrid : MonoBehaviour
             }
         }
 
-
         if (locationGrid != null)
         {
             Grid<GridNode> grid = LocationGrid.Grid;

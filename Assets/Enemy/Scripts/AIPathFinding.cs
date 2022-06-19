@@ -68,8 +68,6 @@ public class AIPathFinding : MonoBehaviour
         {
             Vector3 moveDir = (position - transform.position).normalized;
 
-            float distanceBefore = Vector3.Distance(transform.position, position);
-
             transform.position = transform.position + moveDir * speed * Time.deltaTime;
 
             if (position.x > transform.position.x)

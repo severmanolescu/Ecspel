@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class Grid<TGridObject>
 {
-    public class OnGridObjectChangedEventArgs : EventArgs
-    {
-        public int x;
-        public int y;
-    }
-
     private int height;
     private int width;
     private float cellSize;
