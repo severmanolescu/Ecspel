@@ -81,8 +81,6 @@ public class GetAllDialogueAppear : MonoBehaviour
         {
             GameObject dialogueObject = getObject.GetObjectFromId(dialogue.DialogueID);
 
-            Debug.Log(dialogue.DialogueID);
-
             if(dialogueObject != null)
             {
                 GameObject newObject = Instantiate(dialogueObject);

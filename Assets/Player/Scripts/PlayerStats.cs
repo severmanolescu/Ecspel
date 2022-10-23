@@ -239,9 +239,9 @@ public class PlayerStats : MonoBehaviour
 
     public void DecreseStamina(float stamina)
     {
-        float skillStamina = skillsHandler.StaminaLevel * 0.025f * stamina;
+        //float skillStamina = skillsHandler.StaminaLevel * 0.025f * stamina;
 
-        Stamina -= (stamina - skillStamina);
+       // Stamina -= (stamina - skillStamina);
     }
 
     public bool Eat(Consumable consumable)

@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class SaveSystemHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> deactivateObjectsAtLoad = new List<GameObject>();
+    [SerializeField] private List<GameObject> listOfCameras = new List<GameObject>();
+
+    [SerializeField] private GameObject mainCamera;
 
     [SerializeField] private GameObject playerGround;
 
@@ -139,7 +142,12 @@ public class SaveSystemHandler : MonoBehaviour
     {
         foreach(GameObject npc in positionNpcAtLoad)
         {
-            npc.GetComponent<LoadGamePositionNPC>().LoadGame();
+            LoadGamePositionNPC loadGame = npc.GetComponent<LoadGamePositionNPC>();
+
+            if(loadGame != null)
+            {
+                loadGame.LoadGame();
+            }
         }
     }
 
@@ -173,6 +181,12 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void SetDataToGame(SaveGame saveGame)
     {
+        foreach(GameObject camera in listOfCameras)
+        {
+            camera.SetActive(false);
+        }
+        mainCamera.SetActive(true);
+
         dayTimerHandler.Days = saveGame.Days;
         dayTimerHandler.LoadGameSetWakeUpHour();
 

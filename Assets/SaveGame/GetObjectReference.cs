@@ -24,6 +24,11 @@ public class GetObjectReference : MonoBehaviour
 
     public GameObject GetObjectFromId(int id)
     {
-        return objects[id];
+        if (id >= 0 && id < objects.Count)
+        {
+            return objects[id];
+        }
+
+        return null;
     }
 }

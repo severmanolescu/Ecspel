@@ -18,6 +18,10 @@ public class NpcId : MonoBehaviour
 
     public DialogueDisplay GetNpcFromId(int id)
     {
-        return npcDialogue[id];
+        if (id >= 0 && id <= npcDialogue.Count - 1)
+        {
+            return npcDialogue[id];
+        }
+        return null;
     }
 }

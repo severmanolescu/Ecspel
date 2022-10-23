@@ -29,8 +29,6 @@ public class StartWalkToNPC : MonoBehaviour
     {
         int second = 0;
 
-        Debug.Log("asdasd");
-
         while(second < seconds)
         {
             yield return new WaitForSeconds(1);

@@ -74,7 +74,7 @@ public class FootPrintHandler : MonoBehaviour
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, .5f, 0), footPrefabDown.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position + new Vector3(.15f, 1f, 0), footPrefabDown.transform.rotation);
 
             instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
             instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
@@ -90,7 +90,7 @@ public class FootPrintHandler : MonoBehaviour
     {
         if (spawnLocation.gameObject.activeSelf == true)
         {
-            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -.5f, 0), footPrefabDown.transform.rotation);
+            GameObject instantiateObject = Instantiate(footPrefabDown, spawnLocation.position - new Vector3(.15f, -1f, 0), footPrefabDown.transform.rotation);
 
             instantiateObject.GetComponent<SpriteRenderer>().sortingLayerName = "Ground";
             instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
@@ -171,19 +171,16 @@ public class FootPrintHandler : MonoBehaviour
         audioSource.clip = footstep;
         audioSource.Play();
     }
-
     private void PlayFootstep1Clip()
     {
         audioSource.clip = footstep1;
         audioSource.Play();
     }
-
     private void PlayFootstepWoodClip()
     {
         audioSource.clip = FootstepWood;
         audioSource.Play();
     }
-
     private void PlayFootstepWood1Clip()
     {
         audioSource.clip = FootstepWood1;

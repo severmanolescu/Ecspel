@@ -41,15 +41,20 @@ public class FarmPlotHandler : MonoBehaviour
 
     public void DrySoilChangeSprite()
     {
+        spriteRenderer.sprite = drySoil;
+
         if (dry == true)
         {
-            spriteRenderer.sprite = drySoil;
-
             noOfDryDays++;
 
             if(noOfDryDays >= 2)
             {
-                GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().GetCropFromPosition(transform.position).GetComponent<CropGrow>().DryCrop();
+                GameObject cropObject = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().GetCropFromPosition(transform.position);
+
+                if (cropObject != null)
+                {
+                    cropObject.GetComponent<CropGrow>().DryCrop();
+                }
             }
         }
         else

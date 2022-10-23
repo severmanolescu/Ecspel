@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: JeanWahtHappen
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoReply: 1
+    dialogue: Am nevoie de cateva obiecte
+  - whoReply: 1
+    dialogue: 3 lingouri de fier si 5 morcovi, crezi ca poti sa ma ajuti? Cat mai
+      rapid te rog!
+  dialogueAnswers:
+  - answer: Sigur!
+    nextDialogue: {fileID: 11400000, guid: 2cf76ae31cad8f24f828f04f92f81297, type: 2}
+  - answer: Nu pot acum
+    nextDialogue: {fileID: 11400000, guid: bf0d7d8631eef9a40b7a57a335f85706, type: 2}
+  nextDialogue: {fileID: 0}
+  quests: []
+  startDialogue: 1

@@ -33,7 +33,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private Keyboard keyboard;
 
-    private ForgeHandler forgeHandler;
+    [SerializeField] private ForgeHandler forgeHandler;
 
     private SetDataToBuySlider setData;
 
@@ -107,8 +107,6 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
-
-        forgeHandler = GetComponentInParent<ForgeHandler>();
 
         SearchForBuySlider();
     }

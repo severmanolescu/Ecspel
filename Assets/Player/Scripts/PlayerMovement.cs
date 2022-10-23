@@ -3,9 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float joyStickLeft;
+    [SerializeField] private float joyStickRight;
+    [SerializeField] private float joyStickUp;
+    [SerializeField] private float joyStickDown;
+
+    [SerializeField] private bool moveLeft;
+    [SerializeField] private bool moveRight;
+    [SerializeField] private bool moveUp;
+    [SerializeField] private bool moveDown;
+
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float runStaminaUse;
+
+    [SerializeField] private bool spawnFootprints = true;
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip itemPickup;
@@ -49,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool Dialogue { get => dialogue; set => dialogue = value; }
     public bool MenuOpen { get => menuOpen; set => menuOpen = value; }
+    public bool SpawnFootprints { get => spawnFootprints; set => spawnFootprints = value; }
 
     private void Awake()
     {
@@ -73,43 +86,83 @@ public class PlayerMovement : MonoBehaviour
     {
         inputs = Vector2.zero;
 
-        if (keyboard.aKey.isPressed ||
-            keyboard.leftArrowKey.isPressed ||
-            (joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0))
+        if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
         {
             inputs.x = -1;
         }
-        if (keyboard.dKey.isPressed ||
-            keyboard.rightArrowKey.isPressed ||
-           (joystick != null &&  joystick.stick.left.ReadValue() < 1 && joystick.stick.left.ReadValue() > 0))
+        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
         {
-            if(inputs.x == 0)
-            {
-                inputs.x = 1;
-            }
-            else
-            {
-                inputs.x = 0;
-            }
+            inputs.x += 1;
         }
 
-        if (keyboard.sKey.isPressed ||
-            keyboard.downArrowKey.isPressed ||
-            (joystick != null &&  joystick.stick.up.ReadValue() < 1 && joystick.stick.up.ReadValue() > 0))
+        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
         {
             inputs.y = -1;
         }
-        if (keyboard.wKey.isPressed ||
-            keyboard.upArrowKey.isPressed ||
-            (joystick != null && joystick.stick.down.ReadValue() > 0))
+        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
         {
-            if (inputs.y == 0)
+            inputs.y += 1;
+        }
+
+        if (joystick != null)
+        {
+            joyStickLeft = joystick.stick.left.ReadValue();
+            joyStickRight = joystick.stick.right.ReadValue();
+            joyStickUp = joystick.stick.up.ReadValue();
+            joyStickDown = joystick.stick.down.ReadValue();
+
+            if (joystick.stick.left.ReadValue() == 0 && joystick.stick.right.ReadValue() == 1)
             {
-                inputs.y = 1;
+                moveLeft = false;
+                moveRight = false;
             }
             else
             {
-                inputs.y = 0;
+                if(joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0)
+                {
+                    moveLeft = true;
+                }
+
+                if (joystick != null && joystick.stick.left.ReadValue() < 1 && joystick.stick.left.ReadValue() > 0)
+                {
+                    moveRight = true;
+                }
+
+                if (moveLeft == true)
+                {
+                    inputs.x -= 1;
+                }
+                else if(moveRight == true)
+                {
+                    inputs.x += 1;
+                }
+            }
+
+            if(joystick.stick.up.ReadValue() == 1 && joystick.stick.down.ReadValue() == 0)
+            {
+                moveUp = false;
+                moveDown = false;
+            }
+            else
+            {
+                if (joystick != null && joystick.stick.up.ReadValue() < 1 && joystick.stick.up.ReadValue() > 0)
+                {
+                    moveDown = true;
+                }
+
+                if (joystick != null && joystick.stick.down.ReadValue() < 1 && joystick.stick.down.ReadValue() > 0)
+                {
+                    moveUp = true;
+                }
+
+                if (moveDown == true)
+                {
+                    inputs.y -= 1;
+                }
+                else if (moveUp == true)
+                {
+                    inputs.y += 1;
+                }
             }
         }
     }

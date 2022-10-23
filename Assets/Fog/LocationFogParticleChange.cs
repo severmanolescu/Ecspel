@@ -25,6 +25,8 @@ public class LocationFogParticleChange : MonoBehaviour
         foreach(ParticleSystem particle in particles)
         {
             particle.Stop();
+
+            particle.Clear();
         }
     }
 

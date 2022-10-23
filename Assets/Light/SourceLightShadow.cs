@@ -51,7 +51,7 @@ public class SourceLightShadow : MonoBehaviour
             {
                 light.ChangeIntensity(color);
 
-                if (lightStatus == false)
+                if (lightStatus == false && light != null)
                 {
                     light.gameObject.SetActive(true);
                 }

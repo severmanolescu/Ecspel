@@ -5,29 +5,29 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637899686856703032
-    m_Hash: 838714653
+      ticks: 638017192317922650
+    m_Hash: 217712150
   m_LockFileStatus:
     m_FilePath: D:/Proiect/Unity/Ecspel/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637899687440676919
-    m_Hash: 3530750561
+      ticks: 638017192733121330
+    m_Hash: 2741420588
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: D:/Proiect/Unity/Ecspel/Packages
-m_EditorVersion: 2021.3.4f1 (cb45f9cae8b7)
+m_EditorVersion: 2021.3.11f1 (0a5ca18544bf)
 m_ResolvedPackages:
-- packageId: com.unity.2d.animation@7.0.5
+- packageId: com.unity.2d.animation@7.0.7
   testable: 0
   isDirectDependency: 1
-  version: 7.0.5
+  version: 7.0.7
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.animation@7.0.5
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.animation@7.0.7
   assetPath: Packages/com.unity.2d.animation
   name: com.unity.2d.animation
   displayName: 2D Animation
@@ -85,6 +85,8 @@ m_ResolvedPackages:
     - 3.2.14
     - 3.2.15
     - 3.2.16
+    - 3.2.17
+    - 3.2.18
     - 4.0.0
     - 4.0.1
     - 4.1.0
@@ -109,6 +111,10 @@ m_ResolvedPackages:
     - 5.0.10
     - 5.1.0
     - 5.1.1
+    - 5.2.0
+    - 5.2.1
+    - 5.2.3
+    - 5.2.4
     - 6.0.0-pre.1
     - 6.0.0-pre.2
     - 6.0.1
@@ -124,15 +130,26 @@ m_ResolvedPackages:
     - 7.0.3
     - 7.0.4
     - 7.0.5
+    - 7.0.6
+    - 7.0.7
+    - 7.0.8
     - 8.0.0-pre.3
     - 8.0.0-pre.4
     - 8.0.0
+    - 8.0.1
+    - 8.0.2
+    - 8.0.3
+    - 8.0.4
+    - 9.0.0-pre.1
+    - 9.0.0-pre.3
+    - 9.0.0
     compatible:
-    - 7.0.5
-    verified: 7.0.5
+    - 7.0.7
+    - 7.0.8
+    verified: 7.0.8
   dependencies:
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.sprite
     version: 1.0.0
   - name: com.unity.modules.animation
@@ -141,7 +158,7 @@ m_ResolvedPackages:
     version: 1.0.0
   resolvedDependencies:
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.sprite
     version: 1.0.0
   - name: com.unity.mathematics
@@ -157,7 +174,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.uielementsnative
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.6.5
+    version: 1.7.3
   - name: com.unity.modules.animation
     version: 1.0.0
   keywords:
@@ -172,16 +189,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637958913350000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 85b89d45fa263d1ee875d5166b61c69181713082
+    revision: 6b783c5dfb5a72d73e2b0a70d1caf4a367c58805
     path: 
   unityLifecycle:
-    version: 7.0.5
+    version: 7.0.7
     nextVersion: 
 - packageId: com.unity.2d.pixel-perfect@5.0.1
   testable: 0
@@ -197,7 +214,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: 
+  type: tool
   description: 'The 2D Pixel Perfect package contains the Pixel Perfect Camera component
     which ensures your pixel art remains crisp and clear at different resolutions,
     and stable in motion.
@@ -227,9 +244,11 @@ m_ResolvedPackages:
     - 5.0.0-pre.2
     - 5.0.0
     - 5.0.1
+    - 5.0.2
     compatible:
     - 5.0.1
-    verified: 5.0.1
+    - 5.0.2
+    verified: 5.0.2
   dependencies: []
   resolvedDependencies: []
   keywords:
@@ -257,12 +276,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 5.0.1
     nextVersion: 
-- packageId: com.unity.2d.psdimporter@6.0.3
+- packageId: com.unity.2d.psdimporter@6.0.5
   testable: 0
   isDirectDependency: 1
-  version: 6.0.3
+  version: 6.0.5
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.psdimporter@6.0.3
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.psdimporter@6.0.5
   assetPath: Packages/com.unity.2d.psdimporter
   name: com.unity.2d.psdimporter
   displayName: 2D PSD Importer
@@ -301,6 +320,7 @@ m_ResolvedPackages:
     - 2.1.8
     - 2.1.9
     - 2.1.10
+    - 2.1.11
     - 3.0.0
     - 3.1.1
     - 3.1.3
@@ -316,6 +336,8 @@ m_ResolvedPackages:
     - 4.1.2
     - 4.1.3
     - 4.2.0
+    - 4.3.0
+    - 4.3.1
     - 5.0.0-pre.1
     - 5.0.0-pre.2
     - 5.0.1
@@ -329,24 +351,34 @@ m_ResolvedPackages:
     - 6.0.1
     - 6.0.2
     - 6.0.3
+    - 6.0.4
+    - 6.0.5
+    - 6.0.6
     - 7.0.0-pre.3
     - 7.0.0-pre.4
     - 7.0.0
+    - 7.0.1
+    - 7.0.2
+    - 7.0.3
+    - 8.0.0-pre.1
+    - 8.0.0-pre.3
+    - 8.0.0
     compatible:
-    - 6.0.3
-    verified: 6.0.3
+    - 6.0.5
+    - 6.0.6
+    verified: 6.0.6
   dependencies:
   - name: com.unity.2d.animation
-    version: 7.0.4
+    version: 7.0.7
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.sprite
     version: 1.0.0
   resolvedDependencies:
   - name: com.unity.2d.animation
-    version: 7.0.5
+    version: 7.0.7
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.sprite
     version: 1.0.0
   - name: com.unity.mathematics
@@ -362,7 +394,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.uielementsnative
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.6.5
+    version: 1.7.3
   - name: com.unity.modules.animation
     version: 1.0.0
   keywords:
@@ -378,16 +410,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637817447900000000
+  datePublishedTicks: 637958913380000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 41fd674f8e4b2265bdbc50291dced1bd86c590ee
+    revision: 21cf4d65740fb2e92caf175a7fcaea68198fa577
     path: 
   unityLifecycle:
-    version: 6.0.3
+    version: 6.0.5
     nextVersion: 
 - packageId: com.unity.2d.sprite@1.0.0
   testable: 0
@@ -440,12 +472,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.0.0
     nextVersion: 
-- packageId: com.unity.2d.spriteshape@7.0.4
+- packageId: com.unity.2d.spriteshape@7.0.6
   testable: 0
   isDirectDependency: 1
-  version: 7.0.4
+  version: 7.0.6
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.spriteshape@7.0.4
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.spriteshape@7.0.6
   assetPath: Packages/com.unity.2d.spriteshape
   name: com.unity.2d.spriteshape
   displayName: 2D SpriteShape
@@ -516,6 +548,7 @@ m_ResolvedPackages:
     - 5.1.6
     - 5.1.7
     - 5.2.0
+    - 5.3.0
     - 6.0.0-pre.1
     - 6.0.0-pre.2
     - 6.0.0
@@ -527,17 +560,22 @@ m_ResolvedPackages:
     - 7.0.2
     - 7.0.3
     - 7.0.4
+    - 7.0.5
+    - 7.0.6
     - 8.0.0-pre.4
     - 8.0.0-pre.5
     - 8.0.0
+    - 8.0.1
+    - 9.0.0-pre.1
+    - 9.0.0
     compatible:
-    - 7.0.4
-    verified: 7.0.4
+    - 7.0.6
+    verified: 7.0.6
   dependencies:
   - name: com.unity.mathematics
     version: 1.1.0
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.path
     version: 5.0.2
   - name: com.unity.modules.physics2d
@@ -546,7 +584,7 @@ m_ResolvedPackages:
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.2d.common
-    version: 6.0.3
+    version: 6.0.4
   - name: com.unity.2d.sprite
     version: 1.0.0
   - name: com.unity.modules.uielements
@@ -560,7 +598,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.uielementsnative
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.6.5
+    version: 1.7.3
   - name: com.unity.2d.path
     version: 5.0.2
   - name: com.unity.modules.physics2d
@@ -581,16 +619,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637817447990000000
+  datePublishedTicks: 637958913420000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 41fd674f8e4b2265bdbc50291dced1bd86c590ee
+    revision: 6b783c5dfb5a72d73e2b0a70d1caf4a367c58805
     path: 
   unityLifecycle:
-    version: 7.0.4
+    version: 7.0.6
     nextVersion: 
 - packageId: com.unity.2d.tilemap@1.0.0
   testable: 0
@@ -642,12 +680,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.0.0
     nextVersion: 
-- packageId: com.unity.2d.tilemap.extras@2.2.2
+- packageId: com.unity.2d.tilemap.extras@2.2.3
   testable: 0
   isDirectDependency: 1
-  version: 2.2.2
+  version: 2.2.3
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.tilemap.extras@2.2.2
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.tilemap.extras@2.2.3
   assetPath: Packages/com.unity.2d.tilemap.extras
   name: com.unity.2d.tilemap.extras
   displayName: 2D Tilemap Extras
@@ -685,16 +723,21 @@ m_ResolvedPackages:
     - 1.7.0-preview
     - 1.8.0-preview
     - 1.8.1-preview
+    - 1.8.2-preview
+    - 1.8.3-preview
     - 2.0.0-pre.1
     - 2.0.0-pre.2
     - 2.0.0
     - 2.2.0
     - 2.2.1
     - 2.2.2
+    - 2.2.3
     - 3.0.0
+    - 3.0.1
+    - 3.0.2
     compatible:
-    - 2.2.2
-    verified: 2.2.2
+    - 2.2.3
+    verified: 2.2.3
   dependencies:
   - name: com.unity.modules.tilemap
     version: 1.0.0
@@ -730,23 +773,23 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637892785880000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.com/Unity-Technologies/2d-extras.git
-    revision: 5b2ebfac9790f6a71a896669a8617bf600311d15
+    revision: 23a879f6458e28d4082f486e6c2375ef4c281145
     path: 
   unityLifecycle:
-    version: 2.2.2
+    version: 2.2.3
     nextVersion: 
-- packageId: com.unity.collab-proxy@1.15.17
+- packageId: com.unity.collab-proxy@1.17.2
   testable: 0
   isDirectDependency: 1
-  version: 1.15.17
+  version: 1.17.2
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.collab-proxy@1.15.17
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.collab-proxy@1.17.2
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -797,13 +840,24 @@ m_ResolvedPackages:
     - 1.14.9
     - 1.14.12
     - 1.14.13
+    - 1.14.15
+    - 1.14.16
+    - 1.14.17
+    - 1.14.18
     - 1.15.1
     - 1.15.4
     - 1.15.7
     - 1.15.9
     - 1.15.12
     - 1.15.13
+    - 1.15.15
+    - 1.15.16
     - 1.15.17
+    - 1.15.18
+    - 1.17.0
+    - 1.17.1
+    - 1.17.2
+    - 1.17.6
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -815,7 +869,8 @@ m_ResolvedPackages:
     - 2.1.0-preview.5
     - 2.1.0-preview.6
     compatible:
-    - 1.15.17
+    - 1.17.2
+    - 1.17.6
     - 2.0.0-preview.6
     - 2.0.0-preview.8
     - 2.0.0-preview.15
@@ -826,13 +881,13 @@ m_ResolvedPackages:
     - 2.1.0-preview.3
     - 2.1.0-preview.5
     - 2.1.0-preview.6
-    verified: 1.15.17
+    verified: 1.17.6
   dependencies:
   - name: com.unity.services.core
     version: 1.0.1
   resolvedDependencies:
   - name: com.unity.services.core
-    version: 1.4.0
+    version: 1.4.2
   - name: com.unity.modules.unitywebrequest
     version: 1.0.0
   - name: com.unity.nuget.newtonsoft-json
@@ -862,23 +917,23 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637937432480000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: fd95d00c5a7961beec85ee190181439d53fb0dba
+    revision: 14d129dcc778f8ea2fdf9d0240b47924e4f0dbb1
     path: 
   unityLifecycle:
-    version: 1.15.17
+    version: 1.17.2
     nextVersion: 
-- packageId: com.unity.ide.rider@3.0.14
+- packageId: com.unity.ide.rider@3.0.15
   testable: 0
   isDirectDependency: 1
-  version: 3.0.14
+  version: 3.0.15
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.ide.rider@3.0.14
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.ide.rider@3.0.15
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -923,10 +978,14 @@ m_ResolvedPackages:
     - 3.0.9
     - 3.0.10
     - 3.0.12
+    - 3.0.13
     - 3.0.14
+    - 3.0.15
+    - 3.0.16
     compatible:
-    - 3.0.14
-    verified: 3.0.14
+    - 3.0.15
+    - 3.0.16
+    verified: 3.0.16
   dependencies:
   - name: com.unity.ext.nunit
     version: 1.0.6
@@ -943,23 +1002,23 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637914298700000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
-    revision: e6bfc84a08a0876a2c20ec2ee0883b5ece331dfd
+    revision: b61ff0378932fdf03b5891e09c91728337de674c
     path: 
   unityLifecycle:
-    version: 3.0.14
+    version: 3.0.15
     nextVersion: 
-- packageId: com.unity.ide.visualstudio@2.0.15
+- packageId: com.unity.ide.visualstudio@2.0.16
   testable: 0
   isDirectDependency: 1
-  version: 2.0.15
+  version: 2.0.16
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.ide.visualstudio@2.0.15
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.ide.visualstudio@2.0.16
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -994,9 +1053,10 @@ m_ResolvedPackages:
     - 2.0.12
     - 2.0.14
     - 2.0.15
+    - 2.0.16
     compatible:
-    - 2.0.15
-    verified: 2.0.15
+    - 2.0.16
+    verified: 2.0.16
   dependencies:
   - name: com.unity.test-framework
     version: 1.1.9
@@ -1019,16 +1079,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637914298680000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-    revision: ca1ece42f5a2c5484ba15a15bb975ccc1f6a1a3c
+    revision: c01855ef6461b821ab0226135e96a4ee86de96be
     path: 
   unityLifecycle:
-    version: 2.0.15
+    version: 2.0.16
     nextVersion: 
 - packageId: com.unity.ide.vscode@1.2.5
   testable: 0
@@ -1091,12 +1151,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.2.5
     nextVersion: 
-- packageId: com.unity.inputsystem@1.3.0
+- packageId: com.unity.inputsystem@1.4.2
   testable: 0
   isDirectDependency: 1
-  version: 1.3.0
+  version: 1.4.2
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.inputsystem@1.3.0
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.inputsystem@1.4.2
   assetPath: Packages/com.unity.inputsystem
   name: com.unity.inputsystem
   displayName: Input System
@@ -1144,9 +1204,13 @@ m_ResolvedPackages:
     - 1.1.1
     - 1.2.0
     - 1.3.0
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
     compatible:
-    - 1.3.0
-    verified: 1.3.0
+    - 1.4.2
+    - 1.4.3
+    verified: 1.4.3
   dependencies:
   - name: com.unity.modules.uielements
     version: 1.0.0
@@ -1179,16 +1243,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637769972190000000
+  datePublishedTicks: 637964121590000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.com/Unity-Technologies/InputSystem.git
-    revision: 76d3fd182183dff9e9793431de614fd1e69e363c
+    revision: 631623e8dc57356af6692b9ef7822333edf45f37
     path: 
   unityLifecycle:
-    version: 1.3.0
+    version: 1.4.2
     nextVersion: 
 - packageId: com.unity.postprocessing@3.2.2
   testable: 0
@@ -1267,7 +1331,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637855259850000000
   documentationUrl: 
   hasRepository: 1
   repository:
@@ -1343,6 +1407,9 @@ m_ResolvedPackages:
     - 10.7.0
     - 10.8.0
     - 10.8.1
+    - 10.9.0
+    - 10.10.0
+    - 10.10.1
     - 12.1.7
     compatible:
     - 12.1.7
@@ -1351,7 +1418,7 @@ m_ResolvedPackages:
   - name: com.unity.mathematics
     version: 1.2.1
   - name: com.unity.burst
-    version: 1.5.0
+    version: 1.7.3
   - name: com.unity.render-pipelines.core
     version: 12.1.7
   - name: com.unity.shadergraph
@@ -1360,7 +1427,7 @@ m_ResolvedPackages:
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.burst
-    version: 1.6.5
+    version: 1.7.3
   - name: com.unity.render-pipelines.core
     version: 12.1.7
   - name: com.unity.ugui
@@ -1457,13 +1524,17 @@ m_ResolvedPackages:
     - 1.1.29
     - 1.1.30
     - 1.1.31
+    - 1.1.33
+    - 2.0.1-exp.1
     - 2.0.1-pre.12
     - 2.0.1-pre.18
     compatible:
     - 1.1.31
+    - 1.1.33
+    - 2.0.1-exp.1
     - 2.0.1-pre.12
     - 2.0.1-pre.18
-    verified: 1.1.31
+    verified: 1.1.33
   dependencies:
   - name: com.unity.ext.nunit
     version: 1.0.6
@@ -1602,6 +1673,7 @@ m_ResolvedPackages:
     - 2.1.6
     - 2.2.0-preview.1
     - 2.2.0-preview.2
+    - 2.2.0-preview.3
     - 3.0.0-preview.1
     - 3.0.0-preview.3
     - 3.0.0-preview.4
@@ -1621,11 +1693,13 @@ m_ResolvedPackages:
     - 3.0.6
     - 3.2.0-pre.1
     - 3.2.0-pre.2
+    - 3.2.0-pre.3
     - 4.0.0-pre.1
     compatible:
     - 3.0.6
     - 3.2.0-pre.1
     - 3.2.0-pre.2
+    - 3.2.0-pre.3
     verified: 3.0.6
   dependencies:
   - name: com.unity.ugui
@@ -1755,11 +1829,13 @@ m_ResolvedPackages:
     - 1.7.0-pre.1
     - 1.7.0-pre.2
     - 1.7.0
+    - 1.7.1
     compatible:
     - 1.6.4
     - 1.7.0-pre.1
     - 1.7.0-pre.2
     - 1.7.0
+    - 1.7.1
     verified: 1.6.4
   dependencies:
   - name: com.unity.modules.director
@@ -1941,7 +2017,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637878097330000000
   documentationUrl: 
   hasRepository: 1
   repository:
@@ -3720,9 +3796,11 @@ m_ResolvedPackages:
     - 1.0.5
     - 1.0.6
     - 2.0.2
+    - 2.0.3
     compatible:
     - 1.0.6
     - 2.0.2
+    - 2.0.3
     verified: 1.0.6
   dependencies: []
   resolvedDependencies: []
@@ -3804,7 +3882,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637841876140000000
   documentationUrl: 
   hasRepository: 1
   repository:
@@ -3815,12 +3893,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 1.2.6
     nextVersion: 
-- packageId: com.unity.burst@1.6.5
+- packageId: com.unity.burst@1.7.3
   testable: 0
   isDirectDependency: 0
-  version: 1.6.5
+  version: 1.7.3
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.burst@1.6.5
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.burst@1.7.3
   assetPath: Packages/com.unity.burst
   name: com.unity.burst
   displayName: Burst
@@ -3943,13 +4021,28 @@ m_ResolvedPackages:
     - 1.6.3
     - 1.6.4
     - 1.6.5
+    - 1.6.6
     - 1.7.0-pre.1
     - 1.7.0
+    - 1.7.1
+    - 1.7.2
+    - 1.7.3
+    - 1.7.4
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    - 1.8.0
     compatible:
-    - 1.6.5
+    - 1.6.6
     - 1.7.0-pre.1
     - 1.7.0
-    verified: 1.6.5
+    - 1.7.1
+    - 1.7.2
+    - 1.7.3
+    - 1.7.4
+    - 1.8.0-pre.1
+    - 1.8.0-pre.2
+    - 1.8.0
+    verified: 1.6.6
   dependencies:
   - name: com.unity.mathematics
     version: 1.2.1
@@ -3966,16 +4059,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637914262830000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/burst.git
-    revision: 370080478647882de41c08e5ca4b4ec26032d9c7
+    revision: 22fd3afd45fa12529bd8bd647d2a3a3af2e871bc
     path: 
   unityLifecycle:
-    version: 1.6.5
+    version: 1.6.6
     nextVersion: 
 - packageId: com.unity.render-pipelines.core@12.1.7
   testable: 0
@@ -4098,6 +4191,9 @@ m_ResolvedPackages:
     - 10.7.0
     - 10.8.0
     - 10.8.1
+    - 10.9.0
+    - 10.10.0
+    - 10.10.1
     - 12.1.7
     compatible:
     - 12.1.7
@@ -4259,6 +4355,9 @@ m_ResolvedPackages:
     - 10.7.0
     - 10.8.0
     - 10.8.1
+    - 10.9.0
+    - 10.10.0
+    - 10.10.1
     - 12.1.7
     compatible:
     - 12.1.7
@@ -4304,12 +4403,12 @@ m_ResolvedPackages:
   unityLifecycle:
     version: 12.1.7
     nextVersion: 
-- packageId: com.unity.services.core@1.4.0
+- packageId: com.unity.services.core@1.4.2
   testable: 0
   isDirectDependency: 0
-  version: 1.4.0
+  version: 1.4.2
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.services.core@1.4.0
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.services.core@1.4.2
   assetPath: Packages/com.unity.services.core
   name: com.unity.services.core
   displayName: Services Core
@@ -4337,10 +4436,16 @@ m_ResolvedPackages:
     - 1.1.0-pre.41
     - 1.1.0-pre.69
     - 1.2.0
+    - 1.3.1
+    - 1.3.2
     - 1.4.0
+    - 1.4.1
+    - 1.4.2
+    - 1.4.3
     compatible:
-    - 1.4.0
-    verified: 1.4.0
+    - 1.4.2
+    - 1.4.3
+    verified: 1.4.3
   dependencies:
   - name: com.unity.modules.unitywebrequest
     version: 1.0.0
@@ -4365,23 +4470,23 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637919618520000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git
-    revision: 92e281deb97a96f7b32464b6874de73a17c140ff
+    revision: 3964d1641ebec474aa425853985bccbdb89c2a49
     path: 
   unityLifecycle:
-    version: 1.4.0
+    version: 1.4.2
     nextVersion: 
-- packageId: com.unity.2d.common@6.0.3
+- packageId: com.unity.2d.common@6.0.4
   testable: 0
   isDirectDependency: 0
-  version: 6.0.3
+  version: 6.0.4
   source: 1
-  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.common@6.0.3
+  resolvedPath: D:\Proiect\Unity\Ecspel\Library\PackageCache\com.unity.2d.common@6.0.4
   assetPath: Packages/com.unity.2d.common
   name: com.unity.2d.common
   displayName: 2D Common
@@ -4408,6 +4513,7 @@ m_ResolvedPackages:
     - 2.0.2
     - 2.1.0
     - 2.1.1
+    - 2.1.2
     - 3.0.0
     - 3.0.1
     - 4.0.0
@@ -4416,6 +4522,8 @@ m_ResolvedPackages:
     - 4.0.3
     - 4.0.4
     - 4.1.0
+    - 4.2.0
+    - 4.2.1
     - 5.0.0-pre.1
     - 5.0.0-pre.2
     - 5.0.0
@@ -4426,12 +4534,20 @@ m_ResolvedPackages:
     - 6.0.1
     - 6.0.2
     - 6.0.3
+    - 6.0.4
+    - 6.0.5
     - 7.0.0-pre.3
     - 7.0.0-pre.4
     - 7.0.0
+    - 7.0.1
+    - 7.0.2
+    - 8.0.0-pre.1
+    - 8.0.0-pre.2
+    - 8.0.0
     compatible:
-    - 6.0.3
-    verified: 6.0.3
+    - 6.0.4
+    - 6.0.5
+    verified: 6.0.5
   dependencies:
   - name: com.unity.2d.sprite
     version: 1.0.0
@@ -4457,7 +4573,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.uielementsnative
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.6.5
+    version: 1.7.3
   keywords:
   - 2d
   registry:
@@ -4469,16 +4585,16 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637817447740000000
+  datePublishedTicks: 637958913310000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/2d.git
-    revision: 41fd674f8e4b2265bdbc50291dced1bd86c590ee
+    revision: 6b783c5dfb5a72d73e2b0a70d1caf4a367c58805
     path: 
   unityLifecycle:
-    version: 6.0.3
+    version: 6.0.4
     nextVersion: 
 - packageId: com.unity.2d.path@5.0.2
   testable: 0
@@ -4586,9 +4702,11 @@ m_ResolvedPackages:
     - 4.6.0-preview
     - 4.7.0-preview
     - 4.9.1
+    - 4.9.2
     compatible:
     - 4.9.1
-    verified: 4.9.1
+    - 4.9.2
+    verified: 4.9.2
   dependencies: []
   resolvedDependencies: []
   keywords:
@@ -4654,6 +4772,7 @@ m_ResolvedPackages:
     - 2.0.0
     - 2.0.1-preview.1
     - 2.0.2
+    - 3.0.1
     - 3.0.2
     compatible:
     - 3.0.2
@@ -4670,7 +4789,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 0
+  datePublishedTicks: 637846828220000000
   documentationUrl: 
   hasRepository: 1
   repository:

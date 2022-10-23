@@ -83,7 +83,10 @@ public class ForgeOpenHandler : MonoBehaviour
         smokeParticle.Stop();
         fireParticle.Stop();
         audioSource.Stop();
-        light.enabled = false;
+        if (light != null)
+        {
+            light.enabled = false;
+        }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -132,8 +135,8 @@ public class ForgeOpenHandler : MonoBehaviour
             }
             return newItem;
         }
+
         return null;
-    
     }
 
     private IEnumerator FuelConsume()
@@ -297,7 +300,10 @@ public class ForgeOpenHandler : MonoBehaviour
         smokeParticle.Play();
         audioSource.Play();
 
-        light.enabled = true;
+        if (light != null)
+        {
+            light.enabled = true;
+        }
 
         if (fuelConsumeCoroutineStart == false)
         {
@@ -328,7 +334,10 @@ public class ForgeOpenHandler : MonoBehaviour
 
         audioSource.Stop();
 
-        light.enabled = false;
+        if (light != null)
+        {
+            light.enabled = false;
+        }
 
         DeleteDataFromCanvas();
 

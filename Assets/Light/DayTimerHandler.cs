@@ -337,6 +337,10 @@ public class DayTimerHandler : MonoBehaviour
 
             raining = true;
 
+            GetComponent<RainHandler>().StopPArticles();
+
+            GetComponent<RainHandler>().StartParticle();
+
             PlayRainSound();
         }
         else
