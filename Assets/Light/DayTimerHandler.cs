@@ -121,7 +121,7 @@ public class DayTimerHandler : MonoBehaviour
 
         changeWindowLight = GetComponent<ChangeWindowLightIntensity>();
 
-        saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
+        //saveSystem = GameObject.Find("SaveSystem").GetComponent<SaveSystemHandler>();
 
         startAllFirefly = GetComponent<StartAllFireflyParticles>();
 

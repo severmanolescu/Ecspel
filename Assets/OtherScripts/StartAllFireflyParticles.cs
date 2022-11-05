@@ -12,7 +12,7 @@ public class StartAllFireflyParticles : MonoBehaviour
 
     private void Awake()
     {
-        particles = particlesLocation.GetComponentsInChildren<ParticleSystem>();
+        //particles = particlesLocation.GetComponentsInChildren<ParticleSystem>();
     }
 
     public void StartParticles()

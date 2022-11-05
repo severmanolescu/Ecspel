@@ -15,7 +15,7 @@ public class SetDialogueToPlayer : MonoBehaviour
 
     private void Awake()
     {
-        dialogueChanger = GameObject.Find("Player/Canvas/Dialogue").GetComponent<DialogueChanger>();
+        //dialogueChanger = GameObject.Find("Player/Canvas/Dialogue").GetComponent<DialogueChanger>();
 
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
