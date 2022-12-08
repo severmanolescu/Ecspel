@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightSourceShadowManager : MonoBehaviour
@@ -17,7 +15,7 @@ public class LightSourceShadowManager : MonoBehaviour
 
         position = transform.position;
 
-        shadow = gameObject.GetComponent<SpriteRenderer>();  
+        shadow = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -27,7 +25,7 @@ public class LightSourceShadowManager : MonoBehaviour
 
     private void Update()
     {
-        if(closestSource != null)
+        if (closestSource != null)
         {
             shadow.enabled = true;
 

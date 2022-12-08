@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ public class ChangeSoilsState : MonoBehaviour
 
     public void AddSoil(FarmPlotHandler farmPlot)
     {
-        if(farmPlot != null && !farmPlotHandlers.Contains(farmPlot))
+        if (farmPlot != null && !farmPlotHandlers.Contains(farmPlot))
         {
             farmPlotHandlers.Add(farmPlot);
         }
@@ -16,7 +15,7 @@ public class ChangeSoilsState : MonoBehaviour
 
     public void DryAllDoils()
     {
-        foreach(FarmPlotHandler farmPlotHandler in farmPlotHandlers)
+        foreach (FarmPlotHandler farmPlotHandler in farmPlotHandlers)
         {
             farmPlotHandler.DrySoilChangeSprite();
         }

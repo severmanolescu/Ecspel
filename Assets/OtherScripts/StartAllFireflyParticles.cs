@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartAllFireflyParticles : MonoBehaviour
@@ -19,12 +17,15 @@ public class StartAllFireflyParticles : MonoBehaviour
     {
         if (started == false)
         {
-            foreach (ParticleSystem particle in particles)
+            if (particles != null)
             {
-                particle.Play();
-            }
+                foreach (ParticleSystem particle in particles)
+                {
+                    particle.Play();
+                }
 
-            started = true;
+                started = true;
+            }
         }
     }
 

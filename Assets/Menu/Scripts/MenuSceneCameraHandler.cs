@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 
 public class MenuSceneCameraHandler : MonoBehaviour
 {
@@ -17,7 +14,7 @@ public class MenuSceneCameraHandler : MonoBehaviour
 
     private void Start()
     {
-        foreach(Camera camera in cameras)
+        foreach (Camera camera in cameras)
         {
             camera.gameObject.SetActive(false);
         }
@@ -27,7 +24,7 @@ public class MenuSceneCameraHandler : MonoBehaviour
     {
         Camera newCamera = cameras[Random.Range(0, cameras.Count)];
 
-        while(newCamera == currentCamera)
+        while (newCamera == currentCamera)
         {
             newCamera = cameras[Random.Range(0, cameras.Count)];
         }
@@ -39,13 +36,13 @@ public class MenuSceneCameraHandler : MonoBehaviour
 
     private void Update()
     {
-        if(currentCamera != null && currentCamera.orthographicSize <= finalSize)
+        if (currentCamera != null && currentCamera.orthographicSize <= finalSize)
         {
             currentCamera.orthographicSize += cameraSizeSpeed * Time.deltaTime;
         }
         else
         {
-            if(currentCamera == null)
+            if (currentCamera == null)
             {
                 ChangeCamera();
             }

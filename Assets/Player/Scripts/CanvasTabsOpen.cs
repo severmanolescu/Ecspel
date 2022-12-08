@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,20 +34,6 @@ public class CanvasTabsOpen : MonoBehaviour
 
     public bool canOpenTabs = true;
 
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        playerInventory.SetActive(false);
-        canvasEffects.SetActive(false);
-
-        questShow.DeleteData();
-        questShow.gameObject.SetActive(false);
-
-        menuCanvas.SetActive(false);
-        skills.SetActive(false);
-    }
-
     private void Awake()
     {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
@@ -74,7 +59,14 @@ public class CanvasTabsOpen : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Wait());
+        playerInventory.SetActive(false);
+        canvasEffects.SetActive(false);
+
+        //questShow.DeleteData();
+        //questShow.gameObject.SetActive(false);
+
+        //menuCanvas.SetActive(false);
+        //skills.SetActive(false);
     }
 
     private void Update()
@@ -87,8 +79,8 @@ public class CanvasTabsOpen : MonoBehaviour
 
                 if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
-                    questShow.DeleteData();
-                    questShow.gameObject.SetActive(false);
+                    //questShow.DeleteData();
+                    //questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(true);
                     canvasEffects.SetActive(true);
@@ -152,7 +144,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if(keyboard.qKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == false && skillsButtonPress == false))
+            else if (keyboard.qKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == false && skillsButtonPress == false))
             {
                 skillsButtonPress = true;
 
@@ -179,7 +171,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     canvasEffects.SetActive(false);
 
                     quickSlot.gameObject.SetActive(false);
-                    
+
 
                     caveSelect.SetActive(false);
 
@@ -253,7 +245,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     help.SetActive(false);
 
                     SetCanOpenTabs(true);
-                }                           
+                }
             }
 
             if (Joystick.current != null && Joystick.current.allControls[1].IsPressed() == true)
@@ -273,7 +265,7 @@ public class CanvasTabsOpen : MonoBehaviour
         {
             if (keyboard.escapeKey.wasPressedThisFrame)
             {
-                if(chestStorage.activeSelf == true)
+                if (chestStorage.activeSelf == true)
                 {
                     chestStorage.GetComponent<ChestStorageHandler>().ChestOpenHandler.CloseChest();
                 }
@@ -294,14 +286,14 @@ public class CanvasTabsOpen : MonoBehaviour
                    forgeCanvas.activeSelf == false &&
                    caveSelect.activeSelf == false &&
                    skills.activeSelf == false &&
-                   help.activeSelf == false && 
+                   help.activeSelf == false &&
                    menuCanvas.activeSelf == false)
         {
             return true;
         }
 
         return false;
-        }
+    }
 
     public void CloseMenu()
     {

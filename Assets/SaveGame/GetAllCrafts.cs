@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +19,7 @@ public class GetAllCrafts : MonoBehaviour
 
     public int GetCraftId(Craft craft)
     {
-        if(craft != null)
+        if (craft != null)
         {
             return crafts.IndexOf(craft);
         }
@@ -46,11 +45,11 @@ public class GetAllCrafts : MonoBehaviour
     {
         craftCanvas.DeleteAllCrafts();
 
-        foreach(int craft in crafts)
+        foreach (int craft in crafts)
         {
             Craft craftItem = GetCraft(craft);
 
-            if(craftItem != null)
+            if (craftItem != null)
             {
                 craftCanvas.AddCraft(craftItem, false);
             }

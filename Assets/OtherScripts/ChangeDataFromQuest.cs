@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ public class ChangeDataFromQuest : MonoBehaviour
     {
         switch (dataChoose)
         {
-            case 1: shopHandler.Discount = value;    break;
+            case 1: shopHandler.Discount = value; break;
             case 2: libraryHandler.Discount = value; break;
             default: return;
         }
@@ -33,7 +32,7 @@ public class ChangeDataFromQuest : MonoBehaviour
 
     public void SetData(List<bool> data)
     {
-        for(int indexOfData = 0; indexOfData < data.Count; indexOfData++)
+        for (int indexOfData = 0; indexOfData < data.Count; indexOfData++)
         {
             ChangeDataQuest(indexOfData + 1, data[indexOfData]);
         }

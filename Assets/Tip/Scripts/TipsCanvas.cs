@@ -1,10 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class TipsCanvas : MonoBehaviour
 {
-    [SerializeField] private CanvasTabsOpen canvasTabs;    
+    [SerializeField] private CanvasTabsOpen canvasTabs;
 
     [SerializeField] private TextMeshProUGUI tipDetails;
     [SerializeField] private Toggle stopShow;

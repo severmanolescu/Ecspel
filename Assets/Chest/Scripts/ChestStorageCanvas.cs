@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +32,7 @@ public class ChestStorageCanvas : MonoBehaviour
     {
         List<Item> items = new List<Item>();
 
-        foreach(ItemSlot item in chestItems)
+        foreach (ItemSlot item in chestItems)
         {
             items.Add(item.Item);
         }

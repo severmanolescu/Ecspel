@@ -48,9 +48,9 @@ public class DialogueDisplay : MonoBehaviour
 
     private void ChangeDialogue(DialogueScriptableObject dialogue)
     {
-        if(changeDialogue != null)
+        if (changeDialogue != null)
         {
-            if(changeDialogue.VerifyNewDialogueInList(dialogue) == true)
+            if (changeDialogue.VerifyNewDialogueInList(dialogue) == true)
             {
                 dialogueScriptable = dialogue;
             }
@@ -124,11 +124,11 @@ public class DialogueDisplay : MonoBehaviour
 
         npcPathFinding.Talking = true;
 
-        if(transform.position.x >= position.x)
+        if (transform.position.x >= position.x)
         {
             npcPathFinding.MoveIdleAnimation(0);
         }
-        else if(transform.position.x < position.x)
+        else if (transform.position.x < position.x)
         {
             npcPathFinding.MoveIdleAnimation(2);
         }
@@ -154,7 +154,7 @@ public class DialogueDisplay : MonoBehaviour
 
     public void ShowAllText()
     {
-        if(dialogueHandler != null && dialogueHandler.gameObject.activeSelf == true)
+        if (dialogueHandler != null && dialogueHandler.gameObject.activeSelf == true)
         {
             dialogueHandler.ShowAllText();
         }
@@ -189,7 +189,7 @@ public class DialogueDisplay : MonoBehaviour
 
     public void AddQuest(Quest quest)
     {
-        if(quest != null)
+        if (quest != null)
         {
             quests.Add(quest);
         }
@@ -197,7 +197,7 @@ public class DialogueDisplay : MonoBehaviour
 
     public void DeleteQuest(Quest quest)
     {
-        if(quests != null && quest != null)
+        if (quests != null && quest != null)
         {
             quests.Remove(quest);
         }

@@ -1,7 +1,7 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.InputSystem;
 using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
 public class ForgeOpenHandler : MonoBehaviour
@@ -57,7 +57,7 @@ public class ForgeOpenHandler : MonoBehaviour
 
     public Item InputItem { get => inputItem; set { inputItem = value; ItemsChange(); } }
     public Item FuelItem { get => fuelItem; set { fuelItem = value; ItemsChange(); } }
-    public Item OutputItem { get => outputItem; set { outputItem= value; ItemsChange(); } }
+    public Item OutputItem { get => outputItem; set { outputItem = value; ItemsChange(); } }
 
     public int ForgeID { get => forgeID; set => forgeID = value; }
 
@@ -89,6 +89,13 @@ public class ForgeOpenHandler : MonoBehaviour
         }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
+
+        Transform shadow = transform.Find("Shadow");
+
+        if (shadow != null)
+        {
+            GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(shadow);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,7 +118,7 @@ public class ForgeOpenHandler : MonoBehaviour
 
             playerMovement.TabOpen = false;
             playerInventory.SetActive(false);
-                        
+
             forgeHandler.HideDataAtClose();
             forgeHandler.gameObject.SetActive(false);
 
@@ -181,7 +188,7 @@ public class ForgeOpenHandler : MonoBehaviour
                 forgeHandler.HideFuelProgress();
             }
 
-            if(fuelItem != null && fuelItem.Amount == 0)
+            if (fuelItem != null && fuelItem.Amount == 0)
             {
                 fuelItem = null;
             }
@@ -203,8 +210,8 @@ public class ForgeOpenHandler : MonoBehaviour
         if (smelting != null &&
             ((fuelItem != null && fuelItem.Amount > 0) || workingForge == true) &&
             inputItem != null && inputItem.Amount > 0 &&
-            ((outputItem != null && outputItem.name == smelting.NextItem.name && outputItem.Amount < outputItem.MaxAmount) || 
-            outputItem == null ) )
+            ((outputItem != null && outputItem.name == smelting.NextItem.name && outputItem.Amount < outputItem.MaxAmount) ||
+            outputItem == null))
         {
             if (canvasOpen == true)
             {
@@ -362,21 +369,21 @@ public class ForgeOpenHandler : MonoBehaviour
 
     public void ItemsChange()
     {
-        if(inputItem != null && inputItem.Amount > 0)
+        if (inputItem != null && inputItem.Amount > 0)
         {
-            if(fuelItem != null && fuelItem.Amount > 0 && fuelItem is Fuel)
+            if (fuelItem != null && fuelItem.Amount > 0 && fuelItem is Fuel)
             {
-                if(inputItem is Smelting)
+                if (inputItem is Smelting)
                 {
                     Smelting smelting = (Smelting)inputItem;
 
-                    if(outputItem != null && 
+                    if (outputItem != null &&
                        outputItem.name.CompareTo(smelting.NextItem.name) == 0 &&
                        outputItem.Amount <= outputItem.MaxAmount)
                     {
                         StartForge();
                     }
-                    else if(outputItem == null)
+                    else if (outputItem == null)
                     {
                         StartForge();
                     }
@@ -387,7 +394,7 @@ public class ForgeOpenHandler : MonoBehaviour
         {
             StopCoroutine(Smelting());
 
-            if(canvasOpen == true)
+            if (canvasOpen == true)
             {
                 forgeHandler.HideForgeProgress();
             }
@@ -409,17 +416,17 @@ public class ForgeOpenHandler : MonoBehaviour
                     float smeltingProgress = 0;
                     float fuelProgress = 0;
 
-                    if(inputItem != null && inputItem is Smelting)
+                    if (inputItem != null && inputItem is Smelting)
                     {
                         Smelting smelting = (Smelting)(inputItem);
 
                         smeltingProgress = (float)elapsedTimeSmelting / smelting.Duration;
                     }
-                    if(fuelItem != null && fuelItem is Fuel)
+                    if (fuelItem != null && fuelItem is Fuel)
                     {
                         Fuel smelting = (Fuel)(fuelItem);
 
-                        fuelProgress = 1f -  (float)elapsedTimeFuel / smelting.Duration;
+                        fuelProgress = 1f - (float)elapsedTimeFuel / smelting.Duration;
                     }
 
                     forgeHandler.SetDataAtOpen(InputItem, FuelItem, OutputItem, this, smeltingProgress, fuelProgress, workingForge);

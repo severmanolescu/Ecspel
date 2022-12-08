@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
@@ -26,17 +24,17 @@ public class CameraHandler : MonoBehaviour
     {
         Vector3 position = new Vector3();
 
-        if(playerLocation.transform.position.x >= MinX && playerLocation.transform.position.x <= MaxX)
+        if (playerLocation.transform.position.x >= MinX && playerLocation.transform.position.x <= MaxX)
         {
             position.x = playerLocation.position.x;
         }
         else
         {
-            if(playerLocation.transform.position.x < MinX)
+            if (playerLocation.transform.position.x < MinX)
             {
                 position.x = minX;
-            }   
-            else if(playerLocation.transform.position.x > MaxX)
+            }
+            else if (playerLocation.transform.position.x > MaxX)
             {
                 position.x = maxX;
             }

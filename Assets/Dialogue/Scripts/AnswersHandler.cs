@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class AnswersHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject answerPrefab; 
+    [SerializeField] private GameObject answerPrefab;
 
     private List<GameObject> answers = new List<GameObject>();
 
@@ -110,7 +110,7 @@ public class AnswersHandler : MonoBehaviour
 
                 answers.Add(ansferInstance);
             }
-            else if(quest is QuestTalk)
+            else if (quest is QuestTalk)
             {
                 GameObject ansferInstance = Instantiate(answerPrefab, gameObject.transform);
 
@@ -159,7 +159,7 @@ public class AnswersHandler : MonoBehaviour
 
                 allFoundInInventory = false;
             }
-            else if(quest is QuestTalk)
+            else if (quest is QuestTalk)
             {
                 PlaceAnswers(quest, false);
             }

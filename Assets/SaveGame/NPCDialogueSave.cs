@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ public class NPCDialogueSave : MonoBehaviour
 
     public DialogueScriptableObject GetDialogueFromId(int id)
     {
-        if(id >= 0 && id < dialogueClasses.Count)
+        if (id >= 0 && id < dialogueClasses.Count)
         {
             return dialogueClasses[id];
         }
@@ -29,7 +28,7 @@ public class NPCDialogueSave : MonoBehaviour
     {
         List<int> dialogues = new List<int>();
 
-        foreach(DialogueDisplay dialogue in NpcDialogue)
+        foreach (DialogueDisplay dialogue in NpcDialogue)
         {
             dialogues.Add(GetDialogueId(dialogue.Dialogue));
         }
@@ -39,7 +38,7 @@ public class NPCDialogueSave : MonoBehaviour
 
     public void SetNpcsDialogue(List<int> dialogue)
     {
-        for(int indexOfDialogue = 0; indexOfDialogue < dialogue.Count; indexOfDialogue++)
+        for (int indexOfDialogue = 0; indexOfDialogue < dialogue.Count; indexOfDialogue++)
         {
             NpcDialogue[indexOfDialogue].Dialogue = GetDialogueFromId(dialogue[indexOfDialogue]);
         }

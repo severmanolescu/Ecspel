@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ public class Sapling : Placeable
     [SerializeField] private Sprite seed;
     [SerializeField] private Sprite sapling;
     [SerializeField] private List<Sprite> levels;
+    [SerializeField] private GameObject young;
     [SerializeField] private GameObject almostMature;
     [SerializeField] private GameObject mature;
 
@@ -27,4 +27,5 @@ public class Sapling : Placeable
     public List<Sprite> Levels { get => levels; set => levels = value; }
     public GameObject AlmostMature { get => almostMature; set => almostMature = value; }
     public GameObject Mature { get => mature; set => mature = value; }
+    public GameObject Young { get => young; set => young = value; }
 }

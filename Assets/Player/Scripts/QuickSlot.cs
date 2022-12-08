@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class QuickSlot : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class QuickSlot : MonoBehaviour
 
         if (Equiped.Item != null)
         {
-            itemSprites[1].sprite = itemSprite.GetItemSprite(Equiped.Item.ItemNO);
+            itemSprites[1].sprite = Equiped.Item.ItemSprite;
         }
         else
         {
@@ -36,7 +36,7 @@ public class QuickSlot : MonoBehaviour
 
             amount.gameObject.SetActive(false);
         }
-        
+
         DeselectItem();
     }
 
@@ -49,10 +49,10 @@ public class QuickSlot : MonoBehaviour
     {
         if (Equiped.Item != null)
         {
-            itemSprites[1].sprite = itemSprite.GetItemSprite(Equiped.Item.ItemNO);
+            itemSprites[1].sprite = Equiped.Item.ItemSprite;
             itemSprites[1].gameObject.SetActive(true);
 
-            if(Equiped.Item.Amount <= 0)
+            if (Equiped.Item.Amount <= 0)
             {
                 Equiped.DeleteItem();
 

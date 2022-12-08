@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class ChestStorageHandler : MonoBehaviour
 {
@@ -22,12 +20,12 @@ public class ChestStorageHandler : MonoBehaviour
 
         int slots = items.Count;
 
-        foreach(Item item in items)
+        foreach (Item item in items)
         {
             InstantiateSlot(item);
         }
 
-        for(int emptySlots = slots; emptySlots < maxSlots; emptySlots++)
+        for (int emptySlots = slots; emptySlots < maxSlots; emptySlots++)
         {
             InstantiateSlot(null);
         }
@@ -37,7 +35,7 @@ public class ChestStorageHandler : MonoBehaviour
     {
         Item newItem = null;
 
-        if(item != null)
+        if (item != null)
         {
             newItem = item.Copy();
         }
@@ -55,7 +53,7 @@ public class ChestStorageHandler : MonoBehaviour
 
     private void ReinitializeStorage()
     {
-        foreach(ItemSlot itemSlot in itemSlots)
+        foreach (ItemSlot itemSlot in itemSlots)
         {
             Destroy(itemSlot.gameObject);
         }
@@ -67,7 +65,7 @@ public class ChestStorageHandler : MonoBehaviour
     {
         List<Item> items = new List<Item>();
 
-        foreach(ItemSlot itemSlot in itemSlots)
+        foreach (ItemSlot itemSlot in itemSlots)
         {
             items.Add(itemSlot.Item);
         }

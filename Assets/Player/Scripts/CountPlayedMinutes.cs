@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CountPlayedMinutes : MonoBehaviour
@@ -24,7 +23,7 @@ public class CountPlayedMinutes : MonoBehaviour
 
             Seconds++;
 
-            if(Seconds >= 60)
+            if (Seconds >= 60)
             {
                 Minutes++;
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FogHandler : MonoBehaviour
@@ -49,7 +48,7 @@ public class FogHandler : MonoBehaviour
         {
             yield return new WaitForSeconds(timeToChange);
 
-            if(locationFog.GetAlpha() < maxAlpha)
+            if (locationFog.GetAlpha() < maxAlpha)
             {
                 locationFog.AlphaChange(locationFog.GetAlpha() + speedOfAlpha / 255f);
             }

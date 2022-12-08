@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeFootstepSoundEffect : MonoBehaviour
@@ -10,21 +8,21 @@ public class ChangeFootstepSoundEffect : MonoBehaviour
     [SerializeField] private AudioClip currentSound1Wood;
     [SerializeField] private AudioClip currentSound2Wood;
 
-    [SerializeField]  private AudioClip currentSound1;
-    [SerializeField]  private AudioClip currentSound2;
-     
+    [SerializeField] private AudioClip currentSound1;
+    [SerializeField] private AudioClip currentSound2;
+
     private FootPrintHandler footPrintHandler;
 
     private void Awake()
     {
-        footPrintHandler = GameObject.Find("Global/Player").GetComponent<FootPrintHandler>(); 
+        footPrintHandler = GameObject.Find("Global/Player").GetComponent<FootPrintHandler>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-        {            
-            footPrintHandler.Footstep  = footstepSound1;
+        if (collision.CompareTag("Player"))
+        {
+            footPrintHandler.Footstep = footstepSound1;
             footPrintHandler.Footstep1 = footstepSound2;
 
             footPrintHandler.FootstepWood = footstepSound1;
@@ -36,7 +34,7 @@ public class ChangeFootstepSoundEffect : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            footPrintHandler.Footstep  = currentSound1;
+            footPrintHandler.Footstep = currentSound1;
             footPrintHandler.Footstep1 = currentSound2;
 
             footPrintHandler.FootstepWood = currentSound1Wood;

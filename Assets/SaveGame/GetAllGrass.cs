@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class GetAllGrass : MonoBehaviour
 
         GrassDamage[] grass = spawnLocation.GetComponentsInChildren<GrassDamage>();
 
-        foreach(GrassDamage grassDamage in grass)
+        foreach (GrassDamage grassDamage in grass)
         {
             GrassSaveGame newGrassSave = new();
 
@@ -38,11 +37,11 @@ public class GetAllGrass : MonoBehaviour
             Destroy(grassDamage.gameObject);
         }
 
-        foreach(GrassSaveGame grassSaveGame in grassSaves)
+        foreach (GrassSaveGame grassSaveGame in grassSaves)
         {
             GameObject newObject = getItemWorld.GetObjectFromNo(grassSaveGame.ObjectID);
 
-            if(newObject != null )
+            if (newObject != null)
             {
                 newObject = Instantiate(newObject);
 

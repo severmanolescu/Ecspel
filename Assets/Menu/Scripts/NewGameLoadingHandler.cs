@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NewGameLoadingHandler : MonoBehaviour
@@ -21,7 +20,7 @@ public class NewGameLoadingHandler : MonoBehaviour
         {
             LocationGridSave locationGridSave = location.GetComponent<LocationGridSave>();
 
-            if(locationGridSave != null)
+            if (locationGridSave != null)
             {
                 locationGridSave.CheckGridForObjects(this);
             }

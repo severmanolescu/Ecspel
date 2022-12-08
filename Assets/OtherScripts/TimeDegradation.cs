@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimeDegradation : MonoBehaviour
@@ -30,7 +28,7 @@ public class TimeDegradation : MonoBehaviour
 
         spriteRenderer.color = color;
 
-        if(color.a <= 0)
+        if (color.a <= 0)
         {
             Destroy(gameObject);
         }

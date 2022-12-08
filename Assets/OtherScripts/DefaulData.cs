@@ -28,11 +28,11 @@ public static class DefaulData
     public static float maxPlayerStamina = 100f;
     public static float playerWalkSpeed = 7.5f;
     public static float playerRunSpeed = 10f;
-    public static int   maximInventorySlots = 30;
+    public static int maximInventorySlots = 30;
 
     // Timer
     public static int dayStart = 5;
-    public static int dayEnd   = 18;
+    public static int dayEnd = 18;
     public static int dayNightCycleTime = 5;
 
     // Enemy stats
@@ -47,7 +47,7 @@ public static class DefaulData
 
     // Big Slime
     public static float slimeBigAttackPower = 5f;
-    public static float slimeBigAttackDistance = 2f;    
+    public static float slimeBigAttackDistance = 2f;
 
     public static Item GetItemWithAmount(Item item, int amount)
     {

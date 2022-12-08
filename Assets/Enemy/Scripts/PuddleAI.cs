@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PuddleAI : MonoBehaviour
@@ -34,7 +32,7 @@ public class PuddleAI : MonoBehaviour
     private AudioSource audioSource;
 
     private void Awake()
-    { 
+    {
         playerLocation = GameObject.Find("Player").GetComponent<Transform>();
 
         animator = GetComponent<Animator>();
@@ -90,7 +88,7 @@ public class PuddleAI : MonoBehaviour
                         state = State.IdleOut;
                     }
 
-                    if(distance > distanceToGetOut)
+                    if (distance > distanceToGetOut)
                     {
                         state = State.IdleIn;
 

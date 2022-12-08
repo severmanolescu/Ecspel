@@ -1,8 +1,8 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHandler
+public class CraftSetData : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
     [SerializeField] private GameObject itemWorldPrefab;
 
@@ -49,14 +49,14 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
     {
         if (craft != null)
         {
-            if(itemSprites == null)
+            if (itemSprites == null)
             {
                 Awake();
             }
 
             this.craft = craft;
 
-            receiveItem.sprite = itemSprites.GetItemSprite(craft.ReceiveItem.Item.ItemNO);
+            receiveItem.sprite = craft.ReceiveItem.Item.ItemSprite;
             receiveItem.GetComponent<ChangeText>().Change(craft.ReceiveItem.Amount.ToString());
 
             GetComponent<Button>().onClick.AddListener(delegate { CraftItem(); });
@@ -67,7 +67,7 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
             {
                 case 1:
                     {
-                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
+                        needItem1.sprite = craft.NeedItem[0].Item.ItemSprite;
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
                         needItem2.gameObject.SetActive(false);
@@ -77,25 +77,25 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
                     }
                 case 2:
                     {
-                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
+                        needItem1.sprite = craft.NeedItem[0].Item.ItemSprite;
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
-                        needItem2.sprite = itemSprites.GetItemSprite(craft.NeedItem[1].Item.ItemNO);
+                        needItem2.sprite = craft.NeedItem[1].Item.ItemSprite;
                         needItem2.GetComponent<ChangeText>().Change(craft.NeedItem[1].Amount.ToString());
-                                                                        
+
                         needItem3.gameObject.SetActive(false);
 
                         break;
                     }
                 case 3:
                     {
-                        needItem1.sprite = itemSprites.GetItemSprite(craft.NeedItem[0].Item.ItemNO);
+                        needItem1.sprite = craft.NeedItem[0].Item.ItemSprite;
                         needItem1.GetComponent<ChangeText>().Change(craft.NeedItem[0].Amount.ToString());
 
-                        needItem2.sprite = itemSprites.GetItemSprite(craft.NeedItem[1].Item.ItemNO);
+                        needItem2.sprite = craft.NeedItem[1].Item.ItemSprite;
                         needItem2.GetComponent<ChangeText>().Change(craft.NeedItem[1].Amount.ToString());
 
-                        needItem3.sprite = itemSprites.GetItemSprite(craft.NeedItem[2].Item.ItemNO);
+                        needItem3.sprite = craft.NeedItem[2].Item.ItemSprite;
                         needItem3.GetComponent<ChangeText>().Change(craft.NeedItem[2].Amount.ToString());
 
                         break;
@@ -106,11 +106,11 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
 
     public void CraftItem()
     {
-        if(haveItems == true && haveStamina)
+        if (haveItems == true && haveStamina)
         {
             Item auxItem;
 
-            if(canvasHandler != null)
+            if (canvasHandler != null)
             {
                 canvasHandler.PlaySoundEffect();
             }
@@ -128,7 +128,7 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
 
             bool canAddItemToPlayerInventory = playerInventory.AddItem(auxItem);
 
-            if(canAddItemToPlayerInventory == false)
+            if (canAddItemToPlayerInventory == false)
             {
                 ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
@@ -194,7 +194,7 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
             indexOfItem++;
         }
 
-        if(playerStats.Stamina >= craft.Stamina)
+        if (playerStats.Stamina >= craft.Stamina)
         {
             ChangeColorSprites(3, Color.white);
         }
@@ -216,7 +216,7 @@ public class CraftSetData : MonoBehaviour , IPointerExitHandler, IPointerEnterHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(itemDetails != null)
+        if (itemDetails != null)
         {
             itemDetails.SetItem(craft.ReceiveItem.Item);
         }

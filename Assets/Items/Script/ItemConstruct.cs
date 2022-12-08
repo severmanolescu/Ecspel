@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +6,7 @@ public class ItemConstruct : MonoBehaviour
     private new BoxCollider2D collider;
     private SpriteRenderer spriteRenderer;
 
-    private bool canDrag  = true;
+    private bool canDrag = true;
     private bool canPlace = true;
 
     private void Awake()

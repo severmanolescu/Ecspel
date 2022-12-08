@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,16 +7,16 @@ public class test : MonoBehaviour
 
     public Sprite headlight;
 
-    Vector3 scale = new Vector3(.75f, .75f);
+    Vector3 scale = new Vector3(1f, 1f);
 
     private void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            for(int i = 0; i < locationGrid.Grid.gridArray.GetLength(0) - 1; i++)
-                for(int j = 0; j < locationGrid.Grid.gridArray.GetLength(1) - 1; j++)
+            for (int i = 0; i < locationGrid.Grid.gridArray.GetLength(0) - 1; i++)
+                for (int j = 0; j < locationGrid.Grid.gridArray.GetLength(1) - 1; j++)
                 {
-                    if(locationGrid.Grid.gridArray[i,j].isWalkable == false)
+                    if (locationGrid.Grid.gridArray[i, j].isWalkable == false)
                     {
                         GameObject test = new GameObject();
 

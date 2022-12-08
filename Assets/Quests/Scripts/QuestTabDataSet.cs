@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class QuestTabDataSet : MonoBehaviour
 {
@@ -67,7 +67,7 @@ public class QuestTabDataSet : MonoBehaviour
         {
             GiveItem giveItem = (GiveItem)quest;
 
-            if(giveItem.itemsNeeds.Count > 0)
+            if (giveItem.itemsNeeds.Count > 0)
             {
                 textGiveItems.SetActive(true);
 

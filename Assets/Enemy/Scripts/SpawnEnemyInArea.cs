@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnEnemyInArea : MonoBehaviour
 {
-    [SerializeField] private  List<GameObject> listOfEnemy = new List<GameObject>();
+    [SerializeField] private List<GameObject> listOfEnemy = new List<GameObject>();
 
     [SerializeField] private int minSpawnEnemyNo;
     [SerializeField] private int maxSpawnEnemyNo;
@@ -38,7 +37,7 @@ public class SpawnEnemyInArea : MonoBehaviour
     {
         int noOfEnemy = Random.Range(minSpawnEnemyNo, maxSpawnEnemyNo);
 
-        if(locationGrid != null)
+        if (locationGrid != null)
         {
             this.locationGrid = locationGrid;
         }

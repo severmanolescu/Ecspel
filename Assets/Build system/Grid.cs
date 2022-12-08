@@ -15,7 +15,7 @@ public class Grid<TGridObject>
     public int Width { get { return width; } }
     public float CellSize { get { return cellSize; } }
 
-    public Grid(int height, int width, float cellSize,  Vector3 originPosition, Func<Grid<TGridObject>, int, int, TGridObject> createGridObject)
+    public Grid(int height, int width, float cellSize, Vector3 originPosition, Func<Grid<TGridObject>, int, int, TGridObject> createGridObject)
     {
         this.height = height;
         this.width = width;
@@ -54,6 +54,19 @@ public class Grid<TGridObject>
         return new Vector3(x, y) * cellSize + originPosition;
     }
 
+    public Vector3 GetWorldPosition(GridNode gridNode)
+    {
+        return GetWorldPosition(gridNode.x, gridNode.y);
+    }
+
+    public bool VerifyDistanceBetweenTwoNodes(GridNode node1, GridNode node2, int maxDistance)
+    {
+        if (Math.Abs(node1.x - node2.x) > maxDistance) return false;
+        if (Math.Abs(node1.y - node2.y) > maxDistance) return false;
+
+        return true;
+    }
+
     public void GetXY(Vector3 worldPosition, out int x, out int y)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
@@ -81,4 +94,6 @@ public class Grid<TGridObject>
 
         return GetGridObject(x, y);
     }
+
+
 }

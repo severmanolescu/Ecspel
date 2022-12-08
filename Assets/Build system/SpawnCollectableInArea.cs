@@ -76,7 +76,7 @@ public class SpawnCollectableInArea : MonoBehaviour
     {
         Rigidbody2D[] objectsNo = GetComponentsInChildren<Rigidbody2D>();
 
-        foreach(Rigidbody2D obj in objectsNo)
+        foreach (Rigidbody2D obj in objectsNo)
         {
             Destroy(obj);
         }
@@ -97,7 +97,7 @@ public class SpawnCollectableInArea : MonoBehaviour
                 {
                     GameObject spawnObject = Instantiate(spawnObjects[spawnItemNo]);
 
-                    spawnObject.GetComponent<PositionInGridHarvest>().LocationGrid = gridSave; 
+                    spawnObject.GetComponent<PositionInGridHarvest>().LocationGrid = gridSave;
 
                     spawnObject.transform.position = spawnPosition;
                     spawnObject.transform.SetParent(transform);

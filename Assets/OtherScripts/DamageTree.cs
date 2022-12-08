@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 public class DamageTree : MonoBehaviour
 {
@@ -12,6 +11,9 @@ public class DamageTree : MonoBehaviour
 
     [Header("Audio effects")]
     [SerializeField] private List<AudioClip> woodChop;
+
+    [Header("Particles to play when tree is destoyed")]
+    [SerializeField] private GameObject treeDustWhenDestroy;
 
     private AudioSource audioSource;
 
@@ -46,9 +48,9 @@ public class DamageTree : MonoBehaviour
 
         SpriteRenderer[] objects = gameObject.GetComponentsInChildren<SpriteRenderer>();
 
-        foreach(SpriteRenderer obj in objects)
+        foreach (SpriteRenderer obj in objects)
         {
-            if(obj.CompareTag("SunShadow"))
+            if (obj.CompareTag("SunShadow"))
             {
                 GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(obj.transform);
 
@@ -92,16 +94,16 @@ public class DamageTree : MonoBehaviour
 
     public void TakeDamage(float damage, int spawn, int itemLevel)
     {
-        if(Destroyed == false)
+        if (Destroyed == false)
         {
-            if(itemLevel >= treeLevel)
+            if (itemLevel >= treeLevel)
             {
                 health -= damage;
 
                 PlayChopClip();
             }
         }
-        else 
+        else
         {
             if (itemLevel >= trunkLevel)
             {
@@ -139,7 +141,7 @@ public class DamageTree : MonoBehaviour
 
                 game.transform.position = transform.position;
 
-                game.SetItem(DefaulData.GetItemWithAmount(logItem, 2));
+                game.SetItem(DefaulData.GetItemWithAmount(logItem, 1));
                 game.MoveToPoint();
 
                 Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
@@ -150,6 +152,11 @@ public class DamageTree : MonoBehaviour
                 {
                     ChangeGridData(gridNode, grid);
                 }
+
+                GameObject particles = Instantiate(treeDustWhenDestroy);
+                particles.transform.position = transform.position;
+
+                particles.GetComponent<ParticleSystem>().Play();
 
                 Destroy(this.gameObject);
             }
@@ -164,7 +171,7 @@ public class DamageTree : MonoBehaviour
 
     public void ChangeCrowDesroy()
     {
-        if(destroyed == true)
+        if (destroyed == true)
         {
             Destroy(GetComponentInChildren<DestroyTree>().gameObject);
 

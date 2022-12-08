@@ -1,7 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Audio;
 
 public class SetDataToBuySlider : MonoBehaviour
 {
@@ -226,7 +225,7 @@ public class SetDataToBuySlider : MonoBehaviour
         if (itemSlot != null && itemSlot.Item != null)
         {
             if ((discount == false && coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithoutDiscount) ||
-                (discount == true  && coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithDiscount))
+                (discount == true && coinsHandler.Amount >= itemSlot.Item.Amount * itemSlot.Item.SellPrice * priceBuyWithDiscount))
             {
                 coinsHandler.Amount -= itemSlot.Item.Amount * itemSlot.Item.SellPrice * 2;
 

@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering.Universal;
 
 public class SourceLightShadow : MonoBehaviour
 {
@@ -13,17 +12,15 @@ public class SourceLightShadow : MonoBehaviour
 
     public void AddLight(LightHandler light)
     {
-        if(!sourceLights.Contains(light))
+        if (!sourceLights.Contains(light))
         {
             sourceLights.Add(light);
-
-            light.Gradient = gradientSourceLight;
         }
     }
-    
+
     public void RemoveLight(LightHandler light)
     {
-        if(sourceLights != null)
+        if (sourceLights != null)
         {
             sourceLights.Remove(light);
         }
@@ -31,33 +28,29 @@ public class SourceLightShadow : MonoBehaviour
 
     public void ChangeLightsIntensity(float intensity)
     {
-        if (!(intensity <= 0.23f || intensity >= 0.68f))
+        if (lightStatus == true && !(intensity <= 0.23f || intensity >= 0.68f))
         {
-            if (lightStatus == true)
+            if (sourceLights != null)
             {
                 foreach (LightHandler light in sourceLights)
                 {
-                    light.gameObject.SetActive(false);
+                    light.TurnOffLight();
                 }
 
                 lightStatus = false;
             }
         }
-        else if (sourceLights != null)
+        else if (lightStatus == false && intensity <= 0.23f || intensity >= 0.68f)
         {
-            Color color = gradientSourceLight.Evaluate(intensity);
-
-            foreach (LightHandler light in sourceLights)
+            if (sourceLights != null)
             {
-                light.ChangeIntensity(color);
-
-                if (lightStatus == false && light != null)
+                foreach (LightHandler light in sourceLights)
                 {
-                    light.gameObject.SetActive(true);
+                    light.TurnOnLight();
                 }
-            }
 
-            lightStatus = true;
+                lightStatus = true;
+            }
         }
     }
 }

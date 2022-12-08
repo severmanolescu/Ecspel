@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
@@ -59,7 +59,7 @@ public class FlowerPillar : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && itemPlaced == false && deletedItem == false)
+        if (collision.CompareTag("Player") && itemPlaced == false && deletedItem == false)
         {
             playerInSpace = true;
 
@@ -87,12 +87,12 @@ public class FlowerPillar : MonoBehaviour
 
     private void Update()
     {
-        if(playerInSpace == true && itemPlaced == false && deletedItem == false)
+        if (playerInSpace == true && itemPlaced == false && deletedItem == false)
         {
-            if((Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame) || 
+            if ((Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame) ||
                (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
-                if(playerInventory.SearchInventory(item, 1))
+                if (playerInventory.SearchInventory(item, 1))
                 {
                     Item itemCopy = item.Copy();
                     itemCopy.Amount = 1;
@@ -145,14 +145,14 @@ public class FlowerPillar : MonoBehaviour
         this.deletedItem = deletedItem;
         this.itemPlaced = itemPlaced;
 
-        if(deletedItem == true)
+        if (deletedItem == true)
         {
             itemSprite.gameObject.SetActive(false);
             light.gameObject.SetActive(false);
 
             ChangeSpritesColor(notActtiveColor);
         }
-        else if(itemPlaced == true)
+        else if (itemPlaced == true)
         {
             PlaceItem();
         }

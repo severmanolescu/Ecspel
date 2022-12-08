@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +7,11 @@ public class GetObjectReference : MonoBehaviour
 
     public int GetObjectId(GameObject gameObject)
     {
-        if(gameObject != null)
+        if (gameObject != null)
         {
-            for(int indexOfObject = 0; indexOfObject < objects.Count; indexOfObject++)
+            for (int indexOfObject = 0; indexOfObject < objects.Count; indexOfObject++)
             {
-                if(objects[indexOfObject].name == gameObject.name)
+                if (objects[indexOfObject].name == gameObject.name)
                 {
                     return indexOfObject;
                 }

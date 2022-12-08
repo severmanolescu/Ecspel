@@ -19,14 +19,14 @@ public class SetDataToAnsware : MonoBehaviour
         {
             reward.SetActive(true);
 
-            if(itemSprites == null)
+            if (itemSprites == null)
             {
                 itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
             }
 
             if (itemSprites != null)
             {
-                 rewardImage.sprite = itemSprites.GetItemSprite(giveItem.itemsNeeds[0].Item.ItemNO);
+                rewardImage.sprite = giveItem.itemsNeeds[0].Item.ItemSprite;
             }
         }
         else

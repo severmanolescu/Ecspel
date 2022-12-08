@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,7 +40,7 @@ public class DialogueChanger : MonoBehaviour
     {
         dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
 
-        answersHandler  = gameObject.GetComponentInChildren<AnswersHandler>();
+        answersHandler = gameObject.GetComponentInChildren<AnswersHandler>();
 
         questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
@@ -62,8 +61,8 @@ public class DialogueChanger : MonoBehaviour
 
     private void SetDialogue(DialogueClass dialogue)
     {
-        if(dialogue.WhoReply == false)
-        { 
+        if (dialogue.WhoReply == false)
+        {
             dialogueHandler.SetDialogue(dialogue.Dialogue);
 
             if (NPCDialogue != null)
@@ -73,7 +72,7 @@ public class DialogueChanger : MonoBehaviour
 
             dialogueHandler.gameObject.SetActive(true);
         }
-        else if(NPCDialogue != null)
+        else if (NPCDialogue != null)
         {
             NPCDialogue.SetDialogue(dialogue.Dialogue);
 
@@ -125,8 +124,8 @@ public class DialogueChanger : MonoBehaviour
 
             NPCDialogue.DeleteDialogue();
         }
-        
-        if(NPCDialogue != null && NPCDialogue.Quest.Count > 0)
+
+        if (NPCDialogue != null && NPCDialogue.Quest.Count > 0)
         {
             SetQuest();
         }
@@ -134,12 +133,12 @@ public class DialogueChanger : MonoBehaviour
         {
             NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
         }
-        else if(NPCDialogue != null && dialogueScriptable.NextDialogue == null)
+        else if (NPCDialogue != null && dialogueScriptable.NextDialogue == null)
         {
             NPCDialogue.Dialogue = null;
         }
 
-        if(dialogueScriptable.DialogueAnswers.Count == 0 && dialogueScriptable.NextDialogue == null)
+        if (dialogueScriptable.DialogueAnswers.Count == 0 && dialogueScriptable.NextDialogue == null)
         {
             startDialogue = null;
         }
@@ -245,7 +244,7 @@ public class DialogueChanger : MonoBehaviour
                 spaceKeyPress = false;
             }
         }
-        else if(NPCDialogue != null)
+        else if (NPCDialogue != null)
         {
             if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
@@ -283,7 +282,7 @@ public class DialogueChanger : MonoBehaviour
 
         if (dialogueScriptable != null)
         {
-            if(dialogueScriptable.StartDialogue == true)
+            if (dialogueScriptable.StartDialogue == true)
             {
                 startDialogue = dialogueScriptable;
             }
@@ -314,7 +313,7 @@ public class DialogueChanger : MonoBehaviour
         {
             answersHandler.DeleteAll();
 
-            SetQuest(); 
+            SetQuest();
         }
     }
 

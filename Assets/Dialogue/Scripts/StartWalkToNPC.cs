@@ -29,7 +29,7 @@ public class StartWalkToNPC : MonoBehaviour
     {
         int second = 0;
 
-        while(second < seconds)
+        while (second < seconds)
         {
             yield return new WaitForSeconds(1);
 
@@ -84,10 +84,10 @@ public class StartWalkToNPC : MonoBehaviour
 
                 NPC = npcAI.gameObject;
 
-                if(StopPlayerFromMoving == true)
+                if (StopPlayerFromMoving == true)
                 {
                     playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
-                    canvas =  GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+                    canvas = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
 
                     playerMovement.TabOpen = true;
                     canvas.canOpenTabs = false;

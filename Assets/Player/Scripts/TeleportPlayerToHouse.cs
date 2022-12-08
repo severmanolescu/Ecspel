@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TeleportPlayerToHouse : MonoBehaviour
@@ -23,7 +21,7 @@ public class TeleportPlayerToHouse : MonoBehaviour
 
     public void Teleport()
     {
-        foreach(GameObject camera in cameras)
+        foreach (GameObject camera in cameras)
         {
             camera.SetActive(false);
         }

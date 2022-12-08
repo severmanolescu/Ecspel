@@ -1,18 +1,17 @@
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, 
+public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler,
                                        IEndDragHandler, IDropHandler, IPointerExitHandler, IPointerEnterHandler, IPointerClickHandler
 {
     [SerializeField] private bool canDrop = true;
 
     private bool shopItems = false;
 
-    [SerializeField]  private bool playerInventory = false;
+    [SerializeField] private bool playerInventory = false;
 
     [SerializeField] private Item emptyWateringCan;
     [SerializeField] private Item fullWateringCan;
@@ -23,9 +22,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private Image itemSprite;
     private TextMeshProUGUI amount;
 
-    private ItemSprites itemSprites;
-
     private PlayerInventory inventory;
+
+    private CraftCanvasHandler craftCanvas;
 
     private ChestStorageHandler chestStorage;
 
@@ -43,6 +42,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private PlayerStats playerStats;
 
+    private ItemUseByMouse itemUse;
+
     private bool dontShowDetails = false;
 
     //true  - player inventory
@@ -51,19 +52,17 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private bool discount = false;
 
-    private Item item = null;
+    public Item item = null;
 
     public Item Item { get { return item; } set { item = value; ReinitializeItem(); } }
 
     public bool ShopItems { get => shopItems; set { shopItems = value; SearchForBuySlider(); } }
 
     public bool DontShowDetails { get => dontShowDetails; set => dontShowDetails = value; }
-    public bool PlayerInventory { get => playerInventory;}
+    public bool PlayerInventory { get => playerInventory; }
 
     private void Awake()
     {
-        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-
         quickSlots = GameObject.Find("Global/Player/Canvas/Field/QuickSlots").GetComponent<QuickSlotsChanger>();
 
         Image[] itemsSprite = GetComponentsInChildren<Image>();
@@ -82,6 +81,10 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
         itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
 
+        craftCanvas = GameObject.Find("Global/Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>();
+
+        itemUse = GameObject.Find("Global/Player/Canvas/ItemUseButton").GetComponent<ItemUseByMouse>();
+
         inventory = GetComponentInParent<PlayerInventory>();
 
         if (inventory == null)
@@ -99,12 +102,14 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             chestStorage = GameObject.Find("Global/Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
         }
 
-        if(playerInventory == true)
+        if (playerInventory == true)
         {
             coinsHandler = GameObject.Find("Global/Player/Canvas/PlayerItems/Coins").GetComponent<CoinsHandler>();
 
             playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
         }
+
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
         keyboard = InputSystem.GetDevice<Keyboard>();
 
@@ -120,7 +125,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         itemSprite.gameObject.SetActive(true);
 
-        itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
+        itemSprite.sprite = item.ItemSprite;
 
         if (item.Amount > 1)
         {
@@ -133,7 +138,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             amount.gameObject.SetActive(false);
         }
 
-        if(item is WateringCan)
+        if (item is WateringCan)
         {
             WateringCan wateringCan = (WateringCan)item;
 
@@ -157,7 +162,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public bool ExistItem()
     {
-        if(item != null)
+        if (item != null)
         {
             return true;
         }
@@ -171,29 +176,13 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             this.discount = discount;
 
-            if(item.ItemNO == 69 && playerInventory == true)
+            if (item.ItemNO == 69 && playerInventory == true)
             {
                 coinsHandler.Amount += item.Amount;
 
                 return;
             }
-            else if(item is CraftRecipe && playerInventory == true)
-            {
-                CraftRecipe craft = (CraftRecipe)item;
-
-                if(GameObject.Find("Global/Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>().AddCraft(craft.Recipe) == true)
-                {
-                    if(item.Amount > 0)
-                    {
-                        item.Amount--;
-                    }
-                    else
-                    {
-                        return;
-                    }    
-                }                
-            }
-
+     
             this.item = item;
 
             ShowItem();
@@ -204,17 +193,15 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
             item = null;
         }
-    }    
+    }
 
     public void ReinitializeItem()
     {
-        if(item != null)
+        if (item != null)
         {
             if (item.Amount > 0)
             {
-                amount.text = item.Amount.ToString();
-
-                amount.gameObject.SetActive(true);
+                ShowItem();
             }
             else
             {
@@ -284,7 +271,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -307,7 +294,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -427,9 +414,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                    !(item is Letter) &&
                    ((shopInventory.TypeOfBuyItems == 2 && item is CraftRecipe) ||
                      shopInventory.TypeOfBuyItems == 1 && !(item is CraftRecipe)))
-                    if (eventData.button == 0)
+                    if (eventData.button == PointerEventData.InputButton.Left)
                     {
-                        if (item != null &&( keyboard.shiftKey.isPressed || item.Amount == 1))
+                        if (item != null && (keyboard.shiftKey.isPressed || item.Amount == 1))
                         {
                             setData.SellItem(this);
                         }
@@ -443,7 +430,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             }
             else if (shopItems == false)
             {
-                if (eventData.button == 0 && (eventData.clickCount == 2 ||
+                if (eventData.button == PointerEventData.InputButton.Left && (eventData.clickCount == 2 ||
                    (eventData.clickCount == 1 && keyboard.shiftKey.isPressed)))
                 {
                     if (locationOfItem == true)
@@ -463,19 +450,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                                 ReinitializeItem();
                             }
                         }
-                        else
-                        {
-                            if (item is Consumable)
-                            {
-                                Consumable consumable = (Consumable)item;
-
-                                if (playerStats.Eat(consumable))
-                                {
-                                    DecreseAmount(1);
-                                }
-                            }
-                        }
-                    }
+                    }                    
                     else
                     {
                         bool canTransferToPlayerInventory = inventory.AddItem(Item);
@@ -496,10 +471,16 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
                     quickSlots.Reinitialize();
                 }
+                else if (eventData.button == PointerEventData.InputButton.Right &&
+                        (item is CraftRecipe ||
+                         item is Consumable))
+                {
+                    itemUse.ShowButton(this);
+                }
             }
             else
             {
-                if (eventData.button == 0 && item != null)
+                if (eventData.button == PointerEventData.InputButton.Left && item != null)
                 {
                     if (keyboard.shiftKey.isPressed || item.Amount == 1)
                     {
@@ -512,6 +493,35 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                         setData.SetDataToBuy(this, discount);
                     }
                 }
+            }
+        }
+    }
+
+    public void ItemUse()
+    {
+        if(item is CraftRecipe)
+        {
+            CraftRecipe craft = (CraftRecipe)item;
+
+            if (craftCanvas.AddCraft(craft.Recipe) == true)
+            {
+                if (item.Amount > 0)
+                {
+                    DecreseAmount(1);
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+        else if(item is Consumable)
+        {
+            Consumable consumable = (Consumable)item;
+
+            if (playerStats.Eat(consumable))
+            {
+                DecreseAmount(1);
             }
         }
     }

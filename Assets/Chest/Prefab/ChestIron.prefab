@@ -319,12 +319,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4816836696399735781, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  m_Sprite: {fileID: -481826097, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.375, y: 1.1875}
+  m_Size: {x: 1.5, y: 1.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
-  openSprite: {fileID: 4816836696399735781, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  openSprite: {fileID: -865489645, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   chestId: 0
   chestOpen: {fileID: 8300000, guid: e0652c71b9bb5964b8c9ae150ad1152c, type: 3}
   chestClose: {fileID: 8300000, guid: 66ec24e4a8b120e4a8507192d16da11a, type: 3}
@@ -373,12 +373,12 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003115654, y: 0.5250683}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5046068, y: 0.07323656}
-    oldSize: {x: 1.375, y: 1.1875}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.5, y: 1.3125}
+    newSize: {x: 1.5, y: 1.3125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -399,12 +399,12 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0000009536743, y: 0.48144245}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5046068, y: 0.07323656}
-    oldSize: {x: 1.375, y: 1.1875}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.5, y: 1.3125}
+    newSize: {x: 1.5, y: 1.3125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -436,9 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311c1b6e012a91c499a8236a5788c41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - item: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
-    amount: 50
+  items: []
 --- !u!82 &372845165
 AudioSource:
   m_ObjectHideFlags: 0
@@ -555,17 +553,17 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 858520fc010497a4fb65b98de9d95986cb99512f397a1411899d9d4f00000000
   m_ShapePath:
-  - {x: -0.6895313, y: -0.0166111, z: 0}
-  - {x: -0.6875057, y: 1.028883, z: 0}
-  - {x: 0.6730728, y: 1.0241184, z: 0}
-  - {x: 0.67421436, y: -0.015687943, z: 0}
-  - {x: 0.6127167, y: -0.014816284, z: 0}
-  - {x: 0.60994816, y: -0.07736969, z: 0}
-  - {x: -0.62000275, y: -0.069984436, z: 0}
-  - {x: -0.62239933, y: -0.015554428, z: 0}
-  m_ShapePathHash: -1710520523
+  - {x: -0.68332386, y: 0.19047928, z: 0}
+  - {x: -0.68129826, y: 1.2359734, z: 0}
+  - {x: 0.6792803, y: 1.231205, z: 0}
+  - {x: 0.6804218, y: 0.19140244, z: 0}
+  - {x: 0.61892414, y: 0.19227219, z: 0}
+  - {x: 0.6161556, y: 0.12971878, z: 0}
+  - {x: -0.6137953, y: 0.13710403, z: 0}
+  - {x: -0.61619186, y: 0.19153214, z: 0}
+  m_ShapePathHash: -1759935083
   m_Mesh: {fileID: 0}
-  m_InstanceId: 438918
+  m_InstanceId: 326666
 --- !u!1 &4227357764106793143
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,14 +588,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4227357764106793143}
-  m_LocalRotation: {x: 0, y: 0, z: 0.008552045, w: 0.99996346}
-  m_LocalPosition: {x: -0.027, y: 0.43, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.18480907, w: 0.98277444}
+  m_LocalPosition: {x: -0.032, y: 0.699, z: 0}
   m_LocalScale: {x: 2.5165362, y: 1.5492094, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004845640410780}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.98}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -21.3}
 --- !u!212 &8673803609394940761
 SpriteRenderer:
   m_ObjectHideFlags: 0

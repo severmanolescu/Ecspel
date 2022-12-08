@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class FootPrintHandler : MonoBehaviour
 {
@@ -32,7 +29,7 @@ public class FootPrintHandler : MonoBehaviour
 
     public void ChangeFootprintSpawnLocationState(bool state)
     {
-        if(spawnLocation != null)
+        if (spawnLocation != null)
         {
             spawnLocation.gameObject.SetActive(state);
         }
@@ -112,7 +109,8 @@ public class FootPrintHandler : MonoBehaviour
             instantiateObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             PlayFootstepClip();
-        }else
+        }
+        else
         {
             PlayFootstepWoodClip();
         }

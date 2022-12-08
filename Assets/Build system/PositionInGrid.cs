@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionInGrid : MonoBehaviour
@@ -20,13 +18,13 @@ public class PositionInGrid : MonoBehaviour
 
     private void Update()
     {
-        if(locationGrid == null)
+        if (locationGrid == null)
         {
             locationGrid = GetComponentInParent<LocationGridSave>();
 
-            if(locationGrid == null && gameObject.tag == "Tree")
+            if (locationGrid == null && gameObject.tag == "Tree")
             {
-                locationGrid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>();
+                locationGrid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>();
             }
         }
 

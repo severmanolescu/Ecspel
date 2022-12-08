@@ -51,7 +51,7 @@ public class OpenDoorWithItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Player"))
+        if (collision != null && collision.CompareTag("Player"))
         {
             player = collision.gameObject;
 
@@ -71,7 +71,7 @@ public class OpenDoorWithItem : MonoBehaviour
 
     private void Update()
     {
-        if(player != null)
+        if (player != null)
         {
             if ((Keyboard.current != null && Keyboard.current.fKey.wasPressedThisFrame) ||
                (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
@@ -80,7 +80,7 @@ public class OpenDoorWithItem : MonoBehaviour
 
                 if (canvasTabsOpen.CanOpenTab() && playerMovement.MenuOpen == false && playerMovement.TabOpen == false)
                 {
-                    if(playerInventory.SearchInventory(needItem, 1) == true)
+                    if (playerInventory.SearchInventory(needItem, 1) == true)
                     {
                         player.transform.position = newPosition.position;
 

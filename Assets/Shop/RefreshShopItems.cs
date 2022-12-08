@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +7,9 @@ public class RefreshShopItems : MonoBehaviour
 
     public void AddShop(OpenShopHandler openShop)
     {
-        if(openShop != null && !openShopHandlers.Contains(openShop))
+        if (openShop != null && !openShopHandlers.Contains(openShop))
         {
-            openShopHandlers.Add(openShop); 
+            openShopHandlers.Add(openShop);
         }
     }
 

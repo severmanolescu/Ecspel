@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -114,7 +113,7 @@ public class QuickSlotsChanger : MonoBehaviour
             ChangeSelectedItem(10);
         }
 
-        if(mouse.scroll.y.ReadValue() == 120 || (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == false && forwardButtonPress == false))
+        if (mouse.scroll.y.ReadValue() == 120 || (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == false && forwardButtonPress == false))
         {
             if (selectedItemIndex > 1)
             {
@@ -124,7 +123,7 @@ public class QuickSlotsChanger : MonoBehaviour
 
             forwardButtonPress = true;
         }
-        else if(Joystick.current != null && Joystick.current.allControls[6].IsPressed() == true)
+        else if (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == true)
         {
             forwardButtonPress = false;
         }

@@ -1,8 +1,7 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OpenShopHandler : MonoBehaviour
 {
@@ -90,7 +89,7 @@ public class OpenShopHandler : MonoBehaviour
 
         int noOfItems = UnityEngine.Random.Range(minItems, maxItems);
 
-        for(int noOfItem = 0; noOfItem < noOfItems; noOfItem++)
+        for (int noOfItem = 0; noOfItem < noOfItems; noOfItem++)
         {
             int indexOfItemToAdd = UnityEngine.Random.Range(0, shopItems.Count);
 
@@ -124,11 +123,11 @@ public class OpenShopHandler : MonoBehaviour
 
     private void Update()
     {
-        if(playerInArea)
+        if (playerInArea)
         {
-            if(Keyboard.current.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
+            if (Keyboard.current.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
             {
-                if(shopInventory.gameObject.activeSelf == false)
+                if (shopInventory.gameObject.activeSelf == false)
                 {
                     playerMovement.TabOpen = true;
                     playerInventory.SetActive(true);

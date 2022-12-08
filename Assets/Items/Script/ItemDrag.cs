@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ItemDrag : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class ItemDrag : MonoBehaviour
 
     private bool halfOfAmount;
 
-    public bool startDrag = false;
+    private bool startDrag = false;
 
     public Item Item { get { return item; } }
     public GameObject PreviousItem { get { return previousSlot; } }
@@ -43,14 +43,14 @@ public class ItemDrag : MonoBehaviour
 
     public void SetData(Item item, GameObject previousSlot)
     {
-        if(item != null)
+        if (item != null)
         {
-            if(this.item == null)
+            if (this.item == null)
             {
                 this.item = item;
                 this.previousSlot = previousSlot;
 
-                itemImage.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                itemImage.sprite = item.ItemSprite;
 
                 itemImage.gameObject.SetActive(true);
 
@@ -58,7 +58,7 @@ public class ItemDrag : MonoBehaviour
 
                 halfOfAmount = false;
 
-                if(item.Amount > 1)
+                if (item.Amount > 1)
                 {
                     amount.text = item.Amount.ToString();
 
@@ -79,7 +79,7 @@ public class ItemDrag : MonoBehaviour
 
                 this.previousSlot = previousSlot;
 
-                itemImage.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                itemImage.sprite = item.ItemSprite;
 
                 itemImage.gameObject.SetActive(true);
 
@@ -174,13 +174,13 @@ public class ItemDrag : MonoBehaviour
 
     public void Update()
     {
-        if(mouse.leftButton.isPressed || mouse.rightButton.isPressed)
+        if (mouse.leftButton.isPressed || mouse.rightButton.isPressed)
         {
             startDrag = true;
 
             transform.position = Mouse.current.position.ReadValue();
         }
-        else if(startDrag)
+        else if (startDrag)
         {
             startDrag = false;
 

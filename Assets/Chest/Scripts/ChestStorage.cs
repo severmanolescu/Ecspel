@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class ChestStorage : MonoBehaviour
 {
-    private  List<Item> items = new List<Item>();
+    private List<Item> items = new List<Item>();
 
-    [SerializeField] private  int chestMaxSlots;
+    [SerializeField] private int chestMaxSlots;
 
     public List<Item> Items { get { return items; } }
 
@@ -20,7 +18,7 @@ public class ChestStorage : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        if(items.Count < chestMaxSlots)
+        if (items.Count < chestMaxSlots)
         {
             items.Add(item);
         }
@@ -35,7 +33,7 @@ public class ChestStorage : MonoBehaviour
     {
         ChestStorageInitial chestStorageInitial = GetComponent<ChestStorageInitial>();
 
-        if(chestStorageInitial != null)
+        if (chestStorageInitial != null)
         {
             chestStorageInitial.RemoveAll();
         }

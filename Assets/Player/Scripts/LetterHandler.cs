@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 public class LetterHandler : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class LetterHandler : MonoBehaviour
         details.text = string.Empty;
 
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
-        canvasTabs     = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+        canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
     }
 
     public void SetData(Letter letter)

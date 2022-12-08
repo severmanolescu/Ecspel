@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -43,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
     {
         health -= damage;
 
-        if(health <= 0)
+        if (health <= 0)
         {
             DestroyEnemy();
         }

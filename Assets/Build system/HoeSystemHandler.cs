@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HoeSystemHandler : MonoBehaviour
 {
+    [Header("Farm dry:")]
     public Sprite center;
     public Sprite left;
     public Sprite up;
@@ -24,6 +24,7 @@ public class HoeSystemHandler : MonoBehaviour
     public Sprite leftright;
     public Sprite updown;
 
+    [Header("Farm wet:")]
     public Sprite centerWater;
     public Sprite leftWater;
     public Sprite upWater;
@@ -51,9 +52,19 @@ public class HoeSystemHandler : MonoBehaviour
 
     [SerializeField] private Transform spawnLocation;
 
+    [SerializeField] private Camera mainCamera;
+
+    [SerializeField] private int maxDistanceFromPlayer = 1;
+
+    private GridNode nodeToSpawn = null;
+
     private GameObject headlightObject;
 
     private BuildSystemHandler buildSystem;
+
+    private HarvestCropHandler harvestCrop;
+
+    private PlayerStats playerStats;
 
     private Grid<GridNode> grid;
 
@@ -63,12 +74,16 @@ public class HoeSystemHandler : MonoBehaviour
     {
         headlightObject = null;
 
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
+        harvestCrop = GetComponent<HarvestCropHandler>();
+
         buildSystem = GetComponent<BuildSystemHandler>();
     }
 
-    private GameObject Spawn(GridNode gridNode)
+    public GameObject Spawn(GridNode gridNode)
     {
-        if(gridNode.isWalkable && gridNode.canPlant == false && gridNode.canPlace == true)
+        if (gridNode.isWalkable && gridNode.canPlant == false && gridNode.canPlace == true)
         {
             GameObject soil = Instantiate(prefabGameObject, spawnLocation);
 
@@ -79,7 +94,7 @@ public class HoeSystemHandler : MonoBehaviour
             sprite.sortingOrder = -2;
 
             Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
-            Vector3 scale = new Vector3(.75f, .75f, 0);
+            Vector3 scale = Vector3.one;
 
             position.x += grid.CellSize / 2;
             position.y += grid.CellSize / 2;
@@ -99,26 +114,11 @@ public class HoeSystemHandler : MonoBehaviour
 
             ChangeSprite(gridNode, sprite, soil.GetComponent<FarmPlotHandler>());
 
-            if (gridNode.x - 1 >= 0)
-            {
-                ChangeNeighbor(grid.gridArray[gridNode.x - 1, gridNode.y], 3);
-            }
-            if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-            {
-                ChangeNeighbor(grid.gridArray[gridNode.x + 1, gridNode.y], 4);
-            }
-            if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-            {
-                ChangeNeighbor(grid.gridArray[gridNode.x, gridNode.y + 1], 1);
-            }
-            if (gridNode.y - 1 >= 0)
-            {
-                ChangeNeighbor(grid.gridArray[gridNode.x, gridNode.y - 1], 2);
-            }
+            ChangeNeighbour(gridNode);
 
             return soil;
         }
-        else if(gridNode.crop != null && gridNode.crop.GetComponent<CropGrow>().Destroyed == true)
+        else if (gridNode.crop != null && gridNode.crop.GetComponent<CropGrow>().Destroyed == true)
         {
             Destroy(gridNode.crop);
             gridNode.crop = null;
@@ -127,7 +127,7 @@ public class HoeSystemHandler : MonoBehaviour
             gridNode.canPlace = false;
             gridNode.cropPlaced = false;
 
-            return null;
+            return gameObject;
         }
 
         return null;
@@ -157,18 +157,33 @@ public class HoeSystemHandler : MonoBehaviour
         }
     }
 
-    //1-up
-    //2-down
-    //3-left
-    //4-right
-   
-    private void ChangeNeighbor(GridNode gridNode, int type)
+    public void ChangeNeighbour(GridNode gridNode)
+    {
+        if (gridNode.x - 1 >= 0)
+        {
+            ChangeNeighbour(grid.gridArray[gridNode.x - 1, gridNode.y], 3);
+        }
+        if (gridNode.x + 1 < grid.gridArray.GetLength(0))
+        {
+            ChangeNeighbour(grid.gridArray[gridNode.x + 1, gridNode.y], 4);
+        }
+        if (gridNode.y + 1 < grid.gridArray.GetLength(1))
+        {
+            ChangeNeighbour(grid.gridArray[gridNode.x, gridNode.y + 1], 1);
+        }
+        if (gridNode.y - 1 >= 0)
+        {
+            ChangeNeighbour(grid.gridArray[gridNode.x, gridNode.y - 1], 2);
+        }
+    }
+
+    private void ChangeNeighbour(GridNode gridNode, int type)
     {
         if (gridNode.currentObject != null)
         {
-            if(gridNode.currentObject.sprite == full)
+            if (gridNode.currentObject.sprite == full || gridNode.currentObject.sprite == fullWater)
             {
-                switch(type)
+                switch (type)
                 {
                     case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(up, upWater); break;
                     case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(down, downWater); break;
@@ -176,7 +191,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(right, rightWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == up)
+            else if (gridNode.currentObject.sprite == up || gridNode.currentObject.sprite == upWater)
             {
                 switch (type)
                 {
@@ -185,7 +200,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightUp, cornerRightUpWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == down)
+            else if (gridNode.currentObject.sprite == down || gridNode.currentObject.sprite == downWater)
             {
                 switch (type)
                 {
@@ -194,16 +209,16 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightDown, cornerRightDownWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == right)
+            else if (gridNode.currentObject.sprite == right || gridNode.currentObject.sprite == rightWater)
             {
                 switch (type)
                 {
                     case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightUp, cornerRightUpWater); break;
-                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightDown, cornerRightDownWater);  break;
+                    case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(cornerRightDown, cornerRightDownWater); break;
                     case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(leftright, leftrightWater); ; break;
                 }
             }
-            else if (gridNode.currentObject.sprite == left)
+            else if (gridNode.currentObject.sprite == left || gridNode.currentObject.sprite == leftWater)
             {
                 switch (type)
                 {
@@ -212,7 +227,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(leftright, leftrightWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == updown)
+            else if (gridNode.currentObject.sprite == updown || gridNode.currentObject.sprite == updownWater)
             {
                 switch (type)
                 {
@@ -220,7 +235,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerRight, centerRightWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == leftright)
+            else if (gridNode.currentObject.sprite == leftright || gridNode.currentObject.sprite == leftrightWater)
             {
                 switch (type)
                 {
@@ -228,35 +243,35 @@ public class HoeSystemHandler : MonoBehaviour
                     case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerDown, centerDownWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == centerLeft)
+            else if (gridNode.currentObject.sprite == centerLeft || gridNode.currentObject.sprite == centerLeftWater)
             {
                 switch (type)
                 {
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == centerRight)
+            else if (gridNode.currentObject.sprite == centerRight || gridNode.currentObject.sprite == centerRightWater)
             {
                 switch (type)
                 {
                     case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == centerDown)
+            else if (gridNode.currentObject.sprite == centerDown || gridNode.currentObject.sprite == centerDownWater)
             {
                 switch (type)
                 {
                     case 1: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == centerUp)
+            else if (gridNode.currentObject.sprite == centerUp || gridNode.currentObject.sprite == centerUpWater)
             {
                 switch (type)
                 {
                     case 2: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(center, centerWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == cornerLeftUp)
+            else if (gridNode.currentObject.sprite == cornerLeftUp || gridNode.currentObject.sprite == cornerLeftUpWater)
             {
                 switch (type)
                 {
@@ -264,7 +279,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.sprite = centerUp; break;
                 }
             }
-            else if (gridNode.currentObject.sprite == cornerLeftDown)
+            else if (gridNode.currentObject.sprite == cornerLeftDown || gridNode.currentObject.sprite == cornerLeftDownWater)
             {
                 switch (type)
                 {
@@ -272,7 +287,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 4: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerDown, centerDownWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == cornerRightUp)
+            else if (gridNode.currentObject.sprite == cornerRightUp || gridNode.currentObject.sprite == cornerRightUpWater)
             {
                 switch (type)
                 {
@@ -280,7 +295,7 @@ public class HoeSystemHandler : MonoBehaviour
                     case 3: gridNode.currentObject.GetComponent<FarmPlotHandler>().ChangeSprites(centerUp, centerUpWater); break;
                 }
             }
-            else if (gridNode.currentObject.sprite == cornerRightDown)
+            else if (gridNode.currentObject.sprite == cornerRightDown || gridNode.currentObject.sprite == cornerRightDownWater)
             {
                 switch (type)
                 {
@@ -289,11 +304,11 @@ public class HoeSystemHandler : MonoBehaviour
                 }
             }
         }
-}
+    }
 
     private void ChangeSprite(GridNode gridNode, SpriteRenderer sprite, FarmPlotHandler farmPlot)
     {
-        if(gridNode.x + 1 < grid.gridArray.GetLength(0) && grid.gridArray[gridNode.x + 1, gridNode.y].canPlant == true)
+        if (gridNode.x + 1 < grid.gridArray.GetLength(0) && grid.gridArray[gridNode.x + 1, gridNode.y].canPlant == true)
         {
             if (gridNode.y + 1 < grid.gridArray.GetLength(1) && grid.gridArray[gridNode.x, gridNode.y + 1].canPlant == true)
             {
@@ -301,34 +316,22 @@ public class HoeSystemHandler : MonoBehaviour
                 {
                     if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                     {
-                        sprite.sprite = center;
-
-                        farmPlot.WetSoil = centerWater;
-                        farmPlot.DrySoil = center;
+                        farmPlot.ChangeSprites(center, centerWater);
                     }
                     else
                     {
-                        sprite.sprite = centerDown;
-
-                        farmPlot.WetSoil = centerDownWater;
-                        farmPlot.DrySoil = centerDown;
+                        farmPlot.ChangeSprites(centerDown, centerDownWater);
                     }
                 }
                 else
                 {
                     if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                     {
-                        sprite.sprite = centerLeft;
-
-                        farmPlot.WetSoil = centerLeftWater;
-                        farmPlot.DrySoil = centerLeft;
+                        farmPlot.ChangeSprites(centerLeft, centerLeftWater);
                     }
                     else
                     {
-                        sprite.sprite = cornerLeftDown;
-
-                        farmPlot.WetSoil = cornerLeftDownWater;
-                        farmPlot.DrySoil = cornerLeftDown;
+                        farmPlot.ChangeSprites(cornerLeftDown, cornerLeftDownWater);
                     }
                 }
             }
@@ -336,32 +339,20 @@ public class HoeSystemHandler : MonoBehaviour
             {
                 if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                 {
-                    sprite.sprite = centerUp;
-
-                    farmPlot.WetSoil = centerUpWater;
-                    farmPlot.DrySoil = centerUp;
+                    farmPlot.ChangeSprites(centerUp, centerUpWater);
                 }
                 else
                 {
-                    sprite.sprite = leftright;
-
-                    farmPlot.WetSoil = leftrightWater;
-                    farmPlot.DrySoil = leftright;
+                    farmPlot.ChangeSprites(leftright, leftrightWater);
                 }
             }
             else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
-                sprite.sprite = cornerLeftUp;
-
-                farmPlot.WetSoil = cornerLeftUpWater;
-                farmPlot.DrySoil = cornerLeftUp;
+                farmPlot.ChangeSprites(cornerLeftUp, cornerLeftUpWater);
             }
             else
             {
-                sprite.sprite = left;
-
-                farmPlot.WetSoil = leftWater;
-                farmPlot.DrySoil = left;
+                farmPlot.ChangeSprites(left, leftWater);
             }
         }
         else if (gridNode.y + 1 < grid.gridArray.GetLength(1) && grid.gridArray[gridNode.x, gridNode.y + 1].canPlant == true)
@@ -370,90 +361,148 @@ public class HoeSystemHandler : MonoBehaviour
             {
                 if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
                 {
-                    sprite.sprite = centerRight;
-
-                    farmPlot.WetSoil = centerRightWater;
-                    farmPlot.DrySoil = centerRight;
+                    farmPlot.ChangeSprites(centerRight, centerRightWater);
                 }
                 else
                 {
-                    sprite.sprite = cornerRightDown;
-
-                    farmPlot.WetSoil = cornerRightDownWater;
-                    farmPlot.DrySoil = cornerRightDown;
+                    farmPlot.ChangeSprites(cornerRightDown, cornerRightDownWater);
                 }
             }
             else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
-                sprite.sprite = updown;
-
-                farmPlot.WetSoil = updownWater;
-                farmPlot.DrySoil = updown;
+                farmPlot.ChangeSprites(updown, updownWater);
             }
             else
             {
-                sprite.sprite = down;
-
-                farmPlot.WetSoil = downWater;
-                farmPlot.DrySoil = down;
+                farmPlot.ChangeSprites(down, downWater);
             }
         }
         else if (gridNode.x - 1 >= 0 && grid.gridArray[gridNode.x - 1, gridNode.y].canPlant == true)
         {
             if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
             {
-                sprite.sprite = cornerRightUp;
-
-                farmPlot.WetSoil = cornerRightUpWater;
-                farmPlot.DrySoil = cornerRightUp;
+                farmPlot.ChangeSprites(cornerRightUp, cornerRightUpWater);
             }
             else
             {
-                sprite.sprite = right;
-
-                farmPlot.WetSoil = rightWater;
-                farmPlot.DrySoil = right;
+                farmPlot.ChangeSprites(right, rightWater);
             }
         }
         else if (gridNode.y - 1 >= 0 && grid.gridArray[gridNode.x, gridNode.y - 1].canPlant == true)
         {
-            sprite.sprite = up;
-
-            farmPlot.WetSoil = upWater;
-            farmPlot.DrySoil = up;
+            farmPlot.ChangeSprites(up, upWater);
         }
         else
         {
-            sprite.sprite = full;
-
-            farmPlot.WetSoil = fullWater;
-            farmPlot.DrySoil = full;
+            farmPlot.ChangeSprites(full, fullWater);
         }
     }
 
-    public void PlaceSoil(Vector3 playerPosition, int spawn, Hoe hoe)
+    public bool PlaceSoil(Hoe hoe)
     {
-        if (buildSystem.canPlantGrid == true)
+        if (buildSystem.canPlantGrid == true && nodeToSpawn != null)
         {
-            GridNode gridNode = grid.GetGridObject(playerPosition);
+            GameObject soil = Spawn(grid.gridArray[nodeToSpawn.x, nodeToSpawn.y]);
 
-            if (gridNode != null)
+            if (soil != null)
             {
-                switch (spawn)
+                if (soil != gameObject)
                 {
-                    case 1: if (gridNode.x - 1 >= 0) Spawn(grid.gridArray[gridNode.x - 1, gridNode.y]); break;
-                    case 2: if (gridNode.x + 1 < grid.gridArray.GetLength(0)) Spawn(grid.gridArray[gridNode.x + 1, gridNode.y]); break;
-                    case 3: if (gridNode.y + 1 < grid.gridArray.GetLength(1)) Spawn(grid.gridArray[gridNode.x, gridNode.y + 1]); break;
-                    case 4: if (gridNode.y - 1 >= 0) Spawn(grid.gridArray[gridNode.x, gridNode.y - 1]); break;
+                    playerStats.DecreseStamina(hoe.Stamina);
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool DestroySoilMousePosition(Hoe hoe)
+    {
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
+
+        Vector3 mousePositionWorld = mainCamera.ScreenToWorldPoint(mousePosition);
+
+        GridNode gridNode = grid.GetGridObject(mousePositionWorld);
+
+        if (gridNode != null &&
+            gridNode.objectInSpace != null &&
+            gridNode.objectInSpace.CompareTag("FarmPlot") &&
+            gridNode.cropPlaced == false)
+        {
+            ChangeDestroyedSoilState(gridNode);
+
+            DestroySoil(gridNode);
+
+            playerStats.DecreseStamina(hoe.Stamina);
+
+            return true;
+        }
+        return false;
+    }
+
+    public void DestroySoil(GridNode gridNode)
+    {
+        if (gridNode != null)
+        {
+            for (int i = gridNode.x - 1; i <= gridNode.x + 1; i++)
+            {
+                for (int j = gridNode.y - 1; j <= gridNode.y + 1; j++)
+                {
+                    if (i >= 0 && j >= 0 &&
+                        i < grid.gridArray.GetLength(0) &&
+                        j < grid.gridArray.GetLength(1) &&
+                        grid.gridArray[i, j] != null)
+                    {
+                        if (grid.gridArray[i, j].objectInSpace != null &&
+                            grid.gridArray[i, j].objectInSpace.CompareTag("FarmPlot"))
+                        {
+                            ChangeDestroyedSoilState(grid.gridArray[i, j]);
+
+                            Spawn(grid.GetWorldPosition(grid.gridArray[i, j]));
+                        }
+                    }
                 }
             }
-
-            GameObject.Find("Global/Player").GetComponent<PlayerStats>().DecreseStamina(hoe.Stamina);
-            //1 - Left
-            //2 - Right
-            //3 - Up
-            //4 - Down
         }
+    }
+
+    public void DestroySoil(GridNode gridNode, Placeable placeable)
+    {
+        if (gridNode != null)
+        {
+            for (int i = gridNode.x + placeable.StartX - 1; i <= gridNode.x + placeable.SizeX + 1; i++)
+            {
+                for (int j = gridNode.y + placeable.StartY - 1; j <= gridNode.y + placeable.SizeY + 1; j++)
+                {
+                    if (i >= 0 && j >= 0 &&
+                        i < grid.gridArray.GetLength(0) &&
+                        j < grid.gridArray.GetLength(1) &&
+                        grid.gridArray[i, j] != null)
+                    {
+                        if (grid.gridArray[i, j].objectInSpace != null &&
+                            grid.gridArray[i, j].objectInSpace.CompareTag("FarmPlot"))
+                        {
+                            ChangeDestroyedSoilState(grid.gridArray[i, j]);
+
+                            Spawn(grid.GetWorldPosition(grid.gridArray[i, j]));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void ChangeDestroyedSoilState(GridNode gridNode)
+    {
+        Destroy(gridNode.objectInSpace);
+
+        gridNode.canPlace = true;
+        gridNode.canPlant = false;
+        gridNode.isWalkable = true;
+        gridNode.objectInSpace = null;
     }
 
     private void ChangeHeadlightPosition(GridNode gridNode)
@@ -486,81 +535,53 @@ public class HoeSystemHandler : MonoBehaviour
         }
     }
 
-    public void HoeHeadlight(Vector3 playerPosition, int spawn)
+    public void HoeHeadlight(Vector3 playerPosition)
     {
         if (buildSystem.LocationGrid != null && buildSystem.canPlantGrid == true)
         {
-            GridNode gridNode = grid.GetGridObject(playerPosition);
+            GridNode gridNodePlayerPosition = grid.GetGridObject(playerPosition);
 
-            if (gridNode != null)
+            if (gridNodePlayerPosition != null)
             {
-                if (headlightObject == null)
+                Vector3 mousePosition = Mouse.current.position.ReadValue();
+                mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
+
+                Vector3 mousePositionWorld = mainCamera.ScreenToWorldPoint(mousePosition);
+
+                GridNode gridNode = grid.GetGridObject(mousePositionWorld);
+
+                if (gridNode != null && grid.VerifyDistanceBetweenTwoNodes(gridNodePlayerPosition, gridNode, maxDistanceFromPlayer) == true)
                 {
-                    headlightObject = Instantiate(prefabGameObject);
+                    if (headlightObject == null)
+                    {
+                        headlightObject = Instantiate(prefabGameObject);
 
-                    headlightObject.AddComponent<SpriteRenderer>().sprite = headlight;
+                        headlightObject.AddComponent<SpriteRenderer>().sprite = headlight;
 
-                    Vector3 scale = new Vector3(.75f, .75f, 1f);
+                        Vector3 scale = Vector3.one;
 
-                    headlightObject.transform.localScale = scale;
+                        headlightObject.transform.localScale = scale;
+                    }
+
+                    nodeToSpawn = gridNode;
+
+                    ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y]);
                 }
-
-                switch (spawn)
+                else
                 {
-                    case 1:
-                        {
-                            if (gridNode.x - 1 >= 0)
-                            {
-                                ChangeHeadlightPosition(grid.gridArray[gridNode.x - 1, gridNode.y]);
-                            }
-                            else
-                            {
-                                Destroy(headlightObject);
-                            }
+                    nodeToSpawn = null;
 
-                            break;
-                        }
-                    case 2:
-                        {
-                            if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-                            {
-                                ChangeHeadlightPosition(grid.gridArray[gridNode.x + 1, gridNode.y]);
-                            }
-                            else
-                            {
-                                Destroy(headlightObject);
-                            }
-
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-                            {
-                                ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y + 1]);
-                            }
-                            else
-                            {
-                                Destroy(headlightObject);
-                            }
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (gridNode.y - 1 >= 0)
-                            {
-                                ChangeHeadlightPosition(grid.gridArray[gridNode.x, gridNode.y - 1]);
-                            }
-                            else
-                            {
-                                Destroy(headlightObject);
-                            }
-
-                            break;
-                        }
+                    Destroy(headlightObject);
                 }
             }
+            else
+            {
+                nodeToSpawn = null;
+            }
+        }
+        else
+        {
+            nodeToSpawn = null;
         }
     }
 
@@ -570,5 +591,17 @@ public class HoeSystemHandler : MonoBehaviour
         {
             Destroy(headlightObject);
         }
+    }
+
+    public bool DestroyCrop(Hoe hoe)
+    {
+        if(harvestCrop.DestroyCropWithHoe() == true)
+        {
+            playerStats.DecreseStamina(hoe.Stamina);
+
+            return true;
+        }
+
+        return false;
     }
 }

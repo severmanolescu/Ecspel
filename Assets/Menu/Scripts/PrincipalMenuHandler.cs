@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 using System.IO;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PrincipalMenuHandler : MonoBehaviour
 {
@@ -105,7 +105,7 @@ public class PrincipalMenuHandler : MonoBehaviour
 
         pathToSaveSettings = Path.Combine(pathToSaveSettings, @"Sooth\Sooth.ini");
 
-        if(!File.Exists(pathToSaveSettings))
+        if (!File.Exists(pathToSaveSettings))
         {
             CreateDirectoryIni(currentResolutionIndex);
 
@@ -123,14 +123,14 @@ public class PrincipalMenuHandler : MonoBehaviour
 
     private void Update()
     {
-        if(keyboard.escapeKey.wasPressedThisFrame)
+        if (keyboard.escapeKey.wasPressedThisFrame)
         {
-            if(settingsMenu.activeSelf == true)
+            if (settingsMenu.activeSelf == true)
             {
                 settingsMenu.SetActive(false);
                 principalMenu.SetActive(true);
             }
-            else if(quitConsole.activeSelf == true)
+            else if (quitConsole.activeSelf == true)
             {
                 quitConsole.SetActive(false);
                 principalMenu.SetActive(true);
@@ -146,7 +146,7 @@ public class PrincipalMenuHandler : MonoBehaviour
 
                 HideSaveButtons();
             }
-            else if(openMenu != null && openMenu.activeSelf == true)
+            else if (openMenu != null && openMenu.activeSelf == true)
             {
                 openMenu.SetActive(false);
                 principalMenu.SetActive(true);
@@ -192,7 +192,7 @@ public class PrincipalMenuHandler : MonoBehaviour
                 }
                 catch
                 {
-                    fullScreenToggle.isOn = true; 
+                    fullScreenToggle.isOn = true;
                 }
             }
             else if (line.Contains("Resolution"))
@@ -275,7 +275,7 @@ public class PrincipalMenuHandler : MonoBehaviour
             System.IO.Directory.CreateDirectory(directoryPath);
         }
 
-        FileStream file =  File.Create(pathToSaveSettings);
+        FileStream file = File.Create(pathToSaveSettings);
 
         file.Close();
 
@@ -324,7 +324,7 @@ public class PrincipalMenuHandler : MonoBehaviour
     }
 
     public void OpenPrincipalMenu()
-    {        
+    {
         settingsMenu.SetActive(false);
         principalMenu.SetActive(true);
         quitConsole.SetActive(false);

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,8 @@ public class CropGrowHandler : MonoBehaviour
 
     private List<SaplingGrowHandler> saplingGrows = new List<SaplingGrowHandler>();
 
-    private List<SaplingGrowHandler> toRemoveFromList = new List<SaplingGrowHandler>();
+    private List<SaplingGrowHandler> toRemoveFromListSaplings = new List<SaplingGrowHandler>();
+    private List<CropGrow> toRemoveFromListCrops = new List<CropGrow>();
 
     public void DayChange(int day)
     {
@@ -16,7 +16,14 @@ public class CropGrowHandler : MonoBehaviour
         {
             foreach (CropGrow crop in cropGrows)
             {
-                crop.DayChange(day);
+                if (crop != null)
+                {
+                    crop.DayChange(day);
+                }
+                else
+                {
+                    toRemoveFromListCrops.Add(crop);
+                }
             }
         }
 
@@ -30,19 +37,29 @@ public class CropGrowHandler : MonoBehaviour
                 }
                 else
                 {
-                    toRemoveFromList.Add(sapling);
+                    toRemoveFromListSaplings.Add(sapling);
                 }
             }
         }
 
-        if(toRemoveFromList.Count > 0)
+        if (toRemoveFromListSaplings.Count > 0)
         {
-            foreach (SaplingGrowHandler sapling in toRemoveFromList)
+            foreach (SaplingGrowHandler sapling in toRemoveFromListSaplings)
             {
                 saplingGrows.Remove(sapling);
             }
 
-            toRemoveFromList.Clear();
+            toRemoveFromListSaplings.Clear();
+        }
+
+        if (toRemoveFromListCrops.Count > 0)
+        {
+            foreach (CropGrow cropGrow in toRemoveFromListCrops)
+            {
+                cropGrows.Remove(cropGrow);
+            }
+
+            toRemoveFromListCrops.Clear();
         }
     }
 
@@ -63,7 +80,7 @@ public class CropGrowHandler : MonoBehaviour
 
     public void RemoveSaplingList(SaplingGrowHandler sapling)
     {
-        toRemoveFromList.Remove(sapling);
+        toRemoveFromListSaplings.Remove(sapling);
     }
 
     public void ReinitializeLists()
@@ -72,6 +89,6 @@ public class CropGrowHandler : MonoBehaviour
 
         saplingGrows = new List<SaplingGrowHandler>();
 
-        toRemoveFromList = new List<SaplingGrowHandler>();
-}
+        toRemoveFromListSaplings = new List<SaplingGrowHandler>();
+    }
 }

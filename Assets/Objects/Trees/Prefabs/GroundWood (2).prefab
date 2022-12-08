@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7662106943335026113, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  m_Sprite: {fileID: 1675001429, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.875, y: 0.75}
+  m_Size: {x: 0.875, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,11 +104,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScaleX: 0
   startScaleY: 0
-  scaleX: 1
-  scaleY: 1
+  scaleX: 0
+  scaleY: 0
   locationGrid: {fileID: 0}
   isWalkable: 0
-  positionInCenterOfGridNode: 1
+  positionInCenterOfGridNode: 0
 --- !u!61 &5723756765514654357
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,9 +125,9 @@ BoxCollider2D:
   m_Offset: {x: 0.29796505, y: 0.13536644}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.19569492, y: 0.17802581}
-    oldSize: {x: 1, y: 0.625}
-    newSize: {x: 0.875, y: 0.75}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.875, y: 1}
+    newSize: {x: 0.875, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   log: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   level: 1
+  destroyParticle: {fileID: 1934757459183325492, guid: 21c826b6fd0c61a4aa2b242f7881e0a9, type: 3}
   woodChop: {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
 --- !u!82 &-227958784247367422
 AudioSource:
@@ -284,14 +285,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797721189542647907}
-  m_LocalRotation: {x: 0, y: 0, z: -0.026700301, w: 0.9996435}
-  m_LocalPosition: {x: 0.349, y: 0.1199, z: 0}
+  m_LocalRotation: {x: -0, y: 0, z: -0.20364188, w: -0.97904545}
+  m_LocalPosition: {x: -0.011, y: 0.55, z: 0}
   m_LocalScale: {x: 1.0454289, y: 0.88248616, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5723756765514654352}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.06}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -336.5}
 --- !u!212 &4996459543520315250
 SpriteRenderer:
   m_ObjectHideFlags: 0

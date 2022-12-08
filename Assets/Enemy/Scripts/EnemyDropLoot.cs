@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class EnemyDropLoot : MonoBehaviour
 
     public void DropItem()
     {
-        foreach(QuestItems questItems in drops)
+        foreach (QuestItems questItems in drops)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 

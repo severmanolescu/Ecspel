@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 inputs;
 
-    private  PlayerInventory playerInventory;
+    private PlayerInventory playerInventory;
 
     private PlayerItemUse playerItem;
 
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if(joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0)
+                if (joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0)
                 {
                     moveLeft = true;
                 }
@@ -132,13 +132,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     inputs.x -= 1;
                 }
-                else if(moveRight == true)
+                else if (moveRight == true)
                 {
                     inputs.x += 1;
                 }
             }
 
-            if(joystick.stick.up.ReadValue() == 1 && joystick.stick.down.ReadValue() == 0)
+            if (joystick.stick.up.ReadValue() == 1 && joystick.stick.down.ReadValue() == 0)
             {
                 moveUp = false;
                 moveDown = false;
@@ -219,50 +219,60 @@ public class PlayerMovement : MonoBehaviour
         if (inputs.x > 0 && inputs.y > 0) //Up right
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical",   inputs.y);
+            animator.SetFloat("Vertical", inputs.y);
         }
         else if (inputs.x < 0 && inputs.y > 0) //Up left
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical",   inputs.y);
+            animator.SetFloat("Vertical", inputs.y);
         }
         else if (inputs.x > 0 && inputs.y < 0) //Down right
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical",   inputs.y);
+            animator.SetFloat("Vertical", inputs.y);
         }
         else if (inputs.x < 0 && inputs.y < 0) //Down left
         {
             animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical",   inputs.y);
+            animator.SetFloat("Vertical", inputs.y);
         }
         else
         {
             animator.SetFloat("Horizontal", inputs.x);
-            animator.SetFloat("Vertical",   inputs.y);
+            animator.SetFloat("Vertical", inputs.y);
         }
     }
 
     private void FixedUpdate()
     {
-        if(canMove)
+        if (canMove)
             rigidbody.MovePosition(rigidbody.position + inputs * Time.fixedDeltaTime / slowEffect);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("ItemWorld"))
+        if (collision.CompareTag("ItemWorld"))
         {
-            if(playerInventory.AddItemWithAnimation(collision.gameObject.GetComponent<ItemWorld>().Item) == true)
-            {
-                collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
+            ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
 
-                playSound.Play(itemPickup);
-            }
-            else
+            if (itemWorld.EnteredInPlayer == false)
             {
-                collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
+                itemWorld.EnteredInPlayer = true;
+
+                if (playerInventory.AddItemWithAnimation(itemWorld.Item) == true)
+                {
+                    collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
+
+                    playSound.Play(itemPickup);
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<ItemWorld>().ReinitializeItem();
+
+                    itemWorld.EnteredInPlayer = false;
+                }
             }
+
         }
     }
 
@@ -276,26 +286,26 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
 
         animator.SetFloat("Horizontal", 0);
-        animator.SetFloat("Vertical",   0);
-        animator.SetFloat("Speed",      0);
+        animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Speed", 0);
     }
 
     public void ChangeIdleAnimationDirection(int direction)
     {
         Vector3 directionToChange = Vector3.zero;
 
-        switch(direction)
+        switch (direction)
         {
-            case 0: directionToChange = Vector3.left;   break;
-            case 1: directionToChange = Vector3.right;  break;
-            case 2: directionToChange = Vector3.up;     break;
-            case 3: directionToChange = Vector3.down;   break;
+            case 0: directionToChange = Vector3.left; break;
+            case 1: directionToChange = Vector3.right; break;
+            case 2: directionToChange = Vector3.up; break;
+            case 3: directionToChange = Vector3.down; break;
         }
 
-        if(directionToChange != Vector3.zero)
+        if (directionToChange != Vector3.zero)
         {
             animator.SetFloat("HorizontalFacing", directionToChange.x);
-            animator.SetFloat("VerticalFacing",   directionToChange.y);
+            animator.SetFloat("VerticalFacing", directionToChange.y);
         }
     }
 }

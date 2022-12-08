@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CaveSystemHandler : MonoBehaviour
 {
@@ -74,7 +73,7 @@ public class CaveSystemHandler : MonoBehaviour
     {
         if (locationGrid != null)
         {
-            StopAllCoroutines();            
+            StopAllCoroutines();
 
             StartCoroutine(WaitToCheck());
         }
@@ -206,7 +205,7 @@ public class CaveSystemHandler : MonoBehaviour
 
             playerTransform.position = lastCave.GetComponent<SpawnEnemys>().SpawnLocation.position;
 
-            if(maxCaveIndex > caveIndex)
+            if (maxCaveIndex > caveIndex)
             {
                 lastCave.GetComponent<DeleteCaveChestItems>().DeleteAllStorage();
             }
@@ -222,7 +221,7 @@ public class CaveSystemHandler : MonoBehaviour
     {
         playerTransform.position = spawnLocationOutside.position;
 
-        if(lastCave != null)
+        if (lastCave != null)
         {
             Destroy(lastCave);
         }
@@ -232,7 +231,7 @@ public class CaveSystemHandler : MonoBehaviour
 
     public void TeleportToCaveWithIndex(int indexOfCave)
     {
-        if(indexOfCave >= 0 && indexOfCave < cavesPrefabs.Count)
+        if (indexOfCave >= 0 && indexOfCave < cavesPrefabs.Count)
         {
             caveIndex = indexOfCave;
 
@@ -289,7 +288,7 @@ public class CaveSystemHandler : MonoBehaviour
 
     public bool HaveNextLevel()
     {
-        if(caveIndex < cavesPrefabs.Count - 1)
+        if (caveIndex < cavesPrefabs.Count - 1)
         {
             return true;
         }

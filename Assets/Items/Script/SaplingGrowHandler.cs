@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaplingGrowHandler : MonoBehaviour
@@ -34,7 +32,7 @@ public class SaplingGrowHandler : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        newLocationAfterFullGrow = GameObject.Find("PlayerHouseGround/Environment").transform;
+        newLocationAfterFullGrow = GameObject.Find("PlayerGround/Environment").transform;
     }
 
     public void SetData(Sapling sapling, int currentSprite, int startDay, ushort state)
@@ -53,7 +51,7 @@ public class SaplingGrowHandler : MonoBehaviour
 
         GameObject.Find("Global/DayTimer").GetComponent<CropGrowHandler>().SaplingAddList(this);
 
-        if(state > 0)
+        if (state > 0)
         {
             state--;
         }
@@ -62,7 +60,7 @@ public class SaplingGrowHandler : MonoBehaviour
 
         if (CurrentSprite < sapling.Levels.Count)
         {
-            if(spriteRenderer == null)
+            if (spriteRenderer == null)
             {
                 spriteRenderer = GetComponent<SpriteRenderer>();
             }
@@ -158,27 +156,58 @@ public class SaplingGrowHandler : MonoBehaviour
 
     public void DayChange(int day)
     {
-        if(day >= StartDay + sapling.DayToGrow)
+        if (day >= StartDay + sapling.DayToGrow)
         {
             CurrentSprite++;
 
-            if(CurrentSprite < sapling.Levels.Count)
+            if (CurrentSprite < sapling.Levels.Count)
             {
                 spriteRenderer.sprite = sapling.Levels[CurrentSprite];
 
                 StartDay = day;
 
-                state = 0;
+                if (sapling.Young != null)
+                {
+                    state = 0;
+                }
+                else
+                {
+                    state = 1;
+                }
             }
             else
             {
-                switch(State)
+                switch (State)
                 {
                     case 0:
                         {
-                            if(sapling.AlmostMature != null)
+                            if (sapling.Young != null)
                             {
                                 State = 1;
+
+                                GameObject tree = Instantiate(sapling.Young, transform.position, transform.rotation);
+
+                                tree.AddComponent<SaplingGrowHandler>().SetData(sapling, CurrentSprite, day, State);
+
+                                tree.transform.SetParent(transform.parent);
+
+                                GameObject.Find("Global/DayTimer").GetComponent<CropGrowHandler>().RemoveSaplingList(this);
+
+                                DestroyObject();
+
+                            }
+                            else if (sapling.Mature != null)
+                            {
+                                SaplingFullGrow();
+                            }
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (sapling.AlmostMature != null)
+                            {
+                                State = 2;
 
                                 GameObject tree = Instantiate(sapling.AlmostMature, transform.position, transform.rotation);
 
@@ -191,7 +220,7 @@ public class SaplingGrowHandler : MonoBehaviour
                                 DestroyObject();
 
                             }
-                            else if(sapling.Mature != null)
+                            else if (sapling.Mature != null)
                             {
                                 SaplingFullGrow();
                             }
@@ -199,7 +228,7 @@ public class SaplingGrowHandler : MonoBehaviour
                             break;
                         }
 
-                    case 1:
+                    case 2:
                         {
                             if (sapling.Mature != null)
                             {
@@ -221,9 +250,9 @@ public class SaplingGrowHandler : MonoBehaviour
 
         DamageTree damageTree = GetComponent<DamageTree>();
 
-        if(damageTree != null)
+        if (damageTree != null)
         {
-            if(damageTree.Destroyed == true)
+            if (damageTree.Destroyed == true)
             {
                 DamageTree newTree = tree.GetComponent<DamageTree>();
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class ChestStorageInitial : MonoBehaviour
     {
         ChestStorage chestStorage = GetComponent<ChestStorage>();
 
-        foreach(ItemWithAmount item in Items)
+        foreach (ItemWithAmount item in Items)
         {
             Item itemCopy = item.Item.Copy();
             itemCopy.Amount = item.Amount;

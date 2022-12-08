@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 public class DestroyTree : MonoBehaviour
 {
@@ -13,6 +12,8 @@ public class DestroyTree : MonoBehaviour
 
     [SerializeField] private GameObject itemWorld;
 
+    [SerializeField] private GameObject treeDustWhenHitGround;
+
     private int spawn;
 
     public int Spawn { set { spawn = value; } }
@@ -20,27 +21,32 @@ public class DestroyTree : MonoBehaviour
 
     public void Destroy()
     {
-        switch(spawn)
-        {
+        switch (spawn)
+        { 
             case 1:
                 {
-                    ItemWorld game = Instantiate(itemWorld).GetComponent<ItemWorld>();
+                    ItemWorld item = Instantiate(itemWorld).GetComponent<ItemWorld>();
 
                     Vector3 position = GetComponentInParent<Transform>().position;
 
                     position.x -= 1f;
 
-                    game.transform.position = position;
+                    GameObject particles = Instantiate(treeDustWhenHitGround);
+                    particles.transform.position = position;
 
-                    game.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
-                    game.MoveToPoint();
+                    particles.GetComponent<ParticleSystem>().Play();
 
-                    game = Instantiate(itemWorld).GetComponent<ItemWorld>();
+                    item.transform.position = position;
 
-                    game.transform.position = position;
+                    item.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
+                    item.MoveToPoint();
 
-                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
-                    game.MoveToPoint();
+                    item = Instantiate(itemWorld).GetComponent<ItemWorld>();
+
+                    item.transform.position = position;
+
+                    item.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
+                    item.MoveToPoint();
 
                     break;
                 }
@@ -52,6 +58,11 @@ public class DestroyTree : MonoBehaviour
                     Vector3 position = GetComponentInParent<Transform>().position;
 
                     position.x += 2f;
+
+                    GameObject particles = Instantiate(treeDustWhenHitGround);
+                    particles.transform.position = position;
+
+                    particles.GetComponent<ParticleSystem>().Play();
 
                     game.transform.position = position;
 

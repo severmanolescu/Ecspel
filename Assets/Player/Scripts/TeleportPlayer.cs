@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,9 +57,9 @@ public class TeleportPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            if(audioSource != null)
+            if (audioSource != null)
             {
                 audioSource.Play();
             }
@@ -98,7 +97,7 @@ public class TeleportPlayer : MonoBehaviour
                 rainHandler.ChangeRainLocation(locationRain);
             }
 
-            if(setRainSound == true)
+            if (setRainSound == true)
             {
                 rainHandler.GetComponent<DayTimerHandler>().StartSoundEffects();
             }

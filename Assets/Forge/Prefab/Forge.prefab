@@ -57,6 +57,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
@@ -123,9 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e74e2fc4da660f4c84afd84c80510ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minRadius: 0
-  maxRadius: 0
-  speedIntensityChange: 0
+  lightOn: {fileID: 0}
+  lightOff: {fileID: 0}
 --- !u!1 &1652526027341834624
 GameObject:
   m_ObjectHideFlags: 0
@@ -10070,12 +10070,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2556571802107484399, guid: b3369d2c8fdb7ae4bb869759a3c6688c, type: 3}
+  m_Sprite: {fileID: -1223821400, guid: f84ac1d66f90dea4394ecf236e06be0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.875, y: 1.4375}
+  m_Size: {x: 2, y: 4.6875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -10098,8 +10098,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.875, y: 4.5625}
-    newSize: {x: 1.875, y: 1.4375}
+    oldSize: {x: 2, y: 4.6875}
+    newSize: {x: 2, y: 4.6875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -10124,8 +10124,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.875, y: 4.5625}
-    newSize: {x: 1.875, y: 1.4375}
+    oldSize: {x: 2, y: 4.6875}
+    newSize: {x: 2, y: 4.6875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -10145,6 +10145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2963b132fca74db5dbc59e03d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemWorldSize: 0.4
 --- !u!114 &7588941610524650012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10157,7 +10158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc5e40c5e7eff94c9f8b58ead56b57f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workingSprite: {fileID: 7679927236559278979, guid: b3369d2c8fdb7ae4bb869759a3c6688c, type: 3}
+  workingSprite: {fileID: -250729428, guid: f84ac1d66f90dea4394ecf236e06be0c, type: 3}
   smokeParticle: {fileID: 1652526027720700837}
   fireParticle: {fileID: 1652526027341834631}
   itemSlotPrefab: {fileID: 5500770663196022926, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
@@ -10284,7 +10285,7 @@ MonoBehaviour:
   - {x: 0.80773926, y: 0.49741936, z: 0}
   m_ShapePathHash: 1851627397
   m_Mesh: {fileID: 0}
-  m_InstanceId: 2987240
+  m_InstanceId: 300088
 --- !u!1 &9029612244635300235
 GameObject:
   m_ObjectHideFlags: 0
@@ -10310,7 +10311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9029612244635300235}
   m_LocalRotation: {x: 0, y: 0, z: -0.06557722, w: 0.9978475}
-  m_LocalPosition: {x: -0.01, y: 1.18, z: -22.65101}
+  m_LocalPosition: {x: -0.01, y: 1.18, z: 0}
   m_LocalScale: {x: 4.0885897, y: 2.5720398, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

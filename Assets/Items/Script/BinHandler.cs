@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class BinHandler : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler, IDropHandler
+public class BinHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
     [SerializeField] private Sprite openBin;
     [SerializeField] private Sprite closeBin;
@@ -37,7 +37,7 @@ public class BinHandler : MonoBehaviour , IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(itemDrag.PreviousSlot != null && itemDrag.PreviousSlot.GetComponent<ItemSlot>().PlayerInventory == true)
+        if (itemDrag.PreviousSlot != null && itemDrag.PreviousSlot.GetComponent<ItemSlot>().PlayerInventory == true)
         {
             image.sprite = openBin;
         }

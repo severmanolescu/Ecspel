@@ -45,7 +45,7 @@ public class CropGrow : MonoBehaviour
 
     public void DayChange(int day)
     {
-        if(day >= StartDay + Item.DayToGrow)
+        if (day >= StartDay + Item.DayToGrow)
         {
             CurrentSprite++;
 
@@ -83,7 +83,7 @@ public class CropGrow : MonoBehaviour
                 }
             }
 
-            if(CurrentSprite == 2)
+            if (CurrentSprite == 2)
             {
                 GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
@@ -96,7 +96,7 @@ public class CropGrow : MonoBehaviour
     {
         int chance = Random.Range(0, 100);
 
-        if(chance <= skillHandler.FarmingLevel * 5)
+        if (chance <= skillHandler.FarmingLevel * 5)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
@@ -176,7 +176,7 @@ public class CropGrow : MonoBehaviour
             Item drop = Item.CropItem.Copy();
             drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
-            if(drop.Amount == 0)
+            if (drop.Amount == 0)
             {
                 drop.Amount = 1;
             }
@@ -234,6 +234,26 @@ public class CropGrow : MonoBehaviour
         }
     }
 
+    public bool DestroyCropByHoe()
+    {
+        if (HarverstCrop() == false)
+        {
+            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+
+            itemWorld.transform.position = transform.position;
+
+            Item drop = Item.Copy();
+            drop.Amount = 1;
+
+            itemWorld.SetItem(drop);
+            itemWorld.MoveToPoint();
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void DestroyCropOnLoadGame()
     {
         GameObject.Find("BuildSystem").GetComponent<BuildSystemHandler>().ChangeGridCropPlaced(gridNode, true);
@@ -259,7 +279,7 @@ public class CropGrow : MonoBehaviour
         destroyed = true;
     }
 
-    private void HarvestNotRefil()
+    private bool HarvestNotRefil()
     {
         if (CurrentSprite == Item.Levels.Count - 1)
         {
@@ -285,10 +305,14 @@ public class CropGrow : MonoBehaviour
             destroyed = true;
 
             SpawnSeeds();
+
+            return true;
         }
+
+        return false;
     }
 
-    private void HarvestRefil()
+    private bool HarvestRefil()
     {
         if (CurrentSprite == Item.Levels.Count - 3)
         {
@@ -314,22 +338,28 @@ public class CropGrow : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = Item.Levels[CurrentSprite];
 
             SpawnSeeds();
+
+            return true;
         }
+
+        return false;
     }
 
-    public void HarverstCrop()
+    public bool HarverstCrop()
     {
         if (Destroyed == false)
         {
             if (Item.Refil == false)
             {
-                HarvestNotRefil();
+                return HarvestNotRefil();
             }
             else
             {
-                HarvestRefil();
+                return HarvestRefil();
             }
         }
+
+        return false;
     }
 
     private void ChangeSprite()

@@ -3,27 +3,41 @@ using UnityEngine.Rendering.Universal;
 
 public class LightHandler : MonoBehaviour
 {
-    [SerializeField] private float minRadius;
-    [SerializeField] private float maxRadius;
-    [SerializeField] private float speedIntensityChange;
+    [SerializeField] private Sprite lightOn;
+    [SerializeField] private Sprite lightOff;
 
-    private Gradient gradient;
+    private Light2D spotLight;
 
-    private Light2D lightSource;
+    private SpriteRenderer spriteRenderer;
 
-    public Gradient Gradient { get => gradient; set => gradient = value; }
-
-    private void Awake()
+    private void Start()
     {
-        GameObject.Find("DayTimer").GetComponent<SourceLightShadow>().AddLight(this);
+        spotLight = GetComponentInChildren<Light2D>();
 
-        lightSource = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        lightSource.pointLightInnerRadius = minRadius;
+        GameObject.Find("Global/DayTimer").GetComponent<SourceLightShadow>().AddLight(this);
+
+        TurnOffLight();
     }
 
-    public void ChangeIntensity(Color color)
+    public void TurnOnLight()
     {
-        lightSource.color = color;
+        spotLight.enabled = true;
+
+        if(lightOn != null)
+        {
+            spriteRenderer.sprite = lightOn;
+        }
+    }
+
+    public void TurnOffLight()
+    {
+        spotLight.enabled = false;
+
+        if (lightOn != null)
+        {
+            spriteRenderer.sprite = lightOff;
+        }
     }
 }

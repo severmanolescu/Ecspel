@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -19,7 +17,7 @@ public class DayTimerHandler : MonoBehaviour
     [Header("Timer:")]
     [SerializeField] private float minutes = 0;
     [SerializeField] private int hours = 0;
-    [SerializeField] private int days  = 0;
+    [SerializeField] private int days = 0;
 
     [SerializeField] private Gradient gradient;
     [SerializeField] private Gradient gradientWindowLight;
@@ -138,12 +136,12 @@ public class DayTimerHandler : MonoBehaviour
     {
         minutes += timeSpeed * Time.deltaTime;
 
-        if(Minutes >= 60)
+        if (Minutes >= 60)
         {
             minutes = 0;
             Hours++;
 
-            if((hours >= hourToSpawnEnemyStart && hours <= 23) || 
+            if ((hours >= hourToSpawnEnemyStart && hours <= 23) ||
                (hours >= 0 && hours <= hourToSpawnEnemyFinal) &&
                raining == false)
             {
@@ -154,7 +152,7 @@ public class DayTimerHandler : MonoBehaviour
                     startAllFirefly.StartParticles();
                 }
 
-                if(soundEffectSetted == true)
+                if (soundEffectSetted == true)
                 {
                     audioSource.clip = nightSound;
 
@@ -170,7 +168,7 @@ public class DayTimerHandler : MonoBehaviour
             {
                 startAllFirefly.StopParticles();
 
-                if(raining == false && soundEffectSetted == false)
+                if (raining == false && soundEffectSetted == false)
                 {
                     audioSource.clip = daySound;
 
@@ -183,7 +181,7 @@ public class DayTimerHandler : MonoBehaviour
                 }
             }
 
-            if(Hours >= 24)
+            if (Hours >= 24)
             {
                 Hours = 0;
                 days++;
@@ -191,7 +189,7 @@ public class DayTimerHandler : MonoBehaviour
                 cropGrow.DayChange(days);
             }
 
-            if(hours == sleepHour && sleep == false)
+            if (hours == sleepHour && sleep == false)
             {
                 worldTextDetails.ShowText("Esti obosit!");
 
@@ -207,7 +205,7 @@ public class DayTimerHandler : MonoBehaviour
             }
         }
 
-        if(startFeelingTired == true && minutes >= 30)
+        if (startFeelingTired == true && minutes >= 30)
         {
             startFeelingTired = false;
 
@@ -222,13 +220,13 @@ public class DayTimerHandler : MonoBehaviour
 
         changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
 
-        if(sleep == true && (days > startDay || sleepNotFromBed == true))
+        if (sleep == true && (days > startDay || sleepNotFromBed == true))
         {
             if (Hours == wakeupHour)
             {
                 WakeUp();
             }
-            else if(Hours == wakeupHour - 3)
+            else if (Hours == wakeupHour - 3)
             {
                 StartTodayWeather();
             }
@@ -241,12 +239,12 @@ public class DayTimerHandler : MonoBehaviour
 
         sleep = true;
 
-        if(sleepOutOfStamina == true)
+        if (sleepOutOfStamina == true)
         {
             sleepFromStamina = true;
         }
 
-        GameObject.Find("PlayerHouse/Bed").GetComponent<SleepHandler>().Sleep();
+        //GameObject.Find("PlayerHouse/Bed").GetComponent<SleepHandler>().Sleep();
     }
 
     private void WakeUp()
@@ -270,13 +268,13 @@ public class DayTimerHandler : MonoBehaviour
 
         sleep = false;
 
-        if(sleepNotFromBed == true && sleepFromStamina == false)
+        if (sleepNotFromBed == true && sleepFromStamina == false)
         {
             worldTextDetails.ShowText("Ai adormit, dar te-ai trezit in pat!");
 
             sleepNotFromBed = false;
         }
-        else if(sleepFromStamina == true)
+        else if (sleepFromStamina == true)
         {
             worldTextDetails.ShowText("Ai obosit foarte rau asa ca ai ajuns ca prin miracol acasa");
 
@@ -285,15 +283,15 @@ public class DayTimerHandler : MonoBehaviour
             sleepFromStamina = false;
         }
 
-        sleepHandler.StopSleep();
+        //sleepHandler.StopSleep();
 
-        sleepHandler = null; 
+        sleepHandler = null;
 
         playerStats.SetToMaxStats();
 
-        startAllFirefly.StopParticles();        
+        startAllFirefly.StopParticles();
 
-        saveSystem.StartSaveGame();
+        //saveSystem.StartSaveGame();
     }
 
     public void StopTime()
@@ -357,7 +355,7 @@ public class DayTimerHandler : MonoBehaviour
 
     public void PlayRainSound()
     {
-        if(raining == true)
+        if (raining == true)
         {
             audioSource.clip = rainSound;
 
@@ -390,15 +388,15 @@ public class DayTimerHandler : MonoBehaviour
     public void SetTimer(float minutes, int hours, int days)
     {
         this.minutes = minutes;
-        this.Hours  = hours;
-        this.days   = days;
+        this.Hours = hours;
+        this.days = days;
     }
 
     public void GetTimer(out float minutes, out int hours, out int days)
     {
         minutes = (int)this.Minutes;
-        hours   = this.Hours;
-        days    = this.Hours;
+        hours = this.Hours;
+        days = this.Hours;
     }
 
     public void GetTimer(out float minutes, out int hours)
@@ -427,7 +425,7 @@ public class DayTimerHandler : MonoBehaviour
 
     public bool CanSpawnEnemy()
     {
-        if((Hours >= hourToSpawnEnemyStart && Hours <= 23) ||
+        if ((Hours >= hourToSpawnEnemyStart && Hours <= 23) ||
            (Hours >= 0 && Hours <= hourToSpawnEnemyFinal))
         {
             return true;
@@ -454,7 +452,7 @@ public class DayTimerHandler : MonoBehaviour
 
     public void SetWeatherAtLoad(bool rain, bool fog, int fogIntensity)
     {
-        if(rain == true)
+        if (rain == true)
         {
             GetComponent<RainHandler>().StartParticle();
 
@@ -475,7 +473,7 @@ public class DayTimerHandler : MonoBehaviour
             globalLight.intensity = 1;
         }
 
-        if(fog == true)
+        if (fog == true)
         {
             fogAlpha = fogIntensity;
 

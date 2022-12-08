@@ -1,12 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
     private Item item;
 
-    private Image itemSprite;
+    private SpriteRenderer itemSprite;
 
     private ItemSprites itemSprites;
 
@@ -16,6 +15,8 @@ public class ItemWorld : MonoBehaviour
 
     private Transform shadow;
 
+    private bool enteredInPlayer = false;
+
     private float moveSpeed = 2f;
     private float maxDistante = 0.1f;
 
@@ -23,6 +24,8 @@ public class ItemWorld : MonoBehaviour
     bool move = false;
 
     public Item Item { get { return item; } }
+
+    public bool EnteredInPlayer { get => enteredInPlayer; set => enteredInPlayer = value; }
 
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
@@ -38,16 +41,9 @@ public class ItemWorld : MonoBehaviour
     {
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
 
-        itemSprite = gameObject.GetComponentInChildren<Image>();
+        itemSprite = GetComponent<SpriteRenderer>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-
-        Transform[] transforms = gameObject.GetComponentsInChildren<Transform>();
-
-        if (transforms[1] != null && transforms[1].CompareTag("SunShadow"))
-        {
-            shadow = transforms[1];
-        }
     }
 
     private void Start()
@@ -68,14 +64,14 @@ public class ItemWorld : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if(item != null)
+        else if (item != null)
         {
-            if(itemSprite == null)
+            if (itemSprite == null)
             {
-                itemSprite = gameObject.GetComponentInChildren<Image>();
+                itemSprite = GetComponent<SpriteRenderer>();
             }
 
-            itemSprite.sprite = itemSprites.GetItemSprite(item.ItemNO);
+            itemSprite.sprite = item.ItemSprite;
 
             if (amount != null)
             {
@@ -85,7 +81,7 @@ public class ItemWorld : MonoBehaviour
                 {
                     int chanceForanotherItem = Random.Range(0, 100);
 
-                    if (chanceForanotherItem >= skillsHandler.LuckLevel * 3.5)
+                    if (chanceForanotherItem <= skillsHandler.LuckLevel * 3.5)
                     {
                         item.Amount++;
                     }
@@ -114,7 +110,7 @@ public class ItemWorld : MonoBehaviour
 
     private void Update()
     {
-        if(move == true)
+        if (move == true)
         {
             if (Vector3.Distance(transform.position, newPosition) >= maxDistante)
             {

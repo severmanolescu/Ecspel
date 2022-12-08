@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +9,11 @@ public class GridSaveHadler : MonoBehaviour
     {
         List<GridSave[,]> gridSaves = new List<GridSave[,]>();
 
-        foreach(LocationGridSave locationGridSave in locationGridSaves)
+        foreach (LocationGridSave locationGridSave in locationGridSaves)
         {
             GridSave[,] gridSave = new GridSave[locationGridSave.Grid.gridArray.GetLength(0), locationGridSave.Grid.gridArray.GetLength(1)];
 
-            for(int indexOfWidth = 0; indexOfWidth < locationGridSave.Grid.gridArray.GetLength(0); indexOfWidth++)
+            for (int indexOfWidth = 0; indexOfWidth < locationGridSave.Grid.gridArray.GetLength(0); indexOfWidth++)
             {
                 for (int indexOfHeight = 0; indexOfHeight < locationGridSave.Grid.gridArray.GetLength(1); indexOfHeight++)
                 {
@@ -35,7 +34,7 @@ public class GridSaveHadler : MonoBehaviour
 
     public void SetDataToGridLocations(List<GridSave[,]> gridNodes)
     {
-        for(int indexOfLocation = 0; indexOfLocation < locationGridSaves.Count; indexOfLocation++)
+        for (int indexOfLocation = 0; indexOfLocation < locationGridSaves.Count; indexOfLocation++)
         {
             for (int indexOfWidth = 0; indexOfWidth < gridNodes[indexOfLocation].GetLength(0); indexOfWidth++)
             {

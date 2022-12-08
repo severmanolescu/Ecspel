@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class SetDialogueToPlayer : MonoBehaviour
 {
@@ -33,7 +30,7 @@ public class SetDialogueToPlayer : MonoBehaviour
     {
         playerMovement.Dialogue = false;
 
-        if(dialoguePlayerEnter != null)
+        if (dialoguePlayerEnter != null)
         {
             dialoguePlayerEnter.DialogueEnd();
         }

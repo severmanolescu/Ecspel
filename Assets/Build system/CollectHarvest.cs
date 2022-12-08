@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectHarvest : MonoBehaviour
@@ -21,9 +20,9 @@ public class CollectHarvest : MonoBehaviour
     {
         Destroy(GetComponent<SpriteRenderer>());
 
-        while(audioSource.isPlaying)
+        while (audioSource.isPlaying)
         {
-            yield return null; 
+            yield return null;
         }
 
         Destroy(gameObject);
@@ -35,7 +34,7 @@ public class CollectHarvest : MonoBehaviour
 
         newItem.Amount = 1;
 
-        if(inventory.AddItemWithAnimation(newItem) == true)
+        if (inventory.AddItemWithAnimation(newItem) == true)
         {
             audioSource.Play();
 

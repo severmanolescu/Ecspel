@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ChestOpenHandler : MonoBehaviour
@@ -70,11 +70,18 @@ public class ChestOpenHandler : MonoBehaviour
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         playerItems = GameObject.Find("Global/Player/Canvas/PlayerItems");
+
+        Transform shadow = transform.Find("Shadow");
+
+        if (shadow != null)
+        {
+            GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(shadow);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             player = collision.gameObject;
 
@@ -84,7 +91,7 @@ public class ChestOpenHandler : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             player = null;
 
@@ -93,7 +100,7 @@ public class ChestOpenHandler : MonoBehaviour
             playerMovement.TabOpen = false;
             playerInventory.SetActive(false);
             chestStorageHandler.gameObject.SetActive(false);
-            chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots, this); 
+            chestStorageHandler.SetChestStorage(chestStorage.Items, chestStorage.ChestMaxSlots, this);
 
             canvasTabsOpen.SetCanOpenTabs(true);
 
@@ -112,7 +119,7 @@ public class ChestOpenHandler : MonoBehaviour
     {
         items = chestStorage.Items;
 
-        foreach(Item item in items)
+        foreach (Item item in items)
         {
             if (item != null)
             {
@@ -186,7 +193,7 @@ public class ChestOpenHandler : MonoBehaviour
                         OpenChest();
                     }
                 }
-                else if(opened == true)
+                else if (opened == true)
                 {
                     CloseChestKeyPress();
                 }

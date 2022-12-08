@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TipShow : MonoBehaviour
@@ -12,7 +10,7 @@ public class TipShow : MonoBehaviour
     {
         if (collision != null)
         {
-            if(collision.CompareTag("Player"))
+            if (collision.CompareTag("Player"))
             {
                 collision.GetComponent<StartTip>().ShowTip(Tip.tipDetails);
 

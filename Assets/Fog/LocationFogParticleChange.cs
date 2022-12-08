@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,25 +7,25 @@ public class LocationFogParticleChange : MonoBehaviour
 
     public void StartParticles(float time, float alpha)
     {
-        foreach(ParticleSystem particle in particles)
+        foreach (ParticleSystem particle in particles)
         {
-            particle.Simulate(time, true, true);
+            //particle.Simulate(time, true, true);
 
-            particle.Play();
+            //particle.Play();
 
-            var main = particle.main;
+            //var main = particle.main;
 
-            main.startColor = new Color(1, 1, 1, alpha);
+            //main.startColor = new Color(1, 1, 1, alpha);
         }
     }
 
     public void StopParticles()
     {
-        foreach(ParticleSystem particle in particles)
+        foreach (ParticleSystem particle in particles)
         {
-            particle.Stop();
+            //particle.Stop();
 
-            particle.Clear();
+            //particle.Clear();
         }
     }
 

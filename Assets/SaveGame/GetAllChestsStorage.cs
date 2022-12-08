@@ -16,7 +16,7 @@ public class GetAllChestsStorage : MonoBehaviour
     {
         getItemFromNO = GameObject.Find("Global").GetComponent<GetItemFromNO>();
 
-        chestType = GetComponent<GetChestType>();   
+        chestType = GetComponent<GetChestType>();
     }
 
     public List<ChestSave> GetAllChestStorage()
@@ -25,7 +25,7 @@ public class GetAllChestsStorage : MonoBehaviour
 
         ChestOpenHandler[] chestOpens = placedObjects.GetComponentsInChildren<ChestOpenHandler>();
 
-        foreach(ChestOpenHandler chestOpen in chestOpens)
+        foreach (ChestOpenHandler chestOpen in chestOpens)
         {
             ChestSave chestSave = new ChestSave();
 
@@ -38,7 +38,7 @@ public class GetAllChestsStorage : MonoBehaviour
 
             chestSave.Items = new List<Tuple<int, int>>();
 
-            foreach(Item item in chestStorage.Items)
+            foreach (Item item in chestStorage.Items)
             {
                 if (item != null && item.ItemNO != -1)
                 {
@@ -72,7 +72,7 @@ public class GetAllChestsStorage : MonoBehaviour
                 GameObject chest = Instantiate(chestType.GetChestObject(chestSave.ChestID), placedObjects.transform);
 
                 chest.transform.position = new Vector3(chestSave.PositionX, chestSave.PositionY);
-                
+
                 chest.transform.parent = placedObjects.transform;
 
                 ChestStorage chestStorage = chest.GetComponent<ChestStorage>();
@@ -105,7 +105,7 @@ public class GetAllChestsStorage : MonoBehaviour
     {
         List<Tuple<int, int>> houseChest = new List<Tuple<int, int>>();
 
-        if(playerHouseChest != null)
+        if (playerHouseChest != null)
         {
             ChestStorage chestStorage = playerHouseChest.GetComponent<ChestStorage>();
 

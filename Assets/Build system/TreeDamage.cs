@@ -39,7 +39,7 @@ public class TreeDamage : MonoBehaviour
     {
         health -= damage;
 
-        if(particleStart != null)
+        if (particleStart != null)
         {
             particleStart.StartParticles();
 
@@ -51,12 +51,12 @@ public class TreeDamage : MonoBehaviour
             if (particleStart != null)
             {
                 particleStart.Spawn = spawn;
-                
-                switch(spawn)
+
+                switch (spawn)
                 {
-                    case 1:   animator.SetTrigger("Left"); break;
-                    case 2:   animator.SetTrigger("Right"); break;
-                    default:  animator.SetTrigger("Right"); particleStart.Spawn = 2; break;
+                    case 1: animator.SetTrigger("Left"); break;
+                    case 2: animator.SetTrigger("Right"); break;
+                    default: animator.SetTrigger("Right"); particleStart.Spawn = 2; break;
                 }
 
                 GameObject.Find("Player").GetComponent<PlayerAchievements>().Trees++;

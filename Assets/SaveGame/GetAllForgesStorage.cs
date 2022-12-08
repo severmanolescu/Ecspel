@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,9 +74,9 @@ public class GetAllForgesStorage : MonoBehaviour
             Destroy(forge.gameObject);
         }
 
-        foreach(ForgeStorage forge in forgesStorage)
+        foreach (ForgeStorage forge in forgesStorage)
         {
-            if(forge != null)
+            if (forge != null)
             {
                 GameObject forgeInstantiate = Instantiate(getForgeType.GetForgeObject(forge.Id));
 
@@ -87,13 +86,13 @@ public class GetAllForgesStorage : MonoBehaviour
 
                 ForgeOpenHandler forgeOpen = forgeInstantiate.GetComponent<ForgeOpenHandler>();
 
-                if(forgeOpen != null)
+                if (forgeOpen != null)
                 {
                     Item newItem;
 
                     newItem = getItemFromNO.ItemFromNo(forge.Storage[0].Item1);
 
-                    if(newItem != null)
+                    if (newItem != null)
                     {
                         forgeOpen.InputItem = newItem.Copy();
                         forgeOpen.InputItem.Amount = forge.Storage[0].Item2;

@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class SkillsDetailsHandler : MonoBehaviour
 {
@@ -22,13 +22,13 @@ public class SkillsDetailsHandler : MonoBehaviour
     {
         this.showSkillDetails = showSkillDetails;
 
-        if(details.CompareTo(string.Empty) != 0)
+        if (details.CompareTo(string.Empty) != 0)
         {
             this.details.text = details;
 
             this.coins.text = coins.ToString();
 
-            if(coins <= playerCoins)
+            if (coins <= playerCoins)
             {
                 this.coins.color = Color.white;
             }

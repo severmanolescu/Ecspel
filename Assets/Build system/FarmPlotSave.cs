@@ -1,5 +1,5 @@
 [System.Serializable]
-public class FarmPlotSave 
+public class FarmPlotSave
 {
     private float positionX;
     private float positionY;

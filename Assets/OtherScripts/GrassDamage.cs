@@ -45,7 +45,7 @@ public class GrassDamage : MonoBehaviour
 
         audioSource.Play();
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,8 +22,8 @@ public class EffectHandler : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
 
         playerItemUse = GetComponent<PlayerItemUse>();
-        
-        playerMovement= GetComponent<PlayerMovement>();
+
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     public void AddEffect(Effect effect)
@@ -60,10 +59,10 @@ public class EffectHandler : MonoBehaviour
 
     private void Update()
     {
-        foreach(EffectHandlerClass effect in effects)
+        foreach (EffectHandlerClass effect in effects)
         {
 
-            switch(effect.Effect.EffectType)
+            switch (effect.Effect.EffectType)
             {
                 case EffectType.Otrava: playerStats.TakeDamageEffect(effect.Effect.Power * Time.deltaTime); break;
 
@@ -110,7 +109,7 @@ public class EffectHandler : MonoBehaviour
                         {
                             effect.StartEffect = true;
 
-                            playerMovement.FatiqueEffect = effect.Effect.Power; 
+                            playerMovement.FatiqueEffect = effect.Effect.Power;
                         }
 
                         break;
@@ -120,7 +119,7 @@ public class EffectHandler : MonoBehaviour
 
             if (Time.time >= effect.TimeStart + effect.Effect.Duration)
             {
-                switch(effect.Effect.EffectType)
+                switch (effect.Effect.EffectType)
                 {
                     case EffectType.AtacSlab: playerItemUse.AttackDecrease = 1f; break;
 

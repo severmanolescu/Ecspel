@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1407259840, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
+      value: {fileID: 1921213971, guid: cada70f9c88030c45814e7da5162cace, type: 3}
     - time: 0.083333336
-      value: {fileID: -1580451634, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
+      value: {fileID: -1554294497, guid: cada70f9c88030c45814e7da5162cace, type: 3}
     - time: 0.16666667
-      value: {fileID: 1470602212, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
+      value: {fileID: -26803960, guid: cada70f9c88030c45814e7da5162cace, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1407259840, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
-    - {fileID: -1580451634, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
-    - {fileID: 1470602212, guid: 472264cf3660e1d4782e1d6a2a1d92c2, type: 3}
+    - {fileID: 1921213971, guid: cada70f9c88030c45814e7da5162cace, type: 3}
+    - {fileID: -1554294497, guid: cada70f9c88030c45814e7da5162cace, type: 3}
+    - {fileID: -26803960, guid: cada70f9c88030c45814e7da5162cace, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -71,4 +71,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: SetPlayerMovementFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

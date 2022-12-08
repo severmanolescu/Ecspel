@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0718, y: 0.6678}
+  m_AnchoredPosition: {x: 0.081, y: 0.82}
   m_SizeDelta: {x: 1.4775, y: 1.421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1578004844161814494
@@ -319,12 +319,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3919395379110324435, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  m_Sprite: {fileID: -1849128199, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.375, y: 1.1875}
+  m_Size: {x: 1.875, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
-  openSprite: {fileID: -6334441607478724993, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  openSprite: {fileID: -1448515884, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   chestId: 1
   chestOpen: {fileID: 8300000, guid: e0652c71b9bb5964b8c9ae150ad1152c, type: 3}
   chestClose: {fileID: 8300000, guid: 66ec24e4a8b120e4a8507192d16da11a, type: 3}
@@ -373,12 +373,12 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003115654, y: 0.5250683}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50732315, y: 0.07527524}
-    oldSize: {x: 1.75, y: 1.3125}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.875, y: 1.4375}
+    newSize: {x: 1.875, y: 1.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -399,12 +399,12 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014810562, y: 0.48144245}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50732315, y: 0.07527524}
-    oldSize: {x: 1.75, y: 1.3125}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.875, y: 1.4375}
+    newSize: {x: 1.875, y: 1.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -557,17 +557,17 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 858520fc010497a4fb65b98de9d95986cb99512f397a1411899d9d4f00000000
   m_ShapePath:
-  - {x: -0.8823514, y: -0.03221512, z: 0}
-  - {x: -0.88337183, y: 1.1466522, z: 0}
-  - {x: 0.85817385, y: 1.1452675, z: 0}
-  - {x: 0.85904217, y: -0.033550262, z: 0}
-  - {x: 0.79680824, y: -0.033966064, z: 0}
-  - {x: 0.79750633, y: -0.095085144, z: 0}
-  - {x: -0.8227868, y: -0.0964241, z: 0}
-  - {x: -0.82256436, y: -0.03448105, z: 0}
-  m_ShapePathHash: 1251788849
+  - {x: -0.86905146, y: 0.18988037, z: 0}
+  - {x: -0.8700719, y: 1.3687477, z: 0}
+  - {x: 0.8714738, y: 1.367363, z: 0}
+  - {x: 0.8723421, y: 0.18854523, z: 0}
+  - {x: 0.8101082, y: 0.18812943, z: 0}
+  - {x: 0.8108063, y: 0.12701035, z: 0}
+  - {x: -0.80948687, y: 0.12567139, z: 0}
+  - {x: -0.8092644, y: 0.18761444, z: 0}
+  m_ShapePathHash: 1690726001
   m_Mesh: {fileID: 0}
-  m_InstanceId: 439012
+  m_InstanceId: 326208
 --- !u!1 &7162023035154721767
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,14 +592,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7162023035154721767}
-  m_LocalRotation: {x: 0, y: 0, z: -0.65150267, w: 0.7586463}
-  m_LocalPosition: {x: 0.01, y: 0.54, z: 0}
-  m_LocalScale: {x: 3.7449925, y: 1.5492091, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.05085446, w: 0.99870616}
+  m_LocalPosition: {x: -0.0013, y: 0.724, z: 0}
+  m_LocalScale: {x: 3.1100166, y: 1.5492091, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004845640410780}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -81.31}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.83}
 --- !u!212 &4833637615143521435
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CraftingHandler : MonoBehaviour
@@ -44,6 +43,13 @@ public class CraftingHandler : MonoBehaviour
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         chestCanvas = GameObject.Find("Global/Player/Canvas/ChestStorage");
+
+        Transform shadow = transform.Find("Shadow");
+
+        if (shadow != null)
+        {
+            GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(shadow);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,7 +99,7 @@ public class CraftingHandler : MonoBehaviour
 
                 if (playerMovement.MenuOpen == false && canvasTabsOpen.CanOpenTab())
                 {
-                    if(playerInventory.activeSelf == false)
+                    if (playerInventory.activeSelf == false)
                     {
                         playerMovement.TabOpen = true;
                         playerInventory.SetActive(true);
@@ -110,7 +116,7 @@ public class CraftingHandler : MonoBehaviour
                         opened = true;
                     }
                 }
-                else if(opened == true)
+                else if (opened == true)
                 {
                     CloseCraft();
                 }

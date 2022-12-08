@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +9,9 @@ public class ChangeWindowLightIntensity : MonoBehaviour
 
     public void SetIntensity(Color color)
     {
-        foreach(SpriteRenderer renderer in Renderers)
+        foreach (SpriteRenderer renderer in Renderers)
         {
-            if(renderer != null)
+            if (renderer != null)
             {
                 renderer.color = color;
             }

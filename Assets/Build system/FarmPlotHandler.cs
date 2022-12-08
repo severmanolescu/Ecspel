@@ -17,25 +17,25 @@ public class FarmPlotHandler : MonoBehaviour
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         drySoil = spriteRenderer.sprite;
 
         GameObject.Find("Global/DayTimer").GetComponent<ChangeSoilsState>().AddSoil(this);
     }
 
-    public void ChangeSprites(Sprite dry, Sprite wet)
+    public void ChangeSprites(Sprite drySprite, Sprite wetSprite)
     {
-        drySoil = dry;
-        wetSoil = wet;
+        drySoil = drySprite;
+        wetSoil = wetSprite;
 
-        if(dry)
+        if (GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().Raining == false)
         {
-            spriteRenderer.sprite = dry;
+            spriteRenderer.sprite = drySoil;
         }
         else
         {
-            spriteRenderer.sprite = wet;
+            WetSoilChangeSprite();
         }
     }
 
@@ -47,7 +47,7 @@ public class FarmPlotHandler : MonoBehaviour
         {
             noOfDryDays++;
 
-            if(noOfDryDays >= 2)
+            if (noOfDryDays >= 2)
             {
                 GameObject cropObject = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().GetCropFromPosition(transform.position);
 

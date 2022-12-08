@@ -11,6 +11,8 @@ public class PlayerItemUse : MonoBehaviour
     [SerializeField] private Item emptyBucket;
     [SerializeField] private Item fullBucket;
 
+    [SerializeField] private Camera mainCamera;
+
     private PlayerStats playerStats;
 
     private AudioSource audioSource;
@@ -41,9 +43,6 @@ public class PlayerItemUse : MonoBehaviour
     private Vector2 detectionZone = new Vector2(1.5f, 1.5f);
 
     private float attackDecrease = 1f;
-
-    private bool leftMousePress = true;
-    private bool rightMousePress = true;
 
     public Vector2 Inputs { set { inputs = value; } }
     public float AttackDecrease { set { attackDecrease = value; } }
@@ -89,11 +88,11 @@ public class PlayerItemUse : MonoBehaviour
 
                 auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
             }
-            else if(auxObject.gameObject.CompareTag("Barrel"))
+            else if (auxObject.gameObject.CompareTag("Barrel"))
             {
                 auxObject.GetComponent<BarrelHandler>().GetDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
-            else if(auxObject.gameObject.CompareTag("EnemyNoForce"))
+            else if (auxObject.gameObject.CompareTag("EnemyNoForce"))
             {
                 auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
@@ -104,7 +103,7 @@ public class PlayerItemUse : MonoBehaviour
     {
         Vector3 castPosition = gameObject.transform.position;
 
-        if((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
             castPosition.y -= DefaulData.castPosition;
         }
@@ -212,14 +211,16 @@ public class PlayerItemUse : MonoBehaviour
 
                 pickaxeHandler.UsePickaxe(transform.position, GetSpawnLocation(), item);
             }
-            else if(item is Hoe)
+            else if (item is Hoe)
             {
-                audioSource.clip = attackClip;
-                audioSource.Play();
+                if (hoeSystemHandler.PlaceSoil((Hoe)item) == true ||
+                    hoeSystemHandler.DestroyCrop((Hoe)item) == true)
+                {
+                    audioSource.clip = attackClip;
+                    audioSource.Play();
 
-                animator.SetBool("Hoe", true);
-
-                hoeSystemHandler.PlaceSoil(transform.position, GetSpawnLocation(), (Hoe)item);
+                    animator.SetBool("Hoe", true);
+                }
             }
             else if (item is Weapon)
             {
@@ -242,7 +243,7 @@ public class PlayerItemUse : MonoBehaviour
                     selectedSlot.ReinitializeSelectedSlot();
                 }
             }
-            else if(item is WateringCan)
+            else if (item is WateringCan)
             {
                 WateringCan wateringCan = (WateringCan)item;
 
@@ -256,7 +257,7 @@ public class PlayerItemUse : MonoBehaviour
 
                     wateringCanHandler.UseWateringcan(transform.position, GetSpawnLocation(), (WateringCan)item);
 
-                    if(wateringCan.RemainWater <= 0)
+                    if (wateringCan.RemainWater <= 0)
                     {
                         Item newItem = emptyBucket.Copy();
                         newItem.Amount = 1;
@@ -267,7 +268,7 @@ public class PlayerItemUse : MonoBehaviour
                     }
                 }
             }
-            else if(item is Letter)
+            else if (item is Letter)
             {
                 letterHandler.gameObject.SetActive(true);
 
@@ -278,20 +279,16 @@ public class PlayerItemUse : MonoBehaviour
 
     private void Update()
     {
-        if(playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
+        if (playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
         {
-            if (mouse.leftButton.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[5].IsPressed() == false && leftMousePress == false))
+            if (mouse.leftButton.wasPressedThisFrame)
             {
-                leftMousePress = true;
-
                 Item item = selectedSlot.Item;
 
                 SelectedItemAction(item);
             }
-            else if (mouse.rightButton.isPressed || (Joystick.current != null && Joystick.current.allControls[9].IsPressed() == false && rightMousePress == false))
+            else if (mouse.rightButton.isPressed)
             {
-                rightMousePress = true;
-
                 if (selectedSlot.Item is WateringCan && water == true)
                 {
                     WateringCan newItem = (WateringCan)fullBucket.Copy();
@@ -305,24 +302,25 @@ public class PlayerItemUse : MonoBehaviour
 
                     animator.SetBool("WateringcanFill", true);
                 }
+                else if(selectedSlot.Item is Hoe)
+                {
+                    if(hoeSystemHandler.DestroySoilMousePosition((Hoe)item) == true)
+                    {
+                        audioSource.clip = attackClip;
+                        audioSource.Play();
+
+                        animator.SetBool("Hoe", true);
+                    }
+                }
                 else
                 {
-                    harvestCropHandler.Harvest(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+                    harvestCropHandler.Harvest();
                 }
-            }
-
-            if (Joystick.current != null && Joystick.current.allControls[5].IsPressed() == true)
-            {
-                leftMousePress = false;
-            }
-            if (Joystick.current != null && Joystick.current.allControls[9].IsPressed() == true)
-            {
-                rightMousePress = false;
             }
         }
         if (selectedSlot.Item is Hoe)
         {
-            hoeSystemHandler.HoeHeadlight(playerMovement.transform.position, GetSpawnLocation());
+            hoeSystemHandler.HoeHeadlight(playerMovement.transform.position);
 
             buildSystemHandler.StopPlace();
         }
@@ -340,7 +338,7 @@ public class PlayerItemUse : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Water"))
+        if (collision != null && collision.CompareTag("Water"))
         {
             water = true;
         }
@@ -348,9 +346,9 @@ public class PlayerItemUse : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Water"))
+        if (collision != null && collision.CompareTag("Water"))
         {
-           water = false;
+            water = false;
         }
     }
 }

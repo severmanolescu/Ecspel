@@ -36,7 +36,7 @@ public class PlayerAchievements : MonoBehaviour
 
     public void SetAllAchievements(List<int> achievements)
     {
-        if(achievements != null && achievements.Count == 5)
+        if (achievements != null && achievements.Count == 5)
         {
             Trees = achievements[0];
             Stones = achievements[1];
@@ -53,9 +53,9 @@ public class PlayerAchievements : MonoBehaviour
 
     public bool CheckForEnemyKill(KillEnemy killEnemy, int inialAmount)
     {
-        int kills =  GetEnemyKills();
+        int kills = GetEnemyKills();
 
-        if(kills >= inialAmount + killEnemy.number)
+        if (kills >= inialAmount + killEnemy.number)
         {
             return true;
         }

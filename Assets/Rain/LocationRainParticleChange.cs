@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,20 +7,20 @@ public class LocationRainParticleChange : MonoBehaviour
 
     public void StartParticles(float time)
     {
-        foreach (ParticleSystem particle in particles)
-        {
-            particle.Simulate(time, true, true);
+        //foreach (ParticleSystem particle in particles)
+        //{
+        //    particle.Simulate(time, true, true);
 
-            particle.Play();
-        }
+        //    particle.Play();
+        //}
     }
 
     public void StopParticles()
     {
-        foreach (ParticleSystem particle in particles)
-        {
-            particle.Stop();
-        }
+        //foreach (ParticleSystem particle in particles)
+        //{
+        //    particle.Stop();
+        //}
     }
 
     public float GetTime()

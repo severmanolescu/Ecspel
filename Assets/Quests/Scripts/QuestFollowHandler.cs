@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestFollowHandler : MonoBehaviour
 {
-     [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject prefab;
 
     private List<QuestLocationFollow> questLocations = new List<QuestLocationFollow>();
 
@@ -27,7 +26,7 @@ public class QuestFollowHandler : MonoBehaviour
 
         foreach (QuestLocationFollow questLocation in questLocations)
         {
-            if(questLocation.Quest == quest)
+            if (questLocation.Quest == quest)
             {
                 questLocation.Track = true;
 
@@ -38,7 +37,7 @@ public class QuestFollowHandler : MonoBehaviour
 
     public void StopFollowQuest()
     {
-        foreach(QuestLocationFollow questLocation in questLocations)
+        foreach (QuestLocationFollow questLocation in questLocations)
         {
             questLocation.Track = false;
         }

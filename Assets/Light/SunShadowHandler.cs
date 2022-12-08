@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ public class SunShadowHandler : MonoBehaviour
     {
         GameObject[] shadows = GameObject.FindGameObjectsWithTag("SunShadow");
 
-        foreach(GameObject shadow in shadows)
+        foreach (GameObject shadow in shadows)
         {
             sunShadows.Add(shadow.transform);
 
@@ -45,7 +44,7 @@ public class SunShadowHandler : MonoBehaviour
 
             rotation = Mathf.SmoothStep(-90, 90, (hours + minutes / 60f) / 25f);
 
-            foreach(Transform shadow in sunShadows)
+            foreach (Transform shadow in sunShadows)
             {
                 if (shadow != null)
                 {
@@ -83,12 +82,12 @@ public class SunShadowHandler : MonoBehaviour
 
     public void ChangeShadowAlpha(float alpha)
     {
-        foreach(Transform shadow in sunShadows)
+        foreach (Transform shadow in sunShadows)
         {
             shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
         }
     }
-    
+
     public void ReinitializeShadows()
     {
         GameObject[] shadows = GameObject.FindGameObjectsWithTag("SunShadow");
@@ -112,7 +111,7 @@ public class SunShadowHandler : MonoBehaviour
     }
     public void RemoveShadow(Transform shadow)
     {
-        if(sunShadows != null)
+        if (sunShadows != null)
         {
             sunShadows.Remove(shadow);
         }

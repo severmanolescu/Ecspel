@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,12 +19,12 @@ public class TestCraft : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             start = true;
         }
 
-        if(start == true)
+        if (start == true)
         {
             camera.orthographicSize -= speed * Time.deltaTime;
         }

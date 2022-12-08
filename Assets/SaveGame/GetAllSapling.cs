@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,9 +32,9 @@ public class GetAllSapling : MonoBehaviour
 
         SaplingGrowHandler[] saplingGrowHandlers = placedObjects.GetComponentsInChildren<SaplingGrowHandler>();
 
-        foreach(SaplingGrowHandler sapling in saplingGrowHandlers)
+        foreach (SaplingGrowHandler sapling in saplingGrowHandlers)
         {
-            if(sapling.CompareTag("TreeSapling"))
+            if (sapling.CompareTag("TreeSapling"))
             {
                 SaplingSave saplingSave = new SaplingSave();
 
@@ -52,7 +51,7 @@ public class GetAllSapling : MonoBehaviour
 
                 DamageTree damageTree = sapling.GetComponent<DamageTree>();
 
-                if(damageTree != null)
+                if (damageTree != null)
                 {
                     saplingSave.Destroyed = damageTree.Destroyed;
                 }
@@ -68,7 +67,7 @@ public class GetAllSapling : MonoBehaviour
     {
         SaplingGrowHandler[] saplingGrowHandlers = placedObjects.GetComponentsInChildren<SaplingGrowHandler>();
 
-        foreach(SaplingGrowHandler saplingGrow in saplingGrowHandlers)
+        foreach (SaplingGrowHandler saplingGrow in saplingGrowHandlers)
         {
             saplingGrow.DestroyObject();
         }
@@ -80,7 +79,7 @@ public class GetAllSapling : MonoBehaviour
 
             PositionInGrid positionInGrid = instantiateSapling.GetComponent<PositionInGrid>();
 
-            if(positionInGrid != null)
+            if (positionInGrid != null)
             {
                 positionInGrid.LocationGrid = locationGrid;
             }

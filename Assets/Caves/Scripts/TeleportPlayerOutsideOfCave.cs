@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TeleportPlayerOutsideOfCave : MonoBehaviour

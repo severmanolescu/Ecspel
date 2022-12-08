@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -100,7 +98,7 @@ public class PlayerInventory : MonoBehaviour
 
             return true;
         }
-        
+
         return false;
     }
 
@@ -144,7 +142,7 @@ public class PlayerInventory : MonoBehaviour
 
     public bool AddItemWithAnimation(Item item)
     {
-        if(AddItem(item))
+        if (AddItem(item))
         {
             animator.SetTrigger("Pickup");
 
@@ -170,9 +168,9 @@ public class PlayerInventory : MonoBehaviour
 
     public bool SearchInventory(Item item, int amount)
     {
-        foreach(ItemSlot itemSlot in itemsSlot)
+        foreach (ItemSlot itemSlot in itemsSlot)
         {
-            if(itemSlot.Item != null && itemSlot.Item.ItemNO == item.ItemNO)
+            if (itemSlot.Item != null && itemSlot.Item.ItemNO == item.ItemNO)
             {
                 amount -= itemSlot.Item.Amount;
             }
@@ -180,7 +178,7 @@ public class PlayerInventory : MonoBehaviour
             if (amount <= 0)
             {
                 return true;
-            }    
+            }
         }
         return false;
     }
@@ -259,9 +257,9 @@ public class PlayerInventory : MonoBehaviour
     {
         List<Tuple<int, int>> items = new List<Tuple<int, int>>();
 
-        foreach(ItemSlot itemSlot in itemsSlot)
+        foreach (ItemSlot itemSlot in itemsSlot)
         {
-            if(itemSlot.Item != null)
+            if (itemSlot.Item != null)
             {
                 items.Add(new Tuple<int, int>(itemSlot.Item.ItemNO, itemSlot.Item.Amount));
             }
@@ -277,14 +275,14 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetInventoryFromSave(List<Tuple<int, int>> itemsNo)
     {
-        foreach(ItemSlot slot in itemsSlot)
+        foreach (ItemSlot slot in itemsSlot)
         {
             slot.Item = null;
         }
 
         int indexOfItemSlot = 0;
 
-        foreach(Tuple<int, int> item in itemsNo)
+        foreach (Tuple<int, int> item in itemsNo)
         {
             Item newItem = getItem.ItemFromNo(item.Item1);
 
@@ -294,7 +292,7 @@ public class PlayerInventory : MonoBehaviour
 
                 newItem.Amount = item.Item2;
 
-                itemsSlot[indexOfItemSlot].SetItem(newItem);                
+                itemsSlot[indexOfItemSlot].SetItem(newItem);
             }
             else
             {

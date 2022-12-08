@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TeleportToNextCave : MonoBehaviour
@@ -23,7 +21,7 @@ public class TeleportToNextCave : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             playerInSpace = true;
 
@@ -43,7 +41,7 @@ public class TeleportToNextCave : MonoBehaviour
 
     private void Update()
     {
-        if(playerInSpace == true && Keyboard.current.fKey.wasPressedThisFrame)
+        if (playerInSpace == true && Keyboard.current.fKey.wasPressedThisFrame)
         {
             caveSystemHandler.TeleportToNextCave();
         }

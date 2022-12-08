@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SleepHandler : MonoBehaviour
@@ -108,7 +107,7 @@ public class SleepHandler : MonoBehaviour
 
         ChangeObjectsStates(false);
 
-        dayTimer.Sleep(this); 
+        dayTimer.Sleep(this);
     }
 
     private void Update()

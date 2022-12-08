@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class DialogueHandler : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class DialogueHandler : MonoBehaviour
     {
         dialogueText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
-        audioSource = GetComponent<AudioSource>(); 
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -38,13 +37,13 @@ public class DialogueHandler : MonoBehaviour
 
         foreach (char letter in sentence.ToCharArray())
         {
-            if(letter == '\t' || letter == ' ')
+            if (letter == '\t' || letter == ' ')
             {
                 dialogueText.text += letter;
 
                 continue;
             }
-            else if(letter == '<')
+            else if (letter == '<')
             {
                 stepOver = true;
 
@@ -52,18 +51,18 @@ public class DialogueHandler : MonoBehaviour
 
                 continue;
             }
-            else if(stepOver)
+            else if (stepOver)
             {
                 dialogueText.text += letter;
 
-                if(letter == '>')
+                if (letter == '>')
                 {
                     stepOver = false;
                 }
 
                 continue;
             }
-            
+
             dialogueText.text += letter;
 
             yield return new WaitForSeconds(DefaulData.dialogueSpeed);
@@ -74,7 +73,7 @@ public class DialogueHandler : MonoBehaviour
 
     public void SetDialogue(string dialogue)
     {
-        if(dialogue != null)
+        if (dialogue != null)
         {
             sentace = dialogue;
 

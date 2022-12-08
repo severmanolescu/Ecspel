@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,13 +13,13 @@ public class GetAllDialogueAppear : MonoBehaviour
 
         DialoguePlayerEnterInTrigger[] dialogues = locationOfDialogue.GetComponentsInChildren<DialoguePlayerEnterInTrigger>();
 
-        foreach(DialoguePlayerEnterInTrigger dialogue in dialogues)
+        foreach (DialoguePlayerEnterInTrigger dialogue in dialogues)
         {
             DialogueAppearSave newDialogueSave = new();
 
             newDialogueSave.DialogueID = dialogue.DialogueId;
-            newDialogueSave.PositionX  = dialogue.transform.position.x;
-            newDialogueSave.PositionY  = dialogue.transform.position.y;
+            newDialogueSave.PositionX = dialogue.transform.position.x;
+            newDialogueSave.PositionY = dialogue.transform.position.y;
 
             StartTimeDegradation startTime = dialogue.GetComponent<StartTimeDegradation>();
 
@@ -72,16 +70,16 @@ public class GetAllDialogueAppear : MonoBehaviour
     {
         DialoguePlayerEnterInTrigger[] dialoguesInGame = locationOfDialogue.GetComponentsInChildren<DialoguePlayerEnterInTrigger>();
 
-        foreach(DialoguePlayerEnterInTrigger dialoguePlayerEnterInTrigger in dialoguesInGame)
+        foreach (DialoguePlayerEnterInTrigger dialoguePlayerEnterInTrigger in dialoguesInGame)
         {
             Destroy(dialoguePlayerEnterInTrigger.gameObject);
         }
 
-        foreach(DialogueAppearSave dialogue in dialogues)
+        foreach (DialogueAppearSave dialogue in dialogues)
         {
             GameObject dialogueObject = getObject.GetObjectFromId(dialogue.DialogueID);
 
-            if(dialogueObject != null)
+            if (dialogueObject != null)
             {
                 GameObject newObject = Instantiate(dialogueObject);
 
@@ -111,7 +109,7 @@ public class GetAllDialogueAppear : MonoBehaviour
 
                             startWalk.NpcTimeSchedules.Clear();
 
-                            foreach(NpcPathSave npcPath in dialogue.Path)
+                            foreach (NpcPathSave npcPath in dialogue.Path)
                             {
                                 NpcTimeSchedule npcTime = new NpcTimeSchedule();
 

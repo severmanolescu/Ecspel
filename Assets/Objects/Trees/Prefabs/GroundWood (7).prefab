@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3749972779730570704}
-  m_LocalRotation: {x: 0, y: -0, z: 0.60181475, w: -0.7986357}
-  m_LocalPosition: {x: -0.225, y: 0.508, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: 0.2764753, w: -0.96102107}
+  m_LocalPosition: {x: 0.077, y: 0.43, z: 0}
   m_LocalScale: {x: 0.9612655, y: 0.82451624, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6479809751583882793}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1112.1}
 --- !u!212 &7512024505882400169
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,12 +163,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -432395791937533452, guid: 1665094a4c9d65242ba7fc14569209e7, type: 3}
+  m_Sprite: {fileID: 1159586224, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.875, y: 0.75}
+  m_Size: {x: 0.9375, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -186,13 +186,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967b766f9db088a4e90a4c1dcd0857ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScaleX: -1
+  startScaleX: 0
   startScaleY: 0
   scaleX: 0
-  scaleY: 1
+  scaleY: 0
   locationGrid: {fileID: 0}
   isWalkable: 0
-  positionInCenterOfGridNode: 1
+  positionInCenterOfGridNode: 0
 --- !u!61 &6479809751583882796
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209,9 +209,9 @@ BoxCollider2D:
   m_Offset: {x: -0.17270994, y: 0.4173802}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.67731583, y: 0.08270836}
-    oldSize: {x: 0.8125, y: 1}
-    newSize: {x: 0.875, y: 0.75}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.9375, y: 0.75}
+    newSize: {x: 0.9375, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   log: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   level: 1
+  destroyParticle: {fileID: 1934757459183325492, guid: 21c826b6fd0c61a4aa2b242f7881e0a9, type: 3}
   woodChop: {fileID: 8300000, guid: 5bcceec92cd1bc34895da8bd98ebab90, type: 3}
 --- !u!82 &-1203241046523021219
 AudioSource:

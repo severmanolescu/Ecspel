@@ -16,6 +16,6 @@ public class Smelting : Item
         this.nextItem = nextItem;
     }
 
-    public int Duration { get => duration;}
+    public int Duration { get => duration; }
     public Item NextItem { get => nextItem; }
 }

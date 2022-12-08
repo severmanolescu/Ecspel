@@ -1,13 +1,13 @@
 Library: lib_burst_generated
 --platform=Windows
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=X64_SSE2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Standard
 --format=Coff
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_3_3
+--compilation-defines=UNITY_2021_3_14
 --compilation-defines=UNITY_2021_3
 --compilation-defines=UNITY_2021
 --compilation-defines=UNITY_5_3_OR_NEWER
@@ -39,7 +39,6 @@ Library: lib_burst_generated
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
 --compilation-defines=USE_SEARCH_EXTENSION_API
---compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AR
 --compilation-defines=ENABLE_AUDIO
 --compilation-defines=ENABLE_CACHING
@@ -93,6 +92,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_NETWORK
 --compilation-defines=ENABLE_NVIDIA
 --compilation-defines=ENABLE_CRUNCH_TEXTURE_COMPRESSION
+--compilation-defines=ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT
 --compilation-defines=ENABLE_OUT_OF_PROCESS_CRASH_HANDLER
 --compilation-defines=ENABLE_CLUSTER_SYNC
 --compilation-defines=ENABLE_CLUSTERINPUT
@@ -102,6 +102,9 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
 --compilation-defines=ENABLE_LOCALIZATION
@@ -111,18 +114,18 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_TIMELINE
 --compilation-defines=ENABLE_INPUT_SYSTEM
 --compilation-defines=UNITY_POST_PROCESSING_STACK_V2
---compilation-defines=ENABLE_VR_MODULE
---compilation-defines=ENABLE_XR_MODULE
---compilation-defines=ENABLE_INPUT_SYSTEM_PACKAGE
---compilation-defines=CSHARP_7_OR_LATER
---compilation-defines=CSHARP_7_3_OR_NEWER
 --compilation-defines=PACKAGE_PHYSICS
 --compilation-defines=PACKAGE_PHYSICS2D
 --compilation-defines=PACKAGE_TILEMAP
 --compilation-defines=PACKAGE_ANIMATION
 --compilation-defines=PACKAGE_UITOOLKIT
+--compilation-defines=CSHARP_7_OR_LATER
+--compilation-defines=CSHARP_7_3_OR_NEWER
+--compilation-defines=ENABLE_VR_MODULE
+--compilation-defines=ENABLE_XR_MODULE
+--compilation-defines=ENABLE_INPUT_SYSTEM_PACKAGE
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_VR
---compilation-defines=UNITY_XR_AVAILABLE
+--compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_XR
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_PHYSICS
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_PHYSICS2D
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_UI
@@ -131,6 +134,7 @@ Library: lib_burst_generated
 --compilation-defines=USING_PHYSICS2D_MODULE
 --compilation-defines=UNIVERSAL_1_0_0_OR_NEWER
 --compilation-defines=PACKAGE_INPUT_SYSTEM_EXISTS
+--compilation-defines=PACKAGE_INPUT_SYSTEM_1_2_0_OR_NEWER_EXISTS
 --compilation-defines=MODULE_AI_EXISTS
 --compilation-defines=MODULE_ANIMATION_EXISTS
 --compilation-defines=MODULE_PHYSICS_EXISTS
@@ -142,8 +146,8 @@ Library: lib_burst_generated
 --linker-options=PdbAltPath="Ecspel_Data/Plugins/x86_64"
 --generate-link-xml=Temp\burst.link.xml
 --output=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
---root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.RenderPipelines.Core.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.RenderPipelines.Core.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Telemetry.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.InputSystem.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
@@ -168,9 +172,9 @@ Library: lib_burst_generated
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Analytics.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.IK.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
+--root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Threading.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.Common.Runtime.dll
---root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Networking.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Registration.dll
@@ -180,29 +184,30 @@ Library: lib_burst_generated
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.RenderPipelines.Universal.Shaders.dll
 --assembly-folder=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
---method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--e943843acfb78f5f2f3716a6553740d9
---method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
---method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.SliceCullingJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.SliceCullingJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--1998da082e6413092f0e7bcd5a0e9331
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ZBinningJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ZBinningJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--77fc393cb521ac129b1392d4eb94d29a
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.VisibleLight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.VisibleLight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--b04c75a68edf1d166f6547f2ea0e8928
+--method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--e943843acfb78f5f2f3716a6553740d9
+--method=UnityEngine.U2D.Animation.BurstedSpriteSkinUtilities, Unity.2D.Animation.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::ValidateBoneWeights(Unity.Collections.NativeSlice`1[[UnityEngine.BoneWeight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--5bf0a813706ef9287fcaa55dd0ccb876
+--method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.MinMaxZJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.MinMaxZJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--d23a07cb3c3f217121d5bf94e76674f0
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.Rendering.Universal.RadixSortJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.RadixSortJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--26c6d10914da2fc98755b3533c59141e
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.SliceCombineJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.SliceCombineJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--e046a1595d0148509657ed4dbcb52a86
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.Rendering.Universal.DecalCreateDrawCallSystem+DrawCallJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.DecalCreateDrawCallSystem+DrawCallJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--aa309157da5950aa53ed6075709e6e40
 --method=UnityEngine.Jobs.IJobParallelForTransformExtensions+TransformParallelForLoopStruct`1[[UnityEngine.Rendering.Universal.DecalUpdateCachedSystem+UpdateTransformsJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.DecalUpdateCachedSystem+UpdateTransformsJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--670478f3fb3f285eeace534fbe61a03e
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.LightExtractionJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.LightExtractionJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--34e8fec66b799db60cf2f2f751c3bdd9
+--method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoGetCSRTrampoline()--89425a97f3f500fa810ad03f0c382542
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.U2D.SpriteShapeGenerator, Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.U2D.SpriteShapeGenerator&, Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--a185c62eba2497c95197140e5282b27a
 --platform=Windows
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=AVX2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Standard
 --format=Coff
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_3_3
+--compilation-defines=UNITY_2021_3_14
 --compilation-defines=UNITY_2021_3
 --compilation-defines=UNITY_2021
 --compilation-defines=UNITY_5_3_OR_NEWER
@@ -234,7 +239,6 @@ Library: lib_burst_generated
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
 --compilation-defines=USE_SEARCH_EXTENSION_API
---compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AR
 --compilation-defines=ENABLE_AUDIO
 --compilation-defines=ENABLE_CACHING
@@ -288,6 +292,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_NETWORK
 --compilation-defines=ENABLE_NVIDIA
 --compilation-defines=ENABLE_CRUNCH_TEXTURE_COMPRESSION
+--compilation-defines=ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT
 --compilation-defines=ENABLE_OUT_OF_PROCESS_CRASH_HANDLER
 --compilation-defines=ENABLE_CLUSTER_SYNC
 --compilation-defines=ENABLE_CLUSTERINPUT
@@ -297,6 +302,9 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
 --compilation-defines=ENABLE_LOCALIZATION
@@ -306,18 +314,18 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_TIMELINE
 --compilation-defines=ENABLE_INPUT_SYSTEM
 --compilation-defines=UNITY_POST_PROCESSING_STACK_V2
---compilation-defines=ENABLE_VR_MODULE
---compilation-defines=ENABLE_XR_MODULE
---compilation-defines=ENABLE_INPUT_SYSTEM_PACKAGE
---compilation-defines=CSHARP_7_OR_LATER
---compilation-defines=CSHARP_7_3_OR_NEWER
 --compilation-defines=PACKAGE_PHYSICS
 --compilation-defines=PACKAGE_PHYSICS2D
 --compilation-defines=PACKAGE_TILEMAP
 --compilation-defines=PACKAGE_ANIMATION
 --compilation-defines=PACKAGE_UITOOLKIT
+--compilation-defines=CSHARP_7_OR_LATER
+--compilation-defines=CSHARP_7_3_OR_NEWER
+--compilation-defines=ENABLE_VR_MODULE
+--compilation-defines=ENABLE_XR_MODULE
+--compilation-defines=ENABLE_INPUT_SYSTEM_PACKAGE
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_VR
---compilation-defines=UNITY_XR_AVAILABLE
+--compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_XR
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_PHYSICS
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_PHYSICS2D
 --compilation-defines=UNITY_INPUT_SYSTEM_ENABLE_UI
@@ -326,6 +334,7 @@ Library: lib_burst_generated
 --compilation-defines=USING_PHYSICS2D_MODULE
 --compilation-defines=UNIVERSAL_1_0_0_OR_NEWER
 --compilation-defines=PACKAGE_INPUT_SYSTEM_EXISTS
+--compilation-defines=PACKAGE_INPUT_SYSTEM_1_2_0_OR_NEWER_EXISTS
 --compilation-defines=MODULE_AI_EXISTS
 --compilation-defines=MODULE_ANIMATION_EXISTS
 --compilation-defines=MODULE_PHYSICS_EXISTS
@@ -337,8 +346,8 @@ Library: lib_burst_generated
 --linker-options=PdbAltPath="Ecspel_Data/Plugins/x86_64"
 --generate-link-xml=Temp\burst.link.xml
 --output=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Plugins\x86_64\lib_burst_generated
---root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.RenderPipelines.Core.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.RenderPipelines.Core.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Telemetry.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.InputSystem.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
@@ -363,9 +372,9 @@ Library: lib_burst_generated
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Analytics.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.IK.Runtime.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
+--root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Threading.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.2D.Common.Runtime.dll
---root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Networking.dll
 --root-assembly=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\Unity.Services.Core.Registration.dll
@@ -376,8 +385,8 @@ Library: lib_burst_generated
 --assembly-folder=D:\Proiect\Unity\Ecspel\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.Universal.LightMinMaxZ, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--e943843acfb78f5f2f3716a6553740d9
+--method=UnityEngine.U2D.Animation.BurstedSpriteSkinUtilities, Unity.2D.Animation.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::ValidateBoneWeights(Unity.Collections.NativeSlice`1[[UnityEngine.BoneWeight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--5bf0a813706ef9287fcaa55dd0ccb876
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
---method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.SliceCullingJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.SliceCullingJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--1998da082e6413092f0e7bcd5a0e9331
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ZBinningJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ZBinningJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--77fc393cb521ac129b1392d4eb94d29a
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.VisibleLight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.ReorderJob`1[[UnityEngine.Rendering.VisibleLight, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--b04c75a68edf1d166f6547f2ea0e8928
@@ -387,6 +396,7 @@ Library: lib_burst_generated
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.Rendering.Universal.DecalCreateDrawCallSystem+DrawCallJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.DecalCreateDrawCallSystem+DrawCallJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--aa309157da5950aa53ed6075709e6e40
 --method=UnityEngine.Jobs.IJobParallelForTransformExtensions+TransformParallelForLoopStruct`1[[UnityEngine.Rendering.Universal.DecalUpdateCachedSystem+UpdateTransformsJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.DecalUpdateCachedSystem+UpdateTransformsJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--670478f3fb3f285eeace534fbe61a03e
 --method=Unity.Jobs.IJobForExtensions+ForJobStruct`1[[UnityEngine.Rendering.Universal.LightExtractionJob, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.Rendering.Universal.LightExtractionJob&, Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--34e8fec66b799db60cf2f2f751c3bdd9
+--method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoGetCSRTrampoline()--89425a97f3f500fa810ad03f0c382542
 --method=Unity.Jobs.IJobExtensions+JobStruct`1[[UnityEngine.U2D.SpriteShapeGenerator, Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(UnityEngine.U2D.SpriteShapeGenerator&, Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--a185c62eba2497c95197140e5282b27a
 

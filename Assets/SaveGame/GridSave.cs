@@ -11,4 +11,4 @@ public class GridSave
     public bool CanPlace { get => canPlace; set => canPlace = value; }
     public bool CropPlaced { get => cropPlaced; set => cropPlaced = value; }
 }
-    
+

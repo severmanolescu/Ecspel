@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Linq;
 
 public class SkillPowerHandler : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class SkillPowerHandler : MonoBehaviour
         images.RemoveAt(0);
         images.RemoveAt(images.Count - 1);
 
-        foreach(Image image in images)
+        foreach (Image image in images)
         {
             image.color = notUpgradedColor;
         }

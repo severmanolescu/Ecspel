@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WateringCanHandler : MonoBehaviour
@@ -13,16 +11,16 @@ public class WateringCanHandler : MonoBehaviour
     private void Awake()
     {
         playerStats = playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
-        grid = GameObject.Find("PlayerHouseGround").GetComponent<LocationGridSave>().Grid;
+        grid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>().Grid;
     }
 
     private void ChangeSoilState(GameObject node, int spawn, WateringCan item)
     {
-        if(node != null && node.CompareTag("FarmPlot"))
+        if (node != null && node.CompareTag("FarmPlot"))
         {
             FarmPlotHandler farmPlot = node.GetComponent<FarmPlotHandler>();
 
-            if(farmPlot != null)
+            if (farmPlot != null)
             {
                 playerStats.DecreseStamina(item.Stamina);
 

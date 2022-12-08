@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AxeHandler : MonoBehaviour
@@ -43,7 +42,7 @@ public class AxeHandler : MonoBehaviour
                 {
                     GroundWoodDamage groundWood = node.GetComponent<GroundWoodDamage>();
 
-                    if(groundWood != null)
+                    if (groundWood != null)
                     {
                         groundWood.AxeDestroy(axe.Level);
                     }
@@ -52,7 +51,7 @@ public class AxeHandler : MonoBehaviour
                     {
                         PlaceableDataSave placeableData = node.GetComponent<PlaceableDataSave>();
 
-                        if(placeableData != null)
+                        if (placeableData != null)
                         {
                             Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
@@ -64,12 +63,14 @@ public class AxeHandler : MonoBehaviour
                             {
                                 chestOpen.DropAllItems();
                             }
-
-                            ForgeOpenHandler forge = node.GetComponent<ForgeOpenHandler>();
-
-                            if (forge != null)
+                            else
                             {
-                                forge.DropAllItems();
+                                ForgeOpenHandler forge = node.GetComponent<ForgeOpenHandler>();
+
+                                if (forge != null)
+                                {
+                                    forge.DropAllItems();
+                                }
                             }
 
                             Destroy(placeableData.gameObject);
@@ -79,6 +80,11 @@ public class AxeHandler : MonoBehaviour
                             world.transform.position = node.transform.position;
 
                             Placeable newItem = (Placeable)placeableData.Placeable.Copy();
+
+                            if(placeableData.ItemWorldSize < 1f)
+                            {
+                                world.transform.localScale = new Vector3(placeableData.ItemWorldSize, placeableData.ItemWorldSize, 1f);
+                            }
 
                             newItem.Amount = 1;
 
@@ -105,7 +111,7 @@ public class AxeHandler : MonoBehaviour
         {
             for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
             {
-                if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1) && 
+                if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1) &&
                     grid.gridArray[i, j] != null)
                 {
                     grid.gridArray[i, j].canPlace = true;
@@ -121,7 +127,7 @@ public class AxeHandler : MonoBehaviour
     {
         GridNode gridNode = grid.GetGridObject(position);
 
-        if(gridNode != null)
+        if (gridNode != null)
         {
             switch (spawn)
             {

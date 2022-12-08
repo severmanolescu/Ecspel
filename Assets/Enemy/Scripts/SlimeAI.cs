@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SlimeAI : MonoBehaviour
@@ -50,7 +48,7 @@ public class SlimeAI : MonoBehaviour
 
     private void Update()
     {
-        switch(state)
+        switch (state)
         {
             case State.Walking:
                 {

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,35 +18,35 @@ public class ChangeDialogue : MonoBehaviour
 
     private bool VerifyDialogueWithGameData(DialogueChoose dialogue)
     {
-        if(dialogue.hourOfStart != 0 && dialogue.hourOfEnd != 0)
+        if (dialogue.hourOfStart != 0 && dialogue.hourOfEnd != 0)
         {
-            if(dialogue.hourOfStart > dialogue.hourOfEnd)
+            if (dialogue.hourOfStart > dialogue.hourOfEnd)
             {
-                if(dayTimerHandler.Hours > dialogue.hourOfStart && dayTimerHandler.Hours < dialogue.hourOfEnd)
+                if (dayTimerHandler.Hours > dialogue.hourOfStart && dayTimerHandler.Hours < dialogue.hourOfEnd)
                 {
                     return false;
                 }
             }
 
-            if(dayTimerHandler.Hours < dialogue.hourOfStart || dayTimerHandler.Hours > dialogue.hourOfEnd)
+            if (dayTimerHandler.Hours < dialogue.hourOfStart || dayTimerHandler.Hours > dialogue.hourOfEnd)
             {
                 return false;
             }
         }
 
-        switch(dialogue.weatherType)
+        switch (dialogue.weatherType)
         {
             case -1: return true;
-            case  0:
+            case 0:
                 {
-                    if(dayTimerHandler.Raining == false && dayTimerHandler.Fog == false)
+                    if (dayTimerHandler.Raining == false && dayTimerHandler.Fog == false)
                     {
                         return true;
                     }
 
                     return false;
                 }
-            case  1:
+            case 1:
                 {
                     if (dayTimerHandler.Raining == true && dayTimerHandler.Fog == false)
                     {
@@ -56,7 +55,7 @@ public class ChangeDialogue : MonoBehaviour
 
                     return false;
                 }
-            case  2:
+            case 2:
                 {
                     if (dayTimerHandler.Raining == false && dayTimerHandler.Fog == true)
                     {
@@ -81,7 +80,7 @@ public class ChangeDialogue : MonoBehaviour
 
     private DialogueChoose GetDialogueByGameData()
     {
-        if(dialogueChoose == null || dialogueChoose.Count == 0)
+        if (dialogueChoose == null || dialogueChoose.Count == 0)
         {
             return null;
         }
@@ -90,7 +89,7 @@ public class ChangeDialogue : MonoBehaviour
 
         DialogueChoose choose = dialogueChoose[indexOfDialogue];
 
-        while(VerifyDialogueWithGameData(choose) == false)
+        while (VerifyDialogueWithGameData(choose) == false)
         {
             indexOfDialogue = Random.Range(0, dialogueChoose.Count - 1);
 
@@ -102,11 +101,11 @@ public class ChangeDialogue : MonoBehaviour
 
     private DialogueScriptableObject ChangeNewDialogueNextDialogue(DialogueScriptableObject dialogue)
     {
-        if(dialogue.NextDialogue == null)
+        if (dialogue.NextDialogue == null)
         {
-            if(dialogueDisplay.Dialogue != null)
+            if (dialogueDisplay.Dialogue != null)
             {
-                if(VerifyNewDialogueInList(dialogueDisplay.Dialogue))
+                if (VerifyNewDialogueInList(dialogueDisplay.Dialogue))
                 {
                     dialogue.NextDialogue = dialogueDisplay.Dialogue;
                 }
@@ -115,16 +114,16 @@ public class ChangeDialogue : MonoBehaviour
                     dialogue.NextDialogue = dialogueDisplay.Dialogue.NextDialogue;
                 }
             }
-        }  
+        }
 
         return dialogue;
     }
 
     public DialogueScriptableObject GetDialogue()
     {
-        if(dialogueDisplay != null)
+        if (dialogueDisplay != null)
         {
-            if(dialogueDisplay.Dialogue == null)
+            if (dialogueDisplay.Dialogue == null)
             {
                 return GetDialogueByGameData().dialogue.Copy();
             }
@@ -139,7 +138,7 @@ public class ChangeDialogue : MonoBehaviour
 
     public bool VerifyNewDialogueInList(DialogueScriptableObject dialogue)
     {
-        if(dialogue == null)
+        if (dialogue == null)
         {
             return true;
         }
@@ -148,7 +147,7 @@ public class ChangeDialogue : MonoBehaviour
         {
             foreach (DialogueChoose listDialogue in dialogueChoose)
             {
-                if(listDialogue.dialogue == dialogue)
+                if (listDialogue.dialogue == dialogue)
                 {
                     return false;
                 }
@@ -159,6 +158,6 @@ public class ChangeDialogue : MonoBehaviour
         else
         {
             return false;
-        } 
+        }
     }
 }

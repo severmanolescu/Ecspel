@@ -1,5 +1,5 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Item", order = 1)]
 [Serializable]
@@ -17,6 +17,8 @@ public class Item : ScriptableObject
     [SerializeField] private int maxAmount;
 
     [SerializeField] private int itemNO;
+
+    [SerializeField] private Sprite itemSprite;
 
     [SerializeField] private bool importantItem = false;
 
@@ -39,6 +41,7 @@ public class Item : ScriptableObject
 
     public int SellPrice { get => sellPrice; set => sellPrice = value; }
     public bool ImportantItem { get => importantItem; set => importantItem = value; }
+    public Sprite ItemSprite { get => itemSprite; set => itemSprite = value; }
 
     public Item Copy()
     {

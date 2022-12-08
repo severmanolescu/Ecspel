@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionInGridHarvest : MonoBehaviour
@@ -65,7 +63,7 @@ public class PositionInGridHarvest : MonoBehaviour
                     }
                 }
 
-                if(isWalkable == false)
+                if (isWalkable == false)
                 {
                     gameObject.AddComponent<BoxCollider2D>();
                 }

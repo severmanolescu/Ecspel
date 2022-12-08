@@ -42,7 +42,7 @@ public class SpecialFlowerHandler : MonoBehaviour
 
     private void Awake()
     {
-        foreach(var flower in flowerPillar)
+        foreach (var flower in flowerPillar)
         {
             flower.SpecialFlowerHandler = this;
         }
@@ -64,12 +64,12 @@ public class SpecialFlowerHandler : MonoBehaviour
 
     private void ChangeTableColor(Color color)
     {
-        tableSprite.color = color; 
+        tableSprite.color = color;
     }
 
     private void FlowerCounterChange()
     {
-        if(placedFlowers > maximumOfFlowers && collectedItem == false)
+        if (placedFlowers > maximumOfFlowers && collectedItem == false)
         {
             ChangeTableColor(Color.white);
 
@@ -85,7 +85,7 @@ public class SpecialFlowerHandler : MonoBehaviour
     {
         List<bool> status = new List<bool>();
 
-        foreach(var flower in flowerPillar)
+        foreach (var flower in flowerPillar)
         {
             status.Add(flower.ItemPlaced);
         }
@@ -97,11 +97,11 @@ public class SpecialFlowerHandler : MonoBehaviour
     {
         placedFlowers = 0;
 
-        for(int indexOfFlower = 0; indexOfFlower < status.Count; indexOfFlower++)
+        for (int indexOfFlower = 0; indexOfFlower < status.Count; indexOfFlower++)
         {
             flowerPillar[indexOfFlower].ChangeStateOfPillar(status[indexOfFlower], collectedItem);
 
-            if(status[indexOfFlower] == true)
+            if (status[indexOfFlower] == true)
             {
                 placedFlowers++;
             }
@@ -109,7 +109,7 @@ public class SpecialFlowerHandler : MonoBehaviour
 
         this.collectedItem = collectedItem;
 
-        if(collectedItem == false && placedFlowers > maximumOfFlowers)
+        if (collectedItem == false && placedFlowers > maximumOfFlowers)
         {
             ChangeTableColor(Color.white);
 
@@ -120,7 +120,7 @@ public class SpecialFlowerHandler : MonoBehaviour
 
     private void DeletePillarFlower()
     {
-        foreach(var flower in flowerPillar)
+        foreach (var flower in flowerPillar)
         {
             flower.ChangeStateOfPillar(true, true);
         }
@@ -128,13 +128,13 @@ public class SpecialFlowerHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Player"))
+        if (collision != null && collision.CompareTag("Player"))
         {
-            if(collectedItem == false)
+            if (collectedItem == false)
             {
-                if(placedFlowers > maximumOfFlowers)
+                if (placedFlowers > maximumOfFlowers)
                 {
-                    if(playerInventory.AddItem(item) == true)
+                    if (playerInventory.AddItem(item) == true)
                     {
                         DeletePillarFlower();
 

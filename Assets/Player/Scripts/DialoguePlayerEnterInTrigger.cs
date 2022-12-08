@@ -46,7 +46,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
             dialogueId = GameObject.Find("Global").GetComponent<GetObjectReference>().GetObjectId(gameObject);
         }
 
-        if(StartAnimator)
+        if (StartAnimator)
         {
             animator = GetComponent<Animator>();
         }
@@ -54,7 +54,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
     private void DestroyObjects()
     {
-        foreach(GameObject @object in toDestroyObjects)
+        foreach (GameObject @object in toDestroyObjects)
         {
             if (@object != null)
             {
@@ -66,7 +66,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") &&
-            setDialogueToPlayer != null && 
+            setDialogueToPlayer != null &&
             Dialogue != null && canStartDialogue)
         {
             setDialogueToPlayer.SetDialogue(Dialogue, this);

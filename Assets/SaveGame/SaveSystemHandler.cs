@@ -68,7 +68,7 @@ public class SaveSystemHandler : MonoBehaviour
         playerAchievements = GameObject.Find("Global/Player").GetComponent<PlayerAchievements>();
 
         questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
-        
+
         tipsCanvas = GameObject.Find("Global/Player/Canvas/Tips").GetComponent<TipsCanvas>();
 
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
@@ -99,7 +99,7 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void VerifyPathToSave()
     {
-        if(pathToSaves != null || !pathToSaves.Contains(".svj"))
+        if (pathToSaves != null || !pathToSaves.Contains(".svj"))
         {
             pathToSaves = pathToSaveGameFolder + @"\SaveGame" + IndexOfSaveGame + ".svj";
         }
@@ -140,11 +140,11 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void PositionNpcAtStartLocation()
     {
-        foreach(GameObject npc in positionNpcAtLoad)
+        foreach (GameObject npc in positionNpcAtLoad)
         {
             LoadGamePositionNPC loadGame = npc.GetComponent<LoadGamePositionNPC>();
 
-            if(loadGame != null)
+            if (loadGame != null)
             {
                 loadGame.LoadGame();
             }
@@ -159,7 +159,7 @@ public class SaveSystemHandler : MonoBehaviour
             {
                 location.SetActive(active);
 
-                if(active == false)
+                if (active == false)
                 {
                     location.GetComponent<DeactivateCamera>().Deactivate();
                 }
@@ -181,7 +181,7 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void SetDataToGame(SaveGame saveGame)
     {
-        foreach(GameObject camera in listOfCameras)
+        foreach (GameObject camera in listOfCameras)
         {
             camera.SetActive(false);
         }
@@ -195,7 +195,7 @@ public class SaveSystemHandler : MonoBehaviour
         playerInventory.SetInventoryFromSave(saveGame.PlayerInventory);
 
         SetLocation(true);
-        
+
         getObjects.SetObjectsToWorld(saveGame.ObjectsInGame);
 
         getAllObjectsInPlayerGround.SetObjectsInArea(saveGame.ObjectsInPlayerGround);
@@ -257,14 +257,14 @@ public class SaveSystemHandler : MonoBehaviour
 
     private void VerifyFiles(string pathToSaveGame)
     {
-        if(!File.Exists(pathToSaveGameFolder))
+        if (!File.Exists(pathToSaveGameFolder))
         {
-           Directory.CreateDirectory(pathToSaveGameFolder);
+            Directory.CreateDirectory(pathToSaveGameFolder);
 
-           FileStream file = File.Create(pathToSaveGame);
+            FileStream file = File.Create(pathToSaveGame);
 
-           file.Close();
-        }    
+            file.Close();
+        }
     }
 
     private void SaveGame()
@@ -309,7 +309,7 @@ public class SaveSystemHandler : MonoBehaviour
         saveGame.PlayedSecundes = countPlayedMinutes.Seconds;
 
         saveGame.Chests = GetComponent<GetAllChestsStorage>().GetAllChestStorage();
-        
+
         saveGame.PlayerHouseChest = GetComponent<GetAllChestsStorage>().GetPlayerHouseChestStorage();
 
         saveGame.Saplings = GetComponent<GetAllSapling>().GetAllObjects();
@@ -363,7 +363,7 @@ public class SaveSystemHandler : MonoBehaviour
         {
             LoadSaveGame(0, null);
         }
-        else if(keyboard.pKey.isPressed)
+        else if (keyboard.pKey.isPressed)
         {
             StartSaveGame();
         }

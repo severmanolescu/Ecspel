@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +20,7 @@ public class DieHandler : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        saveSystem  = GameObject.Find("Global/SaveSystem").GetComponent<SaveSystemHandler>();
+        saveSystem = GameObject.Find("Global/SaveSystem").GetComponent<SaveSystemHandler>();
         menuHandler = GameObject.Find("Global/Menu").GetComponent<PrincipalMenuHandler>();
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 

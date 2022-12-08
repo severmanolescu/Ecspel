@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class HelpHandler : MonoBehaviour
 {
@@ -35,7 +34,7 @@ public class HelpHandler : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        if(helpPages != null && indexOfPages < helpPages.Count)
+        if (helpPages != null && indexOfPages < helpPages.Count)
         {
             quickSlot.gameObject.SetActive(false);
             playerMovement.TabOpen = true;

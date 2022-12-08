@@ -1,9 +1,8 @@
-using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class SaveGamesLoad : MonoBehaviour
 {
@@ -87,7 +86,7 @@ public class SaveGamesLoad : MonoBehaviour
         {
             DirectoryInfo directory = new DirectoryInfo(path);
 
-            for(int indexOfSaveGame = 1; indexOfSaveGame <= maxSaveGames; indexOfSaveGame++)
+            for (int indexOfSaveGame = 1; indexOfSaveGame <= maxSaveGames; indexOfSaveGame++)
             {
                 string filePath = path + @"\SaveGame" + indexOfSaveGame + ".svj";
 

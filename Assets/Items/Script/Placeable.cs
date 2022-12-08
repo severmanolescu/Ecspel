@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Item/New Placeable", order = 1)]
@@ -24,10 +22,19 @@ public class Placeable : Item
         this.startY = startY;
     }
 
+    public Placeable(int sizeX, int sizeY, int startX, int startY)
+        : base("", "", 0, 0, 0, 0)
+    {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.startX = startX;
+        this.startY = startY;
+    }
+
     public int SizeX { get { return sizeX; } }
     public int SizeY { get { return sizeY; } }
 
-    public GameObject Prefab { get => prefab;}
+    public GameObject Prefab { get => prefab; }
     public int StartX { get => startX; }
     public int StartY { get => startY; }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestLocationFollow : MonoBehaviour
@@ -32,9 +30,9 @@ public class QuestLocationFollow : MonoBehaviour
 
         if (quest != null && goToLocation.Positions.Count > 0)
         {
-            if(atIndex < goToLocation.Positions.Count)
+            if (atIndex < goToLocation.Positions.Count)
             {
-                if(track == true)
+                if (track == true)
                 {
                     GameObject location = new GameObject();
                     location.transform.position = goToLocation.Positions[atIndex];
@@ -42,7 +40,7 @@ public class QuestLocationFollow : MonoBehaviour
                     questTrack.TrackQuest(location.transform);
                 }
 
-                if(Vector3.Distance(playerLocation.localPosition, goToLocation.Positions[atIndex]) < DefaulData.maxQuestDistante)
+                if (Vector3.Distance(playerLocation.localPosition, goToLocation.Positions[atIndex]) < DefaulData.maxQuestDistante)
                 {
                     atIndex++;
                 }
@@ -58,7 +56,7 @@ public class QuestLocationFollow : MonoBehaviour
                     track = false;
                 }
 
-                if(quest.NextQuest != null)
+                if (quest.NextQuest != null)
                 {
                     questTab.AddQuest(quest.NextQuest);
                 }

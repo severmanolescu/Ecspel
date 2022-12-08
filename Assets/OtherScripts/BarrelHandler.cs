@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +22,7 @@ public class BarrelHandler : MonoBehaviour
 
     private IEnumerator WaitForSound()
     {
-        while(audioSource.isPlaying)
+        while (audioSource.isPlaying)
         {
             yield return null;
         }
@@ -40,7 +39,7 @@ public class BarrelHandler : MonoBehaviour
 
         Debug.Log(damage);
 
-        if(health <= 0)
+        if (health <= 0)
         {
             Destroy(GetComponent<BoxCollider2D>());
             Destroy(GetComponent<SpriteRenderer>());

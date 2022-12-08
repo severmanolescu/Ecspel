@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,9 +29,9 @@ public class GetFarmPlots : MonoBehaviour
 
         SpriteRenderer[] plotsInGame = objectsLocation.GetComponentsInChildren<SpriteRenderer>();
 
-        foreach(SpriteRenderer plot in plotsInGame)
+        foreach (SpriteRenderer plot in plotsInGame)
         {
-            if(plot.CompareTag("FarmPlot"))
+            if (plot.CompareTag("FarmPlot"))
             {
                 FarmPlotSave farmPlot = new FarmPlotSave();
 
@@ -77,7 +75,7 @@ public class GetFarmPlots : MonoBehaviour
 
         foreach (SpriteRenderer crop in cropInGame)
         {
-            if(crop.CompareTag("Crop"))
+            if (crop.CompareTag("Crop"))
             {
                 CropGrow cropGrow = crop.GetComponent<CropGrow>();
 

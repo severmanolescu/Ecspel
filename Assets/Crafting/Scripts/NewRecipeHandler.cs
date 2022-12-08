@@ -32,7 +32,7 @@ public class NewRecipeHandler : MonoBehaviour
 
     private void ChangeSprite()
     {
-        if(currentIndex == 0 && startedAnimation == false && currentIndex < sprites.Count)
+        if (currentIndex == 0 && startedAnimation == false && currentIndex < sprites.Count)
         {
             startedAnimation = true;
 
@@ -56,11 +56,13 @@ public class NewRecipeHandler : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         animator.SetBool("Start", false);
+
+        startedAnimation = false;
     }
 
     private void Update()
     {
-        if(startedAnimation == false)
+        if (startedAnimation == false)
         {
             if (currentIndex < sprites.Count)
             {

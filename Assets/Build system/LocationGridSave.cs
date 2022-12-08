@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LocationGridSave : MonoBehaviour
@@ -29,7 +28,7 @@ public class LocationGridSave : MonoBehaviour
 
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
-        spawnLocations =  gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
+        spawnLocations = gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
     }
 
     public void ReinitializeGrid()
@@ -73,9 +72,9 @@ public class LocationGridSave : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if(dayTimer.CanSpawnEnemy() == true)
+        if (dayTimer.CanSpawnEnemy() == true)
         {
-            foreach(SpawnEnemyInArea spawnLocation in spawnLocations)
+            foreach (SpawnEnemyInArea spawnLocation in spawnLocations)
             {
                 spawnLocation.SpawnEnemy();
             }
@@ -86,7 +85,7 @@ public class LocationGridSave : MonoBehaviour
     {
         AIPathFinding[] enemy = gameObject.GetComponentsInChildren<AIPathFinding>();
 
-        foreach(AIPathFinding aIPathFinding in enemy)
+        foreach (AIPathFinding aIPathFinding in enemy)
         {
             Destroy(aIPathFinding.gameObject);
         }
@@ -96,7 +95,7 @@ public class LocationGridSave : MonoBehaviour
 
     private void Start()
     {
-        if(test)
+        if (test)
         {
             StartCoroutine(WaitToCheck(null));
         }

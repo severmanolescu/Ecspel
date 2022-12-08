@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Quest", menuName = "Quest/New Quest", order = 1)]
 [Serializable]
 public class Quest : ScriptableObject
-{ 
+{
     public string title;
 
     [TextArea(10, 10)]
@@ -26,7 +26,7 @@ public class Quest : ScriptableObject
 
     public string Title { get { return title; } }
     public string Details { get { return details; } }
-   
+
     public List<QuestItems> ItemsReceive { get { return itemsReceive; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public Quest NextQuest { get { return nextQuest; } }

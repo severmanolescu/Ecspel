@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -41,12 +40,19 @@ public class PlayerStats : MonoBehaviour
 
     private float lastHP = 0;
 
-    public float Health { get { return healthSlider.value; } set { lastHP = healthSlider.value;
-                                                                   healthSlider.value = value; 
-                                                                   PlayDamageClip(); 
-                                                                   StartCoroutine(WaitDamage()); 
-                                                                   SetAnimatorHealth(); 
-                                                                   CheckHealth(); } }
+    public float Health
+    {
+        get { return healthSlider.value; }
+        set
+        {
+            lastHP = healthSlider.value;
+            healthSlider.value = value;
+            PlayDamageClip();
+            StartCoroutine(WaitDamage());
+            SetAnimatorHealth();
+            CheckHealth();
+        }
+    }
 
     public float Stamina { get { return staminaSlider.value; } set { staminaSlider.value = value; SetAnimatorStamina(); CheckForStamina(); } }
 
@@ -87,7 +93,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        healthSlider.maxValue = Health  = maxHealth = DefaulData.maxPlayerHealth;
+        healthSlider.maxValue = Health = maxHealth = DefaulData.maxPlayerHealth;
         staminaSlider.maxValue = Stamina = maxStamina = DefaulData.maxPlayerStamina;
 
         SetToMaxStats();
@@ -131,7 +137,7 @@ public class PlayerStats : MonoBehaviour
 
     private void CheckForStamina()
     {
-        if(Stamina <= 0 && alreadyRunOutStamina == false)
+        if (Stamina <= 0 && alreadyRunOutStamina == false)
         {
             OutOfStamina();
         }
@@ -179,7 +185,7 @@ public class PlayerStats : MonoBehaviour
 
     private void SetAnimatorHealth()
     {
-        if(Health >= healthSlider.maxValue / 2)
+        if (Health >= healthSlider.maxValue / 2)
         {
             animatorHealth.SetInteger("Speed", 0);
         }
@@ -229,7 +235,7 @@ public class PlayerStats : MonoBehaviour
             audioSource.clip = damageClip;
             audioSource.Play();
         }
-    }    
+    }
 
     public void SetToMaxStats()
     {
@@ -239,14 +245,14 @@ public class PlayerStats : MonoBehaviour
 
     public void DecreseStamina(float stamina)
     {
-        //float skillStamina = skillsHandler.StaminaLevel * 0.025f * stamina;
+        float skillStamina = skillsHandler.StaminaLevel * 0.025f * stamina;
 
-       // Stamina -= (stamina - skillStamina);
+        Stamina -= (stamina - skillStamina);
     }
 
     public bool Eat(Consumable consumable)
     {
-        if(Health < healthSlider.maxValue || Stamina < staminaSlider.maxValue)
+        if (Health < healthSlider.maxValue || Stamina < staminaSlider.maxValue)
         {
             Health += consumable.Health;
             Stamina += consumable.Stamina;

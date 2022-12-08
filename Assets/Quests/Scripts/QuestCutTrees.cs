@@ -22,13 +22,13 @@ public class QuestCutTrees : MonoBehaviour
 
     private void Update()
     {
-        if(cutTrees != null)
+        if (cutTrees != null)
         {
             if (playerAchievements.Trees >= initialCutTrees + cutTrees.Number)
             {
                 GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(cutTrees);
                 GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>().DeleteQuest(cutTrees.nextQuest);
-                
+
                 GameObject.Find("Player/Canvas/PlayerItems").GetComponent<PlayerInventory>().AddItem(cutTrees.itemsReceive);
 
                 Destroy(this.gameObject);

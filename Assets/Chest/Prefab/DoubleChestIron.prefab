@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0718, y: 0.6678}
+  m_AnchoredPosition: {x: 0, y: 0.832}
   m_SizeDelta: {x: 1.4775, y: 1.421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1578004844161814494
@@ -321,12 +321,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8246552104531898661, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  m_Sprite: {fileID: 1915360563, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.375, y: 1.1875}
+  m_Size: {x: 1.875, y: 1.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemWorld: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
-  openSprite: {fileID: -5292551749217006624, guid: 744512f2a3264404b9eca9f7fcb759c6, type: 3}
+  openSprite: {fileID: -30601122, guid: 1aaab2d94b5da2144a55da3c3408fddc, type: 3}
   chestId: 1
   chestOpen: {fileID: 8300000, guid: e0652c71b9bb5964b8c9ae150ad1152c, type: 3}
   chestClose: {fileID: 8300000, guid: 66ec24e4a8b120e4a8507192d16da11a, type: 3}
@@ -375,12 +375,12 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.003115654, y: 0.5250683}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.496339, y: 0.05574762}
-    oldSize: {x: 1.75, y: 1.3125}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.875, y: 1.4375}
+    newSize: {x: 1.875, y: 1.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -401,12 +401,12 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014810562, y: 0.48144245}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.496339, y: 0.05574762}
-    oldSize: {x: 1.75, y: 1.3125}
-    newSize: {x: 1.375, y: 1.1875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.875, y: 1.4375}
+    newSize: {x: 1.875, y: 1.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -593,17 +593,17 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 858520fc010497a4fb65b98de9d95986cb99512f397a1411899d9d4f00000000
   m_ShapePath:
-  - {x: -0.8645792, y: -0.0050907135, z: 0}
-  - {x: -0.86559963, y: 1.172842, z: 0}
-  - {x: 0.87968636, y: 1.1705227, z: 0}
-  - {x: 0.87666416, y: -0.005290985, z: 0}
-  - {x: 0.81522274, y: -0.00664711, z: 0}
-  - {x: 0.8139, y: -0.06983185, z: 0}
-  - {x: -0.80127335, y: -0.06836319, z: 0}
-  - {x: -0.79918003, y: -0.0036144257, z: 0}
-  m_ShapePathHash: 1082874453
+  - {x: -0.86873436, y: 0.19137573, z: 0}
+  - {x: -0.8697548, y: 1.3693085, z: 0}
+  - {x: 0.8755312, y: 1.3669891, z: 0}
+  - {x: 0.872509, y: 0.19117355, z: 0}
+  - {x: 0.8110676, y: 0.18981934, z: 0}
+  - {x: 0.80974483, y: 0.12663269, z: 0}
+  - {x: -0.8054285, y: 0.12810135, z: 0}
+  - {x: -0.8033352, y: 0.1928482, z: 0}
+  m_ShapePathHash: -73566411
   m_Mesh: {fileID: 0}
-  m_InstanceId: 439106
+  m_InstanceId: 325612
 --- !u!1 &6481948816354233382
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,14 +628,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6481948816354233382}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0028797677, w: 0.9999959}
-  m_LocalPosition: {x: -0.00009918213, y: 0.5930004, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0806338, w: 0.9967438}
+  m_LocalPosition: {x: 0.092, y: 0.783, z: 0}
   m_LocalScale: {x: 3.7449923, y: 1.549209, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004845640410780}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.33}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.25}
 --- !u!212 &3153788918484567277
 SpriteRenderer:
   m_ObjectHideFlags: 0

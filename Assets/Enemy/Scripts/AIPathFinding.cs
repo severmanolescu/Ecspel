@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -173,7 +172,7 @@ public class AIPathFinding : MonoBehaviour
         {
             if (path != null)
             {
-                if(currentIndex <= path.Count - 1)
+                if (currentIndex <= path.Count - 1)
                 {
                     MoveToLocation(path[currentIndex]);
 

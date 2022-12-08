@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,7 +69,7 @@ public class NpcPathFinding : MonoBehaviour
         if (transform.position.x + distanceToleranceDirection < position.x ||
             transform.position.x - distanceToleranceDirection > position.x)
         {
-            if (transform.position.x  < position.x)
+            if (transform.position.x < position.x)
             {
                 direction.x = 1;
             }
@@ -139,14 +138,14 @@ public class NpcPathFinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(ToLocation != null && 
-           locationGrid != null && 
-           CanWalk == true && 
+        if (ToLocation != null &&
+           locationGrid != null &&
+           CanWalk == true &&
            talking == false)
         {
-            if(path == null || path.Count == 0)
+            if (path == null || path.Count == 0)
             {
-                GetNewPath();   
+                GetNewPath();
             }
             else
             {
@@ -195,7 +194,7 @@ public class NpcPathFinding : MonoBehaviour
     {
         Vector3 newDirection = Vector3.zero;
 
-        switch(direction)
+        switch (direction)
         {
             case 0:
                 {
@@ -223,7 +222,7 @@ public class NpcPathFinding : MonoBehaviour
                 }
         }
 
-        if(newDirection != Vector3.zero)
+        if (newDirection != Vector3.zero)
         {
             animator.SetFloat("HorizontalFacing", newDirection.x);
             animator.SetFloat("VerticalFacing", newDirection.y);
@@ -234,7 +233,7 @@ public class NpcPathFinding : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        direction.x =  animator.GetFloat("HorizontalFacing");
+        direction.x = animator.GetFloat("HorizontalFacing");
         direction.y = animator.GetFloat("VerticalFacing");
 
         switch (direction)

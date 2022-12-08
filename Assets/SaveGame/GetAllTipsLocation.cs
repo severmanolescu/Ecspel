@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class GetAllTipsLocation : MonoBehaviour
     {
         foreach (Tip tip in tips)
         {
-            if(tip.tipNo == tipNo)
+            if (tip.tipNo == tipNo)
             {
                 return tip;
             }
@@ -44,7 +43,7 @@ public class GetAllTipsLocation : MonoBehaviour
                 tipsSave.ColliderSizeY = boxCollider.size.y;
 
                 saveTips.Add(tipsSave);
-            }            
+            }
         }
 
         return saveTips;
@@ -54,12 +53,12 @@ public class GetAllTipsLocation : MonoBehaviour
     {
         TipShow[] tipShows = locationOfTips.GetComponentsInChildren<TipShow>();
 
-        foreach(TipShow tipShow in tipShows)
+        foreach (TipShow tipShow in tipShows)
         {
             Destroy(tipShow.gameObject);
         }
 
-        foreach(TipsSave tip in tipsSave)
+        foreach (TipsSave tip in tipsSave)
         {
             GameObject tipObject = new GameObject();
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ public class QuestTabHandler : MonoBehaviour
     [SerializeField] private GameObject answarePrefab;
 
     private Transform spawnLocation;
-    
+
     private List<QuestButton> questButtons = new List<QuestButton>();
 
     private QuestFollowHandler questFollow;
@@ -39,17 +38,17 @@ public class QuestTabHandler : MonoBehaviour
 
     public void SetQuestWorld(Quest quest)
     {
-        if(quest is GiveItem)
+        if (quest is GiveItem)
         {
             GiveItem giveItem = (GiveItem)quest;
 
             npcId.GetNpcFromId(giveItem.whoToGiveId).AddQuest(quest);
         }
-        else if(quest is GoToLocation)
+        else if (quest is GoToLocation)
         {
             questFollow.SetQuestFollow(quest);
         }
-        else if(quest is CutTrees)
+        else if (quest is CutTrees)
         {
             GetComponent<QuestCutTreesHandler>().SetCutTreesQuest(quest);
         }
@@ -61,11 +60,11 @@ public class QuestTabHandler : MonoBehaviour
         {
             GetComponent<QuestKillEnemyHandle>().SetKillEnemyQuest(quest);
         }
-        else if(quest is QuestTalk)
+        else if (quest is QuestTalk)
         {
             QuestTalk questTalk = (QuestTalk)quest;
 
-           npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
+            npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
         }
     }
 
@@ -91,7 +90,7 @@ public class QuestTabHandler : MonoBehaviour
 
     public void AddQuest(Quest quest)
     {
-        if(quest != null && VerifyQuest(quest))
+        if (quest != null && VerifyQuest(quest))
         {
             InstantiateButton(quest);
 
@@ -112,9 +111,9 @@ public class QuestTabHandler : MonoBehaviour
 
     public void DeleteQuest(Quest quest)
     {
-       foreach(QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in questButtons)
         {
-            if(questButton.Quest == quest)
+            if (questButton.Quest == quest)
             {
                 questButtons.Remove(questButton);
 
@@ -129,13 +128,13 @@ public class QuestTabHandler : MonoBehaviour
     {
         List<Quest> quests = new List<Quest>();
 
-        foreach(QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in questButtons)
         {
-            if(questButton.Quest != null)
+            if (questButton.Quest != null)
             {
                 quests.Add(questButton.Quest);
             }
-        }    
+        }
 
         return quests;
     }
@@ -144,9 +143,9 @@ public class QuestTabHandler : MonoBehaviour
     {
         List<int> questIDs = new List<int>();
 
-        foreach(QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in questButtons)
         {
-            if(questButton != null && questButton.Quest != null)
+            if (questButton != null && questButton.Quest != null)
             {
                 questIDs.Add(getQuest.GetQuestID(questButton.Quest));
             }
@@ -169,7 +168,7 @@ public class QuestTabHandler : MonoBehaviour
     {
         DeleteAllQuest();
 
-        foreach(int id in questsId)
+        foreach (int id in questsId)
         {
             AddQuest(getQuest.GetQuestFromID(id));
         }

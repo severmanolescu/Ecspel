@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ClockHandler : MonoBehaviour
 {
-     private ClockTimeChange clockTimeChange;
+    private ClockTimeChange clockTimeChange;
 
     private SpriteRenderer minutes;
     private SpriteRenderer hours;
@@ -16,7 +16,7 @@ public class ClockHandler : MonoBehaviour
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
 
         minutes = sprites[1];
-        hours   = sprites[2];
+        hours = sprites[2];
     }
 
     public void SetTime(Quaternion minute, Quaternion hour)

@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ItemDetails : MonoBehaviour
 {
@@ -48,13 +48,13 @@ public class ItemDetails : MonoBehaviour
     {
         if (item != null)
         {
-            itemSpriteObject.sprite = itemSprites.GetItemSprite(item.ItemNO);
+            itemSpriteObject.sprite = item.ItemSprite;
             itemNameObject.text = item.Name;
             itemDetailsObject.text = "    " + item.Details;
 
             StatDataSet[] oldStats = spawnLocation.GetComponentsInChildren<StatDataSet>();
-            
-            foreach(StatDataSet stat in oldStats)
+
+            foreach (StatDataSet stat in oldStats)
             {
                 Destroy(stat.gameObject);
             }
@@ -78,7 +78,7 @@ public class ItemDetails : MonoBehaviour
             instantiateStat.GetComponent<StatDataSet>().SetData(coinSprite, price.ToString());
         }
 
-        if(item is Weapon)
+        if (item is Weapon)
         {
             Weapon weapon = (Weapon)item;
 
@@ -86,7 +86,7 @@ public class ItemDetails : MonoBehaviour
 
             instantiateStat.GetComponent<StatDataSet>().SetData(attackSprite, weapon.AttackPower.ToString());
         }
-        else if(item is Pickaxe)
+        else if (item is Pickaxe)
         {
             Pickaxe pickaxe = (Pickaxe)item;
 
@@ -98,7 +98,7 @@ public class ItemDetails : MonoBehaviour
 
             instantiateStat.GetComponent<StatDataSet>().SetData(powerSprite, pickaxe.Level.ToString());
         }
-        else if(item is Axe)
+        else if (item is Axe)
         {
             Axe axe = (Axe)item;
 
@@ -110,7 +110,7 @@ public class ItemDetails : MonoBehaviour
 
             instantiateStat.GetComponent<StatDataSet>().SetData(powerSprite, axe.Level.ToString());
         }
-        else if(item is Consumable)
+        else if (item is Consumable)
         {
             Consumable consumable = (Consumable)item;
 

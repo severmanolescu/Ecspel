@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler,
                                           IEndDragHandler, IDropHandler, IPointerMoveHandler, IPointerExitHandler
@@ -17,7 +17,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private Image image;
 
-    public Item Item { get { return item;  } }
+    public Item Item { get { return item; } }
 
     private void Awake()
     {
@@ -31,16 +31,16 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void SetItem(Item item, ItemSlot previousSlot)
     {
-        if(item != null)
+        if (item != null)
         {
-            if(this.item == null)
+            if (this.item == null)
             {
                 this.item = item;
 
-                if(previousSlot != null)
+                if (previousSlot != null)
                     previousSlot.DeleteItem();
 
-                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                image.sprite = item.ItemSprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -53,7 +53,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 if (previousSlot != null)
                     previousSlot.SetItem(auxItemChange);
 
-                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                image.sprite = item.ItemSprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -68,7 +68,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             {
                 this.item = item;
 
-                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                image.sprite = item.ItemSprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -78,7 +78,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
                 this.item = item;
 
-                image.sprite = itemSprites.GetItemSprite(item.ItemNO);
+                image.sprite = item.ItemSprite;
 
                 image.gameObject.SetActive(true);
             }
@@ -104,9 +104,9 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.clickCount == 2)
+        if (eventData.clickCount == 2)
         {
-            if(playerInventory.AddItem(item) == true)
+            if (playerInventory.AddItem(item) == true)
             {
                 DeleteItem();
             }
@@ -130,11 +130,11 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private bool VerifyItemToSlot(Item item)
     {
-        if(gameObject.name == "Sword" && item is Weapon)
+        if (gameObject.name == "Sword" && item is Weapon)
         {
             return true;
         }
-        else if(gameObject.name == "Axe" && item is Axe)
+        else if (gameObject.name == "Axe" && item is Axe)
         {
             return true;
         }
@@ -175,7 +175,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
                 ItemSlot previousItem = itemDrag.PreviousItem.GetComponent<ItemSlot>();
 
-                if(previousItem != null)
+                if (previousItem != null)
                 {
                     SetItem(itemDrag.Item);
 

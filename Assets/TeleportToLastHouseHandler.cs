@@ -77,7 +77,7 @@ public class TeleportToLastHouseHandler : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(WaitForBack(collision.gameObject));  
+            StartCoroutine(WaitForBack(collision.gameObject));
         }
     }
 }

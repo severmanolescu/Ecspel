@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,16 +8,17 @@ public class BuildSystemHandler : MonoBehaviour
     [SerializeField] private GameObject prefabGameObject;
     [SerializeField] private GameObject itemWorldPrefab;
     [SerializeField] private Transform spawnPosition;
-
-    private ItemSprites itemSprites;
+    [SerializeField] private Camera mainCamera;
 
     private Item item;
 
     private bool startPlace = false;
 
-    private GameObject @object;    
+    private GameObject @object;
 
     private QuickSlotsChanger quickSlots;
+
+    private HoeSystemHandler hoeSystem;
 
     private bool canPlace = true;
 
@@ -29,6 +31,8 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void Awake()
     {
+        hoeSystem = GameObject.Find("Global/BuildSystem").GetComponent<HoeSystemHandler>();
+
         audioSource = GetComponent<AudioSource>();
 
         audioSource.Stop();
@@ -36,8 +40,6 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void Start()
     {
-        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-
         ChangeGridToSystems(Grid);
     }
 
@@ -79,7 +81,7 @@ public class BuildSystemHandler : MonoBehaviour
         }
         else
         {
-            @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
+            @object.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
         }
     }
 
@@ -91,10 +93,10 @@ public class BuildSystemHandler : MonoBehaviour
 
             startPlace = true;
 
-            if(@object == null)
+            if (@object == null)
             {
                 CreateObject();
-            }            
+            }
             else
             {
                 if (item is Crop)
@@ -111,18 +113,18 @@ public class BuildSystemHandler : MonoBehaviour
                 }
                 else
                 {
-                    if(item is Placeable)
+                    if (item is Placeable)
                     {
                         Placeable placeable = (Placeable)item;
 
-                        if(placeable.Prefab != null)
+                        if (placeable.Prefab != null)
                         {
                             @object.GetComponent<SpriteRenderer>().sprite = placeable.Prefab.GetComponent<SpriteRenderer>().sprite;
                         }
                     }
                     else
                     {
-                        @object.GetComponent<SpriteRenderer>().sprite = itemSprites.GetItemSprite(item.ItemNO);
+                        @object.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
                     }
                 }
             }
@@ -133,7 +135,7 @@ public class BuildSystemHandler : MonoBehaviour
     {
         startPlace = false;
 
-        if(@object != null)
+        if (@object != null)
         {
             Destroy(@object);
 
@@ -162,7 +164,7 @@ public class BuildSystemHandler : MonoBehaviour
 
         newObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-        if(item is Crop)
+        if (item is Crop)
         {
             newObject.AddComponent<CropGrow>().SetItem(item, gridNode, itemWorldPrefab);
 
@@ -172,7 +174,7 @@ public class BuildSystemHandler : MonoBehaviour
 
             gridNode.crop = newObject;
         }
-        else if(item is Sapling)
+        else if (item is Sapling)
         {
             newObject.tag = "TreeSapling";
 
@@ -184,49 +186,13 @@ public class BuildSystemHandler : MonoBehaviour
 
             spriteRenderer.sortingOrder = 0;
             spriteRenderer.sprite = sapling.SaplingSprite;
-
-            for (int i = gridNode.x - 1; i <= gridNode.x + 1; i++)
-            {
-                for (int j = gridNode.y - 1; j <= gridNode.y + 1; j++)
-                {
-                    if (i >= 0 && i < Grid.gridArray.GetLength(0) &&
-                        j >= 0 && j < Grid.gridArray.GetLength(1))
-                    {
-                        Grid.gridArray[i, j].canPlace = false;
-                        Grid.gridArray[i, j].canPlant = false;
-                        Grid.gridArray[i, j].isWalkable = false;
-                        Grid.gridArray[i, j].objectInSpace = newObject;
-                    }
-                }
-            }
         }
-        else if(item is Placeable)
+        else if (item is Placeable)
         {
             SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
 
-            spriteRenderer.sortingOrder = 0;
-
-            if (gridNode.x + placeable.StartX >= 0 &&
-            gridNode.x + placeable.StartY >= 0 &&
-            gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
-            gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
-            {
-                for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
-                {
-                    for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
-                    {
-                        if (i < Grid.gridArray.GetLength(0) && j < Grid.gridArray.GetLength(1) &&
-                            Grid.gridArray[i, j] != null)
-                        {
-                            Grid.gridArray[i, j].canPlace = false;
-                            Grid.gridArray[i, j].canPlant = false;
-                            Grid.gridArray[i, j].isWalkable = false;
-                            Grid.gridArray[i, j].objectInSpace = newObject;
-                        }
-                    }
-                }
-            }
-        }        
+            spriteRenderer.sortingOrder = 0;   
+        }
         else
         {
             gridNode.objectInSpace = newObject;
@@ -241,7 +207,7 @@ public class BuildSystemHandler : MonoBehaviour
             StopPlace();
         }
 
-        ChangeCanPlace(gridNode);
+        ChangeCanPlace(gridNode, newObject);
 
         audioSource.Play();
 
@@ -264,8 +230,8 @@ public class BuildSystemHandler : MonoBehaviour
     {
         Placeable placeable = (Placeable)item;
 
-        if (gridNode.x + placeable.StartX >=0 &&
-            gridNode.x + placeable.StartY >=0 &&
+        if (gridNode.x + placeable.StartX >= 0 &&
+            gridNode.x + placeable.StartY >= 0 &&
             gridNode.x + placeable.SizeX < Grid.gridArray.GetLength(0) &&
             gridNode.y + placeable.SizeY < Grid.gridArray.GetLength(1))
         {
@@ -275,7 +241,18 @@ public class BuildSystemHandler : MonoBehaviour
                 {
                     if (Grid.gridArray[i, j].canPlace == false || Grid.gridArray[i, j].isWalkable == false)
                     {
-                        return false;
+                        if (Grid.gridArray[i, j].objectInSpace != null)
+                        {
+                            if (Grid.gridArray[i, j].objectInSpace.gameObject.tag != "FarmPlot" || 
+                               (Grid.gridArray[i, j].objectInSpace.gameObject.tag == "FarmPlot" && Grid.gridArray[i, j].cropPlaced == true))
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -286,26 +263,44 @@ public class BuildSystemHandler : MonoBehaviour
         return false;
     }
 
-    private void ChangeCanPlace(GridNode gridNode)
+    private void ChangeCanPlace(GridNode gridNode, GameObject newObject)
     {
-        Placeable placeable = (Placeable)item;
-
-        for (int i = gridNode.x; i < gridNode.x + placeable.SizeX; i++)
+        if (item is Crop)
         {
-            for (int j = gridNode.y; j < gridNode.y + placeable.SizeY; j++)
+            Grid.gridArray[gridNode.x, gridNode.y].cropPlaced = true;
+            Grid.gridArray[gridNode.x, gridNode.y].canPlace = false;
+        }
+        else
+        {
+            Placeable placeable = (Placeable)item;
+
+            if (gridNode.x + placeable.StartX >= 0 &&
+                gridNode.x + placeable.StartY >= 0 &&
+                gridNode.x + placeable.SizeX <= Grid.gridArray.GetLength(0) &&
+                gridNode.y + placeable.SizeY <= Grid.gridArray.GetLength(1))
             {
-                if (item is Crop)
+                for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
                 {
-                    Grid.gridArray[gridNode.x, gridNode.y].cropPlaced = true;
-                    Grid.gridArray[gridNode.x, gridNode.y].canPlant = true;
-                    Grid.gridArray[gridNode.x, gridNode.y].canPlace = false;
+                    for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
+                    {
+                        if (i < Grid.gridArray.GetLength(0) && j < 
+                            Grid.gridArray.GetLength(1) &&
+                            Grid.gridArray[i, j] != null)
+                        {
+                            if (Grid.gridArray[i, j].objectInSpace != null)
+                            {
+                                Destroy(Grid.gridArray[i, j].objectInSpace);
+                            }
+
+                            Grid.gridArray[i, j].canPlace = false;
+                            Grid.gridArray[i, j].canPlant = false;
+                            Grid.gridArray[i, j].isWalkable = false;
+                            Grid.gridArray[i, j].objectInSpace = newObject;
+                        }
+                    }
                 }
-                else
-                {
-                    Grid.gridArray[i, j].canPlace = false;
-                    Grid.gridArray[i, j].canPlant = false;
-                    Grid.gridArray[i, j].cropPlaced = false;
-                }
+
+                hoeSystem.DestroySoil(gridNode, placeable);
             }
         }
     }
@@ -326,7 +321,7 @@ public class BuildSystemHandler : MonoBehaviour
     {
         GridNode gridNode = Grid.GetGridObject(position);
 
-        if(gridNode != null)
+        if (gridNode != null)
         {
             return gridNode.objectInSpace;
         }
@@ -336,13 +331,16 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void Update()
     {
-        if(LocationGrid != null && startPlace)
+        if (LocationGrid != null && startPlace)
         {
-            GridNode gridNode = Grid.GetGridObject(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+            mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
+
+            GridNode gridNode = Grid.GetGridObject(mainCamera.ScreenToWorldPoint(mousePosition));
 
             if (gridNode != null)
             {
-                if((canPlace = VerifyCanPlace(gridNode)) == true && !(item is Crop))
+                if ((canPlace = VerifyCanPlace(gridNode)) == true && !(item is Crop))
                 {
                     @object.GetComponent<SpriteRenderer>().color = Color.white;
                 }
@@ -369,7 +367,7 @@ public class BuildSystemHandler : MonoBehaviour
                 {
                     Crop aux = (Crop)item;
 
-                    if(aux.CenterX == true)
+                    if (aux.CenterX == true)
                     {
                         position.x += Grid.CellSize / 2f;
                     }
@@ -386,9 +384,9 @@ public class BuildSystemHandler : MonoBehaviour
 
                 position.z = 0;
 
-                @object.transform.position = position; 
+                @object.transform.position = position;
 
-                if(Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
+                if (Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
                 {
                     PlaceObject(gridNode);
                 }

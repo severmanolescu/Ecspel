@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class SkillsHandler : MonoBehaviour
 {
@@ -76,7 +75,7 @@ public class SkillsHandler : MonoBehaviour
 
         if (powerLevel < 10 && coinsHandler.Amount >= skillValue)
         {
-            ChangePowerLevel(PowerLevel + 1, skillValue);            
+            ChangePowerLevel(PowerLevel + 1, skillValue);
         }
     }
     public void IncreseAttackLevel()
@@ -102,7 +101,7 @@ public class SkillsHandler : MonoBehaviour
         int skillValue = (staminaLevel + 1) * 100;
 
         if (staminaLevel < 10 && coinsHandler.Amount >= skillValue)
-        {            
+        {
             ChangeStaminaLevel(StaminaLevel + 1, skillValue);
         }
     }
@@ -111,7 +110,7 @@ public class SkillsHandler : MonoBehaviour
         int skillValue = (healthLevel + 1) * 100;
 
         if (healthLevel < 10 && coinsHandler.Amount >= skillValue)
-        {            
+        {
             ChangeHealthLevel(HealthLevel + 1, skillValue);
         }
     }
@@ -120,7 +119,7 @@ public class SkillsHandler : MonoBehaviour
         int skillValue = (luckLevel + 1) * 100;
 
         if (luckLevel < 10 && coinsHandler.Amount >= skillValue)
-        {            
+        {
             ChangeLuckLevel(luckLevel + 1, skillValue);
         }
     }
@@ -274,7 +273,7 @@ public class SkillsHandler : MonoBehaviour
 
     public void SetSkillsLevels(List<int> list)
     {
-        if(list != null && list.Count == 6)
+        if (list != null && list.Count == 6)
         {
             ChangePowerLevel(list[0]);
             ChangeAttackLevel(list[1]);

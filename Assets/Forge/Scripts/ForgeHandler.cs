@@ -54,7 +54,7 @@ public class ForgeHandler : MonoBehaviour
 
         forge = forgeOpenHandler;
 
-        if(working)
+        if (working)
         {
             SetValuetoForgeSlider(smeltingProgress);
             SetValuetoFuelSlider(fuelProgress);

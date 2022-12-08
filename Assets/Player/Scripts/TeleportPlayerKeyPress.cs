@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TeleportPlayerKeyPress : MonoBehaviour
@@ -58,19 +57,19 @@ public class TeleportPlayerKeyPress : MonoBehaviour
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
     }
 
-private void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.CompareTag("Player"))
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        player = collision.gameObject;
+        if (collision.CompareTag("Player"))
+        {
+            player = collision.gameObject;
 
-        text.SetActive(true);
+            text.SetActive(true);
+        }
     }
-}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             player = null;
 
@@ -80,7 +79,7 @@ private void OnTriggerEnter2D(Collider2D collision)
 
     private void Update()
     {
-        if(player != null && (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false)))
+        if (player != null && (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false)))
         {
             fKeyPress = true;
 

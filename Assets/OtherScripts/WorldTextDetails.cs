@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class WorldTextDetails : MonoBehaviour
 {
@@ -27,10 +26,13 @@ public class WorldTextDetails : MonoBehaviour
 
     public void ShowText(string text)
     {
-        textMesh.text = text;
+        if (textMesh != null)
+        {
+            textMesh.text = text;
 
-        StopAllCoroutines();
+            StopAllCoroutines();
 
-        StartCoroutine(WaitForSecondBeforClose());
+            StartCoroutine(WaitForSecondBeforClose());
+        }
     }
 }

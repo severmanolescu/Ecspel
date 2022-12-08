@@ -24,7 +24,7 @@ public class ParticleStart : MonoBehaviour
 
     public void StartParticles()
     {
-        foreach(ParticleSystem particle in particles)
+        foreach (ParticleSystem particle in particles)
         {
             particle.Play();
         }
@@ -34,7 +34,7 @@ public class ParticleStart : MonoBehaviour
     {
         GameObject auxiliarInstantiate;
 
-        if(spawn == 1)
+        if (spawn == 1)
         {
             Vector3 auxiliarPosition = logSpawn.transform.position;
 
@@ -81,5 +81,5 @@ public class ParticleStart : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }    
+    }
 }

@@ -19,7 +19,7 @@ public class EquipItem : MonoBehaviour
 
     public void Equip(Item item, ItemSlot previousSlot)
     {
-        if(item is Weapon weapon)
+        if (item is Weapon weapon)
         {
             Sword.SetItem(item, previousSlot);
         }

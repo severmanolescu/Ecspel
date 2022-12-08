@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class CanvasEffectDataSet : MonoBehaviour
 {
@@ -24,9 +22,9 @@ public class CanvasEffectDataSet : MonoBehaviour
     {
         int minutes = (int)duration / 60;
 
-        int seconds = (int) duration - minutes * 60;
+        int seconds = (int)duration - minutes * 60;
 
-        if(minutes != 0)
+        if (minutes != 0)
         {
             this.duration.text = minutes.ToString() + " : " + seconds.ToString();
         }

@@ -9,10 +9,10 @@ public class StoneDamage : MonoBehaviour
     [SerializeField] private Item spawnItem;
     [SerializeField] private int amount;
 
-    private ParticleSystem particle;
-
     [SerializeField] private float health;
     [SerializeField] private int stoneLevel;
+
+    [SerializeField] private GameObject destroyParticle;
 
     [Header("Audio effects")]
     [SerializeField] private AudioClip soundEffect;
@@ -28,8 +28,6 @@ public class StoneDamage : MonoBehaviour
 
     private void Awake()
     {
-        particle = GetComponentInChildren<ParticleSystem>();
-
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -44,7 +42,7 @@ public class StoneDamage : MonoBehaviour
     public void GetData(out int startScaleX, out int startScaleY, out int scaleX, out int scaleY)
     {
         startScaleX = this.startScaleX;
-        startScaleY= this.startScaleY;
+        startScaleY = this.startScaleY;
         scaleX = this.scaleX;
         scaleY = this.scaleY;
     }
@@ -76,15 +74,13 @@ public class StoneDamage : MonoBehaviour
 
         Destroy(GetComponent<ShadowCaster2D>());
 
-        Destroy(GetComponentInChildren<ParticleSystem>().gameObject);
-
         SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        if(sprites != null && sprites.Length > 1)
+        if (sprites != null && sprites.Length > 1)
         {
             Destroy(sprites[1].gameObject);
         }
 
-        while(audioSource.isPlaying)
+        while (audioSource.isPlaying)
         {
             yield return null;
 
@@ -102,11 +98,6 @@ public class StoneDamage : MonoBehaviour
             audioSource.Play();
 
             health -= damage;
-
-            if (particle != null)
-            {
-                particle.Play();
-            }
 
             if (health <= 0)
             {
@@ -137,10 +128,14 @@ public class StoneDamage : MonoBehaviour
 
                     IncreseCaveObjects increseCave = GetComponent<IncreseCaveObjects>();
 
-                    if(increseCave != null)
+                    if (increseCave != null)
                     {
                         increseCave.Increse();
                     }
+
+                    GameObject particles = Instantiate(destroyParticle);
+                    particles.transform.position = transform.position;
+                    particles.GetComponent<ParticleSystem>().Play();
 
                     StartCoroutine(WaitForSoundEffect());
                 }

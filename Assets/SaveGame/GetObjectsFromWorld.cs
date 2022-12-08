@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +11,9 @@ public class GetObjectsFromWorld : MonoBehaviour
 
     private void Awake()
     {
-        getItemWorld = GameObject.Find("Global"). GetComponent<GetItemWorld>();
+        getItemWorld = GameObject.Find("Global").GetComponent<GetItemWorld>();
 
-        getLocationGrid = GameObject.Find("Global"). GetComponent<GetLocationGrid>();
+        getLocationGrid = GameObject.Find("Global").GetComponent<GetLocationGrid>();
     }
 
     public List<ObjectSaveGame> GetAllObjectsFromArea()
@@ -71,7 +69,7 @@ public class GetObjectsFromWorld : MonoBehaviour
 
     public void SetObjectsToWorld(List<ObjectSaveGame> objects)
     {
-        foreach(GameObject spawnArea in spawnAreas)
+        foreach (GameObject spawnArea in spawnAreas)
         {
             if (spawnArea != null)
             {

@@ -37,7 +37,7 @@ public class LastCaveHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Player"))
+        if (collision != null && collision.CompareTag("Player"))
         {
             player = true;
         }
@@ -78,7 +78,7 @@ public class LastCaveHandler : MonoBehaviour
 
     void Update()
     {
-        if(player == true)
+        if (player == true)
         {
             if (playerMovement.Speed == 0 && playerMovement.CanMove == true && playerMovement.TabOpen == false)
             {

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,7 +74,7 @@ public class ShopInventory : MonoBehaviour
 
         ItemSlot[] slots = spawnLocation.GetComponentsInChildren<ItemSlot>();
 
-        foreach(ItemSlot slot in slots)
+        foreach (ItemSlot slot in slots)
         {
             if (slot.Item != null)
             {

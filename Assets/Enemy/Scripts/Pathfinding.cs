@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,8 +28,8 @@ public class Pathfinding
         grid.GetXY(startWorldPosition, out int startX, out int startY);
         grid.GetXY(endWorldPosition, out int endX, out int endY);
 
-        if(endX < 0 || endY < 0 || 
-           grid.gridArray.GetLength(0) <= endX || 
+        if (endX < 0 || endY < 0 ||
+           grid.gridArray.GetLength(0) <= endX ||
            grid.gridArray.GetLength(1) <= endY ||
            grid.gridArray[endX, endY].isWalkable == false)
         {
@@ -98,7 +97,7 @@ public class Pathfinding
 
             foreach (GridNode neighbourNode in GetNeighbourList(currentNode))
             {
-                if (closedList.Contains(neighbourNode)) 
+                if (closedList.Contains(neighbourNode))
                     continue;
 
                 if (!neighbourNode.isWalkable)

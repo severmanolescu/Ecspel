@@ -72,7 +72,7 @@ public class SpawnObjectsArea : MonoBehaviour
                         {
                             if (gridSave.Grid.gridArray[i, j] != null)
                             {
-                                if (gridSave.Grid.gridArray[i, j].canPlace == false || 
+                                if (gridSave.Grid.gridArray[i, j].canPlace == false ||
                                     gridSave.Grid.gridArray[i, j].isWalkable == false)
                                 {
                                     return false;
@@ -101,7 +101,7 @@ public class SpawnObjectsArea : MonoBehaviour
 
         if (day % dayToSpawn == 0 && objectsNo < maxItems)
         {
-            for(int noItem = 0; noItem < noItemsToSpawn; noItem++)
+            for (int noItem = 0; noItem < noItemsToSpawn; noItem++)
             {
                 if (objectsNo < maxItems)
                 {

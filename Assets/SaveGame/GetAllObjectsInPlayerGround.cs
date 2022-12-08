@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class GetAllObjectsInPlayerGround : MonoBehaviour
 
         BoxCollider2D[] objects = objectLocation.GetComponentsInChildren<BoxCollider2D>();
 
-        foreach(BoxCollider2D obj in objects)
+        foreach (BoxCollider2D obj in objects)
         {
             if (obj != null && obj.isTrigger == false)
             {
@@ -60,7 +59,7 @@ public class GetAllObjectsInPlayerGround : MonoBehaviour
     {
         BoxCollider2D[] objectsInArea = objectLocation.GetComponentsInChildren<BoxCollider2D>();
 
-        foreach(BoxCollider2D box in objectsInArea)
+        foreach (BoxCollider2D box in objectsInArea)
         {
             Destroy(box.gameObject);
         }

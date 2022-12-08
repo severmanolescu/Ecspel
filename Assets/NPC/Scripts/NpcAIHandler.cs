@@ -61,7 +61,7 @@ public class NpcAIHandler : MonoBehaviour
     {
         npcPath.CanWalk = false;
 
-        if (scheduleIndex < npcTimeSchedules.Count && 
+        if (scheduleIndex < npcTimeSchedules.Count &&
             npcTimeSchedules[scheduleIndex].Point.position != transform.position)
         {
             npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
@@ -97,13 +97,13 @@ public class NpcAIHandler : MonoBehaviour
 
         ChangeScheduleIndex();
 
-        npcPath.CanWalk= true;
+        npcPath.CanWalk = true;
     }
 
     public void ChangeScheduleIndex()
     {
         scheduleIndex++;
-        
+
         if (scheduleIndex < npcTimeSchedules.Count)
         {
             if (npcTimeSchedules[scheduleIndex].Location == transform)
@@ -130,7 +130,7 @@ public class NpcAIHandler : MonoBehaviour
             {
                 StartCoroutine(WaitForHour());
             }
-            else if(npcTimeSchedules[scheduleIndex].Location == transform)
+            else if (npcTimeSchedules[scheduleIndex].Location == transform)
             {
                 if (npcTimeSchedules[scheduleIndex].Seconds != 0)
                 {
@@ -149,7 +149,7 @@ public class NpcAIHandler : MonoBehaviour
         else
         {
             npcPath.CanWalk = false;
-            if (scheduleIndex < npcTimeSchedules.Count && 
+            if (scheduleIndex < npcTimeSchedules.Count &&
                 npcTimeSchedules[scheduleIndex].Hours > -1)
             {
                 StartCoroutine(WaitForHour());

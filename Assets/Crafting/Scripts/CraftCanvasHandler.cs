@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CraftCanvasHandler : MonoBehaviour
 {
-    private  List<CraftSetData> crafts = new List<CraftSetData>();
+    private List<CraftSetData> crafts = new List<CraftSetData>();
 
     [SerializeField] private List<Craft> initialCrafts = new List<Craft>();
 
@@ -22,7 +21,7 @@ public class CraftCanvasHandler : MonoBehaviour
 
     private void Start()
     {
-        foreach(Craft craft in initialCrafts)
+        foreach (Craft craft in initialCrafts)
         {
             InstantiateCraft(craft);
         }
@@ -31,12 +30,12 @@ public class CraftCanvasHandler : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
     }
 
     public void ReinitializeAllCraftings()
     {
-        foreach(CraftSetData craft in crafts)
+        foreach (CraftSetData craft in crafts)
         {
             craft.CheckIfItemsAreAvaible();
         }
@@ -49,9 +48,9 @@ public class CraftCanvasHandler : MonoBehaviour
 
     private bool SearchIfCraftExist(Craft craft)
     {
-        foreach(CraftSetData craftSet in crafts)
+        foreach (CraftSetData craftSet in crafts)
         {
-            if(craftSet.Craft == craft)
+            if (craftSet.Craft == craft)
             {
                 return true;
             }
@@ -98,13 +97,13 @@ public class CraftCanvasHandler : MonoBehaviour
 
     public bool AddCraft(Craft craft, bool showAnimation = true)
     {
-        if(craft != null && SearchIfCraftExist(craft) == false)
+        if (craft != null && SearchIfCraftExist(craft) == false)
         {
             InstantiateCraft(craft);
 
             if (showAnimation == true)
             {
-                newRecipeHandler.AddNewRecipie(itemSprites.GetItemSprite(craft.ReceiveItem.Item.ItemNO));
+                newRecipeHandler.AddNewRecipie(craft.ReceiveItem.Item.ItemSprite);
             }
 
             return true;
