@@ -21,9 +21,9 @@ public class DamageTree : MonoBehaviour
 
     private Animator animator;
 
-    private DestroyTree destroyTree;
-
     private bool destroyed = false;
+
+    private DestroyTree destroyTree;
 
     private int startScaleX;
     private int startScaleY;
@@ -45,18 +45,6 @@ public class DamageTree : MonoBehaviour
     private void Start()
     {
         prefabLog = destroyTree.ItemWorld;
-
-        SpriteRenderer[] objects = gameObject.GetComponentsInChildren<SpriteRenderer>();
-
-        foreach (SpriteRenderer obj in objects)
-        {
-            if (obj.CompareTag("SunShadow"))
-            {
-                GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(obj.transform);
-
-                break;
-            }
-        }
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
@@ -75,7 +63,7 @@ public class DamageTree : MonoBehaviour
         scaleY = this.scaleY;
     }
 
-    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
+    private void ChangeGridData(GridNode gridNode, Grid grid)
     {
         for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
         {
@@ -144,7 +132,7 @@ public class DamageTree : MonoBehaviour
                 game.SetItem(DefaulData.GetItemWithAmount(logItem, 1));
                 game.MoveToPoint();
 
-                Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+                Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
                 GridNode gridNode = grid.GetGridObject(transform.position);
 

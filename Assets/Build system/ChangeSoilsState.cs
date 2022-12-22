@@ -13,6 +13,14 @@ public class ChangeSoilsState : MonoBehaviour
         }
     }
 
+    public void RemoveSoil(FarmPlotHandler farmPlot)
+    {
+        if(farmPlot != null)
+        {
+            farmPlotHandlers.Remove(farmPlot);
+        }
+    }
+
     public void DryAllDoils()
     {
         foreach (FarmPlotHandler farmPlotHandler in farmPlotHandlers)

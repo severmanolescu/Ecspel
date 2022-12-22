@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid<TGridObject>
+public class Grid
 {
     private int height;
     private int width;
@@ -9,20 +10,20 @@ public class Grid<TGridObject>
 
     private Vector3 originPosition;
 
-    public TGridObject[,] gridArray;
+    public GridNode[,] gridArray;
 
     public int Height { get { return height; } }
     public int Width { get { return width; } }
     public float CellSize { get { return cellSize; } }
 
-    public Grid(int height, int width, float cellSize, Vector3 originPosition, Func<Grid<TGridObject>, int, int, TGridObject> createGridObject)
+    public Grid(int height, int width, float cellSize, Vector3 originPosition, Func<Grid, int, int, GridNode> createGridObject)
     {
         this.height = height;
         this.width = width;
         this.cellSize = cellSize;
         this.originPosition = originPosition;
 
-        gridArray = new TGridObject[width, height];
+        gridArray = new GridNode[width, height];
 
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
@@ -32,7 +33,7 @@ public class Grid<TGridObject>
             }
         }
 
-        bool showDebug = true;
+        bool showDebug = false;
         if (showDebug)
         {
 
@@ -73,7 +74,7 @@ public class Grid<TGridObject>
         y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
     }
 
-    public TGridObject GetGridObject(int x, int y)
+    public GridNode GetGridObject(int x, int y)
     {
         if (x >= 0 && y >= 0 && x < width && y < height)
         {
@@ -81,11 +82,11 @@ public class Grid<TGridObject>
         }
         else
         {
-            return default(TGridObject);
+            return null;
         }
     }
 
-    public TGridObject GetGridObject(Vector3 worldPosition)
+    public GridNode GetGridObject(Vector3 worldPosition)
     {
         int x;
         int y;
@@ -95,5 +96,109 @@ public class Grid<TGridObject>
         return GetGridObject(x, y);
     }
 
+    public void ReinitializeGrid(Placeable placeable, Vector3 position)
+    {
+        GridNode changePosition = GetGridObject(position);
 
+        if(changePosition != null)
+        {
+            for (int i = changePosition.x + placeable.StartX; i <= changePosition.x + placeable.SizeX; i++)
+            {
+                for (int j = changePosition.y + placeable.StartY; j <= changePosition.y + placeable.SizeY; j++)
+                {
+                    if (i >= 0 && i < width && 
+                        j >= 0 && j < height)
+                    {
+                        ReinitializeGrid(gridArray[i, j]);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void ReinitializeGrid(Vector3 position)
+    {
+        GridNode changePosition = GetGridObject(position);
+
+        ReinitializeGrid(changePosition);
+    }
+
+    public void ReinitializeGrid(GridNode changePosition)
+    {
+        if (changePosition != null)
+        {
+            gridArray[changePosition.x, changePosition.y].canPlace = true;
+            gridArray[changePosition.x, changePosition.y].canPlant = false;
+            gridArray[changePosition.x, changePosition.y].isWalkable = true;
+            gridArray[changePosition.x, changePosition.y].cropPlaced = false;
+            gridArray[changePosition.x, changePosition.y].crop = null;
+            gridArray[changePosition.x, changePosition.y].objectInSpace = null;
+        }
+    }
+
+    public List<GameObject> PlaceObjectInGrid(Placeable placeable, GridNode position, GameObject newObject = null)
+    {
+        List<GameObject> objectsToDestroy = new List<GameObject>();
+
+        if (position != null)
+        {
+            for (int i = position.x + placeable.StartX; i <= position.x + placeable.SizeX; i++)
+            {
+                for (int j = position.y + placeable.StartY; j <= position.y + placeable.SizeY; j++)
+                {
+                    if (i >= 0 && i < width &&
+                        j >= 0 && j < height &&
+                        gridArray[i, j] != null)
+                    {
+                        if (gridArray[i, j].objectInSpace != null &&
+                            !objectsToDestroy.Contains(gridArray[i, j].objectInSpace))
+                        {
+                            objectsToDestroy.Add(gridArray[i, j].objectInSpace);
+                        }
+
+                        gridArray[i, j].canPlace = false;
+                        gridArray[i, j].canPlant = false;
+                        gridArray[i, j].isWalkable = false;
+                        gridArray[i, j].objectInSpace = newObject;
+                    }
+                }
+            }
+        }
+
+        return objectsToDestroy;
+    }
+
+    public bool CheckCanPlaceBuildSystem(Placeable placeable, GridNode gridNode)
+    {
+        if (gridNode != null)
+        {
+            if (gridNode.x + placeable.StartX >= 0 &&
+                gridNode.x + placeable.StartY >= 0 &&
+                gridNode.x + placeable.SizeX < width &&
+                gridNode.y + placeable.SizeY < height)
+            {
+                for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
+                {
+                    for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
+                    {
+                        if (gridArray[i, j].canPlace == false || gridArray[i, j].isWalkable == false)
+                        {
+                            if (gridArray[i, j].objectInSpace != null)
+                            {
+                                if (gridArray[i, j].objectInSpace.gameObject.tag != "FarmPlot" ||
+                                   (gridArray[i, j].objectInSpace.gameObject.tag == "FarmPlot" && gridArray[i, j].cropPlaced == true))
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+        return false;
+    }
 }

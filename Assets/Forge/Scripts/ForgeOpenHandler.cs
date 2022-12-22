@@ -89,13 +89,6 @@ public class ForgeOpenHandler : MonoBehaviour
         }
 
         keyboard = InputSystem.GetDevice<Keyboard>();
-
-        Transform shadow = transform.Find("Shadow");
-
-        if (shadow != null)
-        {
-            GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>().AddShadow(shadow);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

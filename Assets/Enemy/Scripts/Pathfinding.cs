@@ -8,17 +8,17 @@ public class Pathfinding
 
     public static Pathfinding Instance { get; private set; }
 
-    private Grid<GridNode> grid;
+    private Grid grid;
     private List<GridNode> openList;
     private List<GridNode> closedList;
 
-    public Pathfinding(Grid<GridNode> grid)
+    public Pathfinding(Grid grid)
     {
         Instance = this;
         this.grid = grid;
     }
 
-    public Grid<GridNode> GetGrid()
+    public Grid GetGrid()
     {
         return grid;
     }

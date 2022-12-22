@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -17,8 +18,6 @@ public class LightHandler : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         GameObject.Find("Global/DayTimer").GetComponent<SourceLightShadow>().AddLight(this);
-
-        TurnOffLight();
     }
 
     public void TurnOnLight()

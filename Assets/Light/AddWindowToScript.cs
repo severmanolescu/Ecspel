@@ -2,10 +2,23 @@ using UnityEngine;
 
 public class AddWindowToScript : MonoBehaviour
 {
-    void Start()
-    {
-        GameObject.Find("Global/DayTimer").GetComponent<ChangeWindowLightIntensity>().Renderers.Add(GetComponent<SpriteRenderer>());
+    private ChangeWindowLightIntensity change;
 
-        Destroy(this);
+    private void Start()
+    {
+        change = GameObject.Find("Global/DayTimer").GetComponent<ChangeWindowLightIntensity>();
+
+        if(change != null)
+        {
+            change.Renderers.Add(GetComponent<SpriteRenderer>());
+        }
+    }
+
+    private void OnDestroy()
+    {
+         if(change != null)
+         {
+            change.Renderers.Remove(GetComponent<SpriteRenderer>());
+         }
     }
 }

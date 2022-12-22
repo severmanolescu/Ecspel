@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,11 +6,13 @@ public class SunShadowHandler : MonoBehaviour
 {
     [SerializeField] private float fadeSpeed;
 
-    private List<Transform> sunShadows = new List<Transform>();
+    public List<Transform> sunShadows = new List<Transform>();
 
     private DayTimerHandler dayTimerHandler;
 
     private float rotation;
+
+    private bool startShadowFade = false;
 
     [SerializeField] private int dayStart;
     [SerializeField] private int dayEnd;
@@ -31,53 +34,60 @@ public class SunShadowHandler : MonoBehaviour
         dayTimerHandler = gameObject.GetComponent<DayTimerHandler>();
     }
 
+    private void Start()
+    {
+        StartCoroutine(ShadowRotate());
+    }
+
+    private IEnumerator ShadowRotate()
+    {
+        while (true)
+        {
+            dayTimerHandler.GetTimer(out float minutes, out int hours);
+            dayTimerHandler.GetIntensity(out float intensity);
+
+            if (hours >= dayStart && hours <= dayEnd + dayNightCycleTime)
+            {
+                alpha = 1f;
+
+                rotation = Mathf.SmoothStep(-90, 90, (hours + minutes / 60f) / 25f);
+
+                foreach (Transform shadow in sunShadows)
+                {
+                    if (shadow != null)
+                    {
+                        shadow.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotation);
+
+                        shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, intensity);
+
+                        shadow.gameObject.SetActive(true);
+                    }
+                }
+
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                alpha -= fadeSpeed * Time.deltaTime;
+
+                Color color = new Color(1f, 1f, 1f, alpha);
+
+                foreach (Transform shadow in sunShadows)
+                {
+                    if (shadow != null)
+                    {
+                        shadow.GetComponent<SpriteRenderer>().color = color;
+                    }
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
+
     private void Update()
     {
-        dayTimerHandler.GetTimer(out float minutes, out int hours);
-        dayTimerHandler.GetIntensity(out float intensity);
-
-        List<Transform> toRemoveFromList = new List<Transform>();
-
-        if (hours >= dayStart && hours <= dayEnd + dayNightCycleTime)
-        {
-            alpha = 1f;
-
-            rotation = Mathf.SmoothStep(-90, 90, (hours + minutes / 60f) / 25f);
-
-            foreach (Transform shadow in sunShadows)
-            {
-                if (shadow != null)
-                {
-                    shadow.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotation);
-
-                    shadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, intensity);
-
-                    shadow.gameObject.SetActive(true);
-                }
-                else
-                {
-                    toRemoveFromList.Add(shadow);
-                }
-            }
-        }
-        else
-        {
-            alpha -= fadeSpeed * Time.deltaTime;
-
-            Color color = new Color(1f, 1f, 1f, alpha);
-
-            foreach (Transform shadow in sunShadows)
-            {
-                if (shadow != null)
-                {
-                    shadow.GetComponent<SpriteRenderer>().color = color;
-                }
-                else
-                {
-                    toRemoveFromList.Add(shadow);
-                }
-            }
-        }
+        
     }
 
     public void ChangeShadowAlpha(float alpha)

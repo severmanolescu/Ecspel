@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1508235747}
   - component: {fileID: 1508235748}
+  - component: {fileID: 7481183653687656643}
   m_Layer: 8
   m_Name: Shadow
   m_TagString: SunShadow
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7481183653687656643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508235746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6764022329627368883
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,4 +243,4 @@ MonoBehaviour:
   - {x: -0.4386921, y: 0.37766647, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -22076
+  m_InstanceId: -34246

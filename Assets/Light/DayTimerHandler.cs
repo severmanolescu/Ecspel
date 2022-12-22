@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -132,6 +133,72 @@ public class DayTimerHandler : MonoBehaviour
         changeSoilsState = GetComponent<ChangeSoilsState>();
     }
 
+    private void Start()
+    {
+        StartCoroutine(WorldTimeDelay());
+    }
+
+    private IEnumerator WorldTimeDelay()
+    {
+        while (true)
+        {   
+            changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
+
+            sourceLight.ChangeLightsIntensity(1f - intensity);
+
+            NightDayHandler();
+
+            intensity = (Hours + Minutes / 60) / 24;
+
+            globalLight.color = gradient.Evaluate(intensity);
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void NightDayHandler()
+    {
+        if ((hours >= hourToSpawnEnemyStart && hours <= 23) ||
+               (hours >= 0 && hours <= hourToSpawnEnemyFinal) &&
+               raining == false)
+        {
+            float chance = Random.Range(0, 100);
+
+            if (chance <= percentOfFirefly)
+            {
+                startAllFirefly.StartParticles();
+            }
+
+            if (soundEffectSetted == true)
+            {
+                audioSource.clip = nightSound;
+
+                if (stopSoundEffects == false)
+                {
+                    audioSource.Play();
+                }
+
+                soundEffectSetted = false;
+            }
+        }
+        else
+        {
+            startAllFirefly.StopParticles();
+
+            if (raining == false && soundEffectSetted == false)
+            {
+                audioSource.clip = daySound;
+
+                if (stopSoundEffects == false)
+                {
+                    audioSource.Play();
+                }
+
+                soundEffectSetted = true;
+            }
+        }
+    }
+
     private void Update()
     {
         minutes += timeSpeed * Time.deltaTime;
@@ -140,46 +207,6 @@ public class DayTimerHandler : MonoBehaviour
         {
             minutes = 0;
             Hours++;
-
-            if ((hours >= hourToSpawnEnemyStart && hours <= 23) ||
-               (hours >= 0 && hours <= hourToSpawnEnemyFinal) &&
-               raining == false)
-            {
-                float chance = Random.Range(0, 100);
-
-                if (chance <= percentOfFirefly)
-                {
-                    startAllFirefly.StartParticles();
-                }
-
-                if (soundEffectSetted == true)
-                {
-                    audioSource.clip = nightSound;
-
-                    if (stopSoundEffects == false)
-                    {
-                        audioSource.Play();
-                    }
-
-                    soundEffectSetted = false;
-                }
-            }
-            else
-            {
-                startAllFirefly.StopParticles();
-
-                if (raining == false && soundEffectSetted == false)
-                {
-                    audioSource.clip = daySound;
-
-                    if (stopSoundEffects == false)
-                    {
-                        audioSource.Play();
-                    }
-
-                    soundEffectSetted = true;
-                }
-            }
 
             if (Hours >= 24)
             {
@@ -211,14 +238,6 @@ public class DayTimerHandler : MonoBehaviour
 
             worldTextDetails.ShowText("Esti foarte obosit!");
         }
-
-        intensity = (Hours + Minutes / 60) / 24;
-
-        sourceLight.ChangeLightsIntensity(1f - intensity);
-
-        globalLight.color = gradient.Evaluate(intensity);
-
-        changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
 
         if (sleep == true && (days > startDay || sleepNotFromBed == true))
         {

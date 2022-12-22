@@ -8,7 +8,7 @@ public class HarvestCropHandler : MonoBehaviour
 
     public void Harvest()
     {
-        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
+        Grid grid = GetComponent<BuildSystemHandler>().Grid;
 
         Vector3 mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
@@ -42,7 +42,7 @@ public class HarvestCropHandler : MonoBehaviour
 
     public bool DestroyCropWithHoe()
     {
-        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
+        Grid grid = GetComponent<BuildSystemHandler>().Grid;
 
         Vector3 mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
@@ -83,7 +83,7 @@ public class HarvestCropHandler : MonoBehaviour
 
     public void DestroyCrop(Vector3 position)
     {
-        Grid<GridNode> grid = GetComponent<BuildSystemHandler>().Grid;
+        Grid grid = GetComponent<BuildSystemHandler>().Grid;
 
         GridNode gridNode = grid.GetGridObject(position);
 

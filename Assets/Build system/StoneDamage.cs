@@ -47,25 +47,6 @@ public class StoneDamage : MonoBehaviour
         scaleY = this.scaleY;
     }
 
-    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
-    {
-        for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
-        {
-            for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
-            {
-                if (i < grid.gridArray.GetLength(0) &&
-                    j < grid.gridArray.GetLength(1) &&
-                    grid.gridArray[i, j] != null)
-                {
-                    grid.gridArray[i, j].canPlace = true;
-                    grid.gridArray[i, j].canPlant = false;
-                    grid.gridArray[i, j].isWalkable = true;
-                    grid.gridArray[i, j].objectInSpace = null;
-                }
-            }
-        }
-    }
-
     private IEnumerator WaitForSoundEffect()
     {
         Destroy(GetComponent<SpriteRenderer>());
@@ -115,14 +96,11 @@ public class StoneDamage : MonoBehaviour
 
                     itemWorld.transform.parent = transform.parent;
 
-                    Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+                    Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
                     GridNode gridNode = grid.GetGridObject(transform.position);
 
-                    if (gridNode != null)
-                    {
-                        ChangeGridData(gridNode, grid);
-                    }
+                    grid.ReinitializeGrid(gridNode);
 
                     GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
 

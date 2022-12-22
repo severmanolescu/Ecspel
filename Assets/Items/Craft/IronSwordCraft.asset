@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3c1ba4b8909f2429090b0cbd82cd2d, type: 3}
+  m_Name: IronSwordCraft
+  m_EditorClassIdentifier: 
+  needItem:
+  - item: {fileID: 11400000, guid: 2acfd8e5b121a9d479d9436f52917d57, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: c813ba37b8fe91f4cbf7fb7f0fceed1d, type: 2}
+    amount: 10
+  receiveItem:
+    item: {fileID: 11400000, guid: 73762b024d9a873489fc8c23cf7bbf85, type: 2}
+    amount: 1
+  stamina: 4

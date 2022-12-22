@@ -47,8 +47,13 @@ public class PlayerStats : MonoBehaviour
         {
             lastHP = healthSlider.value;
             healthSlider.value = value;
-            PlayDamageClip();
-            StartCoroutine(WaitDamage());
+
+            if (Health < lastHP)
+            {
+                PlayDamageClip();
+                StartCoroutine(WaitDamage());
+            }
+
             SetAnimatorHealth();
             CheckHealth();
         }
@@ -185,22 +190,22 @@ public class PlayerStats : MonoBehaviour
 
     private void SetAnimatorHealth()
     {
-        if (Health >= healthSlider.maxValue / 2)
-        {
-            animatorHealth.SetInteger("Speed", 0);
-        }
-        else if (Health >= healthSlider.maxValue / 3)
-        {
-            animatorHealth.SetInteger("Speed", 1);
-        }
-        else if (Health >= healthSlider.maxValue / 4)
-        {
-            animatorHealth.SetInteger("Speed", 2);
-        }
-        else
-        {
-            animatorHealth.SetInteger("Speed", 3);
-        }
+        //if (Health >= healthSlider.maxValue / 2)
+        //{
+        //    animatorHealth.SetInteger("Speed", 0);
+        //}
+        //else if (Health >= healthSlider.maxValue / 3)
+        //{
+        //    animatorHealth.SetInteger("Speed", 1);
+        //}
+        //else if (Health >= healthSlider.maxValue / 4)
+        //{
+        //    animatorHealth.SetInteger("Speed", 2);
+        //}
+        //else
+        //{
+        //    animatorHealth.SetInteger("Speed", 3);
+        //}
     }
 
     private void SetAnimatorStamina()
@@ -230,11 +235,8 @@ public class PlayerStats : MonoBehaviour
 
     private void PlayDamageClip()
     {
-        if (Health < lastHP)
-        {
-            audioSource.clip = damageClip;
-            audioSource.Play();
-        }
+        audioSource.clip = damageClip;
+        audioSource.Play();
     }
 
     public void SetToMaxStats()

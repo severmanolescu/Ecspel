@@ -1,26 +1,29 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AxeHandler : MonoBehaviour
 {
     [SerializeField] private GameObject itemWorld;
 
-    private Grid<GridNode> grid;
+    private Grid grid;
 
     private SkillsHandler skillHandler;
 
-    public Grid<GridNode> Grid { set { grid = value; } }
+    private PlayerStats playerStats;
+
+    public Grid Grid { set { grid = value; } }
 
     private void Awake()
     {
+        playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
     }
 
-    private void DamageTree(GameObject node, int spawn, Item item)
+    private bool UseAxeToObject(GameObject node, int spawn, Item item)
     {
         Axe axe = (Axe)item;
 
-        if (node != null)
+        if (node != null && axe != null)
         {
             DamageTree damageTree = node.GetComponent<DamageTree>();
 
@@ -29,98 +32,75 @@ public class AxeHandler : MonoBehaviour
                 float skillsAttackBonus = axe.Damage * skillHandler.PowerLevel * 0.05f;
 
                 damageTree.TakeDamage(axe.Damage + skillsAttackBonus, spawn, axe.Level);
+
+                return true;
             }
             else
             {
-                SaplingGrowHandler saplingGrow = node.GetComponent<SaplingGrowHandler>();
+                GroundWoodDamage groundWood = node.GetComponent<GroundWoodDamage>();
 
-                if (saplingGrow != null)
+                if (groundWood != null)
                 {
-                    saplingGrow.DestroyObject();
+                    groundWood.AxeDestroy(axe.Level);
+
+                    return true;
                 }
                 else
                 {
-                    GroundWoodDamage groundWood = node.GetComponent<GroundWoodDamage>();
+                    PlaceableDataSave placeableData = node.GetComponent<PlaceableDataSave>();
 
-                    if (groundWood != null)
+                    if (placeableData != null)
                     {
-                        groundWood.AxeDestroy(axe.Level);
-                    }
+                        ChestOpenHandler chestOpen = node.GetComponent<ChestOpenHandler>();
 
-                    else
-                    {
-                        PlaceableDataSave placeableData = node.GetComponent<PlaceableDataSave>();
-
-                        if (placeableData != null)
+                        if (chestOpen != null)
                         {
-                            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+                            chestOpen.DropAllItems();
+                        }
+                        else
+                        {
+                            ForgeOpenHandler forge = node.GetComponent<ForgeOpenHandler>();
 
-                            GridNode gridNode = grid.GetGridObject(node.transform.position);
-
-                            ChestOpenHandler chestOpen = node.GetComponent<ChestOpenHandler>();
-
-                            if (chestOpen != null)
+                            if (forge != null)
                             {
-                                chestOpen.DropAllItems();
-                            }
-                            else
-                            {
-                                ForgeOpenHandler forge = node.GetComponent<ForgeOpenHandler>();
-
-                                if (forge != null)
-                                {
-                                    forge.DropAllItems();
-                                }
-                            }
-
-                            Destroy(placeableData.gameObject);
-
-                            ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
-                            world.transform.position = node.transform.position;
-
-                            Placeable newItem = (Placeable)placeableData.Placeable.Copy();
-
-                            if(placeableData.ItemWorldSize < 1f)
-                            {
-                                world.transform.localScale = new Vector3(placeableData.ItemWorldSize, placeableData.ItemWorldSize, 1f);
-                            }
-
-                            newItem.Amount = 1;
-
-                            world.SetItem(newItem);
-
-                            world.MoveToPoint();
-
-                            if (gridNode != null)
-                            {
-                                ChangeGridData(gridNode, grid, newItem);
+                                forge.DropAllItems();
                             }
                         }
+
+                        DestroyObject(placeableData, node);
+
+                        return true;
                     }
                 }
             }
         }
 
-        GameObject.Find("Global/Player").GetComponent<PlayerStats>().DecreseStamina(axe.Stamina);
+        playerStats.DecreseStamina(axe.Stamina);
+
+        return false;
     }
 
-    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid, Placeable placeable)
+    private void DestroyObject(PlaceableDataSave placeableData, GameObject node)
     {
-        for (int i = gridNode.x + placeable.StartX; i <= gridNode.x + placeable.SizeX; i++)
+        Destroy(placeableData.gameObject);
+
+        ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
+
+        world.transform.position = node.transform.position;
+
+        Placeable newItem = (Placeable)placeableData.Placeable.Copy();
+
+        if (placeableData.ItemWorldSize < 1f)
         {
-            for (int j = gridNode.y + placeable.StartY; j <= gridNode.y + placeable.SizeY; j++)
-            {
-                if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1) &&
-                    grid.gridArray[i, j] != null)
-                {
-                    grid.gridArray[i, j].canPlace = true;
-                    grid.gridArray[i, j].canPlant = false;
-                    grid.gridArray[i, j].isWalkable = true;
-                    grid.gridArray[i, j].objectInSpace = null;
-                }
-            }
+            world.transform.localScale = new Vector3(placeableData.ItemWorldSize, placeableData.ItemWorldSize, 1f);
         }
+
+        newItem.Amount = 1;
+
+        world.SetItem(newItem);
+        world.MoveToPoint();
+
+        grid.ReinitializeGrid(newItem, node.transform.position);
     }
 
     public void UseAxe(Vector3 position, int spawn, Item item)
@@ -128,45 +108,48 @@ public class AxeHandler : MonoBehaviour
         GridNode gridNode = grid.GetGridObject(position);
 
         if (gridNode != null)
-        {
-            switch (spawn)
+        { 
+            if (!UseAxeToObject(gridNode.objectInSpace, spawn, item))            
             {
-                case 1:
-                    {
-                        if (gridNode.x - 1 >= 0)
+                switch (spawn)
+                {
+                    case 1:
                         {
-                            DamageTree(grid.gridArray[gridNode.x - 1, gridNode.y].objectInSpace, spawn, item);
-                        }
+                            if (gridNode.x - 1 >= 0)
+                            {
+                                UseAxeToObject(grid.gridArray[gridNode.x - 1, gridNode.y].objectInSpace, spawn, item);
+                            }
 
-                        break;
-                    }
-                case 2:
-                    {
-                        if (gridNode.x + 1 < grid.gridArray.GetLength(0))
+                            break;
+                        }
+                    case 2:
                         {
-                            DamageTree(grid.gridArray[gridNode.x + 1, gridNode.y].objectInSpace, spawn, item);
-                        }
+                            if (gridNode.x + 1 < grid.gridArray.GetLength(0))
+                            {
+                                UseAxeToObject(grid.gridArray[gridNode.x + 1, gridNode.y].objectInSpace, spawn, item);
+                            }
 
-                        break;
-                    }
-                case 3:
-                    {
-                        if (gridNode.y + 1 < grid.gridArray.GetLength(1))
+                            break;
+                        }
+                    case 3:
                         {
-                            DamageTree(grid.gridArray[gridNode.x, gridNode.y + 1].objectInSpace, spawn, item);
-                        }
+                            if (gridNode.y + 1 < grid.gridArray.GetLength(1))
+                            {
+                                UseAxeToObject(grid.gridArray[gridNode.x, gridNode.y + 1].objectInSpace, spawn, item);
+                            }
 
-                        break;
-                    }
-                case 4:
-                    {
-                        if (gridNode.y - 1 >= 0)
+                            break;
+                        }
+                    case 4:
                         {
-                            DamageTree(grid.gridArray[gridNode.x, gridNode.y - 1].objectInSpace, spawn, item);
-                        }
+                            if (gridNode.y - 1 >= 0)
+                            {
+                                UseAxeToObject(grid.gridArray[gridNode.x, gridNode.y - 1].objectInSpace, spawn, item);
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
+                }
             }
         }
     }

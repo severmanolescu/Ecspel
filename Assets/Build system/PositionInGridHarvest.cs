@@ -25,7 +25,7 @@ public class PositionInGridHarvest : MonoBehaviour
 
         if (locationGrid != null)
         {
-            Grid<GridNode> grid = LocationGrid.Grid;
+            Grid grid = LocationGrid.Grid;
 
             GridNode gridNode = grid.GetGridObject(transform.position);
 

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PickaxeHandler : MonoBehaviour
 {
-    private Grid<GridNode> grid;
+    private Grid grid;
 
-    public Grid<GridNode> Grid { set { grid = value; } }
+    public Grid Grid { set { grid = value; } }
 
     private SkillsHandler skillHandler;
 

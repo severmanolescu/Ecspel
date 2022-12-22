@@ -223,7 +223,7 @@ MonoBehaviour:
   - {x: -0.21589851, y: 0.13275337, z: 0}
   m_ShapePathHash: 308438101
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1600
+  m_InstanceId: -66742
 --- !u!114 &9495676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2846453282482678610}
   - component: {fileID: 2846453282482678609}
+  - component: {fileID: 3088687000495560190}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: SunShadow
@@ -402,14 +403,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2846453282482678611}
-  m_LocalRotation: {x: 0, y: 0, z: -0.024432095, w: 0.9997015}
+  m_LocalRotation: {x: -0, y: 0, z: -0.3923371, w: -0.9198215}
   m_LocalPosition: {x: -0.006, y: 0.8358, z: 0}
   m_LocalScale: {x: 3.3863225, y: 1.502997, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2846453282388944465}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.8}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -313.8}
 --- !u!212 &2846453282482678609
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -462,3 +463,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3088687000495560190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846453282482678611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

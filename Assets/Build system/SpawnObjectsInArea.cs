@@ -31,7 +31,7 @@ public class SpawnObjectsInArea : MonoBehaviour
         {
             foreach (Transform spawnLocation in spawnTransforms)
             {
-                int objectIndex = UnityEngine.Random.Range(0, spawnObjects.Count - 1);
+                int objectIndex = Random.Range(0, spawnObjects.Count - 1);
 
                 GridNode gridNode = locationGrid.Grid.GetGridObject(spawnLocation.position);
 

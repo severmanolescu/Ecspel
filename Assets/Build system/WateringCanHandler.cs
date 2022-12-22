@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class WateringCanHandler : MonoBehaviour
 {
-    private Grid<GridNode> grid;
+    private Grid grid;
 
     private PlayerStats playerStats;
 
-    public Grid<GridNode> Grid { set { grid = value; } }
+    public Grid Grid { set { grid = value; } }
 
     private void Awake()
     {

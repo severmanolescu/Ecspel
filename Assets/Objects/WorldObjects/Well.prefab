@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5411638142308329210}
   - component: {fileID: 5411638142308329211}
+  - component: {fileID: 1619232470211564256}
   m_Layer: 8
   m_Name: Shadow
   m_TagString: SunShadow
@@ -24,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5411638142308329189}
-  m_LocalRotation: {x: -0, y: -0, z: -0.013961917, w: 0.99990255}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.113399506, y: 0.97290015, z: 0}
   m_LocalScale: {x: 4.439983, y: 2.0604818, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5411638142708660770}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -721.6}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5411638142308329211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1619232470211564256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411638142308329189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5411638142708660783
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,13 +204,21 @@ MonoBehaviour:
   m_SelfShadows: 0
   m_ApplyToSortingLayers: 858520fc010497a4fb65b98de9d95986cb99512f397a1411899d9d4f00000000
   m_ShapePath:
-  - {x: -1.5, y: 0, z: 0}
-  - {x: -1.5, y: 3.5625, z: 0}
-  - {x: 1.5, y: 3.5625, z: 0}
-  - {x: 1.5, y: 0, z: 0}
-  m_ShapePathHash: 0
+  - {x: -1.1758099, y: 0.19369125, z: 0}
+  - {x: -1.1775551, y: 1.7331142, z: 0}
+  - {x: 1.1897936, y: 1.7361202, z: 0}
+  - {x: 1.1765251, y: 0.19327736, z: 0}
+  - {x: 1.0079947, y: 0.19122124, z: 0}
+  - {x: 1.0141602, y: 0.37825012, z: 0}
+  - {x: 0.8682375, y: 0.3741398, z: 0}
+  - {x: 0.2516613, y: 0.05968666, z: 0}
+  - {x: -0.2436552, y: 0.05968666, z: 0}
+  - {x: -0.7980337, y: 0.3121109, z: 0}
+  - {x: -1.019721, y: 0.35644913, z: 0}
+  - {x: -1.0120306, y: 0.19354057, z: 0}
+  m_ShapePathHash: 929228885
   m_Mesh: {fileID: 0}
-  m_InstanceId: -66580
+  m_InstanceId: -36352
 --- !u!61 &5411638142708660771
 BoxCollider2D:
   m_ObjectHideFlags: 0

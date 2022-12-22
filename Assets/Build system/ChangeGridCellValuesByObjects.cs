@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class ChangeGridCellValuesByObjects : MonoBehaviour
 {
-    public Grid<GridNode> grid;
+    public Grid grid;
 
-    public Grid<GridNode> Grid { get => grid; set => grid = value; }
+    public Grid Grid { get => grid; set => grid = value; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LightSourceShadowManager : MonoBehaviour
@@ -21,27 +22,34 @@ public class LightSourceShadowManager : MonoBehaviour
     private void Start()
     {
         maxDistance = DefaulData.maxLightSourceDistance;
+
+        StartCoroutine(ShadowRotation());
     }
 
-    private void Update()
+    private IEnumerator ShadowRotation()
     {
-        if (closestSource != null)
+        while (true)
         {
-            shadow.enabled = true;
+            yield return new WaitForSeconds(1);
 
-            Vector3 distance = closestSource.position - position;
-            float currentSourceDistance = distance.sqrMagnitude;
+            if (closestSource != null)
+            {
+                shadow.enabled = true;
 
-            if (currentSourceDistance > maxDistance)
+                Vector3 distance = closestSource.position - position;
+                float currentSourceDistance = distance.sqrMagnitude;
+
+                if (currentSourceDistance > maxDistance)
+                {
+                    shadow.enabled = false;
+
+                    closestSource = null;
+                }
+            }
+            else
             {
                 shadow.enabled = false;
-
-                closestSource = null;
             }
-        }
-        else
-        {
-            shadow.enabled = false;
         }
     }
 

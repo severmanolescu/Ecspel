@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7372973624285321963}
   - component: {fileID: 3033842608349066435}
+  - component: {fileID: 4309023889082235921}
   m_Layer: 8
   m_Name: Shadow
   m_TagString: SunShadow
@@ -24,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515393311086345777}
-  m_LocalRotation: {x: 0, y: 0, z: 0.497731, w: 0.8673315}
-  m_LocalPosition: {x: -0.0498, y: 0.7072, z: 0}
-  m_LocalScale: {x: 3.2293372, y: 1.3060819, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0532, y: 0.7072, z: 0}
+  m_LocalScale: {x: 3.2293372, y: 1.8110132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004845640410780}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 59.7}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3033842608349066435
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4309023889082235921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515393311086345777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1578004844161814490
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2963b132fca74db5dbc59e03d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemWorldSize: 0.7
 --- !u!114 &1641920595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +534,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311c1b6e012a91c499a8236a5788c41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - item: {fileID: 11400000, guid: 0a47a08ced528044eb4d69bfcbba016a, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: c3e7c7b5d8e686b409db5d1816f9e8cd, type: 2}
+    amount: 50
+  - item: {fileID: 11400000, guid: 4f06c858698f0b7458f575bb7ec09a19, type: 2}
+    amount: 5
+  - item: {fileID: 11400000, guid: 0f25713731d56f04082cf9131057d729, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c90ec4bb0934c3340b1e9641cfb7116e, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 5352df0db6af0974ca2391a3846478da, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 615dd156a665c464f892c6adf2fd31d2, type: 2}
+    amount: 60
+  - item: {fileID: 11400000, guid: 2acfd8e5b121a9d479d9436f52917d57, type: 2}
+    amount: 60
 --- !u!82 &372845165
 AudioSource:
   m_ObjectHideFlags: 0
@@ -647,4 +677,4 @@ MonoBehaviour:
   - {x: -0.62073946, y: 0.0625, z: 0}
   m_ShapePathHash: -413763843
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1360
+  m_InstanceId: -1350

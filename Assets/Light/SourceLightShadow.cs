@@ -6,7 +6,7 @@ public class SourceLightShadow : MonoBehaviour
 {
     [SerializeField] private Gradient gradientSourceLight;
 
-    private bool lightStatus = true;
+    private bool lightStatus = false;
 
     private List<LightHandler> sourceLights = new List<LightHandler>();
 
@@ -15,6 +15,15 @@ public class SourceLightShadow : MonoBehaviour
         if (!sourceLights.Contains(light))
         {
             sourceLights.Add(light);
+
+            if(lightStatus)
+            {
+                light.TurnOnLight();
+            }
+            else
+            {
+                light.TurnOffLight();
+            }
         }
     }
 

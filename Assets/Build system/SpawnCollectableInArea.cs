@@ -31,7 +31,7 @@ public class SpawnCollectableInArea : MonoBehaviour
     {
         GetObjectScale(out bool dataFound, out int startScaleX, out int startScaleY, out int scaleX, out int scaleY, spawnObject);
 
-        Grid<GridNode> grid = gridSave.Grid;
+        Grid grid = gridSave.Grid;
 
         if (dataFound == true && grid != null)
         {

@@ -34,7 +34,7 @@ public class PlayerItemUse : MonoBehaviour
 
     private LetterHandler letterHandler;
 
-    private bool water = false;
+    public bool water = false;
 
     private Mouse mouse;
 
@@ -77,16 +77,16 @@ public class PlayerItemUse : MonoBehaviour
 
         float skillAttackBonus = weapon.AttackPower * 0.02f * skillsHandler.AttackLevel;
 
+        audioSource.clip = attackClip;
+        audioSource.Play();
+
         foreach (Collider2D auxObject in objects)
         {
-            audioSource.clip = attackClip;
-            audioSource.Play();
-
             if (auxObject.gameObject.CompareTag("Enemy"))
             {
                 auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
 
-                auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 1000);
+                auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 200);
             }
             else if (auxObject.gameObject.CompareTag("Barrel"))
             {
@@ -304,12 +304,17 @@ public class PlayerItemUse : MonoBehaviour
                 }
                 else if(selectedSlot.Item is Hoe)
                 {
-                    if(hoeSystemHandler.DestroySoilMousePosition((Hoe)item) == true)
-                    {
-                        audioSource.clip = attackClip;
-                        audioSource.Play();
+                    Hoe hoe = (Hoe)selectedSlot.Item;
 
-                        animator.SetBool("Hoe", true);
+                    if (hoe != null)
+                    {
+                        if (hoeSystemHandler.DestroySoilMousePosition(hoe) == true)
+                        {
+                            audioSource.clip = attackClip;
+                            audioSource.Play();
+
+                            animator.SetBool("Hoe", true);
+                        }
                     }
                 }
                 else

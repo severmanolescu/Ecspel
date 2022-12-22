@@ -22,7 +22,7 @@ public class DestroyTree : MonoBehaviour
     public void Destroy()
     {
         switch (spawn)
-        { 
+        {
             case 1:
                 {
                     ItemWorld item = Instantiate(itemWorld).GetComponent<ItemWorld>();

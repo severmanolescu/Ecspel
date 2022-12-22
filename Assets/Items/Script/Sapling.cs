@@ -14,8 +14,8 @@ public class Sapling : Placeable
     [SerializeField] private GameObject almostMature;
     [SerializeField] private GameObject mature;
 
-    public Sapling(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, int sizeX, int sizeY, int dayToGrow, int startX, int startY)
-        : base(name, details, amount, maxAmount, itemSprite, sellPrice, sizeX, sizeY, null, startX, startY)
+    public Sapling(string name, string details, int amount, int maxAmount, int itemSprite, int sellPrice, int sizeX, int sizeY, int dayToGrow, int startX, int startY, bool positionInCenter)
+        : base(name, details, amount, maxAmount, itemSprite, sellPrice, sizeX, sizeY, null, startX, startY, positionInCenter)
     {
         this.dayToGrow = dayToGrow;
     }

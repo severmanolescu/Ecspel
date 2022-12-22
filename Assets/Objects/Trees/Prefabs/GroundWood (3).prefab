@@ -248,7 +248,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3125}
+  m_Offset: {x: 0, y: 0.24853134}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -259,7 +259,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.625}
+  m_Size: {x: 1, y: 0.37478638}
   m_EdgeRadius: 0
 --- !u!1 &4285621950120843814
 GameObject:
@@ -271,6 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8106973224508257813}
   - component: {fileID: 420835958397838949}
+  - component: {fileID: 6700683921823091121}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: SunShadow
@@ -285,14 +286,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4285621950120843814}
-  m_LocalRotation: {x: 0, y: 0, z: -0.08367776, w: 0.9964929}
+  m_LocalRotation: {x: 0, y: 0, z: 0.17536667, w: 0.9845032}
   m_LocalPosition: {x: 0.0356, y: 0.3234, z: 0}
   m_LocalScale: {x: 0.68946034, y: 0.88248616, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1935358340767488426}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.6}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20.2}
 --- !u!212 &420835958397838949
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -345,3 +346,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6700683921823091121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4285621950120843814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

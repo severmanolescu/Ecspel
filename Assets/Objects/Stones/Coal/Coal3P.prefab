@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9164818294845754931}
   - component: {fileID: 9164818294845754924}
+  - component: {fileID: 7709494075357527092}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: SunShadow
@@ -24,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9164818294845754930}
-  m_LocalRotation: {x: 0, y: 0, z: -0.04597325, w: 0.99894273}
+  m_LocalRotation: {x: -0, y: 0, z: -0.9750914, w: -0.22180368}
   m_LocalPosition: {x: 0.0444, y: 0.471, z: 0}
   m_LocalScale: {x: 2.306554, y: 0.97201586, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9164818295619146421}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.27}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -205.63}
 --- !u!212 &9164818294845754924
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -84,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7709494075357527092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164818294845754930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd8ccd81a261464598e28c5d57bc89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9164818295619146420
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +350,7 @@ MonoBehaviour:
   - {x: -0.2457695, y: 0.18649292, z: 0}
   m_ShapePathHash: -1013767387
   m_Mesh: {fileID: 0}
-  m_InstanceId: 285242
+  m_InstanceId: -64510
 --- !u!82 &-4960846155445787853
 AudioSource:
   m_ObjectHideFlags: 0

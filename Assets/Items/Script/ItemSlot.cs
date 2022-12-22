@@ -503,7 +503,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             CraftRecipe craft = (CraftRecipe)item;
 
-            if (craftCanvas.AddCraft(craft.Recipe) == true)
+            if (craftCanvas.AddCraft(craft.Craft) == true)
             {
                 if (item.Amount > 0)
                 {

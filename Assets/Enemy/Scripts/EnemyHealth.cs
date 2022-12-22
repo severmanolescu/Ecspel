@@ -57,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        animator.SetTrigger("Explode");
+        animator.SetTrigger("Dead");
 
         audioSource.clip = dieClip;
         audioSource.Play();

@@ -26,7 +26,7 @@ public class GrassDamage : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void ChangeGridData(GridNode gridNode, Grid<GridNode> grid)
+    private void ChangeGridData(GridNode gridNode, Grid grid)
     {
         if (gridNode.x < grid.gridArray.GetLength(0) &&
             gridNode.y < grid.gridArray.GetLength(1) &&
@@ -47,7 +47,7 @@ public class GrassDamage : MonoBehaviour
 
         if (health <= 0)
         {
-            Grid<GridNode> grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+            Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
             GridNode gridNode = grid.GetGridObject(transform.position);
 

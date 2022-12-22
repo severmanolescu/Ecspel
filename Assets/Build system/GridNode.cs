@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class GridNode
 {
-    private Grid<GridNode> grid;
+    private Grid grid;
     public int x;
     public int y;
 
@@ -24,7 +24,7 @@ public class GridNode
     public GameObject objectInSpace;
     public GameObject crop;
 
-    public GridNode(Grid<GridNode> grid, int x, int y)
+    public GridNode(Grid grid, int x, int y)
     {
         this.grid = grid;
         this.x = x;

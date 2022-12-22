@@ -66,9 +66,9 @@ public class HoeSystemHandler : MonoBehaviour
 
     private PlayerStats playerStats;
 
-    private Grid<GridNode> grid;
+    private Grid grid;
 
-    public Grid<GridNode> Grid { set { grid = value; } }
+    public Grid Grid { set { grid = value; } }
 
     private void Start()
     {
@@ -145,16 +145,7 @@ public class HoeSystemHandler : MonoBehaviour
 
     public void DestroyPlot(Vector3 position)
     {
-        GridNode gridNode = grid.GetGridObject(position);
-
-        if (gridNode != null)
-        {
-            gridNode.isWalkable = true;
-            gridNode.canPlant = false;
-            gridNode.canPlace = true;
-            gridNode.cropPlaced = false;
-            gridNode.currentObject = null;
-        }
+        grid.ReinitializeGrid(position);
     }
 
     public void ChangeNeighbour(GridNode gridNode)
@@ -430,7 +421,7 @@ public class HoeSystemHandler : MonoBehaviour
         if (gridNode != null &&
             gridNode.objectInSpace != null &&
             gridNode.objectInSpace.CompareTag("FarmPlot") &&
-            gridNode.cropPlaced == false)
+            gridNode.crop == null)
         {
             ChangeDestroyedSoilState(gridNode);
 
@@ -497,12 +488,16 @@ public class HoeSystemHandler : MonoBehaviour
 
     private void ChangeDestroyedSoilState(GridNode gridNode)
     {
+        FarmPlotHandler farmPlotHandler = gridNode.objectInSpace.GetComponent<FarmPlotHandler>();
+
+        if(farmPlotHandler != null)
+        {
+            GameObject.Find("Global/DayTimer").GetComponent<ChangeSoilsState>().RemoveSoil(farmPlotHandler);
+        }
+
         Destroy(gridNode.objectInSpace);
 
-        gridNode.canPlace = true;
-        gridNode.canPlant = false;
-        gridNode.isWalkable = true;
-        gridNode.objectInSpace = null;
+        grid.ReinitializeGrid(gridNode);
     }
 
     private void ChangeHeadlightPosition(GridNode gridNode)

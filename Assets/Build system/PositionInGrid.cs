@@ -22,7 +22,7 @@ public class PositionInGrid : MonoBehaviour
         {
             locationGrid = GetComponentInParent<LocationGridSave>();
 
-            if (locationGrid == null && gameObject.tag == "Tree")
+            if (locationGrid == null)
             {
                 locationGrid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>();
             }
@@ -30,7 +30,7 @@ public class PositionInGrid : MonoBehaviour
 
         if (locationGrid != null)
         {
-            Grid<GridNode> grid = LocationGrid.Grid;
+            Grid grid = LocationGrid.Grid;
 
             GridNode gridNode = grid.GetGridObject(transform.position);
 

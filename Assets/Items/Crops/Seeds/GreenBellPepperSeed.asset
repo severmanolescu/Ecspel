@@ -25,6 +25,7 @@ MonoBehaviour:
   sizeY: 1
   startX: 0
   startY: 0
+  positionInCenter: 0
   prefab: {fileID: 0}
   dayToGrow: 3
   levels:
@@ -33,7 +34,6 @@ MonoBehaviour:
   - {fileID: -1130903954, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   - {fileID: -925240150, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   - {fileID: 1395991299, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
-  - {fileID: 1991205218, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   destroy: {fileID: -1849992601, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
   crop: {fileID: 11400000, guid: 6ce0910f68689954292388b8d8e56a9d, type: 2}
   minDrop: 1
@@ -41,4 +41,5 @@ MonoBehaviour:
   centerX: 1
   centerY: 1
   refil: 1
-  refilDecreseSpriteIndexStart: 2
+  refilSprite: {fileID: 1991205218, guid: 084d34e0a00a05f42afd3957c67dd3a3, type: 3}
+  refilDecreseSpriteIndexStart: 1

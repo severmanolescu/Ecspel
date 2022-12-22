@@ -238,15 +238,18 @@ public class CropGrow : MonoBehaviour
     {
         if (HarverstCrop() == false)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+            if (currentSprite == 0)
+            {
+                ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
-            itemWorld.transform.position = transform.position;
+                itemWorld.transform.position = transform.position;
 
-            Item drop = Item.Copy();
-            drop.Amount = 1;
+                Item drop = Item.Copy();
+                drop.Amount = 1;
 
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+                itemWorld.SetItem(drop);
+                itemWorld.MoveToPoint();
+            }
 
             return true;
         }

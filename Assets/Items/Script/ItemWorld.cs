@@ -7,13 +7,7 @@ public class ItemWorld : MonoBehaviour
 
     private SpriteRenderer itemSprite;
 
-    private ItemSprites itemSprites;
-
     private TextMeshProUGUI amount;
-
-    private SunShadowHandler sunTimer;
-
-    private Transform shadow;
 
     private bool enteredInPlayer = false;
 
@@ -39,21 +33,9 @@ public class ItemWorld : MonoBehaviour
 
     private void Awake()
     {
-        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-
         itemSprite = GetComponent<SpriteRenderer>();
 
         amount = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    private void Start()
-    {
-        sunTimer = GameObject.Find("DayTimer").GetComponent<SunShadowHandler>();
-
-        if (shadow != null)
-        {
-            sunTimer.AddShadow(shadow);
-        }
     }
 
     public void SetItem(Item items, bool luck = true)
@@ -139,11 +121,6 @@ public class ItemWorld : MonoBehaviour
 
     public void DestroySelf()
     {
-        if (shadow != null)
-        {
-            sunTimer.AddShadow(shadow);
-        }
-
         Destroy(gameObject);
     }
 }
