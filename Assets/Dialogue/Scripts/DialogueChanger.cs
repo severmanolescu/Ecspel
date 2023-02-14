@@ -1,356 +1,150 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueChanger : MonoBehaviour
 {
-    private DialogueScriptableObject dialogueScriptable = null;
+    [SerializeField] private TextMeshProUGUI dialogueText;
 
-    private DialogueHandler dialogueHandler;
-    private AnswersHandler answersHandler;
+    [SerializeField] private AnswersHandler answersHandler;
 
-    private DialogueDisplay NPCDialogue;
-
-    private List<DialogueClass> dialogueRespons = null;
-
-    private QuestTabHandler questTab;
-
-    private NpcId npcId;
-
-    private bool firstDialogue = true;
-
-    private bool stop = true;
+    private DialogueScriptableObject dialogue;
 
     private int dialogueIndex = 0;
 
-    private Transform playerLocation;
+    private bool firstSpacePress = false;
 
-    private Keyboard keyboard;
-
-    private bool fKeyPress = true;
-    private bool spaceKeyPress = true;
-
-    private bool spaceKeyPressedFirstTime = false;
-
-    private SetDialogueToPlayer setDialogueToPlayer = null;
-
-    public DialogueScriptableObject startDialogue = null;
+    private DialogueDisplay dialogueDisplay;
 
     private void Awake()
     {
-        dialogueHandler = gameObject.GetComponentInChildren<DialogueHandler>();
+        gameObject.SetActive(false);
 
-        answersHandler = gameObject.GetComponentInChildren<AnswersHandler>();
-
-        questTab = GameObject.Find("Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
-
-        npcId = GameObject.Find("Global").GetComponent<NpcId>();
-
-        keyboard = InputSystem.GetDevice<Keyboard>();
-
-        playerLocation = GameObject.Find("Global/Player").transform;
+        answersHandler.DialogueChanger = this;
     }
 
-    private void Start()
+    public void ShowDialogue(DialogueScriptableObject dialogue, DialogueDisplay dialogueDisplay = null)
     {
-        dialogueHandler.gameObject.SetActive(false);
-        answersHandler.gameObject.SetActive(false);
-
-        answersHandler.SetDialogueChanger(this);
-    }
-
-    private void SetDialogue(DialogueClass dialogue)
-    {
-        if (dialogue.WhoReply == false)
+        if (dialogue != null)
         {
-            dialogueHandler.SetDialogue(dialogue.Dialogue);
-
-            if (NPCDialogue != null)
+            if(dialogueDisplay != null && gameObject.activeSelf == false)
             {
-                NPCDialogue.DeleteDialogue();
+                this.dialogueDisplay = dialogueDisplay;
             }
+            
 
-            dialogueHandler.gameObject.SetActive(true);
-        }
-        else if (NPCDialogue != null)
-        {
-            NPCDialogue.SetDialogue(dialogue.Dialogue);
+            this.dialogue = dialogue;
 
-            dialogueHandler.gameObject.SetActive(false);
+            dialogueIndex = 0;
+
+            dialogueText.text = "";
+
+            gameObject.SetActive(true);
+
+            StopAllCoroutines();
+            StartCoroutine(DialogueDisplay());
         }
     }
 
-    private void SetQuest()
+    public void StopDialogue()
     {
-        SetQuestWhoToGive();
+        StopAllCoroutines();
 
-        answersHandler.SetAnswers(NPCDialogue.Quest);
+        gameObject.SetActive(false);
 
-        answersHandler.gameObject.SetActive(true);
-        dialogueHandler.gameObject.SetActive(false);
-
-        NPCDialogue.DeleteDialogue();
+        dialogue = null;
     }
 
-    private void SetQuestWhoToGive()
+    private IEnumerator DialogueDisplay()
     {
-        if (dialogueScriptable != null)
+        if (dialogue != null)
         {
-            foreach (Quest quest in dialogueScriptable.Quest)
+            if (dialogueIndex < dialogue.DialogueRespons.Count)
             {
-                if (quest != null && quest is GiveItem)
+                dialogueText.text = "";
+
+                firstSpacePress = false;
+
+                for (int dialogueStringIndex = 0; dialogueStringIndex < dialogue.DialogueRespons[dialogueIndex].Length; dialogueStringIndex++)
                 {
-                    GiveItem giveItem = (GiveItem)quest;
+                    dialogueText.text = dialogueText.text + dialogue.DialogueRespons[dialogueIndex][dialogueStringIndex];
 
-                    if (giveItem != null && giveItem.WhoToGive == -1)
-                    {
-                        giveItem.WhoToGive = npcId.GetNpcId(NPCDialogue.GetComponent<DialogueDisplay>());
-                    }
+                    yield return new WaitForSeconds(0.1f);
                 }
+
+                firstSpacePress = true;  
+            }            
+        }
+
+        CheckIfPlaceAnswers();
+    }
+
+    private void ShowAllText()
+    {
+        if (dialogueIndex < dialogue.DialogueRespons.Count)
+        {
+            dialogueText.text = dialogue.DialogueRespons[dialogueIndex];
+
+            CheckIfPlaceAnswers();
+        }
+    }
+
+    private void CheckIfPlaceAnswers()
+    {
+        if (dialogueIndex == dialogue.DialogueRespons.Count - 1)
+        {
+            if( dialogue.DialogueAnswers != null &&
+                dialogue.DialogueAnswers.Count > 0)
+            {
+                answersHandler.ShowAnswers(dialogue);
+            }
+            else
+            {
+                if (dialogueDisplay != null)
+                {
+                    dialogueDisplay.FinishWalk();
+                }
+
+                if( dialogue.Quest != null &&
+                    dialogue.Quest.Count > 0)
+                {
+                    AddQuests();
+                }
+
+                StopDialogue();
             }
         }
     }
 
-    private void DialogueEnd()
+    private void AddQuests()
     {
-        dialogueHandler.gameObject.SetActive(false);
 
-        if (dialogueScriptable.DialogueAnswers.Count >= 1)
-        {
-            answersHandler.SetAnswers(dialogueScriptable.DialogueAnswers);
-
-            answersHandler.gameObject.SetActive(true);
-            dialogueHandler.gameObject.SetActive(false);
-
-            NPCDialogue.DeleteDialogue();
-        }
-
-        if (NPCDialogue != null && NPCDialogue.Quest.Count > 0)
-        {
-            SetQuest();
-        }
-        else if (NPCDialogue != null && dialogueScriptable.NextDialogue != null)
-        {
-            NPCDialogue.Dialogue = dialogueScriptable.NextDialogue;
-        }
-        else if (NPCDialogue != null && dialogueScriptable.NextDialogue == null)
-        {
-            NPCDialogue.Dialogue = null;
-        }
-
-        if (dialogueScriptable.DialogueAnswers.Count == 0 && dialogueScriptable.NextDialogue == null)
-        {
-            startDialogue = null;
-        }
-
-        VerifyDialogueForQuests();
-
-        if (setDialogueToPlayer != null)
-        {
-            setDialogueToPlayer.DialogueEnd();
-        }
-
-        setDialogueToPlayer = null;
-
-        stop = true;
-    }
-
-    private void VerifyDialogueForQuests()
-    {
-        if (NPCDialogue != null && dialogueScriptable.Quest.Count > 0)
-        {
-            SetQuestWhoToGive();
-
-            questTab.AddQuest(dialogueScriptable.Quest);
-
-            NPCDialogue.DeleteDialogue();
-        }
     }
 
     private void Update()
     {
-        if (!stop && dialogueScriptable != null)
+        if (dialogue != null)
         {
-            if (NPCDialogue != null && dialogueRespons.Count == 0)
+            if(Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                DialogueEnd();
-            }
-
-            if (firstDialogue == true)
-            {
-                if (dialogueRespons.Count > 0)
+                if(firstSpacePress == false)
                 {
-                    dialogueHandler.SetDialogue(dialogueRespons[0].Dialogue);
-                    SetDialogue(dialogueRespons[0]);
+                    firstSpacePress = true;
 
-                    dialogueIndex = 1;
+                    StopAllCoroutines();
 
-                    firstDialogue = false;
+                    ShowAllText();
                 }
                 else
                 {
-                    DialogueEnd();
+                    dialogueIndex++;
 
-                    return;
+                    StartCoroutine(DialogueDisplay());
                 }
-            }
-
-            if (keyboard.spaceKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[8].IsPressed() == false && spaceKeyPress == false))
-            {
-                spaceKeyPress = true;
-
-                if (spaceKeyPressedFirstTime == false)
-                {
-                    spaceKeyPressedFirstTime = true;
-
-                    dialogueHandler.ShowAllText();
-
-                    if (NPCDialogue != null)
-                    {
-                        NPCDialogue.ShowAllText();
-                    }
-                }
-                else
-                {
-                    spaceKeyPressedFirstTime = false;
-
-                    if (dialogueIndex >= dialogueRespons.Count)
-                    {
-                        DialogueEnd();
-
-                        if (NPCDialogue != null && dialogueScriptable.NextDialogue != null)
-                        {
-                            SetDialogue(dialogueScriptable.NextDialogue);
-                        }
-                        else
-                        {
-                            if (NPCDialogue != null)
-                            {
-                                NPCDialogue.DeleteDialogue();
-                            }
-                        }
-                    }
-                    else if (dialogueRespons[dialogueIndex] != null)
-                    {
-                        SetDialogue(dialogueRespons[dialogueIndex]);
-
-                        dialogueIndex++;
-                    }
-                }
-            }
-
-            if (Joystick.current != null && Joystick.current.allControls[8].IsPressed() == true)
-            {
-                spaceKeyPress = false;
-            }
-        }
-        else if (NPCDialogue != null)
-        {
-            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
-            {
-                fKeyPress = true;
-
-                if (stop)
-                {
-                    NPCDialogue.ChangeIdleAnimationToPlayerPosition(playerLocation.position);
-
-                    SetDialogue(NPCDialogue.Dialogue);
-                }
-                else
-                {
-                    DialogueEnd();
-                }
-            }
-
-            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
-            {
-                fKeyPress = false;
             }
         }
     }
 
-    public void SetDialogue(DialogueScriptableObject dialogueScriptable, SetDialogueToPlayer setDialogueToPlayer = null)
-    {
-        if (firstDialogue == true && NPCDialogue != null)
-        {
-            NPCDialogue.AddDialogueToStart();
-
-            dialogueScriptable = NPCDialogue.Dialogue;
-        }
-
-        this.setDialogueToPlayer = setDialogueToPlayer;
-
-        if (dialogueScriptable != null)
-        {
-            if (dialogueScriptable.StartDialogue == true)
-            {
-                startDialogue = dialogueScriptable;
-            }
-
-            this.dialogueScriptable = dialogueScriptable;
-
-            dialogueRespons = dialogueScriptable.DialogueRespons;
-
-            dialogueHandler.gameObject.SetActive(true);
-
-            answersHandler.DeleteAll();
-            answersHandler.gameObject.SetActive(false);
-
-            dialogueIndex = 0;
-
-            firstDialogue = true;
-            stop = false;
-        }
-        else if (NPCDialogue != null && dialogueScriptable == null)
-        {
-            DialogueEnd();
-
-            DeleteDialogue();
-
-            NPCDialogue.DeleteDialogue();
-        }
-        else if (NPCDialogue.Quest != null)
-        {
-            answersHandler.DeleteAll();
-
-            SetQuest();
-        }
-    }
-
-    private void DeleteDialogue()
-    {
-        firstDialogue = true;
-
-        stop = true;
-
-        dialogueHandler.StopDialogue();
-        answersHandler.DeleteAll();
-
-        dialogueHandler.gameObject.SetActive(false);
-        answersHandler.gameObject.SetActive(false);
-
-        setDialogueToPlayer = null;
-    }
-
-    public void SetNCP(DialogueDisplay NPCDialogue)
-    {
-        this.NPCDialogue = NPCDialogue;
-    }
-
-    public void DeleteNPC()
-    {
-        if (NPCDialogue != null)
-        {
-            if (startDialogue != null)
-            {
-                NPCDialogue.Dialogue = startDialogue;
-
-                startDialogue = null;
-            }
-
-            NPCDialogue = null;
-        }
-
-        DeleteDialogue();
-    }
 }

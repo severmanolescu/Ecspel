@@ -32,7 +32,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private Keyboard keyboard;
 
-    [SerializeField] private ForgeHandler forgeHandler;
+    private ForgeHandler forgeHandler;
 
     private SetDataToBuySlider setData;
 
@@ -52,7 +52,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private bool discount = false;
 
-    public Item item = null;
+    private Item item = null;
 
     public Item Item { get { return item; } set { item = value; ReinitializeItem(); } }
 
@@ -63,7 +63,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private void Awake()
     {
-        quickSlots = GameObject.Find("Global/Player/Canvas/Field/QuickSlots").GetComponent<QuickSlotsChanger>();
+        quickSlots = GameObject.Find("Global/Player/Canvas/QuickSlots").GetComponent<QuickSlotsChanger>();
 
         Image[] itemsSprite = GetComponentsInChildren<Image>();
 
@@ -81,7 +81,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         itemDrag = GameObject.Find("Player/Canvas/ItemDrag").GetComponent<ItemDrag>();
         itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
 
-        craftCanvas = GameObject.Find("Global/Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>();
+        craftCanvas = GameObject.Find("Global/Player/Canvas/Crafting").GetComponent<CraftCanvasHandler>();
 
         itemUse = GameObject.Find("Global/Player/Canvas/ItemUseButton").GetComponent<ItemUseByMouse>();
 
@@ -395,13 +395,27 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 if (item != null)
                 {
                     itemDetails.SetItem(Item, Item.SellPrice);
+
+                    MoveItemDetailsToSlot();
                 }
             }
             else
             {
                 itemDetails.SetItem(item);
+
+                MoveItemDetailsToSlot();
             }
         }
+    }
+
+    private void MoveItemDetailsToSlot()
+    {
+        Vector3 newPosition = transform.position;
+
+        newPosition.x += 55;
+        newPosition.y -= 55;
+
+        itemDetails.transform.position = newPosition;
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -42,7 +42,7 @@ public class QuestTabHandler : MonoBehaviour
         {
             GiveItem giveItem = (GiveItem)quest;
 
-            npcId.GetNpcFromId(giveItem.whoToGiveId).AddQuest(quest);
+            //npcId.GetNpcFromId(giveItem.whoToGiveId).AddQuest(quest);
         }
         else if (quest is GoToLocation)
         {
@@ -64,7 +64,7 @@ public class QuestTabHandler : MonoBehaviour
         {
             QuestTalk questTalk = (QuestTalk)quest;
 
-            npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
+            //npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
         }
     }
 

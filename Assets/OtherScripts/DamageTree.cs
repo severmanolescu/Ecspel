@@ -5,6 +5,10 @@ using UnityEngine.UIElements;
 public class DamageTree : MonoBehaviour
 {
     [SerializeField] private float health;
+    [SerializeField] private float trunkHealth;
+
+    [SerializeField] private int trunkItemDropNO;
+
     [SerializeField] private int treeLevel;
     [SerializeField] private int trunkLevel;
     [SerializeField] private Item logItem;
@@ -17,13 +21,13 @@ public class DamageTree : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private GameObject prefabLog;
-
     private Animator animator;
 
     private bool destroyed = false;
 
     private DestroyTree destroyTree;
+
+    private SpawnItem spawnItem;
 
     private int startScaleX;
     private int startScaleY;
@@ -40,11 +44,8 @@ public class DamageTree : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         audioSource = gameObject.GetComponent<AudioSource>();
-    }
 
-    private void Start()
-    {
-        prefabLog = destroyTree.ItemWorld;
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
@@ -119,18 +120,13 @@ public class DamageTree : MonoBehaviour
 
                 transform.Find("Shadow").localScale = newScale;
 
-                health = 10;
+                health = trunkHealth;
 
                 Destroyed = true;
             }
             else
             {
-                ItemWorld game = Instantiate(prefabLog).GetComponent<ItemWorld>();
-
-                game.transform.position = transform.position;
-
-                game.SetItem(DefaulData.GetItemWithAmount(logItem, 1));
-                game.MoveToPoint();
+                spawnItem.SpawnItems(logItem, trunkItemDropNO, transform.position);
 
                 Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 

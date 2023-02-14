@@ -14,10 +14,6 @@ public class ItemDetails : MonoBehaviour
     [SerializeField] private Sprite heartSprite;
     [SerializeField] private Sprite lightningSprite;
 
-    private ItemSprites itemSprites;
-
-    private Image itemSpriteObject;
-
     private TextMeshProUGUI itemNameObject;
     private TextMeshProUGUI itemDetailsObject;
 
@@ -25,12 +21,8 @@ public class ItemDetails : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-
         Image[] auxiliarObjectImage = gameObject.GetComponentsInChildren<Image>();
         TextMeshProUGUI[] auxiliarObjectText = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
-
-        itemSpriteObject = auxiliarObjectImage[1];
 
         itemNameObject = auxiliarObjectText[0];
         itemDetailsObject = auxiliarObjectText[1];
@@ -48,7 +40,6 @@ public class ItemDetails : MonoBehaviour
     {
         if (item != null)
         {
-            itemSpriteObject.sprite = item.ItemSprite;
             itemNameObject.text = item.Name;
             itemDetailsObject.text = "    " + item.Details;
 

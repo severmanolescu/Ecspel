@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 public class PathFindingSkelete : MonoBehaviour
 {
-    [SerializeField] private float maxDistanceFromSpawn = 5f;
     [SerializeField] private float toleranteToNewLocation = 0.1f;
 
     [SerializeField] private LocationGridSave locationGrid;
 
     [SerializeField] private float minMovementSpeed = 1f;
     [SerializeField] private float maxMovementSpeed = 2f;
-    private float moveSpeed;
-
+    
     [SerializeField] private float minAttackDistance = 1f;
     [SerializeField] private float maxAttackDistance = 2f;
 
@@ -24,10 +21,16 @@ public class PathFindingSkelete : MonoBehaviour
     [SerializeField] private int minAmountOfHeads = 1;
     [SerializeField] private int maxAmountOfHeads = 3;
 
-    [SerializeField] private Transform headSpawnLocation;
-    [SerializeField] private GameObject headPrefab;
+    [SerializeField] private int minDistanceFromPlayer = 7;
+    [SerializeField] private int maxDistanceFromPlayer = 15;
+
+    
+
+    private float moveSpeed;
 
     private float attackDistance;
+
+    private float distanceFromPlayer;
 
     private Vector3 spawnLocation;
 
@@ -67,6 +70,7 @@ public class PathFindingSkelete : MonoBehaviour
 
         attackDistance = Random.Range(minAttackDistance, maxAttackDistance);
         moveSpeed = Random.Range(minMovementSpeed, maxMovementSpeed);
+        distanceFromPlayer = Random.Range(minDistanceFromPlayer, maxDistanceFromPlayer);
 
         GetComponent<AttackPlayer>().MaxAttackDistance = maxAttackDistance;
     }
@@ -150,21 +154,147 @@ public class PathFindingSkelete : MonoBehaviour
         }
     }
 
+    private GridNode GetRandomNodeNearPlayer(GridNode playerPosition)
+    {
+        if(CheckGridNode(playerPosition.x - 1, playerPosition.y))
+        {
+            return locationGrid.Grid.GetGridObject(playerPosition.x - 1, playerPosition.y);
+        }
+        else if (CheckGridNode(playerPosition.x + 1, playerPosition.y))
+        {
+            return locationGrid.Grid.GetGridObject(playerPosition.x + 1, playerPosition.y);
+
+        }
+        else if (CheckGridNode(playerPosition.x, playerPosition.y - 1))
+        {
+            return locationGrid.Grid.GetGridObject(playerPosition.x, playerPosition.y - 1);
+
+        }
+        else if (CheckGridNode(playerPosition.x, playerPosition.y + 1))
+        {
+            return locationGrid.Grid.GetGridObject(playerPosition.x, playerPosition.y + 1);
+
+        }
+
+        return null;
+    }
+
+    private bool CheckGridNode(int x, int y)
+    {
+        GridNode gridNode = locationGrid.Grid.GetGridObject(x, y);
+
+        if(gridNode != null && gridNode.isWalkable)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void ChangeDestination(GridNode position, int xOffset, int yOffset)
+    {
+        if (CheckGridNode(position.x + xOffset, position.y + yOffset))
+        {
+            Vector3 positionInCenter = new Vector3(position.x + xOffset, position.y + yOffset);
+
+            positionInCenter.x += locationGrid.Grid.CellSize / 2;
+            positionInCenter.y += locationGrid.Grid.CellSize / 2;
+
+            ChangeDestination(positionInCenter);
+        }
+        else
+        {
+            GridNode nearPlayer = GetRandomNodeNearPlayer(position);
+
+            if(nearPlayer != null) 
+            {
+                Vector3 positionInCenter = locationGrid.Grid.GetWorldPosition(nearPlayer);
+
+                positionInCenter.x += locationGrid.Grid.CellSize / 2;
+                positionInCenter.y += locationGrid.Grid.CellSize / 2;
+
+                ChangeDestination(positionInCenter);
+            }
+            else
+            {
+                PlayerLost();
+            }    
+        }
+    }
+
+    private void GetNewPositionToPlayer(GridNode newPlayerLocation)
+    {
+        GridNode enemyPosition = locationGrid.Grid.GetGridObject(transform.position);
+
+        lastPlayerNodeLocation = newPlayerLocation;
+
+        if (enemyPosition != null)
+        {
+            if (enemyPosition.x == newPlayerLocation.x)
+            {
+                if (enemyPosition.y < newPlayerLocation.y)
+                {
+                    ChangeDestination(newPlayerLocation, 0, -1);
+                }
+                else
+                {
+                    ChangeDestination(newPlayerLocation, 0, 1);
+                }
+            }
+            else if (enemyPosition.y == newPlayerLocation.y)
+            {
+                if (enemyPosition.x < newPlayerLocation.x)
+                {
+                    ChangeDestination(newPlayerLocation, -1, 0);
+                }
+                else
+                {
+                    ChangeDestination(newPlayerLocation, 1, 0);
+                }
+            }
+        }
+        else
+        {
+            PlayerLost();
+        }
+    }
+
     private void MoveToPlayer()
     {
         GridNode newPlayerLocation = locationGrid.Grid.GetGridObject(player.position);
 
-        if (newPlayerLocation != lastPlayerNodeLocation)
+        if (attackStarted == true)
         {
-            ChangeDestination(player.position);
+            animator.SetBool("Walk", true);
+            animator.SetBool("Attack", false);
+            animator.SetBool("AttackHead", false);
 
-            lastPlayerNodeLocation = newPlayerLocation;
+            attackStarted = false;
+        }
+
+        if (newPlayerLocation != null && newPlayerLocation != lastPlayerNodeLocation)
+        {
+            if (newPlayerLocation.isWalkable == true)
+            {
+                ChangeDestination(player.position);
+
+                lastPlayerNodeLocation = newPlayerLocation;
+            }
+            else
+            {
+                GetNewPositionToPlayer(newPlayerLocation);
+            }
         }
         else
         {
-            if (path == null || path.Count == 0)
+            if (path == null || path.Count == 0 || pathIndex >= path.Count)
             {
                 ChangeDestination(player.position);
+
+                if (path == null || path.Count == 0)
+                {
+                    MoveToLocation(player.position);
+                }
             }
             else
             {
@@ -186,39 +316,29 @@ public class PathFindingSkelete : MonoBehaviour
     {
         canMove = false;
 
-        if (attackStarted == false)
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Attack", true);
-            animator.SetBool("AttackHead", false);
+        animator.SetBool("Walk", false);
+        animator.SetBool("Attack", true);
+        animator.SetBool("AttackHead", false);
 
-            attackStarted = true;
-        }
+        attackStarted = true;
     }
 
     private void AttackPlayerWithHead()
     {
         canMove = false;
 
-        if (attackStarted == false)
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Attack", false);
-            animator.SetBool("AttackHead", true);
+        animator.SetBool("Walk", false);
+        animator.SetBool("Attack", false);
+        animator.SetBool("AttackHead", true);
 
-            attackStarted = true;
-        }
-    }
-
-    public void SpawnHead()
-    {
-        Instantiate(headPrefab, headSpawnLocation.position, headSpawnLocation.rotation);
-    }
+        attackStarted = true;
+    }  
 
     private IEnumerator Idle()
     {
         animator.SetBool("Walk", false);
         animator.SetBool("Attack", false);
+        animator.SetBool("AttackHead", false);
 
         attackStarted = true;
 
@@ -253,7 +373,7 @@ public class PathFindingSkelete : MonoBehaviour
                 {
                     AttackPlayer();
                 }
-                else if(distance >= maxDistanceFromSpawn)
+                else if(distance >= distanceFromPlayer)
                 {
                     PlayerLost();
                 }
@@ -302,13 +422,16 @@ public class PathFindingSkelete : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            StopAllCoroutines();
+            if (moveToPlayer == false)
+            {
+                StopAllCoroutines();
 
-            idle = false;
+                idle = false;
 
-            moveToPlayer = true;
+                moveToPlayer = true;
 
-            ChangeDestination(player.position);
+                ChangeDestination(player.position);
+            }
         }
     }
 }

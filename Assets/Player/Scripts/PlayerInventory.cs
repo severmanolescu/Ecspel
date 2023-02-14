@@ -144,7 +144,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (AddItem(item))
         {
-            animator.SetTrigger("Pickup");
+            //animator.SetTrigger("Pickup");
 
             return true;
         }

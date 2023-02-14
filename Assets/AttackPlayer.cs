@@ -8,6 +8,9 @@ public class AttackPlayer : MonoBehaviour
 
     private PlayerStats playerStats;
 
+    [SerializeField] private Transform headSpawnLocation;
+    [SerializeField] private GameObject headPrefab;
+
     public float MaxAttackDistance { set => maxAttackDistance = value; }
 
     private void Awake()
@@ -19,7 +22,16 @@ public class AttackPlayer : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, playerStats.transform.position) < maxAttackDistance)
         {
-            playerStats.Health -= attackPower;
+            if((transform.position.x < playerStats.transform.position.x && transform.localScale.x < 0) ||
+               (transform.position.x > playerStats.transform.position.x && transform.localScale.x > 0))
+            {
+                playerStats.Health -= attackPower;
+            }
         }
+    }
+
+    public void SpawnHead()
+    {
+        Instantiate(headPrefab, headSpawnLocation.position, headSpawnLocation.rotation);
     }
 }

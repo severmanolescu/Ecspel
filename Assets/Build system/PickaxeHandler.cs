@@ -36,51 +36,11 @@ public class PickaxeHandler : MonoBehaviour
         playerStats.DecreseStamina(pickaxe.Stamina);
     }
 
-    public void UsePickaxe(Vector3 position, int spawn, Item item)
+    public void UsePickaxe(Item item, GridNode mousePosition)
     {
-        GridNode gridNode = grid.GetGridObject(position);
-
-        if (gridNode != null)
+        if (mousePosition != null)
         {
-            switch (spawn)
-            {
-                case 1:
-                    {
-                        if (gridNode.x - 1 >= 0)
-                        {
-                            DamageStone(grid.gridArray[gridNode.x - 1, gridNode.y].objectInSpace, item);
-                        }
-
-                        break;
-                    }
-                case 2:
-                    {
-                        if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-                        {
-                            DamageStone(grid.gridArray[gridNode.x + 1, gridNode.y].objectInSpace, item);
-                        }
-
-                        break;
-                    }
-                case 3:
-                    {
-                        if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-                        {
-                            DamageStone(grid.gridArray[gridNode.x, gridNode.y + 1].objectInSpace, item);
-                        }
-
-                        break;
-                    }
-                case 4:
-                    {
-                        if (gridNode.y - 1 >= 0)
-                        {
-                            DamageStone(grid.gridArray[gridNode.x, gridNode.y - 1].objectInSpace, item);
-                        }
-
-                        break;
-                    }
-            }
+            DamageStone(mousePosition.objectInSpace, item);
         }
     }
 }

@@ -8,7 +8,7 @@ public class NpcPathFinding : MonoBehaviour
     [SerializeField] private float distanceTolerance = .1f;
     [SerializeField] private float distanceToleranceDirection = .05f;
 
-    private LocationGridSave locationGrid;
+    public LocationGridSave locationGrid;
 
     private bool canWalk;
     private bool talking = false;

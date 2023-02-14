@@ -109,13 +109,20 @@ public class ItemWorld : MonoBehaviour
 
     public void ReinitializeItem()
     {
-        if (item.Amount > 1)
+        if (item != null)
         {
-            amount.SetText(item.Amount.ToString());
+            if (item.Amount > 1)
+            {
+                amount.SetText(item.Amount.ToString());
+            }
+            else
+            {
+                amount.SetText("");
+            }
         }
         else
         {
-            amount.SetText("");
+            DestroySelf();
         }
     }
 

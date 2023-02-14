@@ -103,54 +103,11 @@ public class AxeHandler : MonoBehaviour
         grid.ReinitializeGrid(newItem, node.transform.position);
     }
 
-    public void UseAxe(Vector3 position, int spawn, Item item)
+    public void UseAxe(int spawn, Item item, GridNode mousePosition)
     {
-        GridNode gridNode = grid.GetGridObject(position);
-
-        if (gridNode != null)
-        { 
-            if (!UseAxeToObject(gridNode.objectInSpace, spawn, item))            
-            {
-                switch (spawn)
-                {
-                    case 1:
-                        {
-                            if (gridNode.x - 1 >= 0)
-                            {
-                                UseAxeToObject(grid.gridArray[gridNode.x - 1, gridNode.y].objectInSpace, spawn, item);
-                            }
-
-                            break;
-                        }
-                    case 2:
-                        {
-                            if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-                            {
-                                UseAxeToObject(grid.gridArray[gridNode.x + 1, gridNode.y].objectInSpace, spawn, item);
-                            }
-
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-                            {
-                                UseAxeToObject(grid.gridArray[gridNode.x, gridNode.y + 1].objectInSpace, spawn, item);
-                            }
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (gridNode.y - 1 >= 0)
-                            {
-                                UseAxeToObject(grid.gridArray[gridNode.x, gridNode.y - 1].objectInSpace, spawn, item);
-                            }
-
-                            break;
-                        }
-                }
-            }
+        if (mousePosition != null)
+        {
+            UseAxeToObject(mousePosition.objectInSpace, spawn, item);
         }
     }
 }

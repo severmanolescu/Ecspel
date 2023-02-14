@@ -33,6 +33,8 @@ public class test : MonoBehaviour
                         test.transform.position = position;
                     }
                 }
+
+            this.enabled = false;
         }
     }
 }

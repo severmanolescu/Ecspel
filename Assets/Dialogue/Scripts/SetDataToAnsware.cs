@@ -1,42 +1,15 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SetDataToAnsware : MonoBehaviour
 {
-    [SerializeField] private GameObject reward;
-    [SerializeField] private Image rewardImage;
+    [SerializeField] private GameObject questImage;
+    [SerializeField] private TextMeshProUGUI answerText;
 
-    private ItemSprites itemSprites;
-
-    private void Awake()
+    public void SetDataToAnswer(string text, bool quest)
     {
-        itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-    }
+        questImage.SetActive(quest);
 
-    public void ChangeReward(GiveItem giveItem)
-    {
-        if (giveItem.ItemsNeeds != null && giveItem.ItemsNeeds.Count > 0)
-        {
-            reward.SetActive(true);
-
-            if (itemSprites == null)
-            {
-                itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
-            }
-
-            if (itemSprites != null)
-            {
-                rewardImage.sprite = giveItem.itemsNeeds[0].Item.ItemSprite;
-            }
-        }
-        else
-        {
-            reward.SetActive(false);
-        }
-    }
-
-    public void HideReward()
-    {
-        reward.SetActive(false);
+        answerText.text = text;
     }
 }

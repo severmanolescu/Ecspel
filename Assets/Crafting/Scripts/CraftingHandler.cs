@@ -23,8 +23,6 @@ public class CraftingHandler : MonoBehaviour
 
     private Keyboard keyboard;
 
-    private bool fKeyPress = true;
-
     private bool opened = false;
 
     private void Awake()
@@ -36,9 +34,9 @@ public class CraftingHandler : MonoBehaviour
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerInventory = GameObject.Find("Player/Canvas/PlayerItems");
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
-        craftCanvas = GameObject.Find("Player/Canvas/Field/Crafting").GetComponent<CraftCanvasHandler>();
+        craftCanvas = GameObject.Find("Player/Canvas/Crafting").GetComponent<CraftCanvasHandler>();
 
-        quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+        quickSlots = GameObject.Find("Player/Canvas/QuickSlots");
 
         keyboard = InputSystem.GetDevice<Keyboard>();
 
@@ -86,10 +84,8 @@ public class CraftingHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
-                fKeyPress = true;
-
                 if (playerMovement.MenuOpen == false && canvasTabsOpen.CanOpenTab())
                 {
                     if (playerInventory.activeSelf == false)
@@ -114,11 +110,6 @@ public class CraftingHandler : MonoBehaviour
                     CloseCraft();
                 }
             }
-
-            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
-            {
-                fKeyPress = false;
-            }
         }
     }
 
@@ -126,6 +117,8 @@ public class CraftingHandler : MonoBehaviour
     {
         playerMovement.TabOpen = false;
         playerInventory.SetActive(false);
+
+        craftCanvas.ShowAllCrafts();
         craftCanvas.gameObject.SetActive(false);
 
         quickSlots.SetActive(true);

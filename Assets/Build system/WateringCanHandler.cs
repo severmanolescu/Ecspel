@@ -14,7 +14,7 @@ public class WateringCanHandler : MonoBehaviour
         grid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>().Grid;
     }
 
-    private void ChangeSoilState(GameObject node, int spawn, WateringCan item)
+    private void ChangeSoilState(GameObject node, WateringCan item)
     {
         if (node != null && node.CompareTag("FarmPlot"))
         {
@@ -29,51 +29,11 @@ public class WateringCanHandler : MonoBehaviour
         }
     }
 
-    public void UseWateringcan(Vector3 position, int spawn, WateringCan wateringCan)
+    public void UseWateringcan(WateringCan wateringCan, GridNode farmObject)
     {
-        GridNode gridNode = grid.GetGridObject(position);
-
-        if (gridNode != null)
+        if (farmObject != null)
         {
-            switch (spawn)
-            {
-                case 1:
-                    {
-                        if (gridNode.x - 1 >= 0)
-                        {
-                            ChangeSoilState(grid.gridArray[gridNode.x - 1, gridNode.y].objectInSpace, spawn, wateringCan);
-                        }
-
-                        break;
-                    }
-                case 2:
-                    {
-                        if (gridNode.x + 1 < grid.gridArray.GetLength(0))
-                        {
-                            ChangeSoilState(grid.gridArray[gridNode.x + 1, gridNode.y].objectInSpace, spawn, wateringCan);
-                        }
-
-                        break;
-                    }
-                case 3:
-                    {
-                        if (gridNode.y + 1 < grid.gridArray.GetLength(1))
-                        {
-                            ChangeSoilState(grid.gridArray[gridNode.x, gridNode.y + 1].objectInSpace, spawn, wateringCan);
-                        }
-
-                        break;
-                    }
-                case 4:
-                    {
-                        if (gridNode.y - 1 >= 0)
-                        {
-                            ChangeSoilState(grid.gridArray[gridNode.x, gridNode.y - 1].objectInSpace, spawn, wateringCan);
-                        }
-
-                        break;
-                    }
-            }
+            ChangeSoilState(farmObject.objectInSpace, wateringCan);
         }
     }
 }

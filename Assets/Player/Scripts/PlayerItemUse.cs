@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class PlayerItemUse : MonoBehaviour
 {
@@ -13,17 +14,24 @@ public class PlayerItemUse : MonoBehaviour
 
     [SerializeField] private Camera mainCamera;
 
+    [SerializeField] private float position = 1f;
+    [SerializeField] private float detectionRadius = 1f;
+
+    [SerializeField] private LocationGridSave grid;
+
     private PlayerStats playerStats;
 
     private AudioSource audioSource;
 
-    private Item item;
+    private Item usedItem;
 
     private PlayerMovement playerMovement;
 
     private Animator animator;
 
     private SkillsHandler skillsHandler;
+
+    private PlayerItemUseSpriteChange spriteChange;
 
     private AxeHandler axeHandler;
     private PickaxeHandler pickaxeHandler;
@@ -34,13 +42,14 @@ public class PlayerItemUse : MonoBehaviour
 
     private LetterHandler letterHandler;
 
-    public bool water = false;
+    private Direction lastDirection;
+    private GridNode objectGrid;
+
+    private bool water = false;
 
     private Mouse mouse;
 
     private Vector2 inputs = Vector2.zero;
-
-    private Vector2 detectionZone = new Vector2(1.5f, 1.5f);
 
     private float attackDecrease = 1f;
 
@@ -56,6 +65,8 @@ public class PlayerItemUse : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         mouse = InputSystem.GetDevice<Mouse>();
+
+        spriteChange = GetComponentInChildren<PlayerItemUseSpriteChange>();
 
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
@@ -73,7 +84,7 @@ public class PlayerItemUse : MonoBehaviour
 
     private void SwordUse(Collider2D[] objects)
     {
-        Weapon weapon = (Weapon)item;
+        Weapon weapon = (Weapon)usedItem;
 
         float skillAttackBonus = weapon.AttackPower * 0.02f * skillsHandler.AttackLevel;
 
@@ -82,45 +93,39 @@ public class PlayerItemUse : MonoBehaviour
 
         foreach (Collider2D auxObject in objects)
         {
-            if (auxObject.gameObject.CompareTag("Enemy"))
+            if (auxObject.gameObject.CompareTag("EnemyHit"))
             {
-                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
-
-                auxObject.GetComponent<Rigidbody2D>().AddForce(-(playerMovement.transform.position - auxObject.transform.position) * 200);
+                auxObject.GetComponent<EnemyHitHandler>().AttackEnemy(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
             else if (auxObject.gameObject.CompareTag("Barrel"))
             {
                 auxObject.GetComponent<BarrelHandler>().GetDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
-            }
-            else if (auxObject.gameObject.CompareTag("EnemyNoForce"))
-            {
-                auxObject.GetComponent<EnemyHealth>().TakeDamage(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
         }
     }
 
     private void SetCircleCastForSword()
     {
-        Vector3 castPosition = gameObject.transform.position;
+        Vector3 castPosition = transform.position;
 
         if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
         {
-            castPosition.y -= DefaulData.castPosition;
+            castPosition.y -= position;
         }
         else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
         {
-            castPosition.y += DefaulData.castPosition;
+            castPosition.y += position;
         }
         else if (inputs.x <= -1 && inputs.y == 0)
         {
-            castPosition.x -= DefaulData.castPosition;
+            castPosition.x -= position;
         }
         else if (inputs.x >= 1 && inputs.y == 0)
         {
-            castPosition.x += DefaulData.castPosition;
+            castPosition.x += position;
         }
 
-        Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
+        Collider2D[] objects = Physics2D.OverlapCircleAll(castPosition, detectionRadius);
 
         SwordUse(objects);
     }
@@ -134,7 +139,7 @@ public class PlayerItemUse : MonoBehaviour
 
             if (auxObject.gameObject.tag == "Grass")
             {
-                Sickle sickle = (Sickle)item;
+                Sickle sickle = (Sickle)usedItem;
 
                 auxObject.GetComponent<GrassDamage>().GetDamage(sickle.Attack);
             }
@@ -143,138 +148,250 @@ public class PlayerItemUse : MonoBehaviour
 
     private void SetCircleCastForSickle()
     {
-        Vector3 castPosition = gameObject.transform.position;
+        Vector3 castPosition = transform.position;
 
-        if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        if (lastDirection == Direction.Down)
         {
             castPosition.y -= DefaulData.castPosition;
         }
-        else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
+        else if (lastDirection == Direction.Up)
         {
             castPosition.y += DefaulData.castPosition;
         }
-        else if (inputs.x <= -1 && inputs.y == 0)
+        else if (lastDirection == Direction.Left)
         {
             castPosition.x -= DefaulData.castPosition;
         }
-        else if (inputs.x >= 1 && inputs.y == 0)
+        else if (lastDirection == Direction.Right)
         {
             castPosition.x += DefaulData.castPosition;
         }
 
-        Collider2D[] objects = Physics2D.OverlapBoxAll(castPosition, detectionZone, 0);
+        Collider2D[] objects = Physics2D.OverlapCircleAll(castPosition, detectionRadius);
 
         SickleUse(objects);
     }
 
-    private int GetSpawnLocation()
+    private void ChangeAnimatorDirectionVariables(int horizontal, int vertical)
     {
-        if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+        animator.SetFloat("Horizontal", horizontal);
+        animator.SetFloat("Vertical", vertical);
+
+        animator.SetFloat("HorizontalFacing", horizontal);
+        animator.SetFloat("VerticalFacing", vertical);
+
+        inputs.x = horizontal; 
+        inputs.y = vertical;
+    }
+
+    private Direction GetSpawnLocation()
+    {
+        Vector3 mousePosition = mouse.position.ReadValue();
+        mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
+
+        GridNode mousePositionGrid = grid.Grid.GetGridObject(mainCamera.ScreenToWorldPoint(mousePosition));
+        GridNode playerPosition = grid.Grid.GetGridObject(transform.position);
+
+        if ( usedItem is Weapon ||
+            (mousePositionGrid != null && 
+            mousePositionGrid.x >= playerPosition.x - 1 &&
+            mousePositionGrid.x <= playerPosition.x + 1 &&
+            mousePositionGrid.y >= playerPosition.y - 1 &&
+            mousePositionGrid.y <= playerPosition.y + 1))
         {
-            return 4;
-        }
-        else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
-        {
-            return 3;
-        }
-        else if (inputs.x <= -1 && inputs.y == 0)
-        {
-            return 1;
+            objectGrid = mousePositionGrid;
+
+            if (mousePositionGrid.y > playerPosition.y)
+            {
+                ChangeAnimatorDirectionVariables(0, 1);
+
+                return lastDirection = Direction.Up;
+            }
+            else if (mousePositionGrid.y < playerPosition.y)
+            {
+                ChangeAnimatorDirectionVariables(0, -1);
+
+                return lastDirection = Direction.Down;
+            }
+            else if (mousePositionGrid.x > playerPosition.x)
+            {
+                ChangeAnimatorDirectionVariables(1, 0);
+
+                return lastDirection = Direction.Right;
+            }
+            else
+            {
+                ChangeAnimatorDirectionVariables(-1, 0);
+
+                return lastDirection = Direction.Left;
+            }
         }
         else
         {
-            return 2;
+            objectGrid = null;
+
+            if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y <= -1)
+            {
+                return lastDirection = Direction.Down;
+            }
+            else if ((inputs.x == 0 || inputs.x >= 1 || inputs.x <= -1) && inputs.y >= 1)
+            {
+                return lastDirection = Direction.Up;
+            }
+            else if (inputs.x <= -1 && inputs.y == 0)
+            {
+                return lastDirection = Direction.Left;
+            }
+            else
+            {
+                return lastDirection = Direction.Right;
+            }
+        }
+    }
+
+    public void UseItem()
+    {
+        if(usedItem != null)
+        {
+            switch(usedItem)
+            {
+                case Axe:
+                    {
+                        axeHandler.UseAxe((int)lastDirection, usedItem, objectGrid);
+
+                        break;
+                    }
+                case Pickaxe:
+                    {
+                        pickaxeHandler.UsePickaxe(usedItem, objectGrid);
+
+                        break;
+                    }
+                case WateringCan:
+                    {
+                        wateringCanHandler.UseWateringcan((WateringCan)usedItem, objectGrid);
+
+                        break;
+                    }
+            }
         }
     }
 
     private void SelectedItemAction(Item item)
     {
-        this.item = item;
+        usedItem = item;
 
         if (playerMovement.CanMove)
         {
-            if (item is Axe)
+            switch (item)
             {
-                audioSource.clip = attackClip;
-                audioSource.Play();
-
-                animator.SetBool("Axe", true);
-
-                axeHandler.UseAxe(transform.position, GetSpawnLocation(), item);
-            }
-            else if (item is Pickaxe)
-            {
-                audioSource.clip = attackClip;
-                audioSource.Play();
-
-                animator.SetBool("Pickaxe", true);
-
-                pickaxeHandler.UsePickaxe(transform.position, GetSpawnLocation(), item);
-            }
-            else if (item is Hoe)
-            {
-                if (hoeSystemHandler.PlaceSoil((Hoe)item) == true ||
-                    hoeSystemHandler.DestroyCrop((Hoe)item) == true)
+                case Axe:
                 {
                     audioSource.clip = attackClip;
                     audioSource.Play();
 
-                    animator.SetBool("Hoe", true);
+                    spriteChange.StartUse(item, GetSpawnLocation());
+
+                    break;
                 }
-            }
-            else if (item is Weapon)
-            {
-                animator.SetBool("Sword", true);
-
-                SetCircleCastForSword();
-            }
-            else if (item is Sickle)
-            {
-                animator.SetBool("Sickle", true);
-
-                SetCircleCastForSickle();
-            }
-            else if (item is Consumable)
-            {
-                if (playerStats.Eat((Consumable)item))
+                case Pickaxe:
                 {
-                    selectedSlot.DecreseAmountSelected(1);
+                    audioSource.clip = attackClip;
+                    audioSource.Play();
 
-                    selectedSlot.ReinitializeSelectedSlot();
+                    spriteChange.StartUse(item, GetSpawnLocation());
+
+                    break;
                 }
-            }
-            else if (item is WateringCan)
-            {
-                WateringCan wateringCan = (WateringCan)item;
-
-                if (wateringCan.RemainWater > 0)
+                case Hoe:
                 {
-                    animator.SetBool("Wateringcan", true);
-
-                    wateringCan.RemainWater--;
-
-                    selectedSlot.ReinitializeSelectedSlot();
-
-                    wateringCanHandler.UseWateringcan(transform.position, GetSpawnLocation(), (WateringCan)item);
-
-                    if (wateringCan.RemainWater <= 0)
+                    if (hoeSystemHandler.PlaceSoil((Hoe)item) == true ||
+                        hoeSystemHandler.DestroyCrop((Hoe)item) == true)
                     {
-                        Item newItem = emptyBucket.Copy();
-                        newItem.Amount = 1;
+                        audioSource.clip = attackClip;
+                        audioSource.Play();
 
-                        selectedSlot.SetItem(newItem);
+                        spriteChange.StartUse(item, GetSpawnLocation());
+                    }
+
+                    break;
+                }
+                case Weapon:
+                {
+                    GetSpawnLocation();
+
+                    spriteChange.StartUse(item, Direction.Left);
+
+                    SetCircleCastForSword();
+
+                    break;
+                    }
+                case Sickle:
+                {
+                    spriteChange.StartUse(item, GetSpawnLocation());
+
+                    SetCircleCastForSickle();
+
+                    break;
+                    }
+                case Consumable:
+                {
+                    if (playerStats.Eat((Consumable)item))
+                    {
+                        selectedSlot.DecreseAmountSelected(1);
 
                         selectedSlot.ReinitializeSelectedSlot();
+                        }
+
+                    break;
                     }
+                case WateringCan:
+                {
+                    WateringCan wateringCan = (WateringCan)item;
+
+                    if (wateringCan.RemainWater > 0)
+                    {
+                        spriteChange.StartUse(item, GetSpawnLocation());
+
+                        animator.SetBool("Wateringcan", true);
+
+                        wateringCan.RemainWater--;
+
+                        selectedSlot.ReinitializeSelectedSlot();
+
+                        if (wateringCan.RemainWater <= 0)
+                        {
+                            Item newItem = emptyBucket.Copy();
+                            newItem.Amount = 1;
+
+                            selectedSlot.SetItem(newItem);
+
+                            selectedSlot.ReinitializeSelectedSlot();
+                        }
+                    }
+
+                    break;
+                    }
+                case Letter:
+                {
+                    letterHandler.gameObject.SetActive(true);
+
+                    letterHandler.SetData((Letter)item);
+
+                    break;
                 }
             }
-            else if (item is Letter)
-            {
-                letterHandler.gameObject.SetActive(true);
-
-                letterHandler.SetData((Letter)item);
-            }
         }
+    }
+
+    public void ChangeToNextSprite()
+    {
+        spriteChange.ChangeToNextSprite();
+    }
+
+    public void StopShow()
+    {
+        spriteChange.StopShow();
     }
 
     private void Update()
@@ -313,7 +430,7 @@ public class PlayerItemUse : MonoBehaviour
                             audioSource.clip = attackClip;
                             audioSource.Play();
 
-                            animator.SetBool("Hoe", true);
+                            spriteChange.StartUse(usedItem, GetSpawnLocation());
                         }
                     }
                 }
@@ -356,4 +473,12 @@ public class PlayerItemUse : MonoBehaviour
             water = false;
         }
     }
+}
+
+public enum Direction
+{
+    Right,
+    Left,
+    Up,
+    Down
 }

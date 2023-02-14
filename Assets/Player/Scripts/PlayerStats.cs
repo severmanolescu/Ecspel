@@ -13,6 +13,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Animator animatorHealth;
     [SerializeField] private Animator animatorStamina;
 
+    [SerializeField] private float initialHealth;
+    [SerializeField] private float initialStamina;
+
     private AudioSource audioSource;
 
     private float maxHealth;
@@ -98,8 +101,8 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        healthSlider.maxValue = Health = maxHealth = DefaulData.maxPlayerHealth;
-        staminaSlider.maxValue = Stamina = maxStamina = DefaulData.maxPlayerStamina;
+        healthSlider.maxValue = Health = maxHealth = initialHealth;
+        staminaSlider.maxValue = Stamina = maxStamina = initialStamina;
 
         SetToMaxStats();
     }
@@ -212,19 +215,19 @@ public class PlayerStats : MonoBehaviour
     {
         if (Stamina >= staminaSlider.maxValue / 2)
         {
-            animatorStamina.SetInteger("Speed", 0);
+            //animatorStamina.SetInteger("Speed", 0);
         }
         else if (Stamina >= staminaSlider.maxValue / 3)
         {
-            animatorStamina.SetInteger("Speed", 1);
+            //animatorStamina.SetInteger("Speed", 1);
         }
         else if (Stamina >= staminaSlider.maxValue / 4)
         {
-            animatorStamina.SetInteger("Speed", 2);
+            //animatorStamina.SetInteger("Speed", 2);
         }
         else
         {
-            animatorStamina.SetInteger("Speed", 3);
+            //animatorStamina.SetInteger("Speed", 3);
         }
     }
 

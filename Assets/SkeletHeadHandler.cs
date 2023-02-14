@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SkeletHeadHandler : MonoBehaviour
@@ -16,7 +14,9 @@ public class SkeletHeadHandler : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(player.position - transform.position, ForceMode2D.Force);
+        Vector3 direction = player.position - transform.position;
+
+        GetComponent<Rigidbody2D>().AddRelativeForce(direction, ForceMode2D.Impulse);
 
         StartCoroutine(DestroyHead());
     }
@@ -33,7 +33,7 @@ public class SkeletHeadHandler : MonoBehaviour
         if( collision != null &&
             collision.isTrigger == false && 
             !collision.CompareTag("NotCollide") && 
-            !collision.CompareTag("Enemy"))
+            !collision.tag.Contains("Enemy"))
         {
             StopAllCoroutines();
 

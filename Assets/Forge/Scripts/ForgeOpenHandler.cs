@@ -74,7 +74,7 @@ public class ForgeOpenHandler : MonoBehaviour
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
         forgeHandler = GameObject.Find("Player/Canvas/Forge").GetComponent<ForgeHandler>();
 
-        quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+        quickSlots = GameObject.Find("Player/Canvas/QuickSlots");
 
         notWorkingForge = GetComponent<SpriteRenderer>().sprite;
 

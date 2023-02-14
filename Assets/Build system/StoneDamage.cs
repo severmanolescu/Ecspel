@@ -18,6 +18,8 @@ public class StoneDamage : MonoBehaviour
     [SerializeField] private AudioClip soundEffect;
     [SerializeField] private AudioClip soundEffectNotLevel;
 
+    private SpawnItem spawn;
+
     private AudioSource audioSource;
 
     private int startScaleX;
@@ -29,6 +31,8 @@ public class StoneDamage : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
+        spawn = GameObject.Find("Global").GetComponent<SpawnItem>();
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
@@ -63,8 +67,6 @@ public class StoneDamage : MonoBehaviour
 
         while (audioSource.isPlaying)
         {
-            yield return null;
-
             yield return new WaitForSeconds(10);
         }
 
@@ -82,41 +84,28 @@ public class StoneDamage : MonoBehaviour
 
             if (health <= 0)
             {
-                GameObject stone = Instantiate(stonePrefab, transform.position, transform.rotation);
+                spawn.SpawnItems(spawnItem, amount, transform.position);
 
-                ItemWorld itemWorld = stone.GetComponent<ItemWorld>();
+                Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 
-                if (itemWorld != null)
+                GridNode gridNode = grid.GetGridObject(transform.position);
+
+                grid.ReinitializeGrid(gridNode);
+
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
+
+                IncreseCaveObjects increseCave = GetComponent<IncreseCaveObjects>();
+
+                if (increseCave != null)
                 {
-                    Item copyItem = spawnItem.Copy();
-
-                    itemWorld.SetItem(DefaulData.GetItemWithAmount(copyItem, amount));
-
-                    itemWorld.MoveToPoint();
-
-                    itemWorld.transform.parent = transform.parent;
-
-                    Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
-
-                    GridNode gridNode = grid.GetGridObject(transform.position);
-
-                    grid.ReinitializeGrid(gridNode);
-
-                    GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
-
-                    IncreseCaveObjects increseCave = GetComponent<IncreseCaveObjects>();
-
-                    if (increseCave != null)
-                    {
-                        increseCave.Increse();
-                    }
-
-                    GameObject particles = Instantiate(destroyParticle);
-                    particles.transform.position = transform.position;
-                    particles.GetComponent<ParticleSystem>().Play();
-
-                    StartCoroutine(WaitForSoundEffect());
+                    increseCave.Increse();
                 }
+
+                GameObject particles = Instantiate(destroyParticle);
+                particles.transform.position = transform.position;
+                particles.GetComponent<ParticleSystem>().Play();
+
+                StartCoroutine(WaitForSoundEffect());
             }
         }
         else

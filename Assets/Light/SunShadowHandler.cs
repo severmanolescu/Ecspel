@@ -6,17 +6,15 @@ public class SunShadowHandler : MonoBehaviour
 {
     [SerializeField] private float fadeSpeed;
 
+    [SerializeField] private int dayStart;
+    [SerializeField] private int dayEnd;
+    [SerializeField] private int dayNightCycleTime;
+
     public List<Transform> sunShadows = new List<Transform>();
 
     private DayTimerHandler dayTimerHandler;
 
     private float rotation;
-
-    private bool startShadowFade = false;
-
-    [SerializeField] private int dayStart;
-    [SerializeField] private int dayEnd;
-    [SerializeField] private int dayNightCycleTime;
 
     private float alpha = 1f;
 
@@ -85,11 +83,6 @@ public class SunShadowHandler : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void ChangeShadowAlpha(float alpha)
     {
         foreach (Transform shadow in sunShadows)
@@ -108,7 +101,7 @@ public class SunShadowHandler : MonoBehaviour
         {
             sunShadows.Add(shadow.transform);
 
-            shadow.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            shadow.GetComponent<SpriteRenderer>().sortingOrder = -2;
         }
     }
 

@@ -3,17 +3,19 @@ using UnityEngine;
 public class FarmPlotHandler : MonoBehaviour
 {
     public Sprite drySoil;
-    public Sprite wetSoil;
+    private Sprite wetEffect;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     public int noOfDryDays;
 
     private bool dry = true;
 
+    private GameObject wetObject;
+
     public Sprite DrySoil { get => drySoil; set => drySoil = value; }
-    public Sprite WetSoil { get => wetSoil; set => wetSoil = value; }
     public int NoOfDryDays { get => noOfDryDays; set => noOfDryDays = value; }
+    public Sprite WetEffect { get => wetEffect; set => wetEffect = value; }
 
     private void Awake()
     {
@@ -24,10 +26,9 @@ public class FarmPlotHandler : MonoBehaviour
         GameObject.Find("Global/DayTimer").GetComponent<ChangeSoilsState>().AddSoil(this);
     }
 
-    public void ChangeSprites(Sprite drySprite, Sprite wetSprite)
+    public void ChangeSprites(Sprite drySprite)
     {
         drySoil = drySprite;
-        wetSoil = wetSprite;
 
         if (GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().Raining == false)
         {
@@ -53,7 +54,7 @@ public class FarmPlotHandler : MonoBehaviour
 
                 if (cropObject != null)
                 {
-                    cropObject.GetComponent<CropGrow>().DryCrop();
+                    //cropObject.GetComponent<CropGrow>().DryCrop();
                 }
             }
         }
@@ -62,15 +63,34 @@ public class FarmPlotHandler : MonoBehaviour
             noOfDryDays = 0;
 
             dry = true;
+
+            if(wetObject != null)
+            {
+                Destroy(wetObject);
+
+                wetObject = null;
+            }
         }
     }
 
     public void WetSoilChangeSprite()
     {
-        spriteRenderer.sprite = wetSoil;
+        if (dry == true)
+        {
+            wetObject = new GameObject();
 
-        dry = false;
+            wetObject.transform.parent = transform;
+            wetObject.transform.localPosition = Vector3.zero;
 
-        noOfDryDays = 0;
+            wetObject.AddComponent<SpriteRenderer>();
+            wetObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            wetObject.GetComponent<SpriteRenderer>().sprite = wetEffect;
+
+            Instantiate(wetObject);
+
+            dry = false;
+
+            noOfDryDays = 0;
+        }
     }
 }

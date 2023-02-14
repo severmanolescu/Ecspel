@@ -1,17 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftCanvasHandler : MonoBehaviour
 {
-    private List<CraftSetData> crafts = new List<CraftSetData>();
-
     [SerializeField] private List<Craft> initialCrafts = new List<Craft>();
 
     [SerializeField] private GameObject craftPrefab;
     [SerializeField] private Transform spawnLocation;
 
     [SerializeField] private NewRecipeHandler newRecipeHandler;
-    [SerializeField] private ItemSprites itemSprites;
+
+    [SerializeField] private Color activeButtonColor;
+    [SerializeField] private Color nonActiveButtonColor;
+
+    [SerializeField] private List<Button> filterButtons;
+
+    private List<CraftSetData> crafts = new List<CraftSetData>();
 
     private AudioSource audioSource;
 
@@ -61,6 +66,11 @@ public class CraftCanvasHandler : MonoBehaviour
 
     public void Close()
     {
+        if(crafts != null)
+        {
+            ShowAllCrafts();
+        }
+
         if (CraftingHandler != null)
         {
             craftingHandler.CloseCraft();
@@ -121,5 +131,71 @@ public class CraftCanvasHandler : MonoBehaviour
         newCraft.CanvasHandler = this;
 
         crafts.Add(newCraft);
+    }
+
+    public void ShowAllCrafts()
+    {
+        foreach (CraftSetData craft in crafts)
+        {
+            craft.gameObject.SetActive(true);
+        }
+
+        ChangeButtonColor(0);
+    }
+
+    private void ChangeButtonColor(int buttonNo)
+    {
+        if(filterButtons != null && filterButtons.Count > buttonNo)
+        {
+            for(ushort buttonIndex = 0; buttonIndex < filterButtons.Count; buttonIndex++)
+            {
+                ColorBlock colorBlock = filterButtons[buttonIndex].colors;
+
+                if (buttonNo != buttonIndex)
+                {
+                    colorBlock.normalColor = nonActiveButtonColor;    
+                    colorBlock.selectedColor = nonActiveButtonColor;    
+                }
+                else
+                {
+                    colorBlock.normalColor = activeButtonColor;
+                    colorBlock.selectedColor = activeButtonColor;
+                }
+
+                filterButtons[buttonIndex].colors = colorBlock;
+            }
+        }
+    }
+
+    private void ShowOnlyCraftForFilter(int filter)
+    {
+        foreach (CraftSetData craft in crafts)
+        {
+            if (craft.Craft.FilterType == filter)
+            {
+                craft.gameObject.SetActive(true);
+            }
+            else
+            {
+                craft.gameObject.SetActive(false);
+            }
+        }
+
+        ChangeButtonColor(filter + 1);
+    }
+
+    public void SelectFilter(int filter)
+    {
+        if (crafts != null)
+        {
+            if (filter == -1)
+            {
+                ShowAllCrafts();
+            }
+            else
+            {
+                ShowOnlyCraftForFilter(filter);
+            }
+        }
     }
 }

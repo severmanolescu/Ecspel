@@ -12,14 +12,19 @@ public class Craft : ScriptableObject
 
     [SerializeField] private int stamina;
 
-    public Craft(List<ItemWithAmount> needItem, ItemWithAmount receiveItem, int stamina)
+    [Header("0 - Weapon \n1 - Tools\n2 - Resources")]
+    [SerializeField] private int filterType;
+
+    public Craft(List<ItemWithAmount> needItem, ItemWithAmount receiveItem, int stamina, int filterType)
     {
-        this.NeedItem = needItem;
-        this.ReceiveItem = receiveItem;
-        this.Stamina = stamina;
+        NeedItem = needItem;
+        ReceiveItem = receiveItem;
+        Stamina = stamina;
+        FilterType = filterType;
     }
 
     public List<ItemWithAmount> NeedItem { get => needItem; set => needItem = value; }
     public ItemWithAmount ReceiveItem { get => receiveItem; set => receiveItem = value; }
     public int Stamina { get => stamina; set => stamina = value; }
+    public int FilterType { get => filterType; set => filterType = value; }
 }

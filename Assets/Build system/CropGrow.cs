@@ -49,38 +49,13 @@ public class CropGrow : MonoBehaviour
         {
             CurrentSprite++;
 
-            if (Item.Refil == false)
+            if (CurrentSprite < Item.Levels.Count)
             {
-                if (CurrentSprite < Item.Levels.Count)
-                {
-                    ChangeSprite();
-                }
-                else
-                {
-                    CurrentSprite = Item.Levels.Count - 1;
-                }
+                ChangeSprite();
             }
             else
             {
-                if (CurrentSprite == Item.Levels.Count - 1)
-                {
-                    CurrentSprite -= Item.RefilDecreseSpriteIndexStart;
-
-                    ChangeSprite();
-                }
-                else if (CurrentSprite <= Item.Levels.Count - 2)
-                {
-                    ChangeSprite();
-
-                    if (CurrentSprite == Item.Levels.Count - 2)
-                    {
-                        CurrentSprite--;
-                    }
-                }
-                else
-                {
-                    CurrentSprite = Item.Levels.Count - 2;
-                }
+                CurrentSprite = Item.Levels.Count - 1;
             }
 
             if (CurrentSprite == 2)
@@ -317,7 +292,7 @@ public class CropGrow : MonoBehaviour
 
     private bool HarvestRefil()
     {
-        if (CurrentSprite == Item.Levels.Count - 3)
+        if (CurrentSprite == Item.Levels.Count - 1)
         {
             ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
 
@@ -334,11 +309,9 @@ public class CropGrow : MonoBehaviour
             itemWorld.SetItem(drop);
             itemWorld.MoveToPoint();
 
-            StartDay = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>().Days;
+            CurrentSprite = Item.Levels.Count - Item.RefilDecreseSpriteIndexStart - 2;
 
-            CurrentSprite = Item.Levels.Count - 1;
-
-            GetComponent<SpriteRenderer>().sprite = Item.Levels[CurrentSprite];
+            GetComponent<SpriteRenderer>().sprite = Item.RefilSprite;
 
             SpawnSeeds();
 

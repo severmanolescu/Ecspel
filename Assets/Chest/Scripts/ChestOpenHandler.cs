@@ -59,7 +59,7 @@ public class ChestOpenHandler : MonoBehaviour
         canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
         chestStorageHandler = GameObject.Find("Player/Canvas/ChestStorage").GetComponent<ChestStorageHandler>();
 
-        quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
+        quickSlots = GameObject.Find("Player/Canvas/QuickSlots");
 
         audioSource = GetComponent<AudioSource>();
 

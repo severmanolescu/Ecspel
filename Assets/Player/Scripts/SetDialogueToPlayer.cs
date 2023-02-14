@@ -21,7 +21,7 @@ public class SetDialogueToPlayer : MonoBehaviour
     {
         playerMovement.Dialogue = true;
 
-        dialogueChanger.SetDialogue(dialogue, this);
+        dialogueChanger.ShowDialogue(dialogue);
 
         this.dialoguePlayerEnter = dialoguePlayerEnter;
     }

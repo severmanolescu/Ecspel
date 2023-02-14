@@ -24,7 +24,7 @@ public static class DefaulData
     public static int stickSpawnRate = 25;
 
     // Player stats
-    public static float maxPlayerHealth = 100f;
+    public static float maxPlayerHealth = 500f;
     public static float maxPlayerStamina = 100f;
     public static float playerWalkSpeed = 7.5f;
     public static float playerRunSpeed = 10f;

@@ -14,6 +14,8 @@ public class PositionInGrid : MonoBehaviour
 
     [SerializeField] private bool positionInCenterOfGridNode = true;
 
+    [SerializeField] private bool setObjectOnlyToMiddleGridNode = false;
+
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
 
     private void Update()
@@ -62,10 +64,19 @@ public class PositionInGrid : MonoBehaviour
                                 grid.gridArray[i, j].canPlace = false;
                                 grid.gridArray[i, j].canPlant = false;
                                 grid.gridArray[i, j].isWalkable = isWalkable;
-                                grid.gridArray[i, j].objectInSpace = gameObject;
+
+                                if (setObjectOnlyToMiddleGridNode == false)
+                                {
+                                    grid.gridArray[i, j].objectInSpace = gameObject;
+                                }
                             }
                         }
                     }
+                }
+
+                if (setObjectOnlyToMiddleGridNode == true)
+                {
+                    grid.gridArray[gridNode.x, gridNode.y].objectInSpace = gameObject;
                 }
 
                 DamageTree damageTree = GetComponent<DamageTree>();

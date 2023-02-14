@@ -99,42 +99,42 @@ public class ChangeDialogue : MonoBehaviour
         return choose;
     }
 
-    private DialogueScriptableObject ChangeNewDialogueNextDialogue(DialogueScriptableObject dialogue)
-    {
-        if (dialogue.NextDialogue == null)
-        {
-            if (dialogueDisplay.Dialogue != null)
-            {
-                if (VerifyNewDialogueInList(dialogueDisplay.Dialogue))
-                {
-                    dialogue.NextDialogue = dialogueDisplay.Dialogue;
-                }
-                else
-                {
-                    dialogue.NextDialogue = dialogueDisplay.Dialogue.NextDialogue;
-                }
-            }
-        }
+    //private DialogueScriptableObject ChangeNewDialogueNextDialogue(DialogueScriptableObject dialogue)
+    //{
+    //    if (dialogue.NextDialogue == null)
+    //    {
+    //        if (dialogueDisplay.Dialogue != null)
+    //        {
+    //            if (VerifyNewDialogueInList(dialogueDisplay.Dialogue))
+    //            {
+    //                dialogue.NextDialogue = dialogueDisplay.Dialogue;
+    //            }
+    //            else
+    //            {
+    //                dialogue.NextDialogue = dialogueDisplay.Dialogue.NextDialogue;
+    //            }
+    //        }
+    //    }
 
-        return dialogue;
-    }
+    //    return dialogue;
+    //}
 
-    public DialogueScriptableObject GetDialogue()
-    {
-        if (dialogueDisplay != null)
-        {
-            if (dialogueDisplay.Dialogue == null)
-            {
-                return GetDialogueByGameData().dialogue.Copy();
-            }
-            else
-            {
-                return ChangeNewDialogueNextDialogue(GetDialogueByGameData().dialogue.Copy());
-            }
-        }
+    //public DialogueScriptableObject GetDialogue()
+    //{
+    //    if (dialogueDisplay != null)
+    //    {
+    //        if (dialogueDisplay.Dialogue == null)
+    //        {
+    //            return GetDialogueByGameData().dialogue.Copy();
+    //        }
+    //        else
+    //        {
+    //            return ChangeNewDialogueNextDialogue(GetDialogueByGameData().dialogue.Copy());
+    //        }
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
 
     public bool VerifyNewDialogueInList(DialogueScriptableObject dialogue)
     {

@@ -10,11 +10,16 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private AudioClip damageClip;
     [SerializeField] private AudioClip dieClip;
 
+    [SerializeField] private GameObject fadeObject;
+    [SerializeField] private Sprite dieSprite;
+
     private AudioSource audioSource;
 
     private Animator animator;
 
     private SpriteRenderer enemySprite;
+
+    private bool die = false;
 
     private float health;
 
@@ -40,19 +45,24 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-
-        if (health <= 0)
+        if(die == false)
         {
-            DestroyEnemy();
-        }
-        else
-        {
-            audioSource.clip = damageClip;
-            audioSource.Play();
+            health -= damage;
 
-            StartCoroutine(WaitDamage());
-        }
+            if (health <= 0)
+            {
+                die = true;
+
+                DestroyEnemy();
+            }
+            else
+            {
+                audioSource.clip = damageClip;
+                audioSource.Play();
+
+                StartCoroutine(WaitDamage());
+            }
+        }        
     }
 
     private void DestroyEnemy()
@@ -61,5 +71,30 @@ public class EnemyHealth : MonoBehaviour
 
         audioSource.clip = dieClip;
         audioSource.Play();
+    }
+
+    public void DestroyEnemyDie()
+    {
+        if (dieSprite != null && fadeObject != null)
+        {
+            GameObject newObject = Instantiate(fadeObject, transform.position, transform.rotation);
+
+            newObject.transform.localScale = transform.localScale;
+
+            newObject.GetComponent<SpriteRenderer>().sprite = dieSprite;
+
+            SpawnLittleEnemy spawnLittle = GetComponent<SpawnLittleEnemy>();
+
+            if(spawnLittle != null)
+            {
+                spawnLittle.SpawnEnemy();
+            }
+
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

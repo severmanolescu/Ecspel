@@ -10,14 +10,18 @@ public class DestroyTree : MonoBehaviour
 
     [SerializeField] private int logAmountDrop;
 
-    [SerializeField] private GameObject itemWorld;
+    [SerializeField] private SpawnItem spawnItem;
 
     [SerializeField] private GameObject treeDustWhenHitGround;
 
     private int spawn;
 
     public int Spawn { set { spawn = value; } }
-    public GameObject ItemWorld { get { return itemWorld; } }
+
+    private void Awake()
+    {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+    }
 
     public void Destroy()
     {
@@ -25,8 +29,6 @@ public class DestroyTree : MonoBehaviour
         {
             case 1:
                 {
-                    ItemWorld item = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
                     Vector3 position = GetComponentInParent<Transform>().position;
 
                     position.x -= 1f;
@@ -36,25 +38,14 @@ public class DestroyTree : MonoBehaviour
 
                     particles.GetComponent<ParticleSystem>().Play();
 
-                    item.transform.position = position;
-
-                    item.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
-                    item.MoveToPoint();
-
-                    item = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
-                    item.transform.position = position;
-
-                    item.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
-                    item.MoveToPoint();
+                    spawnItem.SpawnItems(logItem, logAmountDrop, position);
+                    spawnItem.SpawnItems(sapling, Random.Range(minSaplingDrop, maxSaplingDrop), position);
 
                     break;
                 }
 
             default:
                 {
-                    ItemWorld game = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
                     Vector3 position = GetComponentInParent<Transform>().position;
 
                     position.x += 2f;
@@ -64,17 +55,8 @@ public class DestroyTree : MonoBehaviour
 
                     particles.GetComponent<ParticleSystem>().Play();
 
-                    game.transform.position = position;
-
-                    game.SetItem(DefaulData.GetItemWithAmount(logItem, logAmountDrop));
-                    game.MoveToPoint();
-
-                    game = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
-                    game.transform.position = position;
-
-                    game.SetItem(DefaulData.GetItemWithAmount(sapling, Random.Range(minSaplingDrop, maxSaplingDrop)));
-                    game.MoveToPoint();
+                    spawnItem.SpawnItems(logItem, logAmountDrop, position);
+                    spawnItem.SpawnItems(sapling, Random.Range(minSaplingDrop, maxSaplingDrop), position);
 
                     break;
                 }

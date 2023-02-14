@@ -48,4 +48,5 @@ public class Crop : Placeable
     public bool CenterY { get => centerY; set => centerY = value; }
     public bool Refil { get => refil; set => refil = value; }
     public int RefilDecreseSpriteIndexStart { get => refilDecreseSpriteIndexStart; set => refilDecreseSpriteIndexStart = value; }
+    public Sprite RefilSprite { get => refilSprite; set => refilSprite = value; }
 }

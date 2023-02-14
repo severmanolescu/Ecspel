@@ -41,7 +41,7 @@ public class CanvasTabsOpen : MonoBehaviour
         canvasEffects = transform.Find("EffectDetailed").gameObject;
 
         playerInventory = transform.Find("PlayerItems").gameObject;
-        quickSlot = transform.Find("Field/QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
+        quickSlot = transform.Find("QuickSlots").gameObject.GetComponent<QuickSlotsChanger>();
         questShow = transform.Find("QuestTab").gameObject.GetComponent<QuestTabDataSet>();
 
         chestStorage.SetActive(false);
