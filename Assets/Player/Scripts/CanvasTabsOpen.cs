@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,10 +13,6 @@ public class CanvasTabsOpen : MonoBehaviour
     private GameObject canvasEffects;
 
     private Keyboard keyboard;
-
-    private bool inventoryButtonPress = true;
-    private bool questButtonPress = true;
-    private bool skillsButtonPress = true;
 
     [Header("Menu canvas")]
     [SerializeField] private GameObject menuCanvas;
@@ -73,10 +68,8 @@ public class CanvasTabsOpen : MonoBehaviour
     {
         if (canOpenTabs == true)
         {
-            if (keyboard.eKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[1].IsPressed() == false && inventoryButtonPress == false))
+            if (keyboard.eKey.wasPressedThisFrame)
             {
-                inventoryButtonPress = true;
-
                 if (questShow.gameObject.activeSelf || !playerInventory.activeSelf)
                 {
                     //questShow.DeleteData();
@@ -109,10 +102,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if (keyboard.tabKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[4].IsPressed() == false && questButtonPress == false))
+            else if (keyboard.tabKey.wasPressedThisFrame)
             {
-                questButtonPress = true;
-
                 if (playerInventory.activeSelf || !questShow.gameObject.activeSelf)
                 {
                     questShow.gameObject.SetActive(true);
@@ -144,10 +135,8 @@ public class CanvasTabsOpen : MonoBehaviour
                     playerMovement.TabOpen = false;
                 }
             }
-            else if (keyboard.qKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == false && skillsButtonPress == false))
+            else if (keyboard.qKey.wasPressedThisFrame)
             {
-                skillsButtonPress = true;
-
                 if (skills.activeSelf)
                 {
                     questShow.gameObject.SetActive(false);
@@ -247,19 +236,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     SetCanOpenTabs(true);
                 }
             }
-
-            if (Joystick.current != null && Joystick.current.allControls[1].IsPressed() == true)
-            {
-                inventoryButtonPress = false;
-            }
-            if (Joystick.current != null && Joystick.current.allControls[4].IsPressed() == true)
-            {
-                questButtonPress = false;
-            }
-            if (Joystick.current != null && Joystick.current.allControls[2].IsPressed() == true)
-            {
-                skillsButtonPress = false;
-            }
         }
         else
         {
@@ -277,17 +253,28 @@ public class CanvasTabsOpen : MonoBehaviour
         }
     }
 
+    public void PrepareUIForDialogue()
+    {
+        quickSlot.gameObject.SetActive(false);
+    }
+
+    public void ShowDefaultUIElements()
+    {
+        quickSlot.gameObject.SetActive(true);
+        quickSlot.Reinitialize();
+    }
+
     public bool CanOpenTab()
     {
         if (questShow.gameObject.activeSelf == false &&
-                   playerInventory.activeSelf == false &&
-                   chestStorage.activeSelf == false &&
-                   craftingCanvas.activeSelf == false &&
-                   forgeCanvas.activeSelf == false &&
-                   caveSelect.activeSelf == false &&
-                   skills.activeSelf == false &&
-                   help.activeSelf == false &&
-                   menuCanvas.activeSelf == false)
+            playerInventory.activeSelf == false &&
+            chestStorage.activeSelf == false &&
+            craftingCanvas.activeSelf == false &&
+            forgeCanvas.activeSelf == false &&
+            caveSelect.activeSelf == false &&
+            skills.activeSelf == false &&
+            help.activeSelf == false &&
+            menuCanvas.activeSelf == false)
         {
             return true;
         }
@@ -312,5 +299,10 @@ public class CanvasTabsOpen : MonoBehaviour
     public void SetCanOpenTabs(bool canOpenTabs)
     {
         this.canOpenTabs = canOpenTabs;
+    }
+
+    public void StopPlayerFromMoving()
+    {
+        playerMovement.TabOpen = true;
     }
 }

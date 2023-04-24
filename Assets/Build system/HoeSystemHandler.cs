@@ -392,6 +392,24 @@ public class HoeSystemHandler : MonoBehaviour
         return false;
     }
 
+    public bool DestroySoilMousePosition(GridNode mousePosition, float decreseStamina)
+    {
+        if (mousePosition != null &&
+            mousePosition.objectInSpace != null &&
+            mousePosition.objectInSpace.CompareTag("FarmPlot") &&
+            mousePosition.crop == null)
+        {
+            ChangeDestroyedSoilState(mousePosition);
+
+            DestroySoil(mousePosition);
+
+            playerStats.DecreseStamina(decreseStamina);
+
+            return true;
+        }
+        return false;
+    }
+
     public bool DestroySoilMousePosition(Hoe hoe)
     {
         Vector3 mousePosition = Mouse.current.position.ReadValue();
@@ -401,20 +419,7 @@ public class HoeSystemHandler : MonoBehaviour
 
         GridNode gridNode = grid.GetGridObject(mousePositionWorld);
 
-        if (gridNode != null &&
-            gridNode.objectInSpace != null &&
-            gridNode.objectInSpace.CompareTag("FarmPlot") &&
-            gridNode.crop == null)
-        {
-            ChangeDestroyedSoilState(gridNode);
-
-            DestroySoil(gridNode);
-
-            playerStats.DecreseStamina(hoe.Stamina);
-
-            return true;
-        }
-        return false;
+        return DestroySoilMousePosition(gridNode, hoe.Stamina);
     }
 
     public void DestroySoil(GridNode gridNode)
@@ -457,7 +462,8 @@ public class HoeSystemHandler : MonoBehaviour
                         grid.gridArray[i, j] != null)
                     {
                         if (grid.gridArray[i, j].objectInSpace != null &&
-                            grid.gridArray[i, j].objectInSpace.CompareTag("FarmPlot"))
+                            grid.gridArray[i, j].objectInSpace.CompareTag("FarmPlot") &&
+                            grid.gridArray[i, j].cropPlaced == false)
                         {
                             ChangeDestroyedSoilState(grid.gridArray[i, j]);
 
@@ -473,7 +479,7 @@ public class HoeSystemHandler : MonoBehaviour
     {
         FarmPlotHandler farmPlotHandler = gridNode.objectInSpace.GetComponent<FarmPlotHandler>();
 
-        if(farmPlotHandler != null)
+        if (farmPlotHandler != null)
         {
             GameObject.Find("Global/DayTimer").GetComponent<ChangeSoilsState>().RemoveSoil(farmPlotHandler);
         }
@@ -573,7 +579,7 @@ public class HoeSystemHandler : MonoBehaviour
 
     public bool DestroyCrop(Hoe hoe)
     {
-        if(harvestCrop.DestroyCropWithHoe() == true)
+        if (harvestCrop.DestroyCropWithHoe() == true)
         {
             playerStats.DecreseStamina(hoe.Stamina);
 

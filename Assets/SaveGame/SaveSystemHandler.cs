@@ -21,8 +21,6 @@ public class SaveSystemHandler : MonoBehaviour
 
     private PlayerAchievements playerAchievements;
 
-    private QuestTabHandler questTab;
-
     private DayTimerHandler dayTimerHandler;
 
     private LoadSceneHandler loadSceneHandler;
@@ -66,8 +64,6 @@ public class SaveSystemHandler : MonoBehaviour
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
         playerAchievements = GameObject.Find("Global/Player").GetComponent<PlayerAchievements>();
-
-        questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
         tipsCanvas = GameObject.Find("Global/Player/Canvas/Tips").GetComponent<TipsCanvas>();
 
@@ -202,8 +198,6 @@ public class SaveSystemHandler : MonoBehaviour
 
         SetLocation(false);
 
-        questTab.SetQuestsWithID(saveGame.PlayerQuests);
-
         npcDialogue.SetNpcsDialogue(saveGame.NpcDialogues);
 
         GetComponent<GetAllChestsStorage>().SetAllChestToWorld(saveGame.Chests);
@@ -292,8 +286,6 @@ public class SaveSystemHandler : MonoBehaviour
         saveGame.PlayerInventory = playerInventory.GetAllItemsNo();
 
         saveGame.PlayerAchievements = playerAchievements.GetAllAchievements();
-
-        saveGame.PlayerQuests = questTab.GetAllQuestID();
 
         SetLocation(true);
         saveGame.ObjectsInGame = getObjects.GetAllObjectsFromArea();

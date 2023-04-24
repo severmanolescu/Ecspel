@@ -8,12 +8,12 @@ public class NpcPathFinding : MonoBehaviour
     [SerializeField] private float distanceTolerance = .1f;
     [SerializeField] private float distanceToleranceDirection = .05f;
 
-    public LocationGridSave locationGrid;
+    private LocationGridSave locationGrid;
 
     private bool canWalk;
     private bool talking = false;
 
-    private List<Vector3> path = new List<Vector3>();
+    public List<Vector3> path = new List<Vector3>();
 
     private Vector3 toLocation;
 
@@ -48,11 +48,12 @@ public class NpcPathFinding : MonoBehaviour
 
     private void GetNewPath()
     {
-        path = pathfinding.FindPath(transform.position, ToLocation);
+        path = pathfinding.FindPath(locationGrid.Grid.GetWorldPositionFronGridObject(transform.position),
+                                    locationGrid.Grid.GetWorldPositionFronGridObject(ToLocation));
 
         pathCurrentIndex = 0;
 
-        if (path != null && path.Count > 1)
+        if (path != null && path.Count > 2)
         {
             path.RemoveAt(0);
         }
@@ -134,6 +135,11 @@ public class NpcPathFinding : MonoBehaviour
         {
             animator.SetBool("Walking", false);
         }
+    }
+
+    public void SetAnimatorDirectionToPlayer(Vector3 playerPosition)
+    {
+        SetAnimator(GetDirection(playerPosition));
     }
 
     private void FixedUpdate()

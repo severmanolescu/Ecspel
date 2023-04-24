@@ -30,7 +30,7 @@ public class NPCDialogueSave : MonoBehaviour
 
         foreach (DialogueDisplay dialogue in NpcDialogue)
         {
-           // dialogues.Add(GetDialogueId(dialogue.Dialogue));
+            // dialogues.Add(GetDialogueId(dialogue.Dialogue));
         }
 
         return dialogues;
@@ -40,7 +40,7 @@ public class NPCDialogueSave : MonoBehaviour
     {
         for (int indexOfDialogue = 0; indexOfDialogue < dialogue.Count; indexOfDialogue++)
         {
-           // NpcDialogue[indexOfDialogue].Dialogue = GetDialogueFromId(dialogue[indexOfDialogue]);
+            // NpcDialogue[indexOfDialogue].Dialogue = GetDialogueFromId(dialogue[indexOfDialogue]);
         }
     }
 }

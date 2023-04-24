@@ -25,7 +25,7 @@ public class PlayerInventory : MonoBehaviour
         CoinsHandler = GetComponentInChildren<CoinsHandler>();
     }
 
-    private bool AddItemStackable(Item item)
+    private int AddItemStackable(Item item)
     {
         foreach (ItemSlot auxItem in itemsSlot)
         {
@@ -43,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
 
                         quickSlots.Reinitialize();
 
-                        return true;
+                        return 0;
                     }
                     else
                     {
@@ -61,7 +61,7 @@ public class PlayerInventory : MonoBehaviour
         {
             quickSlots.Reinitialize();
 
-            return true;
+            return 0;
         }
 
         foreach (ItemSlot auxItem in itemsSlot)
@@ -87,22 +87,17 @@ public class PlayerInventory : MonoBehaviour
 
                     quickSlots.Reinitialize();
 
-                    return true;
+                    return 0;
                 }
             }
         }
 
-        if (item.Amount <= 0)
-        {
-            quickSlots.Reinitialize();
+        quickSlots.Reinitialize();
 
-            return true;
-        }
-
-        return false;
+        return item.Amount;
     }
 
-    public bool AddItem(Item item)
+    public int AddItem(Item item)
     {
         if (item != null)
         {
@@ -110,7 +105,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 CoinsHandler.Amount += item.Amount;
 
-                return true;
+                return 0;
             }
             else
             {
@@ -128,42 +123,28 @@ public class PlayerInventory : MonoBehaviour
 
                             quickSlots.Reinitialize();
 
-                            return true;
+                            return 0;
                         }
                     }
 
-                    return false;
+                    return item.Amount;
                 }
             }
         }
 
-        return false;
+        return item.Amount;
     }
 
-    public bool AddItemWithAnimation(Item item)
+    public int AddItemWithAnimation(Item item)
     {
-        if (AddItem(item))
+        int amount = AddItem(item);
+
+        if (amount == 0)
         {
             //animator.SetTrigger("Pickup");
-
-            return true;
         }
 
-        return false;
-    }
-
-    public bool AddItem(List<QuestItems> questItems)
-    {
-        foreach (QuestItems quest in questItems)
-        {
-            Item newItem = quest.Item.Copy();
-
-            newItem.Amount = quest.Amount;
-
-            AddItem(newItem);
-        }
-
-        return false;
+        return amount;
     }
 
     public bool SearchInventory(Item item, int amount)
@@ -196,35 +177,6 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return amount;
-    }
-
-    public void DeteleItems(List<QuestItems> items)
-    {
-        foreach (QuestItems questItem in items)
-        {
-            int amount = questItem.Amount;
-
-            foreach (ItemSlot itemSlot in itemsSlot)
-            {
-                if (itemSlot.Item != null && itemSlot.Item.ItemNO == questItem.Item.ItemNO)
-                {
-                    if (itemSlot.Item.Amount >= amount)
-                    {
-                        itemSlot.DecreseAmount(amount);
-                        break;
-                    }
-                    else
-                    {
-                        amount -= itemSlot.Item.Amount;
-
-                        itemSlot.DeleteItem();
-                        continue;
-                    }
-                }
-            }
-        }
-
-        quickSlots.Reinitialize();
     }
 
     public void DeleteItem(Item item)

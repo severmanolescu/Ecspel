@@ -10,26 +10,40 @@ public class PickaxeHandler : MonoBehaviour
 
     private PlayerStats playerStats;
 
+    private HarvestCropHandler harvestCropHandler;
+
+    private HoeSystemHandler hoeSystemHandler;
+
     private void Awake()
     {
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
 
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
+
+        hoeSystemHandler = GetComponent<HoeSystemHandler>();
+
+        harvestCropHandler = GetComponent<HarvestCropHandler>();
     }
 
-    private void DamageStone(GameObject node, Item item)
+    private void UsePickaxeToObject(GridNode gridNode, Item item)
     {
         Pickaxe pickaxe = (Pickaxe)item;
 
-        if (node != null)
+        if (gridNode.objectInSpace != null)
         {
-            StoneDamage stoneDamage = node.GetComponent<StoneDamage>();
+            StoneDamage stoneDamage = gridNode.objectInSpace.GetComponent<StoneDamage>();
 
             if (stoneDamage != null)
             {
                 float skillsAttackBonus = pickaxe.Damage * skillHandler.PowerLevel * 0.05f;
 
                 stoneDamage.TakeDamage(pickaxe.Damage + skillsAttackBonus, pickaxe.Level);
+            }
+            else
+            {
+                harvestCropHandler.DestroyCrop(gridNode);
+
+                hoeSystemHandler.DestroySoilMousePosition(gridNode, 0);
             }
         }
 
@@ -40,7 +54,7 @@ public class PickaxeHandler : MonoBehaviour
     {
         if (mousePosition != null)
         {
-            DamageStone(mousePosition.objectInSpace, item);
+            UsePickaxeToObject(mousePosition, item);
         }
     }
 }

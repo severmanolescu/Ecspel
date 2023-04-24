@@ -106,7 +106,7 @@ public class EquipedITem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (eventData.clickCount == 2)
         {
-            if (playerInventory.AddItem(item) == true)
+            if (playerInventory.AddItem(item) == 0)
             {
                 DeleteItem();
             }

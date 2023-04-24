@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnItem : MonoBehaviour
@@ -17,5 +15,15 @@ public class SpawnItem : MonoBehaviour
             newItem.SetItem(DefaulData.GetItemWithAmount(item, 1));
             newItem.MoveToPoint();
         }
+    }
+
+    public void SpawnItems(Item item, Vector3 position)
+    {
+        ItemWorld newItem = Instantiate(prefabItem).GetComponent<ItemWorld>();
+
+        newItem.transform.position = position;
+
+        newItem.SetItem(DefaulData.GetItemWithAmount(item, item.Amount));
+        newItem.MoveToPoint();
     }
 }

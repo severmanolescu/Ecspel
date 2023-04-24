@@ -33,21 +33,21 @@ public class SpawnLittleEnemy : MonoBehaviour
 
     private IEnumerator WaitBetweenSpawn()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(timeBetweenSpawns);
 
             CheckMinions();
 
             SpawnEnemy();
-        }        
+        }
     }
 
     private void CheckMinions()
     {
-        foreach(GameObject minion in minions)
+        foreach (GameObject minion in minions)
         {
-            if(minion == null)
+            if (minion == null)
             {
                 minions.Remove(minion);
             }
@@ -56,11 +56,11 @@ public class SpawnLittleEnemy : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if(spawnPoints.Count > 0)
+        if (spawnPoints.Count > 0)
         {
             int enemyNo = Random.Range(1, spawnPoints.Count);
 
-            for(int enemyIndex = 0; enemyIndex < enemyNo; enemyIndex++) 
+            for (int enemyIndex = 0; enemyIndex < enemyNo; enemyIndex++)
             {
                 if (minions.Count < amountOfMinions)
                 {

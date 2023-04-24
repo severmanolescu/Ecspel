@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class SourceLightShadow : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class SourceLightShadow : MonoBehaviour
         {
             sourceLights.Add(light);
 
-            if(lightStatus)
+            if (lightStatus)
             {
                 light.TurnOnLight();
             }

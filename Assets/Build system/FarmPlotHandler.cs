@@ -64,7 +64,7 @@ public class FarmPlotHandler : MonoBehaviour
 
             dry = true;
 
-            if(wetObject != null)
+            if (wetObject != null)
             {
                 Destroy(wetObject);
 

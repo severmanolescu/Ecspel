@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerItemUseSpriteChange : MonoBehaviour
@@ -16,12 +14,12 @@ public class PlayerItemUseSpriteChange : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();   
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void StartUse(Item item, Direction direction)
     {
-        if(item != null && item is ItemUse)
+        if (item != null && item is ItemUse)
         {
             this.item = (ItemUse)item;
 
@@ -29,30 +27,30 @@ public class PlayerItemUseSpriteChange : MonoBehaviour
             {
                 case Direction.Left:
                 case Direction.Right:
-                {
+                    {
                         spriteRenderer.sprite = this.item.ItemUseLateral;
 
                         break;
-                }
+                    }
                 case Direction.Down:
-                {
+                    {
                         spriteRenderer.sprite = this.item.ItemUseFront[0];
 
                         spriteIndex = 1;
 
                         break;
-                }
+                    }
                 case Direction.Up:
-                {
-                    spriteRenderer.sprite = this.item.ItemUseBack;
+                    {
+                        spriteRenderer.sprite = this.item.ItemUseBack;
 
-                    break;    
-                }
+                        break;
+                    }
             }
 
             animator.SetBool("ItemUse", true);
         }
-        else if(item is Weapon)
+        else if (item is Weapon)
         {
             spriteRenderer.sprite = item.ItemSprite;
 

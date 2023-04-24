@@ -10,10 +10,14 @@ public class AxeHandler : MonoBehaviour
 
     private PlayerStats playerStats;
 
+    private SpawnItem spawnItem;
+
     public Grid Grid { set { grid = value; } }
 
     private void Awake()
     {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
@@ -65,6 +69,30 @@ public class AxeHandler : MonoBehaviour
                             {
                                 forge.DropAllItems();
                             }
+                            else
+                            {
+                                CampFireHandler campFireHandler = node.GetComponent<CampFireHandler>();
+
+                                if (campFireHandler != null)
+                                {
+                                    if (campFireHandler.FireStarted())
+                                    {
+                                        playerStats.DecreseStamina(axe.Stamina);
+
+                                        grid.ReinitializeGrid(placeableData.Placeable, node.transform.position);     
+
+                                        campFireHandler.DestroyFire(true);
+                                    }
+                                    else
+                                    {
+                                        campFireHandler.DestroyFire();
+
+                                        DestroyObject(placeableData, node);
+                                    }
+                                        
+                                    return true;
+                                }
+                            }
                         }
 
                         DestroyObject(placeableData, node);
@@ -84,23 +112,9 @@ public class AxeHandler : MonoBehaviour
     {
         Destroy(placeableData.gameObject);
 
-        ItemWorld world = Instantiate(itemWorld).GetComponent<ItemWorld>();
+        spawnItem.SpawnItems(placeableData.Placeable, 1, node.transform.position);
 
-        world.transform.position = node.transform.position;
-
-        Placeable newItem = (Placeable)placeableData.Placeable.Copy();
-
-        if (placeableData.ItemWorldSize < 1f)
-        {
-            world.transform.localScale = new Vector3(placeableData.ItemWorldSize, placeableData.ItemWorldSize, 1f);
-        }
-
-        newItem.Amount = 1;
-
-        world.SetItem(newItem);
-        world.MoveToPoint();
-
-        grid.ReinitializeGrid(newItem, node.transform.position);
+        grid.ReinitializeGrid(placeableData.Placeable, node.transform.position);
     }
 
     public void UseAxe(int spawn, Item item, GridNode mousePosition)

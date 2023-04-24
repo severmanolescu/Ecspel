@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,32 +7,35 @@ public class DialogueChanger : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI dialogueText;
 
-    [SerializeField] private AnswersHandler answersHandler;
-
     private DialogueScriptableObject dialogue;
+
+    private DialogueDisplay dialogueDisplay;
+
+    private QuestTabHandler questTab;
 
     private int dialogueIndex = 0;
 
     private bool firstSpacePress = false;
 
-    private DialogueDisplay dialogueDisplay;
+    private bool answersPlaced = false;
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
-        answersHandler.DialogueChanger = this;
+        gameObject.SetActive(false);
     }
 
     public void ShowDialogue(DialogueScriptableObject dialogue, DialogueDisplay dialogueDisplay = null)
     {
         if (dialogue != null)
         {
-            if(dialogueDisplay != null && gameObject.activeSelf == false)
+            if (dialogueDisplay != null && gameObject.activeSelf == false)
             {
                 this.dialogueDisplay = dialogueDisplay;
+
+                answersPlaced = false;
             }
-            
 
             this.dialogue = dialogue;
 
@@ -54,7 +56,21 @@ public class DialogueChanger : MonoBehaviour
 
         gameObject.SetActive(false);
 
+        if (dialogueDisplay != null)
+        {
+            dialogueDisplay.FinishTalk();
+        }
+
+        if (dialogue != null &&
+            dialogue.Quest != null &&
+            dialogue.Quest.Count > 0)
+        {
+            AddQuests();
+        }
+
         dialogue = null;
+
+        answersPlaced = false;
     }
 
     private IEnumerator DialogueDisplay()
@@ -74,11 +90,17 @@ public class DialogueChanger : MonoBehaviour
                     yield return new WaitForSeconds(0.1f);
                 }
 
-                firstSpacePress = true;  
-            }            
+                firstSpacePress = true;
+            }
+            else if (answersPlaced == false || (dialogue.Quest != null && dialogue.Quest.Count > 0))
+            {
+                StopDialogue();
+            }
         }
-
-        CheckIfPlaceAnswers();
+        else
+        {
+            StopDialogue();
+        }
     }
 
     private void ShowAllText()
@@ -86,56 +108,27 @@ public class DialogueChanger : MonoBehaviour
         if (dialogueIndex < dialogue.DialogueRespons.Count)
         {
             dialogueText.text = dialogue.DialogueRespons[dialogueIndex];
-
-            CheckIfPlaceAnswers();
-        }
-    }
-
-    private void CheckIfPlaceAnswers()
-    {
-        if (dialogueIndex == dialogue.DialogueRespons.Count - 1)
-        {
-            if( dialogue.DialogueAnswers != null &&
-                dialogue.DialogueAnswers.Count > 0)
-            {
-                answersHandler.ShowAnswers(dialogue);
-            }
-            else
-            {
-                if (dialogueDisplay != null)
-                {
-                    dialogueDisplay.FinishWalk();
-                }
-
-                if( dialogue.Quest != null &&
-                    dialogue.Quest.Count > 0)
-                {
-                    AddQuests();
-                }
-
-                StopDialogue();
-            }
         }
     }
 
     private void AddQuests()
     {
-
+        questTab.AddQuest(dialogue.Quest);
     }
 
     private void Update()
     {
         if (dialogue != null)
         {
-            if(Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                if(firstSpacePress == false)
+                if (firstSpacePress == false)
                 {
-                    firstSpacePress = true;
-
                     StopAllCoroutines();
 
                     ShowAllText();
+
+                    firstSpacePress = true;
                 }
                 else
                 {

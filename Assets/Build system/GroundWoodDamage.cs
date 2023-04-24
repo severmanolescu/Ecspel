@@ -14,10 +14,14 @@ public class GroundWoodDamage : MonoBehaviour
     [Header("Audio effects")]
     [SerializeField] private AudioClip woodChop;
 
+    private SpawnItem spawnItem;
+
     private AudioSource audioSource;
 
     private void Awake()
     {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -28,16 +32,8 @@ public class GroundWoodDamage : MonoBehaviour
             audioSource.clip = woodChop;
             audioSource.Play();
 
-            ItemWorld newItem = Instantiate(itemWorld).GetComponent<ItemWorld>();
+            spawnItem.SpawnItems(log, 1, transform.position);
 
-            newItem.transform.position = transform.position;
-
-            Item newLog = Instantiate(log);
-
-            newLog.Amount = 1;
-
-            newItem.SetItem(newLog);
-            newItem.MoveToPoint();
 
             Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
 

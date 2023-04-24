@@ -6,17 +6,19 @@ public class BarrelHandler : MonoBehaviour
 {
     [SerializeField] private List<ItemWithRandomAmount> items = new List<ItemWithRandomAmount>();
 
-    [SerializeField] private GameObject itemWorld;
-
     [SerializeField] private float health;
 
     [SerializeField] private AudioClip damageClip;
     [SerializeField] private AudioClip destroyClip;
 
+    private SpawnItem spawnItem;
+
     private AudioSource audioSource;
 
     private void Awake()
     {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -37,8 +39,6 @@ public class BarrelHandler : MonoBehaviour
 
         health -= damage;
 
-        Debug.Log(damage);
-
         if (health <= 0)
         {
             Destroy(GetComponent<BoxCollider2D>());
@@ -49,13 +49,7 @@ public class BarrelHandler : MonoBehaviour
 
             foreach (ItemWithRandomAmount item in items)
             {
-                ItemWorld newItem = Instantiate(itemWorld).GetComponent<ItemWorld>();
-
-                newItem.SetItem(item.GetItem());
-
-                newItem.transform.position = transform.position;
-
-                newItem.MoveToPoint();
+                spawnItem.SpawnItems(item.GetItem(), transform.position);
             }
 
             StartCoroutine(WaitForSound());

@@ -9,9 +9,6 @@ public class DialogueScriptableObject : ScriptableObject
     [Header("Player and NPC respons:")]
     [SerializeField] private List<string> dialogueRespons;
 
-    [Header("Player answers for dialogue:")]
-    [SerializeField] private List<DialogueAnswersClass> dialogueAnswers;
-
     [Header("Next dialogue to play:")]
     [SerializeField] private DialogueScriptableObject nextDialogue;
 
@@ -22,7 +19,6 @@ public class DialogueScriptableObject : ScriptableObject
     [SerializeField] private bool startDialogue;
 
     public List<string> DialogueRespons { get { return dialogueRespons; } }
-    public List<DialogueAnswersClass> DialogueAnswers { get { return dialogueAnswers; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } set { nextDialogue = value; } }
     public List<Quest> Quest { get { return quests; } }
 

@@ -15,7 +15,7 @@ public class ChangeSoilsState : MonoBehaviour
 
     public void RemoveSoil(FarmPlotHandler farmPlot)
     {
-        if(farmPlot != null)
+        if (farmPlot != null)
         {
             farmPlotHandlers.Remove(farmPlot);
         }

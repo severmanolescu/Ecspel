@@ -34,7 +34,7 @@ public class CollectHarvest : MonoBehaviour
 
         newItem.Amount = 1;
 
-        if (inventory.AddItemWithAnimation(newItem) == true)
+        if (inventory.AddItemWithAnimation(newItem) == 0)
         {
             audioSource.Play();
 

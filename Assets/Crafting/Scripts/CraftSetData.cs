@@ -1,12 +1,8 @@
-using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CraftSetData : MonoBehaviour
 {
-    [SerializeField] private GameObject itemWorldPrefab;
-
     private ItemSprites itemSprites;
 
     private Craft craft = null;
@@ -39,6 +35,8 @@ public class CraftSetData : MonoBehaviour
     private ItemDetails itemDetails;
     private PlayerStats playerStats;
 
+    private SpawnItem spawnItem;
+
     public Craft Craft { get => craft; set => SetData(value); }
     public CraftCanvasHandler CanvasHandler { get => canvasHandler; set => canvasHandler = value; }
 
@@ -51,6 +49,8 @@ public class CraftSetData : MonoBehaviour
         playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
 
         itemSprites = GameObject.Find("Global").GetComponent<ItemSprites>();
+
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
 
         itemDetails = GameObject.Find("Player/Canvas/ItemDetails").GetComponent<ItemDetails>();
     }
@@ -163,17 +163,11 @@ public class CraftSetData : MonoBehaviour
             auxItem = craft.ReceiveItem.Item.Copy();
             auxItem.Amount = craft.ReceiveItem.Amount;
 
-            bool canAddItemToPlayerInventory = playerInventory.AddItem(auxItem);
+            int leftAmount = playerInventory.AddItem(auxItem);
 
-            if (canAddItemToPlayerInventory == false)
+            if (leftAmount != 0)
             {
-                ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-                itemWorld.SetItem(auxItem, false);
-
-                itemWorld.transform.position = playerLocation.position;
-
-                itemWorld.MoveToPoint();
+                spawnItem.SpawnItems(craft.ReceiveItem.Item, leftAmount, playerLocation.position);
             }
 
             playerStats.DecreseStamina(craft.Stamina);
@@ -246,7 +240,7 @@ public class CraftSetData : MonoBehaviour
 
     private void SetDataToDetails(int itemNo)
     {
-        switch(itemNo)
+        switch (itemNo)
         {
             default:
             case 0:
@@ -310,7 +304,7 @@ public class CraftSetData : MonoBehaviour
 
     public void HideItemDetails()
     {
-        if(itemDetails != null)
+        if (itemDetails != null)
         {
             itemDetails.gameObject.SetActive(false);
         }

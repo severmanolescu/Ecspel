@@ -66,7 +66,7 @@ public class CraftCanvasHandler : MonoBehaviour
 
     public void Close()
     {
-        if(crafts != null)
+        if (crafts != null)
         {
             ShowAllCrafts();
         }
@@ -145,16 +145,16 @@ public class CraftCanvasHandler : MonoBehaviour
 
     private void ChangeButtonColor(int buttonNo)
     {
-        if(filterButtons != null && filterButtons.Count > buttonNo)
+        if (filterButtons != null && filterButtons.Count > buttonNo)
         {
-            for(ushort buttonIndex = 0; buttonIndex < filterButtons.Count; buttonIndex++)
+            for (ushort buttonIndex = 0; buttonIndex < filterButtons.Count; buttonIndex++)
             {
                 ColorBlock colorBlock = filterButtons[buttonIndex].colors;
 
                 if (buttonNo != buttonIndex)
                 {
-                    colorBlock.normalColor = nonActiveButtonColor;    
-                    colorBlock.selectedColor = nonActiveButtonColor;    
+                    colorBlock.normalColor = nonActiveButtonColor;
+                    colorBlock.selectedColor = nonActiveButtonColor;
                 }
                 else
                 {

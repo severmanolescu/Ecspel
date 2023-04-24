@@ -12,9 +12,6 @@ public class QuickSlotsChanger : MonoBehaviour
     private Keyboard keyboard;
     private Mouse mouse;
 
-    private bool forwardButtonPress = true;
-    private bool backButtonPress = true;
-
     public int SelectedItemIndex { get { return selectedItemIndex; } }
     public Item Item { get { return quickSlots[selectedItemIndex - 1].Item; } }
 
@@ -113,34 +110,22 @@ public class QuickSlotsChanger : MonoBehaviour
             ChangeSelectedItem(10);
         }
 
-        if (mouse.scroll.y.ReadValue() == 120 || (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == false && forwardButtonPress == false))
+        if (mouse.scroll.y.ReadValue() == 120)
         {
             if (selectedItemIndex > 1)
             {
                 selectedItemIndex--;
                 ChangeSelectedItem(selectedItemIndex);
             }
-
-            forwardButtonPress = true;
-        }
-        else if (Joystick.current != null && Joystick.current.allControls[6].IsPressed() == true)
-        {
-            forwardButtonPress = false;
         }
 
-        if (mouse.scroll.y.ReadValue() == -120 || (Joystick.current != null && Joystick.current.allControls[7].IsPressed() == false && backButtonPress == false))
+        if (mouse.scroll.y.ReadValue() == -120)
         {
             if (selectedItemIndex < 10)
             {
                 selectedItemIndex++;
                 ChangeSelectedItem(selectedItemIndex);
             }
-
-            backButtonPress = true;
-        }
-        else if (Joystick.current != null && Joystick.current.allControls[7].IsPressed() == true)
-        {
-            backButtonPress = false;
         }
     }
 }

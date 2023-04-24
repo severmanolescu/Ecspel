@@ -60,6 +60,13 @@ public class Grid
         return GetWorldPosition(gridNode.x, gridNode.y);
     }
 
+    public Vector3 GetWorldPositionFronGridObject(Vector3 position)
+    {
+        GetXY(position, out int x, out int y);
+
+        return GetWorldPosition(x, y);
+    }
+
     public bool VerifyDistanceBetweenTwoNodes(GridNode node1, GridNode node2, int maxDistance)
     {
         if (Math.Abs(node1.x - node2.x) > maxDistance) return false;
@@ -88,10 +95,7 @@ public class Grid
 
     public GridNode GetGridObject(Vector3 worldPosition)
     {
-        int x;
-        int y;
-
-        GetXY(worldPosition, out x, out y);
+        GetXY(worldPosition, out int x, out int y);
 
         return GetGridObject(x, y);
     }
@@ -100,13 +104,13 @@ public class Grid
     {
         GridNode changePosition = GetGridObject(position);
 
-        if(changePosition != null)
+        if (changePosition != null)
         {
             for (int i = changePosition.x + placeable.StartX; i <= changePosition.x + placeable.SizeX; i++)
             {
                 for (int j = changePosition.y + placeable.StartY; j <= changePosition.y + placeable.SizeY; j++)
                 {
-                    if (i >= 0 && i < width && 
+                    if (i >= 0 && i < width &&
                         j >= 0 && j < height)
                     {
                         ReinitializeGrid(gridArray[i, j]);
@@ -152,6 +156,8 @@ public class Grid
                         gridArray[i, j] != null)
                     {
                         if (gridArray[i, j].objectInSpace != null &&
+                            gridArray[i, j].objectInSpace.CompareTag("FarmPlot") &&
+                            gridArray[i, j].cropPlaced == false &&
                             !objectsToDestroy.Contains(gridArray[i, j].objectInSpace))
                         {
                             objectsToDestroy.Add(gridArray[i, j].objectInSpace);

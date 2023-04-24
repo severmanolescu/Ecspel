@@ -33,7 +33,7 @@ public class LocationGridSave : MonoBehaviour
 
     public void ReinitializeGrid()
     {
-        grid = new Grid(height, weight, cellSize, position, (Grid g, int x, int y) => new GridNode( g, x, y));
+        grid = new Grid(height, weight, cellSize, position, (Grid g, int x, int y) => new GridNode(g, x, y));
     }
 
     IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)

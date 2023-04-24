@@ -16,7 +16,7 @@ public class GiantEyeProjectileHandler : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(player.position - transform.position, ForceMode2D.Force);
 
-        float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.y, 
+        float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.y,
                                      player.transform.position.x - transform.position.x);
 
         float angleDeg = (180 / Mathf.PI) * angleRad;

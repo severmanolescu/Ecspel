@@ -61,7 +61,8 @@ public class NpcAIHandler : MonoBehaviour
     {
         npcPath.CanWalk = false;
 
-        if (scheduleIndex < npcTimeSchedules.Count &&
+        if (npcTimeSchedules != null &&
+            scheduleIndex < npcTimeSchedules.Count &&
             npcTimeSchedules[scheduleIndex].Point.position != transform.position)
         {
             npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);

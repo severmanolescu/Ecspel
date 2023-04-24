@@ -73,7 +73,7 @@ public class PathFindingEye : MonoBehaviour
 
     private void Start()
     {
-        if(locationGrid == null)
+        if (locationGrid == null)
         {
             locationGrid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>();
         }

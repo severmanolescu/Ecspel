@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(die == false)
+        if (die == false)
         {
             health -= damage;
 
@@ -62,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
 
                 StartCoroutine(WaitDamage());
             }
-        }        
+        }
     }
 
     private void DestroyEnemy()
@@ -85,7 +85,7 @@ public class EnemyHealth : MonoBehaviour
 
             SpawnLittleEnemy spawnLittle = GetComponent<SpawnLittleEnemy>();
 
-            if(spawnLittle != null)
+            if (spawnLittle != null)
             {
                 spawnLittle.SpawnEnemy();
             }

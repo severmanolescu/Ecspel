@@ -1,192 +1,120 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestTabDataSet : MonoBehaviour
 {
-    [SerializeField] private GameObject textGiveItems;
-    [SerializeField] private Transform spawnLocationGiveItems;
+    [Header("Quest details")]
+    [SerializeField] private TextMeshProUGUI questTitleText;
+    [SerializeField] private TextMeshProUGUI questDetailText;
 
-    [SerializeField] private GameObject textReceiveItems;
-    [SerializeField] private Transform spawnLocationReceiveItems;
+    [Header("Quest objective")]
+    [SerializeField] private GameObject textQuestLog;
+    [SerializeField] private Transform spawnLocationQuestLog;
+    [SerializeField] private GameObject questLogPrefab;
+
+    [Header("Quest rewards")]
+    [SerializeField] private GameObject textRewardItems;
+    [SerializeField] private Transform spawnLocationRewardItems;
+    [SerializeField] private GameObject rewardItemPrefab;
+
+    [Header("Quest icon near name")]
+    [SerializeField] private GameObject questIcon;
 
     [SerializeField] private GameObject itemSlotPrefab;
 
-    private QuestFollowHandler questFollow;
-
-    private QuestTrack questTrack;
-
-    private TextMeshProUGUI title;
-
-    private TextMeshProUGUI details;
-
-    private Button track;
-
-    private NpcId npcId;
-
     private void Awake()
     {
-        TextMeshProUGUI[] texts = gameObject.GetComponentsInChildren<TextMeshProUGUI>();
-
-        title = texts[0];
-        details = texts[1];
-
-        textGiveItems.SetActive(false);
-        textReceiveItems.SetActive(false);
-
-        track = gameObject.GetComponentInChildren<Button>();
-
-        questTrack = GameObject.Find("Player/Canvas/QuestTrack").GetComponent<QuestTrack>();
-        questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
-
-        npcId = GameObject.Find("Global").GetComponent<NpcId>();
-
-        track.gameObject.SetActive(false);
+        DeleteData();
     }
 
     public void SetData(Quest quest)
     {
-        title.text = quest.Title;
-        details.text = quest.Details;
+        questTitleText.text = quest.Title;
+        questDetailText.text = quest.Details;
 
-        ItemSlot[] itemSlots = spawnLocationGiveItems.GetComponentsInChildren<ItemSlot>();
+        questDetailText.gameObject.SetActive(true);
+        questTitleText.gameObject.SetActive(true);
 
-        foreach (ItemSlot itemSlot in itemSlots)
+        textQuestLog.SetActive(true);
+        textRewardItems.SetActive(true);
+        questIcon.SetActive(true);
+
+        DestroyOldQuestData();
+
+        PlaceQuestRewards(quest.ReceiveItems);
+
+        PlaceQuestLog(quest.QuestObjectives);
+    }
+
+    private void PlaceQuestLog(List<Objective> objectives)
+    {
+        if (objectives != null && objectives.Count > 0)
         {
-            Destroy(itemSlot.gameObject);
-        }
-
-        itemSlots = spawnLocationReceiveItems.GetComponentsInChildren<ItemSlot>();
-
-        foreach (ItemSlot itemSlot in itemSlots)
-        {
-            Destroy(itemSlot.gameObject);
-        }
-
-        if (quest is GiveItem)
-        {
-            GiveItem giveItem = (GiveItem)quest;
-
-            if (giveItem.itemsNeeds.Count > 0)
+            foreach (Objective objective in objectives)
             {
-                textGiveItems.SetActive(true);
-
-                foreach (QuestItems item in giveItem.ItemsNeeds)
+                if (objective != null)
                 {
-                    Item newItem = item.Item.Copy();
-                    newItem.Amount = item.Amount;
+                    GameObject newLog = Instantiate(questLogPrefab, spawnLocationQuestLog);
 
-                    ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
+                    newLog.GetComponentInChildren<TextMeshProUGUI>().text = objective.name;
 
-                    itemSlot.transform.SetParent(spawnLocationGiveItems);
+                    Image logComplete = newLog.GetComponentInChildren<Image>();
 
-                    itemSlot.SetItem(newItem);
+                    logComplete.gameObject.SetActive(objective.Completed);
 
-                    itemSlot.DontShowDetails = true;
+                    if (objective.Completed == false)
+                    {
+                        return;
+                    }
                 }
             }
-            else
+        }
+    }
+
+    private void PlaceQuestRewards(List<ItemWithAmount> items)
+    {
+        if (items != null && items.Count > 0)
+        {
+            foreach (ItemWithAmount item in items)
             {
-                textGiveItems.SetActive(false);
+                QuestRewardDataSet questReward = Instantiate(rewardItemPrefab, spawnLocationRewardItems.transform).GetComponent<QuestRewardDataSet>();
+
+                questReward.SetData(item);
             }
         }
+    }
 
-        if (quest.itemsReceive.Count > 0)
+    private void DestroyOldQuestData()
+    {
+        TextMeshProUGUI[] questDetailsList = spawnLocationQuestLog.GetComponentsInChildren<TextMeshProUGUI>();
+
+        foreach (TextMeshProUGUI itemSlot in questDetailsList)
         {
-            textReceiveItems.SetActive(true);
-
-            foreach (QuestItems item in quest.itemsReceive)
-            {
-                Item newItem = item.Item.Copy();
-                newItem.Amount = item.Amount;
-
-                ItemSlot itemSlot = Instantiate(itemSlotPrefab).GetComponent<ItemSlot>();
-
-                itemSlot.transform.SetParent(spawnLocationReceiveItems);
-
-                itemSlot.SetItem(newItem);
-
-                itemSlot.DontShowDetails = true;
-            }
-        }
-        else
-        {
-            textReceiveItems.SetActive(false);
+            Destroy(itemSlot.transform.parent.gameObject);
         }
 
-        //track.gameObject.SetActive(true);
-        //if (quest is GiveItem)
-        //{
-        //    GiveItem giveItem = (GiveItem)quest;
+        questDetailsList = spawnLocationRewardItems.GetComponentsInChildren<TextMeshProUGUI>();
 
-        //    track.onClick.AddListener(delegate { questFollow.StopFollowQuest(); });
-        //    track.onClick.AddListener(delegate { questTrack.TrackQuest(npcId.GetNpcFromId(giveItem.whoToGiveId).transform); });
-        //}
-        //else if(quest is GoToLocation)
-        //{
-        //    track.onClick.AddListener(delegate { questFollow.StartFollowQuest(quest); });
-        //}
-        //else if(quest is CutTrees)
-        //{
-        //    track.gameObject.SetActive(false);
-        //}
-        //else if (quest is DestroyStone)
-        //{
-        //    track.gameObject.SetActive(false);
-        //}
-
+        foreach (TextMeshProUGUI itemSlot in questDetailsList)
+        {
+            Destroy(itemSlot.transform.parent.gameObject);
+        }
     }
 
     public void DeleteData()
     {
-        title.text = "";
-        details.text = "";
+        questTitleText.text = "";
+        questDetailText.text = "";
 
-        textGiveItems.SetActive(false);
-        textReceiveItems.SetActive(false);
+        textQuestLog.SetActive(false);
+        textRewardItems.SetActive(false);
+        questIcon.SetActive(false);
 
-        ItemSlot[] itemSlots = spawnLocationGiveItems.GetComponentsInChildren<ItemSlot>();
+        questDetailText.gameObject.SetActive(false);
+        questTitleText.gameObject.SetActive(false);
 
-        foreach (ItemSlot itemSlot in itemSlots)
-        {
-            Destroy(itemSlot.gameObject);
-        }
-
-        itemSlots = spawnLocationReceiveItems.GetComponentsInChildren<ItemSlot>();
-
-        foreach (ItemSlot itemSlot in itemSlots)
-        {
-            Destroy(itemSlot.gameObject);
-        }
-
-        track.gameObject.SetActive(false);
-    }
-
-    public void SetQuestTrack()
-    {
-        Button button = gameObject.GetComponent<Button>();
-
-        ColorBlock colorBlock = button.colors;
-
-        colorBlock.normalColor = Color.white;
-
-        button.colors = colorBlock;
-    }
-
-    public void DeselectQuestTrack()
-    {
-        Button button = gameObject.GetComponent<Button>();
-
-        Color color;
-
-        if (ColorUtility.TryParseHtmlString("#8E8E8E", out color))
-        {
-            ColorBlock colorBlock = button.colors;
-
-            colorBlock.normalColor = color;
-
-            button.colors = colorBlock;
-
-        }
+        DestroyOldQuestData();
     }
 }

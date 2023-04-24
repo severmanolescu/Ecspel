@@ -259,7 +259,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 itemWorld.EnteredInPlayer = true;
 
-                if (playerInventory.AddItemWithAnimation(itemWorld.Item) == true)
+                if (playerInventory.AddItemWithAnimation(itemWorld.Item) == 0)
                 {
                     collision.gameObject.GetComponent<ItemWorld>().DestroySelf();
 

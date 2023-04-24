@@ -26,7 +26,7 @@ public class ChangeText : MonoBehaviour
 
     public void ChangeColor(Color color)
     {
-        if(textMesh != null)
+        if (textMesh != null)
         {
             textMesh.color = color;
         }

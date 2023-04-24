@@ -373,7 +373,7 @@ public class PathFindingEyeGiant : MonoBehaviour
                 {
                     AttackPlayer();
                 }
-                else if(distance < distanteProjectile)
+                else if (distance < distanteProjectile)
                 {
                     AttackPlayerProjectile();
                 }

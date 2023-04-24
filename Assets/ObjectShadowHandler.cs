@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectShadowHandler : MonoBehaviour
@@ -11,7 +9,7 @@ public class ObjectShadowHandler : MonoBehaviour
         sunShadow = GameObject.Find("Global/DayTimer").GetComponent<SunShadowHandler>();
 
         if (sunShadow != null)
-        { 
+        {
             sunShadow.AddShadow(this.transform);
         }
     }

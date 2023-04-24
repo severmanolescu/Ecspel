@@ -14,7 +14,7 @@ public class GetItemFromNO : MonoBehaviour
     {
         if (itemNo >= 0)
         {
-            if(itemNo < items.Count)
+            if (itemNo < items.Count)
             {
                 if (items[itemNo].ItemNO == itemNo)
                 {

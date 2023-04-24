@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -24,7 +23,7 @@ public class LightHandler : MonoBehaviour
     {
         spotLight.enabled = true;
 
-        if(lightOn != null)
+        if (lightOn != null)
         {
             spriteRenderer.sprite = lightOn;
         }

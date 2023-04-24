@@ -3,25 +3,20 @@ using UnityEngine;
 
 public class EnemyDropLoot : MonoBehaviour
 {
-    [SerializeField] private List<QuestItems> drops = new List<QuestItems>();
+    [SerializeField] private List<ItemWithAmount> drops = new List<ItemWithAmount>();
 
-    [SerializeField] private GameObject itemWorldPrefab;
+    private SpawnItem spawnItem;
+
+    private void Awake()
+    {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+    }
 
     public void DropItem()
     {
-        foreach (QuestItems questItems in drops)
+        foreach (ItemWithAmount drop in drops)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-            Item item = Instantiate(questItems.Item);
-
-            item.Amount = questItems.Drop;
-
-            itemWorld.SetItem(item);
-
-            itemWorld.transform.position = transform.position;
-
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(drop.Item, drop.Amount, transform.position);
 
             return;
         }

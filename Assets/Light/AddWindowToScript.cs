@@ -8,7 +8,7 @@ public class AddWindowToScript : MonoBehaviour
     {
         change = GameObject.Find("Global/DayTimer").GetComponent<ChangeWindowLightIntensity>();
 
-        if(change != null)
+        if (change != null)
         {
             change.Renderers.Add(GetComponent<SpriteRenderer>());
         }
@@ -16,9 +16,9 @@ public class AddWindowToScript : MonoBehaviour
 
     private void OnDestroy()
     {
-         if(change != null)
-         {
+        if (change != null)
+        {
             change.Renderers.Remove(GetComponent<SpriteRenderer>());
-         }
+        }
     }
 }

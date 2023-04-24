@@ -25,7 +25,7 @@ public class ItemUseByMouse : MonoBehaviour, IPointerExitHandler
     {
         transform.position = itemSlot.transform.position;
 
-        this.itemSlot= itemSlot;
+        this.itemSlot = itemSlot;
 
         button.gameObject.SetActive(true);
 
@@ -55,7 +55,7 @@ public class ItemUseByMouse : MonoBehaviour, IPointerExitHandler
 
     private void Update()
     {
-        if(playerInventory.activeSelf == false)
+        if (playerInventory.activeSelf == false)
         {
             HideButton();
         }

@@ -20,9 +20,9 @@ public class AttackPlayer : MonoBehaviour
 
     public void AttackComplete()
     {
-        if(Vector3.Distance(transform.position, playerStats.transform.position) < maxAttackDistance)
+        if (Vector3.Distance(transform.position, playerStats.transform.position) < maxAttackDistance)
         {
-            if((transform.position.x < playerStats.transform.position.x && transform.localScale.x < 0) ||
+            if ((transform.position.x < playerStats.transform.position.x && transform.localScale.x < 0) ||
                (transform.position.x > playerStats.transform.position.x && transform.localScale.x > 0))
             {
                 playerStats.Health -= attackPower;

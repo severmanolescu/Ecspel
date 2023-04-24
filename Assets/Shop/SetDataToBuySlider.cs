@@ -195,9 +195,9 @@ public class SetDataToBuySlider : MonoBehaviour
 
                 itemToAdd.Amount = (int)slider.value;
 
-                bool canAdd = playerInventory.AddItem(itemToAdd);
+                int canAdd = playerInventory.AddItem(itemToAdd);
 
-                if (canAdd == true)
+                if (canAdd == 0)
                 {
                     itemSlot.DecreseAmount((int)slider.value);
                 }
@@ -234,9 +234,9 @@ public class SetDataToBuySlider : MonoBehaviour
 
                 Item itemToAdd = itemSlot.Item.Copy();
 
-                bool canAdd = playerInventory.AddItem(itemToAdd);
+                int canAdd = playerInventory.AddItem(itemToAdd);
 
-                if (canAdd == true)
+                if (canAdd == 0)
                 {
                     if (itemSlot != null)
                     {

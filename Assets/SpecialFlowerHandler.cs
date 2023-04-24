@@ -134,7 +134,7 @@ public class SpecialFlowerHandler : MonoBehaviour
             {
                 if (placedFlowers > maximumOfFlowers)
                 {
-                    if (playerInventory.AddItem(item) == true)
+                    if (playerInventory.AddItem(item) == 0)
                     {
                         DeletePillarFlower();
 

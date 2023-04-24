@@ -1,78 +1,67 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestTabHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject answarePrefab;
+    [SerializeField] private GameObject questButtonPrefab;
 
-    private Transform spawnLocation;
+    [SerializeField] private GameObject activeQuestText;
+    [SerializeField] private Transform activeQuestSpawnLocation;
 
-    private List<QuestButton> questButtons = new List<QuestButton>();
+    [SerializeField] private GameObject completedQuestText;
+    [SerializeField] private Transform completedQuestSpawnLocation;
 
-    private QuestFollowHandler questFollow;
+    private List<QuestButton> activeQuests = new List<QuestButton>();
+    private List<QuestButton> completedQuests = new List<QuestButton>();
+
+    private PlayerInventory playerInventory;
 
     private GetQuest getQuest;
 
-    private NpcId npcId;
+    private QuestToWorldHandler questToWorld;
+
+    private SpawnItem spawnItem;
+
+    private Transform playerPosition;
 
     private void Awake()
     {
+        DeleteAllQuest();
+
+        gameObject.SetActive(false);
+
+        completedQuestText.SetActive(false);
+
         getQuest = GameObject.Find("Global").GetComponent<GetQuest>();
 
-        spawnLocation = transform.Find("ScrollView/Viewport/Content");
-        questFollow = GameObject.Find("Player/QuestFollowObjects").GetComponent<QuestFollowHandler>();
+        questToWorld = GameObject.Find("Global").GetComponent<QuestToWorldHandler>();
 
-        npcId = GameObject.Find("Global").GetComponent<NpcId>();
+        questToWorld.QuestTab = this;
+
+        playerPosition = GameObject.Find("Global/Player").transform;
+
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
+        playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
     }
 
     private void InstantiateButton(Quest quest)
     {
-        GameObject @object = Instantiate(answarePrefab, spawnLocation.transform);
+        GameObject @object = Instantiate(questButtonPrefab, activeQuestSpawnLocation);
 
-        @object.transform.localScale = answarePrefab.transform.localScale;
+        @object.transform.localScale = questButtonPrefab.transform.localScale;
 
-        questButtons.Add(@object.GetComponent<QuestButton>());
+        activeQuests.Add(@object.GetComponent<QuestButton>());
 
-        @object.GetComponent<QuestButton>().SetData(quest, gameObject.GetComponent<QuestTabDataSet>());
-    }
-
-    public void SetQuestWorld(Quest quest)
-    {
-        if (quest is GiveItem)
-        {
-            GiveItem giveItem = (GiveItem)quest;
-
-            //npcId.GetNpcFromId(giveItem.whoToGiveId).AddQuest(quest);
-        }
-        else if (quest is GoToLocation)
-        {
-            questFollow.SetQuestFollow(quest);
-        }
-        else if (quest is CutTrees)
-        {
-            GetComponent<QuestCutTreesHandler>().SetCutTreesQuest(quest);
-        }
-        else if (quest is DestroyStone)
-        {
-            GetComponent<QuestDestroyStoneHandle>().SetDestroyStonequest(quest);
-        }
-        else if (quest is KillEnemy)
-        {
-            GetComponent<QuestKillEnemyHandle>().SetKillEnemyQuest(quest);
-        }
-        else if (quest is QuestTalk)
-        {
-            QuestTalk questTalk = (QuestTalk)quest;
-
-            //npcId.GetNpcFromId(questTalk.npcId).AddQuest(quest);
-        }
+        @object.GetComponent<QuestButton>().SetData(quest, GetComponent<QuestTabDataSet>());
     }
 
     private bool VerifyQuest(Quest quest)
     {
         if (quest != null && quest.Title != string.Empty)
         {
-            foreach (QuestButton questButton in questButtons)
+            foreach (QuestButton questButton in activeQuests)
             {
                 if (questButton.Quest == quest)
                 {
@@ -88,13 +77,26 @@ public class QuestTabHandler : MonoBehaviour
         }
     }
 
+    private Quest ResetQuestData(Quest quest)
+    {
+        foreach (Objective objective in quest.QuestObjectives)
+        {
+            objective.Completed = false;
+        }
+
+        return quest;
+    }
     public void AddQuest(Quest quest)
     {
         if (quest != null && VerifyQuest(quest))
         {
-            InstantiateButton(quest);
+            Quest questCopy = quest.Copy();
 
-            SetQuestWorld(quest);
+            ResetQuestData(questCopy);
+
+            InstantiateButton(questCopy);
+
+            questToWorld.SetQuestToWorld(questCopy);
         }
     }
 
@@ -111,11 +113,11 @@ public class QuestTabHandler : MonoBehaviour
 
     public void DeleteQuest(Quest quest)
     {
-        foreach (QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in activeQuests)
         {
             if (questButton.Quest == quest)
             {
-                questButtons.Remove(questButton);
+                activeQuests.Remove(questButton);
 
                 Destroy(questButton.gameObject);
 
@@ -128,7 +130,7 @@ public class QuestTabHandler : MonoBehaviour
     {
         List<Quest> quests = new List<Quest>();
 
-        foreach (QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in activeQuests)
         {
             if (questButton.Quest != null)
             {
@@ -143,7 +145,7 @@ public class QuestTabHandler : MonoBehaviour
     {
         List<int> questIDs = new List<int>();
 
-        foreach (QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in activeQuests)
         {
             if (questButton != null && questButton.Quest != null)
             {
@@ -156,21 +158,63 @@ public class QuestTabHandler : MonoBehaviour
 
     private void DeleteAllQuest()
     {
-        foreach (QuestButton questButton in questButtons)
+        foreach (QuestButton questButton in activeQuests)
         {
             Destroy(questButton.gameObject);
         }
 
-        questButtons.Clear();
+        activeQuests.Clear();
+
+        DeleteQuestsFromLocation(activeQuestSpawnLocation);
+        DeleteQuestsFromLocation(completedQuestSpawnLocation);
     }
 
-    public void SetQuestsWithID(List<int> questsId)
+    private void DeleteQuestsFromLocation(Transform location)
     {
-        DeleteAllQuest();
+        Button[] oldQuests = location.GetComponentsInChildren<Button>();
 
-        foreach (int id in questsId)
+        foreach (Button quest in oldQuests)
         {
-            AddQuest(getQuest.GetQuestFromID(id));
+            if (quest != location)
+            {
+                Destroy(quest.gameObject);
+            }
+        }
+    }
+
+    public void AddItemsToInventory(List<ItemWithAmount> items)
+    {
+        foreach (ItemWithAmount item in items)
+        {
+            Item itemCopy = item.Item.Copy();
+            itemCopy.Amount = item.Amount;
+
+            int leftAmount = playerInventory.AddItem(itemCopy);
+
+            itemCopy.Amount = leftAmount;
+
+            spawnItem.SpawnItems(itemCopy, playerPosition.position);
+        }
+    }
+
+    public void CompletQuest(Quest quest)
+    {
+        foreach (QuestButton activeQuest in activeQuests)
+        {
+            if (activeQuest.Quest == quest)
+            {
+                activeQuests.Remove(activeQuest);
+
+                activeQuest.transform.SetParent(completedQuestSpawnLocation);
+
+                completedQuestText.SetActive(true);
+
+                completedQuests.Add(activeQuest);
+
+                AddItemsToInventory(quest.ReceiveItems);
+
+                return;
+            }
         }
     }
 }

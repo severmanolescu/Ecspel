@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class BuildSystemHandler : MonoBehaviour
 {
@@ -17,7 +14,7 @@ public class BuildSystemHandler : MonoBehaviour
 
     private bool startPlace = false;
 
-    private GameObject @object;
+    private GameObject toPlaceObject = null;
 
     private QuickSlotsChanger quickSlots;
 
@@ -28,6 +25,10 @@ public class BuildSystemHandler : MonoBehaviour
     private AudioSource audioSource;
 
     private GridNode lastGridNode = null;
+
+    private PlayerMovement playerMovement;
+
+    private FenceSystemHandler fenceSystem;
 
     public Grid Grid { get { return LocationGrid.Grid; } }
     public bool canPlantGrid { get { return LocationGrid.CanPlantToGrid; } }
@@ -41,6 +42,10 @@ public class BuildSystemHandler : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         audioSource.Stop();
+
+        playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
+
+        fenceSystem = GetComponent<FenceSystemHandler>();
     }
 
     private void Start()
@@ -54,6 +59,8 @@ public class BuildSystemHandler : MonoBehaviour
         GetComponent<PickaxeHandler>().Grid = Grid;
         GetComponent<AxeHandler>().Grid = Grid;
         GetComponent<WateringCanHandler>().Grid = Grid;
+
+        fenceSystem.Grid = Grid;
     }
 
     public void ChangeGridCropPlaced(GridNode gridNode, bool cropPlaced)
@@ -68,17 +75,17 @@ public class BuildSystemHandler : MonoBehaviour
 
     private void CreateObject()
     {
-        @object = Instantiate(prefabGameObject, spawnPosition);
+        toPlaceObject = Instantiate(prefabGameObject, spawnPosition);
 
-        @object.AddComponent<SpriteRenderer>().sortingOrder = 1;
+        toPlaceObject.AddComponent<SpriteRenderer>().sortingOrder = 1;
 
-        switch(item)
+        switch (item)
         {
             case Crop:
                 {
                     Crop crop = (Crop)item;
 
-                    @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
+                    toPlaceObject.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
 
                     break;
                 }
@@ -86,13 +93,13 @@ public class BuildSystemHandler : MonoBehaviour
                 {
                     Sapling sapling = (Sapling)item;
 
-                    @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
+                    toPlaceObject.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
 
                     break;
                 }
             default:
                 {
-                    @object.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
+                    toPlaceObject.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
 
                     break;
                 }
@@ -101,55 +108,58 @@ public class BuildSystemHandler : MonoBehaviour
 
     public void StartPlace(Item item)
     {
-        StopPlace();
-
-        if (LocationGrid != null && canPlantGrid == true)
+        if (item != this.item)
         {
-            this.item = item;
+            StopPlace();
 
-            startPlace = true;
-
-            if (@object == null)
+            if (LocationGrid != null && canPlantGrid == true)
             {
-                CreateObject();
-            }
+                this.item = item;
 
-            switch(item)
-            {
-                case Crop:
-                    {
-                        Crop crop = (Crop)item;
+                if (toPlaceObject == null)
+                {
+                    CreateObject();
+                }
 
-                        @object.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
-
-                        break;
-                    }
-                case Sapling:
-                    {
-                        Sapling sapling = (Sapling)item;
-
-                        @object.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
-
-                        break;
-                    }
-                default:
-                    {
-                        if (item is Placeable)
+                switch (item)
+                {
+                    case Crop:
                         {
-                            Placeable placeable = (Placeable)item;
+                            Crop crop = (Crop)item;
 
-                            if (placeable.Prefab != null)
+                            toPlaceObject.GetComponent<SpriteRenderer>().sprite = crop.Levels[0];
+
+                            break;
+                        }
+                    case Sapling:
+                        {
+                            Sapling sapling = (Sapling)item;
+
+                            toPlaceObject.GetComponent<SpriteRenderer>().sprite = sapling.SaplingSprite;
+
+                            break;
+                        }
+                    default:
+                        {
+                            if (item is Placeable)
                             {
-                                @object.GetComponent<SpriteRenderer>().sprite = placeable.Prefab.GetComponent<SpriteRenderer>().sprite;
-                            }
-                        }
-                        else
-                        {
-                            @object.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
-                        }
+                                Placeable placeable = (Placeable)item;
 
-                        break;
-                    }
+                                if (placeable.Prefab != null)
+                                {
+                                    toPlaceObject.GetComponent<SpriteRenderer>().sprite = placeable.Prefab.GetComponent<SpriteRenderer>().sprite;
+                                }
+                            }
+                            else
+                            {
+                                toPlaceObject.GetComponent<SpriteRenderer>().sprite = item.ItemSprite;
+                            }
+
+                            break;
+                        }
+                }
+
+                startPlace = true;
             }
         }
     }
@@ -160,11 +170,13 @@ public class BuildSystemHandler : MonoBehaviour
 
         lastGridNode = null;
 
-        if (@object != null)
-        {
-            Destroy(@object);
+        item = null;
 
-            @object = null;
+        if (toPlaceObject != null)
+        {
+            Destroy(toPlaceObject);
+
+            toPlaceObject = null;
         }
     }
 
@@ -178,18 +190,28 @@ public class BuildSystemHandler : MonoBehaviour
         {
             newObject = Instantiate(placeable.Prefab, spawnPosition);
 
-            newObject.transform.position = @object.transform.position;
+            newObject.transform.position = toPlaceObject.transform.position;
 
-            newObject.GetComponent<PlaceableDataSave>().Placeable = placeable;
+            PlaceableDataSave placeableData = newObject.GetComponent<PlaceableDataSave>();
+
+            if(placeableData != null)
+            {
+                placeableData.Placeable = placeable;
+
+            }
         }
         else
         {
-            newObject = Instantiate(@object, spawnPosition);
+            newObject = Instantiate(toPlaceObject, spawnPosition);
         }
 
         newObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
 
-        switch(item)
+        ChangeCanPlace(gridNode, newObject);
+
+        SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
+
+        switch (item)
         {
             case Crop:
                 {
@@ -197,7 +219,18 @@ public class BuildSystemHandler : MonoBehaviour
 
                     newObject.tag = "Crop";
 
-                    newObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+                    Crop crop = (Crop)item;
+
+                    if (crop.TallCrop)
+                    {
+                        spriteRenderer.sortingOrder = 0;
+                    }
+                    else
+                    {
+                        spriteRenderer.sortingOrder = -1;
+                    }
+
+                    spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
 
                     gridNode.crop = newObject;
 
@@ -207,22 +240,25 @@ public class BuildSystemHandler : MonoBehaviour
                 {
                     newObject.tag = "TreeSapling";
 
-                    SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
-
                     Sapling sapling = (Sapling)item;
 
                     newObject.AddComponent<SaplingGrowHandler>().Sapling = sapling;
 
                     spriteRenderer.sortingOrder = 0;
                     spriteRenderer.sprite = sapling.SaplingSprite;
+                    spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
 
                     break;
                 }
             case Placeable:
                 {
-                    SpriteRenderer spriteRenderer = newObject.GetComponent<SpriteRenderer>();
-
                     spriteRenderer.sortingOrder = 0;
+                    spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+
+                    if (item.Name.Contains("Fence"))
+                    {
+                        fenceSystem.CheckFencePlacement(gridNode);
+                    }
 
                     break;
                 }
@@ -243,9 +279,9 @@ public class BuildSystemHandler : MonoBehaviour
             StopPlace();
         }
 
-        ChangeCanPlace(gridNode, newObject);
-
         audioSource.Play();
+
+        CheckGridNode(gridNode);
 
         return newObject;
     }
@@ -254,12 +290,38 @@ public class BuildSystemHandler : MonoBehaviour
     {
         this.item = item;
 
-        if (@object == null)
+        if (toPlaceObject == null)
         {
             CreateObject();
         }
 
         return PlaceObject(Grid.GetGridObject(position));
+    }
+
+    private void CheckGridNode(GridNode gridNode)
+    {
+        if (toPlaceObject != null)
+        {
+            if ((canPlace = VerifyCanPlace(gridNode)) == true && !(item is Crop))
+            {
+                toPlaceObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+            else
+            {
+                if (item is Crop && Grid.gridArray[gridNode.x, gridNode.y].cropPlaced == false && Grid.gridArray[gridNode.x, gridNode.y].canPlant == true)
+                {
+                    toPlaceObject.GetComponent<SpriteRenderer>().color = Color.white;
+
+                    canPlace = true;
+                }
+                else
+                {
+                    toPlaceObject.GetComponent<SpriteRenderer>().color = Color.red;
+
+                    canPlace = false;
+                }
+            }
+        }
     }
 
     private bool VerifyCanPlace(GridNode gridNode)
@@ -282,9 +344,9 @@ public class BuildSystemHandler : MonoBehaviour
 
             List<GameObject> objectsToDestroy = Grid.PlaceObjectInGrid(placeable, gridNode, newObject);
 
-            if(objectsToDestroy != null)
+            if (objectsToDestroy != null)
             {
-                foreach(GameObject gameObject in objectsToDestroy)
+                foreach (GameObject gameObject in objectsToDestroy)
                 {
                     Destroy(gameObject);
                 }
@@ -343,48 +405,45 @@ public class BuildSystemHandler : MonoBehaviour
 
         position.z = 0;
 
-        @object.transform.position = position;
+        toPlaceObject.transform.position = position;
     }
 
     private void Update()
     {
-        if (LocationGrid != null && startPlace)
+        if (LocationGrid != null && startPlace && playerMovement.TabOpen == false && playerMovement.CanMove == true && playerMovement.Dialogue == false)
         {
             Vector3 mousePosition = Mouse.current.position.ReadValue();
             mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
 
             GridNode gridNode = Grid.GetGridObject(mainCamera.ScreenToWorldPoint(mousePosition));
 
-            if (gridNode != null &&(lastGridNode == null || lastGridNode != gridNode))
+            if (gridNode != null && (lastGridNode == null || lastGridNode != gridNode))
             {
+                if (item.Name.Contains("Fence"))
+                {
+                    fenceSystem.CheckFencePlacement(lastGridNode);
+                    fenceSystem.CheckFencePlacement(gridNode, toPlaceObject.GetComponent<SpriteRenderer>());
+                }
+
                 lastGridNode = gridNode;
 
-                if ((canPlace = VerifyCanPlace(gridNode)) == true && !(item is Crop))
-                {
-                    @object.GetComponent<SpriteRenderer>().color = Color.white;
-                }
-                else
-                {
-                    if (item is Crop && Grid.gridArray[gridNode.x, gridNode.y].cropPlaced == false && Grid.gridArray[gridNode.x, gridNode.y].canPlant == true)
-                    {
-                        @object.GetComponent<SpriteRenderer>().color = Color.white;
-
-                        canPlace = true;
-                    }
-                    else
-                    {
-                        @object.GetComponent<SpriteRenderer>().color = Color.red;
-
-                        canPlace = false;
-                    }
-                }
+                CheckGridNode(lastGridNode);
 
                 ChangeObjectGridCellPosition(gridNode);
             }
-            if (Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
+            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && canPlace == true)
             {
                 PlaceObject(gridNode);
             }
-        } 
+            if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                if (item.Name.Contains("Fence"))
+                {
+                    fenceSystem.Rotate();
+
+                    fenceSystem.CheckFencePlacement(lastGridNode, toPlaceObject.GetComponent<SpriteRenderer>());
+                }
+            }
+        }
     }
 }

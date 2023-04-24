@@ -51,18 +51,6 @@ public class PlayerAchievements : MonoBehaviour
         return SlimeKill + PotionKill + PuddleKill;
     }
 
-    public bool CheckForEnemyKill(KillEnemy killEnemy, int inialAmount)
-    {
-        int kills = GetEnemyKills();
-
-        if (kills >= inialAmount + killEnemy.number)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
     public Sprite GetEnemySprite(int enemyId)
     {
         switch (enemyId)

@@ -141,7 +141,7 @@ public class DayTimerHandler : MonoBehaviour
     private IEnumerator WorldTimeDelay()
     {
         while (true)
-        {   
+        {
             changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
 
             sourceLight.ChangeLightsIntensity(1f - intensity);

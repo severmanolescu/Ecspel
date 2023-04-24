@@ -182,7 +182,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
                 return;
             }
-     
+
             this.item = item;
 
             ShowItem();
@@ -464,12 +464,12 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                                 ReinitializeItem();
                             }
                         }
-                    }                    
+                    }
                     else
                     {
-                        bool canTransferToPlayerInventory = inventory.AddItem(Item);
+                        int canTransferToPlayerInventory = inventory.AddItem(Item);
 
-                        if (canTransferToPlayerInventory == true)
+                        if (canTransferToPlayerInventory == 0)
                         {
                             HideItem();
 
@@ -513,7 +513,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void ItemUse()
     {
-        if(item is CraftRecipe)
+        if (item is CraftRecipe)
         {
             CraftRecipe craft = (CraftRecipe)item;
 
@@ -529,7 +529,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
                 }
             }
         }
-        else if(item is Consumable)
+        else if (item is Consumable)
         {
             Consumable consumable = (Consumable)item;
 

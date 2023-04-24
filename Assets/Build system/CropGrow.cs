@@ -14,6 +14,8 @@ public class CropGrow : MonoBehaviour
 
     private SkillsHandler skillHandler;
 
+    private SpawnItem spawnItem;
+
     private bool destroyed = false;
 
     public bool Destroyed { get { return destroyed; } }
@@ -24,6 +26,8 @@ public class CropGrow : MonoBehaviour
 
     private void Awake()
     {
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
         skillHandler = GameObject.Find("Global/Player/Canvas/Skills").GetComponent<SkillsHandler>();
     }
 
@@ -73,15 +77,7 @@ public class CropGrow : MonoBehaviour
 
         if (chance <= skillHandler.FarmingLevel * 5)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.Copy();
-            drop.Amount = 1;
-
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item, 1, transform.position);
         }
     }
 
@@ -89,39 +85,20 @@ public class CropGrow : MonoBehaviour
     {
         if (CurrentSprite == Item.Levels.Count - 1)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+            int amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
-
-            if (drop.Amount == 0)
+            if (amount == 0)
             {
-                drop.Amount = 1;
+                amount = 1;
             }
 
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, amount, transform.position);
 
             SpawnSeeds();
         }
         else if (CurrentSprite == Item.Levels.Count - 2)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = 1;
-
-            if (drop.Amount == 0)
-            {
-                drop.Amount = 1;
-            }
-
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, 1, transform.position);
 
             SpawnSeeds();
         }
@@ -144,39 +121,20 @@ public class CropGrow : MonoBehaviour
     {
         if (CurrentSprite == Item.Levels.Count - 2)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+            int amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
-
-            if (drop.Amount == 0)
+            if (amount == 0)
             {
-                drop.Amount = 1;
+                amount = 1;
             }
 
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, amount, transform.position);
 
             SpawnSeeds();
         }
         else if (CurrentSprite == Item.Levels.Count - 3)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = 1;
-
-            if (drop.Amount == 0)
-            {
-                drop.Amount = 1;
-            }
-
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, 1, transform.position);
 
             SpawnSeeds();
         }
@@ -215,15 +173,7 @@ public class CropGrow : MonoBehaviour
         {
             if (currentSprite == 0)
             {
-                ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
-
-                itemWorld.transform.position = transform.position;
-
-                Item drop = Item.Copy();
-                drop.Amount = 1;
-
-                itemWorld.SetItem(drop);
-                itemWorld.MoveToPoint();
+                spawnItem.SpawnItems(Item, 1, transform.position);
             }
 
             return true;
@@ -261,20 +211,14 @@ public class CropGrow : MonoBehaviour
     {
         if (CurrentSprite == Item.Levels.Count - 1)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+            int amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
-
-            if (drop.Amount == 0)
+            if (amount == 0)
             {
-                drop.Amount = 1;
+                amount = 1;
             }
 
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, amount, transform.position);
 
             GameObject.Find("DayTimer").GetComponent<CropGrowHandler>().RemoveCropList(this);
 
@@ -294,24 +238,18 @@ public class CropGrow : MonoBehaviour
     {
         if (CurrentSprite == Item.Levels.Count - 1)
         {
-            ItemWorld itemWorld = Instantiate(itemWorldPrefab).GetComponent<ItemWorld>();
+            int amount = Random.Range(Item.MinDrop, Item.MaxDrop);
 
-            itemWorld.transform.position = transform.position;
-
-            Item drop = Item.CropItem.Copy();
-            drop.Amount = Random.Range(Item.MinDrop, Item.MaxDrop);
-
-            if (drop.Amount == 0)
+            if (amount == 0)
             {
-                drop.Amount = 1;
+                amount = 1;
             }
 
-            itemWorld.SetItem(drop);
-            itemWorld.MoveToPoint();
+            spawnItem.SpawnItems(Item.CropItem, amount, transform.position);
 
-            CurrentSprite = Item.Levels.Count - Item.RefilDecreseSpriteIndexStart - 2;
+            CurrentSprite = Item.Levels.Count - Item.RefilDecreseSpriteIndexStart - 1;
 
-            GetComponent<SpriteRenderer>().sprite = Item.RefilSprite;
+            GetComponent<SpriteRenderer>().sprite = Item.Levels[currentSprite];
 
             SpawnSeeds();
 

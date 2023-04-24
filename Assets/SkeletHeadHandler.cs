@@ -30,14 +30,14 @@ public class SkeletHeadHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if( collision != null &&
-            collision.isTrigger == false && 
-            !collision.CompareTag("NotCollide") && 
+        if (collision != null &&
+            collision.isTrigger == false &&
+            !collision.CompareTag("NotCollide") &&
             !collision.tag.Contains("Enemy"))
         {
             StopAllCoroutines();
 
-            if(collision.CompareTag("Player"))
+            if (collision.CompareTag("Player"))
             {
                 collision.GetComponent<PlayerStats>().Health -= attackPower;
             }

@@ -10,7 +10,7 @@ public class PathFindingSkelete : MonoBehaviour
 
     [SerializeField] private float minMovementSpeed = 1f;
     [SerializeField] private float maxMovementSpeed = 2f;
-    
+
     [SerializeField] private float minAttackDistance = 1f;
     [SerializeField] private float maxAttackDistance = 2f;
 
@@ -24,7 +24,7 @@ public class PathFindingSkelete : MonoBehaviour
     [SerializeField] private int minDistanceFromPlayer = 7;
     [SerializeField] private int maxDistanceFromPlayer = 15;
 
-    
+
 
     private float moveSpeed;
 
@@ -84,7 +84,7 @@ public class PathFindingSkelete : MonoBehaviour
 
     public void ChangeDestination(Vector2 destination)
     {
-        if(!destination.Equals(toLocation)) 
+        if (!destination.Equals(toLocation))
         {
             toLocation = destination;
 
@@ -156,7 +156,7 @@ public class PathFindingSkelete : MonoBehaviour
 
     private GridNode GetRandomNodeNearPlayer(GridNode playerPosition)
     {
-        if(CheckGridNode(playerPosition.x - 1, playerPosition.y))
+        if (CheckGridNode(playerPosition.x - 1, playerPosition.y))
         {
             return locationGrid.Grid.GetGridObject(playerPosition.x - 1, playerPosition.y);
         }
@@ -183,7 +183,7 @@ public class PathFindingSkelete : MonoBehaviour
     {
         GridNode gridNode = locationGrid.Grid.GetGridObject(x, y);
 
-        if(gridNode != null && gridNode.isWalkable)
+        if (gridNode != null && gridNode.isWalkable)
         {
             return true;
         }
@@ -206,7 +206,7 @@ public class PathFindingSkelete : MonoBehaviour
         {
             GridNode nearPlayer = GetRandomNodeNearPlayer(position);
 
-            if(nearPlayer != null) 
+            if (nearPlayer != null)
             {
                 Vector3 positionInCenter = locationGrid.Grid.GetWorldPosition(nearPlayer);
 
@@ -218,7 +218,7 @@ public class PathFindingSkelete : MonoBehaviour
             else
             {
                 PlayerLost();
-            }    
+            }
         }
     }
 
@@ -332,7 +332,7 @@ public class PathFindingSkelete : MonoBehaviour
         animator.SetBool("AttackHead", true);
 
         attackStarted = true;
-    }  
+    }
 
     private IEnumerator Idle()
     {
@@ -353,7 +353,7 @@ public class PathFindingSkelete : MonoBehaviour
     {
         float procentage = Random.Range(0, 50);
 
-        if(procentage <= procentageToIdle)
+        if (procentage <= procentageToIdle)
         {
             idle = true;
 
@@ -363,9 +363,9 @@ public class PathFindingSkelete : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(canMove == true && idle == false && toLocation != null && !toLocation.Equals(transform.position))
+        if (canMove == true && idle == false && toLocation != null && !toLocation.Equals(transform.position))
         {
-            if(moveToPlayer == true)
+            if (moveToPlayer == true)
             {
                 float distance = Vector3.Distance(transform.position, player.position);
 
@@ -373,7 +373,7 @@ public class PathFindingSkelete : MonoBehaviour
                 {
                     AttackPlayer();
                 }
-                else if(distance >= distanceFromPlayer)
+                else if (distance >= distanceFromPlayer)
                 {
                     PlayerLost();
                 }
@@ -384,7 +384,7 @@ public class PathFindingSkelete : MonoBehaviour
             }
             else
             {
-                if(path != null)
+                if (path != null)
                 {
                     if (pathIndex < path.Count)
                     {
@@ -394,7 +394,7 @@ public class PathFindingSkelete : MonoBehaviour
                     {
                         CheckIfIdle();
 
-                        if(idle == false)
+                        if (idle == false)
                         {
                             ChangeDestination(GetNewRoamingPosition());
                         }
@@ -420,7 +420,7 @@ public class PathFindingSkelete : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (moveToPlayer == false)
             {

@@ -35,6 +35,7 @@ TagManager:
   - Placeable
   - NotCollide
   - EnemyHit
+  - Fence
   layers:
   - Default
   - TransparentFX
@@ -47,7 +48,7 @@ TagManager:
   - Tree
   - Enemy
   - Wall
-  - 
+  - Fire
   - 
   - 
   - 
@@ -89,6 +90,9 @@ TagManager:
     locked: 0
   - name: Tree
     uniqueID: 1335729545
+    locked: 0
+  - name: Fire
+    uniqueID: 4263368133
     locked: 0
   - name: Default
     uniqueID: 0

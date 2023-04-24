@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Progress;
 
 public class PlayerItemUse : MonoBehaviour
 {
@@ -180,7 +179,7 @@ public class PlayerItemUse : MonoBehaviour
         animator.SetFloat("HorizontalFacing", horizontal);
         animator.SetFloat("VerticalFacing", vertical);
 
-        inputs.x = horizontal; 
+        inputs.x = horizontal;
         inputs.y = vertical;
     }
 
@@ -192,8 +191,8 @@ public class PlayerItemUse : MonoBehaviour
         GridNode mousePositionGrid = grid.Grid.GetGridObject(mainCamera.ScreenToWorldPoint(mousePosition));
         GridNode playerPosition = grid.Grid.GetGridObject(transform.position);
 
-        if ( usedItem is Weapon ||
-            (mousePositionGrid != null && 
+        if (usedItem is Weapon ||
+            (mousePositionGrid != null &&
             mousePositionGrid.x >= playerPosition.x - 1 &&
             mousePositionGrid.x <= playerPosition.x + 1 &&
             mousePositionGrid.y >= playerPosition.y - 1 &&
@@ -251,9 +250,9 @@ public class PlayerItemUse : MonoBehaviour
 
     public void UseItem()
     {
-        if(usedItem != null)
+        if (usedItem != null)
         {
-            switch(usedItem)
+            switch (usedItem)
             {
                 case Axe:
                     {
@@ -286,100 +285,100 @@ public class PlayerItemUse : MonoBehaviour
             switch (item)
             {
                 case Axe:
-                {
-                    audioSource.clip = attackClip;
-                    audioSource.Play();
-
-                    spriteChange.StartUse(item, GetSpawnLocation());
-
-                    break;
-                }
-                case Pickaxe:
-                {
-                    audioSource.clip = attackClip;
-                    audioSource.Play();
-
-                    spriteChange.StartUse(item, GetSpawnLocation());
-
-                    break;
-                }
-                case Hoe:
-                {
-                    if (hoeSystemHandler.PlaceSoil((Hoe)item) == true ||
-                        hoeSystemHandler.DestroyCrop((Hoe)item) == true)
                     {
                         audioSource.clip = attackClip;
                         audioSource.Play();
 
                         spriteChange.StartUse(item, GetSpawnLocation());
+
+                        break;
                     }
-
-                    break;
-                }
-                case Weapon:
-                {
-                    GetSpawnLocation();
-
-                    spriteChange.StartUse(item, Direction.Left);
-
-                    SetCircleCastForSword();
-
-                    break;
-                    }
-                case Sickle:
-                {
-                    spriteChange.StartUse(item, GetSpawnLocation());
-
-                    SetCircleCastForSickle();
-
-                    break;
-                    }
-                case Consumable:
-                {
-                    if (playerStats.Eat((Consumable)item))
+                case Pickaxe:
                     {
-                        selectedSlot.DecreseAmountSelected(1);
+                        audioSource.clip = attackClip;
+                        audioSource.Play();
 
-                        selectedSlot.ReinitializeSelectedSlot();
+                        spriteChange.StartUse(item, GetSpawnLocation());
+
+                        break;
+                    }
+                case Hoe:
+                    {
+                        if (hoeSystemHandler.PlaceSoil((Hoe)item) == true ||
+                            hoeSystemHandler.DestroyCrop((Hoe)item) == true)
+                        {
+                            audioSource.clip = attackClip;
+                            audioSource.Play();
+
+                            spriteChange.StartUse(item, GetSpawnLocation());
                         }
 
-                    break;
+                        break;
                     }
-                case WateringCan:
-                {
-                    WateringCan wateringCan = (WateringCan)item;
+                case Weapon:
+                    {
+                        GetSpawnLocation();
 
-                    if (wateringCan.RemainWater > 0)
+                        spriteChange.StartUse(item, Direction.Left);
+
+                        SetCircleCastForSword();
+
+                        break;
+                    }
+                case Sickle:
                     {
                         spriteChange.StartUse(item, GetSpawnLocation());
 
-                        animator.SetBool("Wateringcan", true);
+                        SetCircleCastForSickle();
 
-                        wateringCan.RemainWater--;
-
-                        selectedSlot.ReinitializeSelectedSlot();
-
-                        if (wateringCan.RemainWater <= 0)
+                        break;
+                    }
+                case Consumable:
+                    {
+                        if (playerStats.Eat((Consumable)item))
                         {
-                            Item newItem = emptyBucket.Copy();
-                            newItem.Amount = 1;
-
-                            selectedSlot.SetItem(newItem);
+                            selectedSlot.DecreseAmountSelected(1);
 
                             selectedSlot.ReinitializeSelectedSlot();
                         }
-                    }
 
-                    break;
+                        break;
+                    }
+                case WateringCan:
+                    {
+                        WateringCan wateringCan = (WateringCan)item;
+
+                        if (wateringCan.RemainWater > 0)
+                        {
+                            spriteChange.StartUse(item, GetSpawnLocation());
+
+                            animator.SetBool("Wateringcan", true);
+
+                            wateringCan.RemainWater--;
+
+                            selectedSlot.ReinitializeSelectedSlot();
+
+                            if (wateringCan.RemainWater <= 0)
+                            {
+                                Item newItem = emptyBucket.Copy();
+                                newItem.Amount = 1;
+
+                                selectedSlot.SetItem(newItem);
+
+                                selectedSlot.ReinitializeSelectedSlot();
+                            }
+                        }
+
+                        break;
                     }
                 case Letter:
-                {
-                    letterHandler.gameObject.SetActive(true);
+                    {
+                        letterHandler.gameObject.SetActive(true);
 
-                    letterHandler.SetData((Letter)item);
+                        letterHandler.SetData((Letter)item);
 
-                    break;
-                }
+                        break;
+                    }
             }
         }
     }
@@ -400,9 +399,7 @@ public class PlayerItemUse : MonoBehaviour
         {
             if (mouse.leftButton.wasPressedThisFrame)
             {
-                Item item = selectedSlot.Item;
-
-                SelectedItemAction(item);
+                SelectedItemAction(selectedSlot.Item);
             }
             else if (mouse.rightButton.isPressed)
             {
@@ -419,42 +416,28 @@ public class PlayerItemUse : MonoBehaviour
 
                     animator.SetBool("WateringcanFill", true);
                 }
-                else if(selectedSlot.Item is Hoe)
-                {
-                    Hoe hoe = (Hoe)selectedSlot.Item;
-
-                    if (hoe != null)
-                    {
-                        if (hoeSystemHandler.DestroySoilMousePosition(hoe) == true)
-                        {
-                            audioSource.clip = attackClip;
-                            audioSource.Play();
-
-                            spriteChange.StartUse(usedItem, GetSpawnLocation());
-                        }
-                    }
-                }
                 else
                 {
                     harvestCropHandler.Harvest();
                 }
             }
-        }
-        if (selectedSlot.Item is Hoe)
-        {
-            hoeSystemHandler.HoeHeadlight(playerMovement.transform.position);
 
-            buildSystemHandler.StopPlace();
-        }
-        else if (selectedSlot.Item is Placeable && playerMovement.TabOpen == false)
-        {
-            buildSystemHandler.StartPlace(selectedSlot.Item);
-            hoeSystemHandler.StopHeadlight();
-        }
-        else
-        {
-            buildSystemHandler.StopPlace();
-            hoeSystemHandler.StopHeadlight();
+            if (selectedSlot.Item is Hoe)
+            {
+                hoeSystemHandler.HoeHeadlight(playerMovement.transform.position);
+
+                buildSystemHandler.StopPlace();
+            }
+            else if (selectedSlot.Item is Placeable && playerMovement.TabOpen == false)
+            {
+                buildSystemHandler.StartPlace(selectedSlot.Item);
+                hoeSystemHandler.StopHeadlight();
+            }
+            else
+            {
+                buildSystemHandler.StopPlace();
+                hoeSystemHandler.StopHeadlight();
+            }
         }
     }
 

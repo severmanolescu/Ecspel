@@ -6,31 +6,53 @@ using UnityEngine;
 [Serializable]
 public class Quest : ScriptableObject
 {
-    public string title;
+    [SerializeField] private string title;
 
-    [TextArea(10, 10)]
-    public string details;
+    [TextArea(4, 40)]
+    [SerializeField] private string details;
 
-    [Header("Item receive:")]
-    public List<QuestItems> itemsReceive;
+    [SerializeField] private List<Objective> questObjectives = new List<Objective>();
+
+    [SerializeField] private List<ItemWithAmount> receiveItems = new();
 
     [Header("Next dialogue:")]
-    public DialogueScriptableObject nextDialogue;
+    [SerializeField] private DialogueScriptableObject nextDialogue;
 
     [Header("Next quest:")]
-    public Quest nextQuest;
+    [SerializeField] private Quest nextQuest;
 
-    [Header("Give bonuses")]
-    [SerializeField] private int indexOfBonus = -1;
-    [SerializeField] private bool value = false;
+    public Quest(string title, string details, List<Objective> questObjectives, List<ItemWithAmount> receiveItems, DialogueScriptableObject nextDialogue, Quest nextQuest)
+    {
+        this.title = title;
+        this.details = details;
+        this.questObjectives = questObjectives;
+        this.receiveItems = receiveItems;
+        this.nextDialogue = nextDialogue;
+        this.nextQuest = nextQuest;
+    }
 
     public string Title { get { return title; } }
     public string Details { get { return details; } }
 
-    public List<QuestItems> ItemsReceive { get { return itemsReceive; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public Quest NextQuest { get { return nextQuest; } }
 
-    public int IndexOfBonus { get => indexOfBonus; set => indexOfBonus = value; }
-    public bool Value { get => value; set => this.value = value; }
+    public List<Objective> QuestObjectives { get => questObjectives; set => questObjectives = value; }
+    public List<ItemWithAmount> ReceiveItems { get => receiveItems; set => receiveItems = value; }
+
+    public Quest Copy()
+    {
+        Quest questCopy = (Quest)this.MemberwiseClone();
+
+        List<Objective> objectiveCopy = new List<Objective>();
+
+        foreach (Objective objective in QuestObjectives)
+        {
+            objectiveCopy.Add(objective.Copy());
+        }
+
+        questCopy.QuestObjectives = objectiveCopy;
+
+        return questCopy;
+    }
 }

@@ -11,8 +11,6 @@ public class ForgeOpenHandler : MonoBehaviour
     [SerializeField] private ParticleSystem smokeParticle;
     [SerializeField] private ParticleSystem fireParticle;
 
-    [SerializeField] private ItemWorld itemSlotPrefab;
-
     [SerializeField] private int forgeID;
 
     private new Light2D light;
@@ -50,7 +48,7 @@ public class ForgeOpenHandler : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private bool fKeyPress = true;
+    private SpawnItem spawnItem;
 
     private int elapsedTimeSmelting;
     private int elapsedTimeFuel;
@@ -66,6 +64,8 @@ public class ForgeOpenHandler : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
 
         text.gameObject.SetActive(false);
+
+        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
 
         light = GetComponentInChildren<Light2D>();
 
@@ -398,7 +398,7 @@ public class ForgeOpenHandler : MonoBehaviour
     {
         if (player != null)
         {
-            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 if (playerInventory.activeSelf == false)
                 {
@@ -450,11 +450,6 @@ public class ForgeOpenHandler : MonoBehaviour
                     canvasOpen = false;
                 }
             }
-
-            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
-            {
-                fKeyPress = false;
-            }
         }
     }
 
@@ -462,13 +457,7 @@ public class ForgeOpenHandler : MonoBehaviour
     {
         if (item != null)
         {
-            ItemWorld instantiateItem = Instantiate(itemSlotPrefab).GetComponent<ItemWorld>();
-
-            instantiateItem.transform.position = transform.position;
-
-            instantiateItem.SetItem(item, false);
-
-            instantiateItem.MoveToPoint();
+            spawnItem.SpawnItems(item, item.Amount, transform.position);
         }
     }
 

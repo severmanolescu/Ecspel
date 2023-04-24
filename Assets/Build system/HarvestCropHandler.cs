@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,6 +35,25 @@ public class HarvestCropHandler : MonoBehaviour
                         gridNode.crop.GetComponent<CollectHarvest>().HarvestItem();
                     }
                 }
+            }
+        }
+    }
+
+    public void DestroyCrop(GridNode mousePosition)
+    {
+        if (mousePosition != null && mousePosition.crop != null)
+        {
+            CropGrow cropGrow = mousePosition.crop.GetComponent<CropGrow>();
+
+            if (cropGrow != null)
+            {
+                cropGrow.HarverstCrop();
+
+                Destroy(cropGrow.gameObject);
+
+                mousePosition.canPlant = true;
+                mousePosition.crop = null;
+                mousePosition.cropPlaced = false;
             }
         }
     }
