@@ -5,22 +5,30 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638267691439483664
-    m_Hash: 3109016268
+      ticks: 638288225349187746
+    m_Hash: 2767885841
   m_LockFileStatus:
     m_FilePath: D:/Ecspel/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638267691760357071
-    m_Hash: 1899797778
+      ticks: 638288225349233847
+    m_Hash: 3986605713
 m_EmbeddedPackageManifests:
-  m_ManifestsStatus: {}
+  m_ManifestsStatus:
+    D:/Ecspel/Packages/com.unity.2d.tilemap.extras/package.json:
+      m_FilePath: D:/Ecspel/Packages/com.unity.2d.tilemap.extras/package.json
+      m_PathExists: 1
+      m_ContentTrackingEnabled: 1
+      m_ModificationDate:
+        serializedVersion: 2
+        ticks: 638288221831683842
+      m_Hash: 507419278
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: D:/Ecspel/Packages
-m_EditorVersion: 2022.3.7f1 (b16b3b16c7a0)
+m_EditorVersion: 2022.3.8f1 (b5eafc012955)
 m_ResolvedPackages:
 - packageId: com.unity.2d.animation@9.0.3
   testable: 0
@@ -190,7 +198,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   - name: com.unity.collections
     version: 1.2.4
   - name: com.unity.test-framework
@@ -433,7 +441,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   - name: com.unity.collections
     version: 1.2.4
   - name: com.unity.test-framework
@@ -660,7 +668,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   - name: com.unity.modules.physics2d
     version: 1.0.0
   keywords:
@@ -769,12 +777,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.2d.tilemap.extras@3.1.1
-  testable: 0
+- packageId: com.unity.2d.tilemap.extras@file:D:\Ecspel\Packages\com.unity.2d.tilemap.extras
+  testable: 1
   isDirectDependency: 1
-  version: 3.1.1
-  source: 1
-  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.2d.tilemap.extras@3.1.1
+  version: 2.2.5
+  source: 3
+  resolvedPath: D:\Ecspel\Packages\com.unity.2d.tilemap.extras
   assetPath: Packages/com.unity.2d.tilemap.extras
   name: com.unity.2d.tilemap.extras
   displayName: 2D Tilemap Extras
@@ -783,7 +791,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 2D
-  type: assets
+  type: 
   description: '2D Tilemap Extras is a package that contains extra scripts for use
     with 2D Tilemap features in Unity. These include custom Tiles and Brushes for
     the Tilemap feature.
@@ -878,13 +886,13 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638234725240000000
-  documentationUrl: https://docs.unity3d.com/Packages/com.unity.2d.tilemap.extras@3.1/manual/index.html
-  hasRepository: 1
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
   repository:
-    type: git
-    url: https://github.com/Unity-Technologies/2d-extras.git
-    revision: 04abca0a975bb264c1f7530288b4ddfa2f4c45ea
+    type: 
+    url: 
+    revision: 
     path: 
   unityLifecycle:
     version: 3.1.1
@@ -962,12 +970,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.collab-proxy@2.0.5
+- packageId: com.unity.collab-proxy@2.0.7
   testable: 0
   isDirectDependency: 1
-  version: 2.0.5
+  version: 2.0.7
   source: 1
-  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.collab-proxy@2.0.5
+  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.collab-proxy@2.0.7
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -1053,7 +1061,6 @@ m_ResolvedPackages:
     - 2.1.0-preview.5
     - 2.1.0-preview.6
     compatible:
-    - 2.0.5
     - 2.0.7
     - 2.1.0-preview.3
     - 2.1.0-preview.5
@@ -1087,16 +1094,16 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638218079810000000
+  datePublishedTicks: 638264754080000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.collab-proxy@2.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-    revision: 7f68049e8cae5b51ad0d17cc01b8c6e802bf3866
+    revision: 13a0e74f47307a1b20a57747cea59891ce36a647
     path: 
   unityLifecycle:
-    version: 2.0.5
+    version: 2.0.7
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -1200,12 +1207,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.ide.visualstudio@2.0.18
+- packageId: com.unity.ide.visualstudio@2.0.20
   testable: 0
   isDirectDependency: 1
-  version: 2.0.18
+  version: 2.0.20
   source: 1
-  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.ide.visualstudio@2.0.18
+  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.ide.visualstudio@2.0.20
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -1214,7 +1221,7 @@ m_ResolvedPackages:
     email: 
     url: 
   category: 
-  type: asset
+  type: assets
   description: Code editor integration for supporting Visual Studio as code editor
     for unity. Adds support for generating csproj files for intellisense purposes,
     auto discovery of installations, etc.
@@ -1272,13 +1279,13 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638173205920000000
+  datePublishedTicks: 638265007710000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.visualstudio@2.0/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-    revision: 9d3c07127cbe1916b8abbfd18f71fb8d9df8008c
+    revision: b7bf23d23806ac75645bfa12acadcfc11468a383
     path: 
   unityLifecycle:
     version: 2.0.18
@@ -1417,8 +1424,10 @@ m_ResolvedPackages:
     - 1.5.1
     - 1.6.1
     - 1.6.3
+    - 1.7.0
     compatible:
     - 1.6.3
+    - 1.7.0
     recommended: 1.6.3
     deprecated: []
   dependencies:
@@ -1651,7 +1660,7 @@ m_ResolvedPackages:
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   - name: com.unity.render-pipelines.core
     version: 14.0.8
   - name: com.unity.ugui
@@ -1765,6 +1774,7 @@ m_ResolvedPackages:
     - 1.3.5
     - 1.3.7
     - 1.3.8
+    - 1.3.9
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -1779,6 +1789,7 @@ m_ResolvedPackages:
     - 1.3.5
     - 1.3.7
     - 1.3.8
+    - 1.3.9
     - 2.0.1-exp.1
     - 2.0.1-exp.2
     - 2.0.1-pre.12
@@ -2240,12 +2251,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.visualscripting@1.8.0
+- packageId: com.unity.visualscripting@1.9.1
   testable: 0
   isDirectDependency: 1
-  version: 1.8.0
+  version: 1.9.1
   source: 1
-  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.visualscripting@1.8.0
+  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.visualscripting@1.9.1
   assetPath: Packages/com.unity.visualscripting
   name: com.unity.visualscripting
   displayName: Visual Scripting
@@ -2289,10 +2300,11 @@ m_ResolvedPackages:
     - 1.8.0-pre.1
     - 1.8.0
     - 1.9.0
+    - 1.9.1
     compatible:
-    - 1.8.0
     - 1.9.0
-    recommended: 1.8.0
+    - 1.9.1
+    recommended: 1.9.1
     deprecated:
     - 1.8.0-pre.1
   dependencies:
@@ -2320,16 +2332,16 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638060044680000000
+  datePublishedTicks: 638284821510000000
   documentationUrl: 
   hasRepository: 1
   repository:
     type: git
     url: https://github.cds.internal.unity3d.com/unity/com.unity.visualscripting.git
-    revision: 0de66378b19e990494d98f39ecc2b6aa5ac65351
+    revision: 5e78e9c354ed1567dbcea08e2bd9992e4a473cfb
     path: 
   unityLifecycle:
-    version: 1.8.0
+    version: 1.9.0
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -4382,12 +4394,12 @@ m_ResolvedPackages:
     deprecationMessage: 
   isDeprecated: 0
   deprecationMessage: 
-- packageId: com.unity.burst@1.8.7
+- packageId: com.unity.burst@1.8.8
   testable: 0
   isDirectDependency: 0
-  version: 1.8.7
+  version: 1.8.8
   source: 1
-  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.burst@1.8.7
+  resolvedPath: D:\Ecspel\Library\PackageCache\com.unity.burst@1.8.8
   assetPath: Packages/com.unity.burst
   name: com.unity.burst
   displayName: Burst
@@ -4525,9 +4537,10 @@ m_ResolvedPackages:
     - 1.8.3
     - 1.8.4
     - 1.8.7
+    - 1.8.8
     compatible:
-    - 1.8.7
-    recommended: 1.8.7
+    - 1.8.8
+    recommended: 1.8.8
     deprecated: []
   dependencies:
   - name: com.unity.mathematics
@@ -4546,16 +4559,16 @@ m_ResolvedPackages:
     configSource: 0
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 638221796120000000
+  datePublishedTicks: 638271934420000000
   documentationUrl: https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html
   hasRepository: 1
   repository:
     type: git
     url: git@github.cds.internal.unity3d.com:unity/burst
-    revision: 47aa5e222ec0a9e94b78af0bb63021cf722ad06b
+    revision: 7673d9a736112fc9d58f32024c19150c2fa6d8ea
     path: 
   unityLifecycle:
-    version: 1.8.7
+    version: 1.8.8
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0
@@ -5016,7 +5029,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.animation
     version: 1.0.0
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   keywords:
   - 2d
   registry:
@@ -5145,7 +5158,7 @@ m_ResolvedPackages:
     version: 1.1.31
   resolvedDependencies:
   - name: com.unity.burst
-    version: 1.8.7
+    version: 1.8.8
   - name: com.unity.mathematics
     version: 1.2.6
   - name: com.unity.test-framework
