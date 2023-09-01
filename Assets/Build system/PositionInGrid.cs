@@ -20,6 +20,8 @@ public class PositionInGrid : MonoBehaviour
 
     private void Update()
     {
+        Destroy(this);
+
         if (locationGrid == null)
         {
             locationGrid = GetComponentInParent<LocationGridSave>();

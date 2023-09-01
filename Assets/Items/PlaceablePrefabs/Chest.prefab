@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515393311086345777}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0532, y: 0.7072, z: 0}
   m_LocalScale: {x: 3.2293372, y: 1.8110132, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1578004845640410780}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3033842608349066435
 SpriteRenderer:
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 793876939
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 13f1760f179c5a44685955fa3ebd2a41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.36862746}
@@ -128,6 +128,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578004845640410778}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.778597, y: -47.74952, z: 22.42484}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -135,7 +136,6 @@ Transform:
   m_Children:
   - {fileID: 7372973624285321963}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1578004845640410779
 SpriteRenderer:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dca9fdfd9709164f932b0b4f48390b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestMaxSlots: 10
+  chestMaxSlots: 20
 --- !u!61 &4117057557308445182
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -228,6 +228,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -256,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2963b132fca74db5dbc59e03d5369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemWorldSize: 0.7
 --- !u!114 &1641920595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,26 +288,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - item: {fileID: 11400000, guid: e054effdcc377f44d98a21753459d110, type: 2}
-    amount: 3
-  - item: {fileID: 11400000, guid: 26211bd9c7daa9c4bb6d855b9fc42035, type: 2}
-    amount: 3
+  - item: {fileID: 11400000, guid: 46ab5e5cbd1e0d44b976cb5daceace8e, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 788c729a7271ade469c36c3a576b2fce, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: 24034e2df200811449bbe1df6b9c1047, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: a898eabd069afe94aaa7525f869c63a4, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: 49566d6706c10ce4391e79df4cf814d2, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: f6c5408cc8a5229458a3ac520186cf91, type: 2}
-    amount: 3
+    amount: 1
+  - item: {fileID: 11400000, guid: 7f2cd1751ef9cbd41a77b5d584907b6b, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: d711f37711b9dba489b4465bfb9e2138, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: c68c0f8b3ae4a95499b8c3124fb39735, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: 21b89101713b7814fa6cf4b6ec8b8597, type: 2}
-    amount: 3
+    amount: 1
   - item: {fileID: 11400000, guid: ca481d7b351213340bec78445eeb3f52, type: 2}
-    amount: 3
+    amount: 1
+  - item: {fileID: 11400000, guid: 2fc2251d2eaf5714d9b1d1fbc66ffa6c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: c8a70acfe0434c247a1fb6ac126416c5, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: a6f932e5e12763e419e037e707b51752, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 791f0a00936e5a6429c58c9283aa7010, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: e07cd025057570947a7eb5c9700de79c, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: b51cdf72ce5643d47be891d507a9dccb, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 1931ffb6fb6b8784bbeccd69ce88d661, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: a98cdb215c09349448b3d7cb33c53c00, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 09472be7b3c1e4b42826bf22855fb6d4, type: 2}
+    amount: 1
 --- !u!82 &372845165
 AudioSource:
   m_ObjectHideFlags: 0
@@ -416,4 +454,7 @@ MonoBehaviour:
   - {x: -0.6219697, y: -0.1422863, z: 0}
   m_ShapePathHash: 1904078725
   m_Mesh: {fileID: 0}
-  m_InstanceId: -2790
+  m_InstanceId: -383450
+  m_LocalBounds:
+    m_Center: {x: 0.00007605553, y: 0.07015133, z: 0}
+    m_Extent: {x: 0.684746, y: 0.27546978, z: 0}
