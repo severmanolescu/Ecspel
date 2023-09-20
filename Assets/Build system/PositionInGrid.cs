@@ -18,87 +18,87 @@ public class PositionInGrid : MonoBehaviour
 
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
 
-    private void Update()
-    {
-        Destroy(this);
+    //private void Update()
+    //{
+    //    Destroy(this);
 
-        if (locationGrid == null)
-        {
-            locationGrid = GetComponentInParent<LocationGridSave>();
+    //    if (locationGrid == null)
+    //    {
+    //        locationGrid = GetComponentInParent<LocationGridSave>();
 
-            if (locationGrid == null)
-            {
-                locationGrid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>();
-            }
-        }
+    //        if (locationGrid == null)
+    //        {
+    //            locationGrid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>();
+    //        }
+    //    }
 
-        if (locationGrid != null)
-        {
-            Grid grid = LocationGrid.Grid;
+    //    if (locationGrid != null)
+    //    {
+    //        Grid grid = LocationGrid.Grid;
 
-            GridNode gridNode = grid.GetGridObject(transform.position);
+    //        GridNode gridNode = grid.GetGridObject(transform.position);
 
-            if (gridNode != null)
-            {
-                Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
+    //        if (gridNode != null)
+    //        {
+    //            Vector3 position = grid.GetWorldPosition(gridNode.x, gridNode.y);
 
-                if (positionInCenterOfGridNode == true)
-                {
-                    position.y += grid.CellSize / 2;
+    //            if (positionInCenterOfGridNode == true)
+    //            {
+    //                position.y += grid.CellSize / 2;
 
-                    transform.position = position;
-                }
+    //                transform.position = position;
+    //            }
 
-                position.x += grid.CellSize / 2;
-                position.z = 0;
+    //            position.x += grid.CellSize / 2;
+    //            position.z = 0;
 
-                transform.position = position;
+    //            transform.position = position;
 
-                for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
-                {
-                    for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
-                    {
-                        if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1))
-                        {
-                            if (i >= 0 && i < locationGrid.Grid.gridArray.GetLength(0) &&
-                                j >= 0 && j < locationGrid.Grid.gridArray.GetLength(1))
-                            {
-                                grid.gridArray[i, j].canPlace = false;
-                                grid.gridArray[i, j].canPlant = false;
-                                grid.gridArray[i, j].isWalkable = isWalkable;
+    //            for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
+    //            {
+    //                for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
+    //                {
+    //                    if (i < grid.gridArray.GetLength(0) && j < grid.gridArray.GetLength(1))
+    //                    {
+    //                        if (i >= 0 && i < locationGrid.Grid.gridArray.GetLength(0) &&
+    //                            j >= 0 && j < locationGrid.Grid.gridArray.GetLength(1))
+    //                        {
+    //                            grid.gridArray[i, j].canPlace = false;
+    //                            grid.gridArray[i, j].canPlant = false;
+    //                            grid.gridArray[i, j].isWalkable = isWalkable;
 
-                                if (setObjectOnlyToMiddleGridNode == false)
-                                {
-                                    grid.gridArray[i, j].objectInSpace = gameObject;
-                                }
-                            }
-                        }
-                    }
-                }
+    //                            if (setObjectOnlyToMiddleGridNode == false)
+    //                            {
+    //                                grid.gridArray[i, j].objectInSpace = gameObject;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
 
-                if (setObjectOnlyToMiddleGridNode == true)
-                {
-                    grid.gridArray[gridNode.x, gridNode.y].objectInSpace = gameObject;
-                }
+    //            if (setObjectOnlyToMiddleGridNode == true)
+    //            {
+    //                grid.gridArray[gridNode.x, gridNode.y].objectInSpace = gameObject;
+    //            }
 
-                DamageTree damageTree = GetComponent<DamageTree>();
+    //            DamageTree damageTree = GetComponent<DamageTree>();
 
-                if (damageTree != null)
-                {
-                    damageTree.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
-                }
-                else
-                {
-                    StoneDamage stoneDamage = GetComponent<StoneDamage>();
+    //            if (damageTree != null)
+    //            {
+    //                damageTree.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
+    //            }
+    //            else
+    //            {
+    //                StoneDamage stoneDamage = GetComponent<StoneDamage>();
 
-                    if (stoneDamage != null)
-                    {
-                        stoneDamage.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
-                    }
-                }
+    //                if (stoneDamage != null)
+    //                {
+    //                    stoneDamage.GetDataFromPosition(startScaleX, startScaleY, scaleX, scaleY);
+    //                }
+    //            }
 
-                Destroy(this);
-            }
-        }
-    }
+    //            Destroy(this);
+    //        }
+    //    }
+    //}
 }
