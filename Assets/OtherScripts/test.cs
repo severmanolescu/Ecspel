@@ -7,7 +7,7 @@ public class test : MonoBehaviour
 
     public Sprite headlight;
 
-    Vector3 scale = new Vector3(1f, 1f);
+    Vector3 scale = new Vector3(.5f, .5f);
 
     private void Update()
     {

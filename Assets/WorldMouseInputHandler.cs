@@ -58,24 +58,25 @@ public class WorldMouseInputHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current != null &&
-            Mouse.current.rightButton.wasPressedThisFrame &&
-            EventSystem.current.IsPointerOverGameObject())
+        if(Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Vector3 mousePosition = Mouse.current.position.ReadValue();
-            mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
-
-            PointerEventData pointer = new PointerEventData(EventSystem.current);
-            pointer.position = mousePosition;
-
-            List<RaycastResult> raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointer, raycastResults);
-
-            if (raycastResults.Count > 0 && canvasTabsOpen.canOpenTabs == true && playerMovement.CanMove && playerMovement.TabOpen == false && playerMovement.Dialogue == false)
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                if (Vector2.Distance(raycastResults[0].gameObject.transform.position, playerMovement.transform.position) <= maxDistanteFromPlayer)
+                Vector3 mousePosition = Mouse.current.position.ReadValue();
+                mousePosition.z = Mathf.Abs(mainCamera.transform.position.z);
+
+                PointerEventData pointer = new PointerEventData(EventSystem.current);
+                pointer.position = mousePosition;
+
+                List<RaycastResult> raycastResults = new List<RaycastResult>();
+                EventSystem.current.RaycastAll(pointer, raycastResults);
+
+                if (raycastResults.Count > 0 && canvasTabsOpen.canOpenTabs == true && playerMovement.CanMove && playerMovement.TabOpen == false && playerMovement.Dialogue == false)
                 {
-                    CheckForObjectType(raycastResults[0]);
+                    if (Vector2.Distance(raycastResults[0].gameObject.transform.position, playerMovement.transform.position) <= maxDistanteFromPlayer)
+                    {
+                        CheckForObjectType(raycastResults[0]);
+                    }
                 }
             }
         }

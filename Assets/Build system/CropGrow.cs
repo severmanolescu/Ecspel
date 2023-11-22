@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CropGrow : MonoBehaviour
 {
-    private GameObject itemWorldPrefab;
-
     private Crop item;
 
     private int startDay;
@@ -43,8 +41,6 @@ public class CropGrow : MonoBehaviour
         this.Item = (Crop)item;
 
         this.gridNode = gridNode;
-
-        this.itemWorldPrefab = itemWorldPrefab;
     }
 
     public void DayChange(int day)

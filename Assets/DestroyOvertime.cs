@@ -16,4 +16,9 @@ public class DestroyOvertime : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
 }

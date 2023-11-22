@@ -6,7 +6,14 @@ public class QuestToWorldHandler : MonoBehaviour
 
     private QuestTabHandler questTab;
 
+    private NpcId npcId;
+
     public QuestTabHandler QuestTab { get => questTab; set => questTab = value; }
+
+    private void Awake()
+    {
+        npcId = GameObject.Find("Global").GetComponent<NpcId>();
+    }
 
     private void SetGoToObjective(Objective objective, Quest quest)
     {
@@ -33,15 +40,36 @@ public class QuestToWorldHandler : MonoBehaviour
         }
     }
 
-    private void SetObjectiveToWorld(Objective objective, Quest quest)
+    private void SetObjectiveGiveItem(Quest quest)
     {
-        if (objective != null)
+        QuestGiveItem questGive = (QuestGiveItem)quest.QuestObjective;
+
+        if(questGive != null)
         {
-            switch (objective)
+            DialogueDisplay npcDialog = npcId.GetNpcFromId(questGive.NpcID);
+
+            if (npcDialog != null)
+            {
+                npcDialog.GetComponent<NPCReceiveItem>().AddQuest(quest);
+            }
+        }
+    }
+
+    private void SetObjectiveToWorld(Quest quest)
+    {
+        if (quest.QuestObjective != null)
+        {
+            switch (quest.QuestObjective)
             {
                 case ObjectiveGoTo:
                     {
-                        SetGoToObjective(objective, quest);
+                        SetGoToObjective(quest.QuestObjective, quest);
+
+                        break;
+                    }
+                case QuestGiveItem:
+                    {
+                        SetObjectiveGiveItem(quest);
 
                         break;
                     }
@@ -53,17 +81,9 @@ public class QuestToWorldHandler : MonoBehaviour
     {
         if (quest != null)
         {
-            foreach (Objective objective in quest.QuestObjectives)
-            {
-                if (objective != null && objective.Completed == false)
-                {
-                    SetObjectiveToWorld(objective, quest);
+            SetObjectiveToWorld(quest);
 
-                    return;
-                }
-            }
-
-            questTab.CompletQuest(quest);
+            //questTab.CompletQuest(quest);
         }
     }
 }

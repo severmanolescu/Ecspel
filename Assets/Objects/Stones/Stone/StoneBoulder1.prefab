@@ -106,7 +106,7 @@ MonoBehaviour:
   stonePrefab: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   spawnItem: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
   amount: 6
-  health: 25
+  health: 50
   stoneLevel: 1
   destroyParticle: {fileID: 7267677822037952181, guid: d2bfe8414e74bde4eb1aab076bf6e1a7, type: 3}
   soundEffect: {fileID: 8300000, guid: 8f393617e15e105438c889e203fc25aa, type: 3}
@@ -151,13 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startScaleX: -1
-  startScaleY: 0
+  startScaleY: -1
   scaleX: 1
   scaleY: 1
   locationGrid: {fileID: 0}
   isWalkable: 0
   positionInCenterOfGridNode: 1
-  setObjectOnlyToMiddleGridNode: 1
+  setObjectOnlyToMiddleGridNode: 0
 --- !u!114 &8644530380432567227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.033991814, y: 0.38083458}
+  m_Offset: {x: 0.033991814, y: 0.026150227}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.3116188}
@@ -214,7 +214,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6865234, y: 1.6370678}
+  m_Size: {x: 1.6865234, y: 0.9276991}
   m_EdgeRadius: 0
 --- !u!82 &3412069383143567845
 AudioSource:
@@ -387,10 +387,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.030834675, y: 0.37124348}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -401,7 +401,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.673419, y: 1.6290169}
   m_EdgeRadius: 0
 --- !u!1 &6242410272373704614
 GameObject:

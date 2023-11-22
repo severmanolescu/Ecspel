@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public static class DefaulData
 {
+    public static Vector3 nullVector = new Vector3(-100, -100, -100);
+
     //Others
     public static int stoneHealth = 10;
     public static float maxLightSourceDistance = 10f;
@@ -184,4 +186,16 @@ public static class DefaulData
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
+}
+
+public enum Direction
+{
+    Right,
+    Left,
+    Up,
+    Down
+}
+public enum Animals
+{
+    Bird
 }

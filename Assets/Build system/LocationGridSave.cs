@@ -16,7 +16,7 @@ public class LocationGridSave : MonoBehaviour
 
     private DayTimerHandler dayTimer;
 
-    private Grid grid;
+    public Grid grid;
 
     public Grid Grid { get { return grid; } }
 
@@ -29,6 +29,8 @@ public class LocationGridSave : MonoBehaviour
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
         spawnLocations = gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
+
+        position = transform.position;
     }
 
     public void ReinitializeGrid()
@@ -44,8 +46,6 @@ public class LocationGridSave : MonoBehaviour
             {
                 GameObject testObjectInGridCell = new GameObject("TestGridCells");
 
-                testObjectInGridCell.AddComponent<ChangeGridCellValuesByObjects>().Grid = Grid;
-
                 Vector3 position = grid.GetWorldPosition(grid.gridArray[indexCellX, indexCellY].x, grid.gridArray[indexCellX, indexCellY].y);
 
                 position.x += grid.CellSize / 2f;
@@ -53,10 +53,12 @@ public class LocationGridSave : MonoBehaviour
 
                 testObjectInGridCell.transform.position = position;
 
+                testObjectInGridCell.AddComponent<ChangeGridCellValuesByObjects>().Grid = Grid;
+
                 testObjectInGridCell.GetComponent<ChangeGridCellValuesByObjects>().SetComponents();
             }
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0);
         }
 
         if (newGameLoading != null)

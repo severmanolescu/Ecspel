@@ -3,11 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float joyStickLeft;
-    [SerializeField] private float joyStickRight;
-    [SerializeField] private float joyStickUp;
-    [SerializeField] private float joyStickDown;
-
     [SerializeField] private bool moveLeft;
     [SerializeField] private bool moveRight;
     [SerializeField] private bool moveUp;
@@ -35,8 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerStats playerStats;
 
     private Keyboard keyboard;
-
-    private Joystick joystick;
 
     private PlaySound playSound;
 
@@ -77,8 +70,6 @@ public class PlayerMovement : MonoBehaviour
 
         keyboard = InputSystem.GetDevice<Keyboard>();
 
-        joystick = InputSystem.GetDevice<Joystick>();
-
         playSound = GetComponentInChildren<PlaySound>();
     }
 
@@ -86,84 +77,22 @@ public class PlayerMovement : MonoBehaviour
     {
         inputs = Vector2.zero;
 
-        if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
+        if (keyboard.aKey.isPressed)
         {
             inputs.x = -1;
         }
-        if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
+        if (keyboard.dKey.isPressed)
         {
             inputs.x += 1;
         }
 
-        if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
+        if (keyboard.sKey.isPressed)
         {
             inputs.y = -1;
         }
-        if (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed)
+        if (keyboard.wKey.isPressed)
         {
             inputs.y += 1;
-        }
-
-        if (joystick != null)
-        {
-            joyStickLeft = joystick.stick.left.ReadValue();
-            joyStickRight = joystick.stick.right.ReadValue();
-            joyStickUp = joystick.stick.up.ReadValue();
-            joyStickDown = joystick.stick.down.ReadValue();
-
-            if (joystick.stick.left.ReadValue() == 0 && joystick.stick.right.ReadValue() == 1)
-            {
-                moveLeft = false;
-                moveRight = false;
-            }
-            else
-            {
-                if (joystick != null && joystick.stick.right.ReadValue() < 1 && joystick.stick.right.ReadValue() > 0)
-                {
-                    moveLeft = true;
-                }
-
-                if (joystick != null && joystick.stick.left.ReadValue() < 1 && joystick.stick.left.ReadValue() > 0)
-                {
-                    moveRight = true;
-                }
-
-                if (moveLeft == true)
-                {
-                    inputs.x -= 1;
-                }
-                else if (moveRight == true)
-                {
-                    inputs.x += 1;
-                }
-            }
-
-            if (joystick.stick.up.ReadValue() == 1 && joystick.stick.down.ReadValue() == 0)
-            {
-                moveUp = false;
-                moveDown = false;
-            }
-            else
-            {
-                if (joystick != null && joystick.stick.up.ReadValue() < 1 && joystick.stick.up.ReadValue() > 0)
-                {
-                    moveDown = true;
-                }
-
-                if (joystick != null && joystick.stick.down.ReadValue() < 1 && joystick.stick.down.ReadValue() > 0)
-                {
-                    moveUp = true;
-                }
-
-                if (moveDown == true)
-                {
-                    inputs.y -= 1;
-                }
-                else if (moveUp == true)
-                {
-                    inputs.y += 1;
-                }
-            }
         }
     }
 
@@ -175,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
             inputs = inputs.normalized;
 
-            if (keyboard.leftShiftKey.isPressed || (joystick != null && joystick.allControls[10].IsPressed() == false))
+            if (keyboard.leftShiftKey.isPressed)
             {
                 inputs *= runSpeed;
 

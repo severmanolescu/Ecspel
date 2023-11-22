@@ -76,7 +76,7 @@ public class CanvasTabsOpen : MonoBehaviour
                     //questShow.gameObject.SetActive(false);
 
                     playerInventory.SetActive(true);
-                    canvasEffects.SetActive(true);
+                    //canvasEffects.SetActive(true);
 
                     quickSlot.gameObject.SetActive(false);
 

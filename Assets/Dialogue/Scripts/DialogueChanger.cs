@@ -7,9 +7,11 @@ public class DialogueChanger : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI dialogueText;
 
+    [SerializeField] private GameObject background;
+
     private DialogueScriptableObject dialogue;
 
-    private DialogueDisplay dialogueDisplay;
+    private DialogueDisplay NPCDialogue;
 
     private QuestTabHandler questTab;
 
@@ -17,48 +19,72 @@ public class DialogueChanger : MonoBehaviour
 
     private bool firstSpacePress = false;
 
-    private bool answersPlaced = false;
+    private SetDialogueToPlayer setDialogueToPlayer;
+
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
+        playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
+
+        setDialogueToPlayer = GameObject.Find("Global").GetComponent<SetDialogueToPlayer>();
+
         questTab = GameObject.Find("Global/Player/Canvas/QuestTab").GetComponent<QuestTabHandler>();
 
-        gameObject.SetActive(false);
+        background.SetActive(false);
     }
 
     public void ShowDialogue(DialogueScriptableObject dialogue, DialogueDisplay dialogueDisplay = null)
     {
         if (dialogue != null)
         {
-            if (dialogueDisplay != null && gameObject.activeSelf == false)
-            {
-                this.dialogueDisplay = dialogueDisplay;
+            firstSpacePress = false;
 
-                answersPlaced = false;
+            playerMovement.Dialogue = true;
+
+            if (dialogueDisplay != null && background.activeSelf == false)
+            {
+                this.NPCDialogue = dialogueDisplay;
             }
 
             this.dialogue = dialogue;
 
             dialogueIndex = 0;
 
-            dialogueText.text = "";
+            if (dialogue.DialogueRespons[0].whoRespond)
+            {
+                NPCDialogue.StartShowDialogue(dialogue.DialogueRespons[0].dialogueText);
 
-            gameObject.SetActive(true);
+                HideDialogue();
+            }
+            else
+            {
+                dialogueIndex = 0;
 
-            StopAllCoroutines();
-            StartCoroutine(DialogueDisplay());
+                dialogueText.text = "";
+
+                background.SetActive(true);
+
+                StopAllCoroutines();
+                StartCoroutine(DialogueDisplay());
+            } 
         }
+    }
+
+    public void NPCDialogueFinish()
+    {
+        firstSpacePress = true;
     }
 
     public void StopDialogue()
     {
         StopAllCoroutines();
 
-        gameObject.SetActive(false);
+        background.SetActive(false);
 
-        if (dialogueDisplay != null)
+        if (NPCDialogue != null)
         {
-            dialogueDisplay.FinishTalk();
+            NPCDialogue.FinishTalk();
         }
 
         if (dialogue != null &&
@@ -70,11 +96,13 @@ public class DialogueChanger : MonoBehaviour
 
         dialogue = null;
 
-        answersPlaced = false;
+        setDialogueToPlayer.DialogueEnd();
     }
 
     private IEnumerator DialogueDisplay()
     {
+        background.SetActive(true);
+
         if (dialogue != null)
         {
             if (dialogueIndex < dialogue.DialogueRespons.Count)
@@ -83,16 +111,16 @@ public class DialogueChanger : MonoBehaviour
 
                 firstSpacePress = false;
 
-                for (int dialogueStringIndex = 0; dialogueStringIndex < dialogue.DialogueRespons[dialogueIndex].Length; dialogueStringIndex++)
+                for (int dialogueStringIndex = 0; dialogueStringIndex < dialogue.DialogueRespons[dialogueIndex].dialogueText.Length; dialogueStringIndex++)
                 {
-                    dialogueText.text = dialogueText.text + dialogue.DialogueRespons[dialogueIndex][dialogueStringIndex];
+                    dialogueText.text = dialogueText.text + dialogue.DialogueRespons[dialogueIndex].dialogueText[dialogueStringIndex];
 
                     yield return new WaitForSeconds(0.1f);
                 }
 
                 firstSpacePress = true;
             }
-            else if (answersPlaced == false || (dialogue.Quest != null && dialogue.Quest.Count > 0))
+            else if (dialogue.Quest != null && dialogue.Quest.Count > 0)
             {
                 StopDialogue();
             }
@@ -107,13 +135,18 @@ public class DialogueChanger : MonoBehaviour
     {
         if (dialogueIndex < dialogue.DialogueRespons.Count)
         {
-            dialogueText.text = dialogue.DialogueRespons[dialogueIndex];
+            dialogueText.text = dialogue.DialogueRespons[dialogueIndex].dialogueText;
         }
     }
 
     private void AddQuests()
     {
         questTab.AddQuest(dialogue.Quest);
+    }
+
+    private void HideDialogue()
+    {
+        background.SetActive(false);
     }
 
     private void Update()
@@ -124,9 +157,16 @@ public class DialogueChanger : MonoBehaviour
             {
                 if (firstSpacePress == false)
                 {
-                    StopAllCoroutines();
+                    if (dialogue.DialogueRespons[dialogueIndex].whoRespond)
+                    {
+                        NPCDialogue.ShowAllText();
+                    }
+                    else
+                    {
+                        StopAllCoroutines();
 
-                    ShowAllText();
+                        ShowAllText();
+                    }
 
                     firstSpacePress = true;
                 }
@@ -134,7 +174,32 @@ public class DialogueChanger : MonoBehaviour
                 {
                     dialogueIndex++;
 
-                    StartCoroutine(DialogueDisplay());
+                    if (dialogueIndex >= dialogue.DialogueRespons.Count)
+                    {
+                        StopDialogue();
+                        NPCDialogue.NextDialogue();
+
+                        HideDialogue();
+
+                        playerMovement.Dialogue = false;
+                    }
+                    else
+                    {
+                        if (dialogue.DialogueRespons[dialogueIndex].whoRespond)
+                        {
+                            NPCDialogue.StartShowDialogue(dialogue.DialogueRespons[dialogueIndex].dialogueText);
+
+                            HideDialogue();
+                        }
+                        else
+                        {
+                            NPCDialogue.StopDialogue();
+
+                            StartCoroutine(DialogueDisplay());
+                        }
+
+                        firstSpacePress = false;
+                    }
                 }
             }
         }

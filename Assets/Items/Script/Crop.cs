@@ -9,6 +9,7 @@ public class Crop : Placeable
     [SerializeField] private int dayToGrow;
 
     [SerializeField] private List<Sprite> levels;
+    [SerializeField] private List<GameObject> level;
 
     [SerializeField] private Sprite destroy;
 

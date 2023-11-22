@@ -18,6 +18,8 @@ public class PlayerItemUse : MonoBehaviour
 
     [SerializeField] private LocationGridSave grid;
 
+    [SerializeField] private int maxDistanceFromPlayer = 3;
+
     private PlayerStats playerStats;
 
     private AudioSource audioSource;
@@ -193,37 +195,49 @@ public class PlayerItemUse : MonoBehaviour
 
         if (usedItem is Weapon ||
             (mousePositionGrid != null &&
-            mousePositionGrid.x >= playerPosition.x - 1 &&
-            mousePositionGrid.x <= playerPosition.x + 1 &&
-            mousePositionGrid.y >= playerPosition.y - 1 &&
-            mousePositionGrid.y <= playerPosition.y + 1))
+            mousePositionGrid.x >= playerPosition.x - maxDistanceFromPlayer &&
+            mousePositionGrid.x <= playerPosition.x + maxDistanceFromPlayer &&
+            mousePositionGrid.y >= playerPosition.y - maxDistanceFromPlayer &&
+            mousePositionGrid.y <= playerPosition.y + maxDistanceFromPlayer))
         {
             objectGrid = mousePositionGrid;
 
-            if (mousePositionGrid.y > playerPosition.y)
-            {
-                ChangeAnimatorDirectionVariables(0, 1);
+            int differenceX = mousePositionGrid.x - playerPosition.x;
+            int differenceY = mousePositionGrid.y - playerPosition.y;
 
-                return lastDirection = Direction.Up;
-            }
-            else if (mousePositionGrid.y < playerPosition.y)
+            if(differenceY < 0)
             {
-                ChangeAnimatorDirectionVariables(0, -1);
+                if(Mathf.Abs(differenceX) <= Mathf.Abs(differenceY))
+                {
+                    ChangeAnimatorDirectionVariables(0, -1);
 
-                return lastDirection = Direction.Down;
+                    return lastDirection = Direction.Down;
+                }
             }
-            else if (mousePositionGrid.x > playerPosition.x)
+
+            if (differenceY > 0)
             {
-                ChangeAnimatorDirectionVariables(1, 0);
+                if (Mathf.Abs(differenceX) <= Mathf.Abs(differenceY))
+                {
+                    ChangeAnimatorDirectionVariables(0, 1);
 
-                return lastDirection = Direction.Right;
+                    return lastDirection = Direction.Up;  
+                }
             }
-            else
+
+            if (differenceX > 0)
             {
-                ChangeAnimatorDirectionVariables(-1, 0);
+                if (Mathf.Abs(differenceY) <= Mathf.Abs(differenceX))
+                {
+                    ChangeAnimatorDirectionVariables(1, 0);
 
-                return lastDirection = Direction.Left;
+                    return lastDirection = Direction.Right;
+                }
             }
+
+            ChangeAnimatorDirectionVariables(-1, 0);
+
+            return lastDirection = Direction.Left;
         }
         else
         {
@@ -456,12 +470,4 @@ public class PlayerItemUse : MonoBehaviour
             water = false;
         }
     }
-}
-
-public enum Direction
-{
-    Right,
-    Left,
-    Up,
-    Down
 }

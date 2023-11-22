@@ -105,8 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stonePrefab: {fileID: 4545528885086037019, guid: 53dbc69b413bb764c8cbd77f5a7113b2, type: 3}
   spawnItem: {fileID: 11400000, guid: f1bb0409427b3f141a44022b4020526b, type: 2}
-  amount: 3
-  health: 15
+  amount: 2
+  health: 10
   stoneLevel: 1
   destroyParticle: {fileID: 7267677822037952181, guid: d2bfe8414e74bde4eb1aab076bf6e1a7, type: 3}
   soundEffect: {fileID: 8300000, guid: 8f393617e15e105438c889e203fc25aa, type: 3}
@@ -157,7 +157,7 @@ MonoBehaviour:
   locationGrid: {fileID: 0}
   isWalkable: 0
   positionInCenterOfGridNode: 1
-  setObjectOnlyToMiddleGridNode: 1
+  setObjectOnlyToMiddleGridNode: 0
 --- !u!114 &8709571516685159844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015390396, y: 0.093440056}
+  m_Offset: {x: 0.015390396, y: -0.03352499}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.45053566, y: 0.19332051}
@@ -214,7 +214,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.68645096, y: 0.43422127}
+  m_Size: {x: 0.68645096, y: 0.18029118}
   m_EdgeRadius: 0
 --- !u!82 &2891153099478979815
 AudioSource:
@@ -484,10 +484,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.013784409, y: 0.08851242}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -498,5 +498,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6822243, y: 0.43990326}
   m_EdgeRadius: 0

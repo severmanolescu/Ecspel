@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: StartDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 1
+    dialogueText: Here you are, I've been waiting for you
+  - whoRespond: 1
+    dialogueText: I have a quest for you
+  - whoRespond: 1
+    dialogueText: I need you to get me some logs from the lumbercamp north from your
+      house
+  - whoRespond: 1
+    dialogueText: Can you do this? I will pay you of course
+  - whoRespond: 0
+    dialogueText: Sure, Ion! I can do this, how many logs do you need?
+  - whoRespond: 1
+    dialogueText: 10 will work for now
+  - whoRespond: 1
+    dialogueText: Alright, it won't take long
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: 459cd00af8c89dd4dae268d7a0cdcf30, type: 2}
+  startDialogue: 0

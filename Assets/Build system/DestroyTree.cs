@@ -10,7 +10,7 @@ public class DestroyTree : MonoBehaviour
 
     [SerializeField] private int logAmountDrop;
 
-    [SerializeField] private SpawnItem spawnItem;
+    private SpawnItem spawnItem;
 
     [SerializeField] private GameObject treeDustWhenHitGround;
 

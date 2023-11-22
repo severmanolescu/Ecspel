@@ -7,7 +7,7 @@ using UnityEngine;
 public class DialogueScriptableObject : ScriptableObject
 {
     [Header("Player and NPC respons:")]
-    [SerializeField] private List<string> dialogueRespons;
+    [SerializeField] private List<Dialogue> dialogueRespons;
 
     [Header("Next dialogue to play:")]
     [SerializeField] private DialogueScriptableObject nextDialogue;
@@ -18,7 +18,7 @@ public class DialogueScriptableObject : ScriptableObject
     [Header("If this is dialogue is first")]
     [SerializeField] private bool startDialogue;
 
-    public List<string> DialogueRespons { get { return dialogueRespons; } }
+    public List<Dialogue> DialogueRespons { get { return dialogueRespons; } }
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } set { nextDialogue = value; } }
     public List<Quest> Quest { get { return quests; } }
 

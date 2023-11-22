@@ -19,8 +19,8 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private ItemDrag itemDrag;
     private ItemDetails itemDetails;
 
-    private Image itemSprite;
-    private TextMeshProUGUI amount;
+    [SerializeField] private Image itemSprite;
+    [SerializeField] private TextMeshProUGUI amount;
 
     private PlayerInventory inventory;
 
@@ -65,14 +65,9 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         quickSlots = GameObject.Find("Global/Player/Canvas/QuickSlots").GetComponent<QuickSlotsChanger>();
 
-        Image[] itemsSprite = GetComponentsInChildren<Image>();
-
-        itemSprite = itemsSprite[1];
-        amount = GetComponentInChildren<TextMeshProUGUI>();
+        amount.gameObject.SetActive(false);
 
         item = null;
-
-        amount.gameObject.SetActive(false);
 
         itemSprite.gameObject.SetActive(false);
 

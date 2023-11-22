@@ -6,14 +6,11 @@ public class QuestTabHandler : MonoBehaviour
 {
     [SerializeField] private GameObject questButtonPrefab;
 
-    [SerializeField] private GameObject activeQuestText;
-    [SerializeField] private Transform activeQuestSpawnLocation;
+    [SerializeField] private Transform spawLocation;
 
-    [SerializeField] private GameObject completedQuestText;
-    [SerializeField] private Transform completedQuestSpawnLocation;
+    [SerializeField] private List<Quest> testQuestHandler = new List<Quest>();
 
     private List<QuestButton> activeQuests = new List<QuestButton>();
-    private List<QuestButton> completedQuests = new List<QuestButton>();
 
     private PlayerInventory playerInventory;
 
@@ -31,8 +28,6 @@ public class QuestTabHandler : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        completedQuestText.SetActive(false);
-
         getQuest = GameObject.Find("Global").GetComponent<GetQuest>();
 
         questToWorld = GameObject.Find("Global").GetComponent<QuestToWorldHandler>();
@@ -48,7 +43,7 @@ public class QuestTabHandler : MonoBehaviour
 
     private void InstantiateButton(Quest quest)
     {
-        GameObject @object = Instantiate(questButtonPrefab, activeQuestSpawnLocation);
+        GameObject @object = Instantiate(questButtonPrefab, spawLocation);
 
         @object.transform.localScale = questButtonPrefab.transform.localScale;
 
@@ -79,10 +74,7 @@ public class QuestTabHandler : MonoBehaviour
 
     private Quest ResetQuestData(Quest quest)
     {
-        foreach (Objective objective in quest.QuestObjectives)
-        {
-            objective.Completed = false;
-        }
+        quest.QuestObjective.Completed = false;
 
         return quest;
     }
@@ -102,7 +94,7 @@ public class QuestTabHandler : MonoBehaviour
 
     public void AddQuest(List<Quest> questList)
     {
-        if (questList != null)
+        if (questList != null)  
         {
             foreach (Quest quest in questList)
             {
@@ -165,8 +157,7 @@ public class QuestTabHandler : MonoBehaviour
 
         activeQuests.Clear();
 
-        DeleteQuestsFromLocation(activeQuestSpawnLocation);
-        DeleteQuestsFromLocation(completedQuestSpawnLocation);
+        DeleteQuestsFromLocation(spawLocation);
     }
 
     private void DeleteQuestsFromLocation(Transform location)
@@ -197,24 +188,11 @@ public class QuestTabHandler : MonoBehaviour
         }
     }
 
-    public void CompletQuest(Quest quest)
+    private void Start()
     {
-        foreach (QuestButton activeQuest in activeQuests)
+        foreach(Quest quest in testQuestHandler)
         {
-            if (activeQuest.Quest == quest)
-            {
-                activeQuests.Remove(activeQuest);
-
-                activeQuest.transform.SetParent(completedQuestSpawnLocation);
-
-                completedQuestText.SetActive(true);
-
-                completedQuests.Add(activeQuest);
-
-                AddItemsToInventory(quest.ReceiveItems);
-
-                return;
-            }
+            AddQuest(quest);
         }
     }
 }

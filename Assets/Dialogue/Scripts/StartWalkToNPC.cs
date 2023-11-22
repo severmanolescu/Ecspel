@@ -78,10 +78,6 @@ public class StartWalkToNPC : MonoBehaviour
 
                 npcAI.GetNpcPath();
 
-                npcAI.ScheduleIndex = -1;
-                npcAI.NpcTimeSchedules = npcTimeSchedules;
-                npcAI.ChangeScheduleIndex();
-
                 NPC = npcAI.gameObject;
 
                 if (StopPlayerFromMoving == true)

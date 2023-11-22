@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1468a1702c9094c8b22aeb9f206408, type: 3}
+  m_Name: FirstQuest
+  m_EditorClassIdentifier: 
+  title: Ion need some logs
+  details: Ion told you to go and collect 10 pieces of logs from the lumber camp
+    north of your house, you have an axe in the chest from your house, get it and
+    go chop some trees
+  questObjective: {fileID: 11400000, guid: d6d06e1b06741294c98061b99b17306c, type: 2}
+  receiveItems:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 10
+  nextDialogue: {fileID: 0}
+  nextQuest: {fileID: 0}

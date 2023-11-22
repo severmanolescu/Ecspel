@@ -6,7 +6,7 @@ public class QuickSlot : MonoBehaviour
 {
     private ItemSlot equiped;
 
-    private TextMeshProUGUI amount;
+    [SerializeField] private TextMeshProUGUI amount;
 
     private Image[] itemSprites;
 
@@ -19,8 +19,6 @@ public class QuickSlot : MonoBehaviour
         itemSprites = gameObject.GetComponentsInChildren<Image>();
 
         Equiped = GameObject.Find("Player/Canvas/PlayerItems/SlotsPockets/" + gameObject.name).GetComponent<ItemSlot>();
-
-        amount = GetComponentInChildren<TextMeshProUGUI>();
 
         if (Equiped.Item != null)
         {

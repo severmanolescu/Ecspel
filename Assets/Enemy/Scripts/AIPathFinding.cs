@@ -19,13 +19,13 @@ public class AIPathFinding : MonoBehaviour
 
     private float initialScaleX;
 
-    private float speed;
+    public float speed;
 
     private int currentIndex;
 
     private Vector3 changeScale;
 
-    private Transform toLocation;
+    private Vector3 toLocation;
     private Vector3 lastPosition;
 
     private Pathfinding pathfinding;
@@ -36,7 +36,7 @@ public class AIPathFinding : MonoBehaviour
 
     private Vector3 initialLocation;
 
-    public Transform ToLocation { get => toLocation; set { toLocation = value; path = null; } }
+    public Vector3 ToLocation { get => toLocation; set { toLocation = value; path = null; } }
     public float Speed { get => speed; set => speed = value; }
     public bool Walking { get => walking; set => walking = value; }
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
@@ -112,7 +112,7 @@ public class AIPathFinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (ToLocation != null)
+        if (ToLocation != Vector3.zero)
         {
             if (path != null)
             {
@@ -122,13 +122,13 @@ public class AIPathFinding : MonoBehaviour
 
                     if (Vector3.Distance(transform.position, path[0]) <= distanceTolerance)
                     {
-                        path = pathfinding.FindPath(transform.position, toLocation.position);
+                        path = pathfinding.FindPath(transform.position, toLocation);
 
                         if (path != null && path.Count > 1)
                         {
                             path.RemoveAt(0);
 
-                            lastPosition = ToLocation.position;
+                            lastPosition = ToLocation;
                         }
                         else
                         {
@@ -136,15 +136,15 @@ public class AIPathFinding : MonoBehaviour
                         }
                     }
                 }
-                else if (lastPosition != ToLocation.position)
+                else if (lastPosition != ToLocation)
                 {
-                    path = pathfinding.FindPath(transform.position, toLocation.position);
+                    path = pathfinding.FindPath(transform.position, toLocation);
 
                     if (path != null && path.Count > 1)
                     {
                         path.RemoveAt(0);
 
-                        lastPosition = ToLocation.position;
+                        lastPosition = ToLocation;
                     }
                     else
                     {
@@ -154,13 +154,13 @@ public class AIPathFinding : MonoBehaviour
             }
             else
             {
-                path = pathfinding.FindPath(transform.position, toLocation.position);
+                path = pathfinding.FindPath(transform.position, toLocation);
 
                 if (path != null && path.Count > 1)
                 {
                     path.RemoveAt(0);
 
-                    lastPosition = ToLocation.position;
+                    lastPosition = ToLocation;
                 }
                 else
                 {

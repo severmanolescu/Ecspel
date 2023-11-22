@@ -10,9 +10,8 @@ public class QuestTabDataSet : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questDetailText;
 
     [Header("Quest objective")]
-    [SerializeField] private GameObject textQuestLog;
-    [SerializeField] private Transform spawnLocationQuestLog;
-    [SerializeField] private GameObject questLogPrefab;
+    [SerializeField] private TextMeshProUGUI objectiveText;
+    [SerializeField] private TextMeshProUGUI objectiveLog;
 
     [Header("Quest rewards")]
     [SerializeField] private GameObject textRewardItems;
@@ -20,8 +19,6 @@ public class QuestTabDataSet : MonoBehaviour
     [SerializeField] private GameObject rewardItemPrefab;
 
     [Header("Quest icon near name")]
-    [SerializeField] private GameObject questIcon;
-
     [SerializeField] private GameObject itemSlotPrefab;
 
     private void Awake()
@@ -37,40 +34,15 @@ public class QuestTabDataSet : MonoBehaviour
         questDetailText.gameObject.SetActive(true);
         questTitleText.gameObject.SetActive(true);
 
-        textQuestLog.SetActive(true);
+        objectiveText.gameObject.SetActive(true);
+        objectiveLog.gameObject.SetActive(true);
         textRewardItems.SetActive(true);
-        questIcon.SetActive(true);
 
         DestroyOldQuestData();
 
         PlaceQuestRewards(quest.ReceiveItems);
 
-        PlaceQuestLog(quest.QuestObjectives);
-    }
-
-    private void PlaceQuestLog(List<Objective> objectives)
-    {
-        if (objectives != null && objectives.Count > 0)
-        {
-            foreach (Objective objective in objectives)
-            {
-                if (objective != null)
-                {
-                    GameObject newLog = Instantiate(questLogPrefab, spawnLocationQuestLog);
-
-                    newLog.GetComponentInChildren<TextMeshProUGUI>().text = objective.name;
-
-                    Image logComplete = newLog.GetComponentInChildren<Image>();
-
-                    logComplete.gameObject.SetActive(objective.Completed);
-
-                    if (objective.Completed == false)
-                    {
-                        return;
-                    }
-                }
-            }
-        }
+        objectiveText.text = quest.QuestObjective.ObjectiveName;
     }
 
     private void PlaceQuestRewards(List<ItemWithAmount> items)
@@ -88,14 +60,7 @@ public class QuestTabDataSet : MonoBehaviour
 
     private void DestroyOldQuestData()
     {
-        TextMeshProUGUI[] questDetailsList = spawnLocationQuestLog.GetComponentsInChildren<TextMeshProUGUI>();
-
-        foreach (TextMeshProUGUI itemSlot in questDetailsList)
-        {
-            Destroy(itemSlot.transform.parent.gameObject);
-        }
-
-        questDetailsList = spawnLocationRewardItems.GetComponentsInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI[] questDetailsList = spawnLocationRewardItems.GetComponentsInChildren<TextMeshProUGUI>();
 
         foreach (TextMeshProUGUI itemSlot in questDetailsList)
         {
@@ -108,9 +73,9 @@ public class QuestTabDataSet : MonoBehaviour
         questTitleText.text = "";
         questDetailText.text = "";
 
-        textQuestLog.SetActive(false);
+        objectiveText.gameObject.SetActive(false);
+        objectiveLog.gameObject.SetActive(false);
         textRewardItems.SetActive(false);
-        questIcon.SetActive(false);
 
         questDetailText.gameObject.SetActive(false);
         questTitleText.gameObject.SetActive(false);

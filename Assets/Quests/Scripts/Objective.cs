@@ -9,12 +9,6 @@ public class Objective : ScriptableObject
 
     [SerializeField] private bool completed = false;
 
-    public Objective(string objectiveName, bool completed)
-    {
-        this.objectiveName = objectiveName;
-        this.completed = completed;
-    }
-
     public bool Completed { get => completed; set => completed = value; }
     public string ObjectiveName { get => objectiveName; set => objectiveName = value; }
 

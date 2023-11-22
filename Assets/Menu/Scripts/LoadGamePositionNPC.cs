@@ -7,7 +7,5 @@ public class LoadGamePositionNPC : MonoBehaviour
     public void LoadGame()
     {
         transform.localPosition = position;
-
-        GetComponent<NpcAIHandler>().DayChange();
     }
 }

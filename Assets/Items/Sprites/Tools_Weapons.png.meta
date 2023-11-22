@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -525,91 +530,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sickle_Gold_Recipe
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b2c71337f1fe8546864277e679c3333
-      internalID: -2049764322
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sickle_Gold
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f311ba5e555e7ce45b8f7df02b8ba83d
-      internalID: 1119834221
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sickle_Diamond_Recipe
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 190352c7d25894a4cabda3b510fa9859
-      internalID: 67426541
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sickle_Diamond
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 192
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f72f334e1736f74e9a434b12ca1c5e5
-      internalID: -891096110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Hoe_Recipe
+      name: Rusty_Axe_Recipe
       rect:
         serializedVersion: 2
         x: 0
@@ -630,7 +551,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Hoe_Icon
+      name: Rusty_Axe_Icon
       rect:
         serializedVersion: 2
         x: 16
@@ -651,7 +572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Hoe_Down1
+      name: Rusty_Axe_Down1
       rect:
         serializedVersion: 2
         x: 32
@@ -672,7 +593,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Hoe_Down2
+      name: Rusty_Axe_Down2
       rect:
         serializedVersion: 2
         x: 48
@@ -693,7 +614,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Hoe_Down3
+      name: Rusty_Axe_Down3
       rect:
         serializedVersion: 2
         x: 64
@@ -714,7 +635,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Hoe_Up
+      name: Rusty_Axe_Up
       rect:
         serializedVersion: 2
         x: 80
@@ -735,7 +656,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Recipe
+      name: Rusty_Pickaxe_Recipe
       rect:
         serializedVersion: 2
         x: 0
@@ -756,7 +677,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Icon
+      name: Rusty_Pickaxe_Icon
       rect:
         serializedVersion: 2
         x: 16
@@ -777,7 +698,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Down1
+      name: Rusty_Pickaxe_Down1
       rect:
         serializedVersion: 2
         x: 32
@@ -798,7 +719,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Down2
+      name: Rusty_Pickaxe_Down2
       rect:
         serializedVersion: 2
         x: 48
@@ -819,7 +740,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Down3
+      name: Rusty_Pickaxe_Down3
       rect:
         serializedVersion: 2
         x: 64
@@ -840,7 +761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gold_Axe_Up
+      name: Rusty_Pickaxe_Up
       rect:
         serializedVersion: 2
         x: 80
@@ -856,510 +777,6 @@ TextureImporter:
       bones: []
       spriteID: 359739f300ac6ae409e6803b68b6d713
       internalID: 648181401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Recipe
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6acffbd56a9c94042b2de5e234fcae4e
-      internalID: -680228463
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Icon
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 470dbe0817ff56240a50fdcefe62d93e
-      internalID: 1448425106
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Down1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78abebec18c7d094196c78a699e57900
-      internalID: 1618898110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Down2
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e01758f4173c3364b883c64c564a019f
-      internalID: 1185941941
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Down3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73663ccb0eec1e54db43f550191d0d75
-      internalID: -1108041221
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Pickaxe_Up
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a7fdea2a929a6b4482209a8fa2b7e8b
-      internalID: 298830586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Recipe
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bde7e72893bcdf5488a2873b6e1932dc
-      internalID: 1867628616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Icon
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b228de5dc1ca89b4085078d706ef6cd9
-      internalID: -630055477
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Down1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa45852142de8bc4abd5f4c353b4ab16
-      internalID: -1652202088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Down2
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fe7a5661546a10488764275fcbf94aa
-      internalID: 155220462
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Down3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 153eac32823679f4ba37d3d38d7868e1
-      internalID: 2056540042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Hoe_Up
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 688b405e88e862c4c8964235cb37342c
-      internalID: 1570683046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Recipe
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a69fd51e12e730443b1ea89af76f7035
-      internalID: 589975355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Icon
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15c07a73c31fc7d49b59959951280101
-      internalID: 1986126097
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Down1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41d2fb3fe81e95f49b0ff232dbb22c3a
-      internalID: -1130198206
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Down2
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f6c490bb318ad845bfe0000e5248bda
-      internalID: -1103006854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Down3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 508c81c7371a17441a25fc97fd4ad0fe
-      internalID: 1674896880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Axe_Up
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23afe943a3472d34fb78e315e0358157
-      internalID: 1807933837
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Recipe
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db7044e0de8166b429145ba32e689a8b
-      internalID: -1186016612
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Icon
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e5136c95bd7cf8458c2c597c5c684ec
-      internalID: 969811359
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Down1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 53a469126a1e7eb43965b3ea44782bf3
-      internalID: -828751588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Down2
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ade65f8b45b916a4896921ea49647a7a
-      internalID: -202394230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Down3
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52566db85f81c2a469072f5380594f5e
-      internalID: -15561758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Pickaxe_Up
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b5803206a57bc8449c9baa6531ebc3e
-      internalID: 1324665932
       vertices: []
       indices: 
       edges: []
@@ -1402,90 +819,6 @@ TextureImporter:
       bones: []
       spriteID: 6b3c6d96594814b489853b988931ce71
       internalID: -115173805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Long_Sword_Recipe
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30dd01231f08d3f46968419117af852c
-      internalID: 5641305
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gold_Long_Sword_Icon
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc350ce9b844bf34db65bbb187537ff9
-      internalID: 1309681357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Long_Sword_Recipe
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df92f43af3ace884c913d91ecce5f72f
-      internalID: 830452422
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Diamond_Long_Sword_Icon
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a3a26bcb66cae34ea26fd111fc82ba1
-      internalID: -2085313971
       vertices: []
       indices: 
       edges: []
@@ -1805,18 +1138,6 @@ TextureImporter:
       Diamond_Pickaxe_Icon: 969811359
       Diamond_Pickaxe_Recipe: -1186016612
       Diamond_Pickaxe_Up: 1324665932
-      Gold_Axe_Down1: 1548520028
-      Gold_Axe_Down2: 1088088954
-      Gold_Axe_Down3: -857737088
-      Gold_Axe_Icon: -1751179067
-      Gold_Axe_Recipe: -225554202
-      Gold_Axe_Up: 648181401
-      Gold_Hoe_Down1: -408365241
-      Gold_Hoe_Down2: -1906210649
-      Gold_Hoe_Down3: -1407468501
-      Gold_Hoe_Icon: -1316496634
-      Gold_Hoe_Recipe: 1536464355
-      Gold_Hoe_Up: 834389175
       Gold_Long_Sword_Icon: 1309681357
       Gold_Long_Sword_Recipe: 5641305
       Gold_Pickaxe_Down1: 1618898110
@@ -1845,6 +1166,18 @@ TextureImporter:
       Pickaxe_Iron_Icon: -584429839
       Pickaxe_Iron_Recipe: -1961665440
       Pickaxe_Iron_Up: 187233670
+      Rusty_Axe_Down1: -408365241
+      Rusty_Axe_Down2: -1906210649
+      Rusty_Axe_Down3: -1407468501
+      Rusty_Axe_Icon: -1316496634
+      Rusty_Axe_Recipe: 1536464355
+      Rusty_Axe_Up: 834389175
+      Rusty_Pickaxe_Down1: 1548520028
+      Rusty_Pickaxe_Down2: 1088088954
+      Rusty_Pickaxe_Down3: -857737088
+      Rusty_Pickaxe_Icon: -1751179067
+      Rusty_Pickaxe_Recipe: -225554202
+      Rusty_Pickaxe_Up: 648181401
       Sickle_Diamond: -891096110
       Sickle_Diamond_Recipe: 67426541
       Sickle_Gold: 1119834221
@@ -1854,9 +1187,8 @@ TextureImporter:
       Stone_Arrow_Icon: -791145180
       Stone_Arrow_Recipe: 1556526908
       Tools_Weapons_6: 936249607
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

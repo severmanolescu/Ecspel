@@ -6,18 +6,15 @@ using UnityEngine.InputSystem;
 public class TeleportPlayerKeyPress : MonoBehaviour
 {
     [Header("Can enter interval:")]
+    [Range(0, 24)]
     [SerializeField] private int startHour;
+    [Range(0, 24)]
     [SerializeField] private int finishHour;
 
     [SerializeField] private Transform teleportToPoint;
 
-    [SerializeField] private GameObject currentCamera;
-    [SerializeField] private GameObject newCamera;
-
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
-
-    [SerializeField] private LocationGridSave newGrid;
 
     private CanvasTabsOpen canvasTabsOpen;
 
@@ -34,8 +31,6 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     private Keyboard keyboard;
 
     private AudioSource audioSource;
-
-    private bool fKeyPress = true;
 
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
 
@@ -79,10 +74,8 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
     private void Update()
     {
-        if (player != null && (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false)))
+        if (player != null && keyboard.fKey.wasPressedThisFrame)
         {
-            fKeyPress = true;
-
             if (canvasTabsOpen.CanOpenTab() && playerMovement.MenuOpen == false && playerMovement.TabOpen == false)
             {
                 if ((startHour == 0 && finishHour == 0) ||
@@ -96,9 +89,6 @@ public class TeleportPlayerKeyPress : MonoBehaviour
 
                     player.transform.position = TeleportToPoint.position;
 
-                    currentCamera.SetActive(false);
-                    newCamera.SetActive(true);
-
                     foreach (GameObject gameObject in objectsToSetActiveToFalse)
                     {
                         gameObject.SetActive(false);
@@ -109,7 +99,6 @@ public class TeleportPlayerKeyPress : MonoBehaviour
                         gameObject.SetActive(true);
                     }
 
-                    GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().LocationGrid = newGrid;
                     GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>().StopSoundEffects();
                 }
                 else
@@ -117,11 +106,6 @@ public class TeleportPlayerKeyPress : MonoBehaviour
                     worldText.ShowText("Usa inchisa!");
                 }
             }
-        }
-
-        if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
-        {
-            fKeyPress = false;
         }
     }
 }

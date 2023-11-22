@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quest", menuName = "Quest/New Quest", order = 1)]
+[CreateAssetMenu(fileName = "Quest", menuName = "Quest/Quest", order = 1)]
 [Serializable]
 public class Quest : ScriptableObject
 {
@@ -11,7 +11,7 @@ public class Quest : ScriptableObject
     [TextArea(4, 40)]
     [SerializeField] private string details;
 
-    [SerializeField] private List<Objective> questObjectives = new List<Objective>();
+    [SerializeField] private Objective questObjective;
 
     [SerializeField] private List<ItemWithAmount> receiveItems = new();
 
@@ -21,11 +21,11 @@ public class Quest : ScriptableObject
     [Header("Next quest:")]
     [SerializeField] private Quest nextQuest;
 
-    public Quest(string title, string details, List<Objective> questObjectives, List<ItemWithAmount> receiveItems, DialogueScriptableObject nextDialogue, Quest nextQuest)
+    public Quest(string title, string details, Objective questObjectives, List<ItemWithAmount> receiveItems, DialogueScriptableObject nextDialogue, Quest nextQuest)
     {
         this.title = title;
         this.details = details;
-        this.questObjectives = questObjectives;
+        this.questObjective = questObjectives;
         this.receiveItems = receiveItems;
         this.nextDialogue = nextDialogue;
         this.nextQuest = nextQuest;
@@ -37,22 +37,11 @@ public class Quest : ScriptableObject
     public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public Quest NextQuest { get { return nextQuest; } }
 
-    public List<Objective> QuestObjectives { get => questObjectives; set => questObjectives = value; }
+    public Objective QuestObjective { get => questObjective; set => questObjective = value; }
     public List<ItemWithAmount> ReceiveItems { get => receiveItems; set => receiveItems = value; }
 
     public Quest Copy()
     {
-        Quest questCopy = (Quest)this.MemberwiseClone();
-
-        List<Objective> objectiveCopy = new List<Objective>();
-
-        foreach (Objective objective in QuestObjectives)
-        {
-            objectiveCopy.Add(objective.Copy());
-        }
-
-        questCopy.QuestObjectives = objectiveCopy;
-
-        return questCopy;
+        return (Quest)this.MemberwiseClone();
     }
 }

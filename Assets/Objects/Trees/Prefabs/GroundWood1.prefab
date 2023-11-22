@@ -102,14 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967b766f9db088a4e90a4c1dcd0857ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScaleX: 0
+  startScaleX: -1
   startScaleY: 0
-  scaleX: 0
+  scaleX: 1
   scaleY: 0
   locationGrid: {fileID: 0}
   isWalkable: 0
   positionInCenterOfGridNode: 1
-  setObjectOnlyToMiddleGridNode: 1
+  setObjectOnlyToMiddleGridNode: 0
 --- !u!61 &593508289740801318
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,10 +142,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0021548271, y: -0.012196064}
+  m_Offset: {x: -0.0013504028, y: -0.035525322}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.53041756, y: 0.5165913}
+    pivot: {x: 0.5, y: 0.3125}
     oldSize: {x: 1, y: 1}
     newSize: {x: 0.9375, y: 0.75}
     adaptiveTilingThreshold: 0.5
@@ -153,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.56405735, y: 0.9967966}
+  m_Size: {x: 0.99684906, y: 0.3033657}
   m_EdgeRadius: 0
 --- !u!114 &3647621228305079557
 MonoBehaviour:
@@ -344,7 +344,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

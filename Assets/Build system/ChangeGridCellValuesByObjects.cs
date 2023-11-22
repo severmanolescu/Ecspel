@@ -9,7 +9,7 @@ public class ChangeGridCellValuesByObjects : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (grid != null && !collision.CompareTag("CheckCell") && collision.CompareTag("Untagged"))
+        if (grid != null && collision.isTrigger == false && !collision.CompareTag("CheckCell") && collision.CompareTag("Untagged"))
         {
             StopAllCoroutines();
 
@@ -39,7 +39,7 @@ public class ChangeGridCellValuesByObjects : MonoBehaviour
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
 
         boxCollider.isTrigger = true;
-        boxCollider.size = new Vector2(.75f, .75f);
+        boxCollider.size = new Vector2(.5f, .5f);
 
         gameObject.tag = "CheckCell";
     }

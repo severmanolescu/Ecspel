@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DrawDistance : MonoBehaviour
 {
     private GameObject mainGameObject = null;
 
+    PositionInGrid positionInGrid = null;
+
     private void Start()
     {
-        mainGameObject = GetComponentsInChildren<Transform>()[1].gameObject;
+        positionInGrid = GetComponentInChildren<PositionInGrid>();
 
-        if(mainGameObject != null )
+        Transform[] objects = GetComponentsInChildren<Transform>();
+
+        if(objects != null && objects.Length >= 2)
         {
-            mainGameObject.SetActive(false);
+            mainGameObject = objects[1].gameObject;
         }
         else
         {
@@ -22,17 +24,28 @@ public class DrawDistance : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.gameObject.name.Equals("DrawDistance"))
+        if(collision != null && collision.gameObject.CompareTag("DrawDistance"))
         {
-            mainGameObject.SetActive(true);
+            if (mainGameObject != null)
+            {
+                mainGameObject.SetActive(true);
+
+                if (positionInGrid != null)
+                {
+                    positionInGrid.InDrawDistance = true;
+                }
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision != null && collision.gameObject.name.Equals("DrawDistance"))
+        if (collision != null && collision.gameObject.CompareTag("DrawDistance"))
         {
-            mainGameObject.SetActive(false);
+            if(mainGameObject != null)
+            {
+                mainGameObject.SetActive(false);
+            }
         }
     }
 }

@@ -41,10 +41,10 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
 
-        if (dialogueId == -1)
-        {
-            dialogueId = GameObject.Find("Global").GetComponent<GetObjectReference>().GetObjectId(gameObject);
-        }
+        //if (dialogueId == -1)
+        //{
+        //    dialogueId = GameObject.Find("Global").GetComponent<GetObjectReference>().GetObjectId(gameObject);
+        //}
 
         if (StartAnimator)
         {
@@ -73,8 +73,6 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
             playerMovement.ChangeIdleAnimationDirection(idleAnimationDirection);
 
-            DestroyObjects();
-
             StartWalkToNPC startWalk = GetComponent<StartWalkToNPC>();
 
             if (StartAnimator == false && startWalk == null)
@@ -83,8 +81,6 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
             }
             else
             {
-                playerMovement.TabOpen = true;
-
                 canStartDialogue = false;
             }
         }
@@ -102,6 +98,8 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
         {
             playerMovement.TabOpen = false;
         }
+
+        DestroyObjects();
     }
 
     public void DestroyObject()

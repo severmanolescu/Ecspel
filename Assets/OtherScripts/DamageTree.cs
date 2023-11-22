@@ -18,6 +18,11 @@ public class DamageTree : MonoBehaviour
     [Header("Particles to play when tree is destoyed")]
     [SerializeField] private GameObject treeDustWhenDestroy;
 
+    [SerializeField] private GameObject shadowToDestroy;
+    [SerializeField] private GameObject sunShadow;
+
+    [SerializeField] private bool canDestroy = true;
+
     private AudioSource audioSource;
 
     private Animator animator;
@@ -45,6 +50,13 @@ public class DamageTree : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
 
         spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+
+        if (destroyTree == null)
+        {
+            destroyed = true;
+
+            ChangeSunShadowLength();
+        }
     }
 
     public void GetDataFromPosition(int startScaleX, int startScaleY, int scaleX, int scaleY)
@@ -63,18 +75,25 @@ public class DamageTree : MonoBehaviour
         scaleY = this.scaleY;
     }
 
-    private void ChangeGridData(GridNode gridNode, Grid grid)
+    private void ChangeGridData()
     {
-        for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
+        Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
+
+        GridNode gridNode = grid.GetGridObject(transform.position);
+
+        if (gridNode != null)
         {
-            for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
+            for (int i = gridNode.x + startScaleX; i <= gridNode.x + scaleX; i++)
             {
-                if (grid.gridArray[i, j] != null)
+                for (int j = gridNode.y + startScaleY; j <= gridNode.y + scaleY; j++)
                 {
-                    grid.gridArray[i, j].canPlace = true;
-                    grid.gridArray[i, j].canPlant = false;
-                    grid.gridArray[i, j].isWalkable = true;
-                    grid.gridArray[i, j].objectInSpace = null;
+                    if (grid.gridArray[i, j] != null)
+                    {
+                        grid.gridArray[i, j].canPlace = true;
+                        grid.gridArray[i, j].canPlant = false;
+                        grid.gridArray[i, j].isWalkable = true;
+                        grid.gridArray[i, j].objectInSpace = null;
+                    }
                 }
             }
         }
@@ -82,67 +101,76 @@ public class DamageTree : MonoBehaviour
 
     public void TakeDamage(float damage, int spawn, int itemLevel)
     {
-        if (Destroyed == false)
-        {
-            if (itemLevel >= treeLevel)
-            {
-                health -= damage;
-
-                PlayChopClip();
-            }
-        }
-        else
-        {
-            if (itemLevel >= trunkLevel)
-            {
-                health -= damage;
-
-                PlayChopClip();
-            }
-        }
-
-        if (health <= 0)
+        if(canDestroy)
         {
             if (Destroyed == false)
             {
-                destroyTree.Spawn = spawn;
-
-                switch (spawn)
+                if (itemLevel >= treeLevel)
                 {
-                    case 1: animator.SetTrigger("Left"); break;
-                    default: animator.SetTrigger("Right"); break;
+                    health -= damage;
+
+                    PlayChopClip();
                 }
-
-                Vector3 newScale = transform.Find("Shadow").localScale;
-
-                newScale.y /= 2;
-
-                transform.Find("Shadow").localScale = newScale;
-
-                health = trunkHealth;
-
-                Destroyed = true;
             }
             else
             {
-                spawnItem.SpawnItems(logItem, trunkItemDropNO, transform.position);
-
-                Grid grid = GameObject.Find("Global/BuildSystem").GetComponent<BuildSystemHandler>().Grid;
-
-                GridNode gridNode = grid.GetGridObject(transform.position);
-
-                if (gridNode != null)
+                if (itemLevel >= trunkLevel)
                 {
-                    ChangeGridData(gridNode, grid);
+                    health -= damage;
+
+                    PlayChopClip();
                 }
-
-                GameObject particles = Instantiate(treeDustWhenDestroy);
-                particles.transform.position = transform.position;
-
-                particles.GetComponent<ParticleSystem>().Play();
-
-                Destroy(this.gameObject);
             }
+
+            if (health <= 0)
+            {
+                if (Destroyed == false)
+                {
+                    destroyTree.Spawn = spawn;
+
+                    switch (spawn)
+                    {
+                        case 1: animator.SetTrigger("Left"); break;
+                        default: animator.SetTrigger("Right"); break;
+                    }
+
+                    ChangeSunShadowLength();
+
+                    health = trunkHealth;
+
+                    if (shadowToDestroy != null)
+                    {
+                        Destroy(shadowToDestroy);
+                    }
+
+                    Destroyed = true;
+                }
+                else
+                {
+                    spawnItem.SpawnItems(logItem, trunkItemDropNO, transform.position);
+
+                    ChangeGridData();
+
+                    GameObject particles = Instantiate(treeDustWhenDestroy);
+                    particles.transform.position = transform.position;
+
+                    particles.GetComponent<ParticleSystem>().Play();
+
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+    }
+
+    private void ChangeSunShadowLength()
+    {
+        if (sunShadow != null)
+        {
+            Vector3 newScale = sunShadow.transform.localScale;
+
+            newScale.y /= 2;
+
+            sunShadow.transform.localScale = newScale;
         }
     }
 
@@ -158,11 +186,14 @@ public class DamageTree : MonoBehaviour
         {
             Destroy(GetComponentInChildren<DestroyTree>().gameObject);
 
-            Vector3 newScale = transform.Find("Shadow").localScale;
+            ChangeSunShadowLength();
 
-            newScale.y /= 2;
+            if (shadowToDestroy != null)
+            {
+                Destroy(shadowToDestroy);
+            }
 
-            transform.Find("Shadow").localScale = newScale;
+            health = trunkHealth;
         }
     }
 }

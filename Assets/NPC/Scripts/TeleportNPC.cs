@@ -35,7 +35,6 @@ public class TeleportNPC : MonoBehaviour
 
             if (npcAIHandler != null)
             {
-                npcAIHandler.LocationChange();
 
                 FootPrintHandler footPrintHandler = npcAIHandler.GetComponent<FootPrintHandler>();
 

@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class NpcAIHandler : MonoBehaviour
 {
-    [SerializeField] private List<NpcTimeSchedule> npcTimeSchedules = new List<NpcTimeSchedule>();
-
-    private DayTimerHandler dayTimerHandler;
-
     private NpcPathFinding npcPath;
 
-    public int scheduleIndex = 0;
+    private WaypointData currentWaypoint;
+    public WaypointData stopWaypoint;
 
-    public int ScheduleIndex { get => scheduleIndex; set => scheduleIndex = value; }
-    public List<NpcTimeSchedule> NpcTimeSchedules { get => npcTimeSchedules; set => npcTimeSchedules = value; }
+    public bool moveToWaypoint = false;
+
+    public List<WaypointData> waypoints = new List<WaypointData>();
+
+    public int waypointIndex = 0;
+
+    private NPCWaypointPath waypointPath;
+
+    private bool blacksmith = false;
+
     public NpcPathFinding NpcPath { get => npcPath; set => npcPath = value; }
+    public WaypointData CurrentWaypoint { get => currentWaypoint; }
 
     private void Awake()
     {
-        scheduleIndex = 0;
-
         npcPath = GetComponent<NpcPathFinding>();
 
-        dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
+        waypointPath = GetComponent<NPCWaypointPath>();
+
+        StartCoroutine(Wait());
     }
 
     public void GetNpcPath()
@@ -30,151 +36,100 @@ public class NpcAIHandler : MonoBehaviour
         npcPath = GetComponent<NpcPathFinding>();
     }
 
-    private void Start()
-    {
-        if (scheduleIndex < npcTimeSchedules.Count)
-        {
-            if (npcTimeSchedules[scheduleIndex].Location == transform)
-            {
-                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-            }
-            else
-            {
-                npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
-                                    npcTimeSchedules[scheduleIndex].Location.position);
-            }
-        }
-        else
-        {
-            npcPath.CanWalk = false;
-
-            if (npcTimeSchedules.Count > 0)
-            {
-                npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
-            }
-        }
-
-        npcPath.CanWalk = true;
-    }
-
-    private IEnumerator WaitForSeconds(int seconds)
-    {
-        npcPath.CanWalk = false;
-
-        if (npcTimeSchedules != null &&
-            scheduleIndex < npcTimeSchedules.Count &&
-            npcTimeSchedules[scheduleIndex].Point.position != transform.position)
-        {
-            npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
-
-            yield return new WaitForSeconds(seconds);
-
-            transform.position = Vector3.MoveTowards(transform.position, npcTimeSchedules[scheduleIndex].Point.position, 5f);
-        }
-        else
-        {
-            npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
-
-            yield return new WaitForSeconds(seconds);
-        }
-
-        ChangeScheduleIndex();
-
-        npcPath.CanWalk = true;
-    }
-
-    private IEnumerator WaitForHour()
-    {
-        npcPath.CanWalk = false;
-
-        npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex].IdleDirection);
-
-        while (dayTimerHandler.Hours < npcTimeSchedules[scheduleIndex].Hours ||
-             (dayTimerHandler.Hours == npcTimeSchedules[scheduleIndex].Hours &&
-              dayTimerHandler.Minutes <= npcTimeSchedules[scheduleIndex].Minutes))
-        {
-            yield return new WaitForSeconds(2);
-        }
-
-        ChangeScheduleIndex();
-
-        npcPath.CanWalk = true;
-    }
-
-    public void ChangeScheduleIndex()
-    {
-        scheduleIndex++;
-
-        if (scheduleIndex < npcTimeSchedules.Count)
-        {
-            if (npcTimeSchedules[scheduleIndex].Location == transform)
-            {
-                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-            }
-            else
-            {
-                npcPath.ChangeLocation(npcTimeSchedules[scheduleIndex].LocationGrid,
-                                    npcTimeSchedules[scheduleIndex].Location.position);
-            }
-        }
-        else
-        {
-            npcPath.CanWalk = false;
-        }
-    }
-
     public void ArrivedAtLocation()
     {
-        if (npcPath.CanWalk == true && scheduleIndex < npcTimeSchedules.Count && npcTimeSchedules.Count > 0)
+        waypointIndex++;
+
+        if(waypointIndex < waypoints.Count)
         {
-            if (npcTimeSchedules[scheduleIndex].Hours > -1)
-            {
-                StartCoroutine(WaitForHour());
-            }
-            else if (npcTimeSchedules[scheduleIndex].Location == transform)
-            {
-                if (npcTimeSchedules[scheduleIndex].Seconds != 0)
-                {
-                    StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-                }
-            }
-            else if (npcTimeSchedules[scheduleIndex].Seconds != 0)
-            {
-                StartCoroutine(WaitForSeconds(npcTimeSchedules[scheduleIndex].Seconds));
-            }
-            else
-            {
-                ChangeScheduleIndex();
-            }
+            npcPath.ChangeLocation(waypoints[waypointIndex].transform.position);
+            
+            currentWaypoint = waypoints[waypointIndex];
         }
         else
         {
-            npcPath.CanWalk = false;
-            if (scheduleIndex < npcTimeSchedules.Count &&
-                npcTimeSchedules[scheduleIndex].Hours > -1)
+            if(blacksmith)
             {
-                StartCoroutine(WaitForHour());
+                GetComponent<BlacksmithHandler>().ArrivedAtLocation();
             }
-            else if (scheduleIndex - 1 < npcTimeSchedules.Count && npcTimeSchedules.Count > 0)
+            else
             {
-                npcPath.MoveIdleAnimation(npcTimeSchedules[scheduleIndex - 1].IdleDirection);
+                CheckForAction();
             }
         }
     }
 
-    public void LocationChange()
+    private void CheckForAction()
     {
-        ArrivedAtLocation();
+        WaypointData waypointData = currentWaypoint.GetComponent<WaypointData>();
+
+        if (waypointData != null)
+        {
+            if(waypointData.Blacksmith)
+            {
+                BlacksmithHandler blacksmithHandler = GetComponent<BlacksmithHandler>();
+
+                if(blacksmithHandler != null)
+                {
+                    blacksmith = true;
+
+                    blacksmithHandler.StartBlacksmith();
+                }
+            }
+        }
     }
 
-    public void DayChange()
+    private void RotateList()
     {
-        scheduleIndex = -1;
+        List<WaypointData> auxWaypoints = new List<WaypointData>(waypoints);
 
-        StopAllCoroutines();
+        for(int count = waypoints.Count - 1; count >= 0; count--)
+        {
+            waypoints[waypoints.Count - 1 - count] = auxWaypoints[count];
+        }
 
-        npcPath.CanWalk = true;
+        waypoints.RemoveAt(0);
+    }
 
-        ChangeScheduleIndex();
+    private IEnumerator Wait()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+
+            if (moveToWaypoint)
+            {
+                waypointIndex = -1;
+
+                waypoints = waypointPath.FindTheWay(currentWaypoint, stopWaypoint);
+
+                RotateList();
+
+                ArrivedAtLocation();
+
+                moveToWaypoint = false;
+            }
+        }
+    }
+
+    public void MoveToWaypoint()
+    {
+
+    }
+
+    public void StartTalking()
+    {
+        if(blacksmith)
+        {
+            GetComponent<BlacksmithHandler>().StartTalking();
+        }
+    }
+
+    public void StopTalking()
+    {
+        if (blacksmith)
+        {
+            GetComponent<BlacksmithHandler>().StopTalking();
+        }
     }
 }

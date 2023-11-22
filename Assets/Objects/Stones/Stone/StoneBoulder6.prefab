@@ -150,14 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967b766f9db088a4e90a4c1dcd0857ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScaleX: 0
+  startScaleX: -1
   startScaleY: 0
   scaleX: 0
-  scaleY: 0
+  scaleY: 1
   locationGrid: {fileID: 0}
   isWalkable: 0
   positionInCenterOfGridNode: 1
-  setObjectOnlyToMiddleGridNode: 1
+  setObjectOnlyToMiddleGridNode: 0
 --- !u!114 &589953971263145334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009345412, y: 0.23046017}
+  m_Offset: {x: 0.009345412, y: 0.04651451}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4868095, y: 0.27246362}
@@ -214,7 +214,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9725826, y: 1.006485}
+  m_Size: {x: 0.9725826, y: 0.5153599}
   m_EdgeRadius: 0
 --- !u!82 &6953991779537154302
 AudioSource:
@@ -387,10 +387,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.22834635}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -401,7 +401,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.0217466}
   m_EdgeRadius: 0
 --- !u!1 &5324219756654680232
 GameObject:
