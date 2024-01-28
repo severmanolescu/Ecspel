@@ -11,7 +11,7 @@ public class WateringCanHandler : MonoBehaviour
     private void Awake()
     {
         playerStats = playerStats = GameObject.Find("Global/Player").GetComponent<PlayerStats>();
-        grid = GameObject.Find("PlayerGround").GetComponent<LocationGridSave>().Grid;
+        grid = GameObject.Find("Global/AI_Grid").GetComponent<LocationGridSave>().Grid;
     }
 
     private void ChangeSoilState(GameObject node, WateringCan item)

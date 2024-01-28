@@ -103,7 +103,7 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
-    private void HideText(bool hide)
+    public void HideText(bool hide)
     {
         text.text = "";
 

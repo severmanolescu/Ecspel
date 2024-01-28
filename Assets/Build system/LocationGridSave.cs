@@ -38,7 +38,19 @@ public class LocationGridSave : MonoBehaviour
         grid = new Grid(height, weight, cellSize, position, (Grid g, int x, int y) => new GridNode(g, x, y));
     }
 
-    IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)
+    public Vector3 GetNeighborNode(Vector3 position, int x, int y)
+    {
+        GridNode gridNode = grid.GetGridObject(position);
+
+        if (gridNode != null)
+        {
+            return grid.GetWorldPosition(gridNode.x + x, gridNode.y + y);
+        }
+
+        return DefaulData.nullVector;
+    }
+
+    private IEnumerator WaitToCheck(NewGameLoadingHandler newGameLoading)
     {
         for (int indexCellX = 0; indexCellX < grid.gridArray.GetLength(0); indexCellX++)
         {

@@ -493,7 +493,6 @@ GameObject:
   - component: {fileID: 1179674499652582740}
   - component: {fileID: 6522937335561851141}
   - component: {fileID: 3613781747233548823}
-  - component: {fileID: 5822974143946144516}
   - component: {fileID: 7911190069668416271}
   - component: {fileID: 6317264807181751989}
   - component: {fileID: 925762862023634316}
@@ -630,20 +629,6 @@ MonoBehaviour:
   distanceTolerance: 0.1
   distanceToleranceDirection: 0.05
   locationGrid: {fileID: 0}
-  action: 0
-  path: []
---- !u!114 &5822974143946144516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7822245923769555019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 123d4a59a3600ae478a70c305982c190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7911190069668416271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +706,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5ce23881c46fb943828439da80b4daf, type: 2}
   - {fileID: 11400000, guid: f7d5679f3ee6e37468227722626e2292, type: 2}
   - {fileID: 11400000, guid: 9b73609973e85da408de3a1f835aea78, type: 2}
-  quests: []
 --- !u!114 &431122770352638292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf4b1712dededc408bd684d0bc63d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsToWait: 2
+  secondsToWait: 5
   anvilLocation: {fileID: 0}
   anvilDirection: 3
   deactivateAnvil:
@@ -775,3 +759,6 @@ MonoBehaviour:
   woodLocation: {fileID: 0}
   woodDirection: 2
   npcForgeHandler: {fileID: 0}
+  woodStorage: {fileID: 0}
+  movingToPickWood: 0
+  enoughtWood: 1

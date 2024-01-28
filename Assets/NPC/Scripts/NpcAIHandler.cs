@@ -6,18 +6,19 @@ public class NpcAIHandler : MonoBehaviour
 {
     private NpcPathFinding npcPath;
 
-    private WaypointData currentWaypoint;
+    public WaypointData currentWaypoint;
     public WaypointData stopWaypoint;
 
     public bool moveToWaypoint = false;
 
-    public List<WaypointData> waypoints = new List<WaypointData>();
+    private List<WaypointData> waypoints = new List<WaypointData>();
 
-    public int waypointIndex = 0;
+    private int waypointIndex = 0;
 
     private NPCWaypointPath waypointPath;
 
     private bool blacksmith = false;
+    private bool construction = false;
 
     public NpcPathFinding NpcPath { get => npcPath; set => npcPath = value; }
     public WaypointData CurrentWaypoint { get => currentWaypoint; }
@@ -26,7 +27,7 @@ public class NpcAIHandler : MonoBehaviour
     {
         npcPath = GetComponent<NpcPathFinding>();
 
-        waypointPath = GetComponent<NPCWaypointPath>();
+        waypointPath = GameObject.Find("Global").GetComponent<NPCWaypointPath>();
 
         StartCoroutine(Wait());
     }
@@ -48,15 +49,38 @@ public class NpcAIHandler : MonoBehaviour
         }
         else
         {
-            if(blacksmith)
-            {
-                GetComponent<BlacksmithHandler>().ArrivedAtLocation();
-            }
-            else
+            if(!CheckForHandlers())
             {
                 CheckForAction();
             }
         }
+    }
+
+    private bool CheckForHandlers()
+    {
+        if (blacksmith)
+        {
+            GetComponent<BlacksmithHandler>().ArrivedAtLocation();
+
+            return true;
+        }
+        else if (construction)
+        {
+            GetComponent<NpcConstructionAI>().ArivedAtLocation();
+
+            return true;
+        }
+
+        BuilderHelperAI builderHelperAI = GetComponent<BuilderHelperAI>();
+
+        if(builderHelperAI != null)
+        {
+            builderHelperAI.ArivedAtLocation();
+
+            return true;
+        }    
+
+        return false;
     }
 
     private void CheckForAction()
@@ -65,16 +89,56 @@ public class NpcAIHandler : MonoBehaviour
 
         if (waypointData != null)
         {
-            if(waypointData.Blacksmith)
+            if (waypointData.Blacksmith)
             {
                 BlacksmithHandler blacksmithHandler = GetComponent<BlacksmithHandler>();
 
-                if(blacksmithHandler != null)
+                if (blacksmithHandler != null)
                 {
                     blacksmith = true;
 
                     blacksmithHandler.StartBlacksmith();
                 }
+            }
+            else if(waypointData.Disapear > 0)
+            {
+                StartCoroutine(WaitForWaypoint(waypointData, true));
+            }
+            else if(waypointData.Construction != null)
+            {
+                NpcConstructionAI npcConstructionAI = GetComponent<NpcConstructionAI>();
+
+                if (npcConstructionAI != null)
+                {
+                    construction = true;
+
+                    npcConstructionAI.StartToConstruct(waypointData.Construction);
+                }
+            }
+        }
+    }
+
+    private IEnumerator WaitForWaypoint(WaypointData waypoint, bool disapear)
+    {
+        if(disapear)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        yield return new WaitForSeconds(waypoint.Disapear);
+
+        if (disapear)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        if(waypoint.StartAnimation.CompareTo(string.Empty) != 0)
+        {
+            GetComponent<Animator>().SetBool(waypoint.StartAnimation, true);
+
+            if (waypoint.GoToWaypoint != null)
+            {
+                MoveToWaypoint(waypoint.GoToWaypoint, true);
             }
         }
     }
@@ -87,8 +151,33 @@ public class NpcAIHandler : MonoBehaviour
         {
             waypoints[waypoints.Count - 1 - count] = auxWaypoints[count];
         }
+    }
 
-        waypoints.RemoveAt(0);
+    public void MoveToWaypoint(WaypointData waypoint, bool removeFirstWaypoint)
+    {
+        if(waypoint == null)
+        {
+            return;
+        }
+
+        blacksmith = false;
+
+        waypointIndex = -1;
+
+        stopWaypoint = waypoint;
+
+        waypoints = waypointPath.FindTheWay(currentWaypoint, stopWaypoint);
+
+        RotateList();
+
+        if (removeFirstWaypoint)
+        {
+            waypoints.RemoveAt(0);
+        }
+
+        ArrivedAtLocation();
+
+        moveToWaypoint = false;
     }
 
     private IEnumerator Wait()
@@ -99,15 +188,7 @@ public class NpcAIHandler : MonoBehaviour
 
             if (moveToWaypoint)
             {
-                waypointIndex = -1;
-
-                waypoints = waypointPath.FindTheWay(currentWaypoint, stopWaypoint);
-
-                RotateList();
-
-                ArrivedAtLocation();
-
-                moveToWaypoint = false;
+                MoveToWaypoint(stopWaypoint, true);
             }
         }
     }

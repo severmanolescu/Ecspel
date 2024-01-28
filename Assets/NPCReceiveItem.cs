@@ -5,7 +5,7 @@ public class NPCReceiveItem : MonoBehaviour
 {
     [SerializeField] private List<DialogueScriptableObject> notHaveItems = new List<DialogueScriptableObject>();
 
-    public List<Quest> quests = new List<Quest>();
+    private List<Quest> quests = new List<Quest>();
     
     private PlayerInventory playerInventory;
 

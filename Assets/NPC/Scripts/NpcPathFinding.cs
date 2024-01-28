@@ -10,11 +10,11 @@ public class NpcPathFinding : MonoBehaviour
 
     [SerializeField] private LocationGridSave locationGrid;
 
-    private bool canWalk = false;
+    public bool canWalk = false;
     private bool talking = false;
-    public bool action = false;
+    private bool action = false;
 
-    public List<Vector3> path = new List<Vector3>();
+    private List<Vector3> path = new List<Vector3>();
 
     private Vector3 toLocation = DefaulData.nullVector;
 
@@ -126,7 +126,7 @@ public class NpcPathFinding : MonoBehaviour
             path = null;
         }
 
-        if (pathCurrentIndex < path.Count)
+        if (path != null && pathCurrentIndex < path.Count)
         {
             SetAnimator(GetDirection(path[pathCurrentIndex]));
         }
@@ -134,77 +134,87 @@ public class NpcPathFinding : MonoBehaviour
 
     private Vector3 GetDirection(Vector3 position)
     {
-        Vector3 direction = Vector3.zero;
-
-        GridNode npcNode = locationGrid.Grid.GetGridObject(transform.position);
-        GridNode toNode  = locationGrid.Grid.GetGridObject(position);
-
-
-        if (npcNode.x < toNode.x)
+        if (position != DefaulData.nullVector)
         {
-            direction.x = 1;
-        }
-        else if (npcNode.x > toNode.x)
-        {
-            direction.x = -1;
+            Vector3 direction = Vector3.zero;
+
+            GridNode npcNode = locationGrid.Grid.GetGridObject(transform.position);
+            GridNode toNode = locationGrid.Grid.GetGridObject(position);
+
+            if (npcNode != null && toNode != null)
+            {
+                if (npcNode.x < toNode.x)
+                {
+                    direction.x = 1;
+                }
+                else if (npcNode.x > toNode.x)
+                {
+                    direction.x = -1;
+                }
+
+                if (npcNode.y < toNode.y)
+                {
+                    direction.y = 1;
+                }
+                else if (npcNode.y > toNode.y)
+                {
+                    direction.y = -1;
+                }
+
+                return direction;
+            }
         }
 
-        if (npcNode.y < toNode.y)
-        {
-            direction.y = 1;
-        }
-        else if (npcNode.y > toNode.y)
-        {
-            direction.y = -1;
-        }
-
-        return direction;
+        return DefaulData.nullVector;
     }
 
     private void SetAnimator(Vector3 direction)
     {
-        if (direction.x > 0 && direction.y > 0) //Up right
+        if (direction != DefaulData.nullVector)
         {
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", direction.y);
-        }
-        else if (direction.x < 0 && direction.y > 0) //Up left
-        {
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", direction.y);
-        }
-        else if (direction.x > 0 && direction.y < 0) //Down right
-        {
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", direction.y);
-        }
-        else if (direction.x < 0 && direction.y < 0) //Down left
-        {
-            animator.SetFloat("Horizontal", 0);
-            animator.SetFloat("Vertical", direction.y);
-        }
-        else
-        {
-            animator.SetFloat("Horizontal", direction.x);
-            animator.SetFloat("Vertical", direction.y);
-        }
+            if (direction.x > 0 && direction.y > 0) //Up right
+            {
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", direction.y);
+            }
+            else if (direction.x < 0 && direction.y > 0) //Up left
+            {
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", direction.y);
+            }
+            else if (direction.x > 0 && direction.y < 0) //Down right
+            {
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", direction.y);
+            }
+            else if (direction.x < 0 && direction.y < 0) //Down left
+            {
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", direction.y);
+            }
+            else
+            {
+                animator.SetFloat("Horizontal", direction.x);
+                animator.SetFloat("Vertical", direction.y);
+            }
 
-        if (direction != Vector3.zero)
-        {
-            animator.SetFloat("HorizontalFacing", direction.x);
-            animator.SetFloat("VerticalFacing", direction.y);
+            if (direction != Vector3.zero)
+            {
+                animator.SetFloat("HorizontalFacing", direction.x);
+                animator.SetFloat("VerticalFacing", direction.y);
 
-            animator.SetBool("Walking", true);
-        }
-        else
-        {
-            animator.SetBool("Walking", false);
+                animator.SetBool("Walking", true);
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
         }
     }
 
-    public void SetAnimatorDirectionToLocation(Vector3 playerPosition)
+    public void SetAnimatorDirectionToLocation(Vector3 position)
     {
-        SetAnimator(GetDirection(playerPosition));
+        SetAnimator(GetDirection(position));
     }
 
     private void FixedUpdate()

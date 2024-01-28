@@ -16,7 +16,7 @@ public class PositionInGrid : MonoBehaviour
     
     private LocationGridSave locationGrid;
 
-    private bool inDrawDistance = false;
+    public bool inDrawDistance = false;
 
     public LocationGridSave LocationGrid { get => locationGrid; set => locationGrid = value; }
     public bool InDrawDistance { set => inDrawDistance = value; }
@@ -100,6 +100,7 @@ public class PositionInGrid : MonoBehaviour
 
             }
         }
+
         if(!inDrawDistance)
         {
             gameObject.SetActive(false);

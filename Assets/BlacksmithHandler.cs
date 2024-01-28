@@ -28,6 +28,10 @@ public class BlacksmithHandler : MonoBehaviour
 
     private NpcPathFinding npcPathFinding;
 
+    private BlacksmithWoodHandler blacksmithWood;
+
+    private NpcAIHandler npcAIHandler;
+
     private Animator animator;
 
     private bool anvil = false;
@@ -37,6 +41,7 @@ public class BlacksmithHandler : MonoBehaviour
     public bool movingToPickWood = false;
     private bool started = false;
     public bool enoughtWood = true;
+    public bool gettingWood = false;
 
     private Coroutine coroutine;
 
@@ -45,6 +50,10 @@ public class BlacksmithHandler : MonoBehaviour
         npcPathFinding = GetComponent<NpcPathFinding>();
 
         animator = GetComponent<Animator>();
+
+        blacksmithWood = woodLocation.GetComponent<BlacksmithWoodHandler>();
+
+        npcAIHandler = GetComponent<NpcAIHandler>();
     }
 
     private int GetRandomState()
@@ -68,6 +77,19 @@ public class BlacksmithHandler : MonoBehaviour
             }
 
             npcForgeHandler.blacksmithStartShift(this);
+        }
+        else
+        {
+            bool carringWood = animator.GetBool("Wood");
+
+            if(carringWood)
+            {
+                gettingWood = true;
+
+                movingToPickWood = true;
+
+                MoveToLocation(woodLocation.position, woodDirection);
+            }
         }
     }
 
@@ -130,8 +152,21 @@ public class BlacksmithHandler : MonoBehaviour
         }
     }
 
+    private void DeactivateForgeObjects()
+    {
+        ChangeObjectsState(activateForge, deactivateForge);
+    }
+
+    private void GetNewAction()
+    {
+        ChooseAction(GetRandomState());
+    }
+
     private void ChooseAction(int action)
     {
+        ChangeObjectsState(activateForge, deactivateForge);
+        ChangeObjectsState(activateAnvil, deactivateAnvil);
+
         switch (action)
         {
             // Anvil
@@ -217,7 +252,23 @@ public class BlacksmithHandler : MonoBehaviour
         {
             if (movingToPickWood)
             {
-                if(woodPickedUp)
+                if(gettingWood)
+                {
+                    animator.SetTrigger("Wood_Forge");
+
+                    animator.SetBool("Wood", false);
+
+                    forgeFuel = false;
+                    woodPickedUp = false;
+                    movingToPickWood = false;
+                    enoughtWood = true;
+                    gettingWood = false;
+
+                    blacksmithWood.AddWood();
+
+                    ChooseAction(GetRandomState());
+                }
+                else if(woodPickedUp)
                 {
                     ChangeObjectsState(deactivateForge, activateForge);
 
@@ -233,13 +284,11 @@ public class BlacksmithHandler : MonoBehaviour
 
                     npcForgeHandler.FuelForge();
 
+                    forge = true;
+
                     if(!enoughtWood)
                     {
-                        
-                    }
-                    else
-                    {
-                        ChooseAction(GetRandomState());
+                        npcAIHandler.MoveToWaypoint(woodStorage, false);
                     }
                 }
                 else
@@ -251,16 +300,13 @@ public class BlacksmithHandler : MonoBehaviour
 
                     woodPickedUp = true;
 
-                    enoughtWood = woodLocation.GetComponent<BlacksmithWoodHandler>().PickUpWood();
+                    enoughtWood = blacksmithWood.PickUpWood();
 
                     ChooseAction(2);
                 }
             }
             else
             {
-                animator.SetBool("Anvil", anvil);
-                animator.SetBool("Forge", forge);
-
                 if (anvil)
                 {
                     ChangeObjectsState(deactivateAnvil, activateAnvil);
@@ -270,14 +316,12 @@ public class BlacksmithHandler : MonoBehaviour
                     ChangeObjectsState(deactivateForge, activateForge);
                 }
 
+                animator.SetBool("Anvil", anvil);
+                animator.SetBool("Forge", forge);
+
                 coroutine = StartCoroutine(WaitBeforMove());
             }
         }
-    }
-
-    public void DeactivateForgeObjects()
-    {
-        ChangeObjectsState(activateForge, deactivateForge);
     }
 
 
@@ -288,47 +332,50 @@ public class BlacksmithHandler : MonoBehaviour
 
     private IEnumerator WaitBeforMove()
     {
-        yield return new WaitForSeconds(secondsToWait);   
+        yield return new WaitForSeconds(secondsToWait);
 
-        if (forgeFuel)
+        if (enoughtWood)
         {
-            ChooseAction(2);
-        }
-        else
-        {
-            int action = GetRandomState();
-
-            switch (action)
+            if (forgeFuel)
             {
-                case 0:
-                    {
-                        if (!anvil)
-                        {
-                            animator.SetBool("Forge", false);
-
-                            ChangeObjectsState(activateForge, deactivateForge);
-
-                            yield return new WaitForSeconds(.5f);
-                        }
-
-                        break;
-                    }
-                case 1:
-                    {
-                        if (!forge)
-                        {
-                            animator.SetBool("Anvil", false);
-
-                            ChangeObjectsState(activateAnvil, deactivateAnvil);
-
-                            yield return new WaitForSeconds(.5f);
-                        }
-
-                        break;
-                    }
+                ChooseAction(2);
             }
+            else
+            {
+                int action = GetRandomState();
 
-            ChooseAction(action);
-        }   
+                switch (action)
+                {
+                    case 0:
+                        {
+                            if (!anvil)
+                            {
+                                animator.SetBool("Forge", false);
+
+                                ChangeObjectsState(activateForge, deactivateForge);
+
+                                yield return new WaitForSeconds(.5f);
+                            }
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (!forge)
+                            {
+                                animator.SetBool("Anvil", false);
+
+                                ChangeObjectsState(activateAnvil, deactivateAnvil);
+
+                                yield return new WaitForSeconds(.5f);
+                            }
+
+                            break;
+                        }
+                }
+
+                ChooseAction(action);
+            }
+        }
     }
 }

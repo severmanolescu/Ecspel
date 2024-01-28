@@ -49,7 +49,7 @@ public class Pathfinding
             foreach (GridNode pathNode in path)
             {
                 //vectorPath.Add(new Vector3(pathNode.x, pathNode.y) * grid.CellSize + Vector3.one * grid.CellSize * .5f);
-                vectorPath.Add(grid.GetWorldPosition(pathNode.x, pathNode.y));
+                vectorPath.Add(grid.GetWorldPositionCenter(pathNode.x, pathNode.y));
             }
 
             return vectorPath;

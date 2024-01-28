@@ -18,7 +18,7 @@ public class test : MonoBehaviour
                 {
                     if (locationGrid.Grid.gridArray[i, j].isWalkable == false)
                     {
-                        GameObject test = new GameObject();
+                        GameObject test = new GameObject("Node: x:" + i + " y:" + j);
 
                         test.transform.localScale = scale;
 

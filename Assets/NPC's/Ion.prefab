@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 2819109409615319098}
   - component: {fileID: 6951711622178144465}
   - component: {fileID: 2326414540371805505}
-  - component: {fileID: 8971110186730629881}
   - component: {fileID: 8681754606138461139}
   - component: {fileID: 9172165524724375168}
   - component: {fileID: 8418556263599506699}
@@ -455,23 +454,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c0360d22cb5ef428e8138e8cbe08c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1.5
   distanceTolerance: 0.1
   distanceToleranceDirection: 0.05
   locationGrid: {fileID: 0}
-  path: []
---- !u!114 &8971110186730629881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8272274188454490382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 123d4a59a3600ae478a70c305982c190, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8681754606138461139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +535,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5ce23881c46fb943828439da80b4daf, type: 2}
   - {fileID: 11400000, guid: f7d5679f3ee6e37468227722626e2292, type: 2}
   - {fileID: 11400000, guid: 9b73609973e85da408de3a1f835aea78, type: 2}
-  quests: []
 --- !u!114 &5946823906065660891
 MonoBehaviour:
   m_ObjectHideFlags: 0

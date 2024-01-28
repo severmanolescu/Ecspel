@@ -45,7 +45,7 @@ public class BuildSystemHandler : MonoBehaviour
 
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
 
-        fenceSystem = GetComponent<FenceSystemHandler>();
+//        fenceSystem = GetComponent<FenceSystemHandler>();
     }
 
     private void Start()
@@ -60,7 +60,7 @@ public class BuildSystemHandler : MonoBehaviour
         GetComponent<AxeHandler>().Grid = Grid;
         GetComponent<WateringCanHandler>().Grid = Grid;
 
-        fenceSystem.Grid = Grid;
+//        fenceSystem.Grid = Grid;
     }
 
     public void ChangeGridCropPlaced(GridNode gridNode, bool cropPlaced)
@@ -406,6 +406,22 @@ public class BuildSystemHandler : MonoBehaviour
         position.z = 0;
 
         toPlaceObject.transform.position = position;
+    }
+
+    public void ChangeNodeData(Vector3 position, bool isWalkable, bool canPlant, bool canPlace, bool cropPlaced)
+    {
+        if(position != DefaulData.nullVector)
+        {
+            GridNode gridNode = Grid.GetGridObject(position);
+
+            if(gridNode != null)
+            {
+                gridNode.isWalkable = isWalkable;
+                gridNode.canPlant = canPlant;
+                gridNode.canPlace = canPlace;
+                gridNode.cropPlaced = cropPlaced;
+            }
+        }
     }
 
     private void Update()

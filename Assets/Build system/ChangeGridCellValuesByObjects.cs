@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ChangeGridCellValuesByObjects : MonoBehaviour
 {
+    public bool saveTheData = false;
+
     public Grid grid;
 
     public Grid Grid { get => grid; set => grid = value; }
@@ -15,7 +17,15 @@ public class ChangeGridCellValuesByObjects : MonoBehaviour
 
             GridNode gridNode = grid.GetGridObject(transform.position);
 
-            gridNode.isWalkable = false;
+            if (gridNode != null)
+            {               
+                gridNode.isWalkable = false;
+
+                if (saveTheData)
+                {
+                    GameObject.Find("Global/AI_Grid").GetComponent<SaveInitialGrid>().AddNode(gridNode.x, gridNode.y);
+                }
+            }
 
             Destroy(gameObject);
         }
@@ -39,7 +49,7 @@ public class ChangeGridCellValuesByObjects : MonoBehaviour
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
 
         boxCollider.isTrigger = true;
-        boxCollider.size = new Vector2(.5f, .5f);
+        boxCollider.size = new Vector2(.48f, .48f);
 
         gameObject.tag = "CheckCell";
     }

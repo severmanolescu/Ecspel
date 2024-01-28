@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -198,4 +199,33 @@ public enum Direction
 public enum Animals
 {
     Bird
+}
+
+[Serializable]
+public class MyTuple
+{
+    public int Item1;
+    public int Item2;
+
+    public MyTuple(int item1, int item2)
+    {
+        Item1 = item1;
+        Item2 = item2;
+    }
+}
+
+[Serializable]
+public class NpcDialogue
+{
+    public string details;
+
+    public List<DialogueList> dialogues;
+}
+
+[Serializable]
+public class DialogueList
+{
+    public string details;
+
+    public List<Dialogue> list;
 }
