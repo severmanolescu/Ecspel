@@ -58,7 +58,7 @@ public class SpawnLittleEnemy : MonoBehaviour
     {
         if (spawnPoints.Count > 0)
         {
-            int enemyNo = Random.Range(1, spawnPoints.Count);
+            int enemyNo = Random.Range(1, spawnPoints.Count - 1);
 
             for (int enemyIndex = 0; enemyIndex < enemyNo; enemyIndex++)
             {

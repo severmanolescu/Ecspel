@@ -187,6 +187,13 @@ public static class DefaulData
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }
+
+    public static Vector3 GetRandomPositionCollider(BoxCollider2D boxCollider, Transform currentObject)
+    {
+        return new Vector3(UnityEngine.Random.Range(boxCollider.transform.position.x - boxCollider.size.x / 2, boxCollider.transform.position.x + boxCollider.size.x / 2),
+                           UnityEngine.Random.Range(boxCollider.transform.position.y - boxCollider.size.y / 2, boxCollider.transform.position.y + boxCollider.size.y / 2),
+                           currentObject.position.z);
+    }
 }
 
 public enum Direction
@@ -204,28 +211,43 @@ public enum Animals
 [Serializable]
 public class MyTuple
 {
-    public int Item1;
-    public int Item2;
+    [SerializeField] private ushort item1;
+    [SerializeField] private ushort item2;
 
-    public MyTuple(int item1, int item2)
+    public MyTuple(ushort item1, ushort item2)
     {
-        Item1 = item1;
-        Item2 = item2;
+        this.item1 = item1;
+        this.item2 = item2;
     }
+
+    public ushort Item1 { get => item1; }
+    public ushort Item2 { get => item2; }
 }
 
 [Serializable]
 public class NpcDialogue
 {
-    public string details;
+    [SerializeField] private NpcDialogueDetails details;
 
-    public List<DialogueList> dialogues;
+    [SerializeField] private List<DialogueNPCs> dialogues;
+
+    public NpcDialogueDetails Details { get => details; }
+    public List<DialogueNPCs> Dialogues { get => dialogues; }
 }
 
 [Serializable]
 public class DialogueList
 {
-    public string details;
+    [SerializeField] private string details;
 
-    public List<Dialogue> list;
+    [SerializeField] private List<Dialogue> list;
+
+    public string Details { get => details; set => details = value; }
+    public List<Dialogue> List { get => list; set => list = value; }
+}
+
+public enum NpcDialogueDetails
+{
+    Digging,
+    Finish
 }

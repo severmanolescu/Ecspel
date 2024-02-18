@@ -73,7 +73,7 @@ public class ChickenAI : MonoBehaviour
     {
         SetAnimatorValue(false, false, false, true);
 
-        audioSource.clip = roosterCrowing[Random.Range(0, roosterCrowing.Count)];
+        audioSource.clip = roosterCrowing[Random.Range(0, roosterCrowing.Count - 1)];
 
         audioSource.volume = maxAudioVolume;
 
@@ -140,7 +140,7 @@ public class ChickenAI : MonoBehaviour
     {
         SetAnimatorValue(false, true, false);
 
-        audioSource.clip = eatingClips[Random.Range(0, eatingClips.Count)];
+        audioSource.clip = eatingClips[Random.Range(0, eatingClips.Count - 1)];
 
         audioSource.volume = Random.Range(maxAudioVolume / 5, maxAudioVolume);
         audioSource.Play();

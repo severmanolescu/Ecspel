@@ -62,7 +62,7 @@ public class BirdsSpawn : MonoBehaviour
     {
         int animalCount = Random.Range(minAnimalCount, maxAnimalCount);
 
-        int animalPrefabIndex = Random.Range(0, animalsPrefab.Count);
+        int animalPrefabIndex = Random.Range(0, animalsPrefab.Count - 1);
 
         while (animals.Count < animalCount)
         {

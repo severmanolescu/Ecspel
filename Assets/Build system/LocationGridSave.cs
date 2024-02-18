@@ -12,8 +12,6 @@ public class LocationGridSave : MonoBehaviour
 
     public bool test = false;
 
-    private SpawnEnemyInArea[] spawnLocations;
-
     private DayTimerHandler dayTimer;
 
     public Grid grid;
@@ -27,8 +25,6 @@ public class LocationGridSave : MonoBehaviour
         ReinitializeGrid();
 
         dayTimer = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
-
-        spawnLocations = gameObject.GetComponentsInChildren<SpawnEnemyInArea>();
 
         position = transform.position;
     }
@@ -84,26 +80,8 @@ public class LocationGridSave : MonoBehaviour
         StartCoroutine(WaitToCheck(newGameLoading));
     }
 
-    public void SpawnEnemy()
-    {
-        if (dayTimer.CanSpawnEnemy() == true)
-        {
-            foreach (SpawnEnemyInArea spawnLocation in spawnLocations)
-            {
-                spawnLocation.SpawnEnemy();
-            }
-        }
-    }
-
     public void ChangeLocation()
     {
-        AIPathFinding[] enemy = gameObject.GetComponentsInChildren<AIPathFinding>();
-
-        foreach (AIPathFinding aIPathFinding in enemy)
-        {
-            Destroy(aIPathFinding.gameObject);
-        }
-
         gameObject.SetActive(false);
     }
 

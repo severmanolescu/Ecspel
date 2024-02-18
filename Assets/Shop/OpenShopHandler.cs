@@ -91,7 +91,7 @@ public class OpenShopHandler : MonoBehaviour
 
         for (int noOfItem = 0; noOfItem < noOfItems; noOfItem++)
         {
-            int indexOfItemToAdd = UnityEngine.Random.Range(0, shopItems.Count);
+            int indexOfItemToAdd = UnityEngine.Random.Range(0, shopItems.Count - 1);
 
             Item newItem = shopItems[indexOfItemToAdd].Item.Copy();
             newItem.Amount = shopItems[indexOfItemToAdd].Amount;

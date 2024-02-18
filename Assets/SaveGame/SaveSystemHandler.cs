@@ -37,8 +37,6 @@ public class SaveSystemHandler : MonoBehaviour
 
     private GridSaveHadler gridSave;
 
-    private TipsCanvas tipsCanvas;
-
     private SkillsHandler skillsHandler;
 
     private Keyboard keyboard;
@@ -64,8 +62,6 @@ public class SaveSystemHandler : MonoBehaviour
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
 
         playerAchievements = GameObject.Find("Global/Player").GetComponent<PlayerAchievements>();
-
-        tipsCanvas = GameObject.Find("Global/Player/Canvas/Tips").GetComponent<TipsCanvas>();
 
         dayTimerHandler = GameObject.Find("Global/DayTimer").GetComponent<DayTimerHandler>();
 
@@ -212,8 +208,6 @@ public class SaveSystemHandler : MonoBehaviour
 
         GetComponent<GetAllForgesStorage>().SetAllForges(saveGame.ForgeStorages);
 
-        GetComponent<GetAllTipsLocation>().SetTipToWorld(saveGame.TipsSaves);
-
         GetComponent<GetAllDialogueAppear>().SetDialogueToWorld(saveGame.DialogueAppear);
 
         GetComponent<GetAllGrass>().SetGrassToWorld(saveGame.GrassSaveGames);
@@ -224,11 +218,7 @@ public class SaveSystemHandler : MonoBehaviour
 
         skillsHandler.SetSkillsLevels(saveGame.SkillsLevels);
 
-        dayTimerHandler.SetWeatherAtLoad(saveGame.Raining, saveGame.Fog, saveGame.FogIntensity);
-
-        GameObject.Find("Caves").GetComponent<CaveSystemHandler>().MaxCaveIndex = saveGame.MaxCaveIndex;
-
-        tipsCanvas.NotShow = saveGame.TipShowState;
+//        dayTimerHandler.SetWeatherAtLoad(saveGame.Raining, saveGame.Fog, saveGame.FogIntensity);
 
         playerInventory.CoinsHandler.Amount = saveGame.Coins;
 
@@ -314,17 +304,11 @@ public class SaveSystemHandler : MonoBehaviour
 
         saveGame.Coins = playerInventory.CoinsHandler.Amount;
 
-        saveGame.TipShowState = tipsCanvas.NotShow;
-
-        saveGame.TipsSaves = GetComponent<GetAllTipsLocation>().GetAllTips();
-
         saveGame.DialogueAppear = GetComponent<GetAllDialogueAppear>().GetAllDialogue();
 
         saveGame.GrassSaveGames = GetComponent<GetAllGrass>().GetAll();
 
         saveGame.Crafts = GetComponent<GetAllCrafts>().GetCrafts();
-
-        saveGame.MaxCaveIndex = GameObject.Find("Caves").GetComponent<CaveSystemHandler>().MaxCaveIndex;
 
         saveGame.Raining = dayTimerHandler.Raining;
         saveGame.Fog = dayTimerHandler.Fog;

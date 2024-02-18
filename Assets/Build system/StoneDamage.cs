@@ -94,13 +94,6 @@ public class StoneDamage : MonoBehaviour
 
                 GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
 
-                IncreseCaveObjects increseCave = GetComponent<IncreseCaveObjects>();
-
-                if (increseCave != null)
-                {
-                    increseCave.Increse();
-                }
-
                 GameObject particles = Instantiate(destroyParticle);
                 particles.transform.position = transform.position;
                 particles.GetComponent<ParticleSystem>().Play();

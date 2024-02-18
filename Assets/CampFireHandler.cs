@@ -16,7 +16,7 @@ public class CampFireHandler : MonoBehaviour
 
     [SerializeField] private Item coalItem;
     [Header("Coal drop when destroy")]
-    [Header("First trop: ")]
+    [Header("First drop: ")]
     [Header("Minimum burn procentage:")]
     [Range(0, 100)]
     [SerializeField] private int minProcentageOfBurn;

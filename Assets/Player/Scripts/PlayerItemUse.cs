@@ -96,7 +96,7 @@ public class PlayerItemUse : MonoBehaviour
         {
             if (auxObject.gameObject.CompareTag("EnemyHit"))
             {
-                auxObject.GetComponent<EnemyHitHandler>().AttackEnemy(weapon.AttackPower / attackDecrease + skillAttackBonus);
+ //               auxObject.GetComponent<EnemyHitHandler>().AttackEnemy(weapon.AttackPower / attackDecrease + skillAttackBonus);
             }
             else if (auxObject.gameObject.CompareTag("Barrel"))
             {

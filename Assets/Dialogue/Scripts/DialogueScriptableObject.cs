@@ -19,7 +19,7 @@ public class DialogueScriptableObject : ScriptableObject
     [SerializeField] private bool startDialogue;
 
     public List<Dialogue> DialogueRespons { get { return dialogueRespons; } }
-    public DialogueScriptableObject NextDialogue { get { return nextDialogue; } set { nextDialogue = value; } }
+    public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
     public List<Quest> Quest { get { return quests; } }
 
     public bool StartDialogue { get => startDialogue; set => startDialogue = value; }

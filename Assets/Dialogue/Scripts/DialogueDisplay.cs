@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Dynamic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class DialogueDisplay : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    private CanvasTabsOpen canvasTabs;
+    private CanvasTabsOpen playerCanvas;
 
     private string dialogueText;
 
@@ -25,12 +26,19 @@ public class DialogueDisplay : MonoBehaviour
 
     private RandomDialogue randomDialogue;
 
+    private DialogueBetweenNPCs dialogueBetweenNPCs;
+
+    private bool canTalk = true;
+
+    public bool CanTalk { get => canTalk; set => canTalk = value; }
+    public DialogueBetweenNPCs DialogueBetweenNPCs { get => dialogueBetweenNPCs; set => dialogueBetweenNPCs = value; }
+
     private void Awake()
     {
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
 
         dialogueChanger = GameObject.Find("Global/Player/Canvas/Dialogue").GetComponent<DialogueChanger>();
-        canvasTabs = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
+        playerCanvas    = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
 
         npcPathFinding = GetComponent<NpcPathFinding>();
 
@@ -57,7 +65,7 @@ public class DialogueDisplay : MonoBehaviour
     {
         StartWalk();
 
-        canvasTabs.ShowDefaultUIElements();
+        playerCanvas.ShowDefaultUIElements();
 
         StopDialogue();
     }
@@ -72,35 +80,65 @@ public class DialogueDisplay : MonoBehaviour
 
     public void ShowDialogue()
     {
-        if(dialogue != null)
+        if (canTalk)
         {
-            dialogueChanger.ShowDialogue(dialogue, this);
+            dialogueBetweenNPCs.PlayerWantsToTalk();
 
-            StopWalk();
-
-            npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
-
-            canvasTabs.PrepareUIForDialogue();
-        }
-        else
-        {
-            DialogueScriptableObject dialogue = npcReceiveItem.CheckForQuest();
-
-            if(dialogue != null)
+            if (dialogue != null)
             {
-                this.dialogue = dialogue; 
+                dialogueChanger.ShowDialogue(dialogue, this);
 
-                ShowDialogue();
+                StopWalk();
+
+                npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
+
+                playerCanvas.PrepareUIForDialogue();
             }
             else
             {
-                this.dialogue = randomDialogue.GetDialogue();
+                DialogueScriptableObject dialogue = npcReceiveItem.CheckForQuest();
+
+                if (dialogue != null)
+                {
+                    this.dialogue = dialogue;
+
+                    ShowDialogue();
+                }
+                else
+                {
+                    this.dialogue = randomDialogue.GetDialogue();
+                }
+
+                npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
+
+                playerCanvas.PrepareUIForDialogue();
             }
-
-            npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
-
-            canvasTabs.PrepareUIForDialogue();
         }
+        else
+        {
+            if(dialogueBetweenNPCs != null)
+            {
+                SetCantTalkDialogue();
+            }
+        }
+    }
+
+    private void SetCantTalkDialogue()
+    {
+        dialogueBetweenNPCs.PlayerWantsToTalk();
+
+        dialogueChanger.ShowDialogue(randomDialogue.GetCantTalk(), this);
+    }
+
+    private void FinishCantTalk()
+    {
+        if(dialogueBetweenNPCs != null)
+        {
+            dialogueBetweenNPCs.PlayerStopToTalk();
+
+            playerCanvas.ShowDefaultUIElements();
+        }
+
     }
 
     public void HideText(bool hide)
@@ -133,7 +171,7 @@ public class DialogueDisplay : MonoBehaviour
 
         this.dialogueText = dialogueText;
 
-        StartCoroutine(WaitForDialogueDisplay());
+        StartCoroutine(WaitForDialogueDisplay());   
     }
 
     public void StopDialogue()
@@ -141,6 +179,12 @@ public class DialogueDisplay : MonoBehaviour
         StopAllCoroutines();
 
         HideText(false);
+
+        dialogueChanger.StopDialogue(false);
+
+        FinishCantTalk();
+
+        ResetCanvas();
     }
 
     public void NextDialogue()
@@ -167,5 +211,47 @@ public class DialogueDisplay : MonoBehaviour
     private void FinishDialogue()
     {
         dialogueChanger.NPCDialogueFinish();
+
+        ResetCanvas();
+    }
+
+    private void MoveCanvasRight()
+    {
+        RectTransform transform = canvas.GetComponent<RectTransform>();
+
+        transform.localPosition = new Vector3(Mathf.Abs(transform.localPosition.x), transform.localPosition.y, 0);
+
+        transform.rotation = Quaternion.identity;
+        text.GetComponent<RectTransform>().rotation = Quaternion.identity;
+    }
+
+    private void MoveCanvasLeft()
+    {
+        ResetCanvas();
+
+        RectTransform transform = canvas.GetComponent<RectTransform>();
+        RectTransform textTransform = text.GetComponent<RectTransform>();
+
+        transform.localPosition = new Vector3(-Mathf.Abs(transform.localPosition.x), transform.localPosition.y, 0);
+
+        textTransform.rotation = Quaternion.Euler(0f, -180f, 0f);
+        transform.rotation     = Quaternion.Euler(0f, -180f, 0f);
+    }
+
+    public void MoveCanvasForObject(Transform objectTransform)
+    {
+        if(objectTransform.position.x > transform.position.x)
+        {
+            MoveCanvasLeft();
+        }
+        else
+        {
+            MoveCanvasRight();
+        }
+    }
+
+    public void ResetCanvas()
+    {
+        MoveCanvasRight();
     }
 }

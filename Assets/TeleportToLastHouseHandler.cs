@@ -18,19 +18,13 @@ public class TeleportToLastHouseHandler : MonoBehaviour
 
     private PlayerMovement playerMovement;
 
-    private RainHandler rainHandler;
-
     private DayTimerHandler dayTimerHandler;
 
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
 
     private void Awake()
     {
-        rainHandler = GameObject.Find("Global/DayTimer").GetComponent<RainHandler>();
-
         playerMovement = GameObject.Find("Global/Player").GetComponent<PlayerMovement>();
-
-        dayTimerHandler = rainHandler.GetComponent<DayTimerHandler>();
     }
 
     private void SetObject()
@@ -59,8 +53,6 @@ public class TeleportToLastHouseHandler : MonoBehaviour
         currentCamera.SetActive(false);
 
         SetObject();
-
-        rainHandler.GetComponent<AudioSource>().Stop();
 
         newCamera.SetActive(true);
 

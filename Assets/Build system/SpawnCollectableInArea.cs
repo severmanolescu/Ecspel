@@ -87,7 +87,7 @@ public class SpawnCollectableInArea : MonoBehaviour
         {
             for (int noItem = 0; noItem < noItemsToSpawn; noItem++)
             {
-                int spawnItemNo = Random.Range(0, spawnObjects.Count);
+                int spawnItemNo = Random.Range(0, spawnObjects.Count - 1);
 
                 Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2),
                                                     transform.position.y + Random.Range(-transform.localScale.y / 2, transform.localScale.y / 2),

@@ -10,3 +10,13 @@ public class Dialogue
     [TextArea(3, 3)]
     public string dialogueText;
 }
+
+[Serializable]
+public class DialogueNpc
+{
+    [Header("Who repond: \n\ttrue - First NPC\n\tfalse - Second NPC\n")]
+    public bool whoRespond;
+
+    [TextArea(3, 3)]
+    public string dialogueText;
+}

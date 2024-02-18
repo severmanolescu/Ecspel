@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301807958751731413}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.25, y: 4.5625}
-  m_SizeDelta: {x: 18.0361, y: 6.6235}
+  m_AnchoredPosition: {x: 2.1875038, y: 2.6874993}
+  m_SizeDelta: {x: 4.2398, y: 2.7241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9116132512144830923
 Canvas:
@@ -137,7 +137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.1184006, y: -2.0484009}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -0.125}
   m_SizeDelta: {x: 148.6486, y: 90.35901}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8715252056587360932
@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 5213135076086869221}
   - component: {fileID: 6287857030796008085}
   - component: {fileID: 2443973355023880781}
+  - component: {fileID: 5307862082479424736}
   m_Layer: 0
   m_Name: Andrei
   m_TagString: Untagged
@@ -270,7 +271,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &1660817292380164777
 Animator:
   serializedVersion: 5
@@ -335,8 +336,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 0}
-  stopWaypoint: {fileID: 0}
-  moveToWaypoint: 0
 --- !u!114 &2646282254976417613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +379,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.030731201, y: 0.65395355}
@@ -439,6 +438,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3e0214da81a6d5469061de4d5ae4078, type: 2}
   - {fileID: 11400000, guid: a772da01239abf249ac15ae92b8b4bdc, type: 2}
   - {fileID: 11400000, guid: 0c31d7be69aa9fe4ebfba56930c6876b, type: 2}
+  cantTalk:
+  - {fileID: 11400000, guid: bd738aa26b82a474591a3bb9b663f2a8, type: 2}
+  - {fileID: 11400000, guid: b5c34a99eca772f4a8a7698e66b6a76c, type: 2}
+  - {fileID: 11400000, guid: dc6e4433c8758e446bc89e6287cf30ad, type: 2}
+  - {fileID: 11400000, guid: ee777c257a58d054d9e544ff2c89b30c, type: 2}
+--- !u!114 &5307862082479424736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191956346200945999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ecec5b42db4c54d8b44b285c42a1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  andreiBehavior:
+  - behaviors: 0
+    waypoints:
+    - {fileID: 0}
+  - behaviors: 1
+    waypoints:
+    - {fileID: 0}
 --- !u!1 &7719680351687869275
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,8 +496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.055397, y: 3.2091}
-  m_SizeDelta: {x: -21.254, y: -27.3431}
+  m_AnchoredPosition: {x: 2.5, y: 3.2091}
+  m_SizeDelta: {x: -22.15, y: -27.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4062572269767821944
 CanvasRenderer:
@@ -506,8 +529,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bacfae6123103b449866dcdde9dd1e8e, type: 2}
-  m_sharedMaterial: {fileID: -3560549427154393267, guid: bacfae6123103b449866dcdde9dd1e8e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
+  m_sharedMaterial: {fileID: -3226579824165103869, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -543,7 +566,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: -2.7
   m_wordSpacing: 17.18
-  m_lineSpacing: -85.74
+  m_lineSpacing: -33.9
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

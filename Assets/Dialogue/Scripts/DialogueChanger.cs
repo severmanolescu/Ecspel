@@ -76,15 +76,17 @@ public class DialogueChanger : MonoBehaviour
         firstSpacePress = true;
     }
 
-    public void StopDialogue()
+    public void StopDialogue(bool callNpc = true)
     {
         StopAllCoroutines();
 
         background.SetActive(false);
 
-        if (NPCDialogue != null)
-        {
+        if (NPCDialogue != null && callNpc)
+        { 
             NPCDialogue.FinishTalk();
+
+            NPCDialogue = null;
         }
 
         if (dialogue != null &&
@@ -177,7 +179,11 @@ public class DialogueChanger : MonoBehaviour
                     if (dialogueIndex >= dialogue.DialogueRespons.Count)
                     {
                         StopDialogue();
-                        NPCDialogue.NextDialogue();
+
+                        if(NPCDialogue != null)
+                        {
+                            NPCDialogue.NextDialogue();
+                        }
 
                         HideDialogue();
 

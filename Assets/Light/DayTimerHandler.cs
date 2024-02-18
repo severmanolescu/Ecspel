@@ -247,7 +247,7 @@ public class DayTimerHandler : MonoBehaviour
             }
             else if (Hours == wakeupHour - 3)
             {
-                StartTodayWeather();
+//                StartTodayWeather();
             }
         }
     }
@@ -323,54 +323,54 @@ public class DayTimerHandler : MonoBehaviour
         timeSpeed = 1;
     }
 
-    private void StartTodayWeather()
-    {
-        float chanceOfFog = Random.Range(0, 100);
+    //private void StartTodayWeather()
+    //{
+    //    float chanceOfFog = Random.Range(0, 100);
 
-        if (chanceOfFog <= percentOfFog)
-        {
-            fogAlpha = Random.Range(5, smokeMaxAlpha);
+    //    if (chanceOfFog <= percentOfFog)
+    //    {
+    //        fogAlpha = Random.Range(5, smokeMaxAlpha);
 
-            GetComponent<FogHandler>().StopPArticles();
+    //        GetComponent<FogHandler>().StopPArticles();
 
-            GetComponent<FogHandler>().StartParticle(fogAlpha);
+    //        GetComponent<FogHandler>().StartParticle(fogAlpha);
 
-            fog = true;
-        }
-        else
-        {
-            GetComponent<FogHandler>().StopPArticles();
+    //        fog = true;
+    //    }
+    //    else
+    //    {
+    //        GetComponent<FogHandler>().StopPArticles();
 
-            fog = false;
-        }
+    //        fog = false;
+    //    }
 
-        float changeOfRain = Random.Range(0, 100);
+    //    float changeOfRain = Random.Range(0, 100);
 
-        if (changeOfRain <= percentOfRain)
-        {
-            GetComponent<RainHandler>().StartParticle();
+    //    if (changeOfRain <= percentOfRain)
+    //    {
+    //        GetComponent<RainHandler>().StartParticle();
 
-            globalLight.intensity = rainIntensity;
+    //        globalLight.intensity = rainIntensity;
 
-            raining = true;
+    //        raining = true;
 
-            GetComponent<RainHandler>().StopPArticles();
+    //        GetComponent<RainHandler>().StopPArticles();
 
-            GetComponent<RainHandler>().StartParticle();
+    //        GetComponent<RainHandler>().StartParticle();
 
-            PlayRainSound();
-        }
-        else
-        {
-            GetComponent<RainHandler>().StopPArticles();
+    //        PlayRainSound();
+    //    }
+    //    else
+    //    {
+    //        GetComponent<RainHandler>().StopPArticles();
 
-            audioSource.Stop();
+    //        audioSource.Stop();
 
-            raining = false;
+    //        raining = false;
 
-            globalLight.intensity = 1;
-        }
-    }
+    //        globalLight.intensity = 1;
+    //    }
+    //}
 
     public void PlayRainSound()
     {
@@ -469,42 +469,42 @@ public class DayTimerHandler : MonoBehaviour
         }
     }
 
-    public void SetWeatherAtLoad(bool rain, bool fog, int fogIntensity)
-    {
-        if (rain == true)
-        {
-            GetComponent<RainHandler>().StartParticle();
+    //public void SetWeatherAtLoad(bool rain, bool fog, int fogIntensity)
+    //{
+    //    if (rain == true)
+    //    {
+    //        GetComponent<RainHandler>().StartParticle();
 
-            globalLight.intensity = rainIntensity;
+    //        globalLight.intensity = rainIntensity;
 
-            raining = true;
+    //        raining = true;
 
-            PlayRainSound();
-        }
-        else
-        {
-            GetComponent<RainHandler>().StopPArticles();
+    //        PlayRainSound();
+    //    }
+    //    else
+    //    {
+    //        GetComponent<RainHandler>().StopPArticles();
 
-            audioSource.Stop();
+    //        audioSource.Stop();
 
-            raining = false;
+    //        raining = false;
 
-            globalLight.intensity = 1;
-        }
+    //        globalLight.intensity = 1;
+    //    }
 
-        if (fog == true)
-        {
-            fogAlpha = fogIntensity;
+    //    if (fog == true)
+    //    {
+    //        fogAlpha = fogIntensity;
 
-            GetComponent<FogHandler>().StartParticle(fogAlpha);
+    //        GetComponent<FogHandler>().StartParticle(fogAlpha);
 
-            fog = true;
-        }
-        else
-        {
-            GetComponent<FogHandler>().StopPArticles();
+    //        fog = true;
+    //    }
+    //    else
+    //    {
+    //        GetComponent<FogHandler>().StopPArticles();
 
-            fog = false;
-        }
-    }
+    //        fog = false;
+    //    }
+    //}
 }

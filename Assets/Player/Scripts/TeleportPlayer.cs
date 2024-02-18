@@ -8,11 +8,6 @@ public class TeleportPlayer : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
-    private LocationFogParticleChange locationFog;
-    private FogHandler fogHandler;
-
-    private LocationRainParticleChange locationRain;
-    private RainHandler rainHandler;
 
     [SerializeField] private bool setRainSound = true;
 
@@ -22,9 +17,6 @@ public class TeleportPlayer : MonoBehaviour
 
     private void Awake()
     {
-        fogHandler = GameObject.Find("Global/DayTimer").GetComponent<FogHandler>();
-        rainHandler = GameObject.Find("Global/DayTimer").GetComponent<RainHandler>();
-
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -53,25 +45,6 @@ public class TeleportPlayer : MonoBehaviour
             collision.transform.position = TeleportToPoint.position;
 
             SetObject();
-
-            if (fogHandler != null && locationFog != null)
-            {
-                fogHandler.ChangeFogLocation(locationFog);
-            }
-
-            if (rainHandler != null && locationRain != null)
-            {
-                rainHandler.ChangeRainLocation(locationRain);
-            }
-
-            if (setRainSound == true)
-            {
-                rainHandler.GetComponent<DayTimerHandler>().StartSoundEffects();
-            }
-            else
-            {
-                rainHandler.GetComponent<AudioSource>().Stop();
-            }
         }
     }
 }

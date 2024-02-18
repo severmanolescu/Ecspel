@@ -235,8 +235,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bacfae6123103b449866dcdde9dd1e8e, type: 2}
-  m_sharedMaterial: {fileID: -3560549427154393267, guid: bacfae6123103b449866dcdde9dd1e8e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
+  m_sharedMaterial: {fileID: -3226579824165103869, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: -2.7
   m_wordSpacing: 17.18
-  m_lineSpacing: -85.74
+  m_lineSpacing: -33.9
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -328,7 +328,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6206858798107980020}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -338,8 +338,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.1809, y: 4.8609}
-  m_SizeDelta: {x: 18.0361, y: 6.6235}
+  m_AnchoredPosition: {x: 2.1875038, y: 2.6874993}
+  m_SizeDelta: {x: 4.2398, y: 2.7241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2196210115476024861
 Canvas:
@@ -362,7 +362,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &2688639878798465581
 MonoBehaviour:
@@ -439,7 +439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.1184006, y: -2.0484009}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 0.1875}
   m_SizeDelta: {x: 148.6486, y: 90.35901}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6229280235670575568
@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 925762862023634316}
   - component: {fileID: 431122770352638292}
   - component: {fileID: 7592157767663345787}
+  - component: {fileID: 4795104530192292493}
   m_Layer: 0
   m_Name: Daniel
   m_TagString: Untagged
@@ -609,10 +610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 0}
-  stopWaypoint: {fileID: 0}
-  moveToWaypoint: 0
-  waypoints: []
-  waypointIndex: 0
 --- !u!114 &3613781747233548823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +624,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   distanceTolerance: 0.1
-  distanceToleranceDirection: 0.05
   locationGrid: {fileID: 0}
 --- !u!114 &7911190069668416271
 MonoBehaviour:
@@ -731,6 +727,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3e0214da81a6d5469061de4d5ae4078, type: 2}
   - {fileID: 11400000, guid: a772da01239abf249ac15ae92b8b4bdc, type: 2}
   - {fileID: 11400000, guid: 0c31d7be69aa9fe4ebfba56930c6876b, type: 2}
+  cantTalk: []
 --- !u!114 &7592157767663345787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,3 +759,21 @@ MonoBehaviour:
   woodStorage: {fileID: 0}
   movingToPickWood: 0
   enoughtWood: 1
+  gettingWood: 0
+--- !u!114 &4795104530192292493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822245923769555019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7770727025a073b45a3fe1532d72984a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  working: 0
+  danielBehavior:
+  - behaviors: 0
+    waypoints:
+    - {fileID: 0}

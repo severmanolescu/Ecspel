@@ -176,7 +176,7 @@ public class DamageTree : MonoBehaviour
 
     public void PlayChopClip()
     {
-        audioSource.clip = woodChop[Random.Range(0, woodChop.Count)];
+        audioSource.clip = woodChop[Random.Range(0, woodChop.Count - 1)];
         audioSource.Play();
     }
 

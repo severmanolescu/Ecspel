@@ -34,7 +34,7 @@ public class SaveInitialGrid : MonoBehaviour
 
     public void AddNode(int x, int y)
     {
-        oldNotWalkableNodes.Add(new MyTuple(x, y));
+        oldNotWalkableNodes.Add(new MyTuple((ushort)x, (ushort)y));
     }
 
     private IEnumerator WaitToCheck()
@@ -45,10 +45,7 @@ public class SaveInitialGrid : MonoBehaviour
             {
                 GameObject testObjectInGridCell = new GameObject("TestGridCells");
 
-                Vector3 position = grid.GetWorldPosition(grid.gridArray[indexCellX, indexCellY].x, grid.gridArray[indexCellX, indexCellY].y);
-
-                position.x += grid.CellSize / 2f;
-                position.y += grid.CellSize / 2f;
+                Vector3 position = grid.GetWorldPositionCenter(grid.gridArray[indexCellX, indexCellY].x, grid.gridArray[indexCellX, indexCellY].y);
 
                 testObjectInGridCell.transform.position = position;
 

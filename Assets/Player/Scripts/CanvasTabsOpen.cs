@@ -21,8 +21,6 @@ public class CanvasTabsOpen : MonoBehaviour
     [SerializeField] private GameObject craftingCanvas;
     [SerializeField] private GameObject forgeCanvas;
     [SerializeField] private GameObject shopItems;
-    [SerializeField] private GameObject tips;
-    [SerializeField] private GameObject caveSelect;
     [SerializeField] private GameObject skills;
     [SerializeField] private GameObject help;
     [SerializeField] private GameObject letters;
@@ -44,10 +42,6 @@ public class CanvasTabsOpen : MonoBehaviour
         forgeCanvas.SetActive(false);
 
         shopItems.SetActive(false);
-
-        tips.SetActive(false);
-
-        caveSelect.SetActive(false);
 
         keyboard = InputSystem.GetDevice<Keyboard>();
     }
@@ -80,7 +74,6 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     quickSlot.gameObject.SetActive(false);
 
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
 
                     playerMovement.TabOpen = true;
@@ -96,7 +89,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
 
                     playerMovement.TabOpen = false;
@@ -112,8 +104,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     canvasEffects.SetActive(false);
 
                     quickSlot.gameObject.SetActive(false);
-
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
 
                     playerMovement.TabOpen = true;
@@ -129,7 +119,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
 
                     playerMovement.TabOpen = false;
@@ -147,7 +136,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     quickSlot.gameObject.SetActive(true);
                     quickSlot.Reinitialize();
 
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
 
                     playerMovement.TabOpen = false;
@@ -160,9 +148,6 @@ public class CanvasTabsOpen : MonoBehaviour
                     canvasEffects.SetActive(false);
 
                     quickSlot.gameObject.SetActive(false);
-
-
-                    caveSelect.SetActive(false);
 
                     skills.SetActive(true);
 
@@ -178,7 +163,6 @@ public class CanvasTabsOpen : MonoBehaviour
                    chestStorage.activeSelf == false &&
                    craftingCanvas.activeSelf == false &&
                    forgeCanvas.activeSelf == false &&
-                   caveSelect.activeSelf == false &&
                    skills.activeSelf == false &&
                    help.activeSelf == false &&
                    letters.activeSelf == false)
@@ -228,8 +212,6 @@ public class CanvasTabsOpen : MonoBehaviour
 
                     letters.SetActive(false);
 
-                    tips.SetActive(false);
-                    caveSelect.SetActive(false);
                     skills.SetActive(false);
                     help.SetActive(false);
 
@@ -271,7 +253,6 @@ public class CanvasTabsOpen : MonoBehaviour
             chestStorage.activeSelf == false &&
             craftingCanvas.activeSelf == false &&
             forgeCanvas.activeSelf == false &&
-            caveSelect.activeSelf == false &&
             skills.activeSelf == false &&
             help.activeSelf == false &&
             menuCanvas.activeSelf == false)

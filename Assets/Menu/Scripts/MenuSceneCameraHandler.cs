@@ -22,11 +22,11 @@ public class MenuSceneCameraHandler : MonoBehaviour
 
     private void ChangeCamera()
     {
-        Camera newCamera = cameras[Random.Range(0, cameras.Count)];
+        Camera newCamera = cameras[Random.Range(0, cameras.Count - 1)];
 
         while (newCamera == currentCamera)
         {
-            newCamera = cameras[Random.Range(0, cameras.Count)];
+            newCamera = cameras[Random.Range(0, cameras.Count - 1)];
         }
 
         currentCamera = newCamera;
