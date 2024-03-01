@@ -10,6 +10,8 @@ public class DialogueDisplay : MonoBehaviour
 
     [SerializeField] private GameObject canvas;
 
+    [SerializeField] private bool turnToPlayer = true;
+
     private TextMeshProUGUI text;
 
     private DialogueChanger dialogueChanger;
@@ -78,6 +80,14 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
+    private void MoveAnimatorToThePlayer()
+    {
+        if(turnToPlayer)
+        {
+            npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
+        }
+    }
+
     public void ShowDialogue()
     {
         if (canTalk)
@@ -90,7 +100,7 @@ public class DialogueDisplay : MonoBehaviour
 
                 StopWalk();
 
-                npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
+                MoveAnimatorToThePlayer();
 
                 playerCanvas.PrepareUIForDialogue();
             }
@@ -109,7 +119,7 @@ public class DialogueDisplay : MonoBehaviour
                     this.dialogue = randomDialogue.GetDialogue();
                 }
 
-                npcPathFinding.SetAnimatorDirectionToLocation(playerMovement.transform.position);
+                MoveAnimatorToThePlayer();
 
                 playerCanvas.PrepareUIForDialogue();
             }

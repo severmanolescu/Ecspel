@@ -307,9 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   distanceTolerance: 0.1
-  distanceToleranceDirection: 0.05
   locationGrid: {fileID: 0}
-  canWalk: 0
 --- !u!114 &4205168307645218739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 11400000, guid: 406b544d50e40974c86466b14ca6fa08, type: 2}
   canvas: {fileID: 1301807958751731413}
+  turnToPlayer: 1
 --- !u!61 &5213135076086869221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -455,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ecec5b42db4c54d8b44b285c42a1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  working: 0
   andreiBehavior:
   - behaviors: 0
     waypoints:
