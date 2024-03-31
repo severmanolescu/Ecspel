@@ -28,7 +28,7 @@ public class NpcBehavior : MonoBehaviour
         
     }
 
-    public void GoToNextBehaviour()
+    virtual public void GoToNextBehaviour()
     {
         indexOfBehavior++;
 
@@ -123,6 +123,10 @@ public class NpcBehavior : MonoBehaviour
         if (teleport != null)
         {
             teleport.TeleportObject(this);
+        }
+        else
+        {
+            GoToNextBehaviour();
         }
     }
 
