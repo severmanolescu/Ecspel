@@ -3,6 +3,7 @@ using System.Dynamic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DialogueDisplay : MonoBehaviour
 {
@@ -92,7 +93,10 @@ public class DialogueDisplay : MonoBehaviour
     {
         if (canTalk)
         {
-            dialogueBetweenNPCs.PlayerWantsToTalk();
+            if(dialogueBetweenNPCs != null)
+            {
+                dialogueBetweenNPCs.PlayerWantsToTalk();
+            }
 
             if (dialogue != null)
             {
@@ -126,16 +130,16 @@ public class DialogueDisplay : MonoBehaviour
         }
         else
         {
-            if(dialogueBetweenNPCs != null)
-            {
-                SetCantTalkDialogue();
-            }
+            SetCantTalkDialogue();
         }
     }
 
     private void SetCantTalkDialogue()
     {
-        dialogueBetweenNPCs.PlayerWantsToTalk();
+        if(dialogueBetweenNPCs != null)
+        {
+            dialogueBetweenNPCs.PlayerWantsToTalk();
+        }
 
         dialogueChanger.ShowDialogue(randomDialogue.GetCantTalk(), this);
     }

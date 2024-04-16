@@ -230,6 +230,10 @@ public class NpcBehavior : MonoBehaviour
                 aiHandler.MoveToWaypoint(waypoint.GoToWaypoint, true);
             }
         }
+        else
+        {
+            GoToNextBehaviour();
+        }
     }
 }
 

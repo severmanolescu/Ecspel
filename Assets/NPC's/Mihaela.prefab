@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 7908880384336774633}
   - component: {fileID: 2363481127002559320}
   - component: {fileID: 8256921176290014246}
+  - component: {fileID: 6277843874650894152}
   m_Layer: 0
   m_Name: Mihaela
   m_TagString: Untagged
@@ -383,6 +384,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWaypoint: {fileID: 0}
+--- !u!114 &6277843874650894152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336758002630757937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6968c78b23b5c44b577a25eb1dac2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  working: 0
+  mihaelaBehavior:
+  - behaviors: 2
+    waypoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  timeBetweenChecks: 40
+  chanceToGetUp: 9
+  chanceToSleep: 53
+  sleepDuration: 102
 --- !u!1 &6164323528616952684
 GameObject:
   m_ObjectHideFlags: 0
