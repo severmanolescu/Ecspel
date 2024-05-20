@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: VladimirNeedsFood
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 0
+    dialogueText: Hello there!
+  - whoRespond: 1
+    dialogueText: Hello! What brings you down into this dark hole?
+  - whoRespond: 0
+    dialogueText: Just exploring around. Do you need any help with something?
+  - whoRespond: 1
+    dialogueText: Actually, now that you mention it, I could use a hand. I forgot
+      my lunch at home this morning, and I'm starving.
+  - whoRespond: 1
+    dialogueText: My wife, Marilena, must be wondering why I haven't come back yet.
+      Could you do me a favor and fetch my food from our house? You know it.
+  - whoRespond: 0
+    dialogueText: Sure, I can do that. Anything special I should tell Marilena?
+  - whoRespond: 1
+    dialogueText: Just let her know I'm working late and that I'm sorry for the trouble.
+      She'll understand.
+  - whoRespond: 0
+    dialogueText: Got it. I'll be back soon with your food.
+  - whoRespond: 1
+    dialogueText: Thank you. I owe you one. Be careful out there.
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: 4838ddfa507eae047ad3865915a07ae7, type: 2}

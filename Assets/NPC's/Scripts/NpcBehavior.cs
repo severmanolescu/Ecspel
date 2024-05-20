@@ -83,7 +83,7 @@ public class NpcBehavior : MonoBehaviour
         }
     }
 
-    private void CheckActionWaypoint(WaypointData waypoint)
+    protected virtual void CheckActionWaypoint(WaypointData waypoint)
     {
         if (waypoint != null)
         {
@@ -194,7 +194,7 @@ public class NpcBehavior : MonoBehaviour
 
     private IEnumerator WaitForWait(WaypointData waypoint)
     {
-        pathFinding.MoveIdleAnimation(waypoint.DirectionToWait);
+        pathFinding.ChangeIdleAnimation(waypoint.DirectionToWait);
 
         yield return new WaitForSeconds(waypoint.TimeToWait / 2);
 
@@ -223,17 +223,39 @@ public class NpcBehavior : MonoBehaviour
 
         if (waypoint.StartAnimation.CompareTo(string.Empty) != 0)
         {
-            GetComponent<Animator>().SetBool(waypoint.StartAnimation, true);
+            Animator animator = GetComponent<Animator>();
+
+            bool currentAnimatorValue = animator.GetBool(waypoint.StartAnimation);
+
+            if(currentAnimatorValue)
+            {
+                animator.SetBool(waypoint.StartAnimation, false);
+            }
+            else
+            {
+                animator.SetBool(waypoint.StartAnimation, true);
+            }
 
             if (waypoint.GoToWaypoint != null)
             {
                 aiHandler.MoveToWaypoint(waypoint.GoToWaypoint, true);
+            }
+            else
+            {
+                GoToNextBehaviour();
             }
         }
         else
         {
             GoToNextBehaviour();
         }
+    }
+
+    public virtual void StopWorking()
+    {
+        working = false;
+
+        GoToNextBehaviour();
     }
 }
 

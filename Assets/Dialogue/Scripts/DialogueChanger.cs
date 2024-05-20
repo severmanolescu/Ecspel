@@ -199,7 +199,7 @@ public class DialogueChanger : MonoBehaviour
                         }
                         else
                         {
-                            NPCDialogue.StopDialogue();
+                            NPCDialogue.HideText(false);
 
                             StartCoroutine(DialogueDisplay());
                         }

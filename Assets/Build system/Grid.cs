@@ -130,8 +130,7 @@ public class Grid
                     }
                 }
             }
-        }
-
+        } 
     }
 
     public void ReinitializeGrid(Vector3 position)

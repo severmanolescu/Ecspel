@@ -281,7 +281,7 @@ public class NpcPathFinding : MonoBehaviour
         canWalk = true;
     }
 
-    public void MoveIdleAnimation(int direction) // 0 - left; 1 - up; 2 - right; 3 - down
+    public void ChangeIdleAnimation(int direction) // 0 - left; 1 - up; 2 - right; 3 - down
     {
         Vector3 newDirection = Vector3.zero;
 
@@ -320,14 +320,14 @@ public class NpcPathFinding : MonoBehaviour
         }
     }
 
-    public void MoveIdleAnimation(Direction direction)
+    public void ChangeIdleAnimation(Direction direction)
     {
         switch(direction)
         {
-            case Direction.Right:   MoveIdleAnimation(2); break;
-            case Direction.Left:    MoveIdleAnimation(0); break;
-            case Direction.Up:      MoveIdleAnimation(1); break;
-            case Direction.Down:    MoveIdleAnimation(3); break;
+            case Direction.Right:   ChangeIdleAnimation(2); break;
+            case Direction.Left:    ChangeIdleAnimation(0); break;
+            case Direction.Up:      ChangeIdleAnimation(1); break;
+            case Direction.Down:    ChangeIdleAnimation(3); break;
         }
     }
 

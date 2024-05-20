@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1468a1702c9094c8b22aeb9f206408, type: 3}
+  m_Name: QuestVladimirFood
+  m_EditorClassIdentifier: 
+  title: Vladimir food
+  details: Vladimir, a hardworking miner, has forgotten his lunch at home and is
+    too busy to leave his post in the cave near the village. He has asked for your
+    help to fetch his lunchbox from his house and bring it back to him. Speak with
+    his wife, Marilena.
+  questObjective: {fileID: 11400000, guid: 2b9af5fbd08714b44b24016c2101890f, type: 2}
+  receiveItems:
+  - item: {fileID: 11400000, guid: 8ca93f519ecb91246910a3f69c1e346e, type: 2}
+    amount: 10
+  nextDialogue: {fileID: 0}
+  nextQuest: {fileID: 0}

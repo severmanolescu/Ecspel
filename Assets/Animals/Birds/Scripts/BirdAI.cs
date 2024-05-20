@@ -178,7 +178,7 @@ public class BirdAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision != null && collision.CompareTag("Player"))
+        if(collision != null && (collision.CompareTag("Player") || collision.CompareTag("NPC")))
         {
             playerTransform = collision.transform;
 
