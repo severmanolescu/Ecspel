@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class RandomDialogue : MonoBehaviour
 {
-    [SerializeField] private List<DialogueScriptableObject> dialogues = new List<DialogueScriptableObject>();
+    [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
 
-    [SerializeField] private List<DialogueScriptableObject> cantTalk = new List<DialogueScriptableObject>();
+    [SerializeField] private List<Dialogue> cantTalk = new List<Dialogue>();
 
-    public DialogueScriptableObject GetDialogue()
+    public Dialogue GetDialogue()
     {
         return dialogues[Random.Range(0, dialogues.Count - 1)];
     }
 
-    public DialogueScriptableObject GetCantTalk()
+    public Dialogue GetCantTalk()
     {
         return cantTalk[Random.Range(0, cantTalk.Count - 1)];
     }

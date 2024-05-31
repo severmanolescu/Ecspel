@@ -29,27 +29,36 @@ public class WorldMouseInputHandler : MonoBehaviour
         }
         else
         {
-            DialogueDisplay dialogueDisplay = raycastResult.gameObject.GetComponent<DialogueDisplay>();
+            CollectItem collectItem = raycastResult.gameObject.GetComponent<CollectItem>();
 
-            if (dialogueDisplay != null)
+            if(collectItem != null)
             {
-                dialogueDisplay.ShowDialogue();
+                collectItem.AddItemToInventory();
             }
             else
             {
-                CraftingHandler craftingHandler = raycastResult.gameObject.GetComponent<CraftingHandler>();
+                DialogueDisplay dialogueDisplay = raycastResult.gameObject.GetComponent<DialogueDisplay>();
 
-                if (craftingHandler != null)
+                if (dialogueDisplay != null)
                 {
-                    craftingHandler.OpenCrafting();
+                    dialogueDisplay.ShowDialogue();
                 }
                 else
                 {
-                    CampFireHandler campFireHandler = raycastResult.gameObject.GetComponent<CampFireHandler>();
+                    CraftingHandler craftingHandler = raycastResult.gameObject.GetComponent<CraftingHandler>();
 
-                    if (campFireHandler != null)
+                    if (craftingHandler != null)
                     {
-                        campFireHandler.StartFire();
+                        craftingHandler.OpenCrafting();
+                    }
+                    else
+                    {
+                        CampFireHandler campFireHandler = raycastResult.gameObject.GetComponent<CampFireHandler>();
+
+                        if (campFireHandler != null)
+                        {
+                            campFireHandler.StartFire();
+                        }
                     }
                 }
             }

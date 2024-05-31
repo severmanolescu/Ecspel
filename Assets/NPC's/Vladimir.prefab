@@ -459,7 +459,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.044509888, y: 0.67619324}
+  m_Offset: {x: -0.01181793, y: 0.8176417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.09375}
@@ -470,7 +470,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9109802, y: 1.7273865}
+  m_Size: {x: 0.7983246, y: 1.739904}
   m_EdgeRadius: 0
 --- !u!114 &7115653167371524236
 MonoBehaviour:
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c0360d22cb5ef428e8138e8cbe08c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1.5
   distanceTolerance: 0.1
   locationGrid: {fileID: 0}
 --- !u!114 &1977606850314850804
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0a3517142063442a3461962630b3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 11400000, guid: b59ab04e96c8d52408f6a3373baa950c, type: 2}
   canvas: {fileID: 4829941022964694622}
   turnToPlayer: 0
 --- !u!114 &5134599808172910414
@@ -515,18 +515,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - {fileID: 11400000, guid: 5eb13a938f421be42881dce796fb423a, type: 2}
-  - {fileID: 11400000, guid: c66408a7eb457294dbbfe8b9695e2ddb, type: 2}
-  - {fileID: 11400000, guid: dfcdfcb975909f740903cd58c49a53ac, type: 2}
-  - {fileID: 11400000, guid: a631ea9241297534ca0019a4d2e67287, type: 2}
-  - {fileID: 11400000, guid: cc8beb1bc3947874f9dd655d89fcf41d, type: 2}
-  - {fileID: 11400000, guid: 68f0ba67d8513ce40bcf8eafe74dad77, type: 2}
-  - {fileID: 11400000, guid: 24657e7af355f374e9cc19e18ca9ea11, type: 2}
-  - {fileID: 11400000, guid: 748779bd7f7d0124cbfb44dfd91ce35f, type: 2}
-  - {fileID: 11400000, guid: 69a8add847efdf142a38a4e5d1814b04, type: 2}
-  - {fileID: 11400000, guid: a3e0214da81a6d5469061de4d5ae4078, type: 2}
-  - {fileID: 11400000, guid: a772da01239abf249ac15ae92b8b4bdc, type: 2}
-  - {fileID: 11400000, guid: 0c31d7be69aa9fe4ebfba56930c6876b, type: 2}
+  - {fileID: 11400000, guid: 7491befb9e2dc6646a06e4daae37df77, type: 2}
+  - {fileID: 11400000, guid: 685b726413f53db4e84f465a5459ca99, type: 2}
+  - {fileID: 11400000, guid: d854fce23a5acf54e868214bd3d1a3af, type: 2}
+  - {fileID: 11400000, guid: a665c51f96bc2644d86fbd3ad5968272, type: 2}
+  - {fileID: 11400000, guid: 931ff4630aa774f4586db2a64ce8b20b, type: 2}
+  - {fileID: 11400000, guid: 210b1e2f5fc18974dbbf0a020fe33a68, type: 2}
+  - {fileID: 11400000, guid: 0fedc66b604539342b27ac6690c374ac, type: 2}
+  - {fileID: 11400000, guid: bb00ddc68fecfa44797bc576b53fbbdb, type: 2}
   cantTalk:
   - {fileID: 11400000, guid: db531010c1cd4ed4ab8f721dcf91d8a3, type: 2}
   - {fileID: 11400000, guid: 6c30059dee39db943ba8795b03183694, type: 2}
@@ -545,11 +541,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notHaveItems:
-  - {fileID: 11400000, guid: b18be5c4a9332824fa415448f78a670e, type: 2}
-  - {fileID: 11400000, guid: 35ebfe68ff1aeff4786a4925806c752d, type: 2}
-  - {fileID: 11400000, guid: c5ce23881c46fb943828439da80b4daf, type: 2}
-  - {fileID: 11400000, guid: f7d5679f3ee6e37468227722626e2292, type: 2}
-  - {fileID: 11400000, guid: 9b73609973e85da408de3a1f835aea78, type: 2}
+  - {fileID: 11400000, guid: 8d71ba33226136649addf850c65af2fe, type: 2}
+  - {fileID: 11400000, guid: 07e9aea7756adca4cbcf0e3767c66abd, type: 2}
+  - {fileID: 11400000, guid: 35cf5955ec9c6184aa29644070c059ee, type: 2}
+  - {fileID: 11400000, guid: b9f5221eb9176864cbcb6859a7b5f9cb, type: 2}
+  - {fileID: 11400000, guid: 74137dc142e6e8d4d8e8d230365e06f9, type: 2}
+  - {fileID: 11400000, guid: 19ecd56cf1d7ce74296295344da3d6e4, type: 2}
+  - {fileID: 11400000, guid: 8cfa7e128372e9249a367be05917247a, type: 2}
+  - {fileID: 11400000, guid: b978798675b784b4b920adb4d36a5814, type: 2}
+  - {fileID: 11400000, guid: 6c822892ae5585c4ab50c5b8511bf10d, type: 2}
+  - {fileID: 11400000, guid: 3494eec0362a5a1429457c53ec2d3aad, type: 2}
+  quests: []
 --- !u!114 &1257820694249962806
 MonoBehaviour:
   m_ObjectHideFlags: 0

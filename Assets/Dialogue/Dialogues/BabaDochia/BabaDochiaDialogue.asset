@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: BabaDochiaDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 0
+    dialogueText: Baba Dochia, what are you doing out here at the entrance of the
+      village?
+  - whoRespond: 1
+    dialogueText: "Ah, child, you\u2019ve come. The winds have changed, and the animals
+      have fled. Dark times are approaching."
+  - whoRespond: 0
+    dialogueText: What do you think is happening?
+  - whoRespond: 1
+    dialogueText: The creatures sense what we do not. Their disappearance is a warning.
+      Something old and malevolent stirs.
+  - whoRespond: 0
+    dialogueText: ' Have you told anyone else?'
+  - whoRespond: 1
+    dialogueText: I have tried, but they dismiss my words as the ramblings of an
+      old woman. They do not see the signs.
+  - whoRespond: 0
+    dialogueText: What should we do?
+  - whoRespond: 1
+    dialogueText: Be cautious, child. Keep your eyes open and your wits sharp especially
+      when you go home
+  - whoRespond: 0
+    dialogueText: I will. Thank you for the warning, Baba Dochia.
+  - whoRespond: 1
+    dialogueText: Remember, child, trust your instincts. The spirits are watching
+      over you. Be safe.
+  nextDialogue: {fileID: 0}
+  quests: []

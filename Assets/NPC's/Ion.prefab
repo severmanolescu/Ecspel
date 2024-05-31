@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Marilena appreciates the offer of your finest pickaxe for Vladimir, the
+    chicken feed for her poultry, and the pouch of coins. She's willing to discuss
+    the details.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
   m_sharedMaterial: {fileID: -3226579824165103869, guid: 71af8dbd04ea0184cac808b783fdaf76, type: 2}
@@ -465,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0a3517142063442a3461962630b3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 406b544d50e40974c86466b14ca6fa08, type: 2}
+  dialogue: {fileID: 11400000, guid: fe9cf388dfaf90b4b9822fb792646196, type: 2}
   canvas: {fileID: 8007130078425059284}
   turnToPlayer: 1
 --- !u!61 &9172165524724375168
@@ -531,6 +533,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c5ce23881c46fb943828439da80b4daf, type: 2}
   - {fileID: 11400000, guid: f7d5679f3ee6e37468227722626e2292, type: 2}
   - {fileID: 11400000, guid: 9b73609973e85da408de3a1f835aea78, type: 2}
+  quests: []
 --- !u!114 &5946823906065660891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,16 +547,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - {fileID: 11400000, guid: 5eb13a938f421be42881dce796fb423a, type: 2}
-  - {fileID: 11400000, guid: c66408a7eb457294dbbfe8b9695e2ddb, type: 2}
-  - {fileID: 11400000, guid: dfcdfcb975909f740903cd58c49a53ac, type: 2}
-  - {fileID: 11400000, guid: a631ea9241297534ca0019a4d2e67287, type: 2}
-  - {fileID: 11400000, guid: cc8beb1bc3947874f9dd655d89fcf41d, type: 2}
-  - {fileID: 11400000, guid: 68f0ba67d8513ce40bcf8eafe74dad77, type: 2}
-  - {fileID: 11400000, guid: 24657e7af355f374e9cc19e18ca9ea11, type: 2}
-  - {fileID: 11400000, guid: 748779bd7f7d0124cbfb44dfd91ce35f, type: 2}
-  - {fileID: 11400000, guid: 69a8add847efdf142a38a4e5d1814b04, type: 2}
-  - {fileID: 11400000, guid: a3e0214da81a6d5469061de4d5ae4078, type: 2}
-  - {fileID: 11400000, guid: a772da01239abf249ac15ae92b8b4bdc, type: 2}
-  - {fileID: 11400000, guid: 0c31d7be69aa9fe4ebfba56930c6876b, type: 2}
+  - {fileID: 11400000, guid: f5c62c303e9dcd1478e73fad5b7940b1, type: 2}
+  - {fileID: 11400000, guid: e433a986e811ad741a4c742f86ab7f86, type: 2}
+  - {fileID: 11400000, guid: 12dad1937d764b642b2e5916b4bf550f, type: 2}
+  - {fileID: 11400000, guid: d20027a940537e949bf6f98dcb91be50, type: 2}
+  - {fileID: 11400000, guid: 0781a66e82b137d41b94a21dcbf1bf17, type: 2}
+  - {fileID: 11400000, guid: d4c61e905dd94e04b9289fbf9f2cbd0c, type: 2}
   cantTalk: []

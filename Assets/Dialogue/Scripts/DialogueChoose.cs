@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueChoose
 {
-    public DialogueScriptableObject dialogue;
+    public Dialogue dialogue;
 
     [Header("-1: anything\n" +
             " 0: clear\n" +

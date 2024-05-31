@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class DialogueDisplay : MonoBehaviour
 {
-    [SerializeField] private DialogueScriptableObject dialogue;
+    [SerializeField] private Dialogue dialogue;
 
     [SerializeField] private GameObject canvas;
 
@@ -25,7 +25,7 @@ public class DialogueDisplay : MonoBehaviour
 
     private string dialogueText;
 
-    private NPCReceiveItem npcReceiveItem;
+    private NPCQuestHandler npcReceiveItem;
 
     private RandomDialogue randomDialogue;
 
@@ -49,7 +49,7 @@ public class DialogueDisplay : MonoBehaviour
 
         canvas.gameObject.SetActive(false);
 
-        npcReceiveItem = GetComponent<NPCReceiveItem>();
+        npcReceiveItem = GetComponent<NPCQuestHandler>();
 
         randomDialogue = GetComponent<RandomDialogue>();
     }
@@ -110,7 +110,7 @@ public class DialogueDisplay : MonoBehaviour
             }
             else
             {
-                DialogueScriptableObject dialogue = npcReceiveItem.CheckForQuest();
+                Dialogue dialogue = npcReceiveItem.CheckForQuest();
 
                 if (dialogue != null)
                 {
@@ -152,7 +152,6 @@ public class DialogueDisplay : MonoBehaviour
 
             playerCanvas.ShowDefaultUIElements();
         }
-
     }
 
     public void HideText(bool hide)
@@ -194,11 +193,14 @@ public class DialogueDisplay : MonoBehaviour
 
         HideText(false);
 
-        dialogueChanger.StopDialogue(false);
-
         FinishCantTalk();
 
         ResetCanvas();
+
+        if(dialogue != null)
+        {
+            dialogue = dialogue.NextDialogue;
+        }
     }
 
     public void NextDialogue()

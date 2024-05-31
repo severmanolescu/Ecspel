@@ -237,4 +237,15 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("VerticalFacing", directionToChange.y);
         }
     }
+
+    public void ChangeIdleAnimationDirection(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Right:   ChangeIdleAnimationDirection(1); break;
+            case Direction.Left:    ChangeIdleAnimationDirection(0); break;
+            case Direction.Up:      ChangeIdleAnimationDirection(2); break;
+            case Direction.Down:    ChangeIdleAnimationDirection(3); break;
+        }
+    }
 }

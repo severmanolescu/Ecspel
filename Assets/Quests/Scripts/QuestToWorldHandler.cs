@@ -42,7 +42,7 @@ public class QuestToWorldHandler : MonoBehaviour
 
     private void SetObjectiveGiveItem(Quest quest)
     {
-        QuestGiveItem questGive = (QuestGiveItem)quest.QuestObjective;
+        ObjectiveGiveItem questGive = (ObjectiveGiveItem)quest.QuestObjective;
 
         if(questGive != null)
         {
@@ -50,7 +50,22 @@ public class QuestToWorldHandler : MonoBehaviour
 
             if (npcDialog != null)
             {
-                npcDialog.GetComponent<NPCReceiveItem>().AddQuest(quest);
+                npcDialog.GetComponent<NPCQuestHandler>().AddQuest(quest);
+            }
+        }
+    }
+
+    private void SetGoTalkObjective(Quest quest)
+    {
+        ObjectiveGoTalk goTalk = (ObjectiveGoTalk)quest.QuestObjective;
+
+        if(goTalk != null)
+        {
+            DialogueDisplay npcDialogue = npcId.GetNpcFromId(goTalk.NpcID);
+
+            if(npcDialogue != null)
+            {
+                npcDialogue.GetComponent<NPCQuestHandler>().AddQuest(quest);
             }
         }
     }
@@ -67,9 +82,15 @@ public class QuestToWorldHandler : MonoBehaviour
 
                         break;
                     }
-                case QuestGiveItem:
+                case ObjectiveGiveItem:
                     {
                         SetObjectiveGiveItem(quest);
+
+                        break;
+                    }
+                case ObjectiveGoTalk:
+                    {
+                        SetGoTalkObjective(quest);
 
                         break;
                     }

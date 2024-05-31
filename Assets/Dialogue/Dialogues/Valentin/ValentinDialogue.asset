@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: ValentinDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 0
+    dialogueText: Hey, Valentin. It seems quieter than usual today, doesn't it?
+  - whoRespond: 1
+    dialogueText: Yeah, it does. I was just thinking the same thing. But then I noticed
+      something strange...
+  - whoRespond: 0
+    dialogueText: What's that?
+  - whoRespond: 1
+    dialogueText: Well, usually there are fish swimming around and ducks waddling
+      about, but today they're nowhere to be seen. It's like they've all disappeared
+      overnight.
+  - whoRespond: 0
+    dialogueText: Huh, you're right. I didn't even notice that. Why do you think
+      they're gone?
+  - whoRespond: 1
+    dialogueText: ' I''m not sure, but my grandma always says animals have a way
+      of sensing danger before we do. They''re like nature''s little alarm system.
+      Maybe there''s something out there that spooked them.'
+  - whoRespond: 0
+    dialogueText: Do you think it's something we should be worried about?
+  - whoRespond: 1
+    dialogueText: I'm not sure. It could just be a passing thing, like a predator
+      passing through or a sudden change in the weather.
+  - whoRespond: 1
+    dialogueText: But my grandpa used to say that when the animals start acting strange,
+      it's best to pay attention. Maybe we should keep an eye out for anything unusual.
+  - whoRespond: 0
+    dialogueText: Yeah, you're probably right. We should stay alert and let someone
+      know if we see anything weird.
+  - whoRespond: 1
+    dialogueText: Agreed. It's better to be safe than sorry. Let's keep an eye out
+      and see if we can figure out what's going on.
+  nextDialogue: {fileID: 0}
+  quests: []

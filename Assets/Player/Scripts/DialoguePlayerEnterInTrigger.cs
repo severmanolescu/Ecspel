@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DialoguePlayerEnterInTrigger : MonoBehaviour
 {
-    [SerializeField] private DialogueScriptableObject dialogue;
+    [SerializeField] private Dialogue dialogue;
 
     [SerializeField] private bool startAnimator = false;
 
@@ -29,7 +29,7 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
     private bool canStartDialogue = true;
 
-    public DialogueScriptableObject Dialogue { get => dialogue; set => dialogue = value; }
+    public Dialogue Dialogue { get => dialogue; set => dialogue = value; }
     public bool StartAnimator { get => startAnimator; set => startAnimator = value; }
     public Transform TeleportPlayerToPoint { get => teleportPlayerToPoint; set => teleportPlayerToPoint = value; }
     public int IdleAnimationDirection { get => idleAnimationDirection; set => idleAnimationDirection = value; }

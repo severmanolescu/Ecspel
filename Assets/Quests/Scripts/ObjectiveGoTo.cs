@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Quest", menuName = "Quest/GoTo Objective", order = 1)]
+[CreateAssetMenu(fileName = "Quest", menuName = "Quest/Objective Go To", order = 1)]
 [Serializable]
 public class ObjectiveGoTo : Objective
 {

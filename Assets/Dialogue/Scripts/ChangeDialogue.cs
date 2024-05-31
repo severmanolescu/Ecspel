@@ -136,7 +136,7 @@ public class ChangeDialogue : MonoBehaviour
     //    return null;
     //}
 
-    public bool VerifyNewDialogueInList(DialogueScriptableObject dialogue)
+    public bool VerifyNewDialogueInList(Dialogue dialogue)
     {
         if (dialogue == null)
         {

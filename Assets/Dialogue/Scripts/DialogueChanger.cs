@@ -9,7 +9,7 @@ public class DialogueChanger : MonoBehaviour
 
     [SerializeField] private GameObject background;
 
-    private DialogueScriptableObject dialogue;
+    private Dialogue dialogue;
 
     private DialogueDisplay NPCDialogue;
 
@@ -34,7 +34,7 @@ public class DialogueChanger : MonoBehaviour
         background.SetActive(false);
     }
 
-    public void ShowDialogue(DialogueScriptableObject dialogue, DialogueDisplay dialogueDisplay = null)
+    public void ShowDialogue(Dialogue dialogue, DialogueDisplay dialogueDisplay = null)
     {
         if (dialogue != null)
         {
@@ -176,7 +176,7 @@ public class DialogueChanger : MonoBehaviour
                 {
                     dialogueIndex++;
 
-                    if (dialogueIndex >= dialogue.DialogueRespons.Count)
+                     if (dialogueIndex >= dialogue.DialogueRespons.Count)
                     {
                         StopDialogue();
 
@@ -193,13 +193,19 @@ public class DialogueChanger : MonoBehaviour
                     {
                         if (dialogue.DialogueRespons[dialogueIndex].whoRespond)
                         {
-                            NPCDialogue.StartShowDialogue(dialogue.DialogueRespons[dialogueIndex].dialogueText);
+                            if(NPCDialogue != null)
+                            {
+                                NPCDialogue.StartShowDialogue(dialogue.DialogueRespons[dialogueIndex].dialogueText);
+                            }
 
                             HideDialogue();
                         }
                         else
                         {
-                            NPCDialogue.HideText(false);
+                            if(NPCDialogue != null)
+                            {
+                                NPCDialogue.HideText(false);
+                            }
 
                             StartCoroutine(DialogueDisplay());
                         }

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: IonDialogueMarilena
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 1
+    dialogueText: Good to see you. What brings you here today?
+  - whoRespond: 0
+    dialogueText: Ion has an interesting proposition, Marilena. He's interested in
+      striking up a trade with you.
+  - whoRespond: 1
+    dialogueText: Oh? And what exactly does Ion have in mind?
+  - whoRespond: 0
+    dialogueText: He's offering his finest pickaxe for Vladimir, some chicken feed
+      for your poultry, and a pouch of coins as a token of gratitude.
+  - whoRespond: 0
+    dialogueText: In return, he's hoping to acquire some of your minerals and your
+      renowned corn.
+  - whoRespond: 1
+    dialogueText: 'Hmm, Ion''s pickaxes are known for their quality, and his coins
+      could come in handy. And it''s good to know he values my corn. '
+  - whoRespond: 1
+    dialogueText: Tell him I'm open to the idea. Let's discuss the details further.
+  - whoRespond: 0
+    dialogueText: I'll pass along your message, Marilena. I'm sure Ion will be pleased
+      to hear that you're interested.
+  - whoRespond: 1
+    dialogueText: Thank you. I appreciate you bringing this to my attention. Let's
+      see if we can work out a mutually beneficial arrangement.
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: cbad2066f40f7a54a9f8af1be2615309, type: 2}

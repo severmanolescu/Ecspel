@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class NPCDialogueSave : MonoBehaviour
 {
-    [SerializeField] private List<DialogueScriptableObject> dialogueClasses = new List<DialogueScriptableObject>();
+    [SerializeField] private List<Dialogue> dialogueClasses = new List<Dialogue>();
 
     [SerializeField] private List<DialogueDisplay> npcDialogue;
 
     public List<DialogueDisplay> NpcDialogue { get => npcDialogue; }
 
-    public int GetDialogueId(DialogueScriptableObject dialogue)
+    public int GetDialogueId(Dialogue dialogue)
     {
         return dialogueClasses.IndexOf(dialogue);
     }
 
-    public DialogueScriptableObject GetDialogueFromId(int id)
+    public Dialogue GetDialogueFromId(int id)
     {
         if (id >= 0 && id < dialogueClasses.Count)
         {

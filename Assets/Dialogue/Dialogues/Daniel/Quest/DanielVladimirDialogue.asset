@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: DanielVladimirDialogue
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 0
+    dialogueText: Hey Vladimir, I just talked to Daniel. He's running low on iron
+      and copper and said you usually set some aside for him.
+  - whoRespond: 1
+    dialogueText: Ah, Daniel! He's always in need of something. I've got a stash
+      right here. Thanks for coming to get it.
+  - whoRespond: 0
+    dialogueText: No problem. He also mentioned you owe him a drink for making him
+      wait
+  - whoRespond: 1
+    dialogueText: Did he now? I'll be sure to pay up. And tell him I'll be expecting
+      that special craft he promised.
+  - whoRespond: 0
+    dialogueText: Will do. I'll take these minerals back to him.
+  - whoRespond: 1
+    dialogueText: Thanks, friend.
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: 5184d9de2fcc1c54a892fe1894b26219, type: 2}

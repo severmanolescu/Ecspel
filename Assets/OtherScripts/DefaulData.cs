@@ -240,10 +240,10 @@ public class DialogueList
 {
     [SerializeField] private string details;
 
-    [SerializeField] private List<Dialogue> list;
+    [SerializeField] private List<DialogueResponse> list;
 
     public string Details { get => details; set => details = value; }
-    public List<Dialogue> List { get => list; set => list = value; }
+    public List<DialogueResponse> List { get => list; set => list = value; }
 }
 
 public enum NpcDialogueDetails

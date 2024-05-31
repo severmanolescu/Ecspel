@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SetDialogueToPlayer : MonoBehaviour
 {
-    [SerializeField] private DialogueScriptableObject initialDialogue;
+    [SerializeField] private Dialogue initialDialogue;
 
     private DialogueChanger dialogueChanger;
 
@@ -30,13 +30,16 @@ public class SetDialogueToPlayer : MonoBehaviour
         }
     }
 
-    public void SetDialogue(DialogueScriptableObject dialogue, DialoguePlayerEnterInTrigger dialoguePlayerEnter = null)
+    public void SetDialogue(Dialogue dialogue, DialoguePlayerEnterInTrigger dialoguePlayerEnter = null)
     {
-        playerMovement.Dialogue = true;
+        if(dialogue != null)
+        {
+            playerMovement.Dialogue = true;
 
-        dialogueChanger.ShowDialogue(dialogue);
+            dialogueChanger.ShowDialogue(dialogue);
 
-        this.dialoguePlayerEnter = dialoguePlayerEnter;
+            this.dialoguePlayerEnter = dialoguePlayerEnter;
+        }
     }
 
     public void DialogueEnd()

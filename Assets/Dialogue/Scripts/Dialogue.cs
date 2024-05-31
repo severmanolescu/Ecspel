@@ -1,22 +1,26 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue/New Dialogue", order = 1)]
 [Serializable]
-public class Dialogue
+public class Dialogue : ScriptableObject
 {
-    [Header("Who repond: \n\tfalse - Player or first NPC\n\ttrue - NPC or second NPC\n")]
-    public bool whoRespond;
+    [Header("Player and NPC respons:")]
+    [SerializeField] private List<DialogueResponse> dialogueRespons;
 
-    [TextArea(3, 3)]
-    public string dialogueText;
-}
+    [Header("Next dialogue to play:")]
+    [SerializeField] private Dialogue nextDialogue;
 
-[Serializable]
-public class DialogueNpc
-{
-    [Header("Who repond: \n\ttrue - First NPC\n\tfalse - Second NPC\n")]
-    public bool whoRespond;
+    [Header("Dialogue quests:")]
+    [SerializeField] private List<Quest> quests;
 
-    [TextArea(3, 3)]
-    public string dialogueText;
+    public List<DialogueResponse> DialogueRespons { get { return dialogueRespons; } }
+    public Dialogue NextDialogue { get { return nextDialogue; } }
+    public List<Quest> Quest { get { return quests; } }
+
+    public Dialogue Copy()
+    {
+        return (Dialogue)this.MemberwiseClone();
+    }
 }

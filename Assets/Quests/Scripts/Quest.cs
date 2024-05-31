@@ -16,25 +16,15 @@ public class Quest : ScriptableObject
     [SerializeField] private List<ItemWithAmount> receiveItems = new();
 
     [Header("Next dialogue:")]
-    [SerializeField] private DialogueScriptableObject nextDialogue;
+    [SerializeField] private Dialogue nextDialogue;
 
     [Header("Next quest:")]
     [SerializeField] private Quest nextQuest;
 
-    public Quest(string title, string details, Objective questObjectives, List<ItemWithAmount> receiveItems, DialogueScriptableObject nextDialogue, Quest nextQuest)
-    {
-        this.title = title;
-        this.details = details;
-        this.questObjective = questObjectives;
-        this.receiveItems = receiveItems;
-        this.nextDialogue = nextDialogue;
-        this.nextQuest = nextQuest;
-    }
-
     public string Title { get { return title; } }
     public string Details { get { return details; } }
 
-    public DialogueScriptableObject NextDialogue { get { return nextDialogue; } }
+    public Dialogue NextDialogue { get { return nextDialogue; } }
     public Quest NextQuest { get { return nextQuest; } }
 
     public Objective QuestObjective { get => questObjective; set => questObjective = value; }

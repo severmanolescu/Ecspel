@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b7656975d0d8547986bc50a82b43d6, type: 3}
+  m_Name: IonDialogueStart
+  m_EditorClassIdentifier: 
+  dialogueRespons:
+  - whoRespond: 1
+    dialogueText: Ah, good to see you! I've been pondering a proposition, and I think
+      you might just be the one to help me with it.
+  - whoRespond: 1
+    dialogueText: You see, Marilena and Vladimir have been good neighbors to us,
+      and I've been thinking about how we could strengthen our ties with them.
+  - whoRespond: 0
+    dialogueText: What are you thinking, Ion?
+  - whoRespond: 1
+    dialogueText: Well, Marilena has those minerals I need to spruce up the shop's
+      inventory, and her corn is known throughout the village as the best around.
+  - whoRespond: 1
+    dialogueText: "Plus, I know Vladimir could make good use of a sturdy pickaxe.
+      And let's not forget about their chickens \u2013 they could use some extra
+      feed to keep them happy and healthy."
+  - whoRespond: 1
+    dialogueText: So, I was thinking, how about we propose a trade? We could offer
+      a finest pickaxe for Vladimir, some chicken feed for Marilena's poultry, and
+      a pouch of coins.
+  - whoRespond: 1
+    dialogueText: In exchange, we get those minerals and that delicious corn we need.
+  - whoRespond: 0
+    dialogueText: That sounds like a fair deal, Ion. I'll talk to Marilena and see
+      if she's interested.
+  - whoRespond: 1
+    dialogueText: Great! Let me know how it goes. I'll get everything ready on our
+      end. And if there's anything else you need, just let me know. We're in this
+      together, after all.
+  nextDialogue: {fileID: 0}
+  quests:
+  - {fileID: 11400000, guid: db6da35741b6485458a1430a6d775bde, type: 2}
