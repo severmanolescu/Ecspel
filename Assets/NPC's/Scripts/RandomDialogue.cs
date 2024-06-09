@@ -9,11 +9,21 @@ public class RandomDialogue : MonoBehaviour
 
     public Dialogue GetDialogue()
     {
-        return dialogues[Random.Range(0, dialogues.Count - 1)];
+        if(dialogues != null && dialogues.Count > 0)
+        {
+            return dialogues[Random.Range(0, dialogues.Count - 1)];
+        }
+
+        return null;
     }
 
     public Dialogue GetCantTalk()
     {
-        return cantTalk[Random.Range(0, cantTalk.Count - 1)];
+        if(cantTalk != null && cantTalk.Count > 0)
+        {
+            return cantTalk[Random.Range(0, cantTalk.Count - 1)];
+        }
+
+        return null;
     }
 }

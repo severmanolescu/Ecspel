@@ -101,7 +101,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (item != null)
         {
-            if (item.name == "Coin")
+            if (item.ItemNO == 0)
             {
                 CoinsHandler.Amount += item.Amount;
 

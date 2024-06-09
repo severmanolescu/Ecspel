@@ -42,6 +42,9 @@ TagManager:
   - Entrance
   - NotWalkable
   - OuterWall
+  - InteriorWindows
+  - ExteriorWindows
+  - SleepTrigger
   layers:
   - Default
   - TransparentFX
@@ -81,6 +84,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2761360385
+    locked: 0
+  - name: Interior
+    uniqueID: 3019621631
     locked: 0
   - name: Hill
     uniqueID: 2377737723

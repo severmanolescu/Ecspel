@@ -90,8 +90,8 @@ public class DialogueChanger : MonoBehaviour
         }
 
         if (dialogue != null &&
-            dialogue.Quest != null &&
-            dialogue.Quest.Count > 0)
+            dialogue.Quests != null &&
+            dialogue.Quests.Count > 0)
         {
             AddQuests();
         }
@@ -117,12 +117,12 @@ public class DialogueChanger : MonoBehaviour
                 {
                     dialogueText.text = dialogueText.text + dialogue.DialogueRespons[dialogueIndex].dialogueText[dialogueStringIndex];
 
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.05f);
                 }
 
                 firstSpacePress = true;
             }
-            else if (dialogue.Quest != null && dialogue.Quest.Count > 0)
+            else if (dialogue.Quests != null && dialogue.Quests.Count > 0)
             {
                 StopDialogue();
             }
@@ -143,7 +143,7 @@ public class DialogueChanger : MonoBehaviour
 
     private void AddQuests()
     {
-        questTab.AddQuest(dialogue.Quest);
+        questTab.AddQuest(dialogue.Quests);
     }
 
     private void HideDialogue()

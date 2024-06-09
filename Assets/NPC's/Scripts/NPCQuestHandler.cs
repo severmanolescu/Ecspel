@@ -46,9 +46,19 @@ public class NPCQuestHandler : MonoBehaviour
         AddPlayerReward(quest.ReceiveItems);
     }
 
+    private void RemoveQuestFromList(Quest quest)
+    {
+        if(quest != null && quests != null)
+        {
+            quests.Remove(quest);
+        }
+    }
+
     public void CompleteQuest(Quest quest)
     {
-        questTab.DeleteQuest(quest);
+        questTab.CompleteQuest(quest);
+
+        RemoveQuestFromList(quest);
 
         if(quest.NextQuest != null)
         {
@@ -59,22 +69,6 @@ public class NPCQuestHandler : MonoBehaviour
     public void CompleteQuest(Quest quest, ObjectiveGoTalk goTalk)
     {
         AddPlayerReward(goTalk.ReceiveItems);
-
-        CompleteQuest(quest);
-    }
-
-
-    public void CompleteQuest(Quest quest, ObjectiveGiveItem questGiveItem)
-    {
-        foreach (ItemWithAmount item in questGiveItem.ItemsToGive)
-        {
-            Item newItem = item.Item.Copy();
-            newItem.Amount = item.Amount;
-
-            playerInventory.DeleteItem(newItem);
-        }
-
-        AddPlayerReward(quest);
 
         CompleteQuest(quest);
     }
@@ -90,6 +84,21 @@ public class NPCQuestHandler : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void CompleteQuest(Quest quest, ObjectiveGiveItem questGiveItem)
+    {
+        foreach (ItemWithAmount item in questGiveItem.ItemsToGive)
+        {
+            Item newItem = item.Item.Copy();
+            newItem.Amount = item.Amount;
+
+            playerInventory.DeleteItem(newItem);
+        }
+
+        AddPlayerReward(quest);
+
+        CompleteQuest(quest);
     }
 
     public Dialogue CheckForQuest()

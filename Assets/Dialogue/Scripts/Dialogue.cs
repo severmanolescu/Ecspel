@@ -17,7 +17,7 @@ public class Dialogue : ScriptableObject
 
     public List<DialogueResponse> DialogueRespons { get { return dialogueRespons; } }
     public Dialogue NextDialogue { get { return nextDialogue; } }
-    public List<Quest> Quest { get { return quests; } }
+    public List<Quest> Quests { get { return quests; } }
 
     public Dialogue Copy()
     {

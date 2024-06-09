@@ -57,10 +57,7 @@ public class NpcAIHandler : MonoBehaviour
         {
             npcPath.ChangeLocation(waypoints[waypointIndex].transform.position);
             
-            if(waypointIndex < waypoints.Count)
-            {
-                currentWaypoint = waypoints[waypointIndex];
-            }
+            currentWaypoint = waypoints[waypointIndex];
         }
         else
         {
@@ -142,8 +139,7 @@ public class NpcAIHandler : MonoBehaviour
             }
 
             ArrivedAtLocation();
-        }
-       
+        }  
     }
 
     public void StartTalking()

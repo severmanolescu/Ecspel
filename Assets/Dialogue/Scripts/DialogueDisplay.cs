@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Dynamic;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 public class DialogueDisplay : MonoBehaviour
 {
@@ -12,6 +10,8 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField] private GameObject canvas;
 
     [SerializeField] private bool turnToPlayer = true;
+
+    [SerializeField] private List<Event> events = new List<Event>();
 
     private TextMeshProUGUI text;
 
@@ -56,12 +56,18 @@ public class DialogueDisplay : MonoBehaviour
 
     private void StopWalk()
     {
-        npcPathFinding.Talking = true;
+        if (npcPathFinding != null)
+        {
+            npcPathFinding.Talking = true;
+        }
     }
 
     private void StartWalk()
     {
-        npcPathFinding.Talking = false;
+        if (npcReceiveItem != null)
+        {
+            npcPathFinding.Talking = false;
+        }
     }
 
     public void FinishTalk()
@@ -70,7 +76,20 @@ public class DialogueDisplay : MonoBehaviour
 
         playerCanvas.ShowDefaultUIElements();
 
+        TriggerEvents();
+
         StopDialogue();
+    }
+
+    private void TriggerEvents()
+    {
+        if (events != null && events.Count > 0)
+        {
+            foreach(Event @event in events)
+            {
+                @event.CanTrigger = true;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -171,7 +190,7 @@ public class DialogueDisplay : MonoBehaviour
             {
                 text.text = text.text + dialogueText[dialogueStringIndex];
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
             }
         }
 

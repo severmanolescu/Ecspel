@@ -16,6 +16,9 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     [SerializeField] private List<GameObject> objectsToSetActiveToFalse;
     [SerializeField] private List<GameObject> objectsToSetActiveToTrue;
 
+    [SerializeField] private bool locked = false;
+    [SerializeField] private Dialogue lockDialogue;
+
     private CanvasTabsOpen canvasTabsOpen;
 
     private PlayerMovement playerMovement;
@@ -33,6 +36,7 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     private AudioSource audioSource;
 
     public Transform TeleportToPoint { get => teleportToPoint; set => teleportToPoint = value; }
+    public bool Locked { get => locked; set => locked = value; }
 
     private void Awake()
     {
@@ -76,7 +80,14 @@ public class TeleportPlayerKeyPress : MonoBehaviour
     {
         if (player != null && keyboard.fKey.wasPressedThisFrame)
         {
-            if (canvasTabsOpen.CanOpenTab() && playerMovement.MenuOpen == false && playerMovement.TabOpen == false)
+            if(locked)
+            {
+                if(lockDialogue != null)
+                {
+                    GameObject.Find("Global").GetComponent<SetDialogueToPlayer>().SetDialogue(lockDialogue);
+                }
+            }
+            else if (canvasTabsOpen.CanOpenTab() && playerMovement.MenuOpen == false && playerMovement.TabOpen == false)
             {
                 if ((startHour == 0 && finishHour == 0) ||
                      dayTimer.Hours >= startHour &&
@@ -87,7 +98,9 @@ public class TeleportPlayerKeyPress : MonoBehaviour
                         audioSource.Play();
                     }
 
-                    player.transform.position = TeleportToPoint.position;
+                    // player.transform.position = TeleportToPoint.position;
+
+                    GameObject.Find("Global/Player/Canvas/Transition").GetComponent<TransitionHandler>().PlayTransition(teleportToPoint.position, true);
 
                     foreach (GameObject gameObject in objectsToSetActiveToFalse)
                     {

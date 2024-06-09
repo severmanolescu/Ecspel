@@ -171,7 +171,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             this.discount = discount;
 
-            if (item.ItemNO == 69 && playerInventory == true)
+            if (item.ItemNO == 0 && playerInventory == true)
             {
                 coinsHandler.Amount += item.Amount;
 

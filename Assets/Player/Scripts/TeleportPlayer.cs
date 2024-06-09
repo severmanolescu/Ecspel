@@ -42,7 +42,10 @@ public class TeleportPlayer : MonoBehaviour
                 audioSource.Play();
             }
 
-            collision.transform.position = TeleportToPoint.position;
+            // collision.transform.position = TeleportToPoint.position;
+
+            GameObject.Find("Global/Player/Canvas/Transition").GetComponent<TransitionHandler>().PlayTransition(TeleportToPoint.position, false);
+
 
             SetObject();
         }

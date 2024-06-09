@@ -39,16 +39,16 @@ public class StoneDamage : MonoBehaviour
     {
         this.startScaleX = startScaleX;
         this.startScaleY = startScaleY;
-        this.scaleX = scaleX;
-        this.scaleY = scaleY;
+        this.scaleX      = scaleX;
+        this.scaleY      = scaleY;
     }
 
     public void GetData(out int startScaleX, out int startScaleY, out int scaleX, out int scaleY)
     {
         startScaleX = this.startScaleX;
         startScaleY = this.startScaleY;
-        scaleX = this.scaleX;
-        scaleY = this.scaleY;
+        scaleX      = this.scaleX;
+        scaleY      = this.scaleY;
     }
 
     private IEnumerator WaitForSoundEffect()
@@ -92,7 +92,7 @@ public class StoneDamage : MonoBehaviour
 
                 grid.ReinitializeGrid(gridNode);
 
-                GameObject.Find("Player").GetComponent<PlayerAchievements>().Stones++;
+                GameObject.Find("Player").GetComponent<PlayerAchievements>().DestroyStones++;
 
                 GameObject particles = Instantiate(destroyParticle);
                 particles.transform.position = transform.position;

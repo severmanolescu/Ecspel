@@ -8,10 +8,10 @@ public class NPCWaypointPath : MonoBehaviour
 
     public List<WaypointData> FindTheWay(WaypointData fromLocation, WaypointData toLocation)
     {
-        if(fromLocation.NextWaypoints == null ||
-           fromLocation.NextWaypoints.Count == 0 ||
-           toLocation.NextWaypoints == null ||
-           toLocation.NextWaypoints.Count == 0)
+        if(fromLocation.NextWaypoints       == null ||
+           fromLocation.NextWaypoints.Count == 0    ||
+           toLocation.  NextWaypoints       == null ||
+           toLocation.  NextWaypoints.Count == 0)
         {
             return null;
         }

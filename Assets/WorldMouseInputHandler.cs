@@ -19,13 +19,15 @@ public class WorldMouseInputHandler : MonoBehaviour
         canvasTabsOpen = GameObject.Find("Global/Player/Canvas").GetComponent<CanvasTabsOpen>();
     }
 
-    private void CheckForObjectType(RaycastResult raycastResult)
+    private bool CheckForObjectType(RaycastResult raycastResult)
     {
         ChestOpenHandler chestOpen = raycastResult.gameObject.GetComponent<ChestOpenHandler>();
 
         if (chestOpen != null)
         {
             chestOpen.OpenChest();
+
+            return true;
         }
         else
         {
@@ -62,7 +64,11 @@ public class WorldMouseInputHandler : MonoBehaviour
                     }
                 }
             }
+
+            return true;
         }
+
+        return false;
     }
 
     private void Update()
@@ -82,10 +88,16 @@ public class WorldMouseInputHandler : MonoBehaviour
 
                 if (raycastResults.Count > 0 && canvasTabsOpen.canOpenTabs == true && playerMovement.CanMove && playerMovement.TabOpen == false && playerMovement.Dialogue == false)
                 {
-                    if (Vector2.Distance(raycastResults[0].gameObject.transform.position, playerMovement.transform.position) <= maxDistanteFromPlayer)
+                    foreach (RaycastResult raycastResult in raycastResults)
                     {
-                        CheckForObjectType(raycastResults[0]);
-                    }
+                        if (Vector2.Distance(raycastResult.gameObject.transform.position, playerMovement.transform.position) <= maxDistanteFromPlayer)
+                        {
+                            if(CheckForObjectType(raycastResult))
+                            {
+                                break;
+                            }
+                        }
+                    }                    
                 }
             }
         }

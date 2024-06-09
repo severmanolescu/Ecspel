@@ -4,13 +4,24 @@ public class TeleportNPC : MonoBehaviour
 {
     [SerializeField] private Transform teleportToPoint;
 
-    public void TeleportObject(NpcBehavior toTeleportObejct)
+    [SerializeField] private bool teleportIn = true;
+
+    public void Teleport(NpcBehavior toTeleportNPC)
     {
         if (teleportToPoint != null)
         {
-            toTeleportObejct.transform.position = teleportToPoint.position;
+            toTeleportNPC.transform.position = teleportToPoint.position;
 
-            toTeleportObejct.GoToNextBehaviour();
+            if(teleportIn)
+            {
+                toTeleportNPC.GetComponent<SpriteRenderer>().sortingLayerName = "Interior";
+            }
+            else
+            {
+                toTeleportNPC.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+            }
+
+            toTeleportNPC.GoToNextBehaviour();
         }
     }
 }

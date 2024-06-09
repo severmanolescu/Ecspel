@@ -277,7 +277,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.044509888, y: 0.67619324}
@@ -323,6 +323,7 @@ MonoBehaviour:
   dialogue: {fileID: 0}
   canvas: {fileID: 6164323528616952684}
   turnToPlayer: 0
+  events: []
 --- !u!114 &7908880384336774633
 MonoBehaviour:
   m_ObjectHideFlags: 0

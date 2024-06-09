@@ -352,7 +352,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.044509888, y: 0.67619324}
@@ -395,9 +395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0a3517142063442a3461962630b3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 406b544d50e40974c86466b14ca6fa08, type: 2}
+  dialogue: {fileID: 11400000, guid: dac0b47acfc9f6945917562b735fa011, type: 2}
   canvas: {fileID: 8802975412467274405}
   turnToPlayer: 0
+  events:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &8920626595183139711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,11 +444,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notHaveItems:
-  - {fileID: 11400000, guid: b18be5c4a9332824fa415448f78a670e, type: 2}
-  - {fileID: 11400000, guid: 35ebfe68ff1aeff4786a4925806c752d, type: 2}
-  - {fileID: 11400000, guid: c5ce23881c46fb943828439da80b4daf, type: 2}
-  - {fileID: 11400000, guid: f7d5679f3ee6e37468227722626e2292, type: 2}
-  - {fileID: 11400000, guid: 9b73609973e85da408de3a1f835aea78, type: 2}
+  - {fileID: 11400000, guid: c279e93a325a02645b7fee2ea5cf4f1a, type: 2}
+  - {fileID: 11400000, guid: 387aec222fa85ac459d6351deb1392cd, type: 2}
+  - {fileID: 11400000, guid: 796e337d990bc2e47abc1bf95309294e, type: 2}
+  - {fileID: 11400000, guid: c27656566251de94f88f0f75e9ef601c, type: 2}
+  - {fileID: 11400000, guid: dad55fda05d962146b2075af67286c7f, type: 2}
+  - {fileID: 11400000, guid: de1dd5c3fc8ec6b4dba2bbb0611a0512, type: 2}
+  - {fileID: 11400000, guid: d31a857a9cbbfe44baf46e58a0a93c25, type: 2}
+  - {fileID: 11400000, guid: 3c8362f7280e711459ad542641b92bea, type: 2}
+  - {fileID: 11400000, guid: a8a99650fc69b54419624249013d492f, type: 2}
+  - {fileID: 11400000, guid: b12caff2823b6f14cb36cbf1e3bdcc83, type: 2}
   quests: []
 --- !u!114 &1636495225709793014
 MonoBehaviour:

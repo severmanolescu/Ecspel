@@ -140,7 +140,7 @@ public class CraftCanvasHandler : MonoBehaviour
             craft.gameObject.SetActive(true);
         }
 
-        ChangeButtonColor(0);
+        //ChangeButtonColor(0);
     }
 
     private void ChangeButtonColor(int buttonNo)

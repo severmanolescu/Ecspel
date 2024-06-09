@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectItem : MonoBehaviour
+public class CollectItem : Event
 {
     [SerializeField] private Item itemToCollect;
 
@@ -12,16 +12,19 @@ public class CollectItem : MonoBehaviour
 
     public void AddItemToInventory()
     {
-        amount = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>().AddItem(GetItem());
-
-        if(amount == 0)
+        if(canTrigger)
         {
-            if(dialogue != null)
-            {
-                GameObject.Find("Global").GetComponent<SetDialogueToPlayer>().SetDialogue(dialogue);
-            }
+            amount = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>().AddItem(GetItem());
 
-            DestroyObject();
+            if(amount == 0)
+            {
+                if(dialogue != null)
+                {
+                    GameObject.Find("Global").GetComponent<SetDialogueToPlayer>().SetDialogue(dialogue);
+                }
+
+                DestroyObject();
+            }
         }
     }
 

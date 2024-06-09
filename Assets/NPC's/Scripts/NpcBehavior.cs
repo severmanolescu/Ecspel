@@ -122,7 +122,7 @@ public class NpcBehavior : MonoBehaviour
 
         if (teleport != null)
         {
-            teleport.TeleportObject(this);
+            teleport.Teleport(this);
         }
         else
         {

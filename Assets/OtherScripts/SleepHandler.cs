@@ -3,35 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SleepHandler : MonoBehaviour
+public class SleepHandler : Event
 {
     [SerializeField] private SaveSystemHandler saveSystem;
-    [SerializeField] private GameObject questdirection;
-
-    [SerializeField] private List<GameObject> currentCamera;
-    [SerializeField] private GameObject playerHouseCamera;
-    [SerializeField] private GameObject sleepCamera;
-    [SerializeField] private GameObject playerHouseGround;
-
-    [SerializeField] private Transform bedLocation;
-
-    private GameObject player = null;
 
     private TextMeshProUGUI text;
-
-    private PlayerMovement playerMovement;
-
-    private CanvasTabsOpen canvasTabsOpen;
-
-    private GameObject quickSlots;
-
-    private GameObject playerStats;
 
     private DayTimerHandler dayTimer;
 
     private Keyboard keyboard;
 
-    private bool fKeyPress = true;
+    private TransitionHandler transition;
+
+    private bool playerInArea = false;
 
     private void Awake()
     {
@@ -39,13 +23,7 @@ public class SleepHandler : MonoBehaviour
 
         text.gameObject.SetActive(false);
 
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-
-        canvasTabsOpen = GameObject.Find("Player/Canvas").GetComponent<CanvasTabsOpen>();
-
-        quickSlots = GameObject.Find("Player/Canvas/Field/QuickSlots");
-
-        playerStats = GameObject.Find("Global/Player/Canvas/Field/QuickSlots/Stats");
+        transition = GameObject.Find("Player/Canvas/Transition").GetComponent<TransitionHandler>();
 
         dayTimer = GameObject.Find("DayTimer").GetComponent<DayTimerHandler>();
 
@@ -54,9 +32,9 @@ public class SleepHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("SleepTrigger") && canTrigger == true)
         {
-            player = collision.gameObject;
+            playerInArea = true;
 
             text.gameObject.SetActive(true);
         }
@@ -64,72 +42,37 @@ public class SleepHandler : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("SleepTrigger") && canTrigger == true)
         {
-            player = null;
+            playerInArea = false;
 
             text.gameObject.SetActive(false);
-
-            playerMovement.TabOpen = false;
-
-            canvasTabsOpen.SetCanOpenTabs(true);
-
-            quickSlots.SetActive(true);
         }
-    }
-
-    private void ChangeObjectsStates(bool state)
-    {
-        playerMovement.TabOpen = !state;
-
-        canvasTabsOpen.SetCanOpenTabs(state);
-
-        quickSlots.SetActive(state);
-        playerHouseCamera.SetActive(state);
-
-        playerStats.SetActive(state);
-
-        playerHouseGround.SetActive(true);
-
-        foreach (GameObject camera in currentCamera)
-        {
-            camera.SetActive(false);
-        }
-
-        questdirection.SetActive(state);
-
-        sleepCamera.SetActive(!state);
     }
 
     public void Sleep()
     {
-        playerMovement.transform.position = bedLocation.position;
+        transition.PlayTransition(this);
+    }
 
-        ChangeObjectsStates(false);
+    public void WakeUp()
+    {
+        //saveSystem.StartSaveGame();
+    }
 
-        dayTimer.Sleep(this);
+    public void TransitionStart()
+    {
+        dayTimer.Sleep();
     }
 
     private void Update()
     {
-        if (player != null)
+        if (playerInArea && canTrigger == true)
         {
-            if (keyboard.fKey.wasPressedThisFrame || (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == false && fKeyPress == false))
+            if (keyboard.fKey.wasPressedThisFrame)
             {
                 Sleep();
             }
-
-            if (Joystick.current != null && Joystick.current.allControls[3].IsPressed() == true)
-            {
-                fKeyPress = false;
-            }
         }
-    }
-
-    public void StopSleep()
-    {
-        ChangeObjectsStates(true);
-
-        saveSystem.StartSaveGame();
     }
 }

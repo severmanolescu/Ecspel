@@ -3,11 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private bool moveLeft;
-    [SerializeField] private bool moveRight;
-    [SerializeField] private bool moveUp;
-    [SerializeField] private bool moveDown;
-
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float runStaminaUse;
@@ -215,8 +210,8 @@ public class PlayerMovement : MonoBehaviour
         canMove = false;
 
         animator.SetFloat("Horizontal", 0);
-        animator.SetFloat("Vertical", 0);
-        animator.SetFloat("Speed", 0);
+        animator.SetFloat("Vertical",   0);
+        animator.SetFloat("Speed",      0);
     }
 
     public void ChangeIdleAnimationDirection(int direction)
@@ -225,16 +220,16 @@ public class PlayerMovement : MonoBehaviour
 
         switch (direction)
         {
-            case 0: directionToChange = Vector3.left; break;
-            case 1: directionToChange = Vector3.right; break;
-            case 2: directionToChange = Vector3.up; break;
-            case 3: directionToChange = Vector3.down; break;
+            case 0: directionToChange = Vector3.left;   break;
+            case 1: directionToChange = Vector3.right;  break;
+            case 2: directionToChange = Vector3.up;     break;
+            case 3: directionToChange = Vector3.down;   break;
         }
 
         if (directionToChange != Vector3.zero)
         {
-            animator.SetFloat("HorizontalFacing", directionToChange.x);
-            animator.SetFloat("VerticalFacing", directionToChange.y);
+            animator.SetFloat("HorizontalFacing",   directionToChange.x);
+            animator.SetFloat("VerticalFacing",     directionToChange.y);
         }
     }
 

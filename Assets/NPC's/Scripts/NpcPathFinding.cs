@@ -30,7 +30,7 @@ public class NpcPathFinding : MonoBehaviour
     public Vector3 ToLocation { get { return toLocation; } set { toLocation = value; GetNewPath(); } }
 
     public bool CanWalk { get => canWalk; set => canWalk = value; }
-    public bool Talking { set { talking = value; CheckForNpcAI(); SetAnimatorValues(); } }
+    public bool Talking { set { talking = value; CheckForNpcAI(); } }
     public bool Action { set { action = value; SetAnimatorValues(); } }
 
     private void Awake()
@@ -56,11 +56,7 @@ public class NpcPathFinding : MonoBehaviour
 
     public void SetAnimatorValues()
     {
-        if(talking)
-        {
-            SetAnimatorDirectionToLocation(playerTransform.position);
-        }
-        else if(canWalk)
+        if(canWalk)
         {
             if (pathCurrentIndex < path.Count)
             {

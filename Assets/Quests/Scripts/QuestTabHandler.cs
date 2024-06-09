@@ -22,6 +22,8 @@ public class QuestTabHandler : MonoBehaviour
 
     private Transform playerPosition;
 
+    private PlayerAchievements playerAchievements;
+
     private void Awake()
     {
         DeleteAllQuest();
@@ -30,13 +32,15 @@ public class QuestTabHandler : MonoBehaviour
 
         getQuest = GameObject.Find("Global").GetComponent<GetQuest>();
 
-        questToWorld = GameObject.Find("Global").GetComponent<QuestToWorldHandler>();
+        questToWorld = getQuest.GetComponent<QuestToWorldHandler>();
 
         questToWorld.QuestTab = this;
 
         playerPosition = GameObject.Find("Global/Player").transform;
 
-        spawnItem = GameObject.Find("Global").GetComponent<SpawnItem>();
+        playerAchievements = playerPosition.GetComponent<PlayerAchievements>();
+
+        spawnItem = getQuest.GetComponent<SpawnItem>();
 
         playerInventory = GameObject.Find("Global/Player/Canvas/PlayerItems").GetComponent<PlayerInventory>();
     }
@@ -103,13 +107,19 @@ public class QuestTabHandler : MonoBehaviour
         }
     }
 
-    public void DeleteQuest(Quest quest)
+    public void CompleteQuest(Quest quest)
     {
         foreach (QuestButton questButton in activeQuests)
         {
             if (questButton.Quest == quest)
             {
                 activeQuests.Remove(questButton);
+
+                if((quest.NextDialogue.Quests == null || quest.NextDialogue.Quests.Count == 0 ) && 
+                    quest.NextQuest == null)
+                {
+                    playerAchievements.QuestCount++;
+                }
 
                 Destroy(questButton.gameObject);
 

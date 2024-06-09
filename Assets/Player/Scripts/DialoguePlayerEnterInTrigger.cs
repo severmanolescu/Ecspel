@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialoguePlayerEnterInTrigger : MonoBehaviour
+public class DialoguePlayerEnterInTrigger : Event
 {
     [SerializeField] private Dialogue dialogue;
 
@@ -65,9 +65,11 @@ public class DialoguePlayerEnterInTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") &&
-            setDialogueToPlayer != null &&
-            Dialogue != null && canStartDialogue)
+        if (collision.CompareTag("Player")  &&
+            setDialogueToPlayer != null     &&
+            Dialogue != null                && 
+            canStartDialogue                &&
+            canTrigger)
         {
             setDialogueToPlayer.SetDialogue(Dialogue, this);
 

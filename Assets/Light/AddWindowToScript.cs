@@ -10,7 +10,7 @@ public class AddWindowToScript : MonoBehaviour
 
         if (change != null)
         {
-            change.Renderers.Add(GetComponent<SpriteRenderer>());
+            change.AddWindows(GetComponent<SpriteRenderer>());
         }
     }
 
@@ -18,7 +18,7 @@ public class AddWindowToScript : MonoBehaviour
     {
         if (change != null)
         {
-            change.Renderers.Remove(GetComponent<SpriteRenderer>());
+            change.RemoveWindows(GetComponent<SpriteRenderer>());
         }
     }
 }

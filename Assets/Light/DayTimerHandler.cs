@@ -20,14 +20,13 @@ public class DayTimerHandler : MonoBehaviour
     [SerializeField] private int hours = 0;
     [SerializeField] private int days = 0;
 
-    [SerializeField] private Gradient gradient;
-    [SerializeField] private Gradient gradientWindowLight;
+    [SerializeField] private Gradient gradientLight;
+    [SerializeField] private Gradient gradientExteriorWindows;
+    [SerializeField] private Gradient gradientInteriorWindows;
 
-    [Header("Wake up time:")]
+    [Header("Sleep data")]
     [Range(0, 23)]
     [SerializeField] private int wakeupHour;
-    [Range(0, 100)]
-    [SerializeField] private float sleepTimeSpeed;
 
     [Header("Fog data:")]
     [Range(0, 100)]
@@ -88,7 +87,6 @@ public class DayTimerHandler : MonoBehaviour
 
     private bool sleepFromStamina = false;
 
-    private bool sleep = false;
     private float speed;
     private int startDay;
     private SleepHandler sleepHandler;
@@ -101,6 +99,7 @@ public class DayTimerHandler : MonoBehaviour
     public int FogAlpha { get => fogAlpha; set => fogAlpha = value; }
     public bool Raining { get => raining; set => raining = value; }
     public bool Fog { get => fog; set => fog = value; }
+    public float TimeSpeed { get => timeSpeed; set => timeSpeed = value; }
 
     private void Awake()
     {
@@ -138,19 +137,24 @@ public class DayTimerHandler : MonoBehaviour
         StartCoroutine(WorldTimeDelay());
     }
 
+    private void CalculateIntensity()
+    {
+        intensity = (Hours + Minutes / 60) / 24;
+
+        changeWindowLight.SetIntensity(gradientInteriorWindows.Evaluate(intensity), gradientExteriorWindows.Evaluate(intensity));
+
+        sourceLight.ChangeLightsIntensity(1f - intensity);
+
+        NightDayHandler();
+
+        globalLight.color = gradientLight.Evaluate(intensity);
+    }
+
     private IEnumerator WorldTimeDelay()
     {
         while (true)
         {
-            changeWindowLight.SetIntensity(gradientWindowLight.Evaluate(intensity));
-
-            sourceLight.ChangeLightsIntensity(1f - intensity);
-
-            NightDayHandler();
-
-            intensity = (Hours + Minutes / 60) / 24;
-
-            globalLight.color = gradient.Evaluate(intensity);
+            CalculateIntensity();
 
             yield return new WaitForSeconds(1);
         }
@@ -215,21 +219,6 @@ public class DayTimerHandler : MonoBehaviour
 
                 cropGrow.DayChange(days);
             }
-
-            if (hours == sleepHour && sleep == false)
-            {
-                worldTextDetails.ShowText("Esti obosit!");
-
-                startFeelingTired = true;
-            }
-            else
-            {
-                startFeelingTired = false;
-            }
-            if (hours == sleepHour + 1 && sleep == false)
-            {
-                Sleep();
-            }
         }
 
         if (startFeelingTired == true && minutes >= 30)
@@ -238,25 +227,11 @@ public class DayTimerHandler : MonoBehaviour
 
             worldTextDetails.ShowText("Esti foarte obosit!");
         }
-
-        if (sleep == true && (days > startDay || sleepNotFromBed == true))
-        {
-            if (Hours == wakeupHour)
-            {
-                WakeUp();
-            }
-            else if (Hours == wakeupHour - 3)
-            {
-//                StartTodayWeather();
-            }
-        }
     }
 
     public void Sleep(bool sleepOutOfStamina = false)
     {
         sleepNotFromBed = true;
-
-        sleep = true;
 
         if (sleepOutOfStamina == true)
         {
@@ -285,8 +260,6 @@ public class DayTimerHandler : MonoBehaviour
 
         Time.timeScale = 1;
 
-        sleep = false;
-
         if (sleepNotFromBed == true && sleepFromStamina == false)
         {
             worldTextDetails.ShowText("Ai adormit, dar te-ai trezit in pat!");
@@ -302,7 +275,7 @@ public class DayTimerHandler : MonoBehaviour
             sleepFromStamina = false;
         }
 
-        //sleepHandler.StopSleep();
+        sleepHandler.WakeUp();
 
         sleepHandler = null;
 
@@ -429,17 +402,13 @@ public class DayTimerHandler : MonoBehaviour
         intensity = this.intensity;
     }
 
-    public void Sleep(SleepHandler sleepHandler)
+    public void Sleep()
     {
-        this.sleepHandler = sleepHandler;
+        days++;
+        minutes = 0;
+        hours = wakeupHour;
 
-        timeSpeed = sleepTimeSpeed;
-
-        Time.timeScale = 50f;
-
-        startDay = days;
-
-        sleep = true;
+        CalculateIntensity();
     }
 
     public bool CanSpawnEnemy()
