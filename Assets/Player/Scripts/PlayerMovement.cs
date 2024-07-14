@@ -93,49 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canMove == true && tabOpen == false && dialogue == false)
-        {
-            GetInputs();
-
-            inputs = inputs.normalized;
-
-            if (keyboard.leftShiftKey.isPressed)
-            {
-                inputs *= runSpeed;
-
-                if (inputs != Vector2.zero)
-                {
-                    playerStats.DecreseStamina(runStaminaUse * Time.deltaTime * fatiqueEffect);
-                }
-            }
-            else
-            {
-                inputs *= walkSpeed;
-            }
-
-            speed = inputs.SqrMagnitude();
-
-            SetAnimatorVariables();
-
-            animator.SetFloat("Speed", speed);
-
-            if (inputs != Vector2.zero)
-            {
-                animator.SetFloat("HorizontalFacing", inputs.x);
-                animator.SetFloat("VerticalFacing", inputs.y);
-
-                playerItem.Inputs = inputs;
-            }
-        }
-        else
-        {
-            speed = 0;
-            inputs = Vector2.zero;
-
-            animator.SetFloat("Horizontal", 0f);
-            animator.SetFloat("Vertical", 0f);
-            animator.SetFloat("Speed", 0f);
-        }
+        
     }
 
     private void SetAnimatorVariables()
@@ -165,12 +123,56 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Horizontal", inputs.x);
             animator.SetFloat("Vertical", inputs.y);
         }
+
+        animator.SetFloat("Speed", speed);
+
+        if (inputs != Vector2.zero)
+        {
+            animator.SetFloat("HorizontalFacing", inputs.x);
+            animator.SetFloat("VerticalFacing", inputs.y);
+
+            playerItem.Inputs = inputs;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (canMove)
+        if (canMove == true && tabOpen == false && dialogue == false)
+        {
+            GetInputs();
+
+            inputs = inputs.normalized;
+
+            if (keyboard.leftShiftKey.isPressed)
+            {
+                inputs *= runSpeed;
+
+                if (inputs != Vector2.zero)
+                {
+                    playerStats.DecreseStamina(runStaminaUse * Time.deltaTime * fatiqueEffect);
+                }
+            }
+            else
+            {
+                inputs *= walkSpeed;
+            }
+
+            speed = inputs.SqrMagnitude();
+
+            SetAnimatorVariables();
+
             rigidbody.MovePosition(rigidbody.position + inputs * Time.fixedDeltaTime / slowEffect);
+
+        }
+        else
+        {
+            speed = 0;
+            inputs = Vector2.zero;
+
+            animator.SetFloat("Horizontal", 0f);
+            animator.SetFloat("Vertical", 0f);
+            animator.SetFloat("Speed", 0f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

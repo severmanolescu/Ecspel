@@ -33,9 +33,9 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (auxItem.Item.Amount < item.MaxAmount)
                 {
-                    int auxiliarIteme = item.MaxAmount - auxItem.Item.Amount;
+                    int auxiliarItem = item.MaxAmount - auxItem.Item.Amount;
 
-                    if (item.Amount <= auxiliarIteme)
+                    if (item.Amount <= auxiliarItem)
                     {
                         auxItem.Item.Amount = auxItem.Item.Amount + item.Amount;
 
@@ -47,9 +47,9 @@ public class PlayerInventory : MonoBehaviour
                     }
                     else
                     {
-                        auxItem.Item.Amount = auxItem.Item.Amount + auxiliarIteme;
+                        auxItem.Item.Amount = auxItem.Item.Amount + auxiliarItem;
 
-                        item.Amount = item.Amount - auxiliarIteme;
+                        item.Amount = item.Amount - auxiliarItem;
                     }
 
                     auxItem.ReinitializeItem();
@@ -130,9 +130,11 @@ public class PlayerInventory : MonoBehaviour
                     return item.Amount;
                 }
             }
+
+            return item.Amount;
         }
 
-        return item.Amount;
+        return 0;        
     }
 
     public int AddItemWithAnimation(Item item)

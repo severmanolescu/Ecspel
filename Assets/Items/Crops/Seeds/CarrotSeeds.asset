@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a6b170f23481548be47a8bdee5324a, type: 3}
   m_Name: CarrotSeeds
   m_EditorClassIdentifier: 
-  name: Seminte morcovi
-  details: Pot sa fie plantate pentru a creste o planta care-ti poate oferi morcovi
+  name: Carrot Seeds
+  details: Can be planted to crow a carrow
   sellPrice: 3
   amount: 0
   maxAmount: 50
   itemNO: 32
-  itemSprite: {fileID: -2075114595, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
+  itemSprite: {fileID: 21300000, guid: 7eda70e72d470ee46b5230655a107a0d, type: 3}
   importantItem: 0
   sizeX: 1
   sizeY: 1
@@ -28,11 +28,12 @@ MonoBehaviour:
   prefab: {fileID: 0}
   dayToGrow: 1
   levels:
-  - {fileID: -2137882208, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
-  - {fileID: 355687543, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
-  - {fileID: -1646781429, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
-  - {fileID: 1645211643, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
-  - {fileID: 440303999, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
+  - {fileID: -261668130, guid: dd076516faf18504e842d26cf5371152, type: 3}
+  - {fileID: -1558637022, guid: dd076516faf18504e842d26cf5371152, type: 3}
+  - {fileID: 1901754488, guid: dd076516faf18504e842d26cf5371152, type: 3}
+  - {fileID: -2002365486, guid: dd076516faf18504e842d26cf5371152, type: 3}
+  - {fileID: -1157142498, guid: dd076516faf18504e842d26cf5371152, type: 3}
+  level: []
   destroy: {fileID: 160384290, guid: a7d881b5fd9727841b5a68d09ddaf593, type: 3}
   crop: {fileID: 11400000, guid: 888ae64c51cec6042a92fe835d3dd4c7, type: 2}
   minDrop: 1
@@ -41,3 +42,4 @@ MonoBehaviour:
   centerY: 1
   refil: 0
   refilDecreseSpriteIndexStart: 0
+  tallCrop: 0

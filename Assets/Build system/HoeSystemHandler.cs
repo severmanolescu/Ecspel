@@ -83,7 +83,7 @@ public class HoeSystemHandler : MonoBehaviour
             position.z = 0;
 
             soil.transform.position = position;
-            soil.transform.localScale = scale;
+            soil.transform.localScale = scale / 2;
 
             gridNode.isWalkable = true;
             gridNode.canPlant = true;
@@ -542,7 +542,7 @@ public class HoeSystemHandler : MonoBehaviour
 
                         headlightObject.AddComponent<SpriteRenderer>().sprite = headlight;
 
-                        Vector3 scale = Vector3.one;
+                        Vector3 scale = Vector3.one / 2;
 
                         headlightObject.transform.localScale = scale;
                     }

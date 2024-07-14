@@ -382,7 +382,7 @@ public class BuildSystemHandler : MonoBehaviour
             }
             if (aux.CenterY == true)
             {
-                position.y += Grid.CellSize / 2f;
+                position.y += Grid.CellSize / 2;
             }
         }
         else if (item is Placeable)

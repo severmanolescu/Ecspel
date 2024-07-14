@@ -36,6 +36,8 @@ public class WorldMouseInputHandler : MonoBehaviour
             if(collectItem != null)
             {
                 collectItem.AddItemToInventory();
+
+                return true;
             }
             else
             {
@@ -44,6 +46,8 @@ public class WorldMouseInputHandler : MonoBehaviour
                 if (dialogueDisplay != null)
                 {
                     dialogueDisplay.ShowDialogue();
+
+                    return true;
                 }
                 else
                 {
@@ -52,6 +56,8 @@ public class WorldMouseInputHandler : MonoBehaviour
                     if (craftingHandler != null)
                     {
                         craftingHandler.OpenCrafting();
+
+                        return true;
                     }
                     else
                     {
@@ -60,12 +66,12 @@ public class WorldMouseInputHandler : MonoBehaviour
                         if (campFireHandler != null)
                         {
                             campFireHandler.StartFire();
+
+                            return true;
                         }
                     }
                 }
             }
-
-            return true;
         }
 
         return false;

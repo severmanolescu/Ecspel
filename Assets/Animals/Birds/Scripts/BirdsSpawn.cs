@@ -124,7 +124,10 @@ public class BirdsSpawn : MonoBehaviour
         {
             if (animals.Count != 0)
             {
-                waitBeforDespawn = StartCoroutine(WaitBeforDespawn());
+                if(gameObject.activeSelf == true)
+                {
+                    waitBeforDespawn = StartCoroutine(WaitBeforDespawn());
+                }
             }
         }
     }
